@@ -1,0 +1,16 @@
+/********* 24/03/2021 **********/ 
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_func_pri_impressao" int4,
+ADD COLUMN "dta_pri_impressao" date,
+ADD COLUMN "hor_pri_impressao" time(6),
+ADD COLUMN "id_func_seg_impressao" int4,
+ADD COLUMN "dta_seg_impressao" date,
+ADD COLUMN "hor_seg_impressao" time(6),
+ADD COLUMN "id_func_ter_impressao" int4,
+ADD COLUMN "dta_ter_impressao" date,
+ADD COLUMN "hor_ter_impressao" time(6),
+ADD COLUMN "motivo_seg_impressao" varchar(100),
+ADD COLUMN "motivo_ter_impressao" varchar(100);
+

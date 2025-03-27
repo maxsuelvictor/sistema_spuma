@@ -1,0 +1,63 @@
+CREATE TABLE "public"."pcp_tb_m_opr_etq" (
+"id_opr" int4 NOT NULL,
+"id_opr_etq" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"id_cor" int4 NOT NULL,
+"id_tamanho" int4 NOT NULL,
+"cod_barra" varchar(50) NOT NULL,
+"sequencia" int4 NOT NULL,
+"dta_criacao" date NOT NULL,
+"hor_criacao" time(6) NOT NULL,
+"impressa" bool NOT NULL,
+CONSTRAINT "pcp_tb_m_opr_etq_pkey" PRIMARY KEY ("id_opr", "id_opr_etq"),
+CONSTRAINT "fk_pcp_m_opr_etq__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opr_etq__cad_c_cor" FOREIGN KEY ("id_cor") REFERENCES "public"."cad_tb_c_cor" ("id_cor") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opr_etq__cad_c_tam" FOREIGN KEY ("id_tamanho") REFERENCES "public"."cad_tb_c_tam" ("id_tamanho") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_opr_etq" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_opr_etq" IS 'Tabela de Etiquetas da Ordem de Produção';
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_ite"
+ADD COLUMN "qtde_conferida" float8;
+
+
+
+
+CREATE TABLE "public"."pcp_tb_m_rom_ped_icf" (
+"id_rom" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"id_cor" int4 NOT NULL,
+"id_tamanho" int4 NOT NULL,
+"cod_barra" varchar(50) NOT NULL,
+"id_responsavel" int4 NOT NULL,
+"dta_conferencia" date NOT NULL,
+"hor_conferencia" time(6) NOT NULL,
+"id_opr_etq" int4 NOT NULL,
+CONSTRAINT "pcp_tb_m_rom_ped_icf_pkey" PRIMARY KEY ("id_rom", "id_pedido", "id_sequencia"),
+CONSTRAINT "fk_pcp_m_rom_ped_icf__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_rom_ped_icf__cad_c_cor" FOREIGN KEY ("id_cor") REFERENCES "public"."cad_tb_c_cor" ("id_cor") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_rom_ped_icf__cad_c_tam" FOREIGN KEY ("id_tamanho") REFERENCES "public"."cad_tb_c_tam" ("id_tamanho") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_rom_ped_icf__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_rom_ped_icf__pcp_m_rom_ped" FOREIGN KEY ("id_rom", "id_pedido") REFERENCES "public"."pcp_tb_m_rom_ped" ("id_rom", "id_pedido") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icf" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_rom_ped_icf" IS 'Tabela de Itens Conferido do Pedido do Romaneio';
+
+
+
+
+
+
+
+

@@ -1,0 +1,1941 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D0938167-5896-4243-82A8-363881C9ED38}</ProjectGuid>
+        <ProjectVersion>16.0</ProjectVersion>
+        <FrameworkType>VCL</FrameworkType>
+        <MainSource>enBuild.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Application</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <SanitizedProjectName>enBuild</SanitizedProjectName>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_E>false</DCC_E>
+        <DCC_N>false</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_UsePackage>JvGlobus;dxBarRS18;dxPSCoreRS18;JvMM;JvManagedThreads;ipstudiowindataset;dxPScxPCProdRS18;AnyDAC_PhysODBC_D18;cxTreeListRS18;frxDB18;dxDockingRS18;AnyDAC_ComI_D18;dxThemeRS18;dxPSdxOCLnkRS18;frxDBX18;JvCrypt;AnyDAC_PhysIB_D18;rbDBE1518;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;cxTreeListdxBarPopupMenuRS18;JvNet;officeXPrt;rbUSERDesign1518;JvDotNetCtrls;Rave110VCL;fsIBX18;DbxCommonDriver;vclimg;dbxcds;DatasnapConnectorsFreePascal;rbRAP1518;JvXPCtrls;vcldb;cxExportRS18;AnyDAC_PhysMSAcc_D18;frxADO18;TAcquireImageXE4;CustomIPTransport;rbCIDE1518;dsnap;IndyIPServer;ACBr_MDFe;IndyCore;dclRBE1518;cxVerticalGridRS18;CloudService;dxPSdxDBOCLnkRS18;FmxTeeUI;dxADOServerModeRS18;ACBr_NFe2;AnyDAC_PhysOracle_D18;AnyDAC_PhysMSSQL_D18;JvDB;JvRuntimeDesign;ipstudiowinwordxp;dxPScxExtCommonRS18;cxEditorsRS18;cxPageControldxBarPopupMenuRS18;cxSchedulerRS18;dxSpellCheckerRS18;rbRCL1518;dxPScxVGridLnkRS18;JclDeveloperTools;rbUSER1518;dxRibbonRS18;AnyDAC_Phys_D18;AnyDAC_Comp_D18;bindcompfmx;ACBr_PAF;vcldbx;cxBarEditItemRS18;cxPageControlRS18;dbrtl;bindcomp;inetdb;JvPluginSystem;rbDIDE1518;DBXOdbcDriver;JvCmp;fsADO18;JvTimeFramework;xmlrtl;ibxpress;dxBarExtItemsRS18;frxe18;dclRBDBE1518;vclactnband;bindengine;soaprtl;FMXTee;ACBrComum;synapse;bindcompvcl;dxPsPrVwAdvRS18;cxSpreadSheetRS18;Jcl;vclie;cxPivotGridRS18;dxmdsRS18;dxBarDBNavRS18;dxTileControlRS18;AnyDAC_PhysASA_D18;dclRBIBE1518;dxComnRS18;dxBarExtDBItemsRS18;DBXInformixDriver;dxPScxSchedulerLnkRS18;Intraweb;fsTee18;ipstudiowinclient;dxNavBarRS18;dsnapcon;DBXFirebirdDriver;PCN2;inet;dxPSTeeChartRS18;dxPScxCommonRS18;rbADO1518;JvPascalInterpreter;vclx;DBXSybaseASADriver;dxorgcRS18;rbDBDE1518;dbexpress;IndyIPClient;JvBDE;AnyDAC_PhysDb2_D18;dxGDIPlusRS18;DbxDevartPostgreSQLDriver180;AnyDAC_PhysADS_D18;frxcs18;AnyDAC_GUIxForms_D18;dxLayoutControlRS18;DBXSqliteDriver;ACBrDiversos;AnyDAC_PhysTDBX_D18;ACBrTCP;fmx;JvDlgs;IndySystem;rbIBE1518;TeeDB;rbIDE1518;frx18;vclib;inetdbbde;DataSnapClient;dxPScxTLLnkRS18;cxSchedulerGridRS18;dxtrmdRS18;DataSnapProviderClient;DBXSybaseASEDriver;dxTabbedMDIRS18;MetropolisUILiveTile;dxPSLnksRS18;vcldsnap;dxPScxPivotGridLnkRS18;DBXDb2Driver;rbDAD1518;dxPScxSSLnkRS18;DBXOracleDriver;dxServerModeRS18;JvCore;vclribbon;ACBr_SPED;dxdborRS18;AnyDAC_PhysPg_D18;fmxase;vcl;IndyIPCommon;DBXMSSQLDriver;CodeSiteExpressPkg;cxPivotGridChartRS18;rbDB1518;rbBDE1518;JvAppFrm;inetdbxpress;webdsnap;ACBr_NFSe;dxPScxGridLnkRS18;AnyDAC_PhysMySQL_D18;cxLibraryRS18;ACBr_LFD;JvDocking;adortl;JvWizards;dxPSdxDBTVLnkRS18;JvHMI;ACBrOpenSSL;JvBands;ACBrCapicom;fs18;rtl;ACBrSerial;DbxClientDriver;Tee;JclContainers;rbTCUI1518;JvSystem;svnui;rbTC1518;JvControls;dxDBXServerModeRS18;IndyProtocols;DBXMySQLDriver;dxFlowChartRS18;bindcompdbx;TeeUI;JvJans;JvPrintPreview;JvPageComps;ipstudiowin;JvStdCtrls;JvCustom;dclRBBDE1518;vcltouch;dxPSPrVwRibbonRS18;PngComponents;ACBrNFSeDanfseFRpkg;dxPSdxFCLnkRS18;VclSmp;cxGridRS18;DataSnapConnectors;dxPSDBTeeChartRS18;dxdbtrRS18;ACBrNFeDanfeFRpkg;AnyDAC_PhysSQLITE_D18;rbRIDE1518;dxCoreRS18;fmxobj;fsDB18;JclVcl;frxIBX18;dclRBADO1518;svn;dxPSdxLCLnkRS18;fmxdae;cxPivotGridOLAPRS18;cxDataRS18;bdertl;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_UsePackage>dxBarRS18;dxPSCoreRS18;AnyDAC_PhysODBC_D18;cxTreeListRS18;dxDockingRS18;AnyDAC_ComI_D18;dxThemeRS18;dxPSdxOCLnkRS18;AnyDAC_PhysIB_D18;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;cxTreeListdxBarPopupMenuRS18;officeXPrt;DbxCommonDriver;vclimg;dbxcds;DatasnapConnectorsFreePascal;vcldb;cxExportRS18;AnyDAC_PhysMSAcc_D18;CustomIPTransport;dsnap;IndyIPServer;IndyCore;cxVerticalGridRS18;CloudService;dxPSdxDBOCLnkRS18;FmxTeeUI;dxADOServerModeRS18;AnyDAC_PhysOracle_D18;AnyDAC_PhysMSSQL_D18;dxPScxExtCommonRS18;cxEditorsRS18;cxPageControldxBarPopupMenuRS18;cxSchedulerRS18;dxSpellCheckerRS18;dxPScxVGridLnkRS18;dxRibbonRS18;AnyDAC_Phys_D18;AnyDAC_Comp_D18;bindcompfmx;cxBarEditItemRS18;cxPageControlRS18;dbrtl;bindcomp;inetdb;DBXOdbcDriver;xmlrtl;ibxpress;dxBarExtItemsRS18;vclactnband;bindengine;soaprtl;FMXTee;bindcompvcl;dxPsPrVwAdvRS18;cxSpreadSheetRS18;vclie;cxPivotGridRS18;dxmdsRS18;dxBarDBNavRS18;dxTileControlRS18;AnyDAC_PhysASA_D18;dxComnRS18;dxBarExtDBItemsRS18;DBXInformixDriver;dxPScxSchedulerLnkRS18;Intraweb;ipstudiowinclient;dxNavBarRS18;dsnapcon;DBXFirebirdDriver;inet;dxPSTeeChartRS18;dxPScxCommonRS18;vclx;DBXSybaseASADriver;dxorgcRS18;dbexpress;IndyIPClient;AnyDAC_PhysDb2_D18;dxGDIPlusRS18;AnyDAC_PhysADS_D18;AnyDAC_GUIxForms_D18;dxLayoutControlRS18;DBXSqliteDriver;AnyDAC_PhysTDBX_D18;fmx;IndySystem;TeeDB;vclib;DataSnapClient;dxPScxTLLnkRS18;cxSchedulerGridRS18;dxtrmdRS18;DataSnapProviderClient;DBXSybaseASEDriver;dxTabbedMDIRS18;MetropolisUILiveTile;dxPSLnksRS18;vcldsnap;dxPScxPivotGridLnkRS18;DBXDb2Driver;dxPScxSSLnkRS18;DBXOracleDriver;dxServerModeRS18;vclribbon;dxdborRS18;AnyDAC_PhysPg_D18;fmxase;vcl;IndyIPCommon;DBXMSSQLDriver;cxPivotGridChartRS18;inetdbxpress;webdsnap;dxPScxGridLnkRS18;AnyDAC_PhysMySQL_D18;cxLibraryRS18;adortl;dxPSdxDBTVLnkRS18;rtl;DbxClientDriver;Tee;dxDBXServerModeRS18;IndyProtocols;DBXMySQLDriver;dxFlowChartRS18;bindcompdbx;TeeUI;ipstudiowin;vcltouch;dxPSPrVwRibbonRS18;PngComponents;dxPSdxFCLnkRS18;VclSmp;cxGridRS18;DataSnapConnectors;dxPSDBTeeChartRS18;dxdbtrRS18;AnyDAC_PhysSQLITE_D18;dxCoreRS18;fmxobj;dxPSdxLCLnkRS18;fmxdae;cxPivotGridOLAPRS18;cxDataRS18;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Icon_MainIcon>enB.ico</Icon_MainIcon>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_RemoteDebug>false</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="enSoftMenu.pas">
+            <Form>frmSoftMenu</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Suprimentos\CTC_UN_M_AVF.pas">
+            <Form>CTC_FM_M_AVF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Qualidade\CTC_UN_M_FAC.pas">
+            <Form>CTC_FM_M_FAC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\uValidacoes.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Biblioteca\uProxy.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Padrao\enConstantes.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Padrao\PAD_UN_X_PAD.pas">
+            <Form>PAD_FM_X_PAD</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\PAD_UN_X_PSQ.pas">
+            <Form>PAD_FM_X_PSQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\PAD_UN_X_REL.pas">
+            <Form>PAD_FM_X_REL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\Vcl.RecError.pas">
+            <Form>ReconcileErrorForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Biblioteca\UApplayClassProxy.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Padrao\enFunc.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_TAM.pas">
+            <Form>CAD_FM_C_TAM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_TIF.pas">
+            <Form>CAD_FM_C_TIF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_TME.pas">
+            <Form>CAD_FM_C_TME</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_TRI.pas">
+            <Form>CAD_FM_C_TRI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_TXS.pas">
+            <Form>CAD_FM_C_TXS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_UND.pas">
+            <Form>CAD_FM_C_UND</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\OFI_UN_C_TIO.pas">
+            <Form>OFI_FM_C_TIO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\CTC_UN_C_OBR.pas">
+            <Form>CTC_FM_C_OBR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\CTC_UN_C_TPR.pas">
+            <Form>CTC_FM_C_TPR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\CTC_UN_C_EPI.pas">
+            <Form>CTC_FM_C_EPI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Relatorios\Cadastros\CTC_UN_R_EPI.pas">
+            <Form>CTC_FM_R_EPI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Manutencao\CTC_UN_M_CEP.pas">
+            <Form>CTC_FM_M_CEP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="SEG_UN_X_SEN.pas">
+            <Form>SEG_FM_X_SEN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Manutencao\CTC_UN_M_CFE.pas">
+            <Form>CTC_FM_M_CFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Manutencao\CTC_UN_M_OFI.pas">
+            <Form>CTC_FM_M_OFI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\SEG_UN_X_BCK.pas">
+            <Form>SEG_FM_X_BCK</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\DataModule\uDmGeral.pas">
+            <Form>dmGeral</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Manutencao\CTC_UN_M_BDE.pas">
+            <Form>CTC_FM_M_BDE</Form>
+        </DCCReference>
+        <DCCReference Include="Relatorios\Movimentacoes\CTC_UN_R_BDE.pas">
+            <Form>CTC_FM_R_BDE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Manutencao\CTC_UN_M_LOC.pas">
+            <Form>CTC_FM_M_LOC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_C_OBR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_C_OFI.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_AVF.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_BDE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_CEP.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_CFE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_FAC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_LOC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_OBR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CAD_RN_C_ITE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CAD_RN_C_LOC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CAD_RN_C_PAR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CSU_RN_C_FIN.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Compras\CMP_RN_M_COT.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Compras\CMP_RN_M_PED.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Compras\CMP_RN_M_SOL.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Compras\CMP_RN_M_XML.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Estoque\EST_RN_M_CTE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_CXA.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_IQM.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_NFE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_ORC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_PED.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_POS.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_BOL.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CAR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CHE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CHE_MOV.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_COB.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CTA_BCO.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CTA_CXA.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CXA.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_ORC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_PAG.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_PBX.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_RBX.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_RCR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_REC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_C_TIO.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_M_AGE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_M_FEV.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_M_OCV.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_M_ORV.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_M_RQV.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_ALM.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_CCU.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_CFO.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_CID.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_CNE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_COR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_CRG.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_CTC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_GRU.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_INF.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_LTO.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_NCM.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_PCT.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_PEC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_SET.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_TAM.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_TDF.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_TIF.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\CAD_RN_R_TRI.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\EST_RN_R_CTE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\EST_RN_R_DEV.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\EST_RN_R_FIC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\EST_RN_R_GIR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\EST_RN_R_INV.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\FAT_RN_R_PIC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\FAT_RN_R_POS.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\FAT_RN_R_PPC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\FIN_RN_R_PAG.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\OFI_RN_R_TIO.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_C_CDP.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_ACR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_IQF.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_ORS.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_ORS_ITE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_RAA.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_ROM.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_BOL.pas">
+            <Form>FIN_FM_M_BOL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CAR.pas">
+            <Form>FIN_FM_M_CAR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CHE_LAN.pas">
+            <Form>FIN_FM_M_CHE_LAN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CHE_MOV.pas">
+            <Form>FIN_FM_M_CHE_MOV</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_COB.pas">
+            <Form>FIN_FM_M_COB</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CTA_ABE.pas">
+            <Form>FIN_FM_M_CTA_ABE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CTA_BCO.pas">
+            <Form>FIN_FM_M_CTA_BCO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CTA_CON.pas">
+            <Form>FIN_FM_M_CTA_CON</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CTA_CXA.pas">
+            <Form>FIN_FM_M_CTA_CXA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_ORC.pas">
+            <Form>FIN_FM_M_ORC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_PAG.pas">
+            <Form>FIN_FM_M_PAG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_PBX.pas">
+            <Form>FIN_FM_M_PBX</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_PQD.pas">
+            <Form>FIN_FM_M_PQD</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_RBX.pas">
+            <Form>FIN_FM_M_RBX</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_RCR.pas">
+            <Form>FIN_FM_M_RCR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_REC.pas">
+            <Form>FIN_FM_M_REC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_REC_REM.pas">
+            <Form>FIN_FM_M_REC_REM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_ALM.pas">
+            <Form>PSQ_FM_X_ALM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CFO.pas">
+            <Form>PSQ_FM_X_CFO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CID.pas">
+            <Form>PSQ_FM_X_CID</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CLI.pas">
+            <Form>PSQ_FM_X_CLI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CNE.pas">
+            <Form>PSQ_FM_X_CNE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CNF.pas">
+            <Form>PSQ_FM_X_CNF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_COR.pas">
+            <Form>PSQ_FM_X_COR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CPG.pas">
+            <Form>PSQ_FM_X_CPG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CRG.pas">
+            <Form>PSQ_FM_X_CRG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CTA_BCO.pas">
+            <Form>PSQ_FM_X_CTA_BCO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CTC.pas">
+            <Form>PSQ_FM_X_CTC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_DIS.pas">
+            <Form>PSQ_FM_X_DIS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_EPI.pas">
+            <Form>PSQ_FM_X_EPI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_ESP.pas">
+            <Form>PSQ_FM_X_ESP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_ETQ.pas">
+            <Form>PSQ_FM_X_ETQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_FOR.pas">
+            <Form>PSQ_FM_X_FOR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_FPG.pas">
+            <Form>PSQ_FM_X_FPG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_FUN.pas">
+            <Form>PSQ_FM_X_FUN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_GRU.pas">
+            <Form>PSQ_FM_X_GRU</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_INF.pas">
+            <Form>PSQ_FM_X_INF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_INS.pas">
+            <Form>PSQ_FM_X_INS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_ITE.pas">
+            <Form>PSQ_FM_X_ITE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_LME.pas">
+            <Form>PSQ_FM_X_LME</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_MEQ.pas">
+            <Form>PSQ_FM_X_MEQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_NCM.pas">
+            <Form>PSQ_FM_X_NCM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_NFE.pas">
+            <Form>PSQ_FM_X_NFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_NRA.pas">
+            <Form>PSQ_FM_X_NRA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_OBR.pas">
+            <Form>PSQ_FM_X_OBR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_OPR_OPS.pas">
+            <Form>PSQ_FM_X_OPR_OPS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PAR.pas">
+            <Form>PSQ_FM_X_PAR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PBX_TIT.pas">
+            <Form>PSQ_FM_X_PBX_TIT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PCT.pas">
+            <Form>PSQ_FM_X_PCT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PEC.pas">
+            <Form>PSQ_FM_X_PEC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PRG.pas">
+            <Form>PSQ_FM_X_PRG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_REC.pas">
+            <Form>PSQ_FM_X_REC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_REC_CHE.pas">
+            <Form>PSQ_FM_X_REC_CHE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_ROT.pas">
+            <Form>PSQ_FM_X_ROT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_RUA.pas">
+            <Form>PSQ_FM_X_RUA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_SET.pas">
+            <Form>PSQ_FM_X_SET</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_TAM.pas">
+            <Form>PSQ_FM_X_TAM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_TDF.pas">
+            <Form>PSQ_FM_X_TDF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_TIF.pas">
+            <Form>PSQ_FM_X_TIF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_TME.pas">
+            <Form>PSQ_FM_X_TME</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_TRI.pas">
+            <Form>PSQ_FM_X_TRI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_UND.pas">
+            <Form>PSQ_FM_X_UND</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_VEI.pas">
+            <Form>PSQ_FM_X_VEI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_ALM.pas">
+            <Form>CAD_FM_C_ALM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CCU.pas">
+            <Form>CAD_FM_C_CCU</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CFO.pas">
+            <Form>CAD_FM_C_CFO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CID.pas">
+            <Form>CAD_FM_C_CID</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CIN.pas">
+            <Form>CAD_FM_C_CIN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CLI.pas">
+            <Form>CAD_FM_C_CLI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CNE.pas">
+            <Form>CAD_FM_C_CNE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_COR.pas">
+            <Form>CAD_FM_C_COR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CPG.pas">
+            <Form>CAD_FM_C_CPG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CTC.pas">
+            <Form>CAD_FM_C_CTC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_ECF.pas">
+            <Form>CAD_FM_C_ECF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_FOR.pas">
+            <Form>CAD_FM_C_FOR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_FPG.pas">
+            <Form>CAD_FM_C_FPG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_FUN.pas">
+            <Form>CAD_FM_C_FUN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_GRU.pas">
+            <Form>CAD_FM_C_GRU</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_INF.pas">
+            <Form>CAD_FM_C_INF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_ITE.pas">
+            <Form>CAD_FM_C_ITE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_LTO.pas">
+            <Form>CAD_FM_C_LTO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_MVE.pas">
+            <Form>CAD_FM_C_MVE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_NAT.pas">
+            <Form>CAD_FM_C_NAT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_NCM.pas">
+            <Form>CAD_FM_C_NCM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_PAR.pas">
+            <Form>CAD_FM_C_PAR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_PCT.pas">
+            <Form>CAD_FM_C_PCT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_PEC.pas">
+            <Form>CAD_FM_C_PEC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_RAM.pas">
+            <Form>CAD_FM_C_RAM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftSpuma\Cadastros\PCP_UN_C_CRG.pas">
+            <Form>PCP_FM_C_CRG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Compras\CMP_UN_M_APR.pas">
+            <Form>CMP_FM_M_APR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Compras\CMP_UN_M_COT.pas">
+            <Form>CMP_FM_M_COT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Compras\CMP_UN_M_COT_ISC.pas">
+            <Form>CMP_FM_M_COT_ISC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Compras\CMP_UN_M_PED.pas">
+            <Form>CMP_FM_M_PED</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Compras\CMP_UN_M_SOL.pas">
+            <Form>CMP_FM_M_SOL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Compras\CMP_UN_M_XML.pas">
+            <Form>CMP_FM_M_XML</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA.pas">
+            <Form>FAT_FM_M_CXA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE.pas">
+            <Form>FAT_FM_M_CXA_NFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_FAT.pas">
+            <Form>FAT_FM_M_FAT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_IQM.pas">
+            <Form>FAT_FM_M_IQM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_IQM_ITE_ANA.pas">
+            <Form>FAT_FM_M_IQM_ITE_ANA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_NFE_ANA.pas">
+            <Form>FAT_FM_M_NFE_ANA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_NFE_FRE.pas">
+            <Form>FAT_FM_M_NFE_FRE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_NFE_IQM.pas">
+            <Form>FAT_FM_M_NFE_IQM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_CTE.pas">
+            <Form>EST_FM_M_CTE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_MAL.pas">
+            <Form>EST_FM_M_MAL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_NFC.pas">
+            <Form>EST_FM_M_NFC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_NFD.pas">
+            <Form>EST_FM_M_NFD</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_NFE.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_NFE_TIT.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_NFS.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\FAT_UN_M_NFE_IPE.pas">
+            <Form>FAT_FM_M_NFE_IPE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\FAT_UN_M_NFE_IPQ.pas">
+            <Form>FAT_FM_M_NFE_IPQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_FAM.pas">
+            <Form>CAD_FM_C_FAM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftSpuma\Cadastros\PCP_UN_C_MDE.pas">
+            <Form>PCP_FM_C_MDE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\PCP\PCP_UN_M_ORS.pas">
+            <Form>PCP_FM_M_ORS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\PCP\PCP_UN_M_ROM.pas">
+            <Form>PCP_FM_M_ROM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_VEI.pas">
+            <Form>CAD_FM_C_VEI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\PAD_UN_X_FRM.pas">
+            <Form>PAD_FM_X_FRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\ufrmStatus.pas">
+            <Form>frmStatus</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_CLI.pas">
+            <Form>CSU_FM_C_CLI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_CLI_FIN.pas">
+            <Form>CSU_FM_C_CLI_FIN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_CLI_NFE.pas">
+            <Form>CSU_FM_C_CLI_NFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_CLI_STA.pas">
+            <Form>CSU_FM_C_CLI_STA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_FOR.pas">
+            <Form>CSU_FM_C_FOR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_FOR_FIN.pas">
+            <Form>CSU_FM_C_FOR_FIN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_FOR_NFE.pas">
+            <Form>CSU_FM_C_FOR_NFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_FOR_STA.pas">
+            <Form>CSU_FM_C_FOR_STA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_ITE.pas">
+            <Form>CSU_FM_C_ITE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_ITE_EST.pas">
+            <Form>CSU_FM_C_ITE_EST</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_ITE_EXT.pas">
+            <Form>CSU_FM_C_ITE_EXT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_ITE_NFE.pas">
+            <Form>CSU_FM_C_ITE_NFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_PED.pas">
+            <Form>CSU_FM_M_PED</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_PSC.pas">
+            <Form>CSU_FM_M_PSC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Tabelas\CAD_UN_C_SET.pas">
+            <Form>CAD_FM_C_SET</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Manutenção\PCP_UN_M_CME.pas">
+            <Form>PCP_FM_M_CME</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Manutenção\PCP_UN_M_MCP.pas">
+            <Form>PCP_FM_M_MCP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_CRP.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Estoque\EST_RN_M_MAL.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_MPS.pas">
+            <Form>FAT_FM_M_CXA_MPS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE_TRA.pas">
+            <Form>FAT_FM_M_CXA_NFE_TRA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_POS.pas">
+            <Form>FAT_FM_M_POS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CAD_RN_C_PES.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_PES.pas">
+            <Form>CAD_FM_C_PES</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CAD_RN_C_FPG.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Biblioteca\YMOFXReader.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PED.pas">
+            <Form>PSQ_FM_X_PED</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE_FPG.pas">
+            <Form>FAT_FM_M_CXA_NFE_FPG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_ORS.pas">
+            <Form>PSQ_FM_X_ORS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_ROM.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_CCU.pas">
+            <Form>CAD_FM_R_CCU</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_CFO.pas">
+            <Form>CAD_FM_R_CFO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_CID.pas">
+            <Form>CAD_FM_R_CID</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_CLI.pas">
+            <Form>CAD_FM_R_CLI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_CNE.pas">
+            <Form>CAD_FM_R_CNE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_COR.pas">
+            <Form>CAD_FM_R_COR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_CRG.pas">
+            <Form>CAD_FM_R_CRG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_CTC.pas">
+            <Form>CAD_FM_R_CTC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_FOR.pas">
+            <Form>CAD_FM_R_FOR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_FPG.pas">
+            <Form>CAD_FM_R_FPG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_FUN.pas">
+            <Form>CAD_FM_R_FUN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_GRU.pas">
+            <Form>CAD_FM_R_GRU</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_INF.pas">
+            <Form>CAD_FM_R_INF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_ITE.pas">
+            <Form>CAD_FM_R_ITE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_NCM.pas">
+            <Form>CAD_FM_R_NCM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_RAM.pas">
+            <Form>CAD_FM_R_RAM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_E01.pas">
+            <Form>CAD_FM_R_E01</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_LTO.pas">
+            <Form>CAD_FM_R_LTO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_MVE.pas">
+            <Form>CAD_FM_R_MVE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_PCT.pas">
+            <Form>CAD_FM_R_PCT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_PEC.pas">
+            <Form>CAD_FM_R_PEC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_PES.pas">
+            <Form>CAD_FM_R_PES</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_PRG.pas">
+            <Form>CAD_FM_R_PRG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_SET.pas">
+            <Form>CAD_FM_R_SET</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_TAM.pas">
+            <Form>CAD_FM_R_TAM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_TDF.pas">
+            <Form>CAD_FM_R_TDF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_TIF.pas">
+            <Form>CAD_FM_R_TIF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_TME.pas">
+            <Form>CAD_FM_R_TME</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_TRI.pas">
+            <Form>CAD_FM_R_TRI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_UND.pas">
+            <Form>CAD_FM_R_UND</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\OFI_UN_R_TIO.pas">
+            <Form>OFI_FM_R_TIO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE_MAQ.pas">
+            <Form>FAT_FM_M_CXA_NFE_MAQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_COB.pas">
+            <Form>CSU_FM_M_COB</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED.pas">
+            <Form>FAT_FM_M_PED</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_IOR.pas">
+            <Form>FAT_FM_M_PED_IOR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_M_POS.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CTC_RN_C_SER.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_SER.pas">
+            <Form>PSQ_FM_X_SER</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CTA_CON.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_FUN_RDF.pas">
+            <Form>CAD_FM_C_FUN_RDF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CTC_RN_C_TPR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CTC_RN_M_ORC.pas"/>
+        <DCCReference Include="Movimentacoes\Engenharia\CTC_UN_M_ORC.pas">
+            <Form>CTC_FM_M_ORC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\CTC\CTC_UN_C_EOC.pas">
+            <Form>CTC_FM_C_EOC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CTC_RN_C_EOC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_TPR.pas">
+            <Form>PSQ_FM_X_TPR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\CTC_UN_R_ORC.pas">
+            <Form>CTC_FM_R_ORC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\CTC_UN_R_COM.pas">
+            <Form>CTC_FM_R_COM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\CTC\CTC_UN_M_MED.pas">
+            <Form>CTC_FM_M_MED</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_IQM_IMP.pas">
+            <Form>FAT_FM_M_IQM_IMP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CTC_RN_M_MED.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\CTC_UN_R_MED.pas">
+            <Form>CTC_FM_R_MED</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\Unit1.pas">
+            <Form>frmNFCe</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_FIC.pas">
+            <Form>EST_FM_R_FIC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_DEV.pas">
+            <Form>EST_FM_R_DEV</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_ABC.pas">
+            <Form>EST_FM_R_ABC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_INV.pas">
+            <Form>EST_FM_R_INV</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_CTE.pas">
+            <Form>EST_FM_R_CTE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_GIR.pas">
+            <Form>EST_FM_R_GIR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_MOV.pas">
+            <Form>EST_FM_R_MOV</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\EST_RN_R_ABC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_PAG.pas">
+            <Form>FIN_FM_R_PAG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_PCP.pas">
+            <Form>FIN_FM_R_PCP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_EXF.pas">
+            <Form>FIN_FM_R_EXF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_REC.pas">
+            <Form>FIN_FM_R_REC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_PCR.pas">
+            <Form>FIN_FM_R_PCR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_EXC.pas">
+            <Form>FIN_FM_R_EXC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_COB.pas">
+            <Form>FIN_FM_R_COB</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_MCH.pas">
+            <Form>FIN_FM_R_MCH</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_CHQ.pas">
+            <Form>FIN_FM_R_CHQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_CXA.pas">
+            <Form>FIN_FM_R_CXA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_BCO.pas">
+            <Form>FIN_FM_R_BCO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_ANV.pas">
+            <Form>FIN_FM_R_ANV</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\DataModule\uDmCtc.pas">
+            <Form>dmCtc</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\DataModule\uDmSgq.pas">
+            <Form>dmSgq</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_PCR.pas">
+            <Form>FIN_FM_M_PCR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_RTC.pas">
+            <Form>FAT_FM_M_PED_RTC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_CBX.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Estoque\EST_RN_M_MET.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_CLI_FIN_ITE.pas">
+            <Form>CSU_FM_C_CLI_FIN_ITE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CTE.pas">
+            <Form>PSQ_FM_X_CTE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_REC_RET.pas">
+            <Form>FIN_FM_M_REC_RET</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_NFE.pas">
+            <Form>CSU_FM_M_NFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Faturamento\FAT_RN_M_XML.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_RBX.pas">
+            <Form>FAT_FM_M_CXA_RBX</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_XML.pas">
+            <Form>EST_FM_M_XML</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE_NCF.pas">
+            <Form>FAT_FM_M_CXA_NFE_NCF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Qualidade\CTC_UN_M_PRO.pas">
+            <Form>CTC_FM_M_PRO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CTC_RN_M_PRO.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_ORC.pas">
+            <Form>CSU_FM_M_ORC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\CTC_UN_M_APG.pas">
+            <Form>CTC_FM_M_APG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\CTC_RN_M_APG.pas"/>
+        <DCCReference Include="Movimentacoes\Manutencao\CTC_UN_M_SLM.pas">
+            <Form>CTC_FM_M_SLM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\CTC_UN_R_SLM.pas">
+            <Form>CTC_FM_R_SLM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Estoque\CTC_RN_M_SLM.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_LIB.pas">
+            <Form>FAT_FM_M_LIB</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_CTA_REA.pas">
+            <Form>FIN_FM_M_CTA_REA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE_IMP.pas">
+            <Form>FAT_FM_M_CXA_NFE_IMP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_ROM.pas">
+            <Form>FAT_FM_M_ROM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_MDF.pas">
+            <Form>FAT_FM_M_MDF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_MDF_STA.pas">
+            <Form>FAT_FM_MDF_STA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_ROM_PCA.pas">
+            <Form>FAT_FM_M_ROM_PCA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\PCP\PCP_UN_M_ROM_COF.pas">
+            <Form>PCP_FM_M_ROM_COF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_C_FPI.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\PCP\PCP_UN_M_ROM_COF_ETQ.pas">
+            <Form>PCP_FM_M_ROM_COF_ETQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE_CAN.pas">
+            <Form>FAT_FM_M_CXA_NFE_CAN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_OPR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_M_OPR_REQ.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Alertas\AVS_UN_X_EST.pas">
+            <Form>AVS_FM_X_EST</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Alertas\AVS_UN_X_APG.pas">
+            <Form>AVS_FM_X_APG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_PDE.pas">
+            <Form>FIN_FM_M_PDE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PAI.pas">
+            <Form>PSQ_FM_X_PAI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_MAL_COF.pas">
+            <Form>EST_FM_M_MAL_COF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_ROM_ETQ.pas">
+            <Form>PSQ_FM_X_ROM_ETQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_CXA_NFE_CRT.pas">
+            <Form>FAT_FM_M_CXA_NFE_CRT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Cadastros\CAD_UN_R_FAM.pas">
+            <Form>CAD_FM_R_FAM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FAT_UN_R_NFE.pas">
+            <Form>FAT_FM_R_NFE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Relatórios\FAT_RN_R_NFE.pas"/>
+        <DCCReference Include="Cadastros\CTC_UN_C_OCO.pas">
+            <Form>CTC_FM_C_OCO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_C_OCO.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_ITE_CMP.pas">
+            <Form>CSU_FM_C_ITE_CMP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_GRP.pas">
+            <Form>PSQ_FM_X_GRP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_ITE_ORV.pas">
+            <Form>CSU_FM_C_ITE_ORV</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_LMF.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_PCR.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_PRC.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_LMF.pas">
+            <Form>FIN_FM_M_LMF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_PRC.pas">
+            <Form>FIN_FM_M_PRC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_LMF.pas">
+            <Form>FIN_FM_R_LMF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_PRC.pas">
+            <Form>FIN_FM_R_PRC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_LMF.pas">
+            <Form>PSQ_FM_X_LMF</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_NFS_CPM.pas">
+            <Form>EST_FM_M_NFS_CPM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_DTS.pas">
+            <Form>CAD_FM_C_DTS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Manutencao\CTC_UN_M_PME.pas">
+            <Form>CTC_FM_M_PME</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Build\CTC_RN_M_PME.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_RBX_TIT.pas">
+            <Form>PSQ_FM_X_RBX_TIT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FIN_UN_R_OBR.pas">
+            <Form>FIN_FM_R_OBR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_DCT.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_MTA.pas">
+            <Form>PSQ_FM_X_MTA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_AUS.pas">
+            <Form>CAD_FM_C_AUS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Cadastros\CAD_RN_C_AUS.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_CLI_PRO.pas">
+            <Form>CAD_FM_C_CLI_PRO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CUL.pas">
+            <Form>PSQ_FM_X_CUL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_RVD.pas">
+            <Form>PSQ_FM_X_RVD</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_C_ITE_COJ.pas">
+            <Form>CSU_FM_C_ITE_COJ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_MCH.pas">
+            <Form>FIN_FM_M_MCH</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_MCH_FIL.pas">
+            <Form>FIN_FM_M_MCH_FIL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_MCH_PGT.pas">
+            <Form>FIN_FM_M_MCH_PGT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_MAL.pas">
+            <Form>EST_FM_R_MAL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\PCP_UN_C_MEQ.pas">
+            <Form>PCP_FM_C_MEQ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\uNfse.pas">
+            <Form>frmNFSe</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_CXA.pas">
+            <Form>PSQ_FM_X_CXA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_GPS.pas">
+            <Form>CSU_FM_M_GPS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_VPR_ROT.pas">
+            <Form>CSU_FM_M_VPR_ROT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_AUD.pas">
+            <Form>CSU_FM_M_AUD</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Estatistica\CSU_UN_M_AUD_XML.pas">
+            <Form>CSU_FM_M_AUD_XML</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_PRO.pas">
+            <Form>PSQ_FM_X_PRO</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Spuma\PCP_RN_C_REG.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_PED_SEN.pas">
+            <Form>FAT_FM_M_PED_SEN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\EST_UN_R_DEZ.pas">
+            <Form>EST_FM_R_DEZ</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\FormImg.pas">
+            <Form>FImg</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Alertas\AVS_UN_X_SOL.pas">
+            <Form>AVS_FM_X_SOL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FAT_UN_R_POS.pas">
+            <Form>FAT_FM_R_POS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_ORP.pas">
+            <Form>OFI_FM_M_ORP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_ORP_SUB.pas">
+            <Form>OFI_FM_M_ORP_SUB</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_RPP.pas">
+            <Form>OFI_FM_M_RPP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_RPP_CAN.pas">
+            <Form>OFI_FM_M_RPP_CAN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_RPP_IMP.pas">
+            <Form>OFI_FM_M_RPP_IMP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_FEP.pas">
+            <Form>OFI_FM_M_FEP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_FEV_OPC.pas">
+            <Form>OFI_FM_M_FEV_OPC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_ORP_CAN.pas">
+            <Form>OFI_FM_M_ORP_CAN</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\OFI_UN_R_OFP_POS.pas">
+            <Form>OFI_FM_R_OFP_POS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\OFI_UN_R_FIP.pas">
+            <Form>OFI_FM_R_FIP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\OFI_UN_R_HIP.pas">
+            <Form>OFI_FM_R_HIP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_MVE.pas">
+            <Form>PSQ_FM_X_MVE</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftSpuma\Cadastros\PCP_UN_C_LME.pas">
+            <Form>PCP_FM_C_LME</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftSpuma\Cadastros\PCP_UN_C_ORI.pas">
+            <Form>PCP_FM_C_ORI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftSpuma\Cadastros\PCP_UN_C_TLM.pas">
+            <Form>PCP_FM_C_TLM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_PRG.pas">
+            <Form>CAD_FM_C_PRG</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Padrao\enFormBloq.pas">
+            <Form>frmBloq</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_CVL.pas">
+            <Form>OFI_FM_M_CVL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Oficina\OFI_UN_M_CVL_IMP.pas">
+            <Form>OFI_FM_M_CVL_IMP</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Oficina\OFI_RN_M_CVL.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Estoque\EST_UN_M_XML_LOT.pas">
+            <Form>EST_FM_M_XML_LOT</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Financeiro\FIN_UN_M_BRD.pas">
+            <Form>FIN_FM_M_BRD</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Regras\Financeiro\FIN_RN_M_BRD.pas"/>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_MAR.pas">
+            <Form>PSQ_FM_X_MAR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_NTR.pas">
+            <Form>PSQ_FM_X_NTR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1046</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                    <VersionInfoKeys Name="CFBundleName"/>
+                    <VersionInfoKeys Name="CFBundleDisplayName"/>
+                    <VersionInfoKeys Name="UIDeviceFamily"/>
+                    <VersionInfoKeys Name="CFBundleIdentifier"/>
+                    <VersionInfoKeys Name="CFBundleVersion"/>
+                    <VersionInfoKeys Name="CFBundlePackageType"/>
+                    <VersionInfoKeys Name="CFBundleSignature"/>
+                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
+                    <VersionInfoKeys Name="UISupportedInterfaceOrientations"/>
+                    <VersionInfoKeys Name="CFBundleExecutable"/>
+                    <VersionInfoKeys Name="CFBundleResourceSpecification"/>
+                    <VersionInfoKeys Name="LSRequiresIPhoneOS"/>
+                    <VersionInfoKeys Name="CFBundleInfoDictionaryVersion"/>
+                    <VersionInfoKeys Name="CFBundleDevelopmentRegion"/>
+                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">enBuild.dpr</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDataSnapNativeServer210.bpl">Embarcadero DBExpress DataSnap Native Server Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\dclcxSchedulerTreeBrowserRS21.bpl">ExpressScheduler tree browser by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\dclcxPivotGridOLAPRS21.bpl">ExpressPivotGrid OLAP by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k210.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp210.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k210.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfsbde21.bpl">File C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfsbde21.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfrxbde21.bpl">File C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfrxbde21.bpl not found</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Deployment>
+                <DeployFile LocalName="Win32\Debug\enBuild.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>enBuild.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployClass Required="true" Name="DependencyPackage">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch2048">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXInfoPList">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceDebug">
+                    <Platform Name="iOSDevice">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-normal</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeX86File">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\x86</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSResource">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXEntitlements">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xlarge</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon96">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch320">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon144">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\mips</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DebugSymbols">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyFramework">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-small</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSEntitlements">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AdditionalDebugSymbols">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSInfoPList">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1024">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_DefaultAppIcon">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXResource">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch768">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="ProjectOutput">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-large</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="File">
+                    <Platform Name="iOSDevice">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Android">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640x1136">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon36">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-ldpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1536">
+                    <Platform Name="iOSDevice">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon72">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+            </Deployment>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+            <ModelSupport>False</ModelSupport>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+    <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+</Project>

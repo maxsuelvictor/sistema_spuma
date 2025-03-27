@@ -1,0 +1,27 @@
+DELETE FROM CAD_TB_C_SEQ WHERE id_tabela='FIN_CD_M_CTA'
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA,SEQUENCIA) VALUES ('FIN_TB_M_CTA',0)
+
+ALTER TABLE "public"."fin_tb_m_pag_pag"
+ALTER COLUMN "id_plano_juros" DROP NOT NULL;
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ALTER COLUMN "exp_id_controle" DROP NOT NULL,
+ALTER COLUMN "exp_id_tipo_financeiro" DROP NOT NULL,
+ALTER COLUMN "exp_id_conta" DROP NOT NULL;
+
+
+ALTER TABLE "public"."fin_tb_m_cxa"
+ADD COLUMN "vlr_suprimento" numeric(18,4);
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ALTER COLUMN "id_abertura" SET NOT NULL;
+
+ALTER TABLE "public"."fin_tb_m_cta"
+DROP CONSTRAINT "fk_fin_m_cta__fin_m_cxa";
+
+ALTER TABLE "public"."cad_tb_c_fun"
+DROP COLUMN "tipo";
+
+ALTER TABLE "public"."pcp_tb_c_crg"
+ADD COLUMN "tipo" int4;

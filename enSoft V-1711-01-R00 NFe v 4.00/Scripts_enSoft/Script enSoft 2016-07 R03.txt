@@ -1,0 +1,8 @@
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "dre_perc_out_ded_ven" float8,
+ADD COLUMN "dre_perc_ircs" float8;
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "dre_perc_out_ded_ven" float8,
+ADD COLUMN "dre_perc_ircs" float8;
+

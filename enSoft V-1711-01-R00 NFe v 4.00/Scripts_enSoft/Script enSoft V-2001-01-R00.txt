@@ -1,0 +1,16 @@
+/****** 09/01/2020 ********/
+
+ALTER TABLE "public"."fat_tb_m_pca"
+ADD COLUMN "seq_carreg_anual" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_pca"."seq_carreg_anual" IS 'O valor deste campo zera todo vez que se muda de ano.';
+
+
+ALTER TABLE "public"."pcp_tb_m_rom"
+ADD COLUMN "seq_pca_carreg_anual" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom"."seq_pca_carreg_anual" IS 'Código do campo seq_carreg_anual';
+
+
+
+

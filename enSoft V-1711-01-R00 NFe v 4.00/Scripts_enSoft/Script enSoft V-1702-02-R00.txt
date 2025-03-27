@@ -1,0 +1,91 @@
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "per_cmv_interno" numeric(18,4),
+ADD COLUMN "per_cmv_externo" numeric(18,4);
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "vnd_interno_externo" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."vnd_interno_externo" IS '0 - Vendedor Interno; 1 - Vendedor Externo';
+
+
+/***** 09/03/2017 *****/
+
+
+CREATE TABLE "public"."cad_tb_c_aus" (
+"id_aus" int4 NOT NULL,
+"id_empresa" int4,
+"id_funcionario" int4,
+CONSTRAINT "cad_tb_c_aus_pkey" PRIMARY KEY ("id_aus")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_aus" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_aus" IS 'Alterar Acessos do Usuário';
+
+
+CREATE TABLE "public"."cad_tb_c_aus_prg" (
+"id_aus" int4 NOT NULL,
+"id_perfil_seg" int4 NOT NULL,
+"formulario" varchar(100) COLLATE "default" NOT NULL,
+"chave" varchar(200) COLLATE "default" NOT NULL,
+"id_empresa" int4 NOT NULL,
+"adicionar" bool,
+"alterar" bool,
+"excluir" bool,
+"consulta" bool,
+"id_aus_prg" int4 NOT NULL,
+CONSTRAINT "CAD_TB_C_AUS_pkey" PRIMARY KEY ("id_aus", "id_aus_prg"),
+CONSTRAINT "fk_cad_c_aus_prg__cad_c_pes_mod" FOREIGN KEY ("id_perfil_seg", "formulario") REFERENCES "public"."cad_tb_c_pes_mod" ("id_perfil_seg", "formulario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_aus_prg__cad_c_aus" FOREIGN KEY ("id_aus") REFERENCES "public"."cad_tb_c_aus" ("id_aus") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_aus_prg" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_aus_prg" IS 'Alterar Acessos do Usuário';
+
+/***** 14/03/2017 ****/
+
+ALTER TABLE "public"."cad_tb_c_ite_coj"
+ADD COLUMN "id_cor" int4,
+ADD COLUMN "id_tamanho" int4;
+
+
+
+ALTER TABLE "public"."cad_tb_c_par"
+ADD COLUMN "banco" int4,
+ADD COLUMN "agencia" char(10),
+ADD COLUMN "conta_corrente" varchar(20),
+ADD COLUMN "agencia_dig" int4,
+ADD COLUMN "conta_corrente_dig" int4;
+
+
+
+/****** 15/03/2017 *******/
+
+ALTER TABLE "public"."est_tb_m_fes"
+ADD COLUMN "data_ult_compra" date;
+
+
+
+/**** 16/03/2016 *****/
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "mdf_encerrado" bool;
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "dias_vencimento" int4;
+
+update cad_tb_c_fpg set dias_vencimento=30
+where dias_vencimento is null;
+
+
+ALTER TABLE "public"."ofi_tb_m_ocq_ite"
+DROP CONSTRAINT "ofi_tb_m_ocq_ite_id_orcamento_fkey";
+
+ALTER TABLE "public"."ofi_tb_m_ocq_ite"
+ADD FOREIGN KEY ("id_orcamento") REFERENCES "public"."ofi_tb_m_ocq" ("id_orcamento");

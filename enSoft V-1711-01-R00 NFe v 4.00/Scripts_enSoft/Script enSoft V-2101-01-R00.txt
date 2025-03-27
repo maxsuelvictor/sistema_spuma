@@ -1,0 +1,4 @@
+/******* 04/01/21 *******/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pcp_rom_ano_corrente" int4;

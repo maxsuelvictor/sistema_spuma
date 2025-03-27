@@ -1,0 +1,14 @@
+
+/**  Usar somente em clientes, onde o parâmetro verifica limete do cliente for TRUE **/
+
+update cad_tb_c_cli
+  set lim_saldo = ttt.novo_saldo
+from 
+   (select cli.id_cliente, cli.lim_valor, (coalesce(cli.lim_valor,0) - 
+       coalesce( ( select sum(coalesce(rec.vlr_saldo,0))  from fin_tb_m_rec rec
+          where rec.id_cliente = cli.id_cliente ),0) )as novo_saldo 
+    from cad_tb_c_cli cli
+    order by 1
+   ) ttt
+where cad_tb_c_cli.id_cliente = ttt.id_cliente
+      

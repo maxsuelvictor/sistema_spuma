@@ -1,0 +1,70 @@
+/*** 15/07/2016 ***/
+
+
+ALTER TABLE "public"."pcp_tb_c_fpi_fti"
+ADD COLUMN "id_busca_item" varchar(30) NOT NULL;
+
+
+ALTER TABLE "public"."pcp_tb_c_fpi_fti_ite"
+ADD COLUMN "id_busca_item" varchar(30) NOT NULL;
+
+
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped"
+ADD COLUMN "status" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom_ped"."status" IS '0-Pendente
+1-Em Andamento
+2-Conferido';
+
+
+update pcp_tb_m_rom_ped set status=0 where status is null;
+
+update pcp_tb_m_rom_ped_ite set qtde_conferida=0 where qtde_conferida is null;
+
+
+
+
+/*** 18/07/2016 ****/
+
+create sequence aud_tb_m_aud_id_aud_seq;
+
+CREATE TABLE "public"."aud_tb_m_aud" (
+"dta_servidor" date NOT NULL,
+"hor_servidor" time(6) NOT NULL,
+"arq_auditoria" bytea NOT NULL,
+"id_usuario" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"programa" varchar(30),
+"id_aud" int4 DEFAULT nextval('aud_tb_m_aud_id_aud_seq'::regclass) NOT NULL,
+CONSTRAINT "aud_tb_m_aud_pkey" PRIMARY KEY ("id_aud")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."aud_tb_m_aud" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."aud_tb_m_aud" IS 'Tabela de Auditoria';
+
+
+ALTER TABLE "public"."pcp_tb_c_fpi_fti" RENAME "id_fpi_ite" TO "id_fpi_fti";
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_etq"
+DROP CONSTRAINT "fk_pcp_m_opr_etq__cad_c_tam",
+DROP CONSTRAINT "fk_pcp_m_opr_etq__cad_c_cor";
+
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "rt_registro" varchar(25);
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "ctr_lot_entr" bool;
+
+
+
+
+

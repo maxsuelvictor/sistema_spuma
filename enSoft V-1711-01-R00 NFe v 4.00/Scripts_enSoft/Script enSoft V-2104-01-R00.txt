@@ -1,0 +1,17 @@
+/******* 27/04/2021 ***********/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "tipo_produto" int4 DEFAULT NULL;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."tipo_produto" IS '0 - Não especificado
+1 - Manual do Usuário';
+
+
+update cad_tb_c_ite 
+set tipo_produto = 0
+where tipo_produto is null;
+
+
+
+
+

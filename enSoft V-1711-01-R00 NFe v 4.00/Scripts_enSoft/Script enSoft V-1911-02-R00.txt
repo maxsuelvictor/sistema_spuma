@@ -1,0 +1,9 @@
+/***** 20/11/2019 ******/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "sgq_vis_vlr_tot_carga" bool;
+
+
+update cad_tb_c_fun
+set sgq_vis_vlr_tot_carga= false;
+

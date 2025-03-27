@@ -1,0 +1,30 @@
+/******* 17/03/2021 *********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pcp_atualiza_dta_pedido" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."pcp_atualiza_dta_pedido" IS 'Caso este campo seja TRUE, no momento de gerar as parcelas no pedido de venda, o sistema irá atualizar a data do pedido para a data do dia.';
+
+
+/****** 18/03/2021 **********/
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "acresc_dias_em_vencto" int4;
+
+
+
+/****** 22/03/2021 *********/
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "per_alterar_repres" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."per_alterar_repres" IS 'Se TRUE o usuário poder alterar o campo REPRESENTANTE na tela de clientes.';
+
+
+
+update cad_tb_c_fun 
+set per_alterar_repres = false
+where 
+ per_alterar_repres is null;
+

@@ -1,0 +1,131 @@
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "vlr_part_dest" numeric(18,2),
+ADD COLUMN "vlr_part_orig" numeric(18,2);
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "vlr_part_dest" numeric(18,2),
+ADD COLUMN "vlr_part_orig" numeric(18,2);
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_dias_prev_uf_dentro" int4,
+ADD COLUMN "sgq_dias_prev_uf_fora" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_dias_prev_uf_dentro" IS 'campo utilizado somente pelo módulo SGQ.  Ao criar um pedido de venda novo o sistema irá mostrar a previsão de entraga. ex:
+emissão do pedido + a qtde deste campo. Isso, caso o cliente seja da mesma UF.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_dias_prev_uf_fora" IS 'campo utilizado somente pelo módulo SGQ.  Ao criar um pedido de venda novo o sistema irá mostrar a previsão de entraga. ex:
+emissão do pedido + a qtde deste campo. Isso, caso o cliente seja da UF diferente.';
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "dta_prev_entrega" date;
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_hab_bot_alt_fun" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_hab_bot_alt_fun" IS 'Desabilita o botão ALTERAR da tela de funcionários.';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "sgq_dias_prev_uf_dentro" TO "sgq_dias_prev_cid_dentro";
+
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "sgq_dias_prev_uf_fora" TO "sgq_dias_prev_cid_fora";
+
+
+
+ALTER TABLE "public"."pcp_tb_m_rom"
+ADD COLUMN "lot_qtde_total" float8,
+ADD COLUMN "hor_emissao" time(6),
+ADD COLUMN "hor_alt" time(6),
+ADD COLUMN "id_resp_alt" int4,
+ADD COLUMN "dta_alt" date,
+ADD COLUMN "hor_fin" time(6),
+ADD COLUMN "dta_fin" date,
+ADD COLUMN "id_resp_fin" int4,
+ADD COLUMN "situacao" int4;
+
+
+
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom"."lot_qtde_total" IS 'Neste campo acumula o total das qtde do lote, da tabela PCP_TB_M_ROM_LOT.';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom"."hor_alt" IS 'Utilizado no momento em que o usuário altera o romaneio.';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom"."id_resp_alt" IS 'Usuário responsável por fazer alterações no Romaneio(Relatório de Cargas).';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom"."id_resp_fin" IS 'Usuário responsável pela finalização do Romaneio(Relatório de Cargas).';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom"."situacao" IS '0 - Em aberto
+1 - Finalizado';
+
+
+ALTER TABLE "public"."fin_tb_m_rbx_ger"
+ALTER COLUMN "vlr_pagamento" DROP NOT NULL,
+ALTER COLUMN "dta_vencimento" DROP NOT NULL,
+ALTER COLUMN "che_conta" DROP NOT NULL,
+ALTER COLUMN "che_cheque" DROP NOT NULL;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_rom"
+ADD COLUMN "ped_ite_qtde_total" int4;
+
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom"."ped_ite_qtde_total" IS 'Neste campo acumula o total das qtde dos itens do pedido de venda, da tabela PCP_TB_M_ROM_PED_ITE.';
+
+
+ALTER TABLE "public"."pcp_tb_m_rom"
+DROP COLUMN "situacao";
+
+
+
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_ed integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_cod_fin integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_arq integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_iss integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_ec integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_rt integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_icms integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_st integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_at integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_ipi integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_pi integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_ind_gef integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_prf_icms integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_prf_iss integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_prf_ridf integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_prf_rudf integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_prf_lcm integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_prf_rv integer;
+ALTER TABLE cad_tb_c_par_ctr ADD COLUMN des_prf_ri integer;
+
+
+CREATE TABLE "public"."fin_tb_m_pbx_ger" (
+"id_baixa" int4 NOT NULL,
+"id_controle" int4 NOT NULL,
+"vlr_pagamento" numeric(18,4),
+"dta_vencimento" date,
+CONSTRAINT "fin_tb_m_pbx_ger_pkey" PRIMARY KEY ("id_baixa", "id_controle"),
+CONSTRAINT "fk_fin_m_pbx_ger__fin_m_pbx" FOREIGN KEY ("id_baixa") REFERENCES "public"."fin_tb_m_pbx" ("id_baixa") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_pbx_ger" OWNER TO "postgres";
+
+
+ALTER TABLE "public"."pcp_tb_m_ors"
+ADD COLUMN "id_rom" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_ors"."id_rom" IS 'Este campo é alimentado no momento em que o usuário digita o código do pedido de venda. Este campo é alimentado automaticamente.';
+
+
+
+
+ALTER TABLE "public"."fin_tb_m_pag_pag"
+ADD COLUMN "com_substituicao" bool;
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ADD COLUMN "id_baixa" int4;
+

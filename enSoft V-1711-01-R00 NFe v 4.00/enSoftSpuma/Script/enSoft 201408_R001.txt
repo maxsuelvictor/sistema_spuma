@@ -1,0 +1,72 @@
+ALTER TABLE "public"."cad_tb_c_tri_reg"
+ADD COLUMN "id_empresa" int4 DEFAULT 1 NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "int_cnt_id_st_icm" TO "iid_st_icm";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "int_cnt_reducao" TO "reducao";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "int_cnt_aliquota" TO "aliquota";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "int_id_inf" TO "id_inf";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg"
+DROP COLUMN "int_nct_id_st_icm",
+DROP COLUMN "int_nct_reducao",
+DROP COLUMN "int_nct_aliquota",
+DROP COLUMN "ext_cnt_id_st_icm",
+DROP COLUMN "ext_cnt_reducao";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg"
+DROP COLUMN "ext_cnt_aliquota",
+DROP COLUMN "ext_id_inf";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "iid_st_icm" TO "cnt_id_st_icm";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "reducao" TO "cnt_reducao";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "aliquota" TO "cnt_aliquota";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "ext_nct_id_st_icm" TO "nct_id_st_icm";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "ext_nct_reducao" TO "nct_reducao";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg" RENAME "ext_nct_aliquota" TO "nct_aliquota";
+
+ALTER TABLE "public"."cad_tb_c_tri_reg"
+DROP CONSTRAINT "PK_dbo.CAD_TB_C_TRI_REG" ,
+ADD CONSTRAINT "PK_dbo.CAD_TB_C_TRI_REG" PRIMARY KEY ("id_tributo", "id_tipo_mov_estoque", "uf", "id_empresa");
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "cert_senha" varchar(30);
+
+CREATE TABLE "public"."cad_tb_c_fun_crg" (
+"id_funcionario" int4 NOT NULL,
+"id_cargo" int4 NOT NULL,
+PRIMARY KEY ("id_funcionario", "id_cargo")
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "public"."cad_tb_c_fun_crg"
+ADD CONSTRAINT "fk_c_fun_crg__c_fun" 
+FOREIGN KEY ("id_funcionario") 
+REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") 
+ON DELETE CASCADE ON UPDATE NO ACTION;
+
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('CMP_TB_M_COT', 1);
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('CMP_TB_M_COT_ITE', 1);
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('CMP_TB_M_SOL', 1);
+
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('PCP_TB_M_RVC', 1);
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('PCP_TB_M_RVC_ITE', 1);
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ALTER COLUMN "status" DROP NOT NULL;
+
+ALTER TABLE "public"."pcp_tb_m_ncf"
+ADD COLUMN "re_dta_resp" date,
+ADD COLUMN "ana_dta_resp" date,
+ADD COLUMN "ana_dta_diretoria" date;
+
+ALTER TABLE "public"."pcp_tb_m_mcp"
+ALTER COLUMN "hora_inicio_atend" TYPE timestamp,
+ALTER COLUMN "hora_termino_atend" TYPE timestamp;

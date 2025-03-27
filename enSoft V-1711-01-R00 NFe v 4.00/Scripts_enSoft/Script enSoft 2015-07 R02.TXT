@@ -1,0 +1,143 @@
+CREATE TABLE "public"."cad_tb_c_fpg_tap" (
+"id_forma_pag" int4,
+"qtde_parc_tot" int4,
+"qtde_parc_ini" int4,
+"qtde_parc_fin" int4,
+"taxa" float8,
+"dias_acres_vencto" int4,
+CONSTRAINT "fk_cad_c_fpg_tap__cad_c_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_fpg_tap" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_fpg_tap" IS 'Tabela responsável pelas taxas aprazos do cartão.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_fpg_tap"."dias_acres_vencto" IS 'Campo utilizado no momento do fechamento do caixa. O sistema irá acrescentar no vencimento do cartão a qtde de dias que tem neste campo.';
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "taxa_antecipacao" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fpg"."taxa_antecipacao" IS 'Campo utilizado pela tela de conciliação de cartão.';
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "car_taxa_ope" float8,
+ADD COLUMN "car_n_lote_venda" varchar(30),
+ADD COLUMN "car_n_lote_id_resp" int4,
+ADD COLUMN "car_n_lote_id_conta" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."car_taxa_ope" IS 'Campo utilizado pela tela de Fechamento de Caixa.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."car_n_lote_venda" IS 'Campo utilizado pela tela de Fechamento de Caixa.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."car_n_lote_id_resp" IS 'Campo utilizado pela tela de Fechamento de Caixa.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."car_n_lote_id_conta" IS 'Campo utilizado pela tela de Fechamento de Caixa.';
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "id_baixa" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."id_baixa" IS 'Campo utilizando pela tela da baixa do contas a receber, quando preciso. Ex:  Caso a baixa seja com cartão de crédito o sistema terá de criar um novo registro no FIN_TB_M_REC.';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cxa_inf_lote_car_fech" bool,
+ADD COLUMN "conc_alt_txa_fixa_car" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_inf_lote_car_fech" IS 'Caso o valor seja TRUE, no momento do fechamento do caixa o usuário será obrigado a informar o nro do lote de cada cartão.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."conc_alt_txa_fixa_car" IS 'Caso seja TRUE, na tela de conciliação de cartão de crédito o sistema permitirá que o usuário altere o valor da Taxa Fixa que vem do cartão (car_taxa).';
+
+
+update cad_tb_c_par_ctr
+set cxa_inf_lote_car_fech = false
+where 
+   cxa_inf_lote_car_fech is null;
+
+update cad_tb_c_par_ctr
+set conc_alt_txa_fixa_car = false
+where 
+   conc_alt_txa_fixa_car is null;
+
+
+ALTER TABLE "public"."fin_tb_m_rec" RENAME "car_n_lote_venda" TO "car_n_lote";
+
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ADD COLUMN "hor_movimento" timestamp(6),
+ADD COLUMN "operacao" int4,
+ADD COLUMN "id_responsavel" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_mch"."historico" IS 'Campo utilizado pelo sistema para detalhar a função da Operação escolhida pelo o usuário. O usuário não manipula este campo.';
+
+ALTER TABLE "public"."fin_tb_m_mch" RENAME "historico" TO "informativo";
+
+COMMENT ON COLUMN "public"."fin_tb_m_mch"."operacao" IS '1 - Depositar;
+2 - Devolver;
+3 - Pagar parcial;
+4 - Resgatar;';
+
+
+ALTER TABLE "public"."fin_tb_m_mch_che"
+ADD COLUMN "vlr_pago" numeric(18,4),
+ADD COLUMN "id_alinea" char(2),
+ADD CONSTRAINT "fk_fin_m_mch_che__fin_m_rec" FOREIGN KEY ("id_titulo") REFERENCES "public"."fin_tb_m_rec" ("id_titulo") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+CREATE TABLE "public"."fin_tb_m_mch_tit" (
+"id_controle" int4 NOT NULL,
+"id_titulo" int4 NOT NULL,
+"id_forma_pag" int4,
+"dias" int4,
+"vencimento" date,
+"num_parcela" varchar(15),
+"id_conta" int4,
+"id_abertura" int4,
+"vlr_juros" numeric(18,4),
+"vlr_total" numeric(18,4),
+"che_conta" int4,
+"che_cheque" int4,
+"che_banco" varchar(10),
+"che_emitente" varchar(50),
+"che_agencia" varchar(10),
+"vlr_titulo" numeric(18,4),
+CONSTRAINT "fin_tb_m_mch_tit_pkey" PRIMARY KEY ("id_controle", "id_titulo"),
+CONSTRAINT "fk_fin_m_mch_tit__fin_m_mch" FOREIGN KEY ("id_controle") REFERENCES "public"."fin_tb_m_mch" ("id_controle") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_mch_tit__cad_c_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_mch_tit" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_mch_tit" IS 'Movimentação de Cheque - Títulos';
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "situacao_chq" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."situacao_chq" IS '1 - Em aberto
+2 - Devolvido
+3 - Parcial
+4 - Resgatado
+5 - Compensado';
+
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ADD COLUMN "vlr_tot_juros" numeric(18,4),
+ADD COLUMN "vlr_tot_movimento" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fin_tb_m_mch"."vlr_tot_movimento" IS 'É o resultado de vlr_movimento + vlr_tot_movimento;';
+
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ADD COLUMN "id_condicao_pag" int4,
+ADD CONSTRAINT "fk_fin_m_mch__cad_c_cpg" FOREIGN KEY ("id_condicao_pag") REFERENCES "public"."cad_tb_c_cpg" ("id_condicao_pag") ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT "fk_fin_m_mch__cad_c_ctc" FOREIGN KEY ("id_conta") REFERENCES "public"."cad_tb_c_ctc" ("id_conta") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."cad_tb_c_fpg_tap"
+ADD PRIMARY KEY ("id_forma_pag", "qtde_parc_tot");

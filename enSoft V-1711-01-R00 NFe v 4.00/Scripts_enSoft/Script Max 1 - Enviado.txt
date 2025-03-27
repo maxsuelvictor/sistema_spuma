@@ -1,0 +1,396 @@
+
+
+/****** INICIO FUNÇÃO 1 *********/
+
+CREATE OR REPLACE FUNCTION "public"."fun_corr_custo_vendas"(v_empresa int4)
+  RETURNS "pg_catalog"."bpchar" AS $BODY$
+DECLARE
+   v_fat_tb_m_nfe_ite record;
+   v_tb_custo_medio record;
+   v_retorno char(10);
+   v_PrimeiraVez bool;
+   v_CustoMedAnt numeric;
+   v_CustoMedNovo numeric;
+   v_data DATE;
+BEGIN
+   /** Função criada por Maxsuel Victor em 26/05/2016 
+       Essa função tem o objetivo de buscar os itens de vendas 
+       que estão com o vlr_custo = 0 e gravar o valor do custo médio 
+       do dia desta venda. **/
+
+   FOR v_fat_tb_m_nfe_ite IN 
+       select nff.id_empresa, nff.dta_documento, nif.id_fiscal, nif.id_sequencia,nif.id_item, nif.id_cor, nif.id_tamanho, nff.id_cfo, cfo.descricao, cfo.id_classe, nif.vlr_custo              
+       from fat_tb_m_nfe_ite nif 
+                 left outer join fat_tb_m_nfe nff on nff.id_fiscal=nif.id_fiscal                 
+                 left outer join cad_tb_c_cfo cfo on cfo.id_cfo=nff.id_cfo   
+                 left outer join cad_tb_c_cpg cpg on cpg.id_condicao_pag=nff.id_condicao_pag                     
+       where nff.nfe_cod_sit not in ('02','04','05') and nff.status = 1 and 
+             nff.faturada = true and nff.tipo_nf = 'S' and nff.id_empresa = v_empresa
+             -- and extract(year from nff.dta_emissao) = v_ano 
+             and nif.vlr_custo <= 0 
+    LOOP
+   
+        for v_tb_custo_medio in
+								select sss.id_empresa, sss."data", sss.id_fiscal, sss.id_controle, sss.id_item, sss.id_seq_item, 
+											 sss.tipo_movimento, case sss.tipo_movimento
+													when 0 then 'Entrada'
+													when 1 then 'Saída'
+											 end as tipo_mov, sss.origem,sss.int_descorigem,
+											 sss.acao_tomar, sss.vlr_custo,(sss.sld_estoque - sss.qtde)as sld_anterior, qtde, sss.sld_estoque
+								from
+										( select f.id_empresa,
+														 f."data",f.id_fea, f.origem,f.int_descorigem, f.documento,  f.id_item, f.id_seq_item,f.id_almoxarifado, f.id_cor, f.id_tamanho,
+														 f.tipo_movimento, f.int_nometme, f.id_fiscal, f.id_controle,f.acao_tomar, f.qtde, f.vlr_custo_nfi,f.vlr_custo_cit,
+														 case
+																when f.acao_tomar <> 'Nenhuma' then
+																		 case
+																				when (f.id_fiscal > 0)  then f.vlr_custo_nfi
+																				when (id_controle > 0) then	f.vlr_custo_cit
+																		 end
+														 end as vlr_custo,
+
+														 sum(f.qtde) over (partition by f.id_item,f.id_almoxarifado, f.id_cor, f.id_tamanho order by f."data",f.id_fea) as sld_estoque
+											from  (select
+																 fea.id_empresa, fea."data", fea.id_fea, fea.origem, fea.documento, fea.id_item, fea.id_seq_item,
+																 fea.id_almoxarifado, fea.id_cor, fea.id_tamanho,
+																 tme.tipo_movimento,tme.descricao as int_nometme, fea.id_fiscal, fea.id_controle,
+																 nfi.vlr_custo as vlr_custo_nfi, cit.vlr_custo as vlr_custo_cit,
+																 case
+																		 when cfo.id_classe in ('EA10','EA50','EA99','EA60') then  'soma'
+																		 when cfo.id_classe in ('SP20') then  'subtrai'
+
+																	 else
+																			case
+																					when (fea.origem = 4) and (tme.tipo_movimento = 0) then  'soma'
+																					when (fea.origem = 4) and (tme.tipo_movimento = 1) then  'subtrai'
+																			else 'Nenhuma'
+																			end
+																 end as acao_tomar,
+
+																 cast (case fea.origem
+																				when  0 then 'Por Nota fiscal de entrada'
+																				when  1 then 'Por Nota fiscal de saída'
+																				when  2 then 'Por Ordem de saída'
+																				when  3 then 'Por almoxarifado - Saída'
+																				when  4 then 'Por inventário'
+																				when  5 then 'Por almoxarifado - Devolucao'
+																				when  6 then 'Por Pedido de Venda'
+																				when  7 then 'Por Dev. de NF de Fornecedor'
+																				when  8 then 'Por Dev. de NF de Cliente'
+																 end as varchar(30)) as int_descorigem,
+																 case tme.tipo_movimento
+																		when 0 then fea.qtde
+																		when 1 then fea.qtde * -1
+																 end as qtde
+															from est_tb_m_fea fea
+																	 left outer join cad_tb_c_tme tme on tme.id_tipo_mov_estoque = fea.id_tipo_mov_estoque
+																	 left outer join fat_tb_m_nfe nff on (nff.id_fiscal = fea.id_fiscal)
+																	 left outer join cad_tb_c_cfo cfo on (cfo.id_cfo = nff.id_cfo and
+																																				cfo.id_classe in ('EA10','EA50','EA99','EA60','SP20'))
+																	 left outer join fat_tb_m_nfe_ite nfi on (nfi.id_fiscal = fea.id_fiscal AND
+																																						nfi.id_sequencia = fea.id_seq_item)
+																	 left outer join est_tb_m_cte_ite cit on (cit.id_controle  = fea.id_controle AND
+																																						cit.id_seq_item = fea.id_seq_item)
+								 where fea.id_empresa = v_fat_tb_m_nfe_ite.id_empresa
+									 and fea.id_item    = v_fat_tb_m_nfe_ite.id_item
+									 and fea.id_cor     = v_fat_tb_m_nfe_ite.id_cor
+									 and fea.id_tamanho = v_fat_tb_m_nfe_ite.id_tamanho
+									 and fea."data" <= v_fat_tb_m_nfe_ite.dta_documento
+								order by fea."data",fea.id_fea, fea.id_item,fea.id_almoxarifado, fea.id_cor, fea.id_tamanho ) f
+								) sss LOOP
+
+									 if v_tb_custo_medio.acao_tomar <> 'Nenhuma' then                       
+                          if v_PrimeiraVez then
+                                 if v_tb_custo_medio.acao_tomar = 'soma' then                                  
+                                    v_CustoMedAnt  := v_tb_custo_medio.vlr_custo;
+                                    v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                    v_PrimeiraVez  := false;
+                                  end if;
+                             
+                          else
+                             --2
+                               if v_tb_custo_medio.sld_anterior > 0 then
+                                  --3
+                                     if v_tb_custo_medio.acao_tomar = 'subtrai' then
+                                        --4
+                                          if ( v_tb_custo_medio.sld_estoque < 0 ) or
+                                             ( v_tb_custo_medio.sld_estoque = 0 ) then
+                                              
+                                                v_CustoMedAnt  := 0;
+                                                v_CustoMedNovo := 0;
+                                              
+                                          else
+                                              
+                                                if (v_tb_custo_medio.origem = 4) and  --// Inventário
+                                                   (v_tb_custo_medio.tipo_movimento = 1) then --// Saída
+                                                   
+                                                     v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                   
+                                                else
+                                                   
+                                                     v_CustoMedNovo := ( (v_CustoMedAnt * v_tb_custo_medio.sld_anterior) +
+                                                                       (v_tb_custo_medio.vlr_custo * v_tb_custo_medio.qtde))
+                                                                      / (v_tb_custo_medio.sld_anterior + v_tb_custo_medio.qtde);
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                   end if;
+                                              end if;
+                                        --4
+                                     else
+                                        
+                                          if v_tb_custo_medio.acao_tomar = 'soma' then
+                                             
+                                               if (v_tb_custo_medio.origem   = 4) and  --// Inventário
+                                                  (v_tb_custo_medio.tipo_movimento = 0) then --// Entrada
+                                                   
+                                                     v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                   
+                                               else
+
+                                                     v_CustoMedNovo := ( (v_CustoMedAnt * v_tb_custo_medio.sld_anterior) +
+                                                                       (v_tb_custo_medio.vlr_custo * v_tb_custo_medio.qtde))
+                                                                      / (v_tb_custo_medio.sld_anterior + v_tb_custo_medio.qtde);
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                  end if;
+                                            end if;
+                                        end if;
+                                  --3
+                               else
+                                  
+                                    if v_tb_custo_medio.acao_tomar = 'soma' then
+                                       
+                                         v_CustoMedAnt  := v_tb_custo_medio.vlr_custo;
+                                         v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                       
+                                    else
+                                       
+                                         v_CustoMedAnt  := 0;
+                                         v_CustoMedNovo := 0;
+                                       end if;
+                                  end if; 
+                             end if; --2 
+                       end if;                  
+                  
+        end LOOP;
+       
+        if v_CustoMedNovo < 0 then
+           update fat_tb_m_nfe_ite set vlr_custo = 0
+               where id_fiscal = v_fat_tb_m_nfe_ite.id_fiscal 
+                  and id_sequencia = v_fat_tb_m_nfe_ite.id_sequencia;
+        else
+           update fat_tb_m_nfe_ite set vlr_custo = v_CustoMedNovo 
+               where id_fiscal = v_fat_tb_m_nfe_ite.id_fiscal 
+                  and id_sequencia = v_fat_tb_m_nfe_ite.id_sequencia;
+        end if;
+   end LOOP;
+   
+   v_retorno := 'ok';
+   RETURN v_retorno;
+end
+
+
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE COST 100
+;
+
+ALTER FUNCTION "public"."fun_corr_custo_vendas"(v_empresa int4) OWNER TO "postgres";
+
+/**** FIM FUNÇÃO 1 *****/
+
+
+
+/****** INICIO FUNÇÃO 2 *********/
+
+CREATE OR REPLACE FUNCTION "public"."fun_recalc_custo_medio"(v_empresa int4)
+  RETURNS "pg_catalog"."bpchar" AS $BODY$
+DECLARE
+   v_est_tb_m_fes record;
+   v_tb_custo_medio record;
+   v_retorno char(10);
+   v_PrimeiraVez bool;
+   v_CustoMedAnt numeric;
+   v_CustoMedNovo numeric;
+   v_data DATE;
+BEGIN
+    /** Função criada por Maxsuel Victor em 26/05/2016
+        Tem o objetivo de refazer o custo médio de todos os itens 
+        da empresa informada **/
+   FOR v_est_tb_m_fes IN 
+       select fes.* from est_tb_m_fes fes 
+       where  fes.id_empresa = v_empresa                          
+    LOOP   
+        for v_tb_custo_medio in
+								select sss.id_empresa, sss."data", sss.id_fiscal, sss.id_controle, sss.id_item, sss.id_seq_item, 
+											 sss.tipo_movimento, case sss.tipo_movimento
+													when 0 then 'Entrada'
+													when 1 then 'Saída'
+											 end as tipo_mov, sss.origem,sss.int_descorigem,
+											 sss.acao_tomar, sss.vlr_custo,(sss.sld_estoque - sss.qtde)as sld_anterior, qtde, sss.sld_estoque
+								from
+										( select f.id_empresa,
+														 f."data",f.id_fea, f.origem,f.int_descorigem, f.documento,  f.id_item, f.id_seq_item,f.id_almoxarifado, f.id_cor, f.id_tamanho,
+														 f.tipo_movimento, f.int_nometme, f.id_fiscal, f.id_controle,f.acao_tomar, f.qtde, f.vlr_custo_nfi,f.vlr_custo_cit,
+														 case
+																when f.acao_tomar <> 'Nenhuma' then
+																		 case
+																				when (f.id_fiscal > 0)  then f.vlr_custo_nfi
+																				when (id_controle > 0) then	f.vlr_custo_cit
+																		 end
+														 end as vlr_custo,
+
+														 sum(f.qtde) over (partition by f.id_item,f.id_almoxarifado, f.id_cor, f.id_tamanho order by f."data",f.id_fea) as sld_estoque
+											from  (select
+																 fea.id_empresa, fea."data", fea.id_fea, fea.origem, fea.documento, fea.id_item, fea.id_seq_item,
+																 fea.id_almoxarifado, fea.id_cor, fea.id_tamanho,
+																 tme.tipo_movimento,tme.descricao as int_nometme, fea.id_fiscal, fea.id_controle,
+																 nfi.vlr_custo as vlr_custo_nfi, cit.vlr_custo as vlr_custo_cit,
+																 case
+																		 when cfo.id_classe in ('EA10','EA50','EA99','EA60') then  'soma'
+																		 when cfo.id_classe in ('SP20') then  'subtrai'
+
+																	 else
+																			case
+																					when (fea.origem = 4) and (tme.tipo_movimento = 0) then  'soma'
+																					when (fea.origem = 4) and (tme.tipo_movimento = 1) then  'subtrai'
+																			else 'Nenhuma'
+																			end
+																 end as acao_tomar,
+
+																 cast (case fea.origem
+																				when  0 then 'Por Nota fiscal de entrada'
+																				when  1 then 'Por Nota fiscal de saída'
+																				when  2 then 'Por Ordem de saída'
+																				when  3 then 'Por almoxarifado - Saída'
+																				when  4 then 'Por inventário'
+																				when  5 then 'Por almoxarifado - Devolucao'
+																				when  6 then 'Por Pedido de Venda'
+																				when  7 then 'Por Dev. de NF de Fornecedor'
+																				when  8 then 'Por Dev. de NF de Cliente'
+																 end as varchar(30)) as int_descorigem,
+																 case tme.tipo_movimento
+																		when 0 then fea.qtde
+																		when 1 then fea.qtde * -1
+																 end as qtde
+															from est_tb_m_fea fea
+																	 left outer join cad_tb_c_tme tme on tme.id_tipo_mov_estoque = fea.id_tipo_mov_estoque
+																	 left outer join fat_tb_m_nfe nff on (nff.id_fiscal = fea.id_fiscal)
+																	 left outer join cad_tb_c_cfo cfo on (cfo.id_cfo = nff.id_cfo and
+																																				cfo.id_classe in ('EA10','EA50','EA99','EA60','SP20'))
+																	 left outer join fat_tb_m_nfe_ite nfi on (nfi.id_fiscal = fea.id_fiscal AND
+																																						nfi.id_sequencia = fea.id_seq_item)
+																	 left outer join est_tb_m_cte_ite cit on (cit.id_controle  = fea.id_controle AND
+																																						cit.id_seq_item = fea.id_seq_item)
+								 where fea.id_empresa = v_est_tb_m_fes.id_empresa
+									 and fea.id_item    = v_est_tb_m_fes.id_item
+									 and fea.id_cor     = v_est_tb_m_fes.id_cor
+									 and fea.id_tamanho = v_est_tb_m_fes.id_tamanho									 
+								order by fea."data",fea.id_fea, fea.id_item,fea.id_almoxarifado, fea.id_cor, fea.id_tamanho ) f
+								) sss LOOP
+
+									 if v_tb_custo_medio.acao_tomar <> 'Nenhuma' then                       
+                          if v_PrimeiraVez then
+                                 if v_tb_custo_medio.acao_tomar = 'soma' then                                  
+                                    v_CustoMedAnt  := v_tb_custo_medio.vlr_custo;
+                                    v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                    v_PrimeiraVez  := false;
+                                  end if;
+                             
+                          else
+                             --2
+                               if v_tb_custo_medio.sld_anterior > 0 then
+                                  --3
+                                     if v_tb_custo_medio.acao_tomar = 'subtrai' then
+                                        --4
+                                          if ( v_tb_custo_medio.sld_estoque < 0 ) or
+                                             ( v_tb_custo_medio.sld_estoque = 0 ) then
+                                              
+                                                v_CustoMedAnt  := 0;
+                                                v_CustoMedNovo := 0;
+                                              
+                                          else
+                                              
+                                                if (v_tb_custo_medio.origem = 4) and  --// Inventário
+                                                   (v_tb_custo_medio.tipo_movimento = 1) then --// Saída
+                                                   
+                                                     v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                   
+                                                else
+                                                   
+                                                     v_CustoMedNovo := ( (v_CustoMedAnt * v_tb_custo_medio.sld_anterior) +
+                                                                       (v_tb_custo_medio.vlr_custo * v_tb_custo_medio.qtde))
+                                                                      / (v_tb_custo_medio.sld_anterior + v_tb_custo_medio.qtde);
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                   end if;
+                                              end if;
+                                        --4
+                                     else
+                                        
+                                          if v_tb_custo_medio.acao_tomar = 'soma' then
+                                             
+                                               if (v_tb_custo_medio.origem   = 4) and  --// Inventário
+                                                  (v_tb_custo_medio.tipo_movimento = 0) then --// Entrada
+                                                   
+                                                     v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                   
+                                               else
+
+                                                     v_CustoMedNovo := ( (v_CustoMedAnt * v_tb_custo_medio.sld_anterior) +
+                                                                       (v_tb_custo_medio.vlr_custo * v_tb_custo_medio.qtde))
+                                                                      / (v_tb_custo_medio.sld_anterior + v_tb_custo_medio.qtde);
+                                                     v_CustoMedAnt  := v_CustoMedNovo;
+                                                  end if;
+                                            end if;
+                                        end if;
+                                  --3
+                               else
+                                  
+                                    if v_tb_custo_medio.acao_tomar = 'soma' then
+                                       
+                                         v_CustoMedAnt  := v_tb_custo_medio.vlr_custo;
+                                         v_CustoMedNovo := v_tb_custo_medio.vlr_custo;
+                                       
+                                    else
+                                       
+                                         v_CustoMedAnt  := 0;
+                                         v_CustoMedNovo := 0;
+                                       end if;
+                                  end if; 
+                             end if; --2 
+                       end if;                  
+                  
+        end LOOP;
+       
+        if v_CustoMedNovo < 0 then
+           update est_tb_m_fes 
+               set vlr_custo_medio = 0
+               where id_empresa = v_est_tb_m_fes.id_empresa
+                 and id_item    = v_est_tb_m_fes.id_item
+                 and id_cor     = v_est_tb_m_fes.id_cor
+                 and id_tamanho = v_est_tb_m_fes.id_tamanho;
+                  
+        else
+           update est_tb_m_fes 
+               set vlr_custo_medio = v_CustoMedNovo 
+               where id_empresa = v_est_tb_m_fes.id_empresa
+                 and id_item    = v_est_tb_m_fes.id_item
+                 and id_cor     = v_est_tb_m_fes.id_cor
+                 and id_tamanho = v_est_tb_m_fes.id_tamanho;        
+        end if;
+   end LOOP;
+   
+   v_retorno := 'ok';
+   RETURN v_retorno;
+end
+
+
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE COST 100
+;
+
+ALTER FUNCTION "public"."fun_recalc_custo_medio"(v_empresa int4) OWNER TO "postgres";
+
+
+/**** FIM FUNÇÃO 2 *****/

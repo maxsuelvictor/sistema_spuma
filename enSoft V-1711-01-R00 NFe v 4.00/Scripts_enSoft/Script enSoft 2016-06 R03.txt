@@ -1,0 +1,22 @@
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "emite_duplicata_aceite" bool;
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "tipo" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_rom"."tipo" IS 'Campo criado para informar para o MDF se as notas informadas no MANIFESTO são de Clientes ou Fornecedores.
+0 - Clientes
+1 - Fornecedores';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ped_cliente_consumidor_venda_max" numeric(18,4);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "ped_cliente_consumidor_venda_max" TO "ped_cli_cns_vnd_max";
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "profissao" varchar(50),
+ADD COLUMN "renda" numeric(18,4);
+

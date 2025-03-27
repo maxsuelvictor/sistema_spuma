@@ -1,0 +1,154 @@
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "id_vendedor" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."id_vendedor" IS 'Este campo será alimentado no momento do faturamento da nota fiscal de venda.';
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "layout_remessa" varchar(10);
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "ind_nf" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."ind_nf" IS 'Este campo informa que a Nota Fiscal é:
+1 - Nota somente de itens;
+2 - Nota somente de Serviço;
+3 - Nota com Itens e Serviços;
+';
+
+
+COMMENT ON COLUMN "public"."pcp_tb_c_crg"."tipo" IS '0 - Vendedor
+1 - Representante
+2 - Outros
+3 - Mecânico';
+
+
+
+COMMENT ON COLUMN "public"."est_tb_m_fea"."origem" IS '0 - Por Nota fiscal de entrada
+
+1 - Por Nota fiscal de saída
+
+2 - Por Ordem de saída
+
+3 - Por almoxarifado - Saída
+
+4 - Por inventário
+
+5 - Por almoxarifado - Devolucao. 
+6- Por Pedido de Venda 
+7 - Por Dev. de NF de Fornecedor   
+8 - Por Dev. de NF de Cliente  
+9 - Por Ordem de Serviço';
+
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_ordem" int4;
+
+COMMENT ON COLUMN "public"."est_tb_m_fea"."id_ordem" IS 'Campo utilizado pela Ordem de Serviço (Oficina)';
+
+
+
+ALTER TABLE "public"."ofi_tb_m_orv_ite"
+ADD COLUMN "id_cor" int4,
+ADD COLUMN "id_tamanho" int4;
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_almoxarifado" int4;
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv"."status" IS '0 – Aberta
+1 – Em Andamento
+2 – Fechada
+3 – Faturada
+4 - Cancelada';
+
+
+ALTER TABLE "public"."cad_tb_c_cli_inf"
+ADD COLUMN "id_sequencia" int4;
+
+
+/**** rodar este comando SOZINHO ******/
+
+CREATE SEQUENCE _seq MINVALUE 0;
+
+SELECT setval('_seq', 1,false);
+
+/**************************************/
+
+update cad_tb_c_cli_inf
+set id_sequencia = nextval('_seq');
+
+update cad_tb_c_seq
+set sequencia = (select count(*) from cad_tb_c_cli_inf)
+where id_tabela = 'CAD_TB_C_CLI_INF';
+
+ALTER TABLE "public"."cad_tb_c_cli_inf"
+DROP CONSTRAINT "PK_dbo.CAD_TB_C_CLI_INF" ,
+ADD CONSTRAINT "PK_dbo.CAD_TB_C_CLI_INF" PRIMARY KEY ("id_cliente", "id_sequencia");
+
+
+
+
+
+
+/******* Script criado por Mariel em 21/08/2015 **********
+/********************************************************/
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "rntrc" varchar(20),
+ADD COLUMN "chave_mdf" varchar(44),
+ADD COLUMN "und_transporte" int2,
+ADD COLUMN "total_notas" int2,
+ADD COLUMN "vol_carga" float8,
+ADD COLUMN "qtde_carga" float8;
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "tipo_rodado" int2,
+ADD COLUMN "tipo_carroceria" int2,
+ADD COLUMN "cap_veiculo" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_vei"."tipo_rodado" IS '0-Não Aplicavel, 
+1-Truck, 
+2-Toco, 
+3-Cavalo Mecanico, 
+4-VAN, 
+5-Utilitario, 
+6-Outros';
+
+COMMENT ON COLUMN "public"."cad_tb_c_vei"."tipo_carroceria" IS '0-NaoAplicavel, 
+1-Aberta, 
+2-Fechada, 
+3-Graneleira, 
+4-PortaContainer, 
+5-Sider';
+
+COMMENT ON COLUMN "public"."cad_tb_c_vei"."cap_veiculo" IS 'Capacidade do veiculo';
+
+COMMENT ON COLUMN "public"."fat_tb_m_rom"."und_transporte" IS '0-RodoTracao, 
+1-RodoReboque, 
+2-Navio, 
+3-Balsa, 
+4-Aeronave, 
+5-Vagao, 
+6-Outros';
+
+CREATE TABLE "public"."fat_tb_m_rom_lac" (
+"id_romaneio" int2 NOT NULL,
+"lacre" varchar(20) NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+
+ALTER TABLE "public"."fat_tb_m_rom_lac" ADD PRIMARY KEY ("id_romaneio", "lacre");
+ALTER TABLE "public"."fat_tb_m_rom_lac" ADD FOREIGN KEY ("id_romaneio") REFERENCES "public"."fat_tb_m_rom" ("id_romaneio") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+
+
+/**********FIM Script criado por Mariel em 21/08/2015****/
+/********************************************************/
+
+
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."origem_nf" IS 
+'A- Pedido de Venda  B- Estoque  C- Oficina  X- Importação XML   G- Gerada de cupom fiscal -  S-Ordem de Serviço';

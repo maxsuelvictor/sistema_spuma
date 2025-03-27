@@ -1,0 +1,588 @@
+/**** 23/08/17 ******/
+
+ALTER TABLE "public"."ctc_tb_m_bde"
+ADD COLUMN "qtde_combustivel" float8;
+
+
+/***** 24/08/17 ******/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "etiq_espuma4" varchar(70),
+ADD COLUMN "etiq_espuma5" varchar(70),
+ADD COLUMN "etiq_espuma6" varchar(70),
+ADD COLUMN "etiq_revestimento4" varchar(70),
+ADD COLUMN "etiq_revestimento5" varchar(70),
+ADD COLUMN "etiq_revestimento6" varchar(70),
+ADD COLUMN "etiq_marca" varchar(30);
+
+
+/***** 01/09/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_calc_sld_produzir_opr" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_calc_sld_produzir_opr" IS 'Caso seja FALSE, a OPR irá considerar que o saldo a produzir do produto seja a mesma qtde que vem do pedido de venda.';
+
+
+UPDATE cad_tb_c_par_ctr
+  set sgq_calc_sld_produzir_opr = true
+where sgq_calc_sld_produzir_opr is null;
+
+
+/***** 04/09/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ALTER COLUMN "etiq_madeira" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_espuma1" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_espuma2" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_espuma3" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_revestimento1" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_revestimento2" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_revestimento3" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_espuma4" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_espuma5" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_espuma6" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_revestimento4" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_revestimento5" TYPE varchar(120) COLLATE "default",
+ALTER COLUMN "etiq_revestimento6" TYPE varchar(120) COLLATE "default";
+
+
+
+/***** 06/09/2017 ******/
+
+ALTER TABLE "public"."pcp_tb_c_cle"
+ALTER COLUMN "descricao" TYPE varchar(100) COLLATE "default";
+
+
+/***** 16/09/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "sgq_reimprime_etq" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."sgq_reimprime_etq" IS 'Se TRUE o usuário poderá reimprimir uma etiqueta já impressa. 
+';
+
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "dta_reimpressa" date,
+ADD COLUMN "hor_reimpressa" time(6),
+ADD COLUMN "id_func_reimpressa" int4,
+ADD COLUMN "motivo_reimpressa" varchar(80);
+
+
+/****** 18/09/2017 ******/
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "saldo_fisico_momento" float8,
+ADD COLUMN "saldo_pendente" float8,
+ADD COLUMN "saldo_disponivel_est" float8,
+ADD COLUMN "saldo_disp_outras_opr" float8;
+
+
+
+/***** 24/09/2017 ******/
+
+
+CREATE TABLE "public"."ctc_tb_c_obr_crg" (
+"id_obra" int4 NOT NULL,
+"id_cargo" int4 NOT NULL,
+"qtde_func" int4,
+"valor" numeric(18,2),
+CONSTRAINT "ctc_tb_c_obr_crg_pkey" PRIMARY KEY ("id_obra", "id_cargo"),
+CONSTRAINT "fk_ctc_tb_c_obr_crg__ctc_c_obr" FOREIGN KEY ("id_obra") REFERENCES "public"."ctc_tb_c_obr" ("id_obra") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_ctc_tb_c_obr_crg__pcp_c_crg" FOREIGN KEY ("id_cargo") REFERENCES "public"."pcp_tb_c_crg" ("id_cargo") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_c_obr_crg" OWNER TO "postgres";
+
+
+
+
+CREATE TABLE "public"."ctc_tb_c_obr_eqp" (
+"id_obra" int4 NOT NULL,
+"id_obra_seq" int4 NOT NULL,
+"id_meq" int4 NOT NULL,
+"valor" numeric(18,2),
+CONSTRAINT "ctc_tb_c_obr_eqp_pkey" PRIMARY KEY ("id_obra", "id_obra_seq"),
+CONSTRAINT "fk_ctc_tb_c_obr_meq__pcp_c_meq" FOREIGN KEY ("id_meq") REFERENCES "public"."pcp_tb_c_meq" ("id_meq") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_ctc_tb_c_obr_meq__ctc_c_obr" FOREIGN KEY ("id_obra") REFERENCES "public"."ctc_tb_c_obr" ("id_obra") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_c_obr_eqp" OWNER TO "postgres";
+
+
+/****** 26/09/17  *******/
+
+CREATE TABLE "public"."cad_tb_c_cli_eml" (
+"id_cliente" int4 NOT NULL,
+"email" varchar(60) COLLATE "default" NOT NULL,
+CONSTRAINT "cad_tb_c_cli_eml_pkey" PRIMARY KEY ("id_cliente", "email"),
+CONSTRAINT "fk_cad_c_cli_eml__cad_c_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "public"."cad_tb_c_cli_eml" OWNER TO "postgres";
+
+
+/******* 27/09/17 ********/
+
+ALTER TABLE "public"."ctc_tb_m_cep_epi"
+ADD COLUMN "dta_entrega" date,
+ADD COLUMN "qtde" int4;
+
+
+/****** 02/10/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_alm"
+ADD COLUMN "id_obra" int4,
+ADD CONSTRAINT "fk_cad_tb_c_alm__ctc_c_obr" FOREIGN KEY ("id_obra") REFERENCES "public"."ctc_tb_c_obr" ("id_obra") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+/***** 04/10/2017 *****/
+
+ALTER TABLE "public"."ctc_tb_c_obr_crg"
+DROP CONSTRAINT "ctc_tb_c_obr_crg_pkey" ,
+ALTER COLUMN "qtde_func" SET NOT NULL,
+ALTER COLUMN "valor" SET NOT NULL,
+ADD COLUMN "dta_ini_contrato" date NOT NULL,
+ADD COLUMN "dta_fim_contrato" date NOT NULL,
+ADD COLUMN "obs" varchar(80),
+ADD COLUMN "id_obra_crg" int4 NOT NULL,
+ADD CONSTRAINT "ctc_tb_c_obr_crg_pkey" PRIMARY KEY ("id_obra", "id_obra_crg");
+
+
+
+ALTER TABLE "public"."ctc_tb_c_obr_eqp"
+ALTER COLUMN "valor" SET NOT NULL,
+ADD COLUMN "dta_ini_contrato" date,
+ADD COLUMN "dta_fim_contrato" date,
+ADD COLUMN "obs" varchar(80);
+
+ALTER TABLE "public"."ctc_tb_c_obr_eqp"
+ALTER COLUMN "dta_ini_contrato" SET NOT NULL,
+ALTER COLUMN "dta_fim_contrato" SET NOT NULL;
+
+
+CREATE TABLE "public"."ctc_tb_c_obr_ite" (
+"id_obra" int4 NOT NULL,
+"id_obra_ite" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"dta_ini_contrato" date NOT NULL,
+"dta_fim_contrato" date NOT NULL,
+"obs" varchar(80) COLLATE "default",
+"valor" numeric(18,2) NOT NULL,
+CONSTRAINT "ctc_tb_c_obr_ite_pkey" PRIMARY KEY ("id_obra", "id_obra_ite"),
+CONSTRAINT "fk_ctc_tb_c_obr_ite__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_ctc_tb_c_obr_ite__ctc_c_obr" FOREIGN KEY ("id_obra") REFERENCES "public"."ctc_tb_c_obr" ("id_obra") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_c_obr_ite" OWNER TO "postgres";
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "sgq_tamanho_ite_epp" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."sgq_tamanho_ite_epp" IS 'Campo utilizado pelo relatório de Entrada de Produto Acabado';
+
+
+/******* 11/10/2017 **********/
+
+
+CREATE TABLE "public"."pcp_tb_c_reg_ite" (
+"id_regiao" int4 NOT NULL,
+"tipo" int4 NOT NULL,
+"id_grupo" char(11) COLLATE "default" NOT NULL,
+"id_item" int4 NOT NULL,
+"per_desconto" float8,
+CONSTRAINT "pcp_tb_c_reg_ite_pkey" PRIMARY KEY ("id_regiao", "tipo", "id_grupo", "id_item"),
+CONSTRAINT "fk_pcp_c_reg_ite__pcp_c_reg" FOREIGN KEY ("id_regiao") REFERENCES "public"."pcp_tb_c_reg" ("id_regiao") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_c_reg_ite" OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."pcp_tb_c_reg_ite"."tipo" IS '0 - Por Grupo de estoque;   1 - Por Item ';
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "qtde_volume" float8;
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "qtde_volume" float8;
+
+
+/******* 13/10/2017 ********/
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "qtde_volume" float8;
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "qtde_volume" float8;
+
+
+/******* 18/10/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_per_desc_maior" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_per_desc_maior" IS 'Permite um desconto geral no pedido de venda, onde irá chamar uma telinha.';
+
+
+update cad_tb_c_fun
+   set seg_per_desc_maior = false
+where 
+   seg_per_desc_maior is null;
+
+
+/****** 20/10/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "tipo_servico" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ALTER COLUMN "id_ncm" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ALTER COLUMN "id_und_compra" DROP NOT NULL,
+ALTER COLUMN "id_und_venda" DROP NOT NULL;
+
+
+
+/******* 24/10/21017 ********/
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mob_tipo_ordem" int4;
+
+
+ALTER TABLE "public"."pcp_tb_c_mta"
+ADD COLUMN "mob_senha" varchar(100),
+ADD COLUMN "mob_login" varchar(30);
+
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_ordem_mob" int4;
+
+ALTER TABLE "public"."ofi_tb_m_ocv"
+ADD COLUMN "id_orcamento_mob" int4;
+
+
+CREATE TABLE "public"."ofi_tb_m_ocv_fot" (
+"id_orcamento" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"caminho_foto" varchar(255) COLLATE "default" NOT NULL,
+CONSTRAINT "ofi_tb_m_ocv_fot_pkey" PRIMARY KEY ("id_orcamento", "id_sequencia"),
+CONSTRAINT "fk_ofi_m_ocv_fot__ofi_m_ocv" FOREIGN KEY ("id_orcamento") REFERENCES "public"."ofi_tb_m_ocv" ("id_orcamento") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_ocv_fot" OWNER TO "postgres";
+
+
+
+CREATE TABLE "public"."ofi_tb_m_orv_fot" (
+"id_ordem" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"caminho_foto" varchar(255) COLLATE "default" NOT NULL,
+CONSTRAINT "ofi_tb_m_orv_fot_pkey" PRIMARY KEY ("id_ordem", "id_sequencia"),
+CONSTRAINT "fk_ofi_m_orv_fot__ofi_m_orv" FOREIGN KEY ("id_ordem") REFERENCES "public"."ofi_tb_m_orv" ("id_ordem") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_orv_fot" OWNER TO "postgres";
+
+
+
+ALTER TABLE "public"."pcp_tb_c_mta"
+ADD COLUMN "mob_id_empresa" int4;
+
+
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_etg" (
+"id_entrega" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+"id_forma_pag" int4 NOT NULL,
+"vlr_pagamento" numeric(18,2),
+"latitude" float8,
+"longitude" float8,
+"mob_id_entrega" int4,
+"id_empresa" int4,
+CONSTRAINT "fat_tb_m_etg_pkey" PRIMARY KEY ("id_entrega")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_etg" OWNER TO "postgres";
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_etg_dev" (
+"id_entrega" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_item" int4,
+"qtde" float8,
+CONSTRAINT "fat_tb_m_etg_dev_pkey" PRIMARY KEY ("id_entrega", "id_sequencia"),
+CONSTRAINT "fk_fat_etg_dev__cad_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fat_etg_dev__fat_etg" FOREIGN KEY ("id_entrega") REFERENCES "public"."fat_tb_m_etg" ("id_entrega") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_etg_dev" OWNER TO "postgres";
+
+
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_etg_fot" (
+"id_entrega" int4 NOT NULL,
+"caminho_foto" varchar(255) COLLATE "default" NOT NULL,
+"id_sequencia" int4 NOT NULL,
+CONSTRAINT "fat_tb_m_etg_fot_pkey" PRIMARY KEY ("id_entrega", "id_sequencia"),
+CONSTRAINT "fk_fat_etg_fot__fat_etg" FOREIGN KEY ("id_entrega") REFERENCES "public"."fat_tb_m_etg" ("id_entrega") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_etg_fot" OWNER TO "postgres";
+
+
+
+
+
+
+CREATE TABLE "public"."fin_tb_m_ldm" (
+"id_ldm" int4 NOT NULL,
+"id_conta" int4,
+"natureza" int4 NOT NULL,
+"id_motorista" int4 NOT NULL,
+"id_forma_pag" int4 NOT NULL,
+"id_plano" char(11) COLLATE "default" NOT NULL,
+"dta_emissao" date NOT NULL,
+"dta_vencimento" date NOT NULL,
+"num_parcela" varchar(20) COLLATE "default",
+"historico" varchar(100) COLLATE "default",
+"vlr_titulo" numeric(18,2),
+"latitude" float8,
+"longitude" float8,
+"mob_id_ldm" int4,
+"id_empresa" int4,
+"caminho_foto" varchar(255) COLLATE "default",
+CONSTRAINT "fin_tb_m_ldm_pkey" PRIMARY KEY ("id_ldm"),
+CONSTRAINT "fk_fin_ldm__pcp_mta" FOREIGN KEY ("id_motorista") REFERENCES "public"."pcp_tb_c_mta" ("id_motorista") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_ldm__cad_ctc" FOREIGN KEY ("id_conta") REFERENCES "public"."cad_tb_c_ctc" ("id_conta") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_ldm__cad_pct" FOREIGN KEY ("id_plano") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_ldm__cad_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_ldm" OWNER TO "postgres";
+
+
+
+ALTER TABLE "public"."fat_tb_m_etg_dev"
+ADD COLUMN "motivo" varchar(255);
+
+
+/****** 27/10/2017 *******/
+
+/*** Na Globo isso já foi rodado ****/
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icf"
+ADD CONSTRAINT "fk_pcp_m_rom_ped_icf__pcp_m_rom_ped" FOREIGN KEY ("id_rom", "id_pedido") REFERENCES "public"."pcp_tb_m_rom_ped" ("id_rom", "id_pedido") ON DELETE CASCADE ON UPDATE NO ACTION;
+/*********************************/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "preco_por_perfil" bool;
+
+
+/******* 01/11/2017 *******/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_cancelar_os" bool;
+
+update cad_tb_c_fun set seg_cancelar_os=TRUE
+where seg_cancelar_os is null;
+
+
+ALTER TABLE "public"."cad_tb_c_ite_prc"
+DROP CONSTRAINT "fk_cad_c_ite_prc__cad_c_pec";
+
+update cad_tb_c_par_ctr set preco_por_perfil=TRUE
+where prc_ite_manual=true;
+
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "mob_nome_foto" varchar(60);
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "mob_nome_foto" varchar(60);
+
+
+
+/******* 06/11/2017 ********/
+
+ALTER TABLE "public"."pcp_tb_c_meq"
+ALTER COLUMN "id_mde" DROP NOT NULL,
+ALTER COLUMN "id_fabricante" DROP NOT NULL,
+ALTER COLUMN "dta_cadastro" DROP NOT NULL,
+ALTER COLUMN "dta_compra" DROP NOT NULL,
+ALTER COLUMN "numero_nf" DROP NOT NULL,
+ALTER COLUMN "gara_existe" DROP NOT NULL,
+ALTER COLUMN "id_resp_lancto" DROP NOT NULL,
+ALTER COLUMN "tipo_mei" DROP NOT NULL;
+
+
+/****** 08/11/2017 *********/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_icm_desn" numeric(18,4);
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "vlr_icm_desn" numeric(18,4);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "hab_icms_desn_saida" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ALTER COLUMN "etiq_espuma1" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_espuma2" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_espuma3" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_revestimento1" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_revestimento2" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_revestimento3" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_espuma4" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_espuma5" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_espuma6" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_revestimento4" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_revestimento5" TYPE varchar(150) COLLATE "default",
+ALTER COLUMN "etiq_revestimento6" TYPE varchar(150) COLLATE "default";
+
+
+
+/********** 20/11/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "correcao_prc_por_grupo" bool;
+
+
+CREATE TABLE "public"."cad_tb_c_gru_emp" (
+"id_grupo" char(11) COLLATE "default" NOT NULL,
+"id_empresa" int4 NOT NULL,
+"fator_corr_aprazo" float8,
+"fator_corr_avista" float8,
+CONSTRAINT "cad_tb_c_gru_emp_pkey" PRIMARY KEY ("id_grupo", "id_empresa"),
+CONSTRAINT "fk_cad_tb_gru_emp__cad_tb_gru" FOREIGN KEY ("id_grupo") REFERENCES "public"."cad_tb_c_gru" ("id_grupo") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_tb_gru_emp__cad_tb_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_gru_emp" OWNER TO "postgres";
+
+
+
+/********** 29/11/2017 **********/
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "desenvolvimento" bool,
+ADD COLUMN "dta_inicio_desnv" date;
+
+
+update cad_tb_c_cli set desenvolvimento=false
+where desenvolvimento is null;
+
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "motivo_icms_des" int4;
+
+
+
+ALTER TABLE "public"."cad_tb_c_vit"
+ADD COLUMN "semana_visitada" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_vit"."semana_visitada" IS 'Corresponde a semana real que o vendedor visitou o cliente.';
+
+
+/******** 05/12/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "filtro_pad_csu_ite" int4,
+ADD COLUMN "filtro_pad_psq_ite" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."filtro_pad_csu_ite" IS 'Servirá para a tela de consulta de itens
+0-Código
+1-Descrição
+2-Cod.Barra
+3-Cod.Fabrica
+4-Loca-Rua
+5-Aplicação
+6-Nome do Fornecedor
+7-Cod.Grupo
+8-Descrição do Grupo
+9-Referência
+10-NCM
+';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."filtro_pad_psq_ite" IS 'Servirá para tela de pesquisa de itens
+0-Código
+1-Descrição do item
+2-Cod.Barra
+3-Cod.Fabrica
+4-Loca-Rua
+5-Aplicação
+6-Nome do Fornecedor
+7-Cod.Grupo
+8-Descrição do Grupo
+9-Referência
+10-NCM';
+
+
+
+update cad_tb_c_par_ctr
+  set filtro_pad_psq_ite = '1'      
+where filtro_pad_psq_ite is null;
+
+
+update cad_tb_c_par_ctr
+  set filtro_pad_csu_ite = '1'
+where filtro_pad_csu_ite is null;
+
+/***** 07/12/2017 ******/
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "vlr_saldo_anterior" numeric(18,4);
+
+/***** 08/12/2017 ******/
+
+
+ALTER TABLE "public"."fat_tb_m_etg"
+ADD COLUMN "id_motorista" int4;
+
+
+
+

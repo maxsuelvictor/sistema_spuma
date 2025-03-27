@@ -1,0 +1,6 @@
+H;10369661000142;20160106
+V;10369661000495;Teresina Agricola Ltda;PI;Teresina;Lourival Parente;64023350;A
+V;10369661000223;Teresina Agricola Ltda EPP;MA;Timon;Parque Sao Francisco;65636752;A
+V;10369661000304;Teresina Agricola Ltda EPP;MA;Timon;Sao Francisco I;65636752;A
+V;10369661000142;Teresina Agricola Ltda;PI;Teresina;Lourival Parente;64022145;A
+E

@@ -1,0 +1,160 @@
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "ctc" bool NOT NULL;
+
+DROP table CAD_TB_C_PAR_MOD;
+
+create table CAD_TB_C_PAR_MOD (
+   ID_EMPRESA           INT4                 not null,
+   CAD                  BOOL                 not null,
+   TAB                  BOOL                 null,
+   CSU                  BOOL                 null,
+   CMP                  BOOL                 not null,
+   EST                  BOOL                 not null,
+   FAT                  BOOL                 null,
+   BCO                  BOOL                 null,
+   PAG                  BOOL                 null,
+   REC                  BOOL                 null,
+   OME                  BOOL                 not null,
+   OTA                  BOOL                 not null,
+   PCP                  BOOL                 not null,
+   SEG                  BOOL                 null,
+   CHAVE                VARCHAR(100)         null,
+   constraint "PK_dbo.CAD_TB_C_PAR_MOD" primary key (ID_EMPRESA)
+);
+
+comment on table CAD_TB_C_PAR_MOD is
+'Modulos do Sistema';
+
+comment on column CAD_TB_C_PAR_MOD.CAD is
+'Cadastros';
+
+comment on column CAD_TB_C_PAR_MOD.CMP is
+'Compras';
+
+comment on column CAD_TB_C_PAR_MOD.EST is
+'Estoque';
+
+comment on column CAD_TB_C_PAR_MOD.OME is
+'Oficina Mecanica';
+
+comment on column CAD_TB_C_PAR_MOD.OTA is
+'Oficina Tratores';
+
+comment on column CAD_TB_C_PAR_MOD.PCP is
+'Produção de Colchão';
+
+alter table CAD_TB_C_PAR_MOD
+   add constraint FK_CAD_C_PAR_MOD__CAD_C_PAR1 foreign key (ID_EMPRESA)
+      references CAD_TB_C_PAR (ID_EMPRESA)
+      on delete cascade;
+
+
+create table CTC_TB_M_AVF (
+   ID_AVF               INT4                 not null,
+   DTA_AVF              DATE                 null,
+   ID_RESPONSAVEL       INT4                 null,
+   ID_FORNECEDOR        INT4                 null,
+   NOM_FORNECEDOR       VARCHAR(50)          null,
+   DOC_CNPJ             VARCHAR(14)          null,
+   PERG_01              BOOL                 null,
+   PERG_02              BOOL                 null,
+   PERG_03              BOOL                 null,
+   PERG_04              BOOL                 null,
+   CRITERIO_01          FLOAT8               null,
+   CRITERIO_02          FLOAT8               null,
+   CRITERIO_03          FLOAT8               null,
+   CRITERIO_04          FLOAT8               null,
+   CRITERIO_05          FLOAT8               null,
+   CRITERIO_06          FLOAT8               null,
+   CRITERIO_07          FLOAT8               null,
+   PESO_01              FLOAT8               null,
+   PESO_02              FLOAT8               null,
+   PESO_03              FLOAT8               null,
+   PESO_04              FLOAT8               null,
+   PESO_05              FLOAT8               null,
+   PESO_06              FLOAT8               null,
+   PESO_07              FLOAT8               null,
+   OBS                  VARCHAR(100)         null,
+   MEDIA                FLOAT8               null,
+   FOR_APROVADO         BOOL                 null,
+   constraint PK_CTC_TB_M_AVF primary key (ID_AVF)
+);
+
+
+comment on table CTC_TB_M_AVF is
+'Avalialção de Fornecedor';
+
+create table CTC_TB_M_FAC (
+   ID_FAC               INT4                 not null,
+   DTA_ABERTURA         DATE                 null,
+   PRO_ACAO             INT4                 null,
+   PRO_ORIGEM           INT4                 null,
+   PRO_ID_RESPONSAVEL   INT4                 null,
+   PRO_DESCRICAO        VARCHAR(100)         null,
+   PRO_DATA             DATE                 null,
+   ACI_DESCRICAO        VARCHAR(100)         null,
+   ACI_ID_RESPONSAVEL   INT4                 null,
+   ACI_DATA             DATE                 null,
+   AVA_AVALIACAO        INT4                 null,
+   AVA_ID_RESPONSAVEL   INT4                 null,
+   AVA_DATA             DATE                 null,
+   CAP_DESCRICAO        VARCHAR(100)         null,
+   CAP_ID_RESPONSAVEL   INT4                 null,
+   CAP_DATA             DATE                 null,
+   ACP_DESCRICAO_01     VARCHAR(100)         null,
+   ACP_DESCRICAO_02     VARCHAR(100)         null,
+   ACP_DESCRICAO_03     VARCHAR(100)         null,
+   ACP_DESCRICAO_04     VARCHAR(100)         null,
+   ACP_ID_RESP_01       INT4                 null,
+   ACP_ID_RESP_02       INT4                 null,
+   ACP_ID_RESP_03       INT4                 null,
+   ACP_ID_RESP_04       INT4                 null,
+   ACP_DATA_01          DATE                 null,
+   ACP_DATA_02          DATE                 null,
+   ACP_DATA_03          DATE                 null,
+   ACP_DATA_04          DATE                 null,
+   MAE_DESCRICAO        VARCHAR(100)         null,
+   ACO_PERG_01          BOOL                 null,
+   ACO_PERG_02          BOOL                 null,
+   ACO_PERG_03          BOOL                 null,
+   ACO_PERG_04          BOOL                 null,
+   ACO_PERG_01_PRAZO    INT4                 null,
+   ACO_PERG_02_PRAZO    INT4                 null,
+   ACO_PERG_03_FAC      INT4                 null,
+   ACO_PERG_04_FAC      INT4                 null,
+   ACA_DESCRICAO        VARCHAR(100)         null,
+   constraint PK_CTC_TB_M_FAC primary key (ID_FAC)
+);
+
+comment on table CTC_TB_M_FAC is
+'Ação Corretiva, Preventiva e de Melhorias (FAC)';
+
+comment on column CTC_TB_M_FAC.PRO_ACAO is
+'0-Corretiva
+1-Preventiva
+2-Melhoria';
+
+comment on column CTC_TB_M_FAC.PRO_ORIGEM is
+'0-Auditoria Interna
+1-Auditoria Externa
+2-Reclamações de Clientes
+3-Colaboradores
+4-Outros';
+
+ALTER TABLE "public"."cad_tb_c_set"
+ALTER COLUMN "lote_controla" DROP NOT NULL,
+ALTER COLUMN "tipo" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "avf_media_avaliacao" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."avf_media_avaliacao" IS 'campo utilizado na avalição de fornecedor do sistema de contrutora';
+
+ALTER TABLE "public"."cad_tb_c_cfo"
+DROP COLUMN "tipo";
+
+ALTER TABLE "public"."cad_tb_c_cfo"
+DROP COLUMN "desc_reduzida";
+
+ALTER TABLE "public"."cad_tb_c_cfo"
+ALTER COLUMN "descricao" TYPE varchar(400);

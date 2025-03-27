@@ -1,0 +1,7 @@
+ALTER TABLE "public"."cad_tb_c_pec"
+ADD COLUMN "per_correcao_aprazo" float8;
+
+update cad_tb_c_pec
+   set per_correcao_aprazo = 0
+where per_correcao_aprazo is null;
+

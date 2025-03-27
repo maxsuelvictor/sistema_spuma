@@ -1,0 +1,16 @@
+ALTER TABLE "public"."pcp_tb_c_cin"
+ALTER COLUMN "tipo_mei" DROP NOT NULL,
+ALTER COLUMN "situacao_instrumento" DROP NOT NULL,
+ALTER COLUMN "cert_dta_verificacao" DROP NOT NULL,
+ALTER COLUMN "num_seq" DROP NOT NULL,
+ALTER COLUMN "tr_sit_encosto" DROP NOT NULL,
+ALTER COLUMN "tr_sit_funcionamento" DROP NOT NULL,
+ALTER COLUMN "tr_sit_escala" DROP NOT NULL,
+ALTER COLUMN "tr_sit_aspecto_geral" DROP NOT NULL,
+ALTER COLUMN "tr_sit_escala_padrao" DROP NOT NULL,
+ALTER COLUMN "tr_resultado" DROP NOT NULL,
+ALTER COLUMN "tr_sit_inspecao" DROP NOT NULL,
+ALTER COLUMN "tr_dta_verificacao" DROP NOT NULL,
+ALTER COLUMN "numero_nfe" DROP NOT NULL;
+
+

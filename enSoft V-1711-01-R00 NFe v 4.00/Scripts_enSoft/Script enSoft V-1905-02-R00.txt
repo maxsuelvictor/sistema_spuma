@@ -1,0 +1,65 @@
+/**** 23/05/2019 *****/
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "id_pedido_prod_1" int4,
+ADD COLUMN "vlr_liquido_ped_prod_1" numeric(18,4),
+ADD COLUMN "id_pedido_prod_2" int4,
+ADD COLUMN "vlr_liquido_ped_prod_2" numeric(18,4),
+ADD COLUMN "id_pedido_prod_3" int4,
+ADD COLUMN "vlr_liquido_ped_prod_3" numeric(18,4),
+ADD COLUMN "id_pedido_prod_4" int4,
+ADD COLUMN "vlr_liquido_ped_prod_4" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."id_pedido_prod_1" IS 'Esse campo será utilizado pela empresa tenha o modulo SGQ = true e o Parâmetro Atualiza vencimentos no pedido de outra base for igual a True.';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."id_pedido_prod_2" IS 'Esse campo será utilizado pela empresa tenha o modulo SGQ = true e o Parâmetro Atualiza vencimentos no pedido de outra base for igual a True.';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."id_pedido_prod_3" IS 'Esse campo será utilizado pela empresa tenha o modulo SGQ = true e o Parâmetro Atualiza vencimentos no pedido de outra base for igual a True.';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."id_pedido_prod_4" IS 'Esse campo será utilizado pela empresa tenha o modulo SGQ = true e o Parâmetro Atualiza vencimentos no pedido de outra base for igual a True.';
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "id_pedido_prod_5" int4,
+ADD COLUMN "vlr_liquido_ped_prod_5" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."id_pedido_prod_5" IS 'Esse campo será utilizado pela empresa tenha o modulo SGQ = true e o Parâmetro Atualiza vencimentos no pedido de outra base for igual a True.';
+
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pcp_atualiza_fin_base_prod" bool,
+ADD COLUMN "pcp_id_empresa_base_prod" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."pcp_atualiza_fin_base_prod" IS 'Se for TRUE, a tela de Geração de Nota Fiscal (FIN_FM_M_CXA_NFE), irá pedir o(s) código(s) do(s) pedido(s) da base da produção que se refere a nota fiscal que será gerada.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."pcp_id_empresa_base_prod" IS 'se o campo "pcp_atualiza_fin_base_prod" = true, este campo será obrigatório o preenchimento.';
+
+
+
+/**** 23/05/2019 *****/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "sgq_bloco_espuma" bool,
+ADD COLUMN "sgq_calc_bloco_produzir" bool,
+ADD COLUMN "id_item_bloco_espuma" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."sgq_bloco_espuma" IS 'Se for TRUE o sistema entenderá que os itens deste grupo serão do tipo Bloco de Espuma. ';
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."sgq_calc_bloco_produzir" IS 'Indica se faz parte de cálculo p/gerar a O.P do bloco de espuma';
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."id_item_bloco_espuma" IS 'Só pode aceitar item que faça parte de grupo de estoque que é do tipo Bloco de Espuma.';
+
+
+
+update cad_tb_c_gru 
+   set sgq_bloco_espuma = false
+where sgq_bloco_espuma is null;
+
+
+update cad_tb_c_gru 
+   set sgq_calc_bloco_produzir = false
+where sgq_calc_bloco_produzir is null;
+

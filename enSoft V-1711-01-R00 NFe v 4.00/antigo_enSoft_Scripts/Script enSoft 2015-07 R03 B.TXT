@@ -1,0 +1,103 @@
+drop table fat_tb_m_rom_ped_ite;
+drop table fat_tb_m_rom_ped;
+drop table fat_tb_m_rom_Lot;
+drop table fat_tb_m_rom;
+
+CREATE TABLE "public"."fat_tb_m_rom" (
+"id_romaneio" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"dta_emissao" date NOT NULL,
+"id_responsavel" int4 NOT NULL,
+"id_motorista" int4 NOT NULL,
+"obs_1" varchar(100),
+"obs_2" varchar(100),
+"cod_lme" varchar(20),
+"rev_lme" varchar(5),
+"veiculo" varchar(50),
+"id_placa" char(8),
+CONSTRAINT "PK_dbo.FAT_TB_M_ROM" PRIMARY KEY ("id_romaneio"),
+CONSTRAINT "fk_fat_tb_m_fk_fat_m__pcp_tb_c" FOREIGN KEY ("id_motorista") REFERENCES "public"."pcp_tb_c_mta" ("id_motorista") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fat_m_rom__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_rom" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fat_tb_m_rom" IS 'Romaneio de Carha';
+
+
+
+CREATE INDEX "ix_ft_rom_dta_emissao" ON "public"."fat_tb_m_rom" USING btree ("dta_emissao");
+
+CREATE INDEX "ix_ft_rom_empresa" ON "public"."fat_tb_m_rom" USING btree ("id_empresa");
+
+CREATE INDEX "ix_ft_rom_motorista" ON "public"."fat_tb_m_rom" USING btree ("id_motorista");
+
+CREATE INDEX "ix_ft_rom_responsavel" ON "public"."fat_tb_m_rom" USING btree ("id_responsavel");
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_rom_lot" (
+"id_romaneio" int4 NOT NULL,
+"id_lote_caminhao" int4 NOT NULL,
+"qtde" float8 NOT NULL,
+"observacao" varchar(100),
+CONSTRAINT "PK_dbo.FAT_TB_M_ROM_LOT" PRIMARY KEY ("id_romaneio", "id_lote_caminhao"),
+CONSTRAINT "fk_fat_m_rom_lot__fat_m_rom" FOREIGN KEY ("id_romaneio") REFERENCES "public"."fat_tb_m_rom" ("id_romaneio") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_rom_lot" OWNER TO "postgres";
+
+
+
+CREATE INDEX "ix_ft_rom_l_romaneio" ON "public"."fat_tb_m_rom_lot" USING btree ("id_romaneio");
+
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_rom_nfe" (
+"id_romaneio" int4 NOT NULL,
+"id_fiscal" int4 NOT NULL,
+CONSTRAINT "PK_dbo.FAT_TB_M_ROM_PED" PRIMARY KEY ("id_romaneio", "id_fiscal"),
+CONSTRAINT "fk_fat_m_rom_ped__fat_m_rom" FOREIGN KEY ("id_romaneio") REFERENCES "public"."fat_tb_m_rom" ("id_romaneio") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_fat_m_rom_ped__fat_m_ped" FOREIGN KEY ("id_fiscal") REFERENCES "public"."fat_tb_m_ped" ("id_pedido") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_rom_nfe" OWNER TO "postgres";
+
+
+
+CREATE INDEX "ix_ft_rom_p_romaneio" ON "public"."fat_tb_m_rom_nfe" USING btree ("id_romaneio");
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_rom_nfe_ite" (
+"id_romaneio" int4 NOT NULL,
+"id_fiscal" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"qtde" float8 NOT NULL,
+"id_cor" int4,
+"id_tamanho" int4,
+"id_sequencia" int4 NOT NULL,
+CONSTRAINT "PK_dbo.FAT_TB_M_ROM_PED_ITE" PRIMARY KEY ("id_romaneio", "id_fiscal", "id_sequencia"),
+CONSTRAINT "fk_fat_m_rom_nfe_ite__fat_m_rom_nfe" FOREIGN KEY ("id_romaneio", "id_fiscal") REFERENCES "public"."fat_tb_m_rom_nfe" ("id_romaneio", "id_fiscal") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_fat_m_rom_nfe_ite__cad_c_cor" FOREIGN KEY ("id_cor") REFERENCES "public"."cad_tb_c_cor" ("id_cor") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fat_m_rom_nfe_ite__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_rom_nfe_ite" OWNER TO "postgres";
+
+
+
+CREATE INDEX "ix_ft_rom_p_i_romaneio" ON "public"."fat_tb_m_rom_nfe_ite" USING btree ("id_romaneio", "id_fiscal");
+

@@ -1,0 +1,14 @@
+create table CMP_TB_M_COT_FIT_APR (
+   ID_COTACAO           INT4                 not null,
+   ID_FORNECEDOR        INT4                 not null,
+   ID_ITEM              INT4                 not null,
+   constraint PK_CMP_TB_M_COT_FIT_APR primary key (ID_COTACAO, ID_FORNECEDOR, ID_ITEM)
+);
+
+comment on table CMP_TB_M_COT_FIT_APR is
+'ITEM DA COTAÇÃO APROVADA';
+
+alter table CMP_TB_M_COT_FIT_APR
+   add constraint FK_CMP_M_COT_FIT_APR__M_COT_FIT foreign key (ID_COTACAO, ID_FORNECEDOR, ID_ITEM)
+      references CMP_TB_M_COT_FIT (ID_COTACAO, ID_FORNECEDOR, ID_ITEM)
+      on delete cascade on update restrict;

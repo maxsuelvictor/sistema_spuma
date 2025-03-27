@@ -1,0 +1,35 @@
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "rastrea_espumacao" bool,
+ADD COLUMN "rastrea_laminacao" bool,
+ADD COLUMN "rastrea_bordadeira" bool,
+ADD COLUMN "rastrea_corte_costura" bool,
+ADD COLUMN "rastrea_colagem_tampo_alfin" bool,
+ADD COLUMN "rastrea_colagem_molas" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "rastrea_montagem_caixa_box" bool,
+ADD COLUMN "exibe_na_impressao_op" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "id_item_caixa" int4;
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."tipo_produto" IS '0 - Outros
+1 - Manual do Usuário
+2 - Espuma
+3 - Bobina
+4 - Colchão de espuma
+5 - Colchão de molas
+6 - Cama Box
+7 - Base Box
+8 - Travesseiro
+9 - Colchonete
+10 - Encosto
+11 - Maquete
+12 - Caixa de madeira
+13 - Grampo
+14 - Cama Box de Molas';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."id_item_caixa" IS 'Aqui deve ser informado o item do tipo (CAIXA) que é utilizado para produzir as bases box, cama box';

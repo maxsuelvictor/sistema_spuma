@@ -1,0 +1,3 @@
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "observacoes" varchar(400);
+

@@ -1,0 +1,24 @@
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+ Erro no cliente: 100452 - Larsson Luis; msg: inserção ou atualização em tabela "cad_tb_c_cli" viola restrição de chave estrangeira "fk_cad_c_cli__cad_c_cid"
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+ Erro no cliente: 100452 - Larsson Luis; msg: inserção ou atualização em tabela "cad_tb_c_cli" viola restrição de chave estrangeira "fk_cad_c_cli__cad_c_cid"
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+ Erro no cliente: 100452 - Larsson Luis; msg: inserção ou atualização em tabela "cad_tb_c_cli" viola restrição de chave estrangeira "fk_cad_c_cli__cad_c_cid"
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+ Erro no cliente: 100452 - Larsson Luis; msg: inserção ou atualização em tabela "cad_tb_c_cli" viola restrição de chave estrangeira "fk_cad_c_cli__cad_c_cid"
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+ Erro no cliente: 100452 - Larsson Luis; msg: inserção ou atualização em tabela "cad_tb_c_cli" viola restrição de chave estrangeira "fk_cad_c_cli__cad_c_cid"
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+ Erro no cliente: 100452 - Larsson Luis; msg: inserção ou atualização em tabela "cad_tb_c_cli" viola restrição de chave estrangeira "fk_cad_c_cli__cad_c_cid"
+tbClientes Parte 2 -Fim do processo do cliente
+tbClientes Parte 1 -Início do processo do cliente
+ Erro no cliente: 100452 - Larsson Luis; msg: inserção ou atualização em tabela "cad_tb_c_cli" viola restrição de chave estrangeira "fk_cad_c_cli__cad_c_cid"
+tbClientes Parte 2 -Fim do processo do cliente

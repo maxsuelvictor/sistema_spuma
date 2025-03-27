@@ -1,0 +1,78 @@
+﻿ALTER TABLE "public"."pcp_tb_m_crp"
+ADD COLUMN "id_grupo" char(11);
+
+COMMENT ON COLUMN "public"."pcp_tb_m_crp"."id_grupo" IS 'Este campo fará com que o controle de recipiente só aceite itens do grupo informado. Ex.: Se o usuário informar grupo POLIOU , recipiente só aceitará itens do grupo POLIOU.';
+
+ALTER TABLE "public"."fin_tb_m_cob"
+ADD COLUMN "id_empresa" int4 NOT NULL,
+ADD CONSTRAINT "fk_fin_m_cob__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."est_tb_m_lot"
+DROP CONSTRAINT "pk_est_tb_m_lot" ,
+ADD CONSTRAINT "pk_est_tb_m_lot" PRIMARY KEY ("num_lote", "id_item", "id_almoxarifado", "id_cor", "id_tamanho");
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+DROP COLUMN "bco",
+DROP COLUMN "pag",
+DROP COLUMN "rec",
+ADD COLUMN "fin" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_mod"."fin" IS 'Financeiro';
+
+ALTER TABLE "public"."cad_tb_c_par_mod" RENAME "pcp" TO "sgq";
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_mod"."sgq" IS 'Sistema Gestão de Qualidade';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cxa_id_plano_suprim" char(11),
+ADD COLUMN "cxa_id_tif_suprim" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_id_plano_suprim" IS 'Este campo será utilizado pela rotina de Abertura/Fechamento de Caixa que é usado pela tela de Controle de Caixa;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_id_tif_suprim" IS 'Este campo será utilizado pela rotina de Abertura/Fechamento de Caixa que é usado pela tela de Controle de Caixa;';
+
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Baixa de Contas a Pagar
+3-Devolução de vendas 4-Conciliação bancária  5-Nota Fiscal de Saída 6-Nota de Crédito  7 - Abertura de caixa  8 - Controle de Caixa;';
+
+ALTER TABLE "public"."fin_tb_m_cxa"
+DROP COLUMN "dta_fechamento_hora",
+ADD COLUMN "hor_fechamento" time(6);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cxa_id_plano_sangria" char(11),
+ADD COLUMN "cxa_id_tif_sangria" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_id_plano_sangria" IS 'Este campo será utilizado pela rotina de Suprimentos / Sangria  que é usado pela tela de Controle de Caixa;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_id_tif_sangria" IS 'Este campo será utilizado pela rotina de Suprimentos / Sangria  que é usado pela tela de Controle de Caixa;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cxa_exp_id_tif_sangria" int4,
+ADD COLUMN "cxa_exp_id_plano_sangria" char(11);
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_exp_id_tif_sangria" IS 'Este campo será utilizado pela rotina de Suprimentos / Sangria  que é usado pela tela de Controle de Caixa;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_exp_id_plano_sangria" IS 'Este campo será utilizado pela rotina de Suprimentos / Sangria  que é usado pela tela de Controle de Caixa;';
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "vlr_acrescimo" numeric(18,4);
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ALTER COLUMN "banco" DROP NOT NULL,
+ALTER COLUMN "agencia" DROP NOT NULL;
+
+
+
+
+

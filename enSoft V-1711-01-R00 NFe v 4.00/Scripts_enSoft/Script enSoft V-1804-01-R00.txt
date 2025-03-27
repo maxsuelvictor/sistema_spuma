@@ -1,0 +1,21 @@
+/******** 24-04-2018 **********/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_desc_pos_fat" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."vlr_desc_pos_fat" IS 'Este campo serve para o financeiro informar o valo do desconto após o faturamento, pois terá influência na comissão do representante';
+
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "sgq_prestacao_conta" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fpg"."sgq_prestacao_conta" IS 'Este campo é utilizado pela consulta do cliente, no botão Extrato do cliente. Serve para indicar os títulos que estão em aberto, é que são para Prestação de Conta.';
+
+
+
+update cad_tb_c_fpg
+  set sgq_prestacao_conta = false
+where sgq_prestacao_conta is null;
+
+
+

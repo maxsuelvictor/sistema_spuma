@@ -1,0 +1,20 @@
+﻿
+Em 14/02/2014
+CAD_EF_C_MVE -Modelo de Veiculo 
+CAD_EF_C_CVE -Cor de Veiculo 
+CAD_EF_C_TDF -Cadastro de Tipo de Defeitos
+CAD_EF_C_VEI -Veiculo
+CAD_EF_C_TXS -Tipos de defeitos X Setores
+PCP_EF_C_PRQ -PLANO DE CONTROLE PARA RECEBIMENTOE PRESERVAÇÃO 
+PCP_EF_C_PRQ_ESP -PLANO DE CONTROLE PARA RECEBIMENTOE PRESERVAÇÃO - Especificações do Grupo 
+PCP_EF_C_CDP -Controle Dimensional de Produto Acabado
+PCP_EF_C_INS -Cadastro de Instrumentos - Conforme Planilha: P 7.6-01 (Controle de Instrumentos de Medição)
+PCP_EF_C_INS_LNS -Cadastro de Instrumentos - Conforme Planilha: P 7.6-01 (Controle de Instrumentos de Medição) - Localização do Instrumento
+PCP_EF_C_MDE -Cadastro de modelo de equipamentos e instrumentos
+PCP_EF_C_MEQ -Cadastro de Maquinas/Equipamento/Outros
+PCP_EF_C_PRP -Plano de Controle para Recebimento e Preservação de MP e Componentes 
+PCP_EF_C_RPT -Cadastro de Recepientes
+PCP_EF_C_SLA -Cadastro de Escalas
+PCP_EF_C_TPP -Tipos de Programação da Produção
+PCP_EF_C_TPP_SET -Setores do Tipo de Programação (Fazer tela separada)
+

@@ -1,0 +1,7 @@
+
+/***** 18/11/2021 ******/
+
+ALTER TABLE "public"."pcp_tb_m_opb_obl"
+ADD COLUMN "op_espumacao_impressa" bool,
+ADD COLUMN "op_impressa_por" int4,
+ADD COLUMN "op_impressa_em" date;

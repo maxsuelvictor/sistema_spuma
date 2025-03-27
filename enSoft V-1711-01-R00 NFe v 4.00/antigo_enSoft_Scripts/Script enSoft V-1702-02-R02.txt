@@ -1,0 +1,91 @@
+/****** 22/03/2017 ******/
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icf"
+DROP CONSTRAINT "fk_pcp_m_rom_ped_icf__pcp_m_rom_ped";
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icf"
+ADD COLUMN "item_conjugado" bool;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom_ped_icf"."item_conjugado" IS 'Quando o valor deste campo for TRUE quer dizer , que este item é um item conjugado. Pois existe itens do pedido que tem o CAD_TB_C_ITE_COJ preenchido.';
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped"
+ADD COLUMN "qtde_total_item_conj" float8;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped"
+ADD COLUMN "qtde_total_item_conj_conf" float8;
+
+
+ALTER TABLE "public"."fat_tb_m_xml"
+ADD COLUMN "vlr_desconto" numeric(18,4);
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "id_cliente" int4;
+
+
+/***** 23/03/2016 *****/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "sgq_inf_qtde_ite_carg" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."sgq_inf_qtde_ite_carg" IS 'Se este campo estiver marcado , quer dizer que o usuário no momento da conferência de carga poderá informar a Qtde total do item para conferir.';
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "fin_conta_dig" char(1);
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ped_id_forma_pag_rcr" int4;
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+ADD COLUMN "vlr_desconto" numeric(18,4);
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_credito" numeric(18,4);
+
+
+/*** 24/03/2017 ***/
+
+ALTER TABLE "public"."fin_tb_m_rbx_tit"
+ADD COLUMN "dta_novo_venc" date;
+
+
+/*** 29/03/2017 ****/
+
+
+CREATE TABLE "public"."pcp_tb_m_rom_ped_icj" (
+"id_rom" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"id_cor" int4 NOT NULL,
+"id_tamanho" int4 NOT NULL,
+"id_responsavel" int4 NOT NULL,
+"dta_conferencia" date NOT NULL,
+"hor_conferencia" time(6) NOT NULL,
+"id_ped_ite" int4 NOT NULL,
+"qtde_a_inserir" float8,
+"qtde_conf" float8,
+CONSTRAINT "pcp_tb_m_rom_ped_icj_pkey" PRIMARY KEY ("id_rom", "id_pedido", "id_ped_ite", "id_sequencia"),
+CONSTRAINT "pcp_tb_m_rom_ped_icf_copy_id_responsavel_fkey" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "pcp_tb_m_rom_ped_icf_copy_id_item_fkey" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icj" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_rom_ped_icj" IS 'Tabela de Itens Conferido do Pedido do Romaneio';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_rom_ped_icj"."id_ped_ite" IS 'Este campo se refere ao mesmo campo da tabela PCP_TB_M_ROM_PED_ITE';
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icj"
+DROP CONSTRAINT "pcp_tb_m_rom_ped_icf_copy_id_responsavel_fkey",
+DROP CONSTRAINT "pcp_tb_m_rom_ped_icf_copy_id_item_fkey",
+ADD CONSTRAINT "fk_pcp_m_rom_ped_icj__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT "fk_pcp_m_rom_ped_icj__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT "fk_pcp_m_rom_ped_icj__pcp_m_rom_ped" FOREIGN KEY ("id_rom", "id_pedido") REFERENCES "public"."pcp_tb_m_rom_ped" ("id_rom", "id_pedido") ON DELETE CASCADE ON UPDATE NO ACTION;
+

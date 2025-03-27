@@ -1,0 +1,39 @@
+/*** 11/01/2019 ***/
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "per_desc_basico" float8,
+ADD COLUMN "per_desc_especial" float8;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."per_desc_basico" IS 'Utiliazado para quem utiliza SGQ';
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."per_desc_especial" IS 'Utiliazado para quem utiliza SGQ';
+
+
+
+update fat_tb_m_ped
+ set per_desc_basico = 0
+where 
+    per_desc_basico is null;
+
+update fat_tb_m_ped
+ set per_desc_especial = 0
+where 
+    per_desc_especial is null;
+
+
+/**** 17/01/2019 *****/
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "per_desc_basico" float8,
+ADD COLUMN "vlr_desc_basico" numeric(18,4),
+ADD COLUMN "per_desc_especial" float8,
+ADD COLUMN "vlr_desc_especial" numeric(18,4);
+
+
+update fat_tb_m_ped_ite 
+set
+  per_desc_basico = 0,
+  vlr_desc_basico = 0,
+  per_desc_especial = 0,
+  vlr_desc_especial = 0;
+
+

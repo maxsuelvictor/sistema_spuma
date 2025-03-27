@@ -1,0 +1,507 @@
+CREATE TABLE "public"."pcp_tb_m_epp" (
+"id_epp" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"cod_lme" varchar(20),
+"rev_lme" varchar(5),
+"id_responsavel" int4 NOT NULL,
+"id_almoxarifado" int4,
+"dta_entrada" date NOT NULL,
+"hor_entrada" time(6) NOT NULL,
+CONSTRAINT "PCP_TB_M_EPP_pkey" PRIMARY KEY ("id_epp"),
+CONSTRAINT "fk_pcp_m_epp__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_epp__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_epp" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_epp" IS 'Tabela: Entrada de Produtos da Produção';
+
+
+
+CREATE TABLE "public"."pcp_tb_m_epp_ite" (
+"id_epp" int4 NOT NULL,
+"id_epp_ite" int4 NOT NULL,
+"id_item" int4,
+"id_busca_item" varchar(30),
+"id_cor" int4,
+"id_tamanho" int4,
+"cod_barra" varchar(50) NOT NULL,
+"qtde" float8,
+CONSTRAINT "PCP_TB_M_M_EPP_ITE_pkey" PRIMARY KEY ("id_epp", "id_epp_ite"),
+CONSTRAINT "fk_pcp_m_epp_ite__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_epp_ite__pcp_m_epp" FOREIGN KEY ("id_epp") REFERENCES "public"."pcp_tb_m_epp" ("id_epp") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_epp_ite" OWNER TO "postgres";
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pcp_epp_id_tipo_mov_estoque" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."pcp_epp_id_tipo_mov_estoque" IS 'Campo utilizado pela tela PCP_FM_M_EPP, para movimentação do estoque.';
+
+
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_epp" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "dias_entrega" int4;
+
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "id_titulo_pag" int4;
+
+
+
+
+
+ALTER TABLE "public"."ctc_tb_m_pro"
+ADD COLUMN "documento" bytea;
+
+
+
+/**** 29/08/2016 ****/
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "offline" bool,
+ADD COLUMN "conferido" bool,
+ADD COLUMN "id_conf" int4,
+ADD COLUMN "dta_conf" date,
+ADD COLUMN "hor_conf" time,
+ADD COLUMN "resultado_conf" int4;
+
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."origem" IS '0-desktop
+1-dispositivo movel 
+2-Pedido Cupom
+3-Separação de Mercadoria';
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."resultado_conf" IS '0-Total
+1-Parcial';
+
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "qtde_conferida" float8;
+
+
+
+
+
+
+ALTER TABLE "public"."est_tb_m_mal"
+ADD COLUMN "id_opr" int4,
+ADD COLUMN "id_opr_req" int4,
+ADD COLUMN "hora" time(6),
+ADD CONSTRAINT "fk_est_m_mal__pcp_m_opr_req" FOREIGN KEY ("id_opr", "id_opr_req") REFERENCES "public"."pcp_tb_m_opr_req" ("id_opr", "id_opr_req") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "public"."est_tb_m_mal_ite"
+ADD COLUMN "id_opr" int4,
+ADD COLUMN "id_opr_req" int4,
+ADD COLUMN "id_opr_req_ite" int4;
+
+
+
+ALTER TABLE "public"."cad_tb_c_cli_bco"
+ADD COLUMN "arquivo" bytea;
+
+
+ALTER TABLE "public"."cad_tb_c_cli_bco"
+ADD COLUMN "nome_arquivo" varchar(255);
+
+
+/***** 31/08/2016 17:20 *******/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_resp_conf" int4;
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icf"
+DROP CONSTRAINT "fk_pcp_m_rom_ped_icf__cad_c_cor",
+DROP CONSTRAINT "fk_pcp_m_rom_ped_icf__cad_c_tam";
+
+
+
+/**** 08/09/2016 ****/
+
+ALTER TABLE "public"."pcp_tb_m_opr"
+ADD COLUMN "id_setor" int4,
+ADD CONSTRAINT "fk_pcp_m_opr__cad_c_set" FOREIGN KEY ("id_setor") REFERENCES "public"."cad_tb_c_set" ("id_setor") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "oqp" bool;
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "id_empresa" int4;
+
+
+
+/*** 14/09/2016 *****/
+
+
+
+CREATE TABLE "public"."cad_tb_c_mar" (
+"id_mar" int4 NOT NULL,
+"descricao" varchar(60),
+"cod_lme" varchar(20),
+"rev_lme" varchar(5),
+CONSTRAINT "cad_tb_c_mar_pkey" PRIMARY KEY ("id_mar")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_mar" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_mar" IS 'Cadastro de Marcas';
+
+
+
+ALTER TABLE "public"."cad_tb_c_mve"
+ADD COLUMN "id_mar" int4;
+
+ALTER TABLE "public"."cad_tb_c_mve"
+ADD CONSTRAINT "fk_cad_c_mve__cad_c_mar" FOREIGN KEY ("id_mar") REFERENCES "public"."cad_tb_c_mar" ("id_mar") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+/**** 15/09/16 *****/
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "gerado_aut" bool;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."gerado_aut" IS 'Será TRUE quando for gerado pela Importação do Pedido de Venda. Caso for inserido manualmente, será FALSE;';
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "motivo_ger_man" varchar(100),
+ADD COLUMN "id_resp_man" int4,
+ADD COLUMN "dta_man" date,
+ADD COLUMN "hor_man" time(6);
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."motivo_ger_man" IS 'Motivo do por quê que está inserido o produto manualmente na ordem de produção.';
+
+
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "path_remessa" varchar(200);
+
+CREATE TABLE "public"."cad_tb_c_hfg" (
+"id_controle" int4 NOT NULL,
+"nivel" int4 NOT NULL,
+"id_forma_pag" int4 NOT NULL,
+CONSTRAINT "cad_tb_c_hfg_pkey" PRIMARY KEY ("id_controle"),
+CONSTRAINT "fk_cad_c_hfg__cad_c_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_hfg" OWNER TO "postgres";
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "id_controle_fpg_hrq" int4;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ativa_forma_fpg_hrq" bool;
+
+UPDATE cad_tb_c_par_ctr
+SET ativa_forma_fpg_hrq = FALSE
+WHERE ativa_forma_fpg_hrq IS NULL;
+
+
+
+ALTER TABLE "public"."ofi_tb_m_ocv"
+ADD COLUMN "hor_orcamento" time(6);
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "hor_emissao" time(6),
+ADD COLUMN "hor_fechamento" time(6);
+
+
+ALTER TABLE "public"."ofi_tb_m_ocv_ite"
+ADD COLUMN "nome_ite" varchar(100);
+
+
+/***** 16/09/16 ******/
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "id_busca_item" varchar(20);
+
+
+
+
+
+/****** 19/09/2016 ********/
+
+
+CREATE TABLE "public"."cad_tb_c_eqp" (
+"id_equipamento" int4 NOT NULL,
+"descricao" varchar(60) COLLATE "default",
+"serial" varchar(30) COLLATE "default",
+"modelo" varchar(30) COLLATE "default",
+"garantia" bool,
+CONSTRAINT "cad_fm_c_eqp_pkey" PRIMARY KEY ("id_equipamento")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_eqp" OWNER TO "postgres";
+
+
+
+
+
+
+
+
+CREATE TABLE "public"."fin_tb_m_brd" (
+"id_brd" int4 NOT NULL,
+"id_empresa" int4,
+"dta_criacao" date,
+"hor_criacao" time(6),
+"id_resp_criacao" int4,
+"dta_lib" date,
+"hor_lib" time(6),
+"id_resp_lib" int4,
+"dta_bxa" date,
+"hor_bxa" time(6),
+"id_resp_bxa" int4,
+"vlr_a_pagar" numeric(18,4),
+"id_forma_pag" int4,
+"id_tipo_financeiro" int4,
+"obs" varchar(200),
+"id_conta" int4,
+"id_abertura" int4,
+"cod_lme" varchar(20),
+"rev_lme" varchar(5),
+CONSTRAINT "fin_tb_m_brd_pkey" PRIMARY KEY ("id_brd"),
+CONSTRAINT "fk_fin_m_brd__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd__cad_c_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd__cad_c_tif" FOREIGN KEY ("id_tipo_financeiro") REFERENCES "public"."cad_tb_c_tif" ("id_tipo_financeiro") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd__cad_c_ctc" FOREIGN KEY ("id_conta") REFERENCES "public"."cad_tb_c_ctc" ("id_conta") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd__cad_c_fun" FOREIGN KEY ("id_resp_criacao") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd__cad_c_fun2" FOREIGN KEY ("id_resp_lib") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd__fin_m_cxa" FOREIGN KEY ("id_abertura") REFERENCES "public"."fin_tb_m_cxa" ("id_abertura") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_brd" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_brd" IS 'Tabela de Borderô';
+
+
+
+
+
+CREATE TABLE "public"."fin_tb_m_brd_tit" (
+"id_brd" int4 NOT NULL,
+"id_titulo" int4 NOT NULL,
+"vlr_pagamento" numeric(18,4),
+"vlr_juros" numeric(18,4),
+"vlr_desconto" numeric(18,4),
+"per_desconto" float8,
+"vlr_a_pagar" numeric(18,4),
+"vlr_restante" numeric(18,4),
+"dta_vencimento" date,
+"vlr_titulo" numeric(18,4),
+"num_parcela" varchar(20),
+"vlr_multa" numeric(18,4),
+"atraso" int4,
+"id_conta" int4,
+"id_plano" char(11),
+"id_ccusto" int4,
+CONSTRAINT "fin_tb_m_brd_tit_pkey" PRIMARY KEY ("id_brd", "id_titulo"),
+CONSTRAINT "fk_fin_m_brd_tit__fin_m_brd" FOREIGN KEY ("id_brd") REFERENCES "public"."fin_tb_m_brd" ("id_brd") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd_tit__fin_m_pag" FOREIGN KEY ("id_titulo") REFERENCES "public"."fin_tb_m_pag" ("id_titulo") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd_tit__cad_c_pct" FOREIGN KEY ("id_plano") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd_tit__cad_c_ccu" FOREIGN KEY ("id_ccusto") REFERENCES "public"."cad_tb_c_ccu" ("id_ccusto") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_brd_tit__cad_c_ctc" FOREIGN KEY ("id_conta") REFERENCES "public"."cad_tb_c_ctc" ("id_conta") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_brd_tit" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_brd_tit" IS 'Títulos do borderô';
+
+
+
+
+CREATE TABLE "public"."cad_tb_c_cli_prd" (
+"id_cliente" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"dias" int4 NOT NULL,
+CONSTRAINT "cad_tb_c_cli_prd_pkey" PRIMARY KEY ("id_cliente", "id_sequencia"),
+CONSTRAINT "fk_cad_c_cli_prd__cad_c_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_cli_prd" OWNER TO "postgres";
+
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "permitir_alterar_dias_tit_ped" bool;
+
+
+
+update ofi_tb_m_ocv_ite ocv 
+    set nome_ite = ite.descricao
+from
+(select id_item,descricao from cad_tb_c_ite ) ite
+where ocv.id_item=ite.id_item; 
+
+
+
+/***** 20/09/2016 ******/
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "excluir_caixa" bool;
+
+update cad_tb_c_fun set excluir_caixa = FALSE
+where excluir_caixa is null;
+
+
+
+/***** 28/09/2016 *****/
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "dta_venc_original" date;
+
+
+
+/***** 04/10/2016 ****/
+
+ALTER TABLE "public"."fat_tb_m_xml_ite"
+ADD COLUMN "vlr_outras" numeric(18,4);
+
+
+ALTER TABLE "public"."fat_tb_m_xml"
+ADD COLUMN "vlr_outras" numeric(18,4);
+
+
+
+/***** 07/10/2016 ******/
+
+
+ALTER TABLE "public"."ctc_tb_m_bde"
+DROP COLUMN "ocorrencia";
+
+ALTER TABLE "public"."ctc_tb_m_bde"
+ADD COLUMN "vlr_combustivel" numeric(18,4);
+
+
+CREATE TABLE "public"."ctc_tb_m_bde_oco" (
+"id_bde" int4 NOT NULL,
+"id_ocorrencia" int4 NOT NULL,
+"qtde" float8
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_bde_oco"
+ADD PRIMARY KEY ("id_bde", "id_ocorrencia");
+
+
+ALTER TABLE "public"."ctc_tb_m_bde_oco"
+ADD CONSTRAINT "fk_bde__bde_oco" FOREIGN KEY ("id_bde") REFERENCES "public"."ctc_tb_m_bde" ("id_bde") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+CREATE TABLE "public"."ctc_tb_c_oco" (
+"id_ocorrencia" int4 NOT NULL,
+"descricao" varchar(100),
+PRIMARY KEY ("id_ocorrencia")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_bde_oco"
+ADD CONSTRAINT "fk_bde__oco" FOREIGN KEY ("id_ocorrencia") REFERENCES "public"."ctc_tb_c_oco" ("id_ocorrencia") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."ctc_tb_m_bde"
+ADD COLUMN "hori_total" float8,
+ADD COLUMN "vlr_bruto" numeric(18,4),
+ADD COLUMN "nro_bde" int4;
+
+
+ALTER TABLE "public"."pcp_tb_c_meq"
+ADD COLUMN "vlr_hora" numeric(18,2),
+ADD COLUMN "vlr_comissao" numeric(18,2);
+
+
+/***** 19/10/2016 *****/
+
+
+
+CREATE TABLE "public"."fat_tb_m_pex" (
+"id_pedido" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"dta_pedido" date NOT NULL,
+"id_tipo_mov_estoque" int4 NOT NULL,
+"id_vendedor" int4 NOT NULL,
+"obs" varchar(100) COLLATE "default",
+"vlr_bruto" numeric(18,4) NOT NULL,
+"vlr_desconto" numeric(18,4) NOT NULL,
+"per_desconto" float8 NOT NULL,
+"vlr_liquido" numeric(18,4) NOT NULL,
+"hor_pedido" timestamp(6),
+"id_condicao_pag" int4 NOT NULL,
+"pcp_obs" varchar(100) COLLATE "default",
+"pcp_id_opr" int4,
+"situacao" int4 NOT NULL,
+"situacao_aprovacao" int4 NOT NULL,
+"id_atendente" int4,
+"id_responsavel" int4,
+"id_cliente" int4,
+"tipo_restricao" varchar(100) COLLATE "default",
+"id_almoxarifado" int4,
+"justificativa" varchar(100) COLLATE "default",
+"id_usuario_lib" int4,
+"cod_lme" varchar(20) COLLATE "default",
+"rev_lme" varchar(5) COLLATE "default",
+"origem" int4,
+"dispositivo" varchar(50) COLLATE "default",
+"gps_latitude" float8,
+"gps_longitude" float8,
+"cubagem" float8,
+"id_orcamento" int4,
+"envia_carga" bool,
+"dta_prev_entrega" date,
+"id_abertura" int4,
+"dias_cpg_prazo" int4,
+"offline" bool,
+"conferido" bool,
+"id_conf" int4,
+"dta_conf" date,
+"hor_conf" time(6),
+"resultado_conf" int4,
+CONSTRAINT "PK_dbo.FAT_TB_M_PEX" PRIMARY KEY ("id_pedido")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_pex" OWNER TO "postgres";
+
+
+
+

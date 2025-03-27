@@ -1,0 +1,324 @@
+ALTER TABLE "public"."fin_tb_m_brd"
+ADD COLUMN "liberado" bool,
+ADD COLUMN "baixado" bool,
+ADD COLUMN "cancelado" bool,
+ADD COLUMN "id_resp_canc" int4,
+ADD COLUMN "dta_canc" date;
+
+
+ALTER TABLE "public"."fin_tb_m_brd"
+ADD CONSTRAINT "fk_fin_m_brd__cad_c_fun3" FOREIGN KEY ("id_resp_canc") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."fin_tb_m_brd"
+ADD COLUMN "hor_canc" time(6);
+
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "pcp_obs_item" varchar(150);
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "obs_producao" varchar(800);
+
+
+
+/****** 26/09/2016 *****/
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Baixa de Contas a Pagar
+3-Devolução de vendas 4-Conciliação bancária  5-Nota Fiscal de Saída 6-Nota de Crédito  7 - Abertura de caixa  8 - Controle de Caixa;
+9 - Movimentação de cheque;
+10 - Baixa de cartões de crédito;
+11 - Baixa automática de boletos (Rec);
+ 12 - Cancelamento NF dia Anterior; 13 - Baixa por Borderô;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_hab_lib_brd" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_hab_lib_brd" IS 'Utilizado pela tela FIN_FM_M_BRD:
+Caso este campo seja TRUE, o usuário poderá fazer as operações de LIBERAR, BAIXAR e CANCELAR;
+Caso FALSE, não terá acesso ao botão LIBERAR.';
+
+
+update cad_tb_c_fun
+ set seg_hab_lib_brd = FALSE
+where seg_hab_lib_brd is null;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp_sop"
+ALTER COLUMN "id_opr_opp_ext" DROP NOT NULL;
+
+
+/***** 28/09/2016  ******/
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "id_brd" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."id_brd" IS 'Refere-se a talela FIN_TB_M_BRD.';
+
+
+
+ALTER TABLE "public"."fin_tb_m_pag_pag"
+ADD COLUMN "id_brd" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag_pag"."id_brd" IS 'Refere-se a talela FIN_TB_M_BRD.';
+
+
+/*** ATENÇÃO: NO CASO DO CLIENTE GLOBO, DESSE PONTO PRA BAIXO NÃO FOI RODADO LÁ ****/
+
+/****** 30/09/2016 *******/
+
+
+CREATE TABLE "public"."ofi_tb_c_cat" (
+"id_cat" int4 NOT NULL,
+"descricao" varchar(60) NOT NULL,
+"cod_lme" varchar(20),
+"rev_lme" varchar(5),
+CONSTRAINT "ofi_tb_c_cat_pkey" PRIMARY KEY ("id_cat")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_c_cat" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."ofi_tb_c_cat" IS 'Cadastro de Categorias';
+
+
+
+
+CREATE TABLE "public"."cad_tb_c_ite_cat" (
+"id_item" int4 NOT NULL,
+"id_cat" int4 NOT NULL,
+"preco" numeric(18,4) NOT NULL,
+CONSTRAINT "cad_tb_c_ite_cat_pkey" PRIMARY KEY ("id_item", "id_cat"),
+CONSTRAINT "fk_cad_c_ite_cat__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_ite_cat__ofi_c_cat" FOREIGN KEY ("id_cat") REFERENCES "public"."ofi_tb_c_cat" ("id_cat") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_ite_cat" OWNER TO "postgres";
+
+
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "id_cat" int4,
+ADD CONSTRAINT "fk_cad_c_vei__ofi_c_cat" FOREIGN KEY ("id_cat") REFERENCES "public"."ofi_tb_c_cat" ("id_cat") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+/*****/
+
+
+ALTER TABLE "public"."cad_tb_c_vei"
+DROP CONSTRAINT "fk_cad_c_vei__ofi_c_cat";
+
+ALTER TABLE "public"."cad_tb_c_vei"
+DROP COLUMN "id_cat";
+
+
+ALTER TABLE "public"."cad_tb_c_mve"
+ADD COLUMN "id_cat" int4,
+ADD CONSTRAINT "fk_cad_c_mve__ofi_c_cat" FOREIGN KEY ("id_cat") REFERENCES "public"."ofi_tb_c_cat" ("id_cat") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+
+CREATE TABLE "public"."ctc_tb_c_eoc" (
+"id_estrutura" int4 NOT NULL,
+"descricao" varchar(50),
+CONSTRAINT "ctc_tb_c_eoc_pkey" PRIMARY KEY ("id_estrutura")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_c_eoc" OWNER TO "postgres";
+
+CREATE TABLE "public"."ctc_tb_c_eoc_gru" (
+"id_estrutura" int4 NOT NULL,
+"grupo" varchar(5) NOT NULL,
+"descricao" varchar(600),
+"und" varchar(4),
+"classe" varchar(6),
+"cod_prpoprio" varchar(15),
+CONSTRAINT "ctc_tb_c_eoc_gru_pkey" PRIMARY KEY ("id_estrutura", "grupo"),
+CONSTRAINT "fk_eoc_gru__eoc" FOREIGN KEY ("id_estrutura") REFERENCES "public"."ctc_tb_c_eoc" ("id_estrutura") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_c_eoc_gru" OWNER TO "postgres";
+
+
+
+
+drop table ctc_tb_m_orc_ite_med;
+drop table ctc_tb_m_orc_ite_com;
+drop table ctc_tb_m_orc_ite;
+drop table ctc_tb_m_orc;
+
+
+CREATE TABLE "public"."ctc_tb_m_orc" (
+"id_orc" int4 NOT NULL,
+"dta_orc" date,
+"id_obra" int4,
+"obs" varchar(100),
+"vlr_total" numeric(18,4),
+"id_estrutura" int4,
+"id_empresa" int4,
+CONSTRAINT "pk_ctc_tb_m_orc" PRIMARY KEY ("id_orc"),
+CONSTRAINT "fk_ctc_m_orc__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_orc" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."ctc_tb_m_orc" IS 'Orçamento de Obras';
+
+
+
+CREATE TABLE "public"."ctc_tb_m_orc_ite" (
+"id_orc" int4 NOT NULL,
+"grupo" varchar(5) NOT NULL,
+"descricao" varchar(600),
+"und" varchar(4),
+"classe" varchar(6),
+"cod_prpoprio" varchar(15),
+"qtde" float8,
+"vlr_unitario" numeric(18,4),
+"vlr_total" numeric(18,4),
+"qtde_saldo_medicao" float8,
+"vlr_mo" numeric(18,4),
+"vlr_mat" numeric(18,4),
+"per_ls" float8,
+"vlr_ls" numeric(18,4),
+"per_bdi" float8,
+"vlr_bdi" numeric(18,4),
+"per_adm" float8,
+"vlr_adm" numeric(18,4),
+"total_taxa" numeric(18,4),
+CONSTRAINT "ctc_tb_m_orc_ite_pkey" PRIMARY KEY ("id_orc", "grupo"),
+CONSTRAINT "fk_ctc_tb_m_fk_ctc_or_ctc_tb_m" FOREIGN KEY ("id_orc") REFERENCES "public"."ctc_tb_m_orc" ("id_orc") ON DELETE CASCADE ON UPDATE RESTRICT
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite" OWNER TO "postgres";
+
+
+
+CREATE TABLE "public"."ctc_tb_m_orc_ite_com" (
+"id_orc" int4 NOT NULL,
+"grupo" varchar(5) NOT NULL,
+"id_com" int4 NOT NULL,
+"id_item" varchar(20) NOT NULL,
+"coeficiente" float8,
+"vlr_unitario" numeric(18,4),
+"vlr_total" numeric(18,4),
+CONSTRAINT "ctc_tb_m_orc_ite_com_pkey" PRIMARY KEY ("id_orc", "grupo", "id_com"),
+CONSTRAINT "fk_ctc_m_orc_ite_com__ctc_m_orc_ite" FOREIGN KEY ("id_orc", "grupo") REFERENCES "public"."ctc_tb_m_orc_ite" ("id_orc", "grupo") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite_com" OWNER TO "postgres";
+
+
+
+CREATE TABLE "public"."ctc_tb_m_orc_ite_med" (
+"id_orc" int4 NOT NULL,
+"grupo" varchar(5) NOT NULL,
+"id_med" int4 NOT NULL,
+"id_item" varchar(20) NOT NULL,
+"qtde" float8,
+"dta_medicao" date,
+"id_responsavel" int4,
+CONSTRAINT "ctc_tb_m_orc_ite_med_pkey" PRIMARY KEY ("id_orc", "grupo", "id_med"),
+CONSTRAINT "fk_ctc_m_orc_ite_med__ctc_m_orc_ite" FOREIGN KEY ("id_orc", "grupo") REFERENCES "public"."ctc_tb_m_orc_ite" ("id_orc", "grupo") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite_med" OWNER TO "postgres";
+
+
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "ativa_red_parc_car_rec" bool;
+
+UPDATE CAD_TB_C_FPG SET ATIVA_RED_PARC_CAR_REC = FALSE
+WHERE ATIVA_RED_PARC_CAR_REC IS NULL;
+
+
+/***** 04/10/2016 ******/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "cod_lot_rps" integer;
+
+
+
+
+/**** 05/10/2016 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "reg_esp_tri" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."reg_esp_tri" IS '0 - Nenhum
+1 - MicroempresaMunicipal
+2 - Estimativa
+3 - SociedadeProfissionais
+4 - Cooperativa
+5 - MicroempresarioIndividual
+6 - MicroempresarioEmpresaPP
+7 - LucroReal
+8 - LucroPresumido
+9 - SimplesNacional';
+
+
+
+ALTER TABLE "public"."ofi_tb_m_ocv"
+ADD COLUMN "can_motivo" varchar(100),
+ADD COLUMN "can_data" date,
+ADD COLUMN "can_hora" time(6),
+ADD COLUMN "can_usuario" int4;
+
+
+/**** 06/10/2016 *****/
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "separa_prod_serv" bool;
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_equipamento" int4;
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD CONSTRAINT "fk_ofi_orv__cad_c_eqp" FOREIGN KEY ("id_equipamento") REFERENCES "public"."cad_tb_c_eqp" ("id_equipamento") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+
+
+
+/***** 08/10/2016 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "oqp" bool;
+
+
+/***** 14/10/2016 ****/
+
+ALTER TABLE "public"."cad_tb_c_pct"
+ADD COLUMN "cod_contabil" varchar(30);
+
+
+
+

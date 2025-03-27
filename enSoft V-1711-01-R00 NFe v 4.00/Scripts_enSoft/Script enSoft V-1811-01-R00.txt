@@ -1,0 +1,27 @@
+/**** 14/11/2018 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_id_almoxarifado_pad_epp" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_id_almoxarifado_pad_epp" IS 'Código de almoxarifado padrão utilizado para Entrada de Produto acabado.';
+
+
+/**** 20/11/2018 *****/
+
+
+CREATE TABLE "public"."fat_tb_m_pca_ped_ite" (
+"id_pedido" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"qtde" float8 NOT NULL,
+"id_cor" int4 NOT NULL,
+"id_tamanho" int4 NOT NULL,
+"id_carregamento" int4 NOT NULL,
+"pcp_obs_item" varchar(150) COLLATE "default",
+CONSTRAINT "fat_tb_m_pca_ped_ite_pkey" PRIMARY KEY ("id_carregamento", "id_pedido", "id_sequencia"),
+CONSTRAINT "fk_fat_m_pca_ped_ite__fat_m_pca" FOREIGN KEY ("id_carregamento", "id_pedido") REFERENCES "public"."fat_tb_m_pca_ped" ("id_carregamento", "id_pedido") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_pca_ped_ite" OWNER TO "postgres";

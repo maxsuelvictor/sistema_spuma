@@ -1,0 +1,6 @@
+COMMENT ON COLUMN "public"."cad_tb_c_pct"."estr_dre" IS '0 - Imposto e Custo sobre Vendas
+1 - Despesas Operacionais
+2 - Receitas Não Operacionais
+3 - Provisões para o Imposto
+4 - Nenhum';
+

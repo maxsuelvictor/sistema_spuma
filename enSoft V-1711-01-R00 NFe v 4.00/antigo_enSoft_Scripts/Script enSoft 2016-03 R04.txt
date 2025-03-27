@@ -1,0 +1,65 @@
+CREATE TABLE "public"."est_tb_m_met" (
+"id_met" int4 NOT NULL,
+"id_empresa" int4,
+"data" date,
+"id_almoxarifado" int4,
+"id_tipo_mov_estoque" int4,
+"id_responsavel" int4,
+"observacao" varchar(100),
+"cod_lme" varchar(20),
+"rev_lme" varchar(5),
+CONSTRAINT "est_tb_m_met_pkey" PRIMARY KEY ("id_met"),
+CONSTRAINT "fk_est_m_met__cad_c_alm" FOREIGN KEY ("id_almoxarifado") REFERENCES "public"."cad_tb_c_alm" ("id_almoxarifado") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_est_m_met__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_est_m_met__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_est_m_met__cad_c_tme" FOREIGN KEY ("id_tipo_mov_estoque") REFERENCES "public"."cad_tb_c_tme" ("id_tipo_mov_estoque") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."est_tb_m_met" OWNER TO "postgres";
+
+
+
+
+CREATE TABLE "public"."est_tb_m_met_ite" (
+"id_met" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"qtde" float8 NOT NULL,
+"observacao" varchar(100),
+"id_cor" int4,
+"id_tamanho" int4,
+"id_busca_item" int4,
+CONSTRAINT "est_tb_m_met_ite_pkey" PRIMARY KEY ("id_met", "id_sequencia", "id_item"),
+CONSTRAINT "fk_est_m_met__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_est_m_met_ite__est_m_met" FOREIGN KEY ("id_met") REFERENCES "public"."est_tb_m_met" ("id_met") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."est_tb_m_met_ite" OWNER TO "postgres";
+
+
+
+ALTER TABLE "public"."est_tb_m_met"
+ALTER COLUMN "id_empresa" SET NOT NULL,
+ALTER COLUMN "data" SET NOT NULL,
+ALTER COLUMN "id_tipo_mov_estoque" SET NOT NULL,
+ALTER COLUMN "id_responsavel" SET NOT NULL;
+
+
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_met" int4;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe" RENAME "vlr_icm_deson" TO "vlr_icm_desc";
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite" RENAME "vlr_icm_deson" TO "vlr_icm_desc";
+
+
+ALTER TABLE "public"."est_tb_m_met"
+DROP COLUMN "id_almoxarifado";
+
+

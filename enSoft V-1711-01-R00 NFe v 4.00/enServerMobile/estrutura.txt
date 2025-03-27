@@ -1,0 +1,214 @@
+ 	String sqlCAD_TB_C_PEC =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_PEC + "(\n"+
+                        ID_PERFIL_CLI + " INTEGER PRIMARY KEY,\n"+
+                        DESCRICAO + " STRING NOT NULL\n"+ //
+                        ")";
+
+        String sqlCAD_TB_C_CID =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_CID + "(\n"+
+                        ID_CIDADE + " INTEGER PRIMARY KEY,\n"+
+                        CODIBGE + " STRING,\n"+
+                        DESCRICAO + " STRING NOT NULL\n" +
+                        ")";
+
+        String sqlCAD_TB_C_VEND =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_VEND + "(\n"+
+                        ID_VENDEDOR + " INTEGER PRIMARY KEY,\n"+
+                        NOME + " STRING NOT NULL\n" +
+                        ")";
+
+        String sqlCAD_TB_C_ROT =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_ROT + "(\n"+
+                        ID_ROTA + " INTEGER PRIMARY KEY,\n"+
+                        DESCRICAO + " STRING NOT NULL\n" +
+                        ")";
+
+        String sqlCAD_TB_C_CLI =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_CLI + "(\n"+
+                        ID_CLIENTE + " INTEGER PRIMARY KEY,\n"+
+                        NOME + " STRING NOT NULL,\n"+
+                        ID_PERFIL_CLI + " INTEGER REFERENCES " + CAD_TB_C_PEC + "("+ID_PERFIL_CLI+") ON DELETE CASCADE,\n"+
+                        ID_ROTA + " INTEGER REFERENCES " + CAD_TB_C_ROT + "("+ID_ROTA+") ON DELETE CASCADE,\n"+
+                        ID_VENDEDOR + " INTEGER REFERENCES " + CAD_TB_C_VEND + "("+ID_VENDEDOR+") ON DELETE CASCADE,\n"+
+                        ID_CIDADE + " INTEGER REFERENCES " + CAD_TB_C_CID + "("+ID_CIDADE+") ON DELETE CASCADE,\n"+
+                        CEP + " STRING,\n"+
+                        ENDERECO + " STRING,\n"+
+                        TELFIXO + " STRING,\n"+
+                        TELMOVEL + " STRING,\n"+
+                        NUMERO + " STRING,\n"+
+                        BAIRRO + " STRING,\n"+
+                        EMAIL + " STRING,\n"+
+                        SEXO + " STRING,\n"+
+                        DTA_NASC + " STRING,\n"+
+                        FILIACAO + " STRING,\n"+
+                        CPFCNPJ + " STRING,\n"+
+                        RG + " STRING,\n"+
+                        IP + " STRING,\n"+
+                        STATUSVIS + " STRING,\n"+
+                        STATUS + " INTEGER\n"+
+                        ")";
+
+        String sqlCAD_TB_C_CLI_PRO =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_CLI_PRO + "(\n"+
+                        ID_PROPRIEDADE + " INTEGER NOT NULL UNIQUE,\n"+
+                        ID_CLIENTE + " INTEGER REFERENCES "+CAD_TB_C_CLI+"("+ID_CLIENTE+") ON DELETE CASCADE,\n"+
+                        DESCRICAO + " STRING NOT NULL,\n"+
+                        TIPO + " INTEGER NOT NULL, \n"+
+                        ADMINISTRADOR + " STRING,\n"+
+                        ENDERECO + " STRING,\n"+
+                        CEP + " STRING,\n"+
+                        STATUS + " INTEGER,\n"+
+                        "PRIMARY KEY ("+ID_PROPRIEDADE+","+ID_CLIENTE+")\n"+
+                        ")";
+
+        String sqlCAD_TB_C_CUL =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_CUL + "(\n"+
+                        ID_CULTURA + " INTEGER PRIMARY KEY,\n"+
+                        DESCRICAO + " STRING NOT NULL,\n"+
+                        CICLO_CURTO + " STRING\n"+
+                        ")";
+
+        String sqlCAD_TB_C_CLI_PRO_CUL =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_CLI_PRO_CUL + "(\n"+
+                        ID_CLIENTE + " INTEGER NOT NULL REFERENCES "+CAD_TB_C_CLI+"("+ID_CLIENTE+") ON DELETE CASCADE,\n"+
+                        ID_PROPRIEDADE + " INTEGER NOT NULL REFERENCES "+CAD_TB_C_CLI_PRO+"("+ID_PROPRIEDADE+") ON DELETE CASCADE,\n"+
+                        ID_CULTURA + " INTEGER NOT NULL REFERENCES "+CAD_TB_C_CUL+"("+ID_CULTURA+") ON DELETE CASCADE,\n"+
+                        LOTE + " STRING NOT NULL,\n"+
+                        IDADE + " INTEGER,\n"+
+                        AREA + " REAL,\n"+
+                        PRODUTIVIDADE + " REAL,\n"+
+                        OBS + " STRING,\n"+
+                        STATUS + " INTEGER,\n"+
+                        VARIEDADE + " STRING,\n"+
+                        "PRIMARY KEY ("+ID_PROPRIEDADE+","+ID_CLIENTE+","+ID_CULTURA+","+LOTE+")\n"+
+                        ")";
+
+        String sqlCAD_TB_C_GRU =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_GRU + "(\n"+
+                        ID_SEQUENCIAL + " INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+                        ID_GRUPO + " STRING NOT NULL UNIQUE,\n"+
+                        DESCRICAO + " STRING NOT NULL,\n"+ // NOME DO GRUPO
+                        TIPO_ITEM + " STRING\n" + // SERVIÇO, PRODUTO ACABADO
+                        ")";
+
+        String sqlCAD_TB_C_ITE =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_ITE + "(\n"+
+                        ID_ITEM + " INTEGER PRIMARY KEY,\n"+
+                        DESCRICAO + " STRING,\n"+
+                        REFERENCIA + " STRING,\n"+
+                        ID_GRUPO + " STRING REFERENCES "+CAD_TB_C_GRU+"("+ID_GRUPO+") ON DELETE CASCADE,\n"+
+                        ID_UND_VENDA + " STRING NOT NULL,\n"+
+                        EMB_VENDA + " REAL,\n"+ //TAMANHO DA EMBALAGEM
+                        PRECO_AVISTA + " REAL,\n"+
+                        PRECO_APRAZO + " REAL\n"+
+                        ")";
+
+        String sqlCAD_TB_C_ITE_CUL =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_ITE_CUL + "(\n"+
+                        ID_ITEM + " INTEGER REFERENCES "+CAD_TB_C_ITE+"("+ID_ITEM+") ON DELETE CASCADE,\n"+
+                        ID_CULTURA + " INTEGER REFERENCES "+CAD_TB_C_CUL+"("+ID_CULTURA+") ON DELETE CASCADE,\n"+
+                        OBS + " STRING,\n" +
+                        "PRIMARY KEY ("+ID_ITEM+","+ID_CULTURA+")\n"+
+                        ")";
+
+
+        String sqlCAD_TB_C_ITE_PRC =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_ITE_PRC + "(\n"+
+                        ID_ITEM + " INTEGER REFERENCES "+CAD_TB_C_ITE+"("+ID_ITEM+") ON DELETE CASCADE,\n"+
+                        ID_PERFIL_CLI + " INTEGER REFERENCES "+CAD_TB_C_PEC+"("+ID_PERFIL_CLI+") ON DELETE CASCADE,\n"+
+                        PRECO_AVISTA + " REAL,\n"+
+                        PRECO1 + " REAL,\n"+
+                        PRECO2 + " REAL,\n"+
+                        PRECO3 + " REAL,\n"+
+                        PRECO4 + " REAL,\n" +
+                        "PRIMARY KEY ("+ID_ITEM+","+ID_PERFIL_CLI+")\n"+
+                        ")";
+
+        String sqlCAD_TB_C_FPG =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_FPG + "(\n"+
+                        ID_FORMA_PAG + " INTEGER PRIMARY KEY,\n"+
+                        DESCRICAO + " STRING NOT NULL,\n"+
+                        DOC_IMPRESSO + " INTEGER NOT NULL\n" +
+                        ")";
+
+        String sqlFAT_TB_M_PED =
+                "CREATE TABLE IF NOT EXISTS " + FAT_TB_M_PED + "(\n"+
+                        ID_PEDIDO + " INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+                        DTA_PEDIDO + " STRING NOT NULL,\n"+
+                        ID_VENDEDOR + " INTEGER REFERENCES "+CAD_TB_C_VEND+"("+ID_VENDEDOR+") ON DELETE CASCADE,\n"+
+                        ID_CONDICAO_PAG + " INTEGER NOT NULL,\n"+
+                        ID_CLIENTE + " INTEGER REFERENCES "+CAD_TB_C_CLI+"("+ID_CLIENTE+") ON DELETE CASCADE,\n"+
+                        VLR_BRUTO + " REAL,\n"+
+                        VLR_DESCONTO + " REAL,\n"+ // perguntar
+                        VLR_LIQUIDO + " REAL,\n"+ // vlr bruto - desconto
+                        GPS_LATITUDE + " REAL,\n"+
+                        GPS_LONGITUDE + " REAL,\n"+
+                        STATUS + " INTEGER\n"+
+                        ")";
+
+        String sqlFAT_TB_M_PED_ITE =
+                "CREATE TABLE IF NOT EXISTS " + FAT_TB_M_PED_ITE + "(\n"+
+                        ID_PEDIDO + " INTEGER REFERENCES "+FAT_TB_M_PED+"("+ID_PEDIDO+") ON DELETE CASCADE,\n"+
+                        ID_ITEM + " INTEGER REFERENCES "+CAD_TB_C_ITE+"("+ID_ITEM+") ON DELETE CASCADE,\n"+
+                        QTDE + " INTEGER NOT NULL,\n"+
+                        VLR_UNITARIO + " REAL NOT NULL,\n"+
+                        VLR_BRUTO + " REAL,\n"+
+                        VLR_DESCONTO + " REAL,\n"+
+                        VLR_LIQUIDO + " REAL,\n"+
+                        PER_DESCONTO + " REAL\n"+
+                        ")";
+
+        String sqlFAT_TB_M_PED_TIT =
+                "CREATE TABLE IF NOT EXISTS " + FAT_TB_M_PED_TIT + "(\n"+
+                        ID_PEDIDO + " INTEGER REFERENCES "+FAT_TB_M_PED+"("+ID_PEDIDO+") ON DELETE CASCADE,\n"+
+                        ID_TITULO + " INTEGER NOT NULL,\n"+
+                        DTA_TITULO + " STRING NOT NULL,\n"+
+                        VALORTITULO + " REAL NOT NULL,\n"+
+                        ID_FORMA_PAG + " INTEGER REFERENCES "+CAD_TB_C_FPG+"("+ID_FORMA_PAG+") ON DELETE CASCADE,\n"+
+                        "PRIMARY KEY ("+ID_PEDIDO+","+ID_TITULO+")\n"+
+                        ")";
+
+        String sqlCAD_TB_C_VEI =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_VEI + "(\n"+
+                        ID_VEICULO + " INTEGER PRIMARY KEY,\n"+
+                        PLACA + " STRING NOT NULL\n" +
+                        ")";
+
+        String sqlCAD_TB_C_VIT =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_VIT + "(\n"+
+                        ID_VISITA + " INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+                        ID_VENDEDOR + " INTEGER REFERENCES "+CAD_TB_C_VEND+"("+ID_VENDEDOR+") ON DELETE CASCADE,\n"+
+                        ID_CLIENTE + " INTEGER REFERENCES "+CAD_TB_C_CLI+"("+ID_CLIENTE+") ON DELETE CASCADE,\n"+
+                        ID_VEICULO + " INTEGER REFERENCES "+CAD_TB_C_VEI+"("+ID_VEICULO+") ON DELETE CASCADE,\n"+
+                        DTA_VISITA + " STRING,\n"+
+                        OBS + " STRING NOT NULL,\n"+
+                        RECOMENDACOES + " STRING\n"+
+                        ")";
+
+        String sqlCAD_TB_C_VIT_FOT =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_VIT_FOT + "(\n"+
+                        ID_VIT_FOT + " INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+                        ID_VISITA + " INTEGER REFERENCES "+CAD_TB_C_VIT+"("+ID_VISITA+") ON DELETE CASCADE,\n"+
+                        ID_CLIENTE + " INTEGER REFERENCES "+CAD_TB_C_CLI+"("+ID_CLIENTE+") ON DELETE CASCADE,\n"+
+                        FOTO + " STRING,\n"+
+                        STATUS + " INTEGER\n"+
+                        ")";
+
+        String sqlCAD_TB_C_KM =
+                "CREATE TABLE IF NOT EXISTS " + CAD_TB_C_KM + "(\n"+
+                        ID_KM + " INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+                        ID_VISITA + " INTEGER REFERENCES "+CAD_TB_C_VIT+"("+ID_VISITA+") ON DELETE CASCADE,\n"+
+                        ID_VEICULO + " INTEGER REFERENCES "+CAD_TB_C_VEI+"("+ID_VEICULO+") ON DELETE CASCADE,\n"+
+                        KM_INICIAL + " REAL NOT NULL,\n"+
+                        KM_FINAL + " REAL NOT NULL\n"+
+                        ")";
+
+        String sqlFIN_TB_M_REC =
+                "CREATE TABLE IF NOT EXISTS " + FIN_TB_M_REC + "(\n"+
+                        ID_REC + " INTEGER PRIMARY KEY,\n"+
+                        NUMERO + " STRING NOT NULL,\n"+
+                        ID_CLIENTE + " INTEGER REFERENCES "+CAD_TB_C_CLI+"("+ID_CLIENTE+") ON DELETE CASCADE,\n"+
+                        VENCIMENTO + " STRING NOT NULL,\n"+
+                        VALOR + " REAL NOT NULL,\n"+
+                        HISTORICO + " STRING\n"+
+                        ")";

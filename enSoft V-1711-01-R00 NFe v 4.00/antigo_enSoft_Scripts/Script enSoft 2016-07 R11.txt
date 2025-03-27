@@ -1,0 +1,3 @@
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "obs_alt" varchar(400);
+

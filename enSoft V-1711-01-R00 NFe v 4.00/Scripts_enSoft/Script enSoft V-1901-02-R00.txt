@@ -1,0 +1,23 @@
+/*** 25/01/2019 ***/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "sgq_perm_botao_ger_prod" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."sgq_perm_botao_ger_prod" IS 'Permite utilizar o botão Gerencia Produção dos Itens.';
+
+
+
+update cad_tb_c_fun
+ set sgq_perm_botao_ger_prod = false
+where sgq_perm_botao_ger_prod is null;
+
+
+/*** 29/01/2019 ***/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "dta_liberacao" date;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."dta_liberacao" IS 'Data que foi feita a liberação do pedido de venda.';
+
+
+

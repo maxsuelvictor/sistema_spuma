@@ -1,0 +1,11 @@
+/****** 16/06/20 ********/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "etiq_tipo_produto" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."etiq_tipo_produto" IS '0 - COLCHÃO DE ESPUMA
+1 - COLCHÃO BOX CONJUGADO
+2 - COLCHÃO AUXILIAR
+3 - COLCHÃO MISTO
+';
+

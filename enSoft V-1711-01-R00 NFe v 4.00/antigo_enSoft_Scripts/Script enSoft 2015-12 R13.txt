@@ -1,0 +1,2 @@
+ALTER TABLE "public"."cad_tb_c_ctc"
+ALTER COLUMN "layout_remessa" TYPE varchar(15);

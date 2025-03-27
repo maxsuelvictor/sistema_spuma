@@ -1,0 +1,108 @@
+ALTER TABLE "public"."fat_tb_m_orc_ite"
+DROP CONSTRAINT "fk_fat_m_orc_ite__cad_c_cor";
+
+CREATE TABLE "public"."fin_tb_m_cbx" (
+"id_cbx" int4 NOT NULL,
+"dta_baixa" date,
+"vlr_bruto" numeric(18,2),
+"vlr_desconto_ope" numeric(18,2),
+"vlr_desconto_antec" numeric(18,2),
+"vlr_liquido" numeric(18,2),
+"observacao" varchar(100),
+"id_responsavel" int4,
+"id_forma_pag" int4,
+"com_bxa_antecipacao" bool,
+"id_conta" int4,
+"id_empresa" int4,
+CONSTRAINT "FIN_TB_M_CBX_pkey" PRIMARY KEY ("id_cbx"),
+CONSTRAINT "fk_fin_m_cbx__cad_c_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_cbx__cad_c_ctc" FOREIGN KEY ("id_conta") REFERENCES "public"."cad_tb_c_ctc" ("id_conta") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_cbx__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_cbx__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_cbx" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_cbx" IS 'Baixa de Cartões de Crédito';
+
+
+
+CREATE TABLE "public"."fin_tb_m_cbx_tit" (
+"id_cbx" int4 NOT NULL,
+"id_titulo" int4 NOT NULL,
+"vlr_desconto_ope" numeric(18,2),
+"vlr_desconto_antec" numeric(18,2),
+"vlr_bruto" numeric(18,2),
+"vlr_liquido" numeric(18,2),
+CONSTRAINT "FIN_TB_M_CBX_TIT_pkey" PRIMARY KEY ("id_cbx", "id_titulo"),
+CONSTRAINT "fk_fin_m_cbx_tit__fin_m_rec" FOREIGN KEY ("id_titulo") REFERENCES "public"."fin_tb_m_rec" ("id_titulo") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_cbx_tit__fin_m_cbx" FOREIGN KEY ("id_cbx") REFERENCES "public"."fin_tb_m_cbx" ("id_cbx") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_cbx_tit" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_cbx_tit" IS 'Titulos da baixa de cartões de crédito';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cbx_id_plano" char(11),
+ADD COLUMN "cbx_id_plano_desc_ope" char(11),
+ADD COLUMN "cbx_id_plano_desc_antec" char(11),
+ADD COLUMN "cbx_id_tipo_financeiro" int4,
+ADD COLUMN "cbx_id_tipo_financeiro_desc" int4,
+ADD COLUMN "rbx_ret_id_plano" char(11),
+ADD COLUMN "rbx_ret_id_tipo_financeiro" int4,
+ADD COLUMN "rbx_ret_id_ccu" int4,
+ADD COLUMN "rbx_ret_id_forma_pag" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cbx_id_plano" IS 'Campo utilizado pela rotina de baixa de cartões de crédito;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cbx_id_plano_desc_ope" IS 'Campo utilizado pela rotina de baixa de cartões de crédito;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cbx_id_plano_desc_antec" IS 'Campo utilizado pela rotina de baixa de cartões de crédito;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cbx_id_tipo_financeiro" IS 'Campo utilizado pela rotina de baixa de cartões de crédito;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cbx_id_tipo_financeiro_desc" IS 'Campo utilizado pela rotina de baixa de cartões de crédito;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."rbx_ret_id_plano" IS 'Campo utilizado pela rotina de baixa automática de boleto;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."rbx_ret_id_tipo_financeiro" IS 'Campo utilizado pela rotina de baixa automática de boleto;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."rbx_ret_id_ccu" IS 'Campo utilizado pela rotina de baixa automática de boleto;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."rbx_ret_id_forma_pag" IS 'Campo utilizado pela rotina de baixa automática de boleto;';
+
+
+
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_pag"."origem" IS '0 - Baixa do Contas a Receber;
+1 - Nota Fiscal de Saída;
+2 - Movimento de cheque;
+3 - Baixa automática de boleto (Rec);
+4 - Baixa de cartões de crédito;
+';
+
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Baixa de Contas a Pagar
+3-Devolução de vendas 4-Conciliação bancária  5-Nota Fiscal de Saída 6-Nota de Crédito  7 - Abertura de caixa  8 - Controle de Caixa;
+9 - Movimentação de cheque;
+10 - Baixa de cartões de crédito;
+11 - Baixa automática de boletos (Rec);
+';
+
+
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "id_cbx" int4,
+ADD CONSTRAINT "fk_fin_m_rec_pag__fin_m_cbx" FOREIGN KEY ("id_cbx") REFERENCES "public"."fin_tb_m_cbx" ("id_cbx") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+

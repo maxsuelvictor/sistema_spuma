@@ -1,0 +1,41 @@
+/**** 16/01/2025 *****/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "bus_som_ped_sem_pagtos" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."bus_som_ped_sem_pagtos" IS 'Buscar somente pedidos do tipo = Sem Pagamentos (CAD_TB_C_CPG) na importação para OPs.';
+
+update cad_tb_c_fun 
+  set bus_som_ped_sem_pagtos = false
+where bus_som_ped_sem_pagtos is null;
+
+
+/**** 27/01/2025 ****/
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "sgq_perm_inserir_itens_op" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."sgq_perm_inserir_itens_op" IS 'Permite incluir itens na O.P.';
+
+
+update cad_tb_c_fun 
+set sgq_perm_inserir_itens_op = false
+where sgq_perm_inserir_itens_op is null;
+
+/**** 19/02/2025 *****/
+
+ALTER TABLE "public"."fat_tb_m_orc_ite"
+DROP CONSTRAINT "PK_dbo.FAT_TB_M_ORC_ITE" ,
+ADD CONSTRAINT "PK_dbo.FAT_TB_M_ORC_ITE" PRIMARY KEY ("id_orcamento", "id_item", "id_seq_item");
+
+/**** 12/03/2025 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "fat_qtde_dias_canc_ped_autom" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."fat_qtde_dias_canc_ped_autom" IS 'Qtde de dias para cancelar automaticante os pedidos de venda em situação DIGITADOS.';
+
+update cad_tb_c_par_ctr
+   set fat_qtde_dias_canc_ped_autom = 100
+where fat_qtde_dias_canc_ped_autom is null;

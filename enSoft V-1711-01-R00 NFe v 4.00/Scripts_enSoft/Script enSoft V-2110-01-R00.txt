@@ -1,0 +1,36 @@
+/****  06/10/21 ****/
+
+ALTER TABLE "public"."pcp_tb_m_opb_obl"
+ADD COLUMN "qtde_abater_sld" float8;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opb_obl"."qtde_abater_sld" IS 'A qtde deste campo será utilizada para abater na tabela de saldo do item.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pcp_opb_id_tipo_mov_estoque" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."pcp_opb_id_tipo_mov_estoque" IS 'Tipo de estoque de saída utilizado pela tela de Ordem de Produção pra gerar as O.Ps de Bloco de Espuma';
+
+
+/**** 29/10/2021 *****/
+
+ALTER TABLE "public"."pcp_tb_m_opb"
+ADD COLUMN "id_almoxarifado" int4;
+
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_opb" int4;
+
+
+/***** 03/11/2021 *****/
+
+ALTER TABLE "public"."pcp_tb_m_opb_obl" RENAME "id_item_bloco" TO "id_item";
+
+
+
+
+
+
+
+

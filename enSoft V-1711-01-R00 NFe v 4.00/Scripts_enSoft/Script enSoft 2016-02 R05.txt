@@ -1,0 +1,44 @@
+ALTER TABLE "public"."pcp_tb_m_acr"
+ADD COLUMN "atendimento_concluido" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_acr"."atendimento_concluido" IS '0-Em Aberto; 1-Concluído';
+
+
+/** MARIEL **/
+update cad_tb_c_fun set seg_hab_bot_alt_fun=true, seg_hab_bot_exc=TRUE, seg_habilitar_seg=true
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ADD COLUMN "id_cta" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag"."origem" IS '0-Estoque
+  1-Caixa/Banco  2 - Pequenas Despesas  3 - Baixa Contas a Pagar  4 - Movimento Bancário ';
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag"."id_cta" IS 'Refere-se ao valor copiado do campo "id_controle" da tabela fin_tb_m_cta, por sua vez, é gerado pela tela Movimentação Bancário ';
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mvb_id_fornecedor" int4,
+ADD COLUMN "mvb_id_forma_pag" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+DROP COLUMN "mvb_id_forma_pag";
+
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."origem" IS '0-desktop
+1-dispositivo movel
+2-Pedido Cupom';
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_abertura" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."id_abertura" IS 'Campo utilizado pela tela (FAT_FM_M_PNF) Pedido Cupom.';
+
+
+ALTER TABLE "public"."fat_tb_m_ped_tit"
+ADD COLUMN "id_maquineta" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped_tit"."id_maquineta" IS 'Campo utilizado pela tela FAT_FM_M_PNF (Pedido Cupom).';
+
+
+

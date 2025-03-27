@@ -1,0 +1,20 @@
+/**** 03/09/19 ******/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "cod_item_prod" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."cod_item_prod" IS 'código do item da produção ';
+
+
+/**** 05/09/19 *****/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "per_desconto_fat" float8;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."per_desconto_fat" IS 'Este campo é utilizado quando o usuário deseja dar um desconto para abater no valor total liquido dos itens sem ter que deixar informado o percentual do desconto nos itens.';
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_ped_gera_nfs" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_ped_gera_nfs" IS 'Este campo será utilizado apenas para cliente que usa o módulo SGQ.  Este campo não poderá ser colocado na tela de parâmetros. É de uso interno da e-north.
+';
+
+
+update cad_tb_c_par_ctr
+set sgq_ped_gera_nfs = false
+where sgq_ped_gera_nfs is null;
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+DROP CONSTRAINT "fk_fat_m_ped__cad_c_cpg",
+ADD CONSTRAINT "fk_fat_m_ped__cad_c_cpg" FOREIGN KEY ("id_condicao_pag") REFERENCES "public"."cad_tb_c_cpg" ("id_condicao_pag") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_fat_m_ped__cad_c_fun",
+ADD CONSTRAINT "fk_fat_m_ped__cad_c_fun" FOREIGN KEY ("id_vendedor") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_fat_m_ped__cad_c_tme",
+ADD CONSTRAINT "fk_fat_m_ped__cad_c_tme" FOREIGN KEY ("id_tipo_mov_estoque") REFERENCES "public"."cad_tb_c_tme" ("id_tipo_mov_estoque") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+DROP INDEX "public"."ix_ft_ped_c_alm";
+
+CREATE INDEX "ix_ft_ped_c_alm" ON "public"."fat_tb_m_ped" ("id_almoxarifado");
+
+ALTER TABLE "public"."fin_tb_m_pcr"
+DROP CONSTRAINT "fk_fin_m_pcr__cad_c_for",
+ADD CONSTRAINT "fk_fin_m_pcr__cad_c_for" FOREIGN KEY ("id_fornecedor") REFERENCES "public"."cad_tb_c_for" ("id_fornecedor") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_fin_m_pcr__cad_c_par",
+ADD CONSTRAINT "fk_fin_m_pcr__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+DROP INDEX "public"."ix_fn_pcr_par";
+
+CREATE INDEX "ix_fn_pcr_par" ON "public"."fin_tb_m_pcr" ("id_empresa");
+
+DROP INDEX "public"."ix_fn_rcr_for";
+
+CREATE INDEX "ix_fn_rcr_for" ON "public"."fin_tb_m_pcr" ("id_fornecedor");
+
+ALTER TABLE "public"."fin_tb_m_pcr_des"
+DROP CONSTRAINT "fk_fin_m_pcr_des__fin_m_pcr",
+ADD CONSTRAINT "fk_fin_m_pcr_des__fin_m_pcr" FOREIGN KEY ("id_fornecedor") REFERENCES "public"."fin_tb_m_pcr" ("id_fornecedor") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+DROP INDEX "public"."ix_baixa";
+
+CREATE INDEX "ix_baixa" ON "public"."fin_tb_m_pcr_des" ("id_baixa", "id_titulo");
+
+ALTER TABLE "public"."fin_tb_m_pcr_ori"
+DROP CONSTRAINT "fk_fin_m_pcr_ori__fin_m_pcr",
+ADD CONSTRAINT "fk_fin_m_pcr_ori__fin_m_pcr" FOREIGN KEY ("id_fornecedor") REFERENCES "public"."fin_tb_m_pcr" ("id_fornecedor") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+
+
+

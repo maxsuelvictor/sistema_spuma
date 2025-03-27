@@ -1,0 +1,22 @@
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "nfc_id_token" int4,
+ADD COLUMN "nfc_csc" varchar(36);
+
+DROP INDEX "public"."pk_par_nfe";
+
+CREATE UNIQUE INDEX "pk_par_nfe" ON "public"."cad_tb_c_par_nfe" ("id_empresa");
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."nfc_id_token" IS 'O código de identificação (cIdToken) do CSC será um sequencial numérico crescente por empresa (CNPJ base 8 dígitos) no Estado.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."nfc_csc" IS 'O CSC corresponderá a um conjunto de, no máximo, 36 caracteres alfanuméricos, sendo que cada CSC possui associado um código seqüencial de identificação (cIdToken) de 6 dígitos para facilitar a identificação do respectivo CSC e validação do QR Code pelo Fisco quando da realização da consulta pelo consumidor.
+';
+
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ALTER COLUMN "nfc_id_token" TYPE varchar(8);
+
+DROP INDEX "public"."pk_par_nfe";
+
+CREATE UNIQUE INDEX "pk_par_nfe" ON "public"."cad_tb_c_par_nfe" ("id_empresa");
+
+

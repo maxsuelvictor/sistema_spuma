@@ -1,0 +1,101 @@
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."origem_nf" IS 'A- Pedido de Venda  B- Estoque  C- Oficina  X- Importação XML   G- Gerada de cupom fiscal ;  D - Gerado partindo do Cupom GerConWin';
+
+ALTER TABLE "public"."fin_tb_m_pag_pag"
+ADD COLUMN "vlr_cred_utilizado" numeric(18,2);
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ecf_id_tipo_mov_estoque" int4,
+ADD COLUMN "ecf_id_condicao_pag" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."ecf_id_tipo_mov_estoque" IS 'Campo utilizado pela geração da NF partindo da tabela BR_CUPOM_MESTRE do GerConWin, no enServer método FatGerNfs.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."ecf_id_condicao_pag" IS 'Campo utilizado pela geração da NF partindo da tabela BR_CUPOM_MESTRE do GerConWin, no enServer método FatGerNfs.';
+
+ALTER TABLE "public"."cad_tb_c_tri_reg"
+ADD COLUMN "nct_aliquota_ecf" varchar(20);
+
+COMMENT ON COLUMN "public"."cad_tb_c_tri_reg"."nct_aliquota_ecf" IS 'Valores possiveis deste campo:
+FF, II, NN,  valor inteiro ou decimal.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "aliquota_ecf" varchar(20);
+
+CREATE OR REPLACE VIEW "public"."vw_paf_produto" AS 
+SELECT "ITE".id_item, 
+       "ITE".descricao::character varying(100) AS descricao, 
+       "ITE".cod_barra::character varying(50) AS cod_barra, 
+       ''::character varying(1) AS num_serial, 
+       "ITE".preco_avista AS preco_vista, 
+       0 AS estoque, 
+       "GRU".aliquota_ecf AS aliquota, 
+       "ITE".id_und_venda::character varying(3) AS unidade, 
+       'A'::character varying(1) AS iat, 
+       'T'::character varying(1) AS ippt, 
+       'T'::character varying(1) AS sit_tributaria, 
+       CURRENT_DATE::date AS dta_estqoue, 
+       'BR*'::character varying(3) AS flag_aceito, 
+       'S'::character varying(1) AS flag_sis, 
+       'S'::character varying(1) AS flag_est, 
+       'N'::character varying(1) AS flag_comb, 
+       "ITE".preco_avista AS preco_prazo, 
+       "ITE".preco_avista AS preco_promo, 
+       'N'::character varying(1) AS flag_grade, 
+       'N'::character varying(1) AS flag_balan, 
+       null::date AS dta_ini_promo, 
+       null::date AS dta_fin_promo, 
+       0 AS vlr_promocao, 
+       'P'::character varying(1) AS pro_ser, 
+       'A'::character varying(1) AS flag_ativo, 
+       0 AS desc_maximo, 
+       'N'::character varying(1) AS flag_kit, 
+       'N'::character varying(1) AS flag_serial, 
+       ''::character varying(1) AS tcsmart, 
+       0 AS custo, 
+       "ITE".id_ncm::character varying(10) AS ncm, 
+       '52'::character varying(2) AS ex_tipi, 
+       ''::character varying(1) AS genero, 
+       '00'::character varying(2) AS cst00, 
+       '0'::character varying(1) AS origem, 
+       '0'::character varying(1) AS ali_ipi, 
+       '0'::character varying(1) AS ali_pis, 
+       '0'::character varying(1) AS ali_cofins, 
+       ''::character varying(1) AS item00, 
+       '5102'::character varying(4) AS cfop, 
+       "UND".descricao AS des_unidade 
+FROM ((cad_tb_c_ite "ITE" 
+       LEFT JOIN cad_tb_c_gru "GRU" ON (("GRU".id_grupo = "ITE".id_grupo))) 
+       LEFT JOIN cad_tb_c_und "UND" ON (("UND".id_unidade = "ITE".id_und_venda)));
+
+
+CREATE OR REPLACE VIEW "public"."vw_paf_cliente" AS 
+SELECT "CLI".id_cliente, 
+       "CLI".nome::character varying(50) AS nome, 
+       "CLI".doc_cnpj_cpf AS cpf_cnpj, 
+       "CLI".endereco, 
+       "CLI".bairro, 
+       cid.nome AS cidade, 
+       "CLI".cep, 
+       cid.uf AS estado, 
+       "CLI".tel_fixo AS telefone, 
+       "CLI".email, 
+       0 AS per_desconto, 
+       0 AS sal_credito, 
+       0 AS sal_debito, 
+      'N'::character varying(1) AS tab_preco, 
+      'N'::character varying(1) AS cli_bloqueado, 
+      cid.id_cidade AS cod_cidade, 
+      '1058'::character varying(5) AS cod_pais, 
+      ''::character varying(1) AS cod_suframa, 
+      "CLI".doc_ie_identidade AS doc_ie, 
+      "CLI".numero, 
+      "CLI".end_complemento 
+FROM (cad_tb_c_cli "CLI" 
+      LEFT JOIN cad_tb_c_cid cid ON ((cid.id_cidade = "CLI".id_cidade)));
+       
+
+

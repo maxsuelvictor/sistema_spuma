@@ -1,0 +1,17 @@
+/**** 29/08/19 ******/
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "bol_remessa_env" bool,
+ADD COLUMN "bol_remessa_dta" date,
+ADD COLUMN "bol_remessa_id_func" int4,
+ADD COLUMN "bol_remessa_nome_arq" varchar(50);
+
+
+
+update fin_tb_m_rec
+   set bol_remessa_env = true
+where
+  coalesce(rtrim(bol_nosso_numero),'') <> '' and 
+  bol_remessa_env is null;
+
+

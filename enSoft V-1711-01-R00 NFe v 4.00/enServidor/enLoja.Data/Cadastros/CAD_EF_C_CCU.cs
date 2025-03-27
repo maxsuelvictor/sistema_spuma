@@ -1,0 +1,30 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using enLoja.Model.Validações;
+
+namespace enLoja.Model.Cadastros
+{
+    [Table("CAD_TB_C_CCU")]
+    public class CAD_EF_C_CCU : NotifyingObject
+    {
+        [Key]
+        [Display(Name = "Código")]
+        public int ID_CCUSTO 
+        {
+            get { return GetValue(() => ID_CCUSTO); }
+            set { SetValue(() => ID_CCUSTO, value); }
+        }
+
+        [Display(Name = "Descrição")]
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(30)]
+        [Required(ErrorMessage = "Descrição deve ser informado!")]
+        public string DESCRICAO
+        {
+            get { return GetValue(() => DESCRICAO); }
+            set { SetValue(() => DESCRICAO, value); }
+        }
+
+    }
+}

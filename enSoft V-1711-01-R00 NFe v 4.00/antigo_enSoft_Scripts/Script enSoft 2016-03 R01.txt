@@ -1,0 +1,11 @@
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ped_cupom_imp" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."ped_cupom_imp" IS '1 - Impressão A4
+2 - Impressão 40 Colunas';
+
+
+update cad_tb_c_par_ctr
+  set ped_cupom_imp = 1
+where ped_cupom_imp is null;
+

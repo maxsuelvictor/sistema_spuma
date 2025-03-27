@@ -1,0 +1,9959 @@
+﻿inherited FAT_FM_R_NFE: TFAT_FM_R_NFE
+  ClientHeight = 554
+  ClientWidth = 920
+  Position = poDesigned
+  OnClose = FormClose
+  ExplicitWidth = 926
+  ExplicitHeight = 582
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlDireita: TPanel
+    Width = 920
+    Height = 524
+    ExplicitWidth = 920
+    inherited pnlDados: TPanel
+      Left = 8
+      Top = 4
+      Width = 548
+      Height = 509
+      ExplicitLeft = 8
+      ExplicitTop = 4
+      ExplicitWidth = 548
+      ExplicitHeight = 509
+      object btnExcel: TSpeedButton [0]
+        Left = 192
+        Top = 463
+        Width = 85
+        Height = 40
+        Caption = 'Gerar Excel'
+        Glyph.Data = {
+          46030000424D460300000000000036000000280000000E0000000E0000000100
+          2000000000001003000000000000000000000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFC5C5C5FF8E8E8EFF575757FF000000FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF797979FF353535FF000000FF0000
+          00FF000000FF000000FF000000FF000000FFE7E7E7FF9F9F9FFFA4A4A4FFA4A4
+          A4FFA3A3A3FFB5B5B5FF000000FF000000FF000000FF000000FF000000FF0000
+          00FF000000FF000000FF9B9B9BFF000000FF000000FF000000FF000000FF0000
+          00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+          00FFFFFFFFFFF6F6F6FF535353FFFAFAFAFFEEEEEEFF000000FF000000FF3030
+          30FFF9F9F9FF020202FF000000FFF2F2F2FF494949FF000000FFBEBEBEFF2F2F
+          2FFF0E0E0EFF3B3B3BFF3A3A3AFF000000FF000000FF000000FFDCDCDCFFAAAA
+          AAFF828282FFFFFFFFFF000000FF000000FFE9E9E9FFB1B1B1FF3B3B3BFFB8B8
+          B8FFAFAFAFFF000000FF000000FF000000FF000000FFFFFFFFFFFFFFFFFF1212
+          12FF000000FF000000FFD4D4D4FF717171FF252525FF7A7A7AFF757575FF0000
+          00FF000000FF000000FF000000FFFFFFFFFFFFFFFFFF0C0C0CFF000000FF0000
+          00FFD4D4D4FF717171FF252525FF7A7A7AFF757575FF000000FF000000FF0000
+          00FFC0C0C0FFCFCFCFFF6F6F6FFFFCFCFCFF000000FF000000FFE9E9E9FFB1B1
+          B1FF3B3B3BFFB7B7B7FFAFAFAFFF000000FF000000FF0F0F0FFFF2F2F2FF2A2A
+          2AFF000000FFE9E9E9FF3D3D3DFF000000FFBFBFBFFF323232FF101010FF3B3B
+          3BFF393939FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+          00FF000000FF000000FFFFFFFFFFFAFAFAFF585858FFF9F9F9FFEEEEEEFF0000
+          00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+          00FF9B9B9BFF000000FF000000FF000000FF000000FF000000FF797979FF3535
+          35FF000000FF000000FF000000FF000000FF000000FF000000FFE6E6E6FF9F9F
+          9FFFA4A4A4FFA4A4A4FFA3A3A3FFB5B5B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFC6C6C6FF8E8E8EFF575757FF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF}
+        OnClick = btnExcelClick
+      end
+      inherited gbRelatorios: TGroupBox
+        Left = 5
+        Width = 538
+        Height = 119
+        ExplicitLeft = 5
+        ExplicitWidth = 538
+        ExplicitHeight = 119
+        inherited lbxRelatorios: TListBox
+          Left = 16
+          Top = 17
+          Width = 519
+          Height = 95
+          Items.Strings = (
+            '00-Espelho das Notas'
+            '01-Resumo das Notas'
+            '02-Resumo por Tipo de Estoque'
+            '03-Resumo por CFOP'
+            '04-Agrupado por Tipo de Estoque'
+            '05-Agrupado por CFOP'
+            '06-Detalhado por Item(Excel)'
+            '07-Detalhado por item(Simples)')
+          OnClick = lbxRelatoriosClick
+          ExplicitLeft = 16
+          ExplicitTop = 17
+          ExplicitWidth = 519
+          ExplicitHeight = 95
+        end
+      end
+      inherited gbFiltros: TGroupBox
+        Left = 5
+        Top = 120
+        Width = 538
+        Height = 337
+        ExplicitLeft = 5
+        ExplicitTop = 120
+        ExplicitWidth = 538
+        ExplicitHeight = 337
+        object Label1: TLabel
+          Left = 32
+          Top = 55
+          Width = 46
+          Height = 13
+          Caption = 'Per'#237'odo :'
+        end
+        object Label2: TLabel
+          Left = 178
+          Top = 56
+          Width = 16
+          Height = 13
+          Caption = 'at'#233
+        end
+        object lblOrdenacao: TLabel
+          Left = 303
+          Top = 106
+          Width = 63
+          Height = 13
+          Caption = 'Ordena'#231#227'o :'
+        end
+        object lblTipoNF: TLabel
+          Left = 17
+          Top = 80
+          Width = 61
+          Height = 13
+          Caption = 'Tipo de NF :'
+        end
+        object lblPesquisaPor: TLabel
+          Left = 295
+          Top = 80
+          Width = 71
+          Height = 13
+          Caption = 'Pesquisa Por :'
+        end
+        object lblNDoc: TLabel
+          Left = 33
+          Top = 106
+          Width = 45
+          Height = 13
+          Caption = 'N'#186' Doc. :'
+        end
+        object Label5: TLabel
+          Left = 6
+          Top = 27
+          Width = 72
+          Height = 13
+          Caption = 'Tipo per'#237'odo :'
+        end
+        object deInicial: TJvDateEdit
+          Left = 82
+          Top = 51
+          Width = 90
+          Height = 21
+          ShowNullDate = False
+          TabOrder = 1
+        end
+        object deFinal: TJvDateEdit
+          Left = 200
+          Top = 52
+          Width = 90
+          Height = 21
+          ShowNullDate = False
+          TabOrder = 2
+        end
+        object cbbOrdenacao: TComboBox
+          Left = 372
+          Top = 104
+          Width = 160
+          Height = 21
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 6
+          Text = '0-Data de Emiss'#227'o'
+          Items.Strings = (
+            '0-Data de Emiss'#227'o'
+            '1-Data Documento'
+            '2-N'#186' Nota Fiscal')
+        end
+        object pcfiltro: TPageControl
+          Left = 9
+          Top = 133
+          Width = 522
+          Height = 197
+          ActivePage = tsEmpresas
+          TabOrder = 7
+          object tsEmpresas: TTabSheet
+            Caption = 'Empresa'
+            ImageIndex = 3
+            object lblEmpresasDisponiveis: TLabel
+              Left = 3
+              Top = 8
+              Width = 250
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Empresas Dispon'#237'veis'
+            end
+            object lblEmpresaSelecionada: TLabel
+              Left = 259
+              Top = 8
+              Width = 250
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Empresa Selecionada'
+            end
+            object lboxEmpresas: TListBox
+              Left = 3
+              Top = 24
+              Width = 250
+              Height = 141
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmSelEmpresas
+              TabOrder = 0
+              OnDblClick = lboxEmpresasDblClick
+            end
+            object lboxEmpresaSelecionada: TListBox
+              Left = 259
+              Top = 25
+              Width = 250
+              Height = 141
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmRemoverEmpresas
+              TabOrder = 1
+              OnDblClick = lboxEmpresaSelecionadaDblClick
+            end
+          end
+          object tsFornecedores: TTabSheet
+            Caption = 'Fornecedor'
+            ImageIndex = 5
+            object lblFornecedoresDisponiveis: TLabel
+              Left = -1
+              Top = 8
+              Width = 513
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 
+                'D'#234' um click no campo abaixo e tecle <F3> para selecionar algum f' +
+                'ornecedor'
+            end
+            object lboxFornecedores: TListBox
+              Left = 0
+              Top = 27
+              Width = 512
+              Height = 141
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmExcluirFornecedor
+              TabOrder = 0
+              OnKeyDown = lboxFornecedoresKeyDown
+            end
+          end
+          object tsTipoEstoque: TTabSheet
+            Caption = 'Tipo de Estoque'
+            ImageIndex = 1
+            object lblTipoEstoqueDisponiveis: TLabel
+              Left = 3
+              Top = 8
+              Width = 250
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Tipos de Estoque Dispon'#237'veis'
+            end
+            object lblTipoEstoqueSelecionado: TLabel
+              Left = 259
+              Top = 8
+              Width = 250
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Tipo de Estoque Selecionado'
+            end
+            object lboxTipoEstoqueDisponiveis: TListBox
+              Left = 3
+              Top = 24
+              Width = 250
+              Height = 141
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmSelTipoEstoque
+              TabOrder = 0
+              OnDblClick = lboxTipoEstoqueDisponiveisDblClick
+            end
+            object lboxTipoEstoqueSelecionado: TListBox
+              Left = 259
+              Top = 25
+              Width = 250
+              Height = 141
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmRemoverTipoEstoque
+              TabOrder = 1
+              OnDblClick = lboxTipoEstoqueSelecionadoDblClick
+            end
+          end
+          object tsCfop: TTabSheet
+            Caption = 'CFOP'
+            ImageIndex = 6
+            object lblCfopDisponiveis: TLabel
+              Left = 3
+              Top = 8
+              Width = 250
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'CFOP Dispon'#237'veis'
+            end
+            object lblCfopSelecionado: TLabel
+              Left = 259
+              Top = 8
+              Width = 250
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'CFOP Selecionado'
+            end
+            object lboxCfopDisponiveis: TListBox
+              Left = 3
+              Top = 25
+              Width = 250
+              Height = 141
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmSelCfop
+              TabOrder = 0
+              OnDblClick = lboxCfopDisponiveisDblClick
+            end
+            object lboxCfopSelecionado: TListBox
+              Left = 259
+              Top = 25
+              Width = 250
+              Height = 141
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmRemoverCfop
+              TabOrder = 1
+              OnDblClick = lboxCfopSelecionadoDblClick
+            end
+          end
+          object tsModelo: TTabSheet
+            Caption = 'Modelo'
+            ImageIndex = 3
+            object lblModeloDis: TLabel
+              Left = 75
+              Top = 10
+              Width = 102
+              Height = 13
+              Caption = 'Modelo Dispon'#237'veis'
+            end
+            object lblModeloSel: TLabel
+              Left = 334
+              Top = 10
+              Width = 111
+              Height = 13
+              Caption = 'Modelo Selecionados'
+            end
+            object lboxModeloDisp: TListBox
+              Left = 1
+              Top = 25
+              Width = 250
+              Height = 141
+              ItemHeight = 13
+              PopupMenu = pmSelModelo
+              TabOrder = 0
+              OnDblClick = lboxModeloDispDblClick
+            end
+            object lboxModeloSel: TListBox
+              Left = 260
+              Top = 25
+              Width = 250
+              Height = 141
+              ItemHeight = 13
+              PopupMenu = pmRemoverModelo
+              TabOrder = 1
+              OnDblClick = lboxModeloSelDblClick
+            end
+          end
+          object tsSitNota: TTabSheet
+            Caption = 'Situa'#231#227'o da Nota'
+            ImageIndex = 4
+            object lblSitNotaDisp: TLabel
+              Left = 79
+              Top = 11
+              Width = 111
+              Height = 13
+              Caption = 'Situa'#231#245'es Dispon'#237'veis'
+            end
+            object lblSitNotaSel: TLabel
+              Left = 342
+              Top = 11
+              Width = 119
+              Height = 13
+              Caption = 'Situa'#231#245'es Selecionadas'
+            end
+            object lboxSitNotaDisp: TListBox
+              Left = 3
+              Top = 25
+              Width = 250
+              Height = 141
+              ItemHeight = 13
+              PopupMenu = pmSelSituacaoNota
+              TabOrder = 0
+              OnDblClick = lboxSitNotaDispDblClick
+            end
+            object lboxSitNotaSel: TListBox
+              Left = 260
+              Top = 25
+              Width = 250
+              Height = 141
+              ItemHeight = 13
+              PopupMenu = pmExcluirSituacaoNota
+              TabOrder = 1
+              OnDblClick = lboxSitNotaSelDblClick
+            end
+          end
+          object tsItem: TTabSheet
+            Caption = 'Item'
+            ImageIndex = 6
+            object lblItemDisponivel: TLabel
+              Left = 71
+              Top = 6
+              Width = 357
+              Height = 13
+              Caption = 
+                'D'#234' um click no campo abaixo e tecle <F3> para selecionar algum I' +
+                'tem'
+            end
+            object lboxItem: TListBox
+              Left = 3
+              Top = 22
+              Width = 508
+              Height = 144
+              ItemHeight = 13
+              PopupMenu = pmExcluirItem
+              TabOrder = 0
+              OnKeyDown = lboxItemKeyDown
+            end
+          end
+          object tsGrupoEstoque: TTabSheet
+            Caption = 'Grupo de Estoque'
+            ImageIndex = 7
+            object Label15: TLabel
+              Left = 3
+              Top = 14
+              Width = 260
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Grupos Dispon'#237'veis'
+            end
+            object Label16: TLabel
+              Left = 254
+              Top = 14
+              Width = 260
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'Grupos Selecionados'
+            end
+            object lboxGruposSelecionados: TListBox
+              Left = 269
+              Top = 30
+              Width = 245
+              Height = 124
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmRemoverTodosGrupos
+              TabOrder = 0
+              OnDblClick = lboxGruposSelecionadosDblClick
+            end
+            object lboxGruposDisponiveis: TListBox
+              Left = 3
+              Top = 30
+              Width = 245
+              Height = 124
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Courier New'
+              Font.Style = []
+              ItemHeight = 14
+              ParentFont = False
+              PopupMenu = pmSelGrupoItem
+              TabOrder = 1
+              OnDblClick = lboxGruposDisponiveisDblClick
+            end
+          end
+          object tsFamilia: TTabSheet
+            Caption = 'Familia'
+            ImageIndex = 8
+            object Label12: TLabel
+              Left = 97
+              Top = 7
+              Width = 102
+              Height = 13
+              Caption = 'Familias dispon'#237'veis'
+            end
+            object Label13: TLabel
+              Left = 339
+              Top = 7
+              Width = 111
+              Height = 13
+              Caption = 'Familias Selecionadas'
+            end
+            object lboxFamDisp: TListBox
+              Left = 19
+              Top = 22
+              Width = 226
+              Height = 141
+              ItemHeight = 13
+              PopupMenu = pmSelFamItem
+              TabOrder = 0
+              OnDblClick = lboxFamDispDblClick
+            end
+            object lboxFamSel: TListBox
+              Left = 272
+              Top = 22
+              Width = 226
+              Height = 141
+              ItemHeight = 13
+              PopupMenu = pmExcluirFam
+              TabOrder = 1
+              OnDblClick = lboxFamSelDblClick
+            end
+          end
+          object tsAlmoxarifado: TTabSheet
+            Caption = 'Almoxarifado'
+            ImageIndex = 9
+            object Label3: TLabel
+              Left = 70
+              Top = 12
+              Width = 130
+              Height = 13
+              Caption = 'Almoxarifado Dispon'#237'veis'
+            end
+            object Label4: TLabel
+              Left = 346
+              Top = 12
+              Width = 139
+              Height = 13
+              Caption = 'Almoxarifado Selecionados'
+            end
+            object lboxAlmSel: TListBox
+              Left = 264
+              Top = 27
+              Width = 250
+              Height = 124
+              ItemHeight = 13
+              PopupMenu = pmExcluirAlm
+              TabOrder = 0
+              OnDblClick = lboxAlmSelDblClick
+            end
+            object lboxAlmDisp: TListBox
+              Left = 3
+              Top = 27
+              Width = 245
+              Height = 124
+              ItemHeight = 13
+              PopupMenu = pmSelAlm
+              TabOrder = 1
+              OnDblClick = lboxAlmDispDblClick
+            end
+          end
+        end
+        object cbbTipoNF: TComboBox
+          Left = 82
+          Top = 77
+          Width = 208
+          Height = 21
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 3
+          Text = 'S-Sa'#237'das'
+          Items.Strings = (
+            'S-Sa'#237'das'
+            'E-Entradas'
+            'D-Devolu'#231#227'o de Fornecedor'
+            'R-Devolu'#231#227'o de Cliente'
+            'F-Fretes'
+            'C-Cancelado')
+        end
+        object cbbPesquisaPor: TComboBox
+          Left = 372
+          Top = 77
+          Width = 160
+          Height = 21
+          Style = csDropDownList
+          ItemIndex = 2
+          TabOrder = 4
+          Text = '2 - Todos'
+          Items.Strings = (
+            '0 - Nota Fiscal'
+            '1 - Cupom'
+            '2 - Todos')
+        end
+        object txtNDoc: TEdit
+          Left = 82
+          Top = 103
+          Width = 90
+          Height = 21
+          TabOrder = 5
+        end
+        object chbExibirNotaCancelada: TCheckBox
+          Left = 353
+          Top = 42
+          Width = 178
+          Height = 17
+          Caption = 'Exibir Notas Canceladas'
+          TabOrder = 8
+        end
+        object chbExibirNotaF11: TCheckBox
+          Left = 353
+          Top = 57
+          Width = 178
+          Height = 17
+          Caption = 'Exibir Notas Faturadas com F11'
+          TabOrder = 9
+        end
+        object cbTipoPeriodo: TComboBox
+          Left = 82
+          Top = 24
+          Width = 208
+          Height = 21
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 0
+          Text = '0 - Emiss'#227'o'
+          Items.Strings = (
+            '0 - Emiss'#227'o'
+            '1 - Entrada')
+        end
+      end
+      inherited btnImprimir: TButton
+        Left = 5
+        Top = 463
+        OnClick = btnImprimirClick
+        ExplicitLeft = 5
+        ExplicitTop = 463
+      end
+      inherited btnSair: TButton
+        Left = 96
+        Top = 463
+        ExplicitLeft = 96
+        ExplicitTop = 463
+      end
+    end
+    inherited pnlEsquerda: TPanel
+      Width = 2
+      Height = 524
+      ExplicitWidth = 2
+    end
+  end
+  inherited pnlTop: TJvPanel
+    Width = 920
+    ExplicitWidth = 920
+    inherited pnlCima: TJvPanel
+      Width = 920
+      ExplicitWidth = 920
+      inherited lblCodificacaoLMestre: TLabel
+        Width = 915
+        ExplicitWidth = 899
+      end
+      inherited lblTitulo: TLabel
+        Width = 920
+        Caption = 'Relat'#243'rio de Notas Fiscais'
+        ExplicitWidth = 904
+      end
+      inherited pnlBaixo: TPanel
+        Width = 920
+        ExplicitWidth = 920
+      end
+    end
+  end
+  inherited imgBotoes: TImageList
+    Left = 600
+    Top = 30
+    Bitmap = {
+      494C010103000800DC0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      000000000000360000002800000058000000160000000100200000000000401E
+      0000000000000000000000000000000000000000000000000000000000000000
+      00170F0F0F8C2F2F2FF8323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF151515A40000001F0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000030303400C0C0C7B161616AA1D1D1DC41D1D1DC4161616AA0C0C
+      0C7B030303400000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000505055A00000019000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000808
+      08692C2C2CEF1A1A1ABA141414A1141414A1141414A1141414A1141414A11414
+      14A1141414A1141414A1141414A1141414A11B1B1BBC303030F90F0F0F8E0000
+      0000000000000000000000000000000000000000000000000000000000000505
+      05531E1E1EC5323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF1E1E1EC505050553000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000002F2F2FFA292929E70E0E0E8C0000001900000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000F0F
+      0F8A323232FF0101012B00000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000021323232FF1A1A1ABA0000
+      0000000000000000000000000000000000000000000000000006111111963232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF111111960000000600000000000000000000
+      0000000000000000000000000000000000000000000000000000030303440606
+      065E00000023313131FF313131FF313131FF2C2C2CF0141414A5050505530000
+      001A000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000F0F
+      0F8A323232FF00000018000000111A1A1ABA1A1A1ABA1A1A1ABA1A1A1ABA1A1A
+      1ABA141414A10000001E000000000000000000000000323232FF1A1A1ABA0000
+      000000000000000000000000000000000000000000061C1C1CC0323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF1C1C1CC000000006000000000000
+      00000000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF2E2E2EF72626
+      26DE000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000F0F
+      0F8A323232FF0000001800000017323232FF323232FF323232FF323232FF3232
+      32FF252525DD01010129000000000000000000000000323232FF1A1A1ABA0000
+      00000000000000000000000000000000000011111197323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF11111197000000000000
+      00000000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000020212121D0323232FF3232
+      32FF323232FF0000001800000002000000180000001800000018000000180000
+      00180000001800000018000000180000000B00000001323232FF323232FF3232
+      32FF252525DB0202023F000000000404044C323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF0404044C0000
+      00000000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000222222D1323232FF323232FF3232
+      32FF323232FF0000001800000017323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF0A0A0A7400000006323232FF323232FF3232
+      32FF323232FF242424D900000003202020CE323232FF323232FF323232FF3232
+      32FF1D1D1DC20101012C0E0E0E85323232FF323232FF323232FF323232FF0E0E
+      0E850101012C1D1D1DC2323232FF323232FF323232FF323232FF202020CE0000
+      00030000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000323232FF323232FF323232FF3232
+      32FF323232FF000000180000000C0F0F0F8A0F0F0F8A0F0F0F8A0F0F0F8A0F0F
+      0F8A0F0F0F8A0F0F0F8A0F0F0F8A0202023F00000003323232FF323232FF3232
+      32FF323232FF323232FF02020239323232FF323232FF323232FF323232FF3232
+      32FF0000001E00000000000000000E0E0E89323232FF323232FF0E0E0E890000
+      0000000000000000001E323232FF323232FF323232FF323232FF323232FF0202
+      02390000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000323232FF323232FF323232FF3232
+      32FF323232FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000323232FF323232FF3232
+      32FF323232FF323232FF0C0C0C7F323232FF323232FF323232FF323232FF3232
+      32FF0E0E0E880000000000000000000000001111119811111198000000000000
+      0000000000000E0E0E88323232FF323232FF323232FF323232FF323232FF0C0C
+      0C7F0000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000323232FF323232FF323232FF3232
+      32FF323232FF232323D5222222D1222222D1222222D1222222D1222222D12222
+      22D1222222D1222222D1222222D1222222D1222222D1323232FF323232FF3232
+      32FF323232FF323232FF161616AA323232FF323232FF323232FF323232FF3232
+      32FF323232FF0F0F0F8C00000000000000000000000000000000000000000000
+      00000F0F0F8C323232FF323232FF323232FF323232FF323232FF323232FF1616
+      16AA0000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF1D1D1DC4323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF11111196000000000000000000000000000000001111
+      1196323232FF323232FF323232FF323232FF323232FF323232FF323232FF1D1D
+      1DC40000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E292929E90000000F313131FE313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF0E0E0E850404044D1D1D
+      1DC1323232FF323232FF1D1D1DC4323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF11111196000000000000000000000000000000001111
+      1196323232FF323232FF323232FF323232FF323232FF323232FF323232FF1D1D
+      1DC40000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E2D2D2DF30B0B0B7D313131FE313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF0606065C0101012C1616
+      16AA323232FF323232FF161616AA323232FF323232FF323232FF323232FF3232
+      32FF323232FF0F0F0F8C00000000000000000000000000000000000000000000
+      00000F0F0F8C323232FF323232FF323232FF323232FF323232FF323232FF1616
+      16AA0000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000252525DC323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF212121CF191919B42929
+      29E7323232FF272727E30C0C0C7F323232FF323232FF323232FF323232FF3232
+      32FF0E0E0E880000000000000000000000001111119811111198000000000000
+      0000000000000E0E0E88323232FF323232FF323232FF323232FF323232FF0C0C
+      0C7F0000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000202023F242424D9323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF272727E20505055A02020239323232FF323232FF323232FF323232FF3232
+      32FF0000001E00000000000000000E0E0E89323232FF323232FF0E0E0E890000
+      0000000000000000001E323232FF323232FF323232FF323232FF323232FF0202
+      02390000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000100000012000000171111
+      1195323232FF0101012D00000017000000170000001700000017000000170000
+      00170000001700000017000000170000001700000017323232FF1C1C1CC00000
+      0017000000130000000400000003202020CE323232FF323232FF323232FF3232
+      32FF1D1D1DC20101012C0E0E0E85323232FF323232FF323232FF323232FF0E0E
+      0E850101012C1D1D1DC2323232FF323232FF323232FF323232FF202020CE0000
+      00030000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000F0F
+      0F8A323232FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000323232FF1A1A1ABA0000
+      00000000000000000000000000000404044C323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF0404044C0000
+      00000000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000F0F
+      0F8A323232FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000323232FF1A1A1ABA0000
+      00000000000000000000000000000000000011111197323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF11111197000000000000
+      00000000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000F0F
+      0F8A323232FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000323232FF1A1A1ABA0000
+      000000000000000000000000000000000000000000061C1C1CC0323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF1C1C1CC000000006000000000000
+      00000000000000000000000000000000000000000000000000001A1A1AB93131
+      31FF0606065E313131FF313131FF313131FF313131FF313131FF313131FF3131
+      31FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000F0F
+      0F8A323232FF0202023300000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000101012E323232FF1A1A1ABA0000
+      0000000000000000000000000000000000000000000000000006111111963232
+      32FF323232FF323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF111111960000000600000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000313131FF313131FF313131FD2D2D2DF3282828E6101010940101
+      012E000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000707
+      075F2A2A2AEA252525DD222222D1222222D1222222D1222222D1222222D12222
+      22D1222222D1222222D1222222D1222222D1272727DE2F2F2FF80D0D0D810000
+      0000000000000000000000000000000000000000000000000000000000000505
+      05531E1E1EC5323232FF323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF1E1E1EC505050553000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000292929E6151515A90909096E0202023B0000000B000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00090B0B0B782F2F2FF6323232FF323232FF323232FF323232FF323232FF3232
+      32FF323232FF323232FF323232FF323232FF323232FF101010920000000C0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000030303400C0C0C7B161616AA1D1D1DC41D1D1DC4161616AA0C0C
+      0C7B030303400000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000058000000160000000100010000000000080100000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000}
+  end
+  inherited imgBotoesAz: TImageList
+    Left = 712
+    Top = 30
+    Bitmap = {
+      494C010103000800EC0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      000000000000360000002800000058000000160000000100200000000000401E
+      0000000000000000000000000000000000000000000000000000000000000100
+      00172716028C7C4807F8844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF362003A40101001F0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000100001B100A015C2C1A0294472A04BD593305D25F3805DA4C2C04C33720
+      03A5170D016C0402002F00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000001009015A01000019000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000160D
+      0169724306EF452804BA341E03A1341E03A1341E03A1341E03A1341E03A1341E
+      03A1341E03A1341E03A1341E03A1341E03A1472904BC7E4807F92817028E0000
+      0000000000000000000000000000000000000000000000000000000000000F08
+      0157653A06DF7E4907FA844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF814A07FC754407F12B1902930000000F0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000007E4907FA6C3F06E72717028C0100001900000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002616
+      028A844C07FF0302002B00000000000000000000000000000000000000000000
+      00000000000000000000000000000000000002010021844C07FF452804BA0000
+      000000000000000000000000000000000000000000000100001A301C029B824C
+      07FE844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF4E2D04C40603003600000001000000000000
+      000000000000000000000000000000000000000000000000000009050044110A
+      015E02010023844C07FF844C07FF844C07FF744406F0362003A50D0800530100
+      001A000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002616
+      028A844C07FF0100001800000011452804BA452804BA452804BA452804BA4528
+      04BA341E03A10101001E000000000000000000000000844C07FF452804BA0000
+      00000000000000000000000000000000000000000001422603B4814A07FC844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF653B05E005030036000000000000
+      0000000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF7C4807F7633A
+      06DE000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002616
+      028A844C07FF0100001801000017844C07FF844C07FF844C07FF844C07FF844C
+      07FF623906DD03010029000000000000000000000000844C07FF452804BA0000
+      0000000000000000000000000000000000072C1A0295844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF4D2E04C50000000F0000
+      0000000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000002010020573304D0844C07FF844C
+      07FF844C07FF0100001800000002010000180100001801000018010000180100
+      00180100001801000018010000180000000B00000001844C07FF844C07FF844C
+      07FF603805DB0804003F000000000A0600497A4707F6844C07FF844C07FF844C
+      07FF844C07FF774507F37D4807F8844C07FF844C07FF844C07FF844C07FF844C
+      07FF754406F0824B07FD844C07FF844C07FF844C07FF844C07FF2A1902920000
+      0000000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000583305D1844C07FF844C07FF844C
+      07FF844C07FF0100001801000017844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF1B0F017400000006844C07FF844C07FF844C
+      07FF844C07FF5E3705D9000000003A2203AB844C07FF844C07FF844C07FF834C
+      07FE523004CB000000140F080056744306F0844C07FF844C07FF7C4807F72918
+      02910000000A301B039A824B07FD844C07FF844C07FF844C07FF764507F20402
+      002F000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000844C07FF844C07FF844C07FF844C
+      07FF844C07FF010000180000000C2616028A2616028A2616028A2616028A2616
+      028A2616028A2616028A2616028A0804003F00000003844C07FF844C07FF844C
+      07FF844C07FF844C07FF00000009724307EF844C07FF844C07FF844C07FF7E49
+      07FA0A06004900000000000000010A060049693D06E4844C07FF251502880000
+      0007000000000000000A744406F0844C07FF844C07FF844C07FF814A07FC170D
+      016C000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000844C07FF844C07FF844C07FF844C
+      07FF844C07FF0100001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000844C07FF844C07FF844C
+      07FF844C07FF844C07FF1009015A844C07FF844C07FF844C07FF844C07FF844C
+      07FF4C2C04C30000000E00000000000000000D0800522C1A0295000000020000
+      0000000000072A180290844C07FF844C07FF844C07FF844C07FF844C07FF3720
+      03A5000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000844C07FF844C07FF844C07FF844C
+      07FF844C07FF5B3505D5583305D1583305D1583305D1583305D1583305D15833
+      05D1583305D1583305D1583305D1583305D1583305D1844C07FF844C07FF844C
+      07FF844C07FF844C07FF2A180291844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF4B2B04C002010022000000000000000100000001000000000000
+      0002241502877C4807F7844C07FF844C07FF844C07FF844C07FF844C07FF4C2C
+      04C3000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF452804BA844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF4E2E04C5000000030000000000000000000000012C1A
+      0295844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF5F38
+      05DA000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E6E4006E90000000F834C07FE844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF231402850B06004D4B2B
+      04C1844C07FF844C07FF3C2304AD844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF7C4807F824150287000000020000000000000000000000010D08
+      0052693D06E4844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF5934
+      05D3000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E774606F31F12017D834C07FE844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF1109015C0302002C3A21
+      03AA844C07FF844C07FF23140285844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF2A18029000000006000000000000000200000003000000000000
+      00000A060049744306F0844C07FF844C07FF844C07FF844C07FF844C07FF4729
+      04BC000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000613906DC844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF573205CF412504B46C3F
+      06E7844C07FF673C06E30704003C824C07FE844C07FF844C07FF844C07FF824B
+      07FD2918028F000000010000000000000006251602874E2E04C5020100230000
+      0000000000010F0801567D4807F8844C07FF844C07FF844C07FF844C07FF2C19
+      0294000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000804003F5E3705D9844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF673C06E21009015A00000003643B06DF844C07FF844C07FF844C07FF804A
+      07FB0D08005200000000000000022A1802907C4807F7844C07FF4B2B04C00000
+      000F0000000000000013784607F4844C07FF844C07FF844C07FF7F4907FA1009
+      015B000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000100000012010000172C1A
+      0295844C07FF0402002D01000017010000170100001701000017010000170100
+      00170100001701000017010000170100001701000017844C07FF4A2B04C00100
+      00170000001300000004000000002817028E824B07FE844C07FF844C07FF844C
+      07FF704106EC0D0800532A180290844C07FF844C07FF844C07FF844C07FF4C2D
+      04C30A060049533005CB844C07FF844C07FF844C07FF844C07FF653A06E00100
+      001C000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002616
+      028A844C07FF0100001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000844C07FF452804BA0000
+      00000000000000000000000000000302002C744306F0844C07FF844C07FF844C
+      07FF844C07FF804A07FB824B07FD844C07FF844C07FF844C07FF844C07FF844C
+      07FF7E4907FA834C07FE844C07FF844C07FF844C07FF824C07FE0F0901580000
+      0000000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002616
+      028A844C07FF0100001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000844C07FF452804BA0000
+      000000000000000000000000000000000000120A015F7A4707F6844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF814A07FC301C029B000000000000
+      0000000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002616
+      028A844C07FF0100001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000844C07FF452804BA0000
+      000000000000000000000000000000000000000000001C100177794606F5844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF422603B50100001A000000000000
+      0000000000000000000000000000000000000000000000000000452804B9844C
+      07FF110A015E844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002616
+      028A844C07FF0502003300000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000402002E844C07FF452804BA0000
+      0000000000000000000000000000000000000000000000000000120A015F7244
+      07EF824C07FE844C07FF844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF7A4707F62C1A02940000000100000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000844C07FF844C07FF824C07FD774607F36A3E06E62B1902940402
+      002E000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000120A
+      015F6E3F06EA633906DD583305D1583305D1583305D1583305D1583305D15833
+      05D1583305D1583305D1583305D1583305D1633A06DE7D4807F8211302810000
+      0000000000000000000000000000000000000000000000000000000000000302
+      002C2817028D653A06DF824B07FE844C07FF844C07FF844C07FF844C07FF844C
+      07FF734306EF3B2204AB0A060049000000070000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000006A3E06E63A2103A9180E016E0704003B0000000B000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00091D1001787A4707F6844C07FF844C07FF844C07FF844C07FF844C07FF844C
+      07FF844C07FF844C07FF844C07FF844C07FF844C07FF2A1902920000000C0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000030704003C231402853C2304AD452804BA2A1802911009
+      015A000000090000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000058000000160000000100010000000000080100000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000}
+  end
+  inherited imgBotoesVe: TImageList
+    Left = 656
+    Top = 54
+    Bitmap = {
+      494C010103000800F00116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      000000000000360000002800000058000000160000000100200000000000401E
+      0000000000000000000000000000000000000000000000000000000000000000
+      0017001E018C005D04F8006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF002901A40001001F0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000001001B000C005C00200194003502BD004303D2004703DA003903C30029
+      01A50011006C0003002F00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000C005A00000019000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000010
+      0069005603EF003502BA002701A1002701A1002701A1002701A1002701A10027
+      01A1002701A1002701A1002701A1002701A1003502BC005E04F9001E018E0000
+      000000000000000000000000000000000000000000000000000000000000000B
+      0057004B04DF005E04FA006204FF006204FF006204FF006204FF006204FF0062
+      04FF006004FC005804F1002001930000000F0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000005E04FA005004E7001E018C0000001900000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000001D
+      018A006204FF0002002B00000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000010021006204FF003402BA0000
+      000000000000000000000000000000000000000000000001001A0024019B0062
+      04FE006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF003A03C40004003600000001000000000000
+      000000000000000000000000000000000000000000000000000000060044000D
+      005E00010023006204FF006204FF006204FF005704F0002901A5000A00530001
+      001A000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000001D
+      018A006204FF0000001800000011003402BA003402BA003402BA003402BA0034
+      02BA002701A10001001E000000000000000000000000006204FF003402BA0000
+      00000000000000000000000000000000000000000001003102B4006004FC0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF004C03E000040036000000000000
+      0000000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF005C04F7004A
+      03DE000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000001D
+      018A006204FF0000001800000017006204FF006204FF006204FF006204FF0062
+      04FF004A03DD00020029000000000000000000000000006204FF003402BA0000
+      00000000000000000000000000000000000700210295006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF003A03C50000000F0000
+      0000000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000010020004103D0006204FF0062
+      04FF006204FF0000001800000002000000180000001800000018000000180000
+      00180000001800000018000000180000000B00000001006204FF006204FF0062
+      04FF004803DB0005003F0000000000070049005C04F6006204FF006204FF0062
+      04FF006204FF005A04F3005D04F8006204FF006204FF006204FF006204FF0062
+      04FF005704F0006004FD006204FF006204FF006204FF006204FF002001920000
+      0000000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000004203D1006204FF006204FF0062
+      04FF006204FF0000001800000017006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF0014007400000006006204FF006204FF0062
+      04FF006204FF004703D900000000002C02AB006204FF006204FF006204FF0062
+      04FE003E03CB00000014000B0056005704F0006204FF006204FF005C04F7001F
+      01910000000A0024019A006004FD006204FF006204FF006204FF005804F20003
+      002F000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000006204FF006204FF006204FF0062
+      04FF006204FF000000180000000C001D018A001D018A001D018A001D018A001D
+      018A001D018A001D018A001D018A0005003F00000003006204FF006204FF0062
+      04FF006204FF006204FF00000009005604EF006204FF006204FF006204FF005E
+      04FA00070049000000000000000100080049004F03E4006204FF001B01880000
+      0007000000000000000A005704F0006204FF006204FF006204FF006004FC0011
+      006C000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000006204FF006204FF006204FF0062
+      04FF006204FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000006204FF006204FF0062
+      04FF006204FF006204FF000C005A006204FF006204FF006204FF006204FF0062
+      04FF003903C30000000E0000000000000000000A005200210195000000020000
+      000000000007001F0190006204FF006204FF006204FF006204FF006204FF0029
+      01A5000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000006204FF006204FF006204FF0062
+      04FF006204FF004503D5004203D1004203D1004203D1004203D1004203D10042
+      03D1004203D1004203D1004203D1004203D1004203D1006204FF006204FF0062
+      04FF006204FF006204FF001F0191006204FF006204FF006204FF006204FF0062
+      04FF006204FF003803C000010022000000000000000100000001000000000000
+      0002001B0187005C04F7006204FF006204FF006204FF006204FF006204FF0039
+      03C3000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF003402BA006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF003B03C5000000030000000000000000000000010021
+      0195006204FF006204FF006204FF006204FF006204FF006204FF006204FF0047
+      03DA000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E005204E90000000F006204FE006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF001B01850009004D0038
+      03C1006204FF006204FF002D02AD006204FF006204FF006204FF006204FF0062
+      04FF006204FF005D04F8001B018700000002000000000000000000000001000A
+      0052004F04E4006204FF006204FF006204FF006204FF006204FF006204FF0042
+      03D3000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E005A04F30017007D006204FE006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF000C005C0002002C002B
+      01AA006204FF006204FF001A0185006204FF006204FF006204FF006204FF0062
+      04FF006204FF0020019000000006000000000000000200000003000000000000
+      000000080049005804F0006204FF006204FF006204FF006204FF006204FF0035
+      02BC000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000004903DC006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF004103CF003102B40051
+      04E7006204FF004E03E30005003C006204FE006204FF006204FF006204FF0060
+      04FD001F018F000000010000000000000006001B0187003B03C5000100230000
+      000000000001000B0056005D04F8006204FF006204FF006204FF006204FF0020
+      0194000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000005003F004703D9006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF004C03E2000B005A00000003004B03DF006204FF006204FF006204FF0060
+      04FB000A00520000000000000002001F0190005C04F7006204FF003703C00000
+      000F0000000000000013005904F4006204FF006204FF006204FF005E04FA000C
+      005B000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000100000012000000170021
+      0195006204FF0002002D00000017000000170000001700000017000000170000
+      00170000001700000017000000170000001700000017006204FF003703C00000
+      0017000000130000000400000000001E018E006104FE006204FF006204FF0062
+      04FF005403EC000A0053001F0190006204FF006204FF006204FF006204FF0039
+      03C300080049003D03CB006204FF006204FF006204FF006204FF004C04E00001
+      001C000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000001D
+      018A006204FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000006204FF003402BA0000
+      00000000000000000000000000000002002C005704F0006204FF006204FF0062
+      04FF006204FF005F04FB006004FD006204FF006204FF006204FF006204FF0062
+      04FF005E04FA006204FE006204FF006204FF006204FF006204FE000B00580000
+      0000000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000001D
+      018A006204FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000006204FF003402BA0000
+      000000000000000000000000000000000000000D005F005B04F6006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006004FC0024019B000000000000
+      0000000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000001D
+      018A006204FF0000001800000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000006204FF003402BA0000
+      0000000000000000000000000000000000000000000000150077005A04F50062
+      04FF006204FF006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF003102B50001001A000000000000
+      0000000000000000000000000000000000000000000000000000003402B90062
+      04FF000D005E006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000001D
+      018A006204FF0003003300000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000003002E006204FF003402BA0000
+      0000000000000000000000000000000000000000000000000000000D005F0056
+      04EF006104FE006204FF006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF005C04F6002102940000000100000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000006204FF006204FF006004FD005904F3004F04E6002001940003
+      002E000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000000E
+      005F005303EA004A03DD004203D1004203D1004203D1004203D1004203D10042
+      03D1004203D1004203D1004203D1004203D1004A03DE005D04F8001901810000
+      0000000000000000000000000000000000000000000000000000000000000002
+      002C001E018D004A03DF006104FE006204FF006204FF006204FF006204FF0062
+      04FF005604EF002C02AB00070049000000070000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000004F03E6002B01A90012006E0005003B0000000B000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000900160078005C04F6006204FF006204FF006204FF006204FF006204FF0062
+      04FF006204FF006204FF006204FF006204FF006204FF002001920000000C0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000030005003C001A0185002D02AD003402BA001F0191000C
+      005A000000090000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000058000000160000000100010000000000080100000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000}
+  end
+  object pmSelTipoEstoque: TPopupMenu
+    Left = 832
+    Top = 334
+    object btnTodosTipoEstoque: TMenuItem
+      Caption = 'Todos os Tipos de Estoque'
+      OnClick = btnTodosTipoEstoqueClick
+    end
+  end
+  object pmRemoverCfop: TPopupMenu
+    Left = 832
+    Top = 382
+    object btnRemoverCfop: TMenuItem
+      Caption = 'Remover Todos CFOP'
+      OnClick = btnRemoverCfopClick
+    end
+  end
+  object pmSelCfop: TPopupMenu
+    Left = 712
+    Top = 382
+    object btnSelCfop: TMenuItem
+      Caption = 'Todos os CFOP'
+      OnClick = btnSelCfopClick
+    end
+  end
+  object pmRemoverTipoEstoque: TPopupMenu
+    Left = 600
+    Top = 382
+    object btnRemoverTiposEstoque: TMenuItem
+      Caption = 'Remover Todos Tipos de Estoque'
+      OnClick = btnRemoverTiposEstoqueClick
+    end
+  end
+  object pmRemoverEmpresas: TPopupMenu
+    Left = 712
+    Top = 334
+    object btnRemoverTodosEmpresa: TMenuItem
+      Caption = 'Remover Todas Empresas'
+      OnClick = btnRemoverTodosEmpresaClick
+    end
+  end
+  object pmSelEmpresas: TPopupMenu
+    Left = 600
+    Top = 334
+    object menuItemEmpresas: TMenuItem
+      Caption = 'Todas as Empresas'
+      OnClick = menuItemEmpresasClick
+    end
+  end
+  object FAT_XL_R_NFE: TfrxXLSExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    ExportEMF = True
+    AsText = False
+    Background = True
+    FastExport = True
+    PageBreaks = True
+    EmptyLines = True
+    SuppressPageHeadersFooters = False
+    Left = 832
+    Top = 286
+  end
+  object FAT_PD_R_NFE: TfrxPDFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    Left = 712
+    Top = 286
+  end
+  object FAT_DB_R_NFE: TfrxDBDataset
+    UserName = 'FAT_DB_R_NFE'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'id_fiscal=id_fiscal'
+      'id_almoxarifado=id_almoxarifado'
+      'id_pedido_compra=id_pedido_compra'
+      'id_condicao_pag=id_condicao_pag'
+      'id_empresa=id_empresa'
+      'id_emitente=id_emitente'
+      'id_cfo=id_cfo'
+      'id_transportadora=id_transportadora'
+      'id_tipo_mov_estoque=id_tipo_mov_estoque'
+      'uf_emitente=uf_emitente'
+      'uf_empresa=uf_empresa'
+      'dta_emissao=dta_emissao'
+      'dta_documento=dta_documento'
+      'cpf_cnpj=cpf_cnpj'
+      'numero=numero'
+      'serie=serie'
+      'sub_serie=sub_serie'
+      'modelo=modelo'
+      'status=status'
+      'nfe_ecf=nfe_ecf'
+      'ecf_prevenda=ecf_prevenda'
+      'id_fiscal_referenciado=id_fiscal_referenciado'
+      'canc_motivo=canc_motivo'
+      'canc_data=canc_data'
+      'canc_usuario=canc_usuario'
+      'peso_liquido=peso_liquido'
+      'peso_bruto=peso_bruto'
+      'nfe_chave=nfe_chave'
+      'nfe_obs=nfe_obs'
+      'nfe_protocolo=nfe_protocolo'
+      'nfe_recibo=nfe_recibo'
+      'nfe_canc_protocolo=nfe_canc_protocolo'
+      'nfe_canc_status=nfe_canc_status'
+      'nfe_tipo_emissao=nfe_tipo_emissao'
+      'nfe_tipo_ambiente=nfe_tipo_ambiente'
+      'nfe_cod_sit=nfe_cod_sit'
+      'ind_operacao=ind_operacao'
+      'ind_emitente=ind_emitente'
+      'ind_frete=ind_frete'
+      'vlr_mercadoria=vlr_mercadoria'
+      'vlr_desconto=vlr_desconto'
+      'vlr_acrescimo=vlr_acrescimo'
+      'vlr_liquido=vlr_liquido'
+      'icm_n_valor=icm_n_valor'
+      'icm_n_base=icm_n_base'
+      'icm_s_valor=icm_s_valor'
+      'icm_s_base=icm_s_base'
+      'ipi_base=ipi_base'
+      'ipi_valor=ipi_valor'
+      'iss_base=iss_base'
+      'iss_valor=iss_valor'
+      'fre_base=fre_base'
+      'fre_valor=fre_valor'
+      'pis_valor=pis_valor'
+      'pis_valor_st=pis_valor_st'
+      'cof_valor=cof_valor'
+      'cof_valor_st=cof_valor_st'
+      'vlr_isenta=vlr_isenta'
+      'vlr_outras=vlr_outras'
+      'vlr_seguro=vlr_seguro'
+      'tipo_nf=tipo_nf'
+      'ecf_serial_impressora=ecf_serial_impressora'
+      'ecf_marca_impressora=ecf_marca_impressora'
+      'ecf_modelo_impressora=ecf_modelo_impressora'
+      'ecf_caixa=ecf_caixa'
+      'dta_movimento=dta_movimento'
+      'origem_nf=origem_nf'
+      'faturada=faturada'
+      'situacao_inspecao=situacao_inspecao'
+      'id_fiscal_frete=id_fiscal_frete'
+      'id_pedido_venda=id_pedido_venda'
+      'vlr_outras_desp=vlr_outras_desp'
+      'fre_custo=fre_custo'
+      'vlr_icm_ser_nao_incide=vlr_icm_ser_nao_incide'
+      'cof_base=cof_base'
+      'pis_base=pis_base'
+      'posvenda=posvenda'
+      'id_responsavel=id_responsavel'
+      'int_id_perfil_cli=int_id_perfil_cli'
+      'int_nfeecf=int_nfeecf'
+      'int_nometme=int_nometme'
+      'int_nomeope=int_nomeope'
+      'int_nomecpg=int_nomecpg'
+      'int_nomevnd=int_nomevnd'
+      'int_nomeres=int_nomeres'
+      'id_vendedor=id_vendedor'
+      'cod_lme=cod_lme'
+      'rev_lme=rev_lme'
+      'int_nometra=int_nometra'
+      'int_endtra=int_endtra'
+      'int_cidtra=int_cidtra'
+      'int_esttra=int_esttra'
+      'int_cnptra=int_cnptra'
+      'int_instra=int_instra'
+      'tipo_cte=tipo_cte'
+      'nfe_finalidade=nfe_finalidade'
+      'path_xml=path_xml'
+      'nfref_chave=nfref_chave'
+      'int_cnpjcpf=int_cnpjcpf'
+      'int_pessoa=int_pessoa'
+      'int_telefone=int_telefone'
+      'int_doc_ie=int_doc_ie'
+      'int_email=int_email'
+      'int_cep=int_cep'
+      'int_endereco=int_endereco'
+      'int_estado=int_estado'
+      'int_bairro=int_bairro'
+      'int_numero=int_numero'
+      'int_complemento=int_complemento'
+      'int_cod_cidade=int_cod_cidade'
+      'int_nom_cidade=int_nom_cidade'
+      'imp_valor=imp_valor'
+      'tri_valor=tri_valor'
+      'tra_placa=tra_placa'
+      'tra_uf=tra_uf'
+      'tra_rntc=tra_rntc'
+      'tra_qtde_vol=tra_qtde_vol'
+      'tra_especie=tra_especie'
+      'tra_marca=tra_marca'
+      'tra_num_vol=tra_num_vol'
+      'int_indpag=int_indpag'
+      'int_cod_pais=int_cod_pais'
+      'int_nom_pais=int_nom_pais'
+      'id_iqm=id_iqm'
+      'int_nomeemp=int_nomeemp'
+      'id_abertura=id_abertura'
+      'legenda=legenda'
+      'int_classe=int_classe'
+      'prevenda=prevenda'
+      'id_ordem=id_ordem'
+      'venctos_origem=venctos_origem'
+      'int_baitra=int_baitra'
+      'int_descnat=int_descnat'
+      'int_nomeemi=int_nomeemi'
+      'int_descnfecodsit=int_descnfecodsit'
+      'nro_termo=nro_termo'
+      'int_nomecfo=int_nomecfo'
+      'FAT_SQ_R_NFE_FRE=FAT_SQ_R_NFE_FRE'
+      'FAT_SQ_R_NFE_TIT=FAT_SQ_R_NFE_TIT'
+      'FAT_SQ_R_NFE_ITE=FAT_SQ_R_NFE_ITE'
+      'ind_nf=ind_nf'
+      'vlr_part_dest=vlr_part_dest'
+      'vlr_part_orig=vlr_part_orig'
+      'vlr_icm_desc=vlr_icm_desc'
+      'id_ors=id_ors'
+      'vlr_fcp=vlr_fcp'
+      'int_notacancelada=int_notacancelada'
+      'vlr_icm=vlr_icm'
+      'vlr_icm_subs=vlr_icm_subs')
+    DataSet = FAT_CD_R_NFE
+    BCDToCurrency = False
+    Left = 600
+    Top = 174
+  end
+  object FAT_FR_R_NFE_ACF: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41822.420257245400000000
+    ReportOptions.LastChange = 41835.722833599540000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 832
+    Top = 126
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+      end>
+    Variables = <
+      item
+        Name = ' Externa'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = ''
+      end
+      item
+        Name = 'ExibirNotaCancelada'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 75.590600000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 25.677180000000000000
+          Width = 574.488560000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Nota Fiscal - Agrupado por CFOP')
+          ParentFont = False
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 25.677180000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataField = 'emp_fantasia'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+        object ingEmpresa1: TfrxPictureView
+          Left = 589.606680000000000000
+          Width = 128.504020000000000000
+          Height = 52.913420000000000000
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 627.401980000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 264.567100000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Assin_enorth: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Assin_enorth]')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 343.937230000000000000
+        Width = 718.110700000000000000
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+        RowCount = 0
+        object FAT_DB_R_NFEint_nomeemi: TfrxMemoView
+          Left = 45.354330708661420000
+          Width = 173.858267720000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomeemi'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomeemi"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEnumero: TfrxMemoView
+          Left = 220.724409448818900000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DataField = 'numero'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."numero"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEserie: TfrxMemoView
+          Left = 288.755905511811000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          DataField = 'serie'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."serie"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEmodelo: TfrxMemoView
+          Left = 326.173228346456700000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          DataField = 'modelo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."modelo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEid_cfo: TfrxMemoView
+          Left = 362.834645669291300000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_cfo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_cfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_emissao: TfrxMemoView
+          Left = 402.897637795275600000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          DataField = 'dta_emissao'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_emissao"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEint_nomecpg: TfrxMemoView
+          Left = 528.000000000000000000
+          Width = 109.606299212598400000
+          Height = 15.118120000000000000
+          DataField = 'int_nomecpg'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomecpg"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEvlr_liquido: TfrxMemoView
+          Left = 639.709030000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_liquido"]')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_emitente'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_emitente"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_documento: TfrxMemoView
+          Left = 464.881889763779500000
+          Top = 0.220470000000000000
+          Width = 60.472440940000000000
+          Height = 15.118110240000000000
+          DataField = 'dta_documento'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_documento"]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 41.574830000000000000
+        Top = 525.354670000000000000
+        Width = 718.110700000000000000
+        Stretched = True
+        object txtOpcoesRelGer: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 706.772110000000000000
+          Height = 18.897650000000000000
+          StretchMode = smActualHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Opcoes]')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 555.590910000000000000
+          Width = 79.370130000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total Geral :')
+          ParentFont = False
+        end
+        object Memo15: TfrxMemoView
+          Left = 638.740570000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 154.960730000000000000
+        Width = 718.110700000000000000
+        object Shape1: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo3: TfrxMemoView
+          Left = 45.354360000000000000
+          Width = 173.858380000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emitente')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 527.882190000000000000
+          Width = 109.606370000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Condi'#231#227'o de Pagamento')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 362.953000000000000000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 402.968770000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emiss'#227'o')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 639.709030000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 220.889920000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Documento')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 288.921460000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Serie')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Left = 326.157700000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Modelo')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 464.897960000000000000
+          Top = 0.220470000000000000
+          Width = 60.472480000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Entrada/Sa'#237'da')
+          ParentFont = False
+        end
+        object Memo21: TfrxMemoView
+          Left = 1.338590000000000000
+          Top = 0.220470000000000000
+          Width = 41.574830000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 241.889920000000000000
+        Width = 718.110700000000000000
+        Condition = 'FAT_DB_R_NFE."id_cfo"'
+        object Line2: TfrxLineView
+          Left = 5.000000000000000000
+          Top = 21.267470000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo12: TfrxMemoView
+          Left = 41.574830000000000000
+          Top = 3.779530000000000000
+          Width = 593.386173390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_cfo"] [FAT_DB_R_NFE."int_nomecfo"]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 34.015733390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'CFOP :')
+          ParentFont = False
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 24.677180000000000000
+        Top = 430.866420000000000000
+        Width = 718.110700000000000000
+        object Memo14: TfrxMemoView
+          Left = 496.086890000000000000
+          Top = 3.779530000000000000
+          Width = 139.842610000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total do CFOP :')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 639.709030000000000000
+          Top = 3.779530000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 196.535560000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader2OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."nfe_cod_sit"'
+        object Memo17: TfrxMemoView
+          Top = 1.559060000000000000
+          Width = 718.110700000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Fill.BackColor = 14342874
+          HAlign = haCenter
+          Memo.UTF8W = (
+            
+              '[IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'00'#39','#39'Notas Regulares'#39',IIF(<FA' +
+              'T_DB_R_NFE."nfe_cod_sit">='#39'01'#39','#39'Notas de Escritura'#231#227'o Extempor'#226'n' +
+              'ea Regulares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'02'#39','#39'Notas Cance' +
+              'ladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'03'#39','#39'Notas de Escritura' +
+              #231#227'o Extempor'#226'nea Canceladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'0' +
+              '4'#39','#39'Notas Denegadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'05'#39','#39'Nota' +
+              's Inutilizadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'06'#39','#39'Notas Com' +
+              'plementares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'07'#39','#39'Notas de Esc' +
+              'ritura'#231#227'o Extempor'#226'nea Complementares'#39',IIF(<FAT_DB_R_NFE."nfe_co' +
+              'd_sit">='#39'08'#39','#39'Notas de Regime Especial ou Normal Especifico'#39','#39'Si' +
+              'tua'#231#227'o das Nota Indefinidas'#39')))))))))]')
+          ParentFont = False
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 480.000310000000000000
+        Width = 718.110700000000000000
+        object Memo18: TfrxMemoView
+          Left = 495.897960000000000000
+          Width = 139.842610000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'SubTotal da Situa'#231#227'o :')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 639.520100000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader3: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 298.582870000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."id_empresa"'
+        ReprintOnNewPage = True
+        object Memo57: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 710.551640000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              'Empresa : [FAT_DB_R_NFE."id_empresa"] - [FAT_DB_R_NFE."int_nomee' +
+              'mp"]')
+          ParentFont = False
+        end
+        object Line4: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 714.331170000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+      end
+      object GroupFooter3: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 385.512060000000000000
+        Width = 718.110700000000000000
+        object Memo22: TfrxMemoView
+          Left = 495.118430000000000000
+          Top = 3.779530000000000000
+          Width = 139.842610000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total da Empresa :')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Left = 638.740570000000000000
+          Top = 3.779530000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object FAT_FR_R_NFE_ATE: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41822.420257245400000000
+    ReportOptions.LastChange = 41835.722833599500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 712
+    Top = 126
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+      end>
+    Variables = <
+      item
+        Name = ' Externa'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = ''
+      end
+      item
+        Name = 'ExibirNotaCancelada'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 75.590600000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 574.488560000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 385.512060000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Nota Fiscal - Agrupado por Tipo de Estoque')
+          ParentFont = False
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataField = 'emp_fantasia'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 343.937230000000000000
+        Width = 718.110700000000000000
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+        RowCount = 0
+        object FAT_DB_R_NFEint_nomeemi: TfrxMemoView
+          Left = 41.574830000000000000
+          Width = 181.417322830000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomeemi'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomeemi"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEnumero: TfrxMemoView
+          Left = 227.905511810000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DataField = 'numero'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."numero"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEserie: TfrxMemoView
+          Left = 294.803149606299200000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          DataField = 'serie'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."serie"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEmodelo: TfrxMemoView
+          Left = 336.000000000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          DataField = 'modelo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."modelo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEid_cfo: TfrxMemoView
+          Left = 373.039370078740200000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_cfo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_cfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_emissao: TfrxMemoView
+          Left = 413.102362204724400000
+          Width = 52.913385830000000000
+          Height = 15.118120000000000000
+          DataField = 'dta_emissao'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_emissao"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEint_nomecpg: TfrxMemoView
+          Left = 530.882190000000000000
+          Width = 105.826771650000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomecpg'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomecpg"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEvlr_liquido: TfrxMemoView
+          Left = 639.709030000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_liquido"]')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_emitente'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_emitente"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_documento: TfrxMemoView
+          Left = 467.527559055118100000
+          Top = 0.220470000000000000
+          Width = 60.472440940000000000
+          Height = 15.118110240000000000
+          DataField = 'dta_documento'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_documento"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 665.197280000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 264.567100000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Assin_enorth: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Assin_enorth]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 41.574830000000000000
+        Top = 563.149970000000000000
+        Width = 718.110700000000000000
+        Stretched = True
+        object txtOpcoesRelGer: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 706.772110000000000000
+          Height = 18.897650000000000000
+          StretchMode = smActualHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Opcoes]')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 563.149970000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total Geral :')
+          ParentFont = False
+        end
+        object Memo15: TfrxMemoView
+          Left = 638.740570000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 154.960730000000000000
+        Width = 718.110700000000000000
+        object Shape1: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo3: TfrxMemoView
+          Left = 43.000000000000000000
+          Width = 181.417440000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emitente')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 530.882190000000000000
+          Width = 105.826840000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Condi'#231#227'o de Pagamento')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 372.953000000000000000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 412.968770000000000000
+          Width = 52.913385830000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emiss'#227'o')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 639.709030000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 227.889920000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Documento')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 294.921460000000000000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Serie')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Left = 336.157700000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Modelo')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 467.559370000000000000
+          Top = 0.220470000000000000
+          Width = 60.472480000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Entrada/Sa'#237'da')
+          ParentFont = False
+        end
+        object Memo21: TfrxMemoView
+          Left = 2.338590000000000000
+          Top = 0.220470000000000000
+          Width = 37.795275590000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 241.889920000000000000
+        Width = 718.110700000000000000
+        Condition = 'FAT_DB_R_NFE."id_tipo_mov_estoque"'
+        object Line2: TfrxLineView
+          Left = 5.000000000000000000
+          Top = 21.267470000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo12: TfrxMemoView
+          Left = 86.929190000000000000
+          Top = 3.779530000000000000
+          Width = 396.850613390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nometme"]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 79.370093390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Tipo de Estoque:')
+          ParentFont = False
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 24.677180000000000000
+        Top = 461.102660000000000000
+        Width = 718.110700000000000000
+        object Memo14: TfrxMemoView
+          Left = 462.071120000000000000
+          Top = 3.779530000000000000
+          Width = 173.858380000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total do Tipo de Estoque :')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 639.709030000000000000
+          Top = 3.779530000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object ingEmpresa1: TfrxPictureView
+        Left = 589.606680000000000000
+        Width = 128.504020000000000000
+        Height = 52.913420000000000000
+        HightQuality = False
+        Transparent = False
+        TransparentColor = clWhite
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 196.535560000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader2OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."nfe_cod_sit"'
+        object Memo17: TfrxMemoView
+          Left = 0.897650000000000000
+          Top = 0.338590000000000000
+          Width = 718.110700000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Fill.BackColor = 14342874
+          HAlign = haCenter
+          Memo.UTF8W = (
+            
+              '[IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'00'#39','#39'Notas Regulares'#39',IIF(<FA' +
+              'T_DB_R_NFE."nfe_cod_sit">='#39'01'#39','#39'Notas de Escritura'#231#227'o Extempor'#226'n' +
+              'ea Regulares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'02'#39','#39'Notas Cance' +
+              'ladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'03'#39','#39'Notas de Escritura' +
+              #231#227'o Extempor'#226'nea Canceladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'0' +
+              '4'#39','#39'Notas Denegadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'05'#39','#39'Nota' +
+              's Inutilizadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'06'#39','#39'Notas Com' +
+              'plementares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'07'#39','#39'Notas de Esc' +
+              'ritura'#231#227'o Extempor'#226'nea Complementares'#39',IIF(<FAT_DB_R_NFE."nfe_co' +
+              'd_sit">='#39'08'#39','#39'Notas de Regime Especial ou Normal Especifico'#39','#39'Si' +
+              'tua'#231#227'o das Nota Indefinidas'#39')))))))))]')
+          ParentFont = False
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 510.236550000000000000
+        Width = 718.110700000000000000
+        object Memo18: TfrxMemoView
+          Left = 506.457020000000000000
+          Width = 128.504020000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Subtotal da Situa'#231#227'o :')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 638.740570000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader3: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 298.582870000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."id_empresa"'
+        ReprintOnNewPage = True
+        object Memo57: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 710.551640000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              'Empresa : [FAT_DB_R_NFE."id_empresa"] - [FAT_DB_R_NFE."int_nomee' +
+              'mp"]')
+          ParentFont = False
+        end
+        object Line4: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 714.331170000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+      end
+      object GroupFooter3: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 52.913420000000000000
+        Top = 385.512060000000000000
+        Width = 718.110700000000000000
+        object Memo22: TfrxMemoView
+          Left = 461.102660000000000000
+          Top = 7.559060000000000000
+          Width = 173.858380000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total da Empresa :')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Left = 638.740570000000000000
+          Top = 7.559060000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object FAT_FR_R_NFE_RCF: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41822.420257245400000000
+    ReportOptions.LastChange = 41835.722833599500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 600
+    Top = 126
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = FAT_DB_R_NFE_CFO
+        DataSetName = 'FAT_DB_R_NFE_CFO'
+      end>
+    Variables = <
+      item
+        Name = ' Externa'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 75.590600000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 574.488560000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 385.512060000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Nota Fiscal - Resumo por CFOP')
+          ParentFont = False
+        end
+        object ingEmpresa1: TfrxPictureView
+          Left = 585.827150000000000000
+          Top = 3.779530000000000000
+          Width = 128.504020000000000000
+          Height = 52.913420000000000000
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataField = 'emp_fantasia'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 514.016080000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 264.567100000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Assin_enorth: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Assin_enorth]')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 287.244280000000000000
+        Width = 718.110700000000000000
+        DataSet = FAT_DB_R_NFE_CFO
+        DataSetName = 'FAT_DB_R_NFE_CFO'
+        RowCount = 0
+        object FAT_DB_R_NFE_CFOvlr_icm: TfrxMemoView
+          Left = 434.834880000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_CFO
+          DataSetName = 'FAT_DB_R_NFE_CFO'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_CFO."vlr_icm"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_CFOvlr_pis_cof: TfrxMemoView
+          Left = 578.457020000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_CFO
+          DataSetName = 'FAT_DB_R_NFE_CFO'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_CFO."vlr_pis_cof"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_CFOint_nomecfo: TfrxMemoView
+          Left = 68.031540000000000000
+          Width = 362.834880000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomecfo'
+          DataSet = FAT_DB_R_NFE_CFO
+          DataSetName = 'FAT_DB_R_NFE_CFO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_CFO."int_nomecfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_CFOvlr_liquido: TfrxMemoView
+          Left = 650.079160000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_CFO
+          DataSetName = 'FAT_DB_R_NFE_CFO'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_CFO."vlr_liquido"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_CFOid_cfo: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_cfo'
+          DataSet = FAT_DB_R_NFE_CFO
+          DataSetName = 'FAT_DB_R_NFE_CFO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_CFO."id_cfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_CFOvlr_icm_subs: TfrxMemoView
+          Left = 506.457020000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_CFO
+          DataSetName = 'FAT_DB_R_NFE_CFO'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_CFO."vlr_icm_subs"]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 37.795300000000000000
+        Top = 415.748300000000000000
+        Width = 718.110700000000000000
+        Stretched = True
+        object txtOpcoesRelGer: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 14.779530000000000000
+          Width = 706.772110000000000000
+          Height = 18.897650000000000000
+          StretchMode = smActualHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Opcoes]')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 355.275820000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total Geral :')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Left = 434.645950000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_icm">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 506.457020000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_icm_subs">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo14: TfrxMemoView
+          Left = 578.268090000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_pis_cof">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 650.079160000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 154.960730000000000000
+        Width = 718.110700000000000000
+        object Shape1: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo6: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 506.645950000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS Subs')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 578.457020000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.PIS/Cofins')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 651.401980000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 434.834880000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS')
+          ParentFont = False
+        end
+      end
+      object Memo9: TfrxMemoView
+        Left = 786.142240000000000000
+        Top = 143.622140000000000000
+        Width = 68.031496060000000000
+        Height = 15.118120000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = []
+        Memo.UTF8W = (
+          'Vlr.PIS')
+        ParentFont = False
+      end
+      object Memo11: TfrxMemoView
+        Left = 931.087200000000000000
+        Top = 143.622140000000000000
+        Width = 68.031496060000000000
+        Height = 15.118120000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = []
+        HAlign = haRight
+        Memo.UTF8W = (
+          'Vlr.Total')
+        ParentFont = False
+      end
+      object Memo3: TfrxMemoView
+        Left = 858.614720000000000000
+        Top = 143.622140000000000000
+        Width = 68.031496060000000000
+        Height = 15.118120000000000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial Narrow'
+        Font.Style = []
+        Memo.UTF8W = (
+          'Vlr.PIS')
+        ParentFont = False
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 18.897650000000000000
+        ParentFont = False
+        Top = 200.315090000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE_CFO."nfe_cod_sit"'
+        ReprintOnNewPage = True
+        object mmlblNotaCan: TfrxMemoView
+          Left = 0.779530000000000000
+          Width = 718.110700000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Fill.BackColor = clWindow
+          Memo.UTF8W = (
+            
+              '[IIF(<FAT_DB_R_NFE_CFO."nfe_cod_sit">='#39'00'#39','#39'Notas Regulares'#39',IIF' +
+              '(<FAT_DB_R_NFE_CFO."nfe_cod_sit">='#39'01'#39','#39'Notas de Escritura'#231#227'o Ex' +
+              'tempor'#226'nea Regulares'#39',IIF(<FAT_DB_R_NFE_CFO."nfe_cod_sit">='#39'02'#39',' +
+              #39'Notas Canceladas'#39',IIF(<FAT_DB_R_NFE_CFO."nfe_cod_sit">='#39'03'#39','#39'No' +
+              'tas de Escritura'#231#227'o Extempor'#226'nea Canceladas'#39',IIF(<FAT_DB_R_NFE_C' +
+              'FO."nfe_cod_sit">='#39'04'#39','#39'Notas Denegadas'#39',IIF(<FAT_DB_R_NFE_CFO."' +
+              'nfe_cod_sit">='#39'05'#39','#39'Notas Inutilizadas'#39',IIF(<FAT_DB_R_NFE_CFO."n' +
+              'fe_cod_sit">='#39'06'#39','#39'Notas Complementares'#39',IIF(<FAT_DB_R_NFE_CFO."' +
+              'nfe_cod_sit">='#39'07'#39','#39'Notas de Escritura'#231#227'o Extempor'#226'nea Complemen' +
+              'tares'#39',IIF(<FAT_DB_R_NFE_CFO."nfe_cod_sit">='#39'08'#39','#39'Notas de Regim' +
+              'e Especial ou Normal Especifico'#39','#39'Situa'#231#227'o das Nota Indefinidas'#39 +
+              ')))))))))]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Line2: TfrxLineView
+          Top = 15.118120000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 374.173470000000000000
+        Width = 718.110700000000000000
+        object Memo15: TfrxMemoView
+          Left = 294.803340000000000000
+          Top = 3.779530000000000000
+          Width = 136.063080000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Sub Total da Situa'#231#227'o  :')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 434.645950000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_icm">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 506.457020000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_icm_subs">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          Left = 578.268090000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_pis_cof">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 650.079160000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 241.889920000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE_CFO."id_empresa"'
+        ReprintOnNewPage = True
+        object Memo57: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 710.551640000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              'Empresa : [FAT_DB_R_NFE_CFO."id_empresa"] - [FAT_DB_R_NFE_CFO."i' +
+              'nt_nomeemp"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Line4: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 714.331170000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 328.819110000000000000
+        Width = 718.110700000000000000
+        object Memo20: TfrxMemoView
+          Left = 294.803340000000000000
+          Top = 3.779530000000000000
+          Width = 136.063080000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Sub Total da Empresa  :')
+          ParentFont = False
+        end
+        object Memo21: TfrxMemoView
+          Left = 434.645950000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_icm">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Left = 506.457020000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_icm_subs">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Left = 578.268090000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_pis_cof">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo24: TfrxMemoView
+          Left = 650.079160000000000000
+          Top = 3.779530000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_CFO."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object FAT_FR_R_NFE_RTE: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41822.420257245400000000
+    ReportOptions.LastChange = 41835.722833599500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 832
+    Top = 78
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+      end
+      item
+        DataSet = FAT_DB_R_NFE_TME
+        DataSetName = 'FAT_DB_R_NFE_TME'
+      end>
+    Variables = <
+      item
+        Name = ' Externa'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 75.590600000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 574.488560000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 385.512060000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Nota Fiscal - Resumo por Tipo de Estoque')
+          ParentFont = False
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataField = 'emp_fantasia'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 506.457020000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 264.567100000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Assin_enorth: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Assin_enorth]')
+          ParentFont = False
+        end
+      end
+      object ingEmpresa1: TfrxPictureView
+        Left = 589.606680000000000000
+        Width = 128.504020000000000000
+        Height = 52.913420000000000000
+        HightQuality = False
+        Transparent = False
+        TransparentColor = clWhite
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 15.118120000000000000
+        Top = 287.244280000000000000
+        Width = 718.110700000000000000
+        DataSet = FAT_DB_R_NFE_TME
+        DataSetName = 'FAT_DB_R_NFE_TME'
+        RowCount = 0
+        object FAT_DB_R_NFE_TMEint_nometme: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 234.330860000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nometme'
+          DataSet = FAT_DB_R_NFE_TME
+          DataSetName = 'FAT_DB_R_NFE_TME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_TME."int_nometme"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_TMEvlr_liquido: TfrxMemoView
+          Left = 245.669450000000000000
+          Width = 113.385900000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_TME
+          DataSetName = 'FAT_DB_R_NFE_TME'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_TME."vlr_liquido"]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 37.795300000000000000
+        Top = 408.189240000000000000
+        Width = 718.110700000000000000
+        Stretched = True
+        object txtOpcoesRelGer: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 14.779530000000000000
+          Width = 706.772110000000000000
+          Height = 18.897650000000000000
+          StretchMode = smActualHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Opcoes]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 283.464750000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_TME."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 204.094620000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total Geral :')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 154.960730000000000000
+        Width = 718.110700000000000000
+        object Shape1: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo9: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 234.330860000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Tipo de Estoque')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 245.669450000000000000
+          Width = 113.385900000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 18.897650000000000000
+        ParentFont = False
+        Top = 200.315090000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE_TME."nfe_cod_sit"'
+        ReprintOnNewPage = True
+        object mmlblNotaCan: TfrxMemoView
+          Left = 0.779530000000000000
+          Width = 718.110700000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Fill.BackColor = clWindow
+          Memo.UTF8W = (
+            
+              '[IIF(<FAT_DB_R_NFE_TME."nfe_cod_sit">='#39'00'#39','#39'Notas Regulares'#39',IIF' +
+              '(<FAT_DB_R_NFE_TME."nfe_cod_sit">='#39'01'#39','#39'Notas de Escritura'#231#227'o Ex' +
+              'tempor'#226'nea Regulares'#39',IIF(<FAT_DB_R_NFE_TME."nfe_cod_sit">='#39'02'#39',' +
+              #39'Notas Canceladas'#39',IIF(<FAT_DB_R_NFE_TME."nfe_cod_sit">='#39'03'#39','#39'No' +
+              'tas de Escritura'#231#227'o Extempor'#226'nea Canceladas'#39',IIF(<FAT_DB_R_NFE_T' +
+              'ME."nfe_cod_sit">='#39'04'#39','#39'Notas Denegadas'#39',IIF(<FAT_DB_R_NFE_TME."' +
+              'nfe_cod_sit">='#39'05'#39','#39'Notas Inutilizadas'#39',IIF(<FAT_DB_R_NFE_TME."n' +
+              'fe_cod_sit">='#39'06'#39','#39'Notas Complementares'#39',IIF(<FAT_DB_R_NFE_TME."' +
+              'nfe_cod_sit">='#39'07'#39','#39'Notas de Escritura'#231#227'o Extempor'#226'nea Complemen' +
+              'tares'#39',IIF(<FAT_DB_R_NFE_TME."nfe_cod_sit">='#39'08'#39','#39'Notas de Regim' +
+              'e Especial ou Normal Especifico'#39','#39'Situa'#231#227'o das Nota Indefinidas'#39 +
+              ')))))))))]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Line2: TfrxLineView
+          Top = 15.118120000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 366.614410000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          Left = 102.047310000000000000
+          Width = 136.063080000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Sub Total da Situa'#231#227'o  :')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 245.669450000000000000
+          Width = 113.385900000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_TME."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 241.889920000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE_TME."id_empresa"'
+        ReprintOnNewPage = True
+        object Memo57: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 710.551640000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              'Empresa : [FAT_DB_R_NFE_TME."id_empresa"] - [FAT_DB_R_NFE_TME."i' +
+              'nt_nomeemp"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Line4: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 714.331170000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 325.039580000000000000
+        Width = 718.110700000000000000
+        object Memo4: TfrxMemoView
+          Left = 102.047310000000000000
+          Width = 136.063080000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Sub Total da Empresa  :')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 245.669450000000000000
+          Width = 113.385900000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_TME."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object FAT_FR_R_NFE_RNF: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41822.420257245400000000
+    ReportOptions.LastChange = 41835.722833599500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 712
+    Top = 78
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+      end>
+    Variables = <
+      item
+        Name = ' Externa'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = Null
+      end
+      item
+        Name = 'ExibirNotaCancelada'
+        Value = Null
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 75.590600000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 574.488560000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 385.512060000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Nota Fiscal - Resumo das Notas')
+          ParentFont = False
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataField = 'emp_fantasia'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+        object ingEmpresa1: TfrxPictureView
+          Left = 589.606680000000000000
+          Width = 128.504020000000000000
+          Height = 52.913420000000000000
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 287.244280000000000000
+        Width = 718.110700000000000000
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+        RowCount = 0
+        object FAT_DB_R_NFEint_nomeemi: TfrxMemoView
+          Left = 37.795275590000000000
+          Width = 113.385900000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomeemi'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomeemi"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEnumero: TfrxMemoView
+          Left = 153.803149610000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DataField = 'numero'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."numero"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEserie: TfrxMemoView
+          Left = 221.590521890000000000
+          Width = 26.456710000000000000
+          Height = 15.118120000000000000
+          DataField = 'serie'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."serie"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEmodelo: TfrxMemoView
+          Left = 250.692884090000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          DataField = 'modelo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."modelo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEid_cfo: TfrxMemoView
+          Left = 286.598395910000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_cfo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_cfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_emissao: TfrxMemoView
+          Left = 319.503910160000000000
+          Width = 52.913385830000000000
+          Height = 15.118120000000000000
+          DataField = 'dta_emissao'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_emissao"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEint_nomecpg: TfrxMemoView
+          Left = 435.307360000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomecpg'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomecpg"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEvlr_liquido: TfrxMemoView
+          Left = 514.016080000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_liquido"]')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_emitente'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_emitente"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_documento: TfrxMemoView
+          Left = 375.173470000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataField = 'dta_documento'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_documento"]')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Left = 590.079160000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataField = 'vlr_icm'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_icm"]')
+          ParentFont = False
+        end
+        object Memo28: TfrxMemoView
+          Left = 653.858690000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_icm_subs"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 525.354670000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 264.567100000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Assin_enorth: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Assin_enorth]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 37.795300000000000000
+        Top = 427.086890000000000000
+        Width = 718.110700000000000000
+        Stretched = True
+        object txtOpcoesRelGer: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 14.779530000000000000
+          Width = 706.772110000000000000
+          Height = 18.897650000000000000
+          StretchMode = smActualHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Opcoes]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 496.268090000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 418.677490000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total Geral :')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          Left = 580.709030000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_icm">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo31: TfrxMemoView
+          Left = 646.299630000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_icm_subs">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 19.118110240000000000
+        Top = 154.960730000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Shape1: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo3: TfrxMemoView
+          Left = 37.795300000000000000
+          Width = 113.385900000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emitente')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 435.307360000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Condi'#231#227'o Pag.')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 286.598640000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 319.393940000000000000
+          Width = 52.913420000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emiss'#227'o')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 514.016080000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 176.567100000000000000
+          Width = 41.574830000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Doc')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 221.567100000000000000
+          Width = 26.456710000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Serie')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Left = 250.803340000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Modelo')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 375.291590000000000000
+          Top = 0.220470000000000000
+          Width = 52.913420000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Lan'#231'ado em')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          Left = 0.897650000000000000
+          Top = 0.220470000000000000
+          Width = 34.015770000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo21: TfrxMemoView
+          Left = 593.858690000000000000
+          Width = 52.913420000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr. Icms')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 650.079160000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr. Icms subs')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 196.535560000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."nfe_cod_sit"'
+        ReprintOnNewPage = True
+        object Memo14: TfrxMemoView
+          Left = 1.417440000000000000
+          Top = 1.338590000000000000
+          Width = 714.331170000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Fill.BackColor = clWindow
+          Memo.UTF8W = (
+            
+              '[IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'00'#39','#39'Notas Regulares'#39',IIF(<FA' +
+              'T_DB_R_NFE."nfe_cod_sit">='#39'01'#39','#39'Notas de Escritura'#231#227'o Extempor'#226'n' +
+              'ea Regulares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'02'#39','#39'Notas Cance' +
+              'ladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'03'#39','#39'Notas de Escritura' +
+              #231#227'o Extempor'#226'nea Canceladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'0' +
+              '4'#39','#39'Notas Denegadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'05'#39','#39'Nota' +
+              's Inutilizadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'06'#39','#39'Notas Com' +
+              'plementares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'07'#39','#39'Notas de Esc' +
+              'ritura'#231#227'o Extempor'#226'nea Complementares'#39',IIF(<FAT_DB_R_NFE."nfe_co' +
+              'd_sit">='#39'08'#39','#39'Notas de Regime Especial ou Normal Especifico'#39','#39'Si' +
+              'tua'#231#227'o das Nota Indefinidas'#39')))))))))]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Line2: TfrxLineView
+          Top = 18.897650000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 377.953000000000000000
+        Width = 718.110700000000000000
+        object Memo15: TfrxMemoView
+          Left = 360.425480000000000000
+          Top = 4.338590000000000000
+          Width = 136.063080000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Sub Total da Situa'#231#227'o :')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 500.606680000000000000
+          Top = 4.338590000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo24: TfrxMemoView
+          Left = 580.709030000000000000
+          Top = 4.338590000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_icm">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo30: TfrxMemoView
+          Left = 646.299630000000000000
+          Top = 4.338590000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_icm_subs">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 241.889920000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."id_empresa"'
+        ReprintOnNewPage = True
+        object Memo57: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 710.551640000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              'Empresa : [FAT_DB_R_NFE."id_empresa"] - [FAT_DB_R_NFE."int_nomee' +
+              'mp"]')
+          ParentFont = False
+        end
+        object Line4: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 714.331170000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 328.819110000000000000
+        Width = 718.110700000000000000
+        object Memo19: TfrxMemoView
+          Left = 360.764070000000000000
+          Top = 3.779530000000000000
+          Width = 136.063080000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Sub Total da Empresa :')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 500.945270000000000000
+          Top = 3.779530000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Left = 580.709030000000000000
+          Top = 3.779530000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_icm">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo29: TfrxMemoView
+          Left = 646.299630000000000000
+          Top = 3.779530000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_icm_subs">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object FAT_FR_R_NFE_ENF: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41822.420257245400000000
+    ReportOptions.LastChange = 41835.722833599500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      '  '
+      'procedure DetailData4OnBeforePrint(Sender: TfrxComponent);'
+      'begin                          '
+      '  DetailData4.Visible := true;      '
+      '  if <NotaFiscalEntrada> = false then'
+      '    begin'
+      
+        '      DetailData4.Visible := false;                             ' +
+        '                                 '
+      '    end;          '
+      'end;'
+      ''
+      ''
+      ''
+      'procedure Header5OnBeforePrint(Sender: TfrxComponent);'
+      'begin      '
+      '   Header5.Visible := true;           '
+      
+        '   if <NotaFiscalEntrada> = false then                          ' +
+        '                            '
+      '     begin                     '
+      '        Header5.Visible := false;'
+      '     end;                '
+      'end;'
+      ''
+      'begin'
+      ''
+      'end.                 ')
+    Left = 600
+    Top = 78
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = FAT_DB_R_NFE_TIT
+        DataSetName = 'FAT_DB_R_NFE_TIT'
+      end
+      item
+        DataSet = FAT_DB_R_NFE_ITE
+        DataSetName = 'FAT_DB_R_NFE_ITE'
+      end
+      item
+        DataSet = FAT_DB_R_NFE_FRE
+        DataSetName = 'FAT_DB_R_NFE_FRE'
+      end
+      item
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+      end>
+    Variables = <
+      item
+        Name = ' Externa'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = Null
+      end
+      item
+        Name = 'NotaFiscalEntrada'
+        Value = Null
+      end
+      item
+        Name = 'ExibirNotaCancelada'
+        Value = Null
+      end
+      item
+        Name = 'Serie'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Width = 3.000000000000000000
+      OnBeforePrint = 'Page1OnBeforePrint'
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 60.472480000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 574.488560000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 385.512060000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Nota Fiscal - Espelho das Notas')
+          ParentFont = False
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataField = 'emp_fantasia'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+        object ingEmpresa1: TfrxPictureView
+          Left = 585.827150000000000000
+          Width = 128.504020000000000000
+          Height = 52.913420000000000000
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 139.842610000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Shape1: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo3: TfrxMemoView
+          Left = 40.574830000000000000
+          Width = 158.740260000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emitente')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 530.575140000000000000
+          Width = 79.370130000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Condi'#231#227'o de Pag.')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 200.551330000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Documento')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 262.803340000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Serie')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Left = 295.039580000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Modelo')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 377.968770000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 330.834880000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Pedido')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 409.984540000000000000
+          Width = 52.913420000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emiss'#227'o')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 612.401980000000000000
+          Width = 105.826840000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Tipo de Estoque')
+          ParentFont = False
+        end
+        object Memo87: TfrxMemoView
+          Left = 464.882190000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Entrada/Sa'#237'da')
+          ParentFont = False
+        end
+        object Memo88: TfrxMemoView
+          Top = 0.220470000000000000
+          Width = 37.795300000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 68.031540000000000000
+        Top = 272.126160000000000000
+        Width = 718.110700000000000000
+        OnAfterPrint = 'MasterData1OnAfterPrint'
+        DataSet = FAT_DB_R_NFE
+        DataSetName = 'FAT_DB_R_NFE'
+        RowCount = 0
+        object FAT_DB_R_NFEint_nomeemi: TfrxMemoView
+          Left = 40.440944881889800000
+          Top = 3.779530000000000000
+          Width = 158.740157480000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomeemi'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomeemi"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEnumero: TfrxMemoView
+          Left = 200.692913385827000000
+          Top = 3.779530000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          DataField = 'numero'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."numero"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEserie: TfrxMemoView
+          Left = 262.677165354331000000
+          Top = 3.779530000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          DataField = 'serie'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."serie"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEmodelo: TfrxMemoView
+          Left = 295.181102360000000000
+          Top = 3.779530000000000000
+          Width = 34.015748031496100000
+          Height = 15.118120000000000000
+          DataField = 'modelo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."modelo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEid_pedido_compra: TfrxMemoView
+          Left = 330.708661420000000000
+          Top = 3.779530000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_pedido_venda"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEid_cfo: TfrxMemoView
+          Left = 377.952755905512000000
+          Top = 3.779530000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_cfo'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_cfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_emissao: TfrxMemoView
+          Left = 410.078740157480000000
+          Top = 3.779530000000000000
+          Width = 52.913385830000000000
+          Height = 15.118120000000000000
+          DataField = 'dta_emissao'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_emissao"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEint_nomecpg: TfrxMemoView
+          Left = 530.645669290000000000
+          Top = 3.779530000000000000
+          Width = 79.370078740157500000
+          Height = 15.118120000000000000
+          DataField = 'int_nomecpg'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nomecpg"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEint_nometme: TfrxMemoView
+          Left = 612.401980000000000000
+          Top = 3.779530000000000000
+          Width = 105.826840000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nometme'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."int_nometme"]')
+          ParentFont = False
+        end
+        object Memo75: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_emitente'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."id_emitente"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFEdta_documento: TfrxMemoView
+          Left = 464.881889760000000000
+          Top = 3.779530000000000000
+          Width = 64.251968500000000000
+          Height = 15.118110240000000000
+          DataField = 'dta_documento'
+          DataSet = FAT_DB_R_NFE
+          DataSetName = 'FAT_DB_R_NFE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."dta_documento"]')
+          ParentFont = False
+        end
+        object Shape2: TfrxShapeView
+          Left = 60.031540000000000000
+          Top = 23.456710000000000000
+          Width = 657.638220000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo35: TfrxMemoView
+          Left = 70.063080000000000000
+          Top = 23.456710000000000000
+          Width = 222.992270000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'TOTAL DA NOTA')
+          ParentFont = False
+        end
+        object Memo36: TfrxMemoView
+          Left = 266.992270000000000000
+          Top = 44.133890000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_desconto"]')
+          ParentFont = False
+        end
+        object Memo37: TfrxMemoView
+          Left = 66.692950000000000000
+          Top = 44.472480000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Mercadoria:')
+          ParentFont = False
+        end
+        object Memo38: TfrxMemoView
+          Left = 210.299320000000000000
+          Top = 44.133890000000000000
+          Width = 56.692906060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Desconto:')
+          ParentFont = False
+        end
+        object Memo39: TfrxMemoView
+          Left = 343.480520000000000000
+          Top = 44.133890000000000000
+          Width = 45.354316060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS:')
+          ParentFont = False
+        end
+        object Memo40: TfrxMemoView
+          Left = 462.645950000000000000
+          Top = 44.133890000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS Subs.:')
+          ParentFont = False
+        end
+        object Memo51: TfrxMemoView
+          Left = 604.945270000000000000
+          Top = 44.133890000000000000
+          Width = 45.354316060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total:')
+          ParentFont = False
+        end
+        object Memo52: TfrxMemoView
+          Left = 134.724490000000000000
+          Top = 44.472480000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_mercadoria"]')
+          ParentFont = False
+        end
+        object Memo53: TfrxMemoView
+          Left = 388.834880000000000000
+          Top = 44.133890000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."icm_n_valor"]')
+          ParentFont = False
+        end
+        object Memo54: TfrxMemoView
+          Left = 530.677490000000000000
+          Top = 44.133890000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."icm_s_valor"]')
+          ParentFont = False
+        end
+        object Memo55: TfrxMemoView
+          Left = 650.079160000000000000
+          Top = 44.133890000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE."vlr_liquido"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 925.984850000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 264.567100000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Assin_enorth: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Assin_enorth]')
+          ParentFont = False
+        end
+      end
+      object Header2: TfrxHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 362.834880000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Memo11: TfrxMemoView
+          Left = 68.031540000000000000
+          Width = 222.992270000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Produtos')
+          ParentFont = False
+        end
+        object Line2: TfrxLineView
+          Left = 68.031540000000000000
+          Top = 15.118120000000000000
+          Width = 650.079160000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo12: TfrxMemoView
+          Left = 294.803340000000000000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'UND')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 336.378170000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CST')
+          ParentFont = False
+        end
+        object Memo14: TfrxMemoView
+          Left = 370.393940000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo15: TfrxMemoView
+          Left = 480.000310000000000000
+          Width = 56.692913390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Unit'#225'rio')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 419.527830000000000000
+          Width = 56.692913390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 540.472790000000000000
+          Width = 56.692913390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Desconto')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          Left = 600.945270000000000000
+          Width = 56.692913390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 661.417750000000000000
+          Width = 56.692913390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+      end
+      object DetailData1: TfrxDetailData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 408.189240000000000000
+        Width = 718.110700000000000000
+        DataSet = FAT_DB_R_NFE_ITE
+        DataSetName = 'FAT_DB_R_NFE_ITE'
+        RowCount = 0
+        object FAT_DB_R_NFE_ITEint_desc_item: TfrxMemoView
+          Left = 69.031540000000000000
+          Width = 222.992270000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."id_item"]-[FAT_DB_R_NFE_ITE."int_desc_item"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEint_und_venda: TfrxMemoView
+          Left = 294.803340000000000000
+          Width = 37.795300000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_und_venda'
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."int_und_venda"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEid_cfo: TfrxMemoView
+          Left = 370.393940000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_cfo'
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."id_cfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEqtde: TfrxMemoView
+          Left = 419.527830000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataField = 'qtde'
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."qtde"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEvlr_unitario: TfrxMemoView
+          Left = 480.000310000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."vlr_unitario"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEvlr_desconto: TfrxMemoView
+          Left = 540.472790000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."vlr_desconto"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEicm_n_valor: TfrxMemoView
+          Left = 600.945270000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."icm_n_valor"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEvlr_liquido: TfrxMemoView
+          Left = 661.417750000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."vlr_liquido"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_ITEid_st_icm: TfrxMemoView
+          Left = 336.378170000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_st_icm'
+          DataSet = FAT_DB_R_NFE_ITE
+          DataSetName = 'FAT_DB_R_NFE_ITE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_ITE."id_st_icm"]')
+          ParentFont = False
+        end
+      end
+      object Header3: TfrxHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 449.764070000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Memo21: TfrxMemoView
+          Left = 68.031540000000000000
+          Width = 181.417440000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Forma de Pagamento')
+          ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Left = 71.811070000000000000
+          Top = 15.118120000000000000
+          Width = 650.079160000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo23: TfrxMemoView
+          Left = 336.378170000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Vencimentos')
+          ParentFont = False
+        end
+        object Memo24: TfrxMemoView
+          Left = 408.189240000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Titulo')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Left = 294.803340000000000000
+          Width = 37.795275590000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Dias')
+          ParentFont = False
+        end
+      end
+      object DetailData2: TfrxDetailData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 495.118430000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'DetailData2OnBeforePrint'
+        DataSet = FAT_DB_R_NFE_TIT
+        DataSetName = 'FAT_DB_R_NFE_TIT'
+        RowCount = 0
+        object FAT_DB_R_NFE_TITint_nomefpg: TfrxMemoView
+          Left = 68.031540000000000000
+          Width = 181.417440000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomefpg'
+          DataSet = FAT_DB_R_NFE_TIT
+          DataSetName = 'FAT_DB_R_NFE_TIT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_TIT."int_nomefpg"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_TITdta_vencimento: TfrxMemoView
+          Left = 336.378170000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DataField = 'dta_vencimento'
+          DataSet = FAT_DB_R_NFE_TIT
+          DataSetName = 'FAT_DB_R_NFE_TIT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_TIT."dta_vencimento"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_TITvlr_titulo: TfrxMemoView
+          Left = 408.189240000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_TIT
+          DataSetName = 'FAT_DB_R_NFE_TIT'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_TIT."vlr_titulo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_TITdias: TfrxMemoView
+          Left = 294.803340000000000000
+          Width = 37.795275590000000000
+          Height = 15.118120000000000000
+          DataField = 'dias'
+          DataSet = FAT_DB_R_NFE_TIT
+          DataSetName = 'FAT_DB_R_NFE_TIT'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_TIT."dias"]')
+          ParentFont = False
+        end
+      end
+      object ReportSummary1: TfrxReportSummary
+        FillType = ftBrush
+        Height = 75.590600000000000000
+        Top = 827.717070000000000000
+        Width = 718.110700000000000000
+        object Memo41: TfrxMemoView
+          Left = 143.622140000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_desconto">,MasterData1)]')
+          ParentFont = False
+        end
+        object Shape3: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo42: TfrxMemoView
+          Left = 7.559060000000000000
+          Width = 222.992270000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'TOTALIZA'#199#195'O GERAL')
+          ParentFont = False
+        end
+        object Memo43: TfrxMemoView
+          Left = 71.811070000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Mercadoria')
+          ParentFont = False
+        end
+        object Memo44: TfrxMemoView
+          Left = 143.622140000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Desconto')
+          ParentFont = False
+        end
+        object Memo45: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS')
+          ParentFont = False
+        end
+        object Memo46: TfrxMemoView
+          Left = 287.244280000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS Subs.')
+          ParentFont = False
+        end
+        object Memo47: TfrxMemoView
+          Left = 359.055350000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+        object Memo48: TfrxMemoView
+          Left = 71.811070000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_mercadoria">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo49: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."icm_n_valor">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo50: TfrxMemoView
+          Left = 287.244280000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."icm_s_valor">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo56: TfrxMemoView
+          Left = 359.055350000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+        object txtOpcoesRelGer: TfrxMemoView
+          Left = 11.338590000000000000
+          Top = 56.692950000000000000
+          Width = 706.772110000000000000
+          Height = 18.897650000000000000
+          StretchMode = smActualHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Opcoes]')
+          ParentFont = False
+        end
+      end
+      object Header5: TfrxHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 536.693260000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'Header5OnBeforePrint'
+        ReprintOnNewPage = True
+        object Line5: TfrxLineView
+          Left = 68.031540000000000000
+          Top = 15.118120000000000000
+          Width = 650.079160000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo20: TfrxMemoView
+          Left = 68.031540000000000000
+          Width = 200.315090000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Conhecimento de Frete')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          Left = 271.803340000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Documento')
+          ParentFont = False
+        end
+        object Memo28: TfrxMemoView
+          Left = 332.055350000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Serie')
+          ParentFont = False
+        end
+        object Memo29: TfrxMemoView
+          Left = 366.291590000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Modelo')
+          ParentFont = False
+        end
+        object Memo30: TfrxMemoView
+          Left = 404.086890000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emiss'#227'o')
+          ParentFont = False
+        end
+        object Memo31: TfrxMemoView
+          Left = 469.000310000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Tipo')
+          ParentFont = False
+        end
+        object Memo32: TfrxMemoView
+          Left = 540.811380000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo34: TfrxMemoView
+          Left = 661.417750000000000000
+          Width = 56.692913390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Frete')
+          ParentFont = False
+        end
+        object Memo33: TfrxMemoView
+          Left = 589.047620000000000000
+          Width = 68.031503390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Frete Rateio')
+          ParentFont = False
+        end
+      end
+      object DetailData4: TfrxDetailData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 582.047620000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'DetailData4OnBeforePrint'
+        DataSet = FAT_DB_R_NFE_FRE
+        DataSetName = 'FAT_DB_R_NFE_FRE'
+        RowCount = 0
+        object FAT_DB_R_NFE_FREint_nomefor: TfrxMemoView
+          Left = 68.031540000000000000
+          Width = 200.315090000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_nomefor'
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."int_nomefor"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREnumero: TfrxMemoView
+          Left = 271.803340000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataField = 'numero'
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."numero"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREserie: TfrxMemoView
+          Left = 332.055350000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          DataField = 'serie'
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."serie"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREmodelo: TfrxMemoView
+          Left = 366.291590000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          DataField = 'modelo'
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."modelo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREid_cfo: TfrxMemoView
+          Left = 540.811380000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          DataField = 'id_cfo'
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."id_cfo"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREdta_emissao: TfrxMemoView
+          Left = 403.748300000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          DataField = 'dta_emissao'
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."dta_emissao"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREint_indfrete: TfrxMemoView
+          Left = 468.661720000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DataField = 'int_indfrete'
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."int_indfrete"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREvlr_frete_rat: TfrxMemoView
+          Left = 589.606680000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."vlr_frete_rat"]')
+          ParentFont = False
+        end
+        object FAT_DB_R_NFE_FREvlr_total_frete: TfrxMemoView
+          Left = 661.417750000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_R_NFE_FRE
+          DataSetName = 'FAT_DB_R_NFE_FRE'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_FRE."vlr_total_frete"]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 181.417440000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."nfe_cod_sit"'
+        ReprintOnNewPage = True
+        object mmlblNotaCan: TfrxMemoView
+          Left = 0.779530000000000000
+          Width = 718.110700000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Fill.BackColor = 14342874
+          HAlign = haCenter
+          Memo.UTF8W = (
+            
+              '[IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'00'#39','#39'Notas Regulares'#39',IIF(<FA' +
+              'T_DB_R_NFE."nfe_cod_sit">='#39'01'#39','#39'Notas de Escritura'#231#227'o Extempor'#226'n' +
+              'ea Regulares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'02'#39','#39'Notas Cance' +
+              'ladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'03'#39','#39'Notas de Escritura' +
+              #231#227'o Extempor'#226'nea Canceladas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'0' +
+              '4'#39','#39'Notas Denegadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'05'#39','#39'Nota' +
+              's Inutilizadas'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'06'#39','#39'Notas Com' +
+              'plementares'#39',IIF(<FAT_DB_R_NFE."nfe_cod_sit">='#39'07'#39','#39'Notas de Esc' +
+              'ritura'#231#227'o Extempor'#226'nea Complementares'#39',IIF(<FAT_DB_R_NFE."nfe_co' +
+              'd_sit">='#39'08'#39','#39'Notas de Regime Especial ou Normal Especifico'#39','#39'Si' +
+              'tua'#231#227'o das Nota Indefinidas'#39')))))))))]'
+            '')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 60.472480000000000000
+        Top = 706.772110000000000000
+        Width = 718.110700000000000000
+        object Memo76: TfrxMemoView
+          Left = 143.622140000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_desconto">,MasterData1)]')
+          ParentFont = False
+        end
+        object Shape4: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo77: TfrxMemoView
+          Left = 7.559060000000000000
+          Width = 222.992270000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'SUBTOTAL DA SITUA'#199#195'O')
+          ParentFont = False
+        end
+        object Memo78: TfrxMemoView
+          Left = 71.811070000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Mercadoria')
+          ParentFont = False
+        end
+        object Memo79: TfrxMemoView
+          Left = 143.622140000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Desconto')
+          ParentFont = False
+        end
+        object Memo80: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS')
+          ParentFont = False
+        end
+        object Memo81: TfrxMemoView
+          Left = 287.244280000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS Subs.')
+          ParentFont = False
+        end
+        object Memo82: TfrxMemoView
+          Left = 359.055350000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+        object Memo83: TfrxMemoView
+          Left = 71.811070000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_mercadoria">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo84: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."icm_n_valor">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo85: TfrxMemoView
+          Left = 287.244280000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."icm_s_valor">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo86: TfrxMemoView
+          Left = 359.055350000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 226.771800000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'FAT_DB_R_NFE."id_empresa"'
+        ReprintOnNewPage = True
+        object Memo57: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 710.551640000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              'Empresa : [FAT_DB_R_NFE."id_empresa"] - [FAT_DB_R_NFE."int_nomee' +
+              'mp"]')
+          ParentFont = False
+        end
+        object Line4: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 714.331170000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 60.472480000000000000
+        Top = 623.622450000000000000
+        Width = 718.110700000000000000
+        object Memo58: TfrxMemoView
+          Left = 143.622140000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_desconto">,MasterData1)]')
+          ParentFont = False
+        end
+        object Shape5: TfrxShapeView
+          Width = 718.110700000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo59: TfrxMemoView
+          Left = 7.559060000000000000
+          Width = 222.992270000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'SUBTOTAL DA EMPRESA')
+          ParentFont = False
+        end
+        object Memo60: TfrxMemoView
+          Left = 71.811070000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Mercadoria')
+          ParentFont = False
+        end
+        object Memo61: TfrxMemoView
+          Left = 143.622140000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Desconto')
+          ParentFont = False
+        end
+        object Memo62: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS')
+          ParentFont = False
+        end
+        object Memo63: TfrxMemoView
+          Left = 287.244280000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.ICMS Subs.')
+          ParentFont = False
+        end
+        object Memo64: TfrxMemoView
+          Left = 359.055350000000000000
+          Top = 22.677180000000000000
+          Width = 68.031496060000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+        object Memo65: TfrxMemoView
+          Left = 71.811070000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_mercadoria">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo66: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."icm_n_valor">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo67: TfrxMemoView
+          Left = 287.244280000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."icm_s_valor">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo68: TfrxMemoView
+          Left = 359.055350000000000000
+          Top = 41.574830000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE."vlr_liquido">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object FAT_DB_R_NFE_FRE: TfrxDBDataset
+    UserName = 'FAT_DB_R_NFE_FRE'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'numero=numero'
+      'serie=serie'
+      'sub_serie=sub_serie'
+      'modelo=modelo'
+      'id_cfo=id_cfo'
+      'icm_n_valor=icm_n_valor'
+      'int_nomefor=int_nomefor'
+      'int_indfrete=int_indfrete'
+      'vlr_total_frete=vlr_total_frete'
+      'vlr_frete_rat=vlr_frete_rat'
+      'dta_emissao=dta_emissao')
+    DataSet = FAT_CD_R_NFE_FRE
+    BCDToCurrency = False
+    Left = 712
+    Top = 174
+  end
+  object FAT_DB_R_NFE_TIT: TfrxDBDataset
+    UserName = 'FAT_DB_R_NFE_TIT'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'id_fiscal=id_fiscal'
+      'id_nfe_tit=id_nfe_tit'
+      'id_forma_pag=id_forma_pag'
+      'num_parcela=num_parcela'
+      'dias=dias'
+      'dta_vencimento=dta_vencimento'
+      'vlr_titulo=vlr_titulo'
+      'id_plano=id_plano'
+      'id_ccusto=id_ccusto'
+      'che_banco=che_banco'
+      'che_agencia=che_agencia'
+      'che_conta=che_conta'
+      'che_numero=che_numero'
+      'che_emitente=che_emitente'
+      'int_nomefpg=int_nomefpg'
+      'int_nomepct=int_nomepct'
+      'int_nomeccu=int_nomeccu'
+      'historico_pag=historico_pag'
+      'int_tipopgto=int_tipopgto')
+    DataSet = FAT_CD_R_NFE_TIT
+    BCDToCurrency = False
+    Left = 840
+    Top = 174
+  end
+  object FAT_DB_R_NFE_ITE: TfrxDBDataset
+    UserName = 'FAT_DB_R_NFE_ITE'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'id_fiscal=id_fiscal'
+      'id_sequencia=id_sequencia'
+      'id_item=id_item'
+      'id_inf_fisco=id_inf_fisco'
+      'id_cfo=id_cfo'
+      'id_st_icm=id_st_icm'
+      'qtde=qtde'
+      'qtde_devolvida=qtde_devolvida'
+      'vlr_unitario=vlr_unitario'
+      'vlr_mercadoria=vlr_mercadoria'
+      'per_desconto=per_desconto'
+      'vlr_desconto=vlr_desconto'
+      'vlr_custo=vlr_custo'
+      'vlr_liquido=vlr_liquido'
+      'vlr_outras=vlr_outras'
+      'vlr_isenta=vlr_isenta'
+      'vlr_seguro=vlr_seguro'
+      'icm_n_aliquota=icm_n_aliquota'
+      'icm_per_reducao=icm_per_reducao'
+      'icm_n_base=icm_n_base'
+      'icm_n_valor=icm_n_valor'
+      'icm_s_base=icm_s_base'
+      'icm_s_valor=icm_s_valor'
+      'ipi_base=ipi_base'
+      'ipi_aliquota=ipi_aliquota'
+      'ipi_valor=ipi_valor'
+      'iss_base=iss_base'
+      'iss_aliquota=iss_aliquota'
+      'iss_valor=iss_valor'
+      'fre_base=fre_base'
+      'fre_percentual=fre_percentual'
+      'fre_valor=fre_valor'
+      'pis_base=pis_base'
+      'pis_aliquota=pis_aliquota'
+      'pis_valor=pis_valor'
+      'cof_base=cof_base'
+      'cof_aliquota=cof_aliquota'
+      'cof_valor=cof_valor'
+      'peso_liquido=peso_liquido'
+      'peso_bruto=peso_bruto'
+      'nro_pedido=nro_pedido'
+      'cof_valor_st=cof_valor_st'
+      'imp_valor=imp_valor'
+      'vlr_icm_ser_nao_incide=vlr_icm_ser_nao_incide'
+      'vlr_outras_desp=vlr_outras_desp'
+      'pis_valor_st=pis_valor_st'
+      'icm_n_dif_aliq=icm_n_dif_aliq'
+      'icm_n_vlr_dif_aliq=icm_n_vlr_dif_aliq'
+      'para_analise_raa=para_analise_raa'
+      'fre_dif_aliq_icm=fre_dif_aliq_icm'
+      'fre_vlr_dif_icm=fre_vlr_dif_icm'
+      'fre_custo=fre_custo'
+      'origem_mercadoria=origem_mercadoria'
+      'id_cor=id_cor'
+      'id_tamanho=id_tamanho'
+      'int_desc_item=int_desc_item'
+      'int_und_venda=int_und_venda'
+      'id_busca_item=id_busca_item'
+      'id_tributo=id_tributo'
+      'num_lote=num_lote'
+      'int_nomecor=int_nomecor'
+      'int_nometam=int_nometam'
+      'id_st_pis=id_st_pis'
+      'id_st_cof=id_st_cof'
+      'id_st_ipi=id_st_ipi'
+      'int_id_ncm=int_id_ncm'
+      'tri_valor=tri_valor'
+      'tri_indice=tri_indice'
+      'icm_s_vlr_mva=icm_s_vlr_mva'
+      'icm_s_per_mva=icm_s_per_mva'
+      'id_sequencia_ite_cmp_ped=id_sequencia_ite_cmp_ped'
+      'imp_base_calculo=imp_base_calculo'
+      'imp_desp_aduana=imp_desp_aduana'
+      'imp_iof=imp_iof'
+      'di_numero=di_numero'
+      'di_data=di_data'
+      'di_local_desemb=di_local_desemb'
+      'di_uf_desemb=di_uf_desemb'
+      'di_data_desemb=di_data_desemb'
+      'di_exportador=di_exportador'
+      'di_numero_adicao=di_numero_adicao'
+      'di_seq_adicao=di_seq_adicao'
+      'di_fabricante=di_fabricante'
+      'di_vlr_desconto=di_vlr_desconto'
+      'di_fci=di_fci'
+      'id_sequencia_ite_iqm=id_sequencia_ite_iqm'
+      'int_sldqtde=int_sldqtde'
+      'id_sequencia_ite_xml=id_sequencia_ite_xml'
+      'int_tipo_item=int_tipo_item'
+      'vlr_acrescimo=vlr_acrescimo'
+      'int_ncmperimposto=int_ncmperimposto')
+    DataSet = FAT_CD_R_NFE_ITE
+    BCDToCurrency = False
+    Left = 600
+    Top = 230
+  end
+  object FAT_DB_R_NFE_CFO: TfrxDBDataset
+    UserName = 'FAT_DB_R_NFE_CFO'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'int_nomecfo=int_nomecfo'
+      'vlr_liquido=vlr_liquido'
+      'vlr_icm=vlr_icm'
+      'vlr_icm_subs=vlr_icm_subs'
+      'vlr_pis_cof=vlr_pis_cof'
+      'id_cfo=id_cfo'
+      'nfe_cod_sit=nfe_cod_sit'
+      'id_empresa=id_empresa'
+      'int_nomeemp=int_nomeemp')
+    DataSet = FAT_CD_R_NFE_CFO
+    BCDToCurrency = False
+    Left = 832
+    Top = 230
+  end
+  object FAT_DB_R_NFE_TME: TfrxDBDataset
+    UserName = 'FAT_DB_R_NFE_TME'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'int_nometme=int_nometme'
+      'vlr_liquido=vlr_liquido'
+      'nfe_cod_sit=nfe_cod_sit'
+      'id_empresa=id_empresa'
+      'int_nomeemp=int_nomeemp')
+    DataSet = FAT_CD_R_NFE_TME
+    BCDToCurrency = False
+    Left = 712
+    Top = 230
+  end
+  object pmRemoverModelo: TPopupMenu
+    Left = 600
+    Top = 446
+    object btnRemoverTodosModelos: TMenuItem
+      Caption = 'Remover Todos Modelos'
+      OnClick = btnRemoverTodosModelosClick
+    end
+  end
+  object pmSelModelo: TPopupMenu
+    Left = 712
+    Top = 446
+    object btnTodosModelos: TMenuItem
+      Caption = 'Todos os Modelos'
+      OnClick = btnTodosModelosClick
+    end
+  end
+  object pmSelSituacaoNota: TPopupMenu
+    Left = 368
+    Top = 443
+    object btnSelTodasSitNota: TMenuItem
+      Caption = 'Todas Situa'#231#245'es'
+      OnClick = btnSelTodasSitNotaClick
+    end
+  end
+  object pmExcluirSituacaoNota: TPopupMenu
+    Left = 498
+    Top = 445
+    object btnExcluirTodosSitNota: TMenuItem
+      Caption = 'Remover Todas Situa'#231#245'es'
+      OnClick = btnExcluirTodosSitNotaClick
+    end
+  end
+  object FAT_CD_R_NFE: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'FAT_DP_R_NFE'
+    RemoteServer = dmGeral.pcConecao
+    Left = 508
+    Top = 90
+    object FAT_CD_R_NFEid_fiscal: TIntegerField
+      FieldName = 'id_fiscal'
+    end
+    object FAT_CD_R_NFEid_almoxarifado: TIntegerField
+      FieldName = 'id_almoxarifado'
+    end
+    object FAT_CD_R_NFEid_pedido_compra: TIntegerField
+      FieldName = 'id_pedido_compra'
+    end
+    object FAT_CD_R_NFEid_condicao_pag: TIntegerField
+      FieldName = 'id_condicao_pag'
+    end
+    object FAT_CD_R_NFEid_empresa: TIntegerField
+      FieldName = 'id_empresa'
+    end
+    object FAT_CD_R_NFEid_emitente: TIntegerField
+      FieldName = 'id_emitente'
+    end
+    object FAT_CD_R_NFEid_cfo: TWideStringField
+      FieldName = 'id_cfo'
+      Size = 5
+    end
+    object FAT_CD_R_NFEid_transportadora: TIntegerField
+      FieldName = 'id_transportadora'
+    end
+    object FAT_CD_R_NFEid_tipo_mov_estoque: TIntegerField
+      FieldName = 'id_tipo_mov_estoque'
+    end
+    object FAT_CD_R_NFEuf_emitente: TWideStringField
+      FieldName = 'uf_emitente'
+      Size = 2
+    end
+    object FAT_CD_R_NFEuf_empresa: TWideStringField
+      FieldName = 'uf_empresa'
+      Size = 2
+    end
+    object FAT_CD_R_NFEdta_emissao: TDateField
+      FieldName = 'dta_emissao'
+    end
+    object FAT_CD_R_NFEdta_documento: TDateField
+      FieldName = 'dta_documento'
+    end
+    object FAT_CD_R_NFEcpf_cnpj: TWideStringField
+      FieldName = 'cpf_cnpj'
+      Size = 14
+    end
+    object FAT_CD_R_NFEnumero: TIntegerField
+      FieldName = 'numero'
+    end
+    object FAT_CD_R_NFEserie: TWideStringField
+      FieldName = 'serie'
+      Size = 3
+    end
+    object FAT_CD_R_NFEsub_serie: TWideStringField
+      FieldName = 'sub_serie'
+      Size = 3
+    end
+    object FAT_CD_R_NFEmodelo: TWideStringField
+      FieldName = 'modelo'
+      Size = 2
+    end
+    object FAT_CD_R_NFEstatus: TIntegerField
+      FieldName = 'status'
+    end
+    object FAT_CD_R_NFEnfe_ecf: TIntegerField
+      FieldName = 'nfe_ecf'
+    end
+    object FAT_CD_R_NFEecf_prevenda: TIntegerField
+      FieldName = 'ecf_prevenda'
+    end
+    object FAT_CD_R_NFEid_fiscal_referenciado: TIntegerField
+      FieldName = 'id_fiscal_referenciado'
+    end
+    object FAT_CD_R_NFEcanc_motivo: TWideStringField
+      FieldName = 'canc_motivo'
+      Size = 50
+    end
+    object FAT_CD_R_NFEcanc_data: TDateField
+      FieldName = 'canc_data'
+    end
+    object FAT_CD_R_NFEcanc_usuario: TIntegerField
+      FieldName = 'canc_usuario'
+    end
+    object FAT_CD_R_NFEpeso_liquido: TFloatField
+      FieldName = 'peso_liquido'
+    end
+    object FAT_CD_R_NFEpeso_bruto: TFloatField
+      FieldName = 'peso_bruto'
+    end
+    object FAT_CD_R_NFEnfe_chave: TWideStringField
+      FieldName = 'nfe_chave'
+      Size = 44
+    end
+    object FAT_CD_R_NFEnfe_obs: TWideStringField
+      FieldName = 'nfe_obs'
+      Size = 800
+    end
+    object FAT_CD_R_NFEnfe_protocolo: TWideStringField
+      FieldName = 'nfe_protocolo'
+      Size = 50
+    end
+    object FAT_CD_R_NFEnfe_recibo: TWideStringField
+      FieldName = 'nfe_recibo'
+      Size = 50
+    end
+    object FAT_CD_R_NFEnfe_canc_protocolo: TWideStringField
+      FieldName = 'nfe_canc_protocolo'
+      Size = 50
+    end
+    object FAT_CD_R_NFEnfe_canc_status: TWideStringField
+      FieldName = 'nfe_canc_status'
+      Size = 50
+    end
+    object FAT_CD_R_NFEnfe_tipo_emissao: TWideStringField
+      FieldName = 'nfe_tipo_emissao'
+      Size = 1
+    end
+    object FAT_CD_R_NFEnfe_tipo_ambiente: TWideStringField
+      FieldName = 'nfe_tipo_ambiente'
+      Size = 1
+    end
+    object FAT_CD_R_NFEnfe_cod_sit: TWideStringField
+      FieldName = 'nfe_cod_sit'
+      Size = 2
+    end
+    object FAT_CD_R_NFEind_operacao: TIntegerField
+      FieldName = 'ind_operacao'
+    end
+    object FAT_CD_R_NFEind_emitente: TIntegerField
+      FieldName = 'ind_emitente'
+    end
+    object FAT_CD_R_NFEind_frete: TIntegerField
+      FieldName = 'ind_frete'
+    end
+    object FAT_CD_R_NFEvlr_mercadoria: TFMTBCDField
+      FieldName = 'vlr_mercadoria'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_desconto: TFMTBCDField
+      FieldName = 'vlr_desconto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_acrescimo: TFMTBCDField
+      FieldName = 'vlr_acrescimo'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_liquido: TFMTBCDField
+      FieldName = 'vlr_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEicm_n_valor: TFMTBCDField
+      FieldName = 'icm_n_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEicm_n_base: TFMTBCDField
+      FieldName = 'icm_n_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEicm_s_valor: TFMTBCDField
+      FieldName = 'icm_s_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEicm_s_base: TFMTBCDField
+      FieldName = 'icm_s_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEipi_base: TFMTBCDField
+      FieldName = 'ipi_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEipi_valor: TFMTBCDField
+      FieldName = 'ipi_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEiss_base: TFMTBCDField
+      FieldName = 'iss_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEiss_valor: TFMTBCDField
+      FieldName = 'iss_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEfre_base: TFMTBCDField
+      FieldName = 'fre_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEfre_valor: TFMTBCDField
+      FieldName = 'fre_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEpis_valor: TFMTBCDField
+      FieldName = 'pis_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEpis_valor_st: TFMTBCDField
+      FieldName = 'pis_valor_st'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEcof_valor: TFMTBCDField
+      FieldName = 'cof_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEcof_valor_st: TFMTBCDField
+      FieldName = 'cof_valor_st'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_isenta: TFMTBCDField
+      FieldName = 'vlr_isenta'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_outras: TFMTBCDField
+      FieldName = 'vlr_outras'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_seguro: TFMTBCDField
+      FieldName = 'vlr_seguro'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEtipo_nf: TWideStringField
+      FieldName = 'tipo_nf'
+      Size = 1
+    end
+    object FAT_CD_R_NFEecf_serial_impressora: TWideStringField
+      FieldName = 'ecf_serial_impressora'
+      Size = 60
+    end
+    object FAT_CD_R_NFEecf_marca_impressora: TWideStringField
+      FieldName = 'ecf_marca_impressora'
+      Size = 50
+    end
+    object FAT_CD_R_NFEecf_modelo_impressora: TWideStringField
+      FieldName = 'ecf_modelo_impressora'
+      Size = 50
+    end
+    object FAT_CD_R_NFEecf_caixa: TWideStringField
+      FieldName = 'ecf_caixa'
+      Size = 3
+    end
+    object FAT_CD_R_NFEdta_movimento: TDateField
+      FieldName = 'dta_movimento'
+    end
+    object FAT_CD_R_NFEorigem_nf: TWideStringField
+      FieldName = 'origem_nf'
+      Size = 1
+    end
+    object FAT_CD_R_NFEfaturada: TBooleanField
+      FieldName = 'faturada'
+    end
+    object FAT_CD_R_NFEsituacao_inspecao: TIntegerField
+      FieldName = 'situacao_inspecao'
+    end
+    object FAT_CD_R_NFEid_fiscal_frete: TIntegerField
+      FieldName = 'id_fiscal_frete'
+    end
+    object FAT_CD_R_NFEid_pedido_venda: TIntegerField
+      FieldName = 'id_pedido_venda'
+    end
+    object FAT_CD_R_NFEvlr_outras_desp: TFMTBCDField
+      FieldName = 'vlr_outras_desp'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEfre_custo: TFMTBCDField
+      FieldName = 'fre_custo'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_icm_ser_nao_incide: TFMTBCDField
+      FieldName = 'vlr_icm_ser_nao_incide'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEcof_base: TFMTBCDField
+      FieldName = 'cof_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEpis_base: TFMTBCDField
+      FieldName = 'pis_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEposvenda: TBooleanField
+      FieldName = 'posvenda'
+    end
+    object FAT_CD_R_NFEid_responsavel: TIntegerField
+      FieldName = 'id_responsavel'
+    end
+    object FAT_CD_R_NFEint_id_perfil_cli: TIntegerField
+      FieldName = 'int_id_perfil_cli'
+      ProviderFlags = []
+    end
+    object FAT_CD_R_NFEint_nfeecf: TWideMemoField
+      FieldName = 'int_nfeecf'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_nometme: TWideStringField
+      FieldName = 'int_nometme'
+      ProviderFlags = []
+      Size = 30
+    end
+    object FAT_CD_R_NFEint_nomeope: TWideMemoField
+      FieldName = 'int_nomeope'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_nomecpg: TWideStringField
+      FieldName = 'int_nomecpg'
+      ProviderFlags = []
+      Size = 30
+    end
+    object FAT_CD_R_NFEint_nomevnd: TWideStringField
+      FieldName = 'int_nomevnd'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFEint_nomeres: TWideStringField
+      FieldName = 'int_nomeres'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFEid_vendedor: TIntegerField
+      FieldName = 'id_vendedor'
+    end
+    object FAT_CD_R_NFEcod_lme: TWideStringField
+      FieldName = 'cod_lme'
+    end
+    object FAT_CD_R_NFErev_lme: TWideStringField
+      FieldName = 'rev_lme'
+      Size = 5
+    end
+    object FAT_CD_R_NFEint_nometra: TWideStringField
+      FieldName = 'int_nometra'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFEint_endtra: TWideStringField
+      FieldName = 'int_endtra'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFEint_cidtra: TWideStringField
+      FieldName = 'int_cidtra'
+      ProviderFlags = []
+      Size = 60
+    end
+    object FAT_CD_R_NFEint_esttra: TWideStringField
+      FieldName = 'int_esttra'
+      ProviderFlags = []
+      Size = 2
+    end
+    object FAT_CD_R_NFEint_cnptra: TWideStringField
+      FieldName = 'int_cnptra'
+      ProviderFlags = []
+      Size = 14
+    end
+    object FAT_CD_R_NFEint_instra: TWideStringField
+      FieldName = 'int_instra'
+      ProviderFlags = []
+    end
+    object FAT_CD_R_NFEtipo_cte: TIntegerField
+      FieldName = 'tipo_cte'
+    end
+    object FAT_CD_R_NFEnfe_finalidade: TIntegerField
+      FieldName = 'nfe_finalidade'
+    end
+    object FAT_CD_R_NFEpath_xml: TWideStringField
+      FieldName = 'path_xml'
+      Size = 200
+    end
+    object FAT_CD_R_NFEnfref_chave: TWideStringField
+      FieldName = 'nfref_chave'
+      Size = 44
+    end
+    object FAT_CD_R_NFEint_cnpjcpf: TWideMemoField
+      FieldName = 'int_cnpjcpf'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_pessoa: TIntegerField
+      FieldName = 'int_pessoa'
+      ProviderFlags = []
+    end
+    object FAT_CD_R_NFEint_telefone: TWideMemoField
+      FieldName = 'int_telefone'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_doc_ie: TWideMemoField
+      FieldName = 'int_doc_ie'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_email: TWideMemoField
+      FieldName = 'int_email'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_cep: TWideMemoField
+      FieldName = 'int_cep'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_endereco: TWideMemoField
+      FieldName = 'int_endereco'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_estado: TWideMemoField
+      FieldName = 'int_estado'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_bairro: TWideMemoField
+      FieldName = 'int_bairro'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_numero: TWideMemoField
+      FieldName = 'int_numero'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_complemento: TWideMemoField
+      FieldName = 'int_complemento'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_cod_cidade: TWideMemoField
+      FieldName = 'int_cod_cidade'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_nom_cidade: TWideMemoField
+      FieldName = 'int_nom_cidade'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEimp_valor: TFMTBCDField
+      FieldName = 'imp_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEtri_valor: TFMTBCDField
+      FieldName = 'tri_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEtra_placa: TWideStringField
+      FieldName = 'tra_placa'
+      Size = 8
+    end
+    object FAT_CD_R_NFEtra_uf: TWideStringField
+      FieldName = 'tra_uf'
+      Size = 2
+    end
+    object FAT_CD_R_NFEtra_rntc: TWideStringField
+      FieldName = 'tra_rntc'
+      Size = 10
+    end
+    object FAT_CD_R_NFEtra_qtde_vol: TFloatField
+      FieldName = 'tra_qtde_vol'
+    end
+    object FAT_CD_R_NFEtra_especie: TWideStringField
+      FieldName = 'tra_especie'
+      Size = 30
+    end
+    object FAT_CD_R_NFEtra_marca: TWideStringField
+      FieldName = 'tra_marca'
+      Size = 30
+    end
+    object FAT_CD_R_NFEtra_num_vol: TWideStringField
+      FieldName = 'tra_num_vol'
+      Size = 10
+    end
+    object FAT_CD_R_NFEint_indpag: TIntegerField
+      FieldName = 'int_indpag'
+      ProviderFlags = []
+    end
+    object FAT_CD_R_NFEint_cod_pais: TWideMemoField
+      FieldName = 'int_cod_pais'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEint_nom_pais: TWideMemoField
+      FieldName = 'int_nom_pais'
+      ProviderFlags = []
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFEid_iqm: TIntegerField
+      FieldName = 'id_iqm'
+    end
+    object FAT_CD_R_NFEint_nomeemp: TWideStringField
+      FieldName = 'int_nomeemp'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFEid_abertura: TIntegerField
+      FieldName = 'id_abertura'
+    end
+    object FAT_CD_R_NFElegenda: TWideStringField
+      FieldName = 'legenda'
+    end
+    object FAT_CD_R_NFEint_classe: TWideStringField
+      FieldName = 'int_classe'
+      ProviderFlags = []
+      Size = 4
+    end
+    object FAT_CD_R_NFEprevenda: TBooleanField
+      FieldName = 'prevenda'
+    end
+    object FAT_CD_R_NFEid_ordem: TIntegerField
+      FieldName = 'id_ordem'
+    end
+    object FAT_CD_R_NFEvenctos_origem: TWideStringField
+      FieldName = 'venctos_origem'
+      Size = 400
+    end
+    object FAT_CD_R_NFEint_baitra: TWideStringField
+      FieldName = 'int_baitra'
+      ProviderFlags = []
+      Size = 40
+    end
+    object FAT_CD_R_NFEint_descnat: TWideStringField
+      FieldName = 'int_descnat'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFEint_nomeemi: TWideStringField
+      FieldName = 'int_nomeemi'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFEint_descnfecodsit: TWideStringField
+      FieldName = 'int_descnfecodsit'
+      ProviderFlags = []
+      Size = 80
+    end
+    object FAT_CD_R_NFEnro_termo: TIntegerField
+      FieldName = 'nro_termo'
+    end
+    object FAT_CD_R_NFEint_nomecfo: TWideStringField
+      FieldName = 'int_nomecfo'
+      Size = 400
+    end
+    object FAT_CD_R_NFEFAT_SQ_R_NFE_FRE: TDataSetField
+      FieldName = 'FAT_SQ_R_NFE_FRE'
+    end
+    object FAT_CD_R_NFEFAT_SQ_R_NFE_TIT: TDataSetField
+      FieldName = 'FAT_SQ_R_NFE_TIT'
+    end
+    object FAT_CD_R_NFEFAT_SQ_R_NFE_ITE: TDataSetField
+      FieldName = 'FAT_SQ_R_NFE_ITE'
+    end
+    object FAT_CD_R_NFEind_nf: TIntegerField
+      FieldName = 'ind_nf'
+    end
+    object FAT_CD_R_NFEvlr_part_dest: TFMTBCDField
+      FieldName = 'vlr_part_dest'
+      Precision = 18
+      Size = 2
+    end
+    object FAT_CD_R_NFEvlr_part_orig: TFMTBCDField
+      FieldName = 'vlr_part_orig'
+      Precision = 18
+      Size = 2
+    end
+    object FAT_CD_R_NFEvlr_icm_desc: TFMTBCDField
+      FieldName = 'vlr_icm_desc'
+      Precision = 18
+      Size = 2
+    end
+    object FAT_CD_R_NFEid_ors: TIntegerField
+      FieldName = 'id_ors'
+    end
+    object FAT_CD_R_NFEvlr_fcp: TFMTBCDField
+      FieldName = 'vlr_fcp'
+      Precision = 18
+      Size = 2
+    end
+    object FAT_CD_R_NFEint_notacancelada: TWideStringField
+      FieldName = 'int_notacancelada'
+      ProviderFlags = []
+      Size = 3
+    end
+    object FAT_CD_R_NFEvlr_icm: TFMTBCDField
+      FieldName = 'vlr_icm'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFEvlr_icm_subs: TFMTBCDField
+      FieldName = 'vlr_icm_subs'
+      Precision = 18
+      Size = 4
+    end
+  end
+  object FAT_CD_R_NFE_FRE: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_R_NFEFAT_SQ_R_NFE_FRE
+    Params = <>
+    RemoteServer = dmGeral.pcConecao
+    Left = 388
+    Top = 90
+    object FAT_CD_R_NFE_FREnumero: TIntegerField
+      FieldName = 'numero'
+    end
+    object FAT_CD_R_NFE_FREserie: TWideStringField
+      FieldName = 'serie'
+      Size = 3
+    end
+    object FAT_CD_R_NFE_FREsub_serie: TWideStringField
+      FieldName = 'sub_serie'
+      Size = 3
+    end
+    object FAT_CD_R_NFE_FREmodelo: TWideStringField
+      FieldName = 'modelo'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_FREid_cfo: TWideStringField
+      FieldName = 'id_cfo'
+      Size = 5
+    end
+    object FAT_CD_R_NFE_FREicm_n_valor: TFMTBCDField
+      FieldName = 'icm_n_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_FREint_nomefor: TWideStringField
+      FieldName = 'int_nomefor'
+      Size = 50
+    end
+    object FAT_CD_R_NFE_FREint_indfrete: TWideMemoField
+      FieldName = 'int_indfrete'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_FREvlr_total_frete: TFMTBCDField
+      FieldName = 'vlr_total_frete'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_FREvlr_frete_rat: TFMTBCDField
+      FieldName = 'vlr_frete_rat'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_FREdta_emissao: TDateField
+      FieldName = 'dta_emissao'
+    end
+  end
+  object FAT_CD_R_NFE_ITE: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_R_NFEFAT_SQ_R_NFE_ITE
+    Params = <>
+    RemoteServer = dmGeral.pcConecao
+    Left = 508
+    Top = 34
+    object FAT_CD_R_NFE_ITEid_fiscal: TIntegerField
+      FieldName = 'id_fiscal'
+    end
+    object FAT_CD_R_NFE_ITEid_sequencia: TIntegerField
+      FieldName = 'id_sequencia'
+    end
+    object FAT_CD_R_NFE_ITEid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object FAT_CD_R_NFE_ITEid_inf_fisco: TIntegerField
+      FieldName = 'id_inf_fisco'
+    end
+    object FAT_CD_R_NFE_ITEid_cfo: TWideStringField
+      FieldName = 'id_cfo'
+      Size = 5
+    end
+    object FAT_CD_R_NFE_ITEid_st_icm: TWideStringField
+      FieldName = 'id_st_icm'
+      Size = 3
+    end
+    object FAT_CD_R_NFE_ITEqtde: TFloatField
+      FieldName = 'qtde'
+    end
+    object FAT_CD_R_NFE_ITEqtde_devolvida: TFloatField
+      FieldName = 'qtde_devolvida'
+    end
+    object FAT_CD_R_NFE_ITEvlr_unitario: TFMTBCDField
+      FieldName = 'vlr_unitario'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEvlr_mercadoria: TFMTBCDField
+      FieldName = 'vlr_mercadoria'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEper_desconto: TFloatField
+      FieldName = 'per_desconto'
+    end
+    object FAT_CD_R_NFE_ITEvlr_desconto: TFMTBCDField
+      FieldName = 'vlr_desconto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEvlr_custo: TFMTBCDField
+      FieldName = 'vlr_custo'
+      Precision = 18
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEvlr_liquido: TFMTBCDField
+      FieldName = 'vlr_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEvlr_outras: TFMTBCDField
+      FieldName = 'vlr_outras'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEvlr_isenta: TFMTBCDField
+      FieldName = 'vlr_isenta'
+      Precision = 18
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEvlr_seguro: TFMTBCDField
+      FieldName = 'vlr_seguro'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEicm_n_aliquota: TFloatField
+      FieldName = 'icm_n_aliquota'
+    end
+    object FAT_CD_R_NFE_ITEicm_per_reducao: TFloatField
+      FieldName = 'icm_per_reducao'
+    end
+    object FAT_CD_R_NFE_ITEicm_n_base: TFMTBCDField
+      FieldName = 'icm_n_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEicm_n_valor: TFMTBCDField
+      FieldName = 'icm_n_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEicm_s_base: TFMTBCDField
+      FieldName = 'icm_s_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEicm_s_valor: TFMTBCDField
+      FieldName = 'icm_s_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEipi_base: TFMTBCDField
+      FieldName = 'ipi_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEipi_aliquota: TFloatField
+      FieldName = 'ipi_aliquota'
+    end
+    object FAT_CD_R_NFE_ITEipi_valor: TFMTBCDField
+      FieldName = 'ipi_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEiss_base: TFMTBCDField
+      FieldName = 'iss_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEiss_aliquota: TFloatField
+      FieldName = 'iss_aliquota'
+    end
+    object FAT_CD_R_NFE_ITEiss_valor: TFMTBCDField
+      FieldName = 'iss_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEfre_base: TFMTBCDField
+      FieldName = 'fre_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEfre_percentual: TFloatField
+      FieldName = 'fre_percentual'
+    end
+    object FAT_CD_R_NFE_ITEfre_valor: TFMTBCDField
+      FieldName = 'fre_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEpis_base: TFMTBCDField
+      FieldName = 'pis_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEpis_aliquota: TFloatField
+      FieldName = 'pis_aliquota'
+    end
+    object FAT_CD_R_NFE_ITEpis_valor: TFMTBCDField
+      FieldName = 'pis_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEcof_base: TFMTBCDField
+      FieldName = 'cof_base'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEcof_aliquota: TFloatField
+      FieldName = 'cof_aliquota'
+    end
+    object FAT_CD_R_NFE_ITEcof_valor: TFMTBCDField
+      FieldName = 'cof_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEpeso_liquido: TFloatField
+      FieldName = 'peso_liquido'
+    end
+    object FAT_CD_R_NFE_ITEpeso_bruto: TFloatField
+      FieldName = 'peso_bruto'
+    end
+    object FAT_CD_R_NFE_ITEnro_pedido: TIntegerField
+      FieldName = 'nro_pedido'
+    end
+    object FAT_CD_R_NFE_ITEcof_valor_st: TFMTBCDField
+      FieldName = 'cof_valor_st'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEimp_valor: TFMTBCDField
+      FieldName = 'imp_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEvlr_icm_ser_nao_incide: TFMTBCDField
+      FieldName = 'vlr_icm_ser_nao_incide'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEvlr_outras_desp: TFMTBCDField
+      FieldName = 'vlr_outras_desp'
+      Precision = 18
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEpis_valor_st: TFMTBCDField
+      FieldName = 'pis_valor_st'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEicm_n_dif_aliq: TFMTBCDField
+      FieldName = 'icm_n_dif_aliq'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEicm_n_vlr_dif_aliq: TFMTBCDField
+      FieldName = 'icm_n_vlr_dif_aliq'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEpara_analise_raa: TIntegerField
+      FieldName = 'para_analise_raa'
+    end
+    object FAT_CD_R_NFE_ITEfre_dif_aliq_icm: TFMTBCDField
+      FieldName = 'fre_dif_aliq_icm'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEfre_vlr_dif_icm: TFMTBCDField
+      FieldName = 'fre_vlr_dif_icm'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEfre_custo: TFMTBCDField
+      FieldName = 'fre_custo'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEorigem_mercadoria: TWideStringField
+      FieldName = 'origem_mercadoria'
+      Size = 1
+    end
+    object FAT_CD_R_NFE_ITEid_cor: TIntegerField
+      FieldName = 'id_cor'
+    end
+    object FAT_CD_R_NFE_ITEid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+    end
+    object FAT_CD_R_NFE_ITEint_desc_item: TWideStringField
+      FieldName = 'int_desc_item'
+      ProviderFlags = []
+      Size = 100
+    end
+    object FAT_CD_R_NFE_ITEint_und_venda: TWideStringField
+      FieldName = 'int_und_venda'
+      ProviderFlags = []
+      Size = 3
+    end
+    object FAT_CD_R_NFE_ITEid_busca_item: TWideStringField
+      FieldName = 'id_busca_item'
+      Size = 30
+    end
+    object FAT_CD_R_NFE_ITEid_tributo: TIntegerField
+      FieldName = 'id_tributo'
+    end
+    object FAT_CD_R_NFE_ITEnum_lote: TWideStringField
+      FieldName = 'num_lote'
+      Size = 15
+    end
+    object FAT_CD_R_NFE_ITEint_nomecor: TWideStringField
+      FieldName = 'int_nomecor'
+      ProviderFlags = []
+      Size = 40
+    end
+    object FAT_CD_R_NFE_ITEint_nometam: TWideStringField
+      FieldName = 'int_nometam'
+      ProviderFlags = []
+      Size = 40
+    end
+    object FAT_CD_R_NFE_ITEid_st_pis: TWideStringField
+      FieldName = 'id_st_pis'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEid_st_cof: TWideStringField
+      FieldName = 'id_st_cof'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEid_st_ipi: TWideStringField
+      FieldName = 'id_st_ipi'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEint_id_ncm: TWideStringField
+      FieldName = 'int_id_ncm'
+      ProviderFlags = []
+      Size = 10
+    end
+    object FAT_CD_R_NFE_ITEtri_valor: TFMTBCDField
+      FieldName = 'tri_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEtri_indice: TFloatField
+      FieldName = 'tri_indice'
+    end
+    object FAT_CD_R_NFE_ITEicm_s_vlr_mva: TFMTBCDField
+      FieldName = 'icm_s_vlr_mva'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEicm_s_per_mva: TFloatField
+      FieldName = 'icm_s_per_mva'
+    end
+    object FAT_CD_R_NFE_ITEid_sequencia_ite_cmp_ped: TIntegerField
+      FieldName = 'id_sequencia_ite_cmp_ped'
+    end
+    object FAT_CD_R_NFE_ITEimp_base_calculo: TFMTBCDField
+      FieldName = 'imp_base_calculo'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEimp_desp_aduana: TFMTBCDField
+      FieldName = 'imp_desp_aduana'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEimp_iof: TFMTBCDField
+      FieldName = 'imp_iof'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEdi_numero: TIntegerField
+      FieldName = 'di_numero'
+    end
+    object FAT_CD_R_NFE_ITEdi_data: TDateField
+      FieldName = 'di_data'
+    end
+    object FAT_CD_R_NFE_ITEdi_local_desemb: TWideStringField
+      FieldName = 'di_local_desemb'
+      Size = 60
+    end
+    object FAT_CD_R_NFE_ITEdi_uf_desemb: TWideStringField
+      FieldName = 'di_uf_desemb'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEdi_data_desemb: TDateField
+      FieldName = 'di_data_desemb'
+    end
+    object FAT_CD_R_NFE_ITEdi_exportador: TWideStringField
+      FieldName = 'di_exportador'
+      Size = 60
+    end
+    object FAT_CD_R_NFE_ITEdi_numero_adicao: TIntegerField
+      FieldName = 'di_numero_adicao'
+    end
+    object FAT_CD_R_NFE_ITEdi_seq_adicao: TIntegerField
+      FieldName = 'di_seq_adicao'
+    end
+    object FAT_CD_R_NFE_ITEdi_fabricante: TWideStringField
+      FieldName = 'di_fabricante'
+      Size = 60
+    end
+    object FAT_CD_R_NFE_ITEdi_vlr_desconto: TFMTBCDField
+      FieldName = 'di_vlr_desconto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEdi_fci: TWideStringField
+      FieldName = 'di_fci'
+      Size = 36
+    end
+    object FAT_CD_R_NFE_ITEid_sequencia_ite_iqm: TIntegerField
+      FieldName = 'id_sequencia_ite_iqm'
+    end
+    object FAT_CD_R_NFE_ITEint_sldqtde: TFloatField
+      FieldName = 'int_sldqtde'
+      ProviderFlags = []
+    end
+    object FAT_CD_R_NFE_ITEid_sequencia_ite_xml: TIntegerField
+      FieldName = 'id_sequencia_ite_xml'
+    end
+    object FAT_CD_R_NFE_ITEint_tipo_item: TWideStringField
+      FieldName = 'int_tipo_item'
+      ProviderFlags = []
+      Size = 2
+    end
+    object FAT_CD_R_NFE_ITEvlr_acrescimo: TFMTBCDField
+      FieldName = 'vlr_acrescimo'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_ITEint_ncmperimposto: TFloatField
+      FieldName = 'int_ncmperimposto'
+      ProviderFlags = []
+    end
+  end
+  object FAT_CD_R_NFE_TIT: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_R_NFEFAT_SQ_R_NFE_TIT
+    Params = <>
+    RemoteServer = dmGeral.pcConecao
+    Left = 388
+    Top = 34
+    object FAT_CD_R_NFE_TITid_fiscal: TIntegerField
+      FieldName = 'id_fiscal'
+    end
+    object FAT_CD_R_NFE_TITid_nfe_tit: TIntegerField
+      FieldName = 'id_nfe_tit'
+    end
+    object FAT_CD_R_NFE_TITid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+    end
+    object FAT_CD_R_NFE_TITnum_parcela: TWideStringField
+      FieldName = 'num_parcela'
+      Size = 15
+    end
+    object FAT_CD_R_NFE_TITdias: TIntegerField
+      FieldName = 'dias'
+    end
+    object FAT_CD_R_NFE_TITdta_vencimento: TDateField
+      FieldName = 'dta_vencimento'
+    end
+    object FAT_CD_R_NFE_TITvlr_titulo: TFMTBCDField
+      FieldName = 'vlr_titulo'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_TITid_plano: TWideStringField
+      FieldName = 'id_plano'
+      Size = 11
+    end
+    object FAT_CD_R_NFE_TITid_ccusto: TIntegerField
+      FieldName = 'id_ccusto'
+    end
+    object FAT_CD_R_NFE_TITche_banco: TWideStringField
+      FieldName = 'che_banco'
+      Size = 10
+    end
+    object FAT_CD_R_NFE_TITche_agencia: TWideStringField
+      FieldName = 'che_agencia'
+      Size = 10
+    end
+    object FAT_CD_R_NFE_TITche_conta: TIntegerField
+      FieldName = 'che_conta'
+    end
+    object FAT_CD_R_NFE_TITche_numero: TIntegerField
+      FieldName = 'che_numero'
+    end
+    object FAT_CD_R_NFE_TITche_emitente: TWideStringField
+      FieldName = 'che_emitente'
+      Size = 50
+    end
+    object FAT_CD_R_NFE_TITint_nomefpg: TWideStringField
+      FieldName = 'int_nomefpg'
+      ProviderFlags = []
+      Size = 30
+    end
+    object FAT_CD_R_NFE_TITint_nomepct: TWideStringField
+      FieldName = 'int_nomepct'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_R_NFE_TITint_nomeccu: TWideStringField
+      FieldName = 'int_nomeccu'
+      ProviderFlags = []
+      Size = 30
+    end
+    object FAT_CD_R_NFE_TIThistorico_pag: TWideStringField
+      FieldName = 'historico_pag'
+      Size = 100
+    end
+    object FAT_CD_R_NFE_TITint_tipopgto: TIntegerField
+      FieldName = 'int_tipopgto'
+      ProviderFlags = []
+    end
+  end
+  object FAT_CD_R_NFE_TME: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'FAT_DP_R_NFE_TME'
+    RemoteServer = dmGeral.pcConecao
+    Left = 268
+    Top = 90
+    object FAT_CD_R_NFE_TMEint_nometme: TWideStringField
+      FieldName = 'int_nometme'
+      Size = 30
+    end
+    object FAT_CD_R_NFE_TMEvlr_liquido: TFMTBCDField
+      FieldName = 'vlr_liquido'
+      Precision = 32
+    end
+    object FAT_CD_R_NFE_TMEnfe_cod_sit: TWideStringField
+      FieldName = 'nfe_cod_sit'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_TMEid_empresa: TIntegerField
+      FieldName = 'id_empresa'
+    end
+    object FAT_CD_R_NFE_TMEint_nomeemp: TWideStringField
+      FieldName = 'int_nomeemp'
+      Size = 50
+    end
+  end
+  object FAT_CD_R_NFE_CFO: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'FAT_DP_R_NFE_CFO'
+    RemoteServer = dmGeral.pcConecao
+    Left = 268
+    Top = 34
+    object FAT_CD_R_NFE_CFOint_nomecfo: TWideStringField
+      FieldName = 'int_nomecfo'
+      Size = 400
+    end
+    object FAT_CD_R_NFE_CFOvlr_liquido: TFMTBCDField
+      FieldName = 'vlr_liquido'
+      Precision = 32
+    end
+    object FAT_CD_R_NFE_CFOvlr_icm: TFMTBCDField
+      FieldName = 'vlr_icm'
+      Precision = 32
+    end
+    object FAT_CD_R_NFE_CFOvlr_icm_subs: TFMTBCDField
+      FieldName = 'vlr_icm_subs'
+      Precision = 32
+    end
+    object FAT_CD_R_NFE_CFOvlr_pis_cof: TFMTBCDField
+      FieldName = 'vlr_pis_cof'
+      Precision = 32
+    end
+    object FAT_CD_R_NFE_CFOid_cfo: TWideStringField
+      FieldName = 'id_cfo'
+      Size = 5
+    end
+    object FAT_CD_R_NFE_CFOnfe_cod_sit: TWideStringField
+      FieldName = 'nfe_cod_sit'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_CFOid_empresa: TIntegerField
+      FieldName = 'id_empresa'
+    end
+    object FAT_CD_R_NFE_CFOint_nomeemp: TWideStringField
+      FieldName = 'int_nomeemp'
+      Size = 50
+    end
+  end
+  object pmExcluirFornecedor: TPopupMenu
+    Left = 832
+    Top = 445
+    object btnRemoverRegistroFornecedor: TMenuItem
+      Caption = 'Remover Registro'
+      OnClick = btnRemoverRegistroFornecedorClick
+    end
+  end
+  object FAT_CD_R_NFE_DPI: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'FAT_DP_R_NFE_DPI'
+    RemoteServer = dmGeral.pcConecao
+    Left = 165
+    Top = 10
+    object FAT_CD_R_NFE_DPIsap: TWideMemoField
+      FieldName = 'sap'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIempresa: TWideStringField
+      FieldName = 'empresa'
+      Size = 50
+    end
+    object FAT_CD_R_NFE_DPIproduto: TWideStringField
+      FieldName = 'produto'
+      Size = 100
+    end
+    object FAT_CD_R_NFE_DPInumeronotafiscal: TIntegerField
+      FieldName = 'numero nota fiscal'
+    end
+    object FAT_CD_R_NFE_DPIdatadeemissãonotafiscal: TDateField
+      FieldName = 'data de emiss'#227'o nota fiscal'
+    end
+    object FAT_CD_R_NFE_DPIcfop: TWideStringField
+      FieldName = 'cfop'
+      Size = 5
+    end
+    object FAT_CD_R_NFE_DPInatureza: TWideMemoField
+      FieldName = 'natureza'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIcliente_fornecedor: TWideMemoField
+      FieldName = 'cliente_fornecedor'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIcpf_cnpj: TWideStringField
+      FieldName = 'cpf_cnpj'
+    end
+    object FAT_CD_R_NFE_DPIinscricao_prod: TWideMemoField
+      FieldName = 'inscricao_prod'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPImunicipio: TWideMemoField
+      FieldName = 'municipio'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIestado: TWideMemoField
+      FieldName = 'estado'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIdta_documento: TDateField
+      FieldName = 'dta_documento'
+    end
+    object FAT_CD_R_NFE_DPIquantidade: TFloatField
+      FieldName = 'quantidade'
+    end
+    object FAT_CD_R_NFE_DPIvlr_unitario: TFMTBCDField
+      FieldName = 'vlr_unitario'
+      Precision = 18
+      Size = 6
+    end
+    object FAT_CD_R_NFE_DPIvalor_total: TFMTBCDField
+      FieldName = 'valor_total'
+      Precision = 32
+    end
+    object FAT_CD_R_NFE_DPIcultura: TWideMemoField
+      FieldName = 'cultura'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIconsultorvendedor: TWideMemoField
+      FieldName = 'consultor/vendedor'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIcpfconsultorvendedor: TWideStringField
+      FieldName = 'cpf consultor/vendedor'
+      Size = 11
+    end
+    object FAT_CD_R_NFE_DPIvendedor: TWideMemoField
+      FieldName = 'vendedor'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIgerente: TWideMemoField
+      FieldName = 'gerente'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPItelefonedoprodutor: TWideMemoField
+      FieldName = 'telefone do produtor'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_NFE_DPIserie: TWideStringField
+      FieldName = 'serie'
+      Size = 3
+    end
+    object FAT_CD_R_NFE_DPImodelo: TWideStringField
+      FieldName = 'modelo'
+      Size = 2
+    end
+    object FAT_CD_R_NFE_DPIid_pedido_venda: TIntegerField
+      FieldName = 'id_pedido_venda'
+    end
+    object FAT_CD_R_NFE_DPIid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object FAT_CD_R_NFE_DPIid_st_icm: TWideStringField
+      FieldName = 'id_st_icm'
+      Size = 3
+    end
+    object FAT_CD_R_NFE_DPIvlr_desconto: TFMTBCDField
+      FieldName = 'vlr_desconto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_DPIicm_n_valor: TFMTBCDField
+      FieldName = 'icm_n_valor'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_NFE_DPIid_und_venda: TWideStringField
+      FieldName = 'id_und_venda'
+      Size = 3
+    end
+    object FAT_CD_R_NFE_DPIint_nomecpg: TWideStringField
+      FieldName = 'int_nomecpg'
+      Size = 30
+    end
+    object FAT_CD_R_NFE_DPIint_nometme: TWideStringField
+      FieldName = 'int_nometme'
+      Size = 30
+    end
+  end
+  object FAT_DB_R_NFE_DPI: TfrxDBDataset
+    UserName = 'FAT_DB_R_NFE_DPI'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'sap=sap'
+      'empresa=empresa'
+      'produto=produto'
+      'numero nota fiscal=numero nota fiscal'
+      'data de emiss'#227'o nota fiscal=data de emiss'#227'o nota fiscal'
+      'cfop=cfop'
+      'natureza=natureza'
+      'cliente_fornecedor=cliente_fornecedor'
+      'cpf_cnpj=cpf_cnpj'
+      'inscricao_prod=inscricao_prod'
+      'municipio=municipio'
+      'estado=estado'
+      'dta_documento=dta_documento'
+      'quantidade=quantidade'
+      'vlr_unitario=vlr_unitario'
+      'valor_total=valor_total'
+      'cultura=cultura'
+      'consultor/vendedor=consultor/vendedor'
+      'cpf consultor/vendedor=cpf consultor/vendedor'
+      'vendedor=vendedor'
+      'gerente=gerente'
+      'telefone do produtor=telefone do produtor'
+      'serie=serie'
+      'modelo=modelo'
+      'id_pedido_venda=id_pedido_venda'
+      'id_item=id_item'
+      'id_st_icm=id_st_icm'
+      'vlr_desconto=vlr_desconto'
+      'icm_n_valor=icm_n_valor'
+      'id_und_venda=id_und_venda'
+      'int_nomecpg=int_nomecpg'
+      'int_nometme=int_nometme')
+    DataSet = FAT_CD_R_NFE_DPI
+    BCDToCurrency = False
+    Left = 600
+    Top = 278
+  end
+  object FAT_FR_R_NFE_DPI: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41822.420257245400000000
+    ReportOptions.LastChange = 41835.722833599500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 830
+    Top = 32
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = FAT_DB_R_NFE_DPI
+        DataSetName = 'FAT_DB_R_NFE_DPI'
+      end>
+    Variables = <
+      item
+        Name = ' Externa'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = ''
+      end
+      item
+        Name = 'ExibirNotaCancelada'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 75.590600000000000000
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 903.307670000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 385.512060000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Nota Fiscal - Detalhado por Item')
+          ParentFont = False
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataField = 'emp_fantasia'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+        object ingEmpresa1: TfrxPictureView
+          Left = 918.425790000000000000
+          Width = 128.504020000000000000
+          Height = 52.913420000000000000
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 230.551330000000000000
+        Width = 1046.929810000000000000
+        DataSet = FAT_DB_R_NFE_DPI
+        DataSetName = 'FAT_DB_R_NFE_DPI'
+        RowCount = 0
+        object FAT_DB_R_NFE_DPIempresa: TfrxMemoView
+          Width = 226.771738980000000000
+          Height = 15.118110240000000000
+          DataField = 'cliente_fornecedor'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."cliente_fornecedor"]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 230.551330000000000000
+          Width = 56.692950000000000000
+          Height = 15.118110240000000000
+          DataField = 'numero nota fiscal'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."numero nota fiscal"]')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 291.023810000000000000
+          Width = 26.456710000000000000
+          Height = 15.118110240000000000
+          DataField = 'serie'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."serie"]')
+          ParentFont = False
+        end
+        object Memo24: TfrxMemoView
+          Left = 321.260050000000000000
+          Width = 22.677180000000000000
+          Height = 15.118110240000000000
+          DataField = 'modelo'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."modelo"]')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          Left = 347.716760000000000000
+          Width = 45.354360000000000000
+          Height = 15.118110240000000000
+          DataField = 'id_pedido_venda'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."id_pedido_venda"]')
+          ParentFont = False
+        end
+        object Memo28: TfrxMemoView
+          Left = 396.850650000000000000
+          Width = 30.236240000000000000
+          Height = 15.118110240000000000
+          DataField = 'cfop'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."cfop"]')
+          ParentFont = False
+        end
+        object Memo29: TfrxMemoView
+          Left = 430.866420000000000000
+          Width = 60.472440940000000000
+          Height = 15.118110240000000000
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."data de emiss'#227'o nota fiscal"]')
+          ParentFont = False
+        end
+        object Memo30: TfrxMemoView
+          Left = 495.118430000000000000
+          Width = 60.472480000000000000
+          Height = 15.118110240000000000
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."dta_documento"]')
+          ParentFont = False
+        end
+        object Memo31: TfrxMemoView
+          Left = 559.370440000000000000
+          Width = 90.708634570000000000
+          Height = 15.118110240000000000
+          StretchMode = smActualHeight
+          DataField = 'int_nomecpg'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."int_nomecpg"]')
+          ParentFont = False
+        end
+        object Memo32: TfrxMemoView
+          Left = 652.299630000000000000
+          Width = 113.385814570000000000
+          Height = 15.118110240000000000
+          StretchMode = smActualHeight
+          DataField = 'int_nometme'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."int_nometme"]')
+          ParentFont = False
+        end
+        object Memo35: TfrxMemoView
+          Left = 767.244590000000000000
+          Width = 22.677180000000000000
+          Height = 15.118110240000000000
+          DataField = 'id_und_venda'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."id_und_venda"]')
+          ParentFont = False
+        end
+        object Memo36: TfrxMemoView
+          Left = 793.701300000000000000
+          Width = 22.677180000000000000
+          Height = 15.118110240000000000
+          DataField = 'id_st_icm'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."id_st_icm"]')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 820.158010000000000000
+          Width = 30.236240000000000000
+          Height = 15.118110240000000000
+          DataField = 'quantidade'
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."quantidade"]')
+          ParentFont = False
+        end
+        object Memo37: TfrxMemoView
+          Left = 854.173780000000000000
+          Width = 49.133890000000000000
+          Height = 15.118110240000000000
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."vlr_unitario"]')
+          ParentFont = False
+        end
+        object Memo38: TfrxMemoView
+          Left = 907.087200000000000000
+          Width = 37.795300000000000000
+          Height = 15.118110240000000000
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."vlr_desconto"]')
+          ParentFont = False
+        end
+        object Memo39: TfrxMemoView
+          Left = 948.662030000000000000
+          Width = 37.795300000000000000
+          Height = 15.118110240000000000
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."icm_n_valor"]')
+          ParentFont = False
+        end
+        object Memo40: TfrxMemoView
+          Left = 990.236860000000000000
+          Width = 56.692950000000000000
+          Height = 15.118110240000000000
+          DataSet = FAT_DB_R_NFE_DPI
+          DataSetName = 'FAT_DB_R_NFE_DPI'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."valor_total"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 404.409710000000000000
+        Width = 1046.929810000000000000
+        object Memo25: TfrxMemoView
+          Left = 264.567100000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+        object Assin_enorth: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Assin_enorth]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 317.480520000000000000
+        Width = 1046.929810000000000000
+        Stretched = True
+        object txtOpcoesRelGer: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.695950590000000000
+          Width = 650.301521760000000000
+          Height = 18.897650000000000000
+          StretchMode = smActualHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Opcoes]')
+          ParentFont = False
+        end
+        object Memo34: TfrxMemoView
+          Left = 982.352941180000000000
+          Top = 3.695950590000000000
+          Width = 62.723544120000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_DPI."valor_total">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo43: TfrxMemoView
+          Left = 676.470588240000000000
+          Top = 3.695950590000000000
+          Width = 55.664720590000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Totais :')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 19.118110240000000000
+        Top = 151.181200000000000000
+        Width = 1046.929810000000000000
+        ReprintOnNewPage = True
+        object Shape1: TfrxShapeView
+          Width = 1046.929810000000000000
+          Height = 15.118120000000000000
+          Fill.BackColor = 15395562
+          Frame.Color = 15395562
+        end
+        object Memo18: TfrxMemoView
+          Left = 559.370440000000000000
+          Width = 90.708634570000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Condi'#231#227'o de Pag.')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 291.023810000000000000
+          Width = 26.456710000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Serie')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 430.866420000000000000
+          Width = 60.472440940000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emiss'#227'o')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 396.850650000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CFOP')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Width = 226.771738980000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Emitente')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 495.118430000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Entrada/Saida')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 230.551330000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Fiscal')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 321.260050000000000000
+          Width = 22.677180000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Mod')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 347.716760000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'N'#186' Pedido')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Left = 652.299630000000000000
+          Width = 113.385814570000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Tipo de Estoque')
+          ParentFont = False
+        end
+        object Memo14: TfrxMemoView
+          Left = 767.244590000000000000
+          Width = 22.677180000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'UND')
+          ParentFont = False
+        end
+        object Memo15: TfrxMemoView
+          Left = 793.701300000000000000
+          Width = 22.677180000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'CST')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 820.158010000000000000
+          Width = 30.236240000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 854.173780000000000000
+          Width = 49.133890000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Unitario')
+          ParentFont = False
+        end
+        object Memo21: TfrxMemoView
+          Left = 907.087200000000000000
+          Width = 37.795300000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Desc')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Left = 948.662030000000000000
+          Width = 37.795300000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Icms')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Left = 990.236860000000000000
+          Width = 56.692950000000000000
+          Height = 15.118110240000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vlr.Total')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 188.976500000000000000
+        Width = 1046.929810000000000000
+        Condition = 'FAT_DB_R_NFE_DPI."id_item"'
+        object Memo41: TfrxMemoView
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Produtos :')
+          ParentFont = False
+        end
+        object Line2: TfrxLineView
+          Top = 15.118120000000000000
+          Width = 1046.929810000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo42: TfrxMemoView
+          Left = 64.252010000000000000
+          Width = 982.677800000000000000
+          Height = 15.118120000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_R_NFE_DPI."id_item"] - [FAT_DB_R_NFE_DPI."produto"]')
+          ParentFont = False
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 268.346630000000000000
+        Width = 1046.929810000000000000
+        object Memo11: TfrxMemoView
+          Left = 982.352941170000000000
+          Top = 4.065134710000000000
+          Width = 62.723544120000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_DPI."valor_total">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 676.470588230000000000
+          Top = 4.065134710000000000
+          Width = 55.664720590000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Totais :')
+          ParentFont = False
+        end
+        object Memo33: TfrxMemoView
+          Left = 794.729529410000000000
+          Top = 4.065134710000000000
+          Width = 55.664720590000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<FAT_DB_R_NFE_DPI."quantidade">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object pmExcluirItem: TPopupMenu
+    Left = 319
+    Top = 427
+    object bntRemoverItem: TMenuItem
+      Caption = 'Remover Item'
+      OnClick = bntRemoverItemClick
+    end
+  end
+  object pmSelGrupoItem: TPopupMenu
+    Left = 392
+    Top = 331
+    object MenuItemGruposItens: TMenuItem
+      Caption = 'Todos os Grupos de Itens'
+      OnClick = MenuItemGruposItensClick
+    end
+  end
+  object pmExcluirAlm: TPopupMenu
+    Left = 392
+    Top = 374
+    object btnExcluirAlm: TMenuItem
+      Caption = 'Remover Todos'
+      OnClick = btnExcluirAlmClick
+    end
+  end
+  object pmRemoverTodosGrupos: TPopupMenu
+    Left = 489
+    Top = 328
+    object btnRemoverTodosGrupos: TMenuItem
+      Caption = 'Remover Todos Grupos'
+      OnClick = btnRemoverTodosGruposClick
+    end
+  end
+  object pmSelAlm: TPopupMenu
+    Left = 496
+    Top = 374
+    object btnSelAlm: TMenuItem
+      Caption = 'Todos Almoxarifados'
+      OnClick = btnSelAlmClick
+    end
+  end
+  object pmSelFamItem: TPopupMenu
+    Left = 142
+    Top = 308
+    object btnSelTipos: TMenuItem
+      Caption = 'Todos as Fam'#237'lias'
+      OnClick = btnSelTiposClick
+    end
+  end
+  object pmExcluirFam: TPopupMenu
+    Left = 142
+    Top = 372
+    object btnExcluirTipoItem: TMenuItem
+      Caption = 'Remover Todas as Fam'#237'lias'
+      OnClick = btnExcluirTipoItemClick
+    end
+  end
+end

@@ -1,0 +1,7 @@
+/******** 28/06/2019 **********/
+
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "dta_hor_ini_viagem" timestamptz;
+
+

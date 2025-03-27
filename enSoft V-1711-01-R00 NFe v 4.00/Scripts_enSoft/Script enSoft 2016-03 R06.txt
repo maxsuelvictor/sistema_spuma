@@ -1,0 +1,27 @@
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_ors" int4;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "rcr_id_tipo_financeiro" int4,
+ADD COLUMN "rcr_id_plano" char(11);
+
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ADD COLUMN "id_recibo" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_mch"."id_recibo" IS 'Esse campo é utilizado para registrar nº do recibo';
+
+
+ALTER TABLE "public"."fin_tb_m_rbx"
+ADD COLUMN "id_recibo" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rbx"."id_recibo" IS 'Esse campo é utilizado para conter nº do recibo';
+
+
+
+ALTER TABLE "public"."fin_tb_m_pbx"
+ADD COLUMN "id_recibo" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_pbx"."id_recibo" IS 'Esse campo é utilizado para conter nº do recibo';
+
+

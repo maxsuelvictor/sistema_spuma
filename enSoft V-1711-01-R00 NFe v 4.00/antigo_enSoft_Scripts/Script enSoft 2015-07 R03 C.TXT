@@ -1,0 +1,31 @@
+ALTER TABLE "public"."fin_tb_m_mch_tit"
+DROP COLUMN "id_conta",
+DROP COLUMN "id_abertura";
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ADD COLUMN "id_abertura" int4;
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ALTER COLUMN "hor_movimento" TYPE time(6);
+
+
+ALTER TABLE "public"."fin_tb_m_rec_hch"
+ALTER COLUMN "hor_movimento" TYPE time(6);
+
+ALTER TABLE "public"."fat_tb_m_rom_nfe"
+DROP CONSTRAINT "fk_fat_m_rom_ped__fat_m_rom",
+ADD CONSTRAINT "fk_fat_m_rom_nfe__fat_m_rom" FOREIGN KEY ("id_romaneio") REFERENCES "public"."fat_tb_m_rom" ("id_romaneio") ON DELETE CASCADE ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_fat_m_rom_ped__fat_m_ped",
+ADD CONSTRAINT "fk_fat_m_rom_nfe__fat_m_nfe" FOREIGN KEY ("id_fiscal") REFERENCES "public"."fat_tb_m_nfe" ("id_fiscal") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."fat_tb_m_rom_nfe_ite"
+DROP CONSTRAINT "fk_fat_m_rom_nfe_ite__cad_c_cor",
+DROP CONSTRAINT "fk_fat_m_rom_nfe_ite__cad_c_ite";
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "id_conciliacao" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."id_conciliacao" IS 'Campo utilizado pela Rotina de Conciliação bancária;';
+
+

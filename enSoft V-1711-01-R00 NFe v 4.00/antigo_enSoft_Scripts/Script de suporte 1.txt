@@ -1,0 +1,22 @@
+/* preenche as nota fiscais de venda com os % do D.R.E do Grupo de Estoque */
+
+/** ATENÇÃO: SÓ TEM SENTIDO RODAR ESTE UPDATE SE O CADASTRO DO GRUPO ESTIVER
+    COM OS PERCENTUAIS DE D.R.E Preenchidos **/
+
+update fat_tb_m_nfe_ite 
+   set dre_perc_out_ded_ven = ttt.dre_perc_out_ded_ven ,
+       dre_perc_ircs = ttt.dre_perc_ircs 
+from (
+select nfi.id_fiscal, nfi.id_sequencia, nfi.id_item, COALESCE(gru.dre_perc_out_ded_ven,0) dre_perc_out_ded_ven , COALESCE(gru.dre_perc_ircs,0) dre_perc_ircs
+  from fat_tb_m_nfe_ite nfi
+  left outer join fat_tb_m_nfe nff on nff.id_fiscal = nfi.id_fiscal            
+  left outer join cad_tb_c_ite ite on (ite.id_item  = nfi.id_item)
+  left outer join cad_tb_c_gru gru on (gru.id_grupo = ite.id_grupo)
+  left outer join cad_tb_c_cfo cfo on cfo.id_cfo    = nff.id_cfo 
+where
+    cfo.id_classe in ('SP10','SP70') and nff.status = 1 and 
+		nff.faturada = true and nff.tipo_nf = 'S'    
+order by 1,2,3,4,5) ttt
+where fat_tb_m_nfe_ite.id_fiscal = ttt.id_fiscal
+  and fat_tb_m_nfe_ite.id_sequencia = ttt.id_sequencia
+  and fat_tb_m_nfe_ite.id_item = ttt.id_item;

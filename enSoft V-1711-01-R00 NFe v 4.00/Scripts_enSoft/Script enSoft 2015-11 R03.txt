@@ -1,0 +1,3 @@
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."nfe_ecf" IS '0-NFE; 
+1-ECF; 2-NFCe';

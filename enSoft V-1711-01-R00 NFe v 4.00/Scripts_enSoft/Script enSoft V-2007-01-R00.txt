@@ -1,0 +1,15 @@
+/****** 27/07/20 *******/
+
+ALTER TABLE "public"."pcp_tb_c_mta"
+ADD COLUMN "filiacao" varchar(100),
+ADD COLUMN "nome_contato_1" varchar(50),
+ADD COLUMN "fone_contato_1" varchar(14),
+ADD COLUMN "tipo_cnh" varchar(10);
+
+
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "cubagem_carga" float8;
+
+
+

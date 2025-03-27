@@ -1,0 +1,236 @@
+/** 01/11/2016 **/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "cod_tri_mcp" varchar(20),
+ADD COLUMN "cod_ite_ser" varchar(5);
+
+
+/*** 03/11/2016 ***/
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."nfe_ecf" IS '0-NFE; 
+1-ECF; 2-NFCe; 3-NFSe';
+
+
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "cod_fab_danfe" bool;
+
+update cad_tb_c_for set cod_fab_danfe=false
+where cod_fab_danfe is null;
+
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "id_cultura" int4;
+
+
+
+/***** 09/11/2016 ****/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "avf_peso_01" float8,
+ADD COLUMN "avf_peso_02" float8,
+ADD COLUMN "avf_peso_03" float8,
+ADD COLUMN "avf_peso_04" float8,
+ADD COLUMN "avf_peso_05" float8,
+ADD COLUMN "avf_peso_06" float8,
+ADD COLUMN "avf_peso_07" float8;
+
+
+
+/***** 10/11/2016 *****/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_propriedade" int4;
+
+ 
+ALTER TABLE "public"."cad_tb_c_tme"
+ADD COLUMN "cfo_exterior_pf" char(5),
+ADD COLUMN "cfo_exterior_pj" char(5);
+
+
+/****** 14/11/2016 ******/
+
+
+CREATE TABLE "public"."cad_tb_c_ite_coj" (
+"id_item" int4 NOT NULL,
+"id_item_conjugado" int4 NOT NULL,
+"qtde" float8,
+CONSTRAINT "cad_tb_c_ite_coj_pkey" PRIMARY KEY ("id_item", "id_item_conjugado"),
+CONSTRAINT "fk_cad_c_ite_coj__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_ite_coj" OWNER TO "postgres";
+
+ALTER TABLE "public"."cad_tb_c_ite_coj"
+ADD COLUMN "id_busca_item" varchar(30);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ativa_ite_conj" bool;
+
+update cad_tb_c_par_ctr set ativa_ite_conj=FALSE
+where ativa_ite_conj is null;
+
+ 
+
+COMMENT ON COLUMN "public"."cad_tb_c_pct"."tipo_desp" IS '0 - Despesas,
+1 - Receitas,
+2 - SemFluxo,
+3 - Tributos,
+4 - Resultado, 5 - Investimento ';
+
+
+/***** 17/11/2016 *****/
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_coj_ite" int4;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "id_ccusto" int4;
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "custo_servico" numeric(18,4);
+
+
+
+update cad_tb_c_par_ctr
+  set ASSOCIADO_ACAVASF = FALSE
+where ASSOCIADO_ACAVASF is null;
+
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "path_xml_outros" varchar(200);
+
+
+
+
+
+/****** 18/11/2016 ******/
+
+update cad_tb_c_par_nfe set path_xml_outros = path_xml
+where path_xml_outros is null
+
+
+/***** 19/11/2016 ****/
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag"."origem" IS '0-Estoque
+  1-Caixa/Banco  2 - Pequenas Despesas  3 - Baixa Contas a Pagar  4 - Movimento Bancário - 5 - Contas a Pagar';
+
+
+
+
+/*** 21/11/2016 ***/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_zerar_est" bool;
+
+update cad_tb_c_fun set seg_zerar_est=FALSE
+where seg_zerar_est is null;
+
+
+ALTER TABLE "public"."cad_tb_c_cli_inf"
+ADD COLUMN "dta_ult_compra" date,
+ADD COLUMN "vlr_ult_compra" numeric(18,4);
+
+
+
+/**** 22/11/2016 ****/
+
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ADD COLUMN "dta_lancamento" date;
+
+
+
+update FIN_TB_M_PAG
+set dta_lancamento = dta_emissao
+where dta_lancamento is null;
+
+
+
+/****** 23/11/2016 *****/
+
+ALTER TABLE "public"."est_tb_m_mal"
+ADD COLUMN "id_ccusto" int4,
+ADD CONSTRAINT "fk_est_m_mal__cad_c_ccu" FOREIGN KEY ("id_ccusto") REFERENCES "public"."cad_tb_c_ccu" ("id_ccusto") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+/***** 01/12/2016 ***** POR Luan ******/
+with pag as (select id_tabela,sequencia from cad_tb_c_seq seq where seq.id_tabela='FIN_TB_M_PAG')
+update cad_tb_c_seq set 
+  sequencia=ttt.nova_seq
+ from 
+(select 
+    (case
+         when pag.sequencia>seq.sequencia then pag.sequencia
+     ELSE 
+         seq.sequencia end) as nova_seq
+ from cad_tb_c_seq seq 
+     left outer join pag on pag.id_tabela='FIN_TB_M_PAG'
+ where  
+     seq.id_tabela='FAT_TB_M_NFE_TIT') ttt
+
+where id_tabela='FAT_TB_M_NFE_TIT';
+
+
+/**************************************/
+
+
+
+/*** 08/12/2016 ***/
+CREATE TABLE "public"."pcp_tb_m_ors_ico" (
+"id_ors" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"id_cor" int4 NOT NULL,
+"id_tamanho" int4 NOT NULL,
+"qtde" float8 NOT NULL,
+"vlr_unitario" numeric(18,4),
+"vlr_bruto" numeric(18,4),
+"id_sequencia_icf" int4,
+"vlr_liquido" numeric(18,2),
+"vlr_desconto" numeric(18,2),
+"per_desconto" float8,
+CONSTRAINT "pcp_tb_m_ors_ite_copy_pkey" PRIMARY KEY ("id_ors", "id_sequencia"),
+CONSTRAINT "fk_pcp_m_ors_ico__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_ors_ico__pcp_m_ors" FOREIGN KEY ("id_ors") REFERENCES "public"."pcp_tb_m_ors" ("id_ors") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_ors_ico" OWNER TO "postgres";
+/*******************************************************************/
+
+
+
+ALTER TABLE "public"."pcp_tb_m_ors_ico"
+DROP COLUMN "id_sequencia_icf";
+
+
+/****** 10/12/2016 ********/
+
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "dta_saida" date,
+ADD COLUMN "hor_saida" time(6),
+ADD COLUMN "id_ors_saida" int4,
+ADD COLUMN "id_rom_saida" int4,
+ADD COLUMN "id_funcionario_sai" varchar(255);
+
+COMMENT ON COLUMN "public"."pcp_tb_m_etq"."dta_saida" IS 'Data da saída do produto(etiqueta) do estoque';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_etq"."hor_saida" IS 'Hora da saída do produto(etiqueta) do estoque';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_etq"."id_ors_saida" IS 'Ordem de Faturamento responsável pela saída do produto(etiqueta)';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_etq"."id_rom_saida" IS 'Romaneio que tem a conferência desta etiqueta.';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_etq"."id_funcionario_sai" IS 'Responsável pela saída do produto(etiqueta) do estoque';
+
+

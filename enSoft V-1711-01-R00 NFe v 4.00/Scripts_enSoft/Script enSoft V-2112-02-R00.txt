@@ -1,0 +1,4 @@
+/****** 15/12/2021 ******/
+
+ALTER TABLE "public"."pcp_tb_m_epp_ite"
+ADD COLUMN "lancto_func_colch_manual" bool;

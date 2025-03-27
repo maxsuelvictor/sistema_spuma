@@ -1,0 +1,23 @@
+/******** 04/09/20 ***********/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "tam_esp_espessura_1" float8,
+ADD COLUMN "tam_esp_espessura_2" float8,
+ADD COLUMN "tam_esp_espessura_3" float8,
+ADD COLUMN "tam_esp_comprimento_1" float8,
+ADD COLUMN "tam_esp_comprimento_2" float8,
+ADD COLUMN "tam_esp_comprimento_3" float8,
+ADD COLUMN "tam_esp_largura_1" float8,
+ADD COLUMN "tam_esp_largura_2" float8,
+ADD COLUMN "tam_esp_largura_3" float8,
+ADD COLUMN "cubagem_esp_1" float8,
+ADD COLUMN "cubagem_esp_2" float8,
+ADD COLUMN "cubagem_esp_3" float8;
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "id_item_bloco_espuma_2" int4,
+ADD COLUMN "id_item_bloco_espuma_3" int4;
+
+

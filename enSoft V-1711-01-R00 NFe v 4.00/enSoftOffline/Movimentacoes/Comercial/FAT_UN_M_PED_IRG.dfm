@@ -1,0 +1,134 @@
+object FAT_FM_M_PED_IRG: TFAT_FM_M_PED_IRG
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  ClientHeight = 162
+  ClientWidth = 405
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlTop: TPanel
+    Left = 0
+    Top = 0
+    Width = 405
+    Height = 33
+    Align = alTop
+    Color = 3355443
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitWidth = 427
+    object Label1: TLabel
+      Left = 1
+      Top = 1
+      Width = 403
+      Height = 31
+      Align = alClient
+      Alignment = taCenter
+      Caption = 'Importar Registros'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ExplicitWidth = 175
+      ExplicitHeight = 25
+    end
+  end
+  object pnlPrincipal: TPanel
+    Left = 0
+    Top = 33
+    Width = 405
+    Height = 129
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitWidth = 427
+    object Label2: TLabel
+      Left = 41
+      Top = 22
+      Width = 115
+      Height = 13
+      Caption = 'Digite o c'#243'digo da rota :'
+    end
+    object txtPrg: TLabel
+      Left = 15
+      Top = 86
+      Width = 380
+      Height = 13
+      Caption = 'txtPrg'
+    end
+    object txtIdRota: TEdit
+      Left = 158
+      Top = 19
+      Width = 95
+      Height = 21
+      TabOrder = 0
+    end
+    object btnImportarReg: TcxButton
+      Left = 259
+      Top = 17
+      Width = 81
+      Height = 25
+      Caption = 'Importar'
+      TabOrder = 1
+      OnClick = btnImportarRegClick
+    end
+    object pb: TProgressBar
+      Left = 15
+      Top = 55
+      Width = 380
+      Height = 25
+      Max = 19
+      Position = 14
+      MarqueeInterval = 0
+      Step = 1
+      TabOrder = 2
+    end
+    object btnSair: TcxButton
+      Left = 320
+      Top = 102
+      Width = 75
+      Height = 25
+      Caption = 'Sair'
+      OptionsImage.Glyph.Data = {
+        46030000424D460300000000000036000000280000000E0000000E0000000100
+        2000000000001003000000000000000000000000000000000000000000000000
+        000000000000000000000000000002020208252525BC17171774060606210000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00001E1E1E981313135F2F2F2FEF323232FF2F2F2FF2222222AE101010530000
+        0000000000000000000000000000000000000000000000000000323232FF1E1E
+        1E9B2B2B2BDD323232FF323232FF323232FF303030F700000000000000000000
+        000000000000000000000000000000000000323232FD1D1D1D932C2C2CDE3232
+        32FF323232FF323232FF2F2F2FF1000000000000000000000000000000000000
+        00000000000000000000323232FD1D1D1D932C2C2CDE323232FF323232FF3232
+        32FF2F2F2FF00000000000000000000000000000000000000000000000000000
+        0000323232FD1D1D1D922D2D2DE7323232FF323232FF323232FF2F2F2FF00000
+        0000000000000000000000000000000000000000000000000000323232FD1F1F
+        1F9C1D1D1D94242424B8323232FF323232FF2F2F2FF000000000000000000000
+        000000000000000000000000000000000000323232FD1F1F1F9C1D1D1D942424
+        24B8323232FF323232FF2F2F2FF0000000000000000000000000000000000000
+        00000000000000000000323232FD1D1D1D922D2D2DE7323232FF323232FF3232
+        32FF2F2F2FF00000000000000000000000000000000000000000000000000000
+        0000323232FD1D1D1D932C2C2CDE323232FF323232FF323232FF2F2F2FF00000
+        0000000000000000000000000000000000000000000000000000323232FD1D1D
+        1D932C2C2CDE323232FF323232FF323232FF2F2F2FF000000000000000000000
+        000000000000000000000000000000000000323232FF1E1E1E9B2B2B2BDD3232
+        32FF323232FF323232FF313131FB000000000000000000000000000000000000
+        000000000000000000001E1E1E981212125E2F2F2FEE323232FF323232FF2E2E
+        2EED222222AC0000000000000000000000000000000000000000000000000000
+        00000000000001010107272727C51D1D1D961010105105050517000000000000
+        00000000000000000000}
+      TabOrder = 3
+      OnClick = btnSairClick
+    end
+  end
+end

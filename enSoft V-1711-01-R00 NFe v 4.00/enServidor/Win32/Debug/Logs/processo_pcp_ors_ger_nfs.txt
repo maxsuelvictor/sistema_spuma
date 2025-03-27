@@ -1,0 +1,2 @@
+PCP_DP_M_ORS: Geração NF: Fase 9
+PCP_DP_M_ORS: Geração NF: Fase encerrada

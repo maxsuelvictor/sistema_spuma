@@ -1,0 +1,16 @@
+ALTER TABLE "public"."fin_tb_m_cob"
+ADD COLUMN "nome_contato" varchar(80);
+
+
+ALTER TABLE "public"."pcp_tb_m_acr_ite_pcn"
+DROP COLUMN "data_entrada",
+DROP COLUMN "observacao",
+DROP COLUMN "indicacor_destino",
+DROP COLUMN "id_responsavel";
+
+
+ALTER TABLE "public"."pcp_tb_m_acr_ite_pcr"
+DROP COLUMN "dta_entrada",
+DROP COLUMN "observacao",
+DROP COLUMN "id_responsavel";
+

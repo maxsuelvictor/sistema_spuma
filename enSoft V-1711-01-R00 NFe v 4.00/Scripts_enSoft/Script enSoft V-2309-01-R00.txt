@@ -1,0 +1,14 @@
+/***** 12-09-23 ****/
+
+ALTER TABLE "public"."pcp_tb_c_reg"
+ADD COLUMN "unifica_desc_reg" bool;
+
+COMMENT ON COLUMN "public"."pcp_tb_c_reg"."unifica_desc_reg" IS 'Se "true", ele irá somar o desconto do Pai + o registro do filho reg_ite';
+
+
+
+update pcp_tb_c_reg 
+   set unifica_desc_reg = true
+where  unifica_desc_reg is null;
+
+

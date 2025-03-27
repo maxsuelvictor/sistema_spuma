@@ -1,0 +1,16 @@
+﻿ALTER TABLE "public"."fat_tb_m_nfe_dev_ite"
+ADD COLUMN "qtde_sld_orig" float8;
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_dev_ite"."qtde_sld_orig" IS 'Neste campo ficará o saldo da qtde do Item da Nota Fiscal de Origem.';
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_apr_rep_cmp_ped" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_apr_rep_cmp_ped" IS 'Permite ao usuário poder Aprovar/Reprovar pedido de compra.
+Importante:  O sistema só mostrará essa opção se o módulo SGQ = True;';
+
+
+update cad_tb_c_fun
+set seg_apr_rep_cmp_ped=FALSE
+where seg_apr_rep_cmp_ped is null;

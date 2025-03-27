@@ -1,0 +1,100 @@
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "orv_id_cargo_mec" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."orv_id_cargo_mec" IS 'Este campo será utilizado pelo módulo de oficina. O código do cargo que for informado aqui, estará informando para o sistema que todo funcionário que tiver cadastro neste código de cargo será considerado MECÂNICO.';
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "orv_critica_ite_aber" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."orv_critica_ite_aber" IS 'Este campo informa para o módulo de oficina que será obrigado a inserção de Itens na abertura da O.S.';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "orv_critica_ocv_aber" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."orv_critica_ocv_aber" IS 'Este campo informa para o módulo de oficina o seguinte procedimento: Caso o cliente tenha algum orçamento aberto para "aquele veículo", no momento da Abertura da O.S a importação deste orçamento passa a ser obrigatório.';
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "pec_vlr_bruto" TO "vlr_produtos";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "pec_vlr_desc" TO "vlr_desc_produtos";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "pec_per_desc" TO "per_desc_produtos";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "pec_vlr_liquido" TO "vlr_prod_liquido";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ser_vlr_bruto" TO "vlr_serv_bruto";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ser_vlr_desc" TO "vlr_desc_servicos";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ser_per_desc" TO "per_desc_servicos";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ser_vlr_liquido" TO "vlr_ser_liquido";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ter_vlr_bruto" TO "vlr_terceiro";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ter_vlr_desc" TO "vlr_desc_terceiro";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ter_per_desc" TO "per_desc_terceiro";
+
+ALTER TABLE "public"."ofi_tb_m_orv" RENAME "ter_vlr_liquido" TO "vlr_terc_liquido";
+
+
+
+COMMENT ON COLUMN "public"."est_tb_m_fea"."origem" IS '0 - Por Nota fiscal de entrada
+1 - Por Nota fiscal de saída
+2 - Por Ordem de saída
+3 - Por almoxarifado - Saída
+4 - Por inventário
+5 - Por almoxarifado - Devolucao. 6- Por Pedido de Venda 7 - Por Dev. de NF de Fornecedor  8 - Por Dev. de NF de Cliente  9 - Por abertura de OS';
+
+
+
+
+
+
+ALTER TABLE "public"."pcp_tb_m_ors_ite"
+ADD COLUMN "id_sequencia_ped" int4;
+
+ALTER TABLE "public"."pcp_tb_m_ors_ite" RENAME "id_ors_ite" TO "id_sequencia";
+
+
+ALTER TABLE "public"."fin_tb_m_con"
+ADD COLUMN "id_empresa" int4,
+ADD CONSTRAINT "fk_fin_m_con__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_ors_tit"
+ALTER COLUMN "che_conta" DROP NOT NULL,
+ALTER COLUMN "che_numero" DROP NOT NULL;
+
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+ADD COLUMN "selecao" char(1);
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."selecao" IS 'Este campo terá apenas a função de mostrar para o usuário que o registro foi selecionado para fazer relação com os movimentos bancários do enSoft;';
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+ALTER COLUMN "dta_movimento" TYPE time(6);
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "dta_conciliacao" date;
+
+ALTER TABLE "public"."ofi_tb_m_orv_ite"
+ADD COLUMN "vlr_unitario_orig" numeric(18,4);
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."vlr_unitario_orig" IS 'Este campo irá armazenar o preço original (Que é calculado pelo sistema).  Assim o sistema saberá se o usuário alterou o preço no pedido ao verificar VLR_UNITARIO vs VLR_UNITARIO_ORIG';
+
+
+ALTER TABLE "public"."ofi_tb_m_ocv_ite"
+ADD COLUMN "vlr_unitario_orig" numeric(18,4);
+
+COMMENT ON COLUMN "public"."ofi_tb_m_ocv_ite"."vlr_unitario_orig" IS 'Este campo irá armazenar o preço original (Que é calculado pelo sistema).  Assim o sistema saberá se o usuário alterou o preço no pedido ao verificar VLR_UNITARIO vs VLR_UNITARIO_ORIG';
+
+
+ALTER TABLE "public"."pcp_tb_m_ors_ite"
+DROP CONSTRAINT "fk_pcp_m_ors__cad_c_cor";
+

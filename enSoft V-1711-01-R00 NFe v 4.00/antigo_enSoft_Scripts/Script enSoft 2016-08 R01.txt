@@ -1,0 +1,87 @@
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seq_vis_alert_est_min" bool;
+
+
+update cad_tb_c_fun
+   set seq_vis_alert_est_min = FALSE
+where seq_vis_alert_est_min is null;
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "id_responsavel" int4,
+ADD CONSTRAINT "fk_cad_c_cli__cad_c_fun2" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."fin_tb_m_pbx"
+ADD COLUMN "vlr_tot_novo_tit" numeric(18,4);
+
+update fin_tb_m_pbx  
+   set vlr_tot_novo_tit = pgr.valor
+from
+(select pbx.id_baixa,coalesce(sum(ger.vlr_pagamento),0) as valor from fin_tb_m_pbx_ger ger
+left outer join fin_tb_m_pbx pbx on pbx.id_baixa=ger.id_baixa 
+group by pbx.id_baixa) pgr
+where fin_tb_m_pbx.id_baixa=pgr.id_baixa; 
+
+update fin_tb_m_pbx  
+   set vlr_tot_novo_tit = 0 where vlr_tot_novo_tit is null;
+
+
+
+update cad_tb_c_cid
+  set cod_pais = '01058' 
+where cod_pais is null and
+   uf <> 'EX';
+
+
+/**** 13/08/2016 ****/
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "vlr_min_parcela" numeric(18,4);
+
+COMMENT ON COLUMN "public"."cad_tb_c_fpg"."vlr_min_parcela" IS 'Campo utilizado pelo pedido de venda.';
+
+
+
+/**** 16/08/2016 ****/
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."regime" IS '0 - Simples Nacional; 
+1 - Normal - Lucro Presumido
+2 - Normal - Lucro Real'
+
+
+/*** 18/08/2016 ***/ 
+
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "bol_nome_arq_ret" varchar(50);
+
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "vlr_acrescimo" numeric(18,2);
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_pag"."vlr_acrescimo" IS 'Este campo é utilizado no momento de baixar o arquivo retorno do banco, ele tem o mesmo sentido do campo VLR_JUROS.';
+
+
+/*** 19/08/2016 ***/
+
+
+
+/*** Rordar esse UPDATE somente em TERESINA ***/
+    update fin_tb_m_rec
+       set vlr_saldo = 0
+    from 
+       (select id_titulo from fin_tb_m_rec rec
+        left outer join cad_tb_c_fpg fpg on (fpg.id_forma_pag = rec.id_forma_pag)
+         where fpg.doc_impresso = 4 
+           and rec.vlr_saldo < 0) ttt
+        where fin_tb_m_rec.id_titulo = ttt.id_titulo
+          and fin_tb_m_rec.vlr_saldo < 0;
+
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mal_tipo_estoque_ent" int4;
+

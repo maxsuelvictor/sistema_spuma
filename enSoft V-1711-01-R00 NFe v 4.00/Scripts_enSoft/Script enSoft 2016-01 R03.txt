@@ -1,0 +1,16 @@
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "cnpj_titular" varchar(14);
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."cnpj_titular" IS 'Este campo indica qual é o CNPJ titula da conta corrente,  pois para o BANCO DO BRASIL, esse valor é importante e a mesma conta corrente pode ser usada por outras filiais. Ex. A conta pode ser utilizada para emissão de boleto por N filiais, mas essa conta só tem um único CNPJ.';
+
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+DROP CONSTRAINT "fk_fin_m_rec_pag__fin_m_cbx";
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "id_cbx" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."id_cbx" IS 'Este campo é alimentado pela rotina de FIN_FM_M_CBX.';
+

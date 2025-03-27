@@ -1,0 +1,8 @@
+/*** 16-10-2023 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_nome_etq_maquete" varchar(100);
+
+
+
+

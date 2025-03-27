@@ -1,0 +1,32 @@
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "nfe_per_partilha_dest" float4,
+ADD COLUMN "nfe_per_partilha_orig" float4;
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "contribuinte" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_cli"."contribuinte" IS '0 - Contribuinte de ICMS
+1 - Não Contribuinte de ICMS
+2 - ISENTO';
+
+
+update cad_tb_c_cli
+set contribuinte = 1 
+where pessoa = 0 and
+  contribuinte is null;
+
+update cad_tb_c_cli
+set contribuinte = 0 
+where pessoa = 1 and
+  contribuinte is null;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ALTER COLUMN "nfe_per_partilha_dest" TYPE float8,
+ALTER COLUMN "nfe_per_partilha_orig" TYPE float8,
+ADD COLUMN "nfe_per_icms_saida" float8;
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "carteira_variacao" varchar(3);

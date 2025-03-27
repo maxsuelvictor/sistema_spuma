@@ -1,0 +1,19 @@
+/**** 10/05/2024 ****/
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "placa_reboque" char(8),
+ADD COLUMN "tara_reboque" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_vei"."placa_reboque" IS 'Este campo será preenchido quando o campo TIPO_RODADO for igual a CAVALO MECÂNICO.';
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "cap_reboque" float8,
+ADD COLUMN "cubagem_reboque" float8;
+
+
+/**** 22/05/2024 ****/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "nome_selo_inmetro_etq" varchar(100);
+
+

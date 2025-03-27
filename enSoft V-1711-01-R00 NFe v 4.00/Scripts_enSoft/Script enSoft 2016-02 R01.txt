@@ -1,0 +1,2 @@
+ALTER TABLE "public"."pcp_tb_m_acr_ite_prc"
+ALTER COLUMN "evento_ocorrido_reg_acao" TYPE varchar(500);

@@ -1,0 +1,274 @@
+/*** 29/05/2017 ***/
+
+
+ALTER TABLE "public"."ofi_tb_m_orv_ite"
+ADD COLUMN "id_ordem_subst" int4;
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_ordem_asub" int4;
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "ordem_substituicao" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "substituir_os" bool;
+
+UPDATE CAD_TB_C_PAR_CTR SET substituir_os=FALSE
+WHERE substituir_os IS NULL;
+
+
+ALTER TABLE "public"."cad_tb_c_ite_coj"
+DROP COLUMN "qtde_tempo";
+
+ALTER TABLE "public"."cad_tb_c_ite_coj"
+ADD COLUMN "qtde_tempo" char(6);
+
+/*** 05/06/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "per_desc_especial" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."per_desc_especial" IS 'Campo utilizado pelo pedido de venda.';
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_cpg"
+ADD COLUMN "perm_desc_especial" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_cpg"."perm_desc_especial" IS 'Campo utilizado no pedido de venda.';
+
+update cad_tb_c_cpg
+  set perm_desc_especial = FALSE
+where perm_desc_especial is null;
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_desc_especial" numeric(18,4);
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_desc_basico" numeric(18,4);
+
+
+update fat_tb_m_ped
+  set vlr_desc_basico = vlr_desconto
+where 
+   vlr_desconto > 0 
+and vlr_desc_basico is null
+and vlr_desc_especial is null;
+
+update fat_tb_m_ped
+  set vlr_desc_basico = 0
+where 
+  vlr_desc_basico is null;
+
+update fat_tb_m_ped
+  set vlr_desc_especial = 0
+where 
+  vlr_desc_especial is null;
+
+
+/***** 07/06/2017 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "rps_nat_opr" varchar(3);
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "rps_prefeitura" varchar(100);
+
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "rps_cod_cnae" varchar(7);
+
+ALTER TABLE "public"."fat_tb_m_xml"
+ADD COLUMN "vlr_icms" numeric(18,4),
+ADD COLUMN "vlr_base" numeric(18,4);
+
+
+
+/***** 09/06/17 *******/
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "num_rps" int4;
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "aniversariante_mes" bool;
+
+
+
+/***** 10/06/17 ******/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "informar_caixa_nfe" bool;
+
+update cad_tb_c_par_ctr set informar_caixa_nfe=false 
+where informar_caixa_nfe is null;
+
+
+/****** 12/06/2017 ********/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "nfe_id_tipo_financeiro" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Baixa de Contas a Pagar
+3-Devolução de vendas 4-Conciliação bancária  5-Nota Fiscal de Saída 6-Nota de Crédito  7 - Abertura de caixa  8 - Controle de Caixa;
+9 - Movimentação de cheque;
+10 - Baixa de cartões de crédito;
+11 - Baixa automática de boletos (Rec);
+12 - Cancelamento NF dia Anterior; 13 - Baixa por Borderô;14 - Lançamento do Movimento do Funcionário;15 - Prestação de Contas; 16 - Desconto de Titulos;17 - Nota Fiscal de Entrada';
+
+ALTER TABLE "public"."fin_tb_m_pag_pag"
+ADD COLUMN "id_fiscal" int4;
+
+
+/****** 14/06/2017 *******/
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "gps_latitude" float8,
+ADD COLUMN "gps_longitude" float8;
+
+ALTER TABLE "public"."cad_tb_c_par"
+ADD COLUMN "gps_latitude" float8,
+ADD COLUMN "gps_longitude" float8;
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "per_cmv_interno" numeric(18,4),
+ADD COLUMN "per_cmv_externo" numeric(18,4);
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "per_cmv_interno" numeric(18,4),
+ADD COLUMN "per_cmv_externo" numeric(18,4);
+
+
+/*********** 20/06/2017 **********/
+
+COMMENT ON COLUMN "public"."cad_tb_c_vit"."tipo_mobile" IS '0 - Visita normal (carro próprio)
+1 - Intervalo
+2 - Finalização do Dia
+3 - Visita acompanhada.
+';
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "per_cmv" numeric(18,4);
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "hab_vlr_custo_cte" bool;
+
+update cad_tb_c_par_ctr set hab_vlr_custo_cte=TRUE
+where hab_vlr_custo_cte is null;
+
+
+/**** 28/06/2017 *****/
+
+
+ALTER TABLE "public"."cad_tb_c_cfo"
+ADD COLUMN "desc_nat_operacao_nfe" varchar(60);
+
+
+update cad_tb_c_cfo
+  set desc_nat_operacao_nfe = ttt.descricao
+from 
+  (select id_classe, descricao from cad_tb_c_nat) ttt
+where     
+   cad_tb_c_cfo.id_classe = ttt.id_classe and
+desc_nat_operacao_nfe is null;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_tipo_comissao" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_tipo_comissao" IS '0 - Nenhum;1 - Por Pedido de Venda';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_per_comissao_max" float8;
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "sgq_per_comissao" float8;
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "nfe_separar_xml_mes" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "qtde_red_parc_car_rec" int4;
+
+update cad_tb_c_fpg set qtde_red_parc_car_rec=4
+where ativa_red_parc_car_rec=true and qtde_red_parc_car_rec is null;
+
+
+/***** 30/06/2017 *****/
+
+update cad_tb_c_par_ctr set sgq_tipo_comissao=0
+where sgq_tipo_comissao is null;
+
+
+/***** 04/07/2017 ******/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pbx_gravar_obs_tit" bool;
+
+update cad_tb_c_par_ctr set pbx_gravar_obs_tit=FALSE
+where pbx_gravar_obs_tit is null;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "rbx_gravar_obs_tit" bool;
+
+update cad_tb_c_par_ctr set rbx_gravar_obs_tit=FALSE
+where rbx_gravar_obs_tit is null;
+
+
+/***** 10/07/2017 *******/
+
+ALTER TABLE "public"."fat_tb_m_xml"
+ADD COLUMN "ipi_valor" numeric(18,4),
+ADD COLUMN "icm_s_valor" numeric(18,4);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "nfce_permite_cheque" bool;
+
+update cad_tb_c_par_ctr set nfce_permite_cheque=TRUE
+where nfce_permite_cheque is null;
+
+
+/***** 12/07/2017 ******/
+
+
+create sequence pro_tb_m_pmb_id_pmb_seq;
+
+CREATE TABLE "public"."pro_tb_m_pmb" (
+"dta_rec" date,
+"hor_rec" time(6),
+"pacote_mobile" bytea,
+"id_funcionario" int4,
+"pacote_utilizado" bool,
+"id_pmb" int4 DEFAULT nextval('pro_tb_m_pmb_id_pmb_seq'::regclass) NOT NULL,
+CONSTRAINT "pro_tb_m_pmb_pkey" PRIMARY KEY ("id_pmb")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pro_tb_m_pmb" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pro_tb_m_pmb" IS 'Tabela de Pacote de Dados do Mobile';
+
+COMMENT ON COLUMN "public"."pro_tb_m_pmb"."pacote_utilizado" IS 'Caso for TRUE quer dizer que o pacote foi utilizado com sucesso para a geração das visitas, pedido, etc.';
+
+
+/*** 14/07/2017 ***/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "dta_pag_ret_banco" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."dta_pag_ret_banco" IS '0 - Data da Ocorrencia; 1 - Data de Crédito';
+
+update cad_tb_c_par_ctr set dta_pag_ret_banco=0
+where dta_pag_ret_banco is null;

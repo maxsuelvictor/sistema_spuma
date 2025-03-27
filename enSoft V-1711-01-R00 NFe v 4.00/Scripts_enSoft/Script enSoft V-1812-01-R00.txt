@@ -1,0 +1,66 @@
+/**** 03/12/2018 ****/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_alterar_local_tit_fin" bool;
+
+
+/**** 04/12/2018 ****/
+
+ALTER TABLE "public"."pcp_tb_m_epp"
+ADD COLUMN "tipo_entrada" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_epp"."tipo_entrada" IS '0 - Entrada Normal
+1 - Entrada por Contagem';
+
+
+update pcp_tb_m_epp
+   set tipo_entrada = 0
+where tipo_entrada is null;
+
+
+update cad_tb_c_fun 
+  set seg_alterar_local_tit_fin = false
+where seg_alterar_local_tit_fin is null;
+
+
+ALTER TABLE "public"."cad_tb_c_lto"
+ADD COLUMN "em_protesto" bool,
+ADD COLUMN "em_spc" bool;
+
+
+update cad_tb_c_lto
+  set em_protesto = false      
+where em_protesto is null;
+
+
+update cad_tb_c_lto
+  set em_spc = false
+where em_spc is null;
+
+
+/***** 07/12/2018 *****/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_vis_aviso_tit_spc_protesto" bool;
+
+update cad_tb_c_fun
+  set seg_vis_aviso_tit_spc_protesto = false
+where seg_vis_aviso_tit_spc_protesto is null;
+
+
+
+
+
+/******* 13/12/2018 ********/
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "contagem" bool;
+
+
+update pcp_tb_m_etq 
+   set contagem = false
+where contagem is null;
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "dta_entrada_antes_contagem" date,
+ADD COLUMN "hor_entrada_antes_contagem" time(6);

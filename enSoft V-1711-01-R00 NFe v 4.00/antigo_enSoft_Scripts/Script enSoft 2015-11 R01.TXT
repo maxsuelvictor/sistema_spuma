@@ -1,0 +1,125 @@
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "id_mch" int4;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "vlr_unitario_orig" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_unitario_orig" IS 'Este campo irá armazenar o preço original (Que é calculado pelo sistema).  Assim o sistema saberá se o usuário alterou o preço no pedido ao verificar VLR_UNITARIO vs VLR_UNITARIO_ORIG';
+
+
+
+CREATE TABLE "public"."pcp_tb_c_cle" (
+"id_cle" int4 NOT NULL,
+"descricao" varchar(40),
+CONSTRAINT "pcp_tb_c_cle_pkey" PRIMARY KEY ("id_cle")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_c_cle" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_c_cle" IS 'Tabela de Classificação de Etiqueta';
+
+
+CREATE TABLE "public"."pcp_tb_c_cue" (
+"id_cue" int4 NOT NULL,
+"descricao" varchar(40),
+CONSTRAINT "pcp_tb_c_eso_pkey" PRIMARY KEY ("id_cue")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_c_cue" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_c_cue" IS 'Tabela de Cadastro Uso da Etiqueta
+ex: Uso Geral;
+      Uso Infantil;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "etiq_id_cue" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."etiq_classificacao_pro" IS 'Campo utilizado no sistema de produção.
+Este campo foi direcinado para a tabela PCP_TB_C_CLE (ID_CLE)';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."etiq_id_cue" IS 'Refere-se a tabela PCP_TB_C_CUE.';
+
+
+update cad_tb_c_ite
+   set etiq_classificacao_pro = etiq_classificacao_pro + 1
+where etiq_classificacao_pro is not null; 
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "msg_etq" varchar(600),
+ADD COLUMN "imprime_msq_etq" bool;
+
+
+update CAD_TB_C_GRU
+   SET imprime_msq_etq = false
+where COALESCE(imprime_msq_etq,false) = false;
+
+
+ALTER TABLE "public"."est_tb_m_cte"
+ALTER COLUMN "dta_movimento" DROP NOT NULL;
+
+
+ALTER TABLE "public"."fat_tb_m_rom_nfe"
+ADD COLUMN "id_busca_nfe" varchar(9);
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+DROP COLUMN "msg_etq",
+ADD COLUMN "msg_etq1" varchar(100),
+ADD COLUMN "msg_etq2" varchar(100),
+ADD COLUMN "msg_etq3" varchar(100),
+ADD COLUMN "msg_etq4" varchar(100),
+ADD COLUMN "msg_etq5" varchar(100);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ped_envia_carga" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."ped_envia_carga" IS 'Este campo será utilizado pela módulo REV.
+ Caso seja TRUE, o campo "Envia para carga" no pedido de venda será exibido.';
+
+
+update cad_tb_c_par_ctr
+  set ped_envia_carga = false
+where ped_envia_carga is null;
+
+
+
+ALTER TABLE "public"."ctc_tb_m_orc"
+ADD COLUMN "id_empresa" int4,
+ADD CONSTRAINT "fk_ctc_m_orc__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "envia_carga" bool;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."envia_carga" IS 'Este campo irá aparecer na tela se 
+o campo "ped_envia_carga" do cad_tb_c_par_ctr estiver marcado.   Caso o campo "envia_carga" estiver marcado o sistema irá enviá-lo para a tela de liberação.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "msg_etq6" varchar(100),
+ADD COLUMN "msg_etq7" varchar(100);
+
+
+ALTER TABLE "public"."fin_tb_m_orc"
+ADD COLUMN "id_empresa" int4,
+ADD CONSTRAINT "fk_fin_m_orc__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_acr_ite"
+ALTER COLUMN "defeito_produto" TYPE varchar(800),
+ALTER COLUMN "comentarios" TYPE varchar(800);
+
+

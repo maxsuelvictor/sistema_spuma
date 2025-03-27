@@ -1,0 +1,54 @@
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "fin_id_maquineta_pad" int4,
+ADD COLUMN "fin_perm_n_maquinetas" int4;
+
+
+ALTER TABLE "public"."fin_tb_m_rcr"
+ADD COLUMN "id_maquineta" int4,
+ADD CONSTRAINT "fk_fin_m_rcr__cad_c_mct" FOREIGN KEY ("id_maquineta") REFERENCES "public"."cad_tb_c_mct" ("id_maquineta") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_tit"
+ADD COLUMN "id_maquineta" int4,
+ADD CONSTRAINT "fk_fat_m_nfe_tit__cad_c_mct" FOREIGN KEY ("id_maquineta") REFERENCES "public"."cad_tb_c_mct" ("id_maquineta") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."fin_tb_m_rbx"
+ADD COLUMN "id_maquineta" int4,
+ADD CONSTRAINT "fk_fin_m_rbx__cad_c_mct" FOREIGN KEY ("id_maquineta") REFERENCES "public"."cad_tb_c_mct" ("id_maquineta") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "car_id_maquineta" int4,
+ADD CONSTRAINT "fk_fin_m_rec__cad_c_mct" FOREIGN KEY ("car_id_maquineta") REFERENCES "public"."cad_tb_c_mct" ("id_maquineta") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."cad_tb_c_mct"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+DROP COLUMN "fin_perm_n_maquinetas",
+ADD COLUMN "orv_id_forma_pag_rcr" int4;
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "fin_perm_n_maquinetas" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_tme"
+ADD COLUMN "cfo_servico_dentro" char(5),
+ADD COLUMN "cfo_servico_fora" char(5),
+ADD COLUMN "cfo_interno_icm_s_pf" char(5),
+ADD COLUMN "cfo_interno_icm_s_pj" char(5),
+ADD COLUMN "cfo_externo_icm_s_pf" char(5),
+ADD COLUMN "cfo_externo_icm_s_pj" char(5);
+
+
+
+ALTER TABLE "public"."pcp_tb_c_cin"
+ALTER COLUMN "id_num_seq" DROP NOT NULL;
+

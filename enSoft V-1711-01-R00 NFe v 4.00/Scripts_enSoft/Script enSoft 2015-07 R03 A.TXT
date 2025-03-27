@@ -1,0 +1,210 @@
+CREATE TABLE "public"."fin_tb_m_con_cxb" (
+"id_conciliacao" int4,
+"id_cxb" int4,
+"debcre" int4,
+"historico" varchar(100),
+"dta_movimento" timestamp(6),
+"tipo" varchar(30),
+"documento" varchar(30),
+"vlr_lancamento" numeric(18,4),
+CONSTRAINT "fk_fin_m_con_cxb__fin_m_con" FOREIGN KEY ("id_conciliacao") REFERENCES "public"."fin_tb_m_con" ("id_conciliacao") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_con_cxb" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_con_cxb" IS 'Tabela de extrato do banco, arquivo OFX dos bancos.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."debcre" IS '0 - Débito;  1 - Crédito;';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."historico" IS 'Refere-se a tag-> <MEMO> do arquivo .ofx;';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."dta_movimento" IS 'Refere-se a tag-> <DTPOSTED> do arquivo .ofx;';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."tipo" IS 'Refere-se a tag-> <TRNTYPE> do arquivo .ofx;';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."documento" IS 'Refere-se a tag-> <CHECKNUM> do arquivo .ofx;';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."vlr_lancamento" IS 'Refere-se a tag-> <TRNAMT> do arquivo .ofx;';
+
+ALTER TABLE "public"."fin_tb_m_con"
+ADD COLUMN "id_responsavel" int4,
+ADD CONSTRAINT "fk_fin_m_con__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."fin_tb_m_mch_tit" RENAME "vencimento" TO "dta_vencimento";
+
+ALTER TABLE "public"."fin_tb_m_mch_tit" RENAME "che_cheque" TO "che_numero";
+
+
+ALTER TABLE "public"."fin_tb_m_con_cta"
+ADD COLUMN "id_cxb" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cta"."id_cxb" IS 'Este campo faz relação com a tabela fin_tb_m_con_cxb.';
+
+
+ALTER TABLE "public"."fin_tb_m_con_ger"
+ADD COLUMN "id_cxb" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_ger"."id_cxb" IS 'Este campo faz relação com a tabela fin_tb_m_con_cxb.';
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+ADD PRIMARY KEY ("id_conciliacao", "id_cxb");
+
+
+
+CREATE TABLE "public"."fin_tb_m_rec_hch" (
+"id_titulo" int4 NOT NULL,
+"id_rec_hch" int4 NOT NULL,
+"dta_movimento" date,
+"hor_movimento" timestamp(6),
+"situacao_chq" int4,
+"operacao" int4,
+"id_responsavel" int4,
+CONSTRAINT "fin_tb_m_rec_hch_pkey" PRIMARY KEY ("id_titulo", "id_rec_hch"),
+CONSTRAINT "fk_fin_m_rec_hcq__fin_m_rec" FOREIGN KEY ("id_titulo") REFERENCES "public"."fin_tb_m_rec" ("id_titulo") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_rec_hch" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_rec_hch" IS 'Tabela de histórico do cheque';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_hch"."situacao_chq" IS '1 - Em aberto
+2 - Depositado
+3 - Devolvido
+4 - Parcial
+5 - Resgatado
+6 - Compensado';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_hch"."operacao" IS '1 - Depositar;
+2 - Devolver;
+3 - Pagar parcial;
+4 - Resgatar;';
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Baixa de Contas a Pagar
+3-Devolução de vendas 4-Conciliação bancária  5-Nota Fiscal de Saída 6-Nota de Crédito  7 - Abertura de caixa  8 - Controle de Caixa;
+9 - Movimentação de cheque;';
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "id_mov_mch" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."id_mov_mch" IS 'Este campo corresponde ao ID_CONTROLE da tabela FIN_TB_M_MCH;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mch_id_tif_dep" int4,
+ADD COLUMN "mch_id_tif_dev" int4,
+ADD COLUMN "mch_id_tif_pgtres" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mch_id_tif_dep" IS 'Este campo será utilizado pela Movimentação de cheque, no momento da operação Depositar;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mch_id_tif_dev" IS 'Este campo será utilizado pela Movimentação de cheque, no momento da operação Devolver;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mch_id_tif_pgtres" IS 'Este campo poderá ser utilizado pela Movimentação de cheque, no momento da operação Paga parcial ou Resgate, isso vai depender da forma de pagamento escolhida;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mch_id_plano_dep" char(11),
+ADD COLUMN "mch_id_plano_dev" char(11),
+ADD COLUMN "mch_id_plano_pgtres" char(11);
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mch_id_plano_dep" IS 'Este campo será utilizado pela Movimentação de cheque, no momento da operação Depositar;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mch_id_plano_dev" IS 'Este campo será utilizado pela Movimentação de cheque, no momento da operação Depositar;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mch_id_plano_pgtres" IS 'Este campo poderá ser utilizado pela Movimentação de cheque, no momento da operação Paga parcial ou Resgate, isso vai depender da forma de pagamento escolhida;';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "mch_id_tif_pgtres" TO "mch_id_tif_ppr";
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "mch_id_plano_pgtres" TO "mch_id_plano_ppr";
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "id_mch" int4;
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."origem" IS '0 - Manual
+1 - Baixa do contas a receber
+2 - Nota Fiscal de Saída
+3 - Movimentação de cheque';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."id_mch" IS 'Campo utilizado pela tela de Movimentação de cheque';
+
+ALTER TABLE "public"."fin_tb_m_cta" RENAME "id_mov_mch" TO "id_mch";
+
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ADD COLUMN "id_cliente" int4,
+ADD CONSTRAINT "fk_fin_m_mch__cad_c_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+COMMENT ON COLUMN "public"."fin_tb_m_mch"."id_cliente" IS 'Campo utilizado somente para operações de Resgate ou Pagto parcial';
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_pag"."origem" IS '0 - Baixa do Contas a Receber;
+1 - Nota Fiscal de Saída;
+2 - Movimento de cheque;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mch_id_forma_pag" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mch_id_forma_pag" IS 'Este campo será utilizado pela Rotina de Movimentação de cheque, nas operações:
+Depositar, Pagar parcial e Resgatar.
+O valor deste campo será gravado no REC_PAG.
+O doc_impresso deste campo deve ser NENHUM.
+';
+
+
+ALTER TABLE "public"."fin_tb_m_rec_hch"
+DROP CONSTRAINT "fk_fin_m_rec_hcq__fin_m_rec",
+ADD CONSTRAINT "fk_fin_m_rec_hch__fin_m_rec" FOREIGN KEY ("id_titulo") REFERENCES "public"."fin_tb_m_rec" ("id_titulo") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE "public"."fin_tb_m_rec_hch" RENAME "id_rec_hch" TO "id_mch";
+
+ALTER TABLE "public"."fin_tb_m_rec_hch"
+ADD CONSTRAINT "fk_fin_m_rec_hch__fin_m_mch" FOREIGN KEY ("id_mch") REFERENCES "public"."fin_tb_m_mch" ("id_controle") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_hch"."situacao_chq" IS '1 - Em aberto
+2 - Depositado
+3 - Devolvido
+4 - Parcial
+5 - Resgatado
+6 - Compensado';
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."situacao_chq" IS '1 - Em aberto
+2 - Depositado
+3 - Devolvido
+4 - Parcial
+5 - Resgatado
+6 - Compensado';
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "veiculo" varchar(50),
+ADD COLUMN "id_placa" char(8);
+
+ALTER TABLE "public"."fin_tb_m_rec_hch"
+DROP CONSTRAINT "fk_fin_m_rec_hch__fin_m_mch";
+
+ALTER TABLE "public"."fin_tb_m_rec_hch"
+ADD COLUMN "situacao_chq_ant" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_hch"."situacao_chq_ant" IS 'Fica gravado a situação anterior do cheque.';
+
+/*******************************************
+ALTER TABLE "public"."fat_tb_m_rom_nfe_ite"
+ADD COLUMN "peso_liquido" float8;
+********************************************/

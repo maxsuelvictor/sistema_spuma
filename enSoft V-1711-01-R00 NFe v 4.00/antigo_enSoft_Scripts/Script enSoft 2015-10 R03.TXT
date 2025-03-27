@@ -1,0 +1,20 @@
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+DROP COLUMN "selecao",
+ADD COLUMN "selecao" int4;
+
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+ADD COLUMN "tipo_reg" int4,
+ADD COLUMN "id_tipo_financeiro_transf" int4,
+ADD CONSTRAINT "fk_fin_m_con_cxb_det__cad_c_tif" FOREIGN KEY ("id_tipo_financeiro") REFERENCES "public"."cad_tb_c_tif" ("id_tipo_financeiro") ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT "fk_fin_m_con_cxb_det__cad_c_tif_2" FOREIGN KEY ("id_tipo_financeiro_transf") REFERENCES "public"."cad_tb_c_tif" ("id_tipo_financeiro") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_det"."tipo_reg" IS '0 - Normal;  1- Transferência (Este estatus tem utilização no momento de calcular a diferença de valores no relacionamento;';
+
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_aux"
+ADD COLUMN "id_tipo_financeiro_transf" int4;
+
+

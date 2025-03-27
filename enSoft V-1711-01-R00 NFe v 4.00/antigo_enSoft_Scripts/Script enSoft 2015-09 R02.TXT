@@ -1,0 +1,5 @@
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "mdf_recibo" varchar(50),
+ADD COLUMN "mdf_protocolo" varchar(50);
+
+

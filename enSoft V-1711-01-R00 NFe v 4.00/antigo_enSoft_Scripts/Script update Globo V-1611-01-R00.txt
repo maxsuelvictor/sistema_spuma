@@ -1,0 +1,29 @@
+/*** Manutenção nas O.P de 2016 ***/
+update pcp_tb_m_opr
+   set num_lote = cast(ttt.id_opr as varchar)||'-16'
+from
+(
+      select * from pcp_tb_m_opr opr
+      where opr.dta_emissao <= '31/12/2016'
+) ttt
+where  pcp_tb_m_opr.id_opr = ttt.id_opr;
+
+/*** Manutenção nas O.P de 2017 ***/
+
+SELECT setval('_seq', 1,false)
+
+update pcp_tb_m_opr
+   set num_lote = cast(mmm.ROWNUM as varchar)||'-17'
+from
+(
+      
+with tmpOpr
+as
+(
+  select opr.id_opr, opr.num_lote, opr.dta_emissao from pcp_tb_m_opr opr
+  where opr.dta_emissao >= '01/01/2017'
+  order by opr.id_opr
+) 
+select ttt.*, nextval('_seq') AS ROWNUM  from tmpOpr ttt
+) mmm
+where  pcp_tb_m_opr.id_opr = mmm.id_opr

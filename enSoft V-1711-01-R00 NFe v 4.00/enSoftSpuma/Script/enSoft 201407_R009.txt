@@ -1,0 +1,13 @@
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('CAD_TB_C_FOR_REP', 1);
+
+ALTER TABLE "public"."cad_tb_c_for"
+ALTER COLUMN "lim_valor" DROP NOT NULL,
+ALTER COLUMN "dta_fundacao" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_for_rep"
+ALTER COLUMN "cep" DROP NOT NULL,
+ALTER COLUMN "endereco" DROP NOT NULL,
+ALTER COLUMN "numero" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_tif"
+ADD COLUMN "gera_pag" BOOLEAN;

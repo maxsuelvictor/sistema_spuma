@@ -1,0 +1,53 @@
+/**** 05/01/2024 ****/
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "nome_proprietario" varchar(50),
+ADD COLUMN "doc_cnpj_cpf_proprietario" varchar(14);
+
+COMMENT ON COLUMN "public"."cad_tb_c_cli"."nome_proprietario" IS 'A pedido da Colchões Glogo';
+
+
+
+/***** 09/01/2024 ******/
+
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+DROP COLUMN "dta_movimento";
+
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+ADD COLUMN "dta_movimento" date;
+
+
+/***** 15/01/2024 ******/
+
+ALTER TABLE "public"."fin_tb_m_rbx"
+ADD COLUMN "faz_conciliacao" bool;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rbx"."faz_conciliacao" IS 'Já alimenta os dados ';
+
+
+ALTER TABLE "public"."fin_tb_m_rbx_tit"
+ADD COLUMN "concilia" bool;
+
+
+/***** script para alimentar o campo historico do mês de janeiro/2024 - Colchões Globo *****/
+
+/*
+update fin_tb_m_cta
+  set historico = substring(ttt.doc ||', '||historico,1,100)
+from (
+select cta.id_controle,
+    case
+       when NFE.NUMERO <> 0 then 'NF: '||nfe.numero
+    else 'NRO PARCELA: '||pag.num_parcela end as doc
+
+ from fin_tb_m_cta cta
+  left outer join fin_tb_m_pag pag on pag.id_titulo = cta.id_titulo_pag
+  left outer join fat_tb_m_nfe nfe on pag.id_fiscal = nfe.id_fiscal
+where cta.dta_movimento >= '01/01/2024' and cta.dta_movimento <= '23/01/2024'
+ and CTA.id_titulo_pag > 0 
+) ttt
+where fin_tb_m_cta.id_controle = ttt.id_controle
+*/
+
+
+

@@ -1,0 +1,664 @@
+
+/**** 04/01/2017 ****/
+
+ALTER TABLE "public"."ofi_tb_c_tio"
+ADD COLUMN "tipo" int4;
+
+COMMENT ON COLUMN "public"."ofi_tb_c_tio"."tipo" IS '0 - Normal
+1 - Garantia';
+
+update ofi_tb_c_tio
+   set tipo = 0
+where tipo is null;
+
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "aval_duplicata" bool;
+
+
+
+
+/***** 07/01/2017 *****/
+
+ALTER TABLE "public"."fin_tb_m_prc_det"
+DROP CONSTRAINT "fk_fin_m_prc_det__cad_c_ctc",
+DROP CONSTRAINT "fk_fin_m_prc_det__cad_c_tif2";
+
+
+/***** 09/01/2017 *****/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "orv_id_cfo_int_dev_gar" char(5),
+ADD COLUMN "orv_id_cfo_ext_dev_gar" char(5),
+ADD COLUMN "orv_id_tme_dev_gar" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."orv_id_cfo_int_dev_gar" IS 'CFO utilizado no momento de Fechamento de O.S de Garantia na geração da nota fiscal de devolução.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."orv_id_cfo_ext_dev_gar" IS 'CFO utilizado no momento de Fechamento de O.S de Garantia na geração da nota fiscal de devolução.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."orv_id_tme_dev_gar" IS 'Tipo de movimento estoque utilizado no momento de Fechamento de O.S de Garantia na geração da nota fiscal de devolução.';
+
+
+
+
+ALTER TABLE "public"."fin_tb_m_lmf"
+ADD COLUMN "id_obra" int4;
+
+
+
+/***** 10/01/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_vis_nota_csu_ite" bool;
+
+update cad_tb_c_fun set seg_vis_nota_csu_ite=TRUE
+where seg_vis_nota_csu_ite is null;
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "preco_sugerido" numeric(18,4);
+
+
+/**** DEVIDO O SERVIDOR MOBILE *****/
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "status_vis_mobile" bool;
+
+ALTER TABLE "public"."cad_tb_c_cul"
+ADD COLUMN "ciclo_curto" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_cul"."ciclo_curto" IS 'Criado devido o sistema MOBILE.';
+
+
+
+CREATE TABLE "public"."cad_tb_c_vit" (
+"id_visita" int4 NOT NULL,
+"id_vendedor" int4,
+"id_cliente" int4,
+"id_veiculo" int4,
+"dta_visita" date,
+"obs" varchar(500) COLLATE "default",
+"recomendacoes" varchar(500) COLLATE "default",
+CONSTRAINT "cad_tb_c_vit_pkey" PRIMARY KEY ("id_visita"),
+CONSTRAINT "fk_cad_c_vit__cad_c_fun" FOREIGN KEY ("id_vendedor") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_vit__cad_c_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_vit__cad_c_vei" FOREIGN KEY ("id_veiculo") REFERENCES "public"."cad_tb_c_vei" ("id_veiculo") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_vit" OWNER TO "postgres";
+
+
+
+CREATE TABLE "public"."cad_tb_c_vit_fot" (
+"id_visita" int4 NOT NULL,
+"id_vit_fot" int4 NOT NULL,
+"caminho_foto" varchar(255) COLLATE "default",
+CONSTRAINT "cad_tb_c_vit_fot_pkey" PRIMARY KEY ("id_visita", "id_vit_fot"),
+CONSTRAINT "fk_cad_c_vit_fot__cad_c_vit" FOREIGN KEY ("id_visita") REFERENCES "public"."cad_tb_c_vit" ("id_visita") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_vit_fot" OWNER TO "postgres";
+
+
+
+
+CREATE TABLE "public"."cad_tb_c_vit_kmt" (
+"id_visita" int4 NOT NULL,
+"id_km" int4 NOT NULL,
+"id_veiculo" int4 NOT NULL,
+"km_inicial" float8,
+"km_final" float8,
+CONSTRAINT "fk_cad_c_vit_kmt__cad_c_vit" FOREIGN KEY ("id_visita") REFERENCES "public"."cad_tb_c_vit" ("id_visita") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_vit_kmt__cad_c_vei" FOREIGN KEY ("id_veiculo") REFERENCES "public"."cad_tb_c_vei" ("id_veiculo") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_vit_kmt" OWNER TO "postgres";
+
+
+ALTER TABLE "public"."cad_tb_c_vit_kmt"
+ADD PRIMARY KEY ("id_visita", "id_km");
+
+
+
+
+/****** 11/01/2017 *****/
+
+
+ALTER TABLE "public"."fin_tb_m_mch"
+ADD COLUMN "vlr_tot_juros_che" numeric(18,4);
+
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv"."tipo_ordem" IS '1-Veículo;2-Tratores;3-Equipamentos';
+
+
+CREATE TABLE "public"."pro_tb_m_vis" (
+"id_vis" int4 NOT NULL,
+"semana" int4 NOT NULL,
+"id_vendedor" int4 NOT NULL,
+"fechada" bool,
+CONSTRAINT "pro_tb_m_vis_pkey" PRIMARY KEY ("id_vis"),
+CONSTRAINT "fk_pro_m_vis__cad_c_fun" FOREIGN KEY ("id_vendedor") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pro_tb_m_vis" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pro_tb_m_vis" IS 'Tabela de Vistas a serem feitas aos produtores';
+
+
+
+CREATE TABLE "public"."pro_tb_m_vis_cli" (
+"id_vis" int4 NOT NULL,
+"id_vis_cli" int4 NOT NULL,
+"doc_cnpj_cpf" varchar(14) COLLATE "default",
+CONSTRAINT "pro_tb_m_vis_cli_pkey" PRIMARY KEY ("id_vis", "id_vis_cli"),
+CONSTRAINT "fk_pro_m_vis_cli__pro_m_vis" FOREIGN KEY ("id_vis") REFERENCES "public"."pro_tb_m_vis" ("id_vis") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pro_tb_m_vis_cli" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pro_tb_m_vis_cli" IS 'Tabela de clientes da vista ao produtor por semana.';
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_vit"
+DROP CONSTRAINT "fk_cad_c_vit__cad_c_cli",
+ALTER COLUMN "id_cliente" TYPE varchar(14);
+
+ALTER TABLE "public"."cad_tb_c_vit" RENAME "id_cliente" TO "doc_cnpj_cpf";
+
+
+
+ALTER TABLE "public"."cad_tb_c_cli_pro"
+ADD COLUMN "id_pro_mob_temp" int4;
+
+
+/***** 13/01/2017 ****/
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "id_ordem_gar" int4;
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_ordem_orig_gar" int4;
+
+
+/******** 16/01/2017 **********/
+
+ALTER TABLE "public"."cad_tb_c_vit"
+ADD COLUMN "id_empresa" int4;
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "id_empresa_mob" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."id_empresa_mob" IS 'Campo utilizado pelo sistema Mobile.';
+
+ALTER TABLE "public"."pro_tb_m_vis"
+ADD COLUMN "id_empresa" int4;
+
+
+
+/****** 17/01/2017 ******/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "orv_id_tme_dev_cli_gar" int4;
+
+
+/**** 25/01/2017 ****/
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "id_seq_fat_gar" int4;
+
+
+/**** 26/01/2017 *****/
+
+ALTER TABLE "public"."pro_tb_m_vis_cli"
+ADD COLUMN "dta_visita" date;
+
+
+
+ALTER TABLE "public"."cad_tb_c_vit"
+ADD COLUMN "gps_latitude" float8,
+ADD COLUMN "gps_longitude" float8,
+ADD COLUMN "hor_ini" time(6),
+ADD COLUMN "hor_fim" time(6);
+
+
+/**** 30/01/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_vit"
+ADD COLUMN "semana" int4;
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "semana" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."semana" IS 'Campo utilizado pelo dispositivo movel, usado pelo esquema da visita a produtores.';
+
+
+
+/**** 31/07/2017 *****/
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag"."origem" IS '0-Estoque
+  1-Caixa/Banco  2 - Pequenas Despesas  3 - Baixa Contas a Pagar  4 - Movimento Bancário 5 - Lancamento Manual 6 - Lançamento de Movimento do Funcionário  7 - Prestação de Contas';
+
+
+
+/***** 01/02/2017 *****/
+
+
+ALTER TABLE "public"."cad_tb_c_vit"
+ADD COLUMN "placa" varchar(8),
+ADD COLUMN "id_pedido_mobile" int4,
+ADD COLUMN "tipo_mobile" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_vit_fot"
+ADD COLUMN "obs" varchar(255);
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_pedido_mob" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."id_pedido_mob" IS 'Neste campo de fato fica gravado o Id pedido do mobile, diferente do ID_PEDIDO_TEMP_MOB.';
+
+
+
+/****** 01/02/2017 ******/
+
+
+ALTER TABLE "public"."cad_tb_c_ite_prc"
+ADD COLUMN "id_empresa" int4;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "preco_por_filial" bool;
+
+
+
+update cad_tb_c_ite_prc set id_empresa=0
+where id_empresa is null;
+
+
+
+ALTER TABLE "public"."cad_tb_c_ite_prc"
+DROP CONSTRAINT "cad_tb_c_ite_prc_pkey" ,
+ALTER COLUMN "id_empresa" SET NOT NULL,
+ADD CONSTRAINT "cad_tb_c_ite_prc_pkey" PRIMARY KEY ("id_item", "id_perfil_cli", "id_empresa");
+
+
+
+
+
+/***** 06/02/2017 *****/
+
+ALTER TABLE "public"."pcp_tb_m_acr"
+ALTER COLUMN "bairro_consumidor" DROP NOT NULL,
+ALTER COLUMN "endereco_consumidor" DROP NOT NULL,
+ALTER COLUMN "cep_consumidor" DROP NOT NULL,
+ALTER COLUMN "numero_nf" DROP NOT NULL,
+ALTER COLUMN "nro_end_consumidor" DROP NOT NULL;
+
+
+ALTER TABLE "public"."pcp_tb_m_acr_ite"
+ALTER COLUMN "garantia" DROP NOT NULL,
+ALTER COLUMN "data_validade" DROP NOT NULL,
+ALTER COLUMN "data_fabricacao" DROP NOT NULL,
+ALTER COLUMN "data_venda" DROP NOT NULL;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_acr_ite_prc"
+ALTER COLUMN "id_resp_reg_acao" DROP NOT NULL,
+ALTER COLUMN "situacao" DROP NOT NULL,
+ALTER COLUMN "data_reg_acao" DROP NOT NULL;
+
+
+
+
+
+/***** 07/02/2017 *********/
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag"."origem" IS '0-Estoque
+  1-Caixa/Banco  2 - Pequenas Despesas  3 - Baixa Contas a Pagar  4 - Movimento Bancário 5 - Lancamento Manual 6 - Lançamento de Movimento do Funcionário  7 - Prestação de Contas 8 - Conciliação Bancária';
+
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ADD COLUMN "id_conciliacao" int4;
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "id_conciliacao" int4;
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "con_id_forma_pag_rec" int4,
+ADD COLUMN "con_id_forma_pag_pag" int4,
+ADD COLUMN "con_id_local_titulo_rec" int4,
+ADD COLUMN "con_id_local_titulo_pag" int4,
+ADD COLUMN "con_id_ccusto_rec" int4,
+ADD COLUMN "con_id_ccusto_pag" int4;
+
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+ADD COLUMN "id_titulo_rec" int4,
+ADD COLUMN "id_titulo_pag" int4,
+ADD COLUMN "tipo_titulo" int4,
+ADD COLUMN "vlr_titulo" numeric(18,4),
+ADD COLUMN "vlr_juros" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_det"."tipo_titulo" IS '0 - Movimento do CTA; 1 - Contas a Receber; 2 - Contas a Pagar';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_det"."vlr_titulo" IS 'Campo utilizado para titulos de contas a receber e a pagar';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_det"."vlr_juros" IS 'Campo utilizado pelo titulos a receber e a pagar';
+
+
+update fin_tb_m_con_cxb_det set id_titulo_rec=0
+where id_titulo_rec is null;
+
+
+update fin_tb_m_con_cxb_det set id_titulo_pag=0
+where id_titulo_pag is null;
+
+
+update fin_tb_m_con_cxb_det set tipo_titulo=0
+where tipo_titulo is null;
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+DROP CONSTRAINT "fin_tb_m_con_cxb_det_pkey" ,
+ALTER COLUMN "id_titulo_rec" SET NOT NULL,
+ALTER COLUMN "id_titulo_pag" SET NOT NULL,
+ADD CONSTRAINT "fin_tb_m_con_cxb_det_pkey" PRIMARY KEY ("id_conciliacao", "id_cxb", "id_controle", "id_titulo_rec", "id_titulo_pag");
+
+
+
+/*** 08/02/2016 ****/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "perm_bxa_rec_n_emp" bool;
+
+
+CREATE TABLE "public"."cad_tb_c_par_bxr" (
+"id_empresa" int4 NOT NULL,
+"id_empresa_bxr" int4 NOT NULL,
+"permite_baixar" bool,
+CONSTRAINT "cad_tb_c_par_bxr_pkey" PRIMARY KEY ("id_empresa", "id_empresa_bxr"),
+CONSTRAINT "fk_cad_c_par_bxr__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_par_bxr" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_par_bxr" IS 'Empresas permitidas baixar contas a receber na empresa logada.';
+
+
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+ADD COLUMN "id_emitente" int4;
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_aux"
+ADD COLUMN "id_emitente" int4;
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_aux"
+ADD COLUMN "tipo_titulo" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_aux"."tipo_titulo" IS '0 - Movimento CTA; 1 - Contas a Receber;2 - Contas a Pagar';
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "con_id_tipo_financeiro_rec" int4,
+ADD COLUMN "con_id_tipo_financeiro_pag" int4;
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag"."origem" IS '0-Estoque
+  1-Caixa/Banco  2 - Pequenas Despesas  3 - Baixa Contas a Pagar  4 - Movimento Bancário 5 - Lancamento Manual 6 - Lançamento de Movimento do Funcionário  7 - Prestação de Contas 8 - Conciliação Bancária';
+
+
+
+/**** 10/02/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_vit"
+DROP CONSTRAINT "fk_cad_c_vit__cad_c_vei";
+
+ALTER TABLE "public"."cad_tb_c_vit_kmt"
+DROP CONSTRAINT "fk_cad_c_vit_kmt__cad_c_vei";
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."origem" IS '0 - Manual
+1 - Baixa do contas a receber
+2 - Nota Fiscal de Saída
+3 - Movimentação de cheque 4- Conciliação Bancária';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+DROP COLUMN "con_id_ccusto_rec";
+
+
+/*** 14/02/2017 ***/
+
+ALTER TABLE "public"."fin_tb_m_rcr"
+ADD COLUMN "cancelado" bool;
+
+update fin_tb_m_rcr set cancelado=false 
+where cancelado is null;
+
+
+/**** 16/02/2017 ****/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ativa_preco_cat_ser" bool;
+
+update cad_tb_c_par_ctr set ativa_preco_cat_ser=TRUE
+where ativa_preco_cat_ser is null;
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+ADD COLUMN "vlr_desconto_ope" numeric(18,4);
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+ADD COLUMN "doc_impresso" int4;
+
+
+
+/*** 17/02/2017 ****/
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ALTER COLUMN "vlr_unitario" TYPE numeric(18,6);
+
+
+/**** 20/02/2017 *****/
+
+CREATE TABLE "public"."cad_tb_c_rvd" (
+"id_rvd" int4,
+"descricao" varchar(60) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_rvd" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_rvd" IS 'Cadastro de Revendas.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "id_rvd" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_cli"."id_rvd" IS 'Refere-se ao cadastro de Revendas. Criado inicialmente para atender uma particularidade da Valeagro.';
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+DROP COLUMN "id_rvd";
+
+CREATE TABLE "public"."cad_tb_c_cli_rvd" (
+"id_cliente" int4,
+"id_rvd" int4
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_cli_rvd" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_cli_rvd" IS 'Revendas do Cliente';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mob_periodo_ult_vend" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mob_periodo_ult_vend" IS 'Este campo é utilizado pelo aplicativo mobile.
+Aqui o usuário inseri a qtde de meses último que o cliente comprou. exe:  6 ->   6 ultimos meses de venda.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "id_cli_temp_mobile" varchar(30);
+
+
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "id_empresa_bxa" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_pag"."id_empresa_bxa" IS 'Empresa que recebeu o pagamento.';
+
+
+
+/****** 22/02/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_vit"
+ADD COLUMN "remarcar_vis" bool,
+ADD COLUMN "dta_prox_vis" date,
+ADD COLUMN "semana_prox_vis" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec_pag"."origem" IS '0 - Baixa do Contas a Receber;
+1 - Nota Fiscal de Saída;
+2 - Movimento de cheque;
+3 - Baixa automática de boleto (Rec);
+4 - Baixa de cartões de crédito;
+5 - Desconto de Títulos';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "dct_id_tipo_financeiro_cred" int4,
+ADD COLUMN "dct_id_tipo_financeiro_desc_taxa" int4,
+ADD COLUMN "dct_id_tipo_financeiro_canc" int4;
+
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Baixa de Contas a Pagar
+3-Devolução de vendas 4-Conciliação bancária  5-Nota Fiscal de Saída 6-Nota de Crédito  7 - Abertura de caixa  8 - Controle de Caixa;
+9 - Movimentação de cheque;
+10 - Baixa de cartões de crédito;
+11 - Baixa automática de boletos (Rec);
+ 12 - Cancelamento NF dia Anterior; 13 - Baixa por Borderô;14 - Lançamento do Movimento do Funcionário;15 - Prestação de Contas; 16 - Desconto de Titulos';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "dct_id_plano_cred" int4,
+ADD COLUMN "dct_id_plano_desc_taxa" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "dct_id_forma_pag" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "dct_id_plano_canc" int4;
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "dct_id_conta" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."dct_id_conta" IS 'Utilizado pela rotina Desconto de Titulos';
+
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "id_dct_desc" int4,
+ADD COLUMN "id_dct_canc" int4;
+
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "id_dct_bxa" int4;
+
+
+
+
+
+CREATE TABLE "public"."fin_tb_m_dct" (
+"id_dct" int4 NOT NULL,
+"data_operacao" date NOT NULL,
+"data_original" date NOT NULL,
+"id_conta" int4,
+"id_local_titulo" int4,
+"per_taxa_desc" numeric(18,4),
+"vlr_taxa_desc" numeric(18,4),
+"tipo_operacao" int4 NOT NULL,
+CONSTRAINT "fin_tb_m_dct_pkey" PRIMARY KEY ("id_dct"),
+CONSTRAINT "fk_fin_m_dct__cad_c_lto" FOREIGN KEY ("id_local_titulo") REFERENCES "public"."cad_tb_c_lto" ("id_local_titulo") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_m_dct__cad_c_ctc" FOREIGN KEY ("id_conta") REFERENCES "public"."cad_tb_c_ctc" ("id_conta") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_dct" OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."fin_tb_m_dct"."tipo_operacao" IS '0 - Descontar Títulos; 1- Baixar Títulos Descontados; 2 - Desfazer Desconto de Títulos';
+
+
+
+
+CREATE TABLE "public"."fin_tb_m_dct_tit" (
+"id_dct" int4 NOT NULL,
+"id_titulo" int4 NOT NULL,
+"vlr_cobrado_canc_desc" numeric(18,4),
+CONSTRAINT "fin_tb_m_dct_tit_pkey" PRIMARY KEY ("id_dct", "id_titulo"),
+CONSTRAINT "fk_fin_dct_tit__fin_m_rec" FOREIGN KEY ("id_titulo") REFERENCES "public"."fin_tb_m_rec" ("id_titulo") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fin_dct_tit__fin_m_dct" FOREIGN KEY ("id_dct") REFERENCES "public"."fin_tb_m_dct" ("id_dct") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_dct_tit" OWNER TO "postgres";
+
+
+
+ALTER TABLE "public"."pro_tb_m_vis"
+ADD COLUMN "ano" int4,
+ADD COLUMN "dta_criacao" date;
+
+
+/***** 24/02/2017 *******/
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "ped_mod_frete" int4,
+ADD COLUMN "ped_vlr_frete" numeric(18,2);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."ped_mod_frete" IS '0 - Nenhum; 1 - CIF; 2 - FOB ';
+
+
+

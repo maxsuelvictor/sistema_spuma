@@ -1,0 +1,50 @@
+create table FIN_TB_M_CON (
+   ID_CONCILIACAO       INT4                 not null,
+   DTA_CONCILIACAO      DATE                 null,
+   ID_CONTA             INT4                 null,
+   constraint PK_FIN_TB_M_CON primary key (ID_CONCILIACAO)
+);
+
+comment on table FIN_TB_M_CON is
+'Consciliação Bancaria';
+
+
+create table FIN_TB_M_CON_CTA (
+   ID_CONCILIACAO       INT4                 not null,
+   ID_CONTROLE          INT4                 not null,
+   constraint PK_FIN_TB_M_CON_CTA primary key (ID_CONCILIACAO, ID_CONTROLE)
+);
+
+comment on table FIN_TB_M_CON_CTA is
+'Registros do banco da tabela CTA.';
+
+alter table FIN_TB_M_CON_CTA
+   add constraint FK_FIN_M_CON_CTA__FIN_M_CON foreign key (ID_CONCILIACAO)
+      references FIN_TB_M_CON (ID_CONCILIACAO)
+      on delete cascade on update restrict;
+
+
+create table FIN_TB_M_CON_GER (
+   ID_CONCILIACAO       INT4                 not null,
+   ID_CONTROLE          INT4                 not null,
+   ID_PLANO             CHAR(11)             null,
+   ID_CONTA             INT4                 null,
+   ID_TIPO_FINANCEIRO   INT4                 null,
+   VLR_LANCAMENTO       NUMERIC(18,4)        null,
+   ID_TITULO            INT4                 null,
+   HISTORICO            VARCHAR(100)         null,    
+   constraint PK_FIN_TB_M_CON_GER primary key (ID_CONCILIACAO, ID_CONTROLE)
+);
+
+comment on table FIN_TB_M_CON_GER is
+'Lançamento Gerado na conciliação';
+
+comment on column FIN_TB_M_CON_GER.ID_TITULO is
+'Identificador do titulo no contas a pagar que foi gerado na conciliacao.';
+
+alter table FIN_TB_M_CON_GER
+   add constraint FK_FIN_M_CON_GER__FIN_M_CON foreign key (ID_CONCILIACAO)
+      references FIN_TB_M_CON (ID_CONCILIACAO)
+      on delete cascade on update restrict;
+
+

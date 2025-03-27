@@ -1,0 +1,10 @@
+/**** 15/03/2019 ****/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "sgq_descartar_op_etq_cof" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."sgq_descartar_op_etq_cof" IS 'Para os itens que precisa informar a Qtde de etiquetas que vai sair, esse parâmetro serve para dizer se o sistema tem que levar em consideração o saldo disponivel em cima da OP da etiqueta ou não.';
+
+update cad_tb_c_gru
+   set sgq_descartar_op_etq_cof = false
+where sgq_descartar_op_etq_cof is null;

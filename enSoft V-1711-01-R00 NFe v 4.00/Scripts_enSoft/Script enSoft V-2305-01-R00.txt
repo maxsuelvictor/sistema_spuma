@@ -1,0 +1,16 @@
+/******* 31-05-23 *********/
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."metodo3_metodo" IS '0 - Amostra
+1 - Pesquisa de mercado
+2 - Indicação do fabricante
+3 - Curriculum vitae
+4 - Auto avaliação
+';
+
+
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "metodo3_dta_auto_avaliacao" date;
+
+
+

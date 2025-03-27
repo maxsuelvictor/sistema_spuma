@@ -1,0 +1,7 @@
+/**** 10/03/2019 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pcp_cpa_id_tipo_mov_estoque" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."pcp_cpa_id_tipo_mov_estoque" IS 'Campo utilizado pela tela de contagem por entrada de produto acabado';
+

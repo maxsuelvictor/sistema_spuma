@@ -1,0 +1,5 @@
+ALTER TABLE "public"."cad_tb_c_pes_mod"
+ALTER COLUMN "menu" TYPE varchar(100);
+
+ALTER TABLE "public"."cad_tb_c_pes_mod"
+ALTER COLUMN "descricao" TYPE varchar(100);

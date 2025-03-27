@@ -1,0 +1,7 @@
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Release\enLoja.Model.dll.config
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Release\enLoja.Model.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Release\enLoja.Model.pdb
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Release\EntityFramework.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Release\EntityFramework.xml
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\obj\Release\enLoja.Model.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\obj\Release\enLoja.Model.pdb

@@ -1,0 +1,29 @@
+ALTER TABLE "public"."ctc_tb_c_tpr_ite_com"
+ADD CONSTRAINT "fk_ctc_c_tpr_ite_com__ctc_c_tpr_ite" FOREIGN KEY ("id_tpr", "id_item") REFERENCES "public"."ctc_tb_c_tpr_ite" ("id_tpr", "id_item") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+/*** 29/10/2016 ****/
+ALTER TABLE cad_tb_c_vei ALTER COLUMN dta_aquisicao DROP NOT NULL
+
+
+/*** 08/11/2016 ***/
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_vis_custo_csu_ite" bool;
+
+update cad_tb_c_fun set seg_vis_custo_csu_ite=FALSE
+where seg_vis_custo_csu_ite is null;
+
+
+
+
+/***** 18/11/2016 *****/
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "di_estrangeiro" varchar(20)
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+/ ***** 25/02/2019 ******* /
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "sgq_perm_atual_contagem" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."sgq_perm_atual_contagem" IS 'Irá permitir se o usuário poderá clicar no botão Atualizar Contagem , da tela de Contagem de inventário';
+
+
+update cad_tb_c_fun
+  set sgq_perm_atual_contagem = false
+
+where sgq_perm_atual_contagem is null;
+
+
+ALTER TABLE "public"."est_tb_m_cte_ite"
+ADD COLUMN "saldo_estoque_momento" float8;
+
+COMMENT ON COLUMN "public"."est_tb_m_cte_ite"."saldo_estoque_momento" IS 'Ficará gravado o estoque físico do momento.';
+
+
+
+
+

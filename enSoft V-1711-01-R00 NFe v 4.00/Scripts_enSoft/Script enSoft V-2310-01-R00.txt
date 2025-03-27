@@ -1,0 +1,14 @@
+/*** 09/10/2023 ***/
+
+
+CREATE TABLE "public"."cad_tb_c_gru_cor" (
+"id_grupo" varchar(11) COLLATE "default" NOT NULL,
+"id_cor" int4 NOT NULL,
+CONSTRAINT "fk_cad_tb_gru_cor__cad_tb_gru" FOREIGN KEY ("id_grupo") REFERENCES "public"."cad_tb_c_gru" ("id_grupo") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_tb_gru_cor__cad_tb_cor" FOREIGN KEY ("id_cor") REFERENCES "public"."cad_tb_c_cor" ("id_cor") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "uniq_cad_tb_gru" UNIQUE ("id_grupo", "id_cor")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_gru_cor" OWNER TO "postgres";

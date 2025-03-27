@@ -1,0 +1,188 @@
+/*** 12/03/2018 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "prot_com_ssllib" int4,
+ADD COLUMN "prot_com_criptlib" int4,
+ADD COLUMN "prot_com_httplib" int4,
+ADD COLUMN "prot_com_xmlsignlib" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."prot_com_ssllib" IS '0 - libNone
+1 - libOpenSSL
+2 - libCapicom
+3 - libCapicomDelphiSoap
+4 - libWinCrypt
+5 - libCustom';
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."prot_com_criptlib" IS '0 - cryNone
+1 - cryOpenSSL
+2 - cryCapicom
+3 - cryWinCrypt';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."prot_com_httplib" IS '0 - httpNone
+1 - httpWinNet
+2 - httpWinHttp
+3 - httpOpenSSL
+4 - httpIndy';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."prot_com_xmlsignlib" IS '0 - xsNone
+1 - xsXmlSec
+1 - xsMsXml
+2 - xsMsXmlCapicom
+3 - xsLibXml2';
+
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "nfe_versao" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."nfe_versao" IS '0- ve200
+1 - ve300
+2 - ve310
+3 - ve400';
+
+
+
+/**** 14/03/18 *****/
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "vlr_fcp_ope_int" numeric(18,4),
+ADD COLUMN "per_fcp_ope_int" float8,
+ADD COLUMN "vlr_fcp_base_ope_int" numeric(18,4),
+ADD COLUMN "vlr_fcp_st_ope_int" numeric(18,4),
+ADD COLUMN "per_fcp_st_ope_int" float8,
+ADD COLUMN "vlr_fcp_st_base_ope_int" numeric(18,4),
+ADD COLUMN "per_st_sup_cons_final_ope_int" float8,
+ADD COLUMN "vlr_fcp_st_ret_ope_int" numeric(18,4),
+ADD COLUMN "per_fcp_st_ret_ope_int" float8,
+ADD COLUMN "vlr_fcp_st_ret_base_ope_int" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."per_st_sup_cons_final_ope_int" IS 'Alíquota suportada pelo Consumidor Final';
+
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_fcp_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."per_fcp_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_fcp_base_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_fcp_st_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."per_fcp_st_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_fcp_st_base_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."per_st_sup_cons_final_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária
+Alíquota suportada pelo Consumidor Final';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_fcp_st_ret_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."per_fcp_st_ret_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_fcp_st_ret_base_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+
+
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "vlr_fcp_ope_int" numeric(18,4),
+ADD COLUMN "vlr_fcp_st_ope_int" numeric(18,4),
+ADD COLUMN "vlr_fcp_st_ret_ope_int" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."vlr_fcp_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."vlr_fcp_st_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."vlr_fcp_st_ret_ope_int" IS 'Criado devido a nota Nota técnica: NT_2016_002_v1.42 - Fundo de combate a pobreza para operações internas ou interestaduais com substituição tributária';
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "vlr_fcp_base_uf_dest" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_fcp_base_uf_dest" IS 'Nota técnica: NT_2016_002_v1.42 - Criado para gravar a informação da base do fcp no caso ';
+
+
+
+/******* 28/03/2018 ********/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "cert_caminho_pfx" varchar(255),
+ADD COLUMN "cert_senha_pfx" varchar(30);
+
+
+
+/******* 31/03/2018 *******/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "sgq_personalizado" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."sgq_personalizado" IS 'produto utilizado pelo módulo sgq.';
+
+
+update cad_tb_c_ite
+  set  sgq_personalizado = false
+where sgq_personalizado is null;
+
+
+
+
+/****** 01/04/2018 *******/
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "pcp_obs_item" varchar(200);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."pcp_obs_item" IS 'Utilizado quando a empresa utiliza SGQ.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "sgq_verif_cod_barra_ped" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."sgq_verif_cod_barra_ped" IS 'utilizado no momento do pedido de venda para verificar se o produto é obrigado a ter o código de barra (GTIN)';
+
+
+update cad_tb_c_gru
+   set sgq_verif_cod_barra_ped = false
+where 
+   sgq_verif_cod_barra_ped is null;
+
+
+
+/******* 06/04/2018  ********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_verif_op_ped" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_verif_op_ped" IS 'Campo responsável de verificar a checagem de nro da O.P no momento de informar o pedido de venda na Ordem de Faturamento.';
+
+
+update cad_tb_c_par_ctr
+   set sgq_verif_op_ped = true
+where 
+   sgq_verif_op_ped is null;
+
+
+/******* 17-04-18 **********/
+
+/******** 17-04-18 ********/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ALTER COLUMN "etiq_madeira" TYPE varchar(200) COLLATE "default",
+ALTER COLUMN "etiq_espuma1" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_espuma2" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_espuma3" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_revestimento1" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_revestimento2" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_revestimento3" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_espuma4" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_espuma5" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_espuma6" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_revestimento4" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_revestimento5" TYPE varchar(300) COLLATE "default",
+ALTER COLUMN "etiq_revestimento6" TYPE varchar(300) COLLATE "default";
+

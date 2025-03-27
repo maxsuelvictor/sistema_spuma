@@ -1,0 +1,92 @@
+object CSU_FM_C_FOR_STA: TCSU_FM_C_FOR_STA
+  Left = 0
+  Top = 0
+  ClientHeight = 550
+  ClientWidth = 835
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlPrincipal: TPanel
+    Left = 0
+    Top = 43
+    Width = 835
+    Height = 507
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 0
+    ExplicitWidth = 800
+    ExplicitHeight = 457
+  end
+  object pnlTop: TPanel
+    Left = 0
+    Top = 0
+    Width = 835
+    Height = 43
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 3355443
+    Ctl3D = True
+    ParentBackground = False
+    ParentCtl3D = False
+    TabOrder = 1
+    ExplicitWidth = 800
+    object pnlCima: TPanel
+      Left = 0
+      Top = 0
+      Width = 835
+      Height = 30
+      Align = alTop
+      BevelOuter = bvNone
+      Color = 3355443
+      ParentBackground = False
+      TabOrder = 0
+      ExplicitWidth = 800
+      object lblTitulo: TLabel
+        AlignWithMargins = True
+        Left = 0
+        Top = -5
+        Width = 835
+        Height = 30
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 5
+        Align = alBottom
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Estat'#237'sticas do Cliente'
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -21
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        ExplicitTop = -13
+        ExplicitWidth = 500
+      end
+    end
+    object pnlBaixo: TPanel
+      Left = 0
+      Top = 25
+      Width = 835
+      Height = 18
+      Align = alBottom
+      BevelOuter = bvNone
+      Color = 3355443
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitWidth = 800
+    end
+  end
+end

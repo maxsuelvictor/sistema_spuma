@@ -1,0 +1,173 @@
+ALTER TABLE "public"."fin_tb_m_con_cta"
+ADD COLUMN "dta_mov_cxb" date;
+
+ALTER TABLE "public"."fin_tb_m_con_ger"
+ADD COLUMN "dta_mov_cxb" date;
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+DROP COLUMN "dta_movimento",
+ADD COLUMN "dta_movimento" date;
+
+ALTER TABLE "public"."pcp_tb_m_ors_tit"
+ALTER COLUMN "num_parcela" DROP NOT NULL;
+
+
+ALTER TABLE "public"."pcp_tb_m_ors"
+ADD COLUMN "id_motorista" int4,
+ADD CONSTRAINT "fk_pcp_m_ors__pcp_c_mta" FOREIGN KEY ("id_motorista") REFERENCES "public"."pcp_tb_c_mta" ("id_motorista") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."ofi_tb_m_ocv"
+ADD COLUMN "doc_cnpj_cpf" varchar(14);
+
+
+ALTER TABLE "public"."ofi_tb_m_orv_ite"
+ADD COLUMN "id_sequencia_ite_ocv" int4;
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."id_sequencia_ite_ocv" IS 'Campo utilizado no momento da Importação do Orçamento da Oficina.';
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_per_canc_orv" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_per_canc_orv" IS 'Este campo será utilizado na tela de Ordem de Serviço.';
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "can_usuario" int4,
+ADD COLUMN "can_data" date,
+ADD COLUMN "can_motivo" varchar(100),
+ADD COLUMN "can_hora" time(6);
+
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "rea_usuario" int4,
+ADD COLUMN "rea_data" date,
+ADD COLUMN "rea_hora" time(6),
+ADD COLUMN "rea_motivo" varchar(100),
+ADD CONSTRAINT "fk_ofi_orv__cad_c_fun_can" FOREIGN KEY ("can_usuario") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT "fk_ofi_orv__cad_c_fun_rea" FOREIGN KEY ("rea_usuario") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."pcp_tb_m_rom"
+ADD COLUMN "placa" char(8);
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ors_ite"
+DROP CONSTRAINT "fk_pcp_m_rom_ors_ite__cad_c_cor";
+
+/*ATENCÇÃO**** SE O CÓDIGO ACIMA DÉ ERRO, RODE ESSE ABAIXO *****/
+
+ALTER TABLE "public"."pcp_tb_m_rom_ors_ite"
+DROP CONSTRAINT "pcp_tb_m_rom_ors_ite_id_cor_fkey";
+
+/*******************************************************/
+
+
+ALTER TABLE "public"."ofi_tb_m_orv_ite"
+ADD COLUMN "id_requisicao" int4,
+ADD COLUMN "can_usuario" int4,
+ADD COLUMN "can_data" date,
+ADD COLUMN "can_hora" time(6),
+ADD COLUMN "can_motivo" varchar(100);
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."id_requisicao" IS 'Este campo será alimentado pela tela OFI_FM_M_RQV';
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."can_usuario" IS 'Campo utilizado pela tela OFI_FM_M_RQV no momento de cancelamento de peça;';
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."can_data" IS 'Campo utilizado pela tela OFI_FM_M_RQV no momento de cancelamento de peça;';
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."can_hora" IS 'Campo utilizado pela tela OFI_FM_M_RQV no momento de cancelamento de peça;';
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."can_motivo" IS 'Campo utilizado pela tela OFI_FM_M_RQV no momento de cancelamento de peça;';
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "id_regiao" int4,
+ADD CONSTRAINT "fk_cad_c_cli__pcp_c_reg" FOREIGN KEY ("id_regiao") REFERENCES "public"."pcp_tb_c_reg" ("id_regiao") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."ofi_tb_m_orv_ite"
+ADD COLUMN "dta_requisicao" date;
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv_ite"."dta_requisicao" IS 'Este campo será alimentado quando o campo id_requisicao for preenchido';
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "dta_fechamento" date;
+
+
+
+CREATE TABLE "public"."pcp_tb_m_rom_ped" (
+"id_rom" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+CONSTRAINT "pcp_tb_m_rom_ped_pkey" PRIMARY KEY ("id_rom", "id_pedido"),
+CONSTRAINT "fk_pcp_m_rom_ped__pcp_m_ped" FOREIGN KEY ("id_pedido") REFERENCES "public"."fat_tb_m_ped" ("id_pedido") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_rom_ped__pcp_m_rom" FOREIGN KEY ("id_rom") REFERENCES "public"."pcp_tb_m_rom" ("id_rom") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_rom_ped" IS 'Pedidos do Romaneio';
+
+
+
+CREATE TABLE "public"."pcp_tb_m_rom_ped_ite" (
+"id_rom" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+"id_ped_ite" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"id_cor" int4,
+"id_tamanho" int4,
+"qtde" float8,
+CONSTRAINT "pcp_tb_m_rom_ped_ite_pkey" PRIMARY KEY ("id_rom", "id_pedido", "id_ped_ite"),
+CONSTRAINT "fk_pcp_m_rom_ped_ite__pcp_m_rom_ped" FOREIGN KEY ("id_rom", "id_pedido") REFERENCES "public"."pcp_tb_m_rom_ped" ("id_rom", "id_pedido") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_rom_ped_ite__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_ite" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_rom_ped_ite" IS 'Itens dos pedidos no romaneio';
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped"
+DROP CONSTRAINT "fk_pcp_m_rom_ped__pcp_m_rom",
+ADD CONSTRAINT "fk_pcp_m_rom_ped__pcp_m_rom" FOREIGN KEY ("id_rom") REFERENCES "public"."pcp_tb_m_rom" ("id_rom") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+
+DROP TABLE pcp_tb_m_rom_ors_ite;
+DROP TABLE pcp_tb_m_rom_ors;
+
+
+ALTER TABLE "public"."cad_tb_c_par"
+ADD COLUMN "res_id_cidade" int4;
+
+ALTER TABLE "public"."cad_tb_c_par"
+ALTER COLUMN "res_id_cidade" TYPE char(10);
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "eff_motivo_inv" char(2);
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."eff_motivo_inv" IS '01 – No final no período;
+02 – Na mudança de forma de tributação da
+mercadoria (ICMS);
+03 – Na solicitação da baixa cadastral, paralisação
+temporária e outras situações;
+04 – Na alteração de regime de pagamento – condição
+do contribuinte;
+05 – Por determinação dos fiscos.';
+
+
+
+

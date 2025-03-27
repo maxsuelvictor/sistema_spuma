@@ -1,0 +1,9 @@
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "dta_vencimento" date;
+
+ALTER TABLE "public"."fin_tb_m_pbx_ger"
+ADD COLUMN "che_numero" int4;
+
+update cad_tb_c_gru
+  set ctr_lot_entr = false
+where ctr_lot_entr is null;

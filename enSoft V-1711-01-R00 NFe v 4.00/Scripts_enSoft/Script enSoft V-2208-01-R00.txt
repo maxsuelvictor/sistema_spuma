@@ -1,0 +1,16 @@
+/******* 19-08-22 *********/
+
+
+CREATE TABLE "public"."cad_tb_c_fun_cpn" (
+"id_funcionario" int4 NOT NULL,
+"id_condicao_pag" int4 NOT NULL,
+CONSTRAINT "cad_tb_c_fun_cpn_pkey" PRIMARY KEY ("id_funcionario", "id_condicao_pag"),
+CONSTRAINT "fk_cad_c_fun_cpn__cad_c_fun" FOREIGN KEY ("id_funcionario") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_fun_cpn__cad_c_cpg" FOREIGN KEY ("id_condicao_pag") REFERENCES "public"."cad_tb_c_cpg" ("id_condicao_pag") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_fun_cpn" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_fun_cpn" IS 'Tabela: Condição de Pagamento não permitada para o vendedor.';

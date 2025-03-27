@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.1.9" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Padrão" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43192,5770529514" ReportOptions.Description.Text="" ReportOptions.LastChange="43192,6206473958" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;procedure Page1OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;  page1.PageCount := 2;                            &#13;&#10;end;&#13;&#10;&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="BUS_DB_C_ITE" DataSetName="BUS_DB_C_ITE"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="0" PaperWidth="99" PaperHeight="33" PaperSize="256" LeftMargin="4" RightMargin="4" TopMargin="2" BottomMargin="2" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="" OnBeforePrint="Page1OnBeforePrint">
+    <TfrxBarCodeView Name="BarCode1" Left="79,37013" Top="11,33859" Width="133,9" Height="79,37013" BarType="bcCodeEAN13" DataField="cod_barra" DataSet="BUS_DB_C_ITE" DataSetName="BUS_DB_C_ITE" Rotation="0" Text="0000000000000" WideBarRatio="2" Zoom="1,3"/>
+  </TfrxReportPage>
+</TfrxReport>

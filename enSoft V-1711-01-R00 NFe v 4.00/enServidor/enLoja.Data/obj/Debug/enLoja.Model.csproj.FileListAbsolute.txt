@@ -1,0 +1,13 @@
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Debug\enLoja.Model.dll.config
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Debug\enLoja.Model.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Debug\enLoja.Model.pdb
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Debug\EntityFramework.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\bin\Debug\EntityFramework.xml
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\obj\Debug\enLoja.Model.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enLojaAspNet\Main\Source\enLojaAspNet\enLoja.Data\obj\Debug\enLoja.Model.pdb
+C:\Mariel\Projetos\Ativo\enSoftware\enSoft\enServidor\enLoja.Data\bin\Debug\enLoja.Model.dll.config
+C:\Mariel\Projetos\Ativo\enSoftware\enSoft\enServidor\enLoja.Data\bin\Debug\enLoja.Model.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enSoft\enServidor\enLoja.Data\bin\Debug\enLoja.Model.pdb
+C:\Mariel\Projetos\Ativo\enSoftware\enSoft\enServidor\enLoja.Data\obj\Debug\enLoja.Model.dll
+C:\Mariel\Projetos\Ativo\enSoftware\enSoft\enServidor\enLoja.Data\obj\Debug\enLoja.Model.pdb
+C:\Mariel\Projetos\Ativo\enSoftware\enSoft\enServidor\enLoja.Data\obj\Debug\enLoja.Model.csprojResolveAssemblyReference.cache

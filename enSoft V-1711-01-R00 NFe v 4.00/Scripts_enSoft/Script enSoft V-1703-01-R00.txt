@@ -1,0 +1,295 @@
+/*** 30/03/2017 ***/
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_ite"
+ADD COLUMN "qtde_conj" float8,
+ADD COLUMN "qtde_conj_conf" float8;
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "per_comissao" float8;
+
+
+
+/****** 04/04/2017 *******/
+
+ALTER TABLE "public"."pcp_tb_m_opr_ops"
+ADD COLUMN "obs_producao" varchar(800);
+
+
+/**** 05/04/2017 ******/
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_fiscal_ref_entrada" int4;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+DROP COLUMN "eff_layout";
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "eff_layout" int4;
+
+update cad_tb_c_ite_coj set id_cor=0
+where id_cor is null;
+
+update cad_tb_c_ite_coj set id_tamanho=0
+where id_tamanho is null;
+
+
+/**** 17/04/2017 *****/
+
+ALTER TABLE "public"."fin_tb_m_dct"
+ADD COLUMN "can_motivo" varchar(100),
+ADD COLUMN "cancelado" bool;
+
+ALTER TABLE "public"."fin_tb_m_dct_tit"
+ADD COLUMN "vlr_taxa_desc" numeric(18,4);
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "dct_id_local_titulo" int4;
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "dct_id_desc" int4;
+
+
+/****** 22/04/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "perm_bxa_rec_n_tit" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "tor" bool;
+
+
+/***** 25/04/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "tipo" int4;
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."tipo" IS '0 - Funcionário 1 - Tercerizado';
+
+
+ALTER TABLE "public"."fat_tb_m_xml"
+ADD COLUMN "vlr_outras_desp" numeric(18,4);
+
+
+/***** 27/04/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_vit_kmt"
+ADD COLUMN "km_inicial_orig" float8,
+ADD COLUMN "km_final_orig" float8;
+
+
+/***** 28/04/2017 *****/
+
+update cad_tb_c_par_ctr
+set per_desp_var = 0
+where per_desp_var is NULL;
+
+update cad_tb_c_par_ctr
+set per_desp_fixa = 0
+where per_desp_fixa is NULL;
+
+
+ALTER TABLE "public"."pro_tb_m_vis_cli"
+ADD COLUMN "id_cliente" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_vit"
+ADD COLUMN "id_cliente" int4;
+
+
+
+/******* 03/05/2017 ******/
+
+
+update pro_tb_m_vis_cli vvv
+   set id_cliente = ttt.id_cliente
+FROM  
+   (select id_cliente,doc_cnpj_cpf from cad_tb_c_cli 
+    where ativo = true) ttt
+where vvv.doc_cnpj_cpf = ttt.doc_cnpj_cpf;
+
+
+
+
+/******* 05/05/2017 *******/
+
+update cad_tb_c_vit_kmt
+  set km_inicial_orig = km_inicial
+where
+   km_inicial_orig is null;
+
+
+update cad_tb_c_vit_kmt
+  set km_final_orig = km_final
+where
+   km_final_orig is null;
+
+
+/****** 08/05/2017 ******/
+
+
+ALTER TABLE "public"."cad_tb_c_rvd"
+ALTER COLUMN "id_rvd" SET NOT NULL,
+ALTER COLUMN "descricao" SET NOT NULL,
+ADD PRIMARY KEY ("id_rvd");
+
+
+ALTER TABLE "public"."cad_tb_c_cli_rvd"
+ALTER COLUMN "id_cliente" SET NOT NULL,
+ALTER COLUMN "id_rvd" SET NOT NULL,
+ADD PRIMARY KEY ("id_cliente", "id_rvd"),
+ADD CONSTRAINT "fk_cad_c_cli_rvd__cad_c_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."cad_tb_c_cli_rvd"
+ADD CONSTRAINT "fk_cad_c_cli_rvd__cad_c_rvd" FOREIGN KEY ("id_rvd") REFERENCES "public"."cad_tb_c_rvd" ("id_rvd") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."cad_tb_c_und"
+ADD COLUMN "inf_tempo_ite_coj" bool;
+
+ALTER TABLE "public"."cad_tb_c_ite_coj"
+ADD COLUMN "qtde_tempo" time(0);
+
+
+
+/******** 09/05/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ALTER COLUMN "dta_senha_expira" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ALTER COLUMN "id_perfil_seg" DROP NOT NULL,
+ALTER COLUMN "seg_alt_lim_cli" DROP NOT NULL,
+ALTER COLUMN "seg_alt_sit_cli" DROP NOT NULL,
+ALTER COLUMN "seg_alt_pre_pro" DROP NOT NULL,
+ALTER COLUMN "seg_hab_bot_exc" DROP NOT NULL;
+
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "coj_ite_hrq" varchar(50);
+
+
+
+/******* 10/05/2017 *********/
+
+ALTER TABLE "public"."ctc_tb_m_cep_epi"
+DROP CONSTRAINT "ctc_tb_m_cep_epi_id_epi_fkey";
+
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "id_seq_coj" int4;
+
+update cad_tb_c_par_mod set tor=FALSE
+where tor is null;
+
+
+update est_tb_m_fea fea 
+  set id_seq_coj=ttt.id_seq_item,
+       coj_ite_hrq=ttt.id_item||'-'||fea.id_item
+from 
+(select id_pedido,id_seq_item,id_item from est_tb_m_fea where id_pedido>0 and id_seq_item>0) as ttt
+where fea.id_pedido=ttt.id_pedido and fea.id_coj_ite=ttt.id_item;
+
+
+/******* 15/05/2017 ********/
+
+ALTER TABLE "public"."est_tb_m_mal_ite"
+ADD COLUMN "vlr_unitario" numeric(18,4),
+ADD COLUMN "vlr_total" numeric(18,4);
+
+
+/***** 24/05/2017 *****/
+
+ALTER TABLE "public"."cmp_tb_m_sol_ite"
+ADD COLUMN "desc_item" varchar(100);
+
+ALTER TABLE "public"."cmp_tb_m_sol_ite"
+DROP CONSTRAINT "fk_cmp_m_sol_ite__cad_c_ite";
+
+
+/****** 26-05-2017 *****/
+
+ALTER TABLE "public"."cmp_tb_m_sol_ite"
+ADD COLUMN "und_item" char(3);
+
+update cmp_tb_m_sol_ite ste set 
+desc_item = ITE.descricao,
+und_item = ITE.id_und_venda
+from (select id_item,descricao,id_und_venda from cad_tb_c_ite ) ite
+where ste.id_item=ite.id_item;
+
+
+/***** 29/05/2017 ******/
+
+ALTER TABLE "public"."pro_tb_m_vis_cli"
+ADD CONSTRAINT "fk_pro_m_vis_cli__cad_c_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+/***** 31/05/2017 ******/
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "vlr_tarifa" numeric(18,2);
+
+
+/**** 09/06/17 *******/
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "imp_msg_juros_mora" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."imp_msg_juros_mora" IS 'Utilizado no momento de gerar o boleto.';
+
+update cad_tb_c_ctc
+  set imp_msg_juros_mora = true
+where 
+   imp_msg_juros_mora is null;
+
+
+/**** 10/06/2017 ******/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "orv_gera_fin_separado" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."orv_gera_fin_separado" IS 'Campo utilizado no momento de fechar a O.S. Mesmo que o usuário escolha notas separada, ele poderá serpara o financeiro ou não.';
+
+
+
+update cad_tb_c_par_ctr
+  set orv_gera_fin_separado = TRUE
+where 
+   orv_gera_fin_separado is null;
+
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "orv_gera_fin_separado" bool;
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv"."orv_gera_fin_separado" IS 'Campo preenchido automaticamente pelo parâmetro da oficina. Indica se o financeiro da oficina será gerado separado.';
+
+
+/***** 13/06/2017 *******/
+
+
+CREATE TABLE "public"."fat_tb_m_nfe_arq" (
+"id_fiscal" int4 NOT NULL,
+"arq_xml" bytea,
+CONSTRAINT "FAT_TB_M_NFE_ARQ_pkey" PRIMARY KEY ("id_fiscal"),
+CONSTRAINT "fk_fat_m_nfe_arq__fat_m_nfe_arq" FOREIGN KEY ("id_fiscal") REFERENCES "public"."fat_tb_m_nfe" ("id_fiscal") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_nfe_arq" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fat_tb_m_nfe_arq" IS 'Tabela que guarda arquivo XML das notas fiscais.';
+
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "nfe_permite_salv_xml" bool;
+
+update cad_tb_c_par_nfe
+  set nfe_permite_salv_xml = false
+where nfe_permite_salv_xml is null;

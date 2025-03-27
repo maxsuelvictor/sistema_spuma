@@ -1,0 +1,126 @@
+/******** 08-05-2018 **********/
+
+ALTER TABLE "public"."fat_tb_m_orc_ite"
+ADD COLUMN "pcp_obs_item" varchar(150);
+
+
+/****** 10/05/2018 ********/
+
+CREATE TABLE "public"."fin_tb_m_rbx_ppe" (
+"id_baixa" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+"vlr_desc_pos_fat" numeric(18,4),
+CONSTRAINT "fin_tb_m_rbx_ppe_pkey" PRIMARY KEY ("id_baixa", "id_pedido")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_rbx_ppe" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_rbx_ppe" IS 'Pedidos que foram prestado conta na baixa do contas a receber. (sgq).';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rbx_ppe"."vlr_desc_pos_fat" IS 'Informe neste campo';
+
+
+/******* 14/04/2018 *******/
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "sgq_perm_alt_comissao_ped" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."sgq_perm_alt_comissao_ped" IS 'Permitir alterar a comissão do representane';
+
+update cad_tb_c_fun
+set sgq_perm_alt_comissao_ped = false 
+where sgq_perm_alt_comissao_ped is null;
+
+
+/******* 16/05/2018 *******/
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_mch"."operacao" IS '1 - Depositar;
+2 - Devolver;
+3 - Pagar parcial;
+4 - Resgatar; 5 - Pgto a terceiros; 6 - Cheque descontado;';
+
+
+/******* 22-05-2018 *******/
+
+
+CREATE TABLE "public"."fin_tb_m_pbx_cht" (
+"id_baixa" int4 NOT NULL,
+"id_titulo" int4 NOT NULL,
+"vlr_cheque" numeric(18,4),
+CONSTRAINT "fin_tb_m_pbx_cht_pkey" PRIMARY KEY ("id_baixa", "id_titulo")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_pbx_cht" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_pbx_cht" IS 'Baixa de Contas a Pagar com Cheques de Terceiros';
+
+
+/******* 23-05-18 ********/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "sgq_texto_cond_pgto" varchar(80);
+
+
+ALTER TABLE "public"."cad_tb_c_cpg"
+ADD COLUMN "sgq_texto_cnd_ped" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_cpg"."sgq_texto_cnd_ped" IS 'Se estiver TRUE , o pedido de venda irá abrir o campo para o usuário digitar o texto a ser impresso no pedido de venda ao invés da descrição da condição de pagamento.';
+
+
+update cad_tb_c_cpg
+set sgq_texto_cnd_ped = false
+where sgq_texto_cnd_ped is null;
+
+
+
+
+/******** 24-05-18 ********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_preenc_vlr_pago_bx_tit" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_preenc_vlr_pago_bx_tit" IS 'Se estiver TRUE o sistema irá fazer com que no momento de selcionar o título para baixar , o sistema irá preencher o valor pago já com o valor do título.';
+
+
+update cad_tb_c_par_ctr
+set sgq_preenc_vlr_pago_bx_tit = false
+where sgq_preenc_vlr_pago_bx_tit is null;
+
+
+
+/******* 29-05-18 *********/
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "qtde_dias_protesto" int4,
+ADD COLUMN "perc_multa" float8;
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "protestar_negativar" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."protestar_negativar" IS '0 - Nenhum
+1 - Protestar
+2 - Negativar';
+
+
+/****** 30-05-18 ********/
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "aval_doc_cnpj_cpf" varchar(14),
+ADD COLUMN "aval_nome" varchar(40),
+ADD COLUMN "aval_logradouro" varchar(30),
+ADD COLUMN "aval_nro" varchar(10),
+ADD COLUMN "aval_bairro" varchar(20),
+ADD COLUMN "aval_id_cidade" char(10),
+ADD COLUMN "aval_cep" char(9),
+ADD COLUMN "aval_fone" varchar(14),
+ADD COLUMN "aval_email" varchar(60);
+
+
+

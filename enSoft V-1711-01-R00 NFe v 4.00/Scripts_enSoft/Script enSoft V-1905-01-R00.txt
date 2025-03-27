@@ -1,0 +1,30 @@
+/**** 14/05/2019 *****/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "pedido_automatico" bool;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."pedido_automatico" IS 'Pedido gerado automaticamente a partir de um pedido que tenha o seu item alterado para menos e com a confirmação do usuário, para poder ser gerado.';
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "pedido_origem_aut" integer;
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_ped"
+ADD COLUMN "origem_insercao" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_ped"."origem_insercao" IS '0 - Pedido inserido por importacao;
+1 - Pedido inserido por pedido automático(Quando  o pedido é gerado partindo de um pedido já em produção);';
+
+
+update pcp_tb_m_opr_ped
+set origem_insercao = 0
+where origem_insercao is null;
+
+
+update fat_tb_m_ped
+set pedido_automatico = false
+where pedido_automatico is null;
+
+
+

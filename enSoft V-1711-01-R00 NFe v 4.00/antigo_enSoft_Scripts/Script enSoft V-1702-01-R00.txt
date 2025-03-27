@@ -1,0 +1,143 @@
+/****** 27/02/2017 ****/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_motorista" int4,
+ADD COLUMN "id_placa" char(8),
+ADD CONSTRAINT "fk_fat_m_ped__pcp_c_mta" FOREIGN KEY ("id_motorista") REFERENCES "public"."pcp_tb_c_mta" ("id_motorista") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+update  cad_tb_c_par_ctr
+  set mob_periodo_ult_vend = 180
+where 
+   mob_periodo_ult_vend is null;
+
+
+
+/**** 01/03/2017 *****/
+
+CREATE TABLE "public"."ctc_tb_m_pme" (
+"id_pme" int4 NOT NULL,
+"id_equip" char(8) COLLATE "default",
+"tipo_cont" varchar(20) COLLATE "default",
+"modelo" varchar(30) COLLATE "default",
+"ult_manu" varchar(10) COLLATE "default",
+"atual_manu" varchar(10) COLLATE "default",
+"prox_manu" varchar(10) COLLATE "default",
+"tipo_prox_manu" varchar(20) COLLATE "default",
+"per_restante" varchar(10) COLLATE "default",
+"per_excedido" varchar(10) COLLATE "default",
+"local" varchar(50) COLLATE "default",
+"observacao" varchar(200) COLLATE "default",
+"tipo_equip" char(1) COLLATE "default",
+"dta_ult_dado" date,
+PRIMARY KEY ("id_pme")
+)
+WITH (OIDS=FALSE)
+;
+
+
+
+ALTER TABLE "public"."fin_tb_m_dct"
+ADD COLUMN "vlr_total_titulos" numeric(18,4);
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ALTER COLUMN "dct_id_plano_cred" TYPE char(11),
+ALTER COLUMN "dct_id_plano_desc_taxa" TYPE char(11),
+ALTER COLUMN "dct_id_plano_canc" TYPE char(11);
+
+ALTER TABLE "public"."fin_tb_m_dct"
+ADD COLUMN "id_empresa" int4 NOT NULL;
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "dct_dta_descontado" date;
+
+
+ALTER TABLE "public"."fin_tb_m_dct"
+ADD COLUMN "id_responsavel" int4,
+ADD CONSTRAINT "fk_fin_m_dct__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+/***** 02/03/2017 ******/
+
+ALTER TABLE "public"."fat_tb_m_mkt"
+ADD COLUMN "id_vis" int4;
+
+ALTER TABLE "public"."fat_tb_m_mkt"
+ALTER COLUMN "id_rota" DROP NOT NULL;
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_pcr"."origem" IS '1 - Baixa Contas a Pagar; 2 - Devolução do Fornecedor';
+
+ALTER TABLE "public"."fin_tb_m_pcr"
+ADD COLUMN "id_fiscal" int4;
+
+
+
+
+CREATE TABLE "public"."ofi_tb_m_ocq" (
+"id_orcamento" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"id_equipamento" int4,
+"dta_orcamento" date,
+"dta_validade" date,
+"id_cliente" int4,
+"nome_cliente" varchar(50) COLLATE "default",
+"id_funcionario" int4,
+"id_analista" int4,
+"id_condicao_pag" int4,
+"vlr_servicos" numeric(18,4),
+"vlr_produtos" numeric(18,4),
+"vlr_terceiro" numeric(18,4),
+"des_servicos" numeric(18,4),
+"des_produtos" numeric(18,4),
+"vlr_total" numeric(18,4),
+"status" int4,
+"obs" varchar(100) COLLATE "default",
+"doc_cnpj_cpf" varchar(14) COLLATE "default",
+"hor_orcamento" time(6),
+"can_motivo" varchar(100) COLLATE "default",
+"can_data" date,
+"can_hora" time(6),
+"can_usuario" int4,
+"serial" varchar(30) COLLATE "default",
+PRIMARY KEY ("id_orcamento")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_ocq" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."ofi_tb_m_ocq" IS 'Orçamento de Equipamentos';
+
+COMMENT ON COLUMN "public"."ofi_tb_m_ocq"."status" IS '0 - Em aberto;
+1 - Importado;
+2 - Cancelado;';
+
+-----------------------------------------------------------------------------
+CREATE TABLE "public"."ofi_tb_m_ocq_ite" (
+"id_orcamento" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"id_busca_item" varchar(30) COLLATE "default",
+"qtde" float8 NOT NULL,
+"vlr_unitario" numeric(18,4) NOT NULL,
+"vlr_bruto" numeric(18,4) NOT NULL,
+"per_desconto" float8 NOT NULL,
+"vlr_desconto" numeric(18,4) NOT NULL,
+"vlr_liquido" numeric(18,4) NOT NULL,
+"id_terceiro" int4,
+"vlr_unitario_orig" numeric(18,4),
+"nome_ite" varchar(100) COLLATE "default",
+PRIMARY KEY ("id_orcamento", "id_sequencia"),
+FOREIGN KEY ("id_orcamento") REFERENCES "public"."ofi_tb_m_ocv" ("id_orcamento") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_ocq_ite" OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."ofi_tb_m_ocq_ite"."vlr_unitario_orig" IS 'Este campo irá armazenar o preço original (Que é calculado pelo sistema).  Assim o sistema saberá se o usuário alterou o preço no pedido ao verificar VLR_UNITARIO vs VLR_UNITARIO_ORIG';
+
+

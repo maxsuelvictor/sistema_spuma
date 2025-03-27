@@ -1,0 +1,16 @@
+/**** 02/12/2021 *****/
+
+ALTER TABLE "public"."pcp_tb_m_epp_ite"
+ADD COLUMN "id_func_colchoaria" int4;
+
+
+
+/***** 06/12/2021 ****/
+
+COMMENT ON COLUMN "public"."cad_tb_c_set"."tipo" IS '0 - Laminação
+;1 - Bordadeira;2 - Colagem
+;3 - Costura;4 - Alfinetagem
+;5 - Espumação;6 - Revisão;7 - Outros
+8 - Colchoaria';
+
+

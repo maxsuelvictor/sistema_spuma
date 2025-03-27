@@ -1,0 +1,15 @@
+/**** 22/01/2020 ******/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_alterar_ped_sit" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_alterar_ped_sit" IS '0 - Não se aplica;
+1 - Somente pedido em situação DIGITADO;
+2 - Somente pedido em situação DIGITADO ou APROVADO;
+3 - Somente pedido em situação DIGITADO, APROVADO ou EM PRODUÇÃO;
+';
+
+
+update cad_tb_c_fun 
+  set seg_alterar_ped_sit = 0
+where seg_alterar_ped_sit is null;

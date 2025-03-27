@@ -1,0 +1,9 @@
+
+/**** Maxsuel Victor - 03/12/2017 *****/
+
+update cad_tb_c_vit 
+   set semana_visitada = ttt.semana_vis
+from (
+select vit.id_visita, vit.dta_visita, vit.semana, extract(week from vit.dta_visita::date) as semana_vis
+      from cad_tb_c_vit vit ) ttt
+where cad_tb_c_vit.id_visita = ttt.id_visita

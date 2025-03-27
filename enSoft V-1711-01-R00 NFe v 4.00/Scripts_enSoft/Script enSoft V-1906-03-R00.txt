@@ -1,0 +1,19 @@
+/******** 18/06/2019 ********/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "gerar_pedido_diferenca" bool;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."gerar_pedido_diferenca" IS 'Se for true o sistema irá gerar um novo pedido com a qtde retirada do pedido original';
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_pedido_gerado" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."id_pedido_gerado" IS 'Neste campo fica guardado o nro do pedido que será gerado com a diferença das quantidades dos itens.';
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+ALTER INDEX "public"."ix_ft_ped_t_pedido2" RENAME TO "ix_ft_orv_tit ";
+
+
+CREATE TABLE "public"."ofi_tb_m_orv_tit_ser" (
+"id_ordem" int4 NOT NULL,
+"id_titulo" int4 NOT NULL,
+"dias" int4 NOT NULL,
+"dta_vencimento" date NOT NULL,
+"vlr_titulo" numeric(18,4) NOT NULL,
+"che_banco" char(10),
+"che_agencia" char(10),
+"che_conta" int4,
+"che_numero" int4,
+"che_emitente" varchar(50),
+"id_forma_pag" int4,
+CONSTRAINT "ofi_tb_m_orv_tit_copy_pkey" PRIMARY KEY ("id_ordem", "id_titulo"),
+CONSTRAINT "fk_ofi_m_orv_tit_ser__ofi_m_orv" FOREIGN KEY ("id_ordem") REFERENCES "public"."ofi_tb_m_orv" ("id_ordem") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_orv_tit_ser" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."ofi_tb_m_orv_tit_ser" IS 'Ordem de Serviço - Titulos dos Serviços';
+
+
+
+CREATE INDEX "ix_ft_orv_tit_serv" ON "public"."ofi_tb_m_orv_tit_ser" USING btree ("id_ordem");
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_orcamento" int4;
+
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."origem_nf" IS 'A- Pedido de Venda  B- Estoque  C- Oficina  X- Importação XML   G- Gerada de cupom fiscal ';
+
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "vlr_cred_produtos" numeric(18,4),
+ADD COLUMN "vlr_cred_servicos" numeric(18,4);
+
+
+
+
+
+CREATE TABLE "public"."cad_tb_c_mct" (
+"id_maquineta" int4 NOT NULL,
+"descricao" varchar(30),
+CONSTRAINT "CAD_TB_C_MCT_pkey" PRIMARY KEY ("id_maquineta")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_mct" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_mct" IS 'Cadastro de Maquinetas de Cartão de Crédito';
+
+
+
+drop table cad_tb_c_fpg_tap;
+
+
+
+CREATE TABLE "public"."cad_tb_c_fpg_tap" (
+"id_forma_pag" int4 NOT NULL,
+"qtde_parc_tot" int4 NOT NULL,
+"qtde_parc_ini" int4,
+"qtde_parc_fin" int4,
+"taxa" float8,
+"dias_acres_vencto" int4,
+"id_empresa" int4 NOT NULL,
+"id_maquineta" int4 NOT NULL,
+CONSTRAINT "cad_tb_c_fpg_tap_pkey" PRIMARY KEY ("id_forma_pag", "id_empresa", "id_maquineta", "qtde_parc_tot"),
+CONSTRAINT "fk_cad_c_fpg_tap__cad_c_mct" FOREIGN KEY ("id_maquineta") REFERENCES "public"."cad_tb_c_mct" ("id_maquineta") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_fpg_tap__cad_c_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_fpg_tap" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_fpg_tap" IS 'Tabela responsável pelas taxas aprazos do cartão.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_fpg_tap"."dias_acres_vencto" IS 'Campo utilizado no momento do fechamento do caixa. O sistema irá acrescentar no vencimento do cartão a qtde de dias que tem neste campo.';
+
+
+

@@ -1,0 +1,15 @@
+ALTER TABLE "public"."fat_tb_m_rom_lac"
+ALTER COLUMN "id_romaneio" TYPE int4;
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "vlr_icm_deson" numeric(18,2);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."vlr_icm_deson" IS 'Desconto de ICMS.
+';
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "vlr_icm_deson" numeric(18,2);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."vlr_icm_deson" IS 'Desconto de ICMS.';
+

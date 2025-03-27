@@ -1,0 +1,16 @@
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "contribuinte" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."contribuinte" IS '0 - Contribuinte de ICMS
+1 - Não Contribuinte de ICMS
+2 - ISENTO';
+
+update cad_tb_c_for
+set contribuinte = 0
+where contribuinte is null and
+ doc_ie <> 'ISENTO';
+
+update cad_tb_c_for
+set contribuinte = 2
+where contribuinte is null and
+ doc_ie = 'ISENTO';

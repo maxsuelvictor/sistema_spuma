@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8DEE70B1-B46A-41CA-8167-8198FE158565}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>enLoja.Model</RootNamespace>
+    <AssemblyName>enLoja.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cadastros\CAD_EF_C_CCU.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CHH.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CHS.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CLI_BCO.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CLI_CTO.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CNE.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_COR.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CPG.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CTC.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_ECF.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_FOR.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_FOR_REP.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_FPG.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_FUN.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_GFO.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_GRU.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_INF.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_ITE_COM.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_ITE_ESP.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_ITE_LOT.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_ITE_PRE.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_LTO.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_NCM.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PAR.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PAR_CTR.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PAR_MOD.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PAR_SER.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PCT.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PEC.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PES.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_PES_MOD.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_RAM.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_SEQ.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_SET.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_TDF.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_TIF.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_TME.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_TRI.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_TRI_REG.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_SET_TDS.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_UND.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CFO.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_ITE.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_NAT.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CLI_REC.cs" />
+    <Compile Include="Compras\CMP_EF_M_COT.cs" />
+    <Compile Include="Compras\CMP_EF_M_COT_FIT.cs" />
+    <Compile Include="Compras\CMP_EF_M_COT_FOR.cs" />
+    <Compile Include="Compras\CMP_EF_M_COT_ITE.cs" />
+    <Compile Include="Compras\CMP_EF_M_IQF.cs" />
+    <Compile Include="Compras\CMP_EF_M_PED.cs" />
+    <Compile Include="Compras\CMP_EF_M_PED_ITE.cs" />
+    <Compile Include="Compras\CMP_EF_M_RAA.cs" />
+    <Compile Include="Compras\CMP_EF_M_RAA_ITE.cs" />
+    <Compile Include="Compras\CMP_EF_M_SOL.cs" />
+    <Compile Include="Compras\CMP_EF_M_SOL_ITE.cs" />
+    <Compile Include="Enums\CLASSIFICA_CONTA_ENUM.cs" />
+    <Compile Include="Enums\CLI_SITUACAO_ENUM.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CID.cs" />
+    <Compile Include="Enums\CREDITO_ORIGEM_ENUM.cs" />
+    <Compile Include="Enums\CXA_TIPO_LANCA_ENUM.cs" />
+    <Compile Include="Enums\DEB_CRE_ENUM.cs" />
+    <Compile Include="Enums\DOC_IMPRESSO_ENUM.cs" />
+    <Compile Include="Enums\IND_EMITENTE_ENUM.cs" />
+    <Compile Include="Enums\IND_FRETE_ENUM.cs" />
+    <Compile Include="Enums\IND_OPERACAO_ENUM.cs" />
+    <Compile Include="Enums\IND_PAGAMENTO_ENUM.cs" />
+    <Compile Include="Enums\NATUREZA_CONTA_ENUM.cs" />
+    <Compile Include="Enums\ORIGEM_ENUM.cs" />
+    <Compile Include="Enums\PCP_INDICADOR_DESTINO_ENUM.cs" />
+    <Compile Include="Enums\PCP_TIPO_CADARCO_ENUM.cs" />
+    <Compile Include="Enums\PCP_TIPO_CLIENTE_ENUM.cs" />
+    <Compile Include="Enums\REGIME_TRIBUTARIO_ENUM.cs" />
+    <Compile Include="Enums\STATUS_ENUM.cs" />
+    <Compile Include="Enums\TIPO_BANCO_ENUM.cs" />
+    <Compile Include="Enums\TIPO_DESPESA_ENUM.cs" />
+    <Compile Include="Enums\TIPO_FRETE_ENUM.cs" />
+    <Compile Include="Enums\TIPO_MOV_ES_ENUM.cs" />
+    <Compile Include="Enums\TIPO_SETOR_ENUM.cs" />
+    <Compile Include="Enums\TME_TIPO_INDICADOR_ENUM.cs" />
+    <Compile Include="Enums\TME_TIPO_MOV_ENUM.cs" />
+    <Compile Include="Estoque\EST_EF_M_CTE.cs" />
+    <Compile Include="Estoque\EST_EF_M_CTE_ITE.cs" />
+    <Compile Include="Estoque\EST_EF_M_FEA.cs" />
+    <Compile Include="Estoque\EST_EF_M_FES.cs" />
+    <Compile Include="Estoque\EST_EF_M_FES_ALM.cs" />
+    <Compile Include="Estoque\EST_EF_M_INV.cs" />
+    <Compile Include="Estoque\EST_EF_M_MAL.cs" />
+    <Compile Include="Estoque\EST_EF_M_MAL_ITE.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE_ANA.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE_DEV.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE_IQM.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE_ITE.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE_DEV_ITE.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE_NFF.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_NFE_TIT.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_ORC.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_ORC_ITE.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_PED.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_PED_ITE.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_PED_TIT.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_POS.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_POS_ITE.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_ROM.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_ROM_LOT.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_ROM_PED.cs" />
+    <Compile Include="Faturamento\FAT_EF_M_ROM_PED_ITE.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_COB.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_COB_TIT.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_CXA.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_CXA_MOV.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_PAG.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_PAG_PAG.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_RBX.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_RBX_GER.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_RBX_TIT.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_RCR.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_REC.cs" />
+    <Compile Include="Financeiro\FIN_EF_M_REC_PAG.cs" />
+    <Compile Include="Helpers\Criptografia.cs" />
+    <Compile Include="Helpers\enClass.cs" />
+    <Compile Include="Helpers\ESTADO.cs" />
+    <Compile Include="Helpers\LimiteCrédito.cs" />
+    <Compile Include="Helpers\PAIS.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Obras\Cadastros\OBR_EF_C_EQP.cs" />
+    <Compile Include="Obras\Cadastros\OBR_EF_C_GRU.cs" />
+    <Compile Include="Obras\Cadastros\OBR_EF_C_OBR.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CVE.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_VEI.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_ALM.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_CDP.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_CDR.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_CIN.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_CLA.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_CNF.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_CRG.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_DIS.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_ESP.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_INS.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_LME.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_LME_DOC.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_LME_DPG.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_LME_DRP.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_LME_DRV.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_MDE.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_MEQ.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_MET.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_MTA.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_MVE.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_PRP.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_PRQ.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_PRQ_ESP.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_REG.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_ROT.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_RPT.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_TIN.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_TLM.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_CIN_LNS.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_TPP.cs" />
+    <Compile Include="PCP\Cadastros\PCP_EF_C_TPP_SET.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR_OPS.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR_OPS_IPS.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ORS.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ORS_ITE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ORS_TIT.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ROM.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ROM_LOT.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ROM_ORS.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ROM_ORS_ITE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_RVC_ITE_SET.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_RVC_ITE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_RVC_ITE_SET_DEF.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ACR.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ACR_ITE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ACR_ITE_PCN.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ACR_ITE_PCR.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ACR_ITE_PDT.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_ACR_ITE_PRC.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CAC.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CAC_ANA.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CAC_PLA.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CME.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CME_MEQ.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CRP.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CRP_ITE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CRP_ITE_BXI.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CRQ.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_CRQ_REG.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_LBE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_LBE_BLO.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_LPR.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_LPR_FUN.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_MCP.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_MCP_IVE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_MCP_SER.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_NCF.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_NCF_DIS.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPB.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPB_OPE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPB_OPE_IBE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPB_OPR.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR_IPA.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR_OPP.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR_PED.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_PSC.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_PSC_PRT.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_REC.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_REC_IPP.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR_REQ.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_OPR_REQ_ITE.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_RVC.cs" />
+    <Compile Include="PCP\Movimentacoes\PCP_EF_M_VVE.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Validações\ExistClienteAttribute.cs" />
+    <Compile Include="Validações\ExistItemAttribute.cs" />
+    <Compile Include="Validações\ExistTipoEstoqueAttribute.cs" />
+    <Compile Include="Validações\ExistTributoAttribute.cs" />
+    <Compile Include="Validações\ExistNCMAttribute.cs" />
+    <Compile Include="Validações\ExistCidadeAttribute.cs" />
+    <Compile Include="Validações\ExistVendedorAttribute.cs" />
+    <Compile Include="Validações\Faturamento\ExistNF.cs" />
+    <Compile Include="Validações\ExistSetorAttribute.cs" />
+    <Compile Include="Validações\Faturamento\NFEChaveRequiredAttribute.cs" />
+    <Compile Include="Validações\Faturamento\ValidaCFOPNFEAttribute.cs" />
+    <Compile Include="Validações\Faturamento\ExistEmitente.cs" />
+    <Compile Include="Validações\Faturamento\ValidaChaveNFeAttribute.cs" />
+    <Compile Include="Validações\Faturamento\ValidaCondPagNFAttribute.cs" />
+    <Compile Include="Validações\Faturamento\ValidaEmitente.cs" />
+    <Compile Include="Validações\Faturamento\ValidaVendedorNFAttribute.cs" />
+    <Compile Include="Validações\LimiteMáximoAttribute.cs" />
+    <Compile Include="Validações\NotifyingObject.cs" />
+    <Compile Include="Validações\NotZeroAttibute.cs" />
+    <Compile Include="enLojaContext.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CIN.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CLI.cs" />
+    <Compile Include="Cadastros\CAD_EF_C_CLI_INF.cs" />
+    <Compile Include="Enums\PESSOA_ENUM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Enums\SEXO_ENUM.cs" />
+    <Compile Include="Enums\TIPO_CLIENTE_ENUM.cs" />
+    <Compile Include="Validações\UniqueCidadeAttribute.cs" />
+    <Compile Include="Validações\UniqueCNAEAttribute.cs" />
+    <Compile Include="Validações\UniqueCnpjAttribute.cs" />
+    <Compile Include="Validações\UniqueCpfAttribute.cs" />
+    <Compile Include="Validações\UniqueGrupoAttribute.cs" />
+    <Compile Include="Validações\ValidaClientePedidoAttribute.cs" />
+    <Compile Include="Validações\ValidaDataEmissãoEntradasAttribute.cs" />
+    <Compile Include="Validações\ValidaDataValidadePedidoAttribute.cs" />
+    <Compile Include="Validações\ValidaItemPedidoAttribute.cs" />
+    <Compile Include="Validações\ValidaNascimentoAttribute.cs" />
+    <Compile Include="Validações\ValidaQuantidadeItemPedidoAttribute.cs" />
+    <Compile Include="Validações\ValidaTipoEstoquePedidoAttribute.cs" />
+    <Compile Include="Validações\ValidaVencimentoTítulosPedidoAttribute.cs" />
+    <Compile Include="Validações\ValidaVendedorPedidoAttribute.cs" />
+    <Compile Include="Validações\ValidaVlrPedidoAttribute.cs" />
+    <Compile Include="Validações\ValidCpfCnpjAttribute.cs" />
+    <Compile Include="Validações\ValidIdCidadeAttribute.cs" />
+    <Compile Include="Validações\ValidIdGrupoAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CraiacaoDeTabelas.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

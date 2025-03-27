@@ -1,0 +1,11 @@
+/******* 05-10-2020 ********/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "texto_diversos_temp" varchar(255);
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."texto_diversos_temp" IS 'Este campo será utilizado para diversas utilidades.
+exemplo: quando rodar algum suporte.';
+
+
+
+

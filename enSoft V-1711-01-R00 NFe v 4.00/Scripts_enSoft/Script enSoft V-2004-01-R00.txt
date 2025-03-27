@@ -1,0 +1,12 @@
+/****** 30/04/2020 *******/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "sgq_per_comissao" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."sgq_per_comissao" IS 'Utilizado no pedido de venda quando usa o sgq.';
+
+
+update cad_tb_c_fun
+  set sgq_per_comissao = 5
+where id_funcionario in (select id_vendedor from fat_tb_m_ped where dta_pedido >= '01/01/2018' group by id_vendedor);
+

@@ -1,0 +1,3 @@
+COMMENT ON COLUMN "public"."ofi_tb_m_ocv"."status" IS '0 - Em aberto;
+1 - Importado;
+2 - Cancelado;';

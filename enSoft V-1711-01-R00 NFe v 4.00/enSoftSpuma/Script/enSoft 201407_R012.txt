@@ -1,0 +1,168 @@
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+ADD COLUMN "id_pedido" int4;
+
+ALTER TABLE "public"."cmp_tb_m_cot_ite"
+ADD COLUMN "id_busca_item" varchar(30);
+
+ALTER TABLE "public"."cmp_tb_m_cot"
+ADD COLUMN "situacao" int4;
+
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('FIN_TB_M_CXA', 1);
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('FIN_TB_M_CTA_CXA', 1);
+INSERT INTO CAD_TB_C_SEQ (ID_TABELA, SEQUENCIA) VALUES ('FIN_TB_M_CTA_BCO', 1);
+
+
+ALTER TABLE "public"."cmp_tb_m_sol"
+ADD COLUMN "id_cotacao_imp" int4,
+ADD COLUMN "id_pedido_imp" int4;
+
+ALTER TABLE "public"."cmp_tb_m_sol_ite"
+ADD COLUMN "id_sequencia" int4 DEFAULT 0 NOT NULL;
+
+ALTER TABLE "public"."cmp_tb_m_cot_ite"
+ADD COLUMN "id_sequencia" int4 DEFAULT 0 NOT NULL;
+
+
+delete from cmp_tb_m_sol_ite;
+
+ALTER TABLE cmp_tb_m_sol_ite
+  DROP CONSTRAINT "PK_dbo.CMP_TB_M_SOL_ITE";
+
+ALTER TABLE cmp_tb_m_sol_ite
+  ADD CONSTRAINT pk_cmp_sol_ite PRIMARY KEY (id_solicitacao, id_sequencia);
+
+ALTER TABLE cmp_tb_m_cot_ite
+  DROP CONSTRAINT "PK_dbo.CMP_TB_M_COT_ITE"; 
+
+ALTER TABLE cmp_tb_m_cot_ite
+  ADD CONSTRAINT PK_CMP_TB_M_COT_ITE PRIMARY KEY (id_cotacao, id_sequencia);
+
+ALTER TABLE "public"."cmp_tb_m_sol"
+ADD COLUMN "selecao" bool;
+
+ALTER TABLE "public"."fin_tb_m_cxa"
+ALTER COLUMN "ecf_serial_impressora" DROP NOT NULL;
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "dta_movimento" date;
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "conciliado" bool;
+
+ALTER TABLE "public"."fin_tb_m_pbx"
+DROP COLUMN "status";
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ALTER COLUMN "num_parcela" DROP NOT NULL;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+ADD COLUMN "dta_aprovacao" date;
+
+ALTER TABLE "public"."cmp_tb_m_ped"
+ALTER COLUMN "tipo_frete" DROP NOT NULL,
+ALTER COLUMN "vlr_frete" DROP NOT NULL;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+ADD COLUMN "ipi" bool;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+DROP COLUMN "vlr_ipi";
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+DROP COLUMN "vlr_frete";
+
+ALTER TABLE "public"."fin_tb_m_pbx_tit"
+ADD COLUMN "atraso" int4;
+
+ALTER TABLE "public"."fin_tb_m_pag"
+DROP COLUMN "vlr_juros",
+DROP COLUMN "vlr_multa";
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ADD COLUMN "per_juros" float8,
+ADD COLUMN "per_multa" float8;
+
+ALTER TABLE "public"."cmp_tb_m_cot_for"
+ALTER COLUMN "vlr_total" DROP NOT NULL;
+
+ALTER TABLE "public"."cmp_tb_m_cot_for"
+ALTER COLUMN "status" DROP NOT NULL;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+ADD COLUMN "dta_aprovacao" date,
+ADD COLUMN "id_responsavel" int4;
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+DROP COLUMN "tipo";
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "tipo" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."tipo" IS '0-Caixa, 1-Banco';
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+ADD COLUMN "id_cor" int4,
+ADD COLUMN "id_tamanho" int4;
+
+
+--correção da cheve de _FIT e FIT_APR
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+DROP CONSTRAINT "fk_cmp_m_cot_fit_apr__m_cot_fit";
+
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+DROP CONSTRAINT "pk_cmp_tb_m_cot_fit_apr" ,
+ADD CONSTRAINT "pk_cmp_tb_m_cot_fit_apr" PRIMARY KEY ("id_cotacao", "id_fornecedor");
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+DROP CONSTRAINT "PK_dbo.CMP_TB_M_COT_FIT" ,
+ADD CONSTRAINT "PK_dbo.CMP_TB_M_COT_FIT" PRIMARY KEY ("id_cotacao", "id_fornecedor");
+
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+DROP CONSTRAINT "fk_cmp_m_cot_fit__cmp_m_cot_for";
+
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+DROP CONSTRAINT "PK_dbo.CMP_TB_M_COT_FIT" ,
+ADD CONSTRAINT "PK_dbo.CMP_TB_M_COT_FIT" PRIMARY KEY ("id_cotacao", "id_fornecedor");
+
+
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+ADD COLUMN "id_sequencia" int4 NOT NULL;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+ADD COLUMN "id_sequencia" int4 NOT NULL;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+DROP CONSTRAINT "PK_dbo.CMP_TB_M_COT_FIT" ,
+ADD CONSTRAINT "PK_dbo.CMP_TB_M_COT_FIT" PRIMARY KEY ("id_cotacao", "id_fornecedor", "id_sequencia");
+
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+DROP CONSTRAINT "pk_cmp_tb_m_cot_fit_apr" ,
+ADD CONSTRAINT "pk_cmp_tb_m_cot_fit_apr" PRIMARY KEY ("id_cotacao", "id_fornecedor", "id_sequencia");
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+ADD CONSTRAINT "fk_cmp_m_cot_fit_apr__m_cot_fit" FOREIGN KEY ("id_cotacao", "id_fornecedor", "id_sequencia") REFERENCES "public"."cmp_tb_m_cot_fit" ("id_cotacao", "id_fornecedor", "id_sequencia") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."cmp_tb_m_ped"
+ADD COLUMN "id_cotacao" int4,
+ADD COLUMN "id_solicitacao" int4;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+DROP CONSTRAINT "fk_cmp_m_cot_fit_apr__m_cot_fit";
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit_apr"
+ADD CONSTRAINT "fk_cmp_m_cot_fit_apr__m_cot" FOREIGN KEY ("id_cotacao") REFERENCES "public"."cmp_tb_m_cot" ("id_cotacao") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE "public"."cmp_tb_m_cot_fit"
+DROP CONSTRAINT "fk_cmp_m_cot_fit__cad_c_for";
+
+ALTER TABLE "public"."cmp_tb_m_ped"
+DROP COLUMN "id_tipo_estoque";

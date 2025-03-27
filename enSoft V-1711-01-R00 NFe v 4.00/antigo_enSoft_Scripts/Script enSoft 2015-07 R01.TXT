@@ -1,0 +1,67 @@
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "vlr_cred_utilizado" numeric(18,2);
+
+
+ALTER TABLE "public"."fin_tb_m_rcr"
+ALTER COLUMN "vlr_saldo" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "fat_seq_termo" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."fat_seq_termo" IS 'Campo sequência utilizado pela impressão do Termo, pelo botão GerarNfe da tela de controle de caixa.';
+
+
+update cad_tb_c_par_ctr
+set fat_seq_termo = 0
+where fat_seq_termo is null;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "nro_termo" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."nro_termo" IS 'Neste campo será armazenado o nro do Termo impresso pela tela de Controle de Caixa através do botão GerarNfe.';
+
+
+update fat_tb_m_nfe
+set nro_termo = 0
+where nro_termo is null;
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ALTER COLUMN "ret_emb_capacidade" TYPE varchar(20);
+
+
+COMMENT ON COLUMN "public"."fat_tb_m_pos_ite"."avaliacao" IS '1 - Ótimo; 2 - Bom; 3 - Regular; 4 - Ruim;
+';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "per_cofins_l_presumido" float8,
+ADD COLUMN "per_pis_l_presumido" float8;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "per_cofins" TO "per_cofins_l_real";
+
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "per_pis" TO "per_pis_l_real";
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."geracao_lote_interno" IS 'Campo utilizado no sistema de produção.
+Todo produto tem que ter o seu lote_interno que é gerado pelo sistema, isso é devido a rastreabilidade.
+O produto pode ter o seu lote gerado a partir de:  
+
+0 - Nota fiscal de entrada, 1 - Espumação, 2 - Bordadeira, 3 - Inspeção de Itens 
+, 4 - Não utiliza   ';
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "sgq_critica_laudo_fab" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ite"."sgq_critica_laudo_fab" IS 'Este campo será utilizado pela tela de Inspeção de Itens (FAT_FM_M_IQM).';
+
+
+ALTER TABLE "public"."fat_tb_m_iqm_ite"
+ADD COLUMN "observacao" varchar(100);
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."regime" IS '0 - Normal - Lucro presumido; 
+1 - Normal - Lucro Real;
+2 - Simples Nacional;';
+

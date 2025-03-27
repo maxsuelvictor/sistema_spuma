@@ -1,0 +1,117 @@
+/**** 30/10/20 *****/
+
+ALTER TABLE "public"."pcp_tb_m_opb"
+ADD COLUMN "origem" int4,
+ADD COLUMN "id_opr" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opb"."origem" IS '0 - Gerado Manualmente; 
+1 - Gerado por Ordem de Produção;';
+
+
+CREATE TABLE "public"."pcp_tb_m_opb_blo" (
+"id_opb" int4 NOT NULL,
+"id_opb_ite" int4 NOT NULL,
+"num_lote" varchar(15) COLLATE "default" NOT NULL,
+"dta_emissao" date NOT NULL,
+"hor_emissao" time(6) NOT NULL,
+"id_item_bloco" int4 NOT NULL,
+"id_cor" int4,
+"id_tamanho" int4,
+"bloco_aprovado" bool NOT NULL,
+CONSTRAINT "fk_pcp_m_opb_blo__pcp_m_opb" FOREIGN KEY ("id_opb") REFERENCES "public"."pcp_tb_m_opb" ("id_opb") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opb_blo__cad_c_ite" FOREIGN KEY ("id_item_bloco") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opb_blo__cad_c_cor" FOREIGN KEY ("id_cor") REFERENCES "public"."cad_tb_c_cor" ("id_cor") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opb_blo__cad_c_tam" FOREIGN KEY ("id_tamanho") REFERENCES "public"."cad_tb_c_tam" ("id_tamanho") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_opb_blo" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_opb_blo" IS 'Blocos produzidos da Ordem de Produção';
+
+
+
+CREATE TABLE "public"."pcp_tb_m_opb_obl" (
+"id_opb" int4 NOT NULL,
+"id_opb_obl" int4 NOT NULL,
+"id_item_bloco" int4 NOT NULL,
+"id_cor" int4 NOT NULL,
+"id_tamanho" int4 NOT NULL,
+"cubagem_a_produzir" float8 NOT NULL,
+"obs" varchar(100) COLLATE "default",
+CONSTRAINT "fk_pcp_m_opb_obl__pcp_m_opb" FOREIGN KEY ("id_opb") REFERENCES "public"."pcp_tb_m_opb" ("id_opb") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opb_blo__cad_c_ite" FOREIGN KEY ("id_item_bloco") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opb_blo__cad_c_cor" FOREIGN KEY ("id_cor") REFERENCES "public"."cad_tb_c_cor" ("id_cor") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_pcp_m_opb_blo__cad_c_tam" FOREIGN KEY ("id_tamanho") REFERENCES "public"."cad_tb_c_tam" ("id_tamanho") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_opb_obl" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_opb_obl" IS 'Blocos de espuma para serem produzidos.';
+
+
+
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "bloco_gerado" int4,
+ADD COLUMN "id_opb" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."bloco_gerado" IS 'Se foi gerado a ordem de produção de bloco para espuma do produto.
+0 - Não necessita de criação de bloco;
+1 - Ord. de produção do bloco não gerada;
+2 - Gerado a ordem de produção;';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."id_opb" IS 'Ao gerar a Ordem de produção dos blocos de espuma , o sistema irá gravar o código da O.P.B.';
+
+
+
+/******* 06/11/2020 *******/
+
+ALTER TABLE "public"."pcp_tb_m_opb"
+DROP COLUMN "cub_produzir";
+
+
+
+/****** 11/11/2020 *******/
+ALTER TABLE "public"."pcp_tb_m_opb_obl"
+DROP CONSTRAINT "fk_pcp_m_opb_blo__cad_c_cor",
+DROP CONSTRAINT "fk_pcp_m_opb_blo__cad_c_tam";
+
+
+ALTER TABLE "public"."pcp_tb_m_opb_blo"
+DROP CONSTRAINT "fk_pcp_m_opb_blo__cad_c_cor",
+DROP CONSTRAINT "fk_pcp_m_opb_blo__cad_c_tam";
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "criado_em" date,
+ADD COLUMN "hora_criado" time(6);
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."bloco_gerado" IS 'Se foi gerado a ordem de produção de bloco para espuma do produto.
+0 - Não necessita de criação de bloco;
+1 - Ord. de produção do bloco não gerada;
+2 - Gerado a ordem de produção;
+3 - Geração de bloco cancelada;';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."criado_em" IS 'Data quando o registro do opp foi criado.';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."hora_criado" IS 'Hora quando o registro do opp foi criado.';
+
+
+
+
+/****** 13/11/2020 ********/
+
+ALTER TABLE "public"."pcp_tb_m_opb_blo"
+DROP COLUMN "id_opb_ite",
+ADD PRIMARY KEY ("id_opb", "num_lote");
+
+
+ALTER TABLE "public"."pcp_tb_m_opb_obl"
+ADD PRIMARY KEY ("id_opb", "id_opb_obl");
+
+

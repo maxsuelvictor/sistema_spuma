@@ -1,0 +1,7 @@
+/******* 06/06/2019 ********/
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "sequencia_remessa" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."sequencia_remessa" IS 'Nro sequencial do arquivo de remessa ref. a posicao 111 a 117 no layout 400';
+

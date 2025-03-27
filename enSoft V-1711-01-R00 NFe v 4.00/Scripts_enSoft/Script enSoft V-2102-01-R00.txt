@@ -1,0 +1,40 @@
+/******* 22/02/2021 *********/
+
+ALTER TABLE "public"."fat_tb_m_iqm_ite"
+ADD COLUMN "manual_tam_letras" int4,
+ADD COLUMN "manual_simb_conserv" int4,
+ADD COLUMN "manual_inform_cadast_cont" int4,
+ADD COLUMN "manual_cobert_garant_e_perda" int4,
+ADD COLUMN "manual_tabela_garantia_biotipo" int4,
+ADD COLUMN "manual_aviso_colchao_baby" int4,
+ADD COLUMN "manual_desenho_esquem_colch" int4;
+
+
+ALTER TABLE "public"."fat_tb_m_iqm_ite"
+ADD COLUMN "manual_aviso_asfixia" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_tam_letras" IS '0 - Reprovado
+ 1 - Aprovado';
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_simb_conserv" IS '0 - Reprovado
+ 1 - Aprovado';
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_inform_cadast_cont" IS '0 - Reprovado
+ 1 - Aprovado';
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_cobert_garant_e_perda" IS '0 - Reprovado
+ 1 - Aprovado';
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_tabela_garantia_biotipo" IS '0 - Reprovado
+ 1 - Aprovado';
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_aviso_colchao_baby" IS '0 - Reprovado
+ 1 - Aprovado';
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_desenho_esquem_colch" IS '0 - Reprovado
+ 1 - Aprovado';
+
+COMMENT ON COLUMN "public"."fat_tb_m_iqm_ite"."manual_aviso_asfixia" IS '0 - Reprovado
+ 1 - Aprovado';
+
+

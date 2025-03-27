@@ -1,0 +1,74 @@
+/**** Mariel - inicio *******/
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "tipo_cobranca" int4,
+ADD COLUMN "caract_titulo" int4,
+ADD COLUMN "tipo_carteira" int4,
+ADD COLUMN "resp_emissao" int4,
+ADD COLUMN "agencia_dig" int4,
+ADD COLUMN "conta_corrente_dig" int4,
+ADD COLUMN "convenio" int4;
+
+DROP INDEX "public"."ix_ctc_banco";
+
+CREATE INDEX "ix_ctc_banco" ON "public"."cad_tb_c_ctc" ("banco");
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."tipo_cobranca" IS '0-Nenhum
+1-Banco Do Brasil
+2-Santander
+3-Caixa Economica
+4-Caixa Sicob
+5-Bradesco
+6-Itau
+7-Banco Mercantil
+8-Sicred
+9-Bancoob
+10-Banrisul,
+11-Banestes,
+12-HSBC
+13-BancoDoNordeste
+14-BRB
+15-BicBanco,
+    cobBradescoSICOOB,
+    cobBancoSafra,
+    cobSafraBradesco,
+    cobBancoCECRED
+';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."caract_titulo" IS '0-Simples
+1-Vinculada
+2-Caucionada
+3-Descontada
+4-Vendor';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."tipo_carteira" IS '0-Simples
+1-Registrada';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."resp_emissao" IS '0-Cliente Emite
+1-Banco Emite
+2-Banco Reemite
+3-Banco Nao Reemite';
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+DROP COLUMN "licenca";
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+DROP COLUMN "nnu_inicio";
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+DROP COLUMN "nnu_final";
+
+
+/**** Mariel - Terminou *******/
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "carteira" varchar(4);
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."carteira" IS 'Usado na impressão do boleto.';
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "msg_local_pagto" varchar(80);

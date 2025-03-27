@@ -1,0 +1,264 @@
+/******** 30/06/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "perm_bxa_pag_n_tit" bool;
+
+
+/******* 12/07/2017 *****/
+
+ALTER TABLE "public"."fat_tb_m_xml"
+ADD COLUMN "nref_chave" varchar(44);
+
+ALTER TABLE "public"."fat_tb_m_xml"
+ADD COLUMN "nfe_finalidade" int4;
+
+
+/**** 28/07/2017 ****/
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "id_epp" int4;
+
+
+/**** 04/08/17 *****/
+
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "inf_nat_ope_nfe_comp" varchar(100);
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "ativar_nat_ope_nfe_comp" bool;
+
+
+/**** 11/08/17 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "frete_fob_total_ped" bool;
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "pcp_obs_item" varchar(150);
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ADD COLUMN "pcp_desc_item_person" varchar(150);
+
+
+/****  12/08/17 ****/
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "vlr_frete" numeric(18,4);
+
+/**** 22/08/2017 ****/
+
+ALTER TABLE "public"."pcp_tb_m_acr"
+ADD COLUMN "id_pedido_venda" int4;
+
+
+/**** 25/08/17 ******/
+
+ALTER TABLE "public"."fat_tb_m_xml_ite"
+ADD COLUMN "motivo_icms_des" int4;
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "motivo_icms_des" int4;
+
+
+/**** 29/08/2017 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "path_logo_prefeitura" varchar(200);
+
+
+CREATE TABLE "public"."cad_tb_c_cli_vei" (
+"id_cliente" int4 NOT NULL,
+"id_veiculo" int4 NOT NULL,
+CONSTRAINT "cad_tb_c_cli_vei_pkey" PRIMARY KEY ("id_cliente", "id_veiculo"),
+CONSTRAINT "fk_cad_c_cli_vei__cad_c_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_cli_vei__cad_c_vei" FOREIGN KEY ("id_veiculo") REFERENCES "public"."cad_tb_c_vei" ("id_veiculo") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE);
+
+
+
+/**** 01/09/2017 ****/
+
+ALTER TABLE "public"."est_tb_m_cte"
+ADD COLUMN "offline" bool;
+
+update est_tb_m_cte set offline=FALSE
+where offline is null;
+
+
+
+
+/**** 02/09/2017 *****/
+
+
+CREATE TABLE "public"."cad_tb_c_fun_emp" (
+"id_funcionario" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"permitir_acesso" bool,
+CONSTRAINT "cad_tb_c_fun_emp_pkey" PRIMARY KEY ("id_funcionario", "id_empresa"),
+CONSTRAINT "fk_cad_fun_emp__cad_fun" FOREIGN KEY ("id_funcionario") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_fun_emp__cad_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_fun_emp" OWNER TO "postgres";
+
+
+
+
+/***** 05/09/2017 ****/ 
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "calcular_iss_retido" bool;
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "iss_valor_retido" numeric(18,2);
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "substituto_tributario" bool;
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "iss_valor_retido" numeric(18,2);
+
+
+
+/***** 11/09/2017 *****/
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "iss_valor_retido" numeric(18,4);
+
+
+
+/***** 16/09/2017  *****/
+
+
+CREATE TABLE "public"."cad_tb_c_ite_loc" (
+"id_item" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"loca_rua" varchar(4) COLLATE "default",
+"loca_prateleira" varchar(4) COLLATE "default",
+"loca_escaninho" varchar(4) COLLATE "default",
+CONSTRAINT "cad_tb_c_ite_loc_pkey" PRIMARY KEY ("id_item", "id_empresa"),
+CONSTRAINT "fk_cad_ite_loc__cad_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_ite_loc__cad_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "public"."cad_tb_c_ite_loc" OWNER TO "postgres";
+
+
+INSERT INTO CAD_TB_C_ITE_LOC (ID_EMPRESA,ID_ITEM,LOCA_RUA,LOCA_PRATELEIRA,LOCA_ESCANINHO)
+SELECT PAR.ID_EMPRESA,ITE.ID_ITEM, ITE.LOCA_RUA, ITE.LOCA_PRATELEIRA, ITE.LOCA_ESCANINHO FROM CAD_TB_C_ITE ITE
+LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PAR.ID_EMPRESA>0;
+
+
+CREATE TABLE "public"."fat_tb_m_rte" (
+"id_rte" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"dta_criacao" date,
+"hor_criacao" time,
+"id_responsavel" int4 NOT NULL,
+"importado" BOOLEAN,
+"observacao" varchar(200),
+"cod_lme" varchar(20),
+"rev_lme" varchar(5),
+CONSTRAINT "fat_tb_m_rte_pkey" PRIMARY KEY ("id_rte")
+)
+with (oids=false)
+;
+
+CREATE TABLE "public"."fat_tb_m_rte_ped" (
+"id_rte" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+CONSTRAINT "fat_tb_m_rte_ped_pkey" PRIMARY KEY ("id_rte","id_pedido")
+)
+with (oids=false);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "permitir_alterar_vend_ped" bool;
+
+
+
+/****** 19/09/2017 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mob_busca_sld_est" bool;
+
+
+/**** 20/09/2017 *****/
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "vlr_base_icms_dest" numeric(18,2);
+
+
+/***** 27/09/17 ****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "mob_tipo_preco_cli" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."mob_tipo_preco_cli" IS '0 - Cálculo usando a tabela CAD_TB_C_ITE_PC
+1 - Cálculo usando Perfil de Cliente, Permissão de Correção por Perfil  + Permissão de correção por Família';
+
+
+/******* 29/09/2017 ******/
+
+CREATE TABLE "public"."cad_tb_c_fam_emp" (
+"id_familia" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"faz_corr_preco_perfil" bool,
+CONSTRAINT "cad_tb_c_fam_emp_pkey" PRIMARY KEY ("id_familia", "id_empresa"),
+CONSTRAINT "fk_cad_fam_emp__cad_fam" FOREIGN KEY ("id_familia") REFERENCES "public"."cad_tb_c_fam" ("id_familia") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_fam_emp__cad_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_fam_emp" OWNER TO "postgres";
+
+
+
+CREATE TABLE "public"."cad_tb_c_pec_emp" (
+"id_perfil_cli" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"per_correcao" float8,
+"per_correcao_aprazo" float8,
+"per_correcao_financeiro" float8,
+CONSTRAINT "cad_tb_c_pec_emp_pkey" PRIMARY KEY ("id_perfil_cli", "id_empresa"),
+CONSTRAINT "fk_cad_pec_emp__cad_pec" FOREIGN KEY ("id_perfil_cli") REFERENCES "public"."cad_tb_c_pec" ("id_perfil_cli") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_pec_emp__cad_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_pec_emp" OWNER TO "postgres";
+
+
+
+
+
+INSERT INTO CAD_TB_C_PEC_EMP (ID_EMPRESA,ID_PERFIL_CLI,PER_CORRECAO,PER_CORRECAO_APRAZO,PER_CORRECAO_FINANCEIRO)
+SELECT PAR.ID_EMPRESA,PEC.ID_PERFIL_CLI,PEC.PER_CORRECAO,PEC.PER_CORRECAO_APRAZO,PEC.PER_CORRECAO_FINANCEIRO FROM CAD_TB_C_PEC PEC
+LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PAR.ID_EMPRESA>0;
+
+
+INSERT INTO CAD_TB_C_FAM_EMP (ID_EMPRESA,ID_FAMILIA,faz_corr_preco_perfil)
+SELECT PAR.ID_EMPRESA,FAM.ID_FAMILIA,FAM.faz_corr_preco_perfil FROM CAD_TB_C_FAM FAM
+LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PAR.ID_EMPRESA>0;
+
+
+/******** 11/10/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "mob_alt_preco_ped" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."mob_alt_preco_ped" IS 'Campo utilizado para informar se o usuário pode alterar o preço unitário no pedido de venda no aplicativo Produtor Mobile.';
+
+
+
+update cad_tb_c_fun
+  set mob_alt_preco_ped = false
+where
+  mob_alt_preco_ped is null;
+

@@ -1,0 +1,559 @@
+﻿COMMENT ON COLUMN "public"."fin_tb_m_pag"."origem" IS '0-Estoque
+  1-Caixa/Banco  2 - Pequenas Despesas';
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ADD COLUMN "id_abertura" int4;
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag"."id_abertura" IS 'Campo utilizado pela telinha de Pequeas Despesas;';
+
+ALTER TABLE "public"."fin_tb_m_pag_pag"
+ADD COLUMN "id_abertura" int4;
+
+
+ALTER TABLE "public"."fin_tb_m_rec_pag"
+ADD COLUMN "id_abertura" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "rcr_id_condicao_pag" int4,
+ADD COLUMN "rcr_id_forma_pag" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."rcr_id_condicao_pag" IS 'Este campo será utilizado pela Devolução de NF de Cliente.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."rcr_id_forma_pag" IS 'Este campo será utilizado pela Devolução de NF de Cliente.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_rcr"."id_titulo" IS 'Campo utilizado pela nota fiscal de saída. Quando o cliente utiliza seu crédito o sitema deverá registrar a saída no FIN_TB_M_RCR.';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr" RENAME "pde_id_fornecdor" TO "pde_id_fornecedor";
+
+
+ALTER TABLE "public"."fin_tb_m_rcr"
+ALTER COLUMN "id_forma_pag" DROP NOT NULL;
+
+
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "aval_ctc_perg_01" int4,
+ADD COLUMN "aval_ctc_perg_02" int4,
+ADD COLUMN "aval_ctc_perg_03" int4,
+ADD COLUMN "aval_ctc_perg_04" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."aval_ctc_perg_01" IS '0 - Não;  1 - Sim;   2 - Não se aplica;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."aval_ctc_perg_02" IS '0 - Não;  1 - Sim;   2 - Não se aplica;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."aval_ctc_perg_03" IS '0 - Não;  1 - Sim;   2 - Não se aplica;';
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."aval_ctc_perg_04" IS '0 - Não;  1 - Sim;   2 - Não se aplica;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "dev_for_id_condicao_pag" int4,
+ADD COLUMN "cxa_critica_chq" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."dev_for_id_condicao_pag" IS 'Este campo será utilizado pela tela de Nota Fiscal de Dev. de Fornecedor.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_critica_chq" IS 'Este campo será utilizado pela tela de Controle de Caixa na parte de Notas (FAT_UN_M_CXA_NFE);';
+
+update CAD_TB_C_PAR_CTR
+SET CXA_CRITICA_CHQ = FALSE
+WHERE 
+   CXA_CRITICA_CHQ IS NULL;  
+
+
+COMMENT ON COLUMN "public"."fat_tb_m_pos_ite"."avaliacao" IS ' 1 - Ruim ;  2 - Regular ; 3 - Bom ; 4 - Ótimo ;
+
+
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+DROP CONSTRAINT "fk_cad_c_fpg__cad_c_pct_ven",
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_pct_ven" FOREIGN KEY ("ven_id_plano") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_cad_c_fpg__cad_c_pct_rcj",
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_pct_rcj" FOREIGN KEY ("rec_id_plano_juros") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_cad_c_fpg__cad_c_pct_rcd",
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_pct_rcd" FOREIGN KEY ("rec_id_plano_desconto") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_cad_c_fpg__cad_c_pct_pgj",
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_pct_pgj" FOREIGN KEY ("pag_id_plano_juros") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_cad_c_fpg__cad_c_pct_pgd",
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_pct_pgd" FOREIGN KEY ("pag_id_plano_desconto") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+DROP CONSTRAINT "fk_cad_c_fpg__cad_c_pct_com",
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_pct_com" FOREIGN KEY ("com_id_plano") REFERENCES "public"."cad_tb_c_pct" ("id_plano") ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_lto" FOREIGN KEY ("id_local_titulo") REFERENCES "public"."cad_tb_c_lto" ("id_local_titulo") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."cad_tb_c_fun_crg"
+ADD CONSTRAINT "fk_c_fun_crg__c_crg" FOREIGN KEY ("id_cargo") REFERENCES "public"."pcp_tb_c_crg" ("id_cargo") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+create table "public"."br_cupom_mestre" (
+  "n_cupom" int not null,
+  "cpf_cnpj" varchar(30)   null,
+  "descontos" numeric(18, 3) null,
+  "acrescimos" numeric(18, 3) null,
+  "cancelado" varchar(1)   null,
+  "total_bruto" numeric(18, 3) null,
+  "total_liquido" numeric(18, 3) null,
+  "serial_impressora" varchar(60)   not null,
+  "cnpj_empresa" varchar(30)   null,
+  "ie" varchar(40)   null,
+  "im" varchar(40)   null,
+  "tipo_ecf" varchar(10)   null,
+  "marca" varchar(50)   null,
+  "modelo" varchar(50)   null,
+  "data_movimento"  date null,
+  "versao_sb" varchar(10)   null,
+  "data_sb"  date null,
+  "hora_sb"  date null,
+  "dthora_inclusao"  date null,
+  "naofiscal" varchar(1)   null,
+  "ccf" int null,
+  "indicadordesconto" varchar(1)   null,
+  "flag_descontoacrescimo" varchar(1)   null,
+  "nome_cliente" varchar(40)   null,
+  "n_caixa" varchar(3)   null,
+  "numloja" varchar(6)   null,
+  "flag_aceito" varchar(3)   null,
+  "flag_sis" varchar(1)   null,
+  "placa" varchar(20)   null,
+  "hodometro" int null,
+  "motivo_afericao" varchar(100)   null,
+  "motorista" varchar(60)   null,
+  "transportadora" varchar(80)   null,
+  "cpf_cnpj_transp" varchar(20)   null,
+  "autorizacao" varchar(20)   null,
+  "ccusto" varchar(10)   null,
+  "cliccodigo" varchar(20)   null,
+  "data_homologacao"  date null,
+  "dthora_fechamento"  date null,
+  "cod_pais" int null,
+  "cod_municipio" int null,
+  "suframa" varchar(9)   null,
+  "endereco" varchar(60)   null,
+  "numero" varchar(20)   null,
+  "complemento" varchar(60)   null,
+  "bairro" varchar(60)   null,
+  "ie_cliente" varchar(20)   null,
+  "uf" varchar(2)   null,
+  "cidade" varchar(50)   null,
+  "notafiscal" varchar(50)   null,
+  constraint "pk_cupons_cliente" primary key ("n_cupom", "serial_impressora")
+)
+with (oids=false)
+;
+
+
+
+create table "public"."br_prevenda_detalhe" (
+  "numprevenda" int not null,
+  "loja" varchar(10)   not null,
+  "cod_produto" varchar(20)   not null,
+  "qtd" numeric(18, 4) null,
+  "un" varchar(3)   null,
+  "valor" numeric(18, 3) null,
+  "desconto" numeric(18, 3) null,
+  "acrescimo" numeric(18, 3) null,
+  "total" numeric(18, 3) null,
+  "cancelado" varchar(1)   null,
+  "n_cupom" int null,
+  "serial" varchar(60)   null,
+  "cod_grade" varchar(20)   null,
+  "item" int not null,
+  "cod_kit" varchar(20)   null,
+  "cod_vendedor" varchar(20)   null,
+  "desc_produto" varchar(100)   null,
+  "aliquota" varchar(10)   null,
+  "servico" varchar(1)   null,
+  "serialproduto" varchar(100)   null,
+  "tipo" varchar(1)   not null,
+  "cod_prod_tcsmart" varchar(30)   null,
+  "tipo_bloqueado" varchar(1)   null,
+  "flag_sis" varchar(1)   null,
+  "flag_aceito" varchar(3)   null,
+  "mesa_origem" varchar(30)   null,
+  "numprevenda_origem" int null,
+  "item_origem" int null,
+  "ccusto" numeric(15, 3) null,
+  "ncm" varchar(8)   null,
+  "ex_ipi" varchar(3)   null,
+  "genero" varchar(2)   null,
+  "cst_icms" varchar(2)   null,
+  "origem_icms" varchar(1)   null,
+  "aliquota_ipi" numeric(15, 3) null,
+  "aliquota_pis" numeric(15, 3) null,
+  "tipo_item" varchar(2)   null,
+  "cfop" int null,
+  "desc_unidade" varchar(50)   null,
+  "stb" varchar(1)   null,
+  "complemento_item" varchar(100)   null,
+  "prdcoutroscodigo" varchar(18)   null,
+  constraint "pk_br_prevenda_detalhe" primary key ("numprevenda", "loja", "cod_produto", "item", "tipo")
+)
+with (oids=false)
+;
+
+
+create table  "public"."br_seq_id" (
+  "tabela" varchar(50) not null,
+  "seq_id" int null,
+  constraint "pk_br_seq_id" primary key ("tabela")
+)
+
+with (oids=false)
+;
+
+
+create table "public"."br_prevenda" (
+  "numprevenda" int not null,
+  "data_cad"  date null,
+  "data_emissao"  date null,
+  "vendedor" varchar(20)   null,
+  "plano" varchar(4)   null,
+  "id_cliente" varchar(20)   null,
+  "numloja" varchar(10)   not null,
+  "cancelado" varchar(1)   null,
+  "n_cupom" int null,
+  "serial" varchar(60)   null,
+  "contrz" int null,
+  "cpf_cnpj" varchar(20)   null,
+  "endereco" varchar(80)   null,
+  "nome" varchar(70)   null,
+  "bairro" varchar(50)   null,
+  "cidade" varchar(50)   null,
+  "cep" varchar(15)   null,
+  "uf" varchar(2)   null,
+  "fone1" varchar(25)  null,
+  "fone2" varchar(25)   null,
+  "email" varchar(100)   null,
+  "desconto" numeric(18, 3) null,
+  "acrescimo" numeric(18, 3) null,
+  "flag_liberado" varchar(1)   null,
+  "usuario_lib" varchar(50)   null,
+  "dthora_lib"  date null,
+  "tipo" varchar(1)   not null,
+  "serialpv" varchar(30)   null,
+  "flag_aceito" varchar(3)   null,
+  "flag_sis" varchar(1)   null,
+  "dav_impresso" varchar(1)   null,
+  "mesa" varchar(30)   null,
+  "conferencia" varchar(1)   null,
+  "caixa_conf" int null,
+  "coo_conf" int null,
+  "cer_conf" int null,
+  "data_abertura"  date null,
+  "placa" varchar(10)   null,
+  "renavan" varchar(30)   null,
+  "ano" varchar(10)   null,
+  "marca" varchar(50)   null,
+  "modelo" varchar(50)   null,
+  constraint "pk_br_prevenda" primary key ("numprevenda", "tipo")
+)
+
+with (oids=false)
+;
+
+
+create table "public"."br_credito" (
+  "numcoo" int not null,
+  "dthora" date not null,
+  "serial" varchar(60) null ,
+  "numloja" int null,
+  "cod_doc" varchar(50) null ,
+  "cod_operacao" varchar(10) null ,
+  "parcela" varchar(2) null ,
+  "valor" numeric(18, 3) null,
+  "tipo_pag" varchar(50) null ,
+  "indice_tp" varchar(10) null,
+  "historico" varchar(200) null ,
+  "desc_comprov" varchar(100) null ,
+  "cod_comprov" int null,
+  "numecf" int null,
+  "numgnf" int null,
+  "data" date null,
+  constraint "pk_br_credito" primary key ("numcoo", "dthora")
+)
+with (oids=false)
+;
+
+
+
+
+create table "public"."br_cupom_detalhe" (
+  "n_cupom" int not null,
+  "cod_produto" varchar(15)  not null,
+  "n_item" int not null,
+  "qtde" numeric(18, 4) null,
+  "valor_unitario" numeric(18, 3) null,
+  "valor_total" numeric(18, 3) null,
+  "desconto" numeric(18, 3) null,
+  "acrecimo" numeric(18, 3) null,
+  "cancelado" varchar(1)  null,
+  "serial_impressora" varchar(60)  not null,
+  "n_caixa" varchar(3)  null,
+  "aliquota" varchar(20)  null,
+  "unidade" varchar(3)  null,
+  "numloja" varchar(6)  null,
+  "flag_aceito" varchar(3)  null,
+  "flag_sis" varchar(1)  null,
+  "tanque" varchar(3)  null,
+  "bomba" varchar(3)  null,
+  "bico" varchar(3)  null,
+  "ei" numeric(18, 3) null,
+  "ef" numeric(18, 3) null,
+  "cod_grade" varchar(20)  null,
+  "cartao_cliente" varchar(20)  null,
+  "cartao_autorizador" varchar(20)  null,
+  "desc_produto" varchar(100)  null,
+  "numcaixa" varchar(5)  null,
+  "numterminal" varchar(3)  null,
+  "bico_posto" varchar(3)  null,
+  "data_ab" date null,
+  "hora_ab" date null,
+  "posicao_ab" varchar(10)  null,
+  "serial" varchar(100)  null,
+  "tabela" varchar(20)  null,
+  "cod_kit" varchar(20)  null,
+  "cod_vendedor" varchar(20)  null,
+  "cod_operador" varchar(20)  null,
+  "pdeccodigo" varchar(4)  null,
+  "prdcoutroscodigo" varchar(18)  null,
+  "prvndescontopenota" numeric(18, 3) null,
+  "prvnacrescimopenota" numeric(18, 3) null,
+  "flag_servico" varchar(1)  null,
+  "ccusto" numeric(18, 3) null,
+  "ncm" varchar(8)  null,
+  "ex_ipi" varchar(3)  null,
+  "genero" varchar(2)  null,
+  "cst_icms" varchar(2)  null,
+  "origem_icms" varchar(1)  null,
+  "aliquota_ipi" numeric(15, 3) null,
+  "aliquota_pis" numeric(15, 3) null,
+  "tipo_item" varchar(2)  null,
+  "cfop" int null,
+  "desc_unidade" varchar(50)  null,
+  "stb" varchar(1)  null,
+  "complemento_item" varchar(100)  null,
+  constraint "pk_cupons" primary key  ("n_cupom", "cod_produto", "n_item", "serial_impressora"),
+  constraint "fk_cupons_1" foreign key ("n_cupom", "serial_impressora") 
+  references "public"."br_cupom_mestre" ("n_cupom", "serial_impressora") 
+  on update no action
+  on delete no action
+)
+with (oids=false)
+;
+
+
+create table "public"."br_cupom_pagamento" (
+  "n_cupom" int not null,
+  "cod_forma_pag" varchar(10)  not null,
+  "valor" numeric(18, 3) null,
+  "serial_impressora" varchar(60)  not null,
+  "descricao" varchar(40)  null,
+  "vinculado" varchar(1)  null,
+  "cancelado" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  "flag_sis" varchar(1)  null,
+  "cod_forma_troco1" varchar(10)  null,
+  "forma_troco1" varchar(40)  null,
+  "cod_forma_troco2" varchar(10)  null,
+  "forma_troco2" varchar(40)  null,
+  "cod_forma_troco3" varchar(10)  null,
+  "forma_troco3" varchar(40)  null,
+  "n_doc" varchar(20)  null,
+  "banco" varchar(5)  null,
+  "agencia" varchar(10)  null,
+  "conta" varchar(10)  null,
+  "vencimento" date null,
+  "qtd_parcela" int null,
+  "valor_troco1" numeric(18, 3) null,
+  "valor_troco2" numeric(18, 3) null,
+  "valor_troco3" numeric(18, 3) null,
+  "id_cliente" varchar(20)  null,
+  "nome_cheque" varchar(70)  null,
+  "cpf_cheque" varchar(20)  null,
+  "fone_cheque" varchar(25)  null,
+  "cod_retaguarda" varchar(20)  null,
+  "item" int not null,
+  "strtipotransacaotef" varchar(10)  null,
+  "cod_bandeira" varchar(20)  null,
+  "parstrnomeredetef" varchar(50)  null,
+  "parstrnumidtranstef" varchar(20)  null,
+  "parstrnsutranstefhost" varchar(20)  null,
+  "dthoratransacao" date null,
+  "troco" varchar(255)  null,
+  constraint "pk_br_cupom_pagamento" primary key  ("n_cupom", "cod_forma_pag", "serial_impressora", "item"),
+  constraint "fk_cupons_forma_pag_1" foreign key ("n_cupom", "serial_impressora") 
+  references "public"."br_cupom_mestre" ("n_cupom", "serial_impressora") 
+  on update no action
+  on delete no action
+)
+with (oids=false)
+;
+
+
+create table "public"."br_estoque" (
+  "data" date not null,
+  "cod_produto" varchar(20)  not null,
+  "qtd" numeric(18, 4) null,
+  "preco" numeric(15, 3) null,
+  "custo" numeric(15, 3) null,
+  "descricao" varchar(200)  null,
+  "flag_sis" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  "hora" date null,
+  constraint "pk_br_estoque" primary key  ("data", "cod_produto")
+)
+with (oids=false)
+;
+
+
+create table "public"."br_reducaoz" (
+  "serial" varchar(60)  not null,
+  "cnpj" varchar(40)  null,
+  "ie" varchar(40)  null,
+  "im" varchar(40)  null,
+  "tipo_ecf" varchar(10)  null,
+  "marca" varchar(50)  null,
+  "modelo" varchar(40)  null,
+  "data_movimento" date not null,
+  "n_caixa" varchar(3)  null,
+  "versao_sb" varchar(20)  null,
+  "data_sb" date null,
+  "hora_sb" date null,
+  "coo_inicial" int null,
+  "coo_final" int null,
+  "dataemissao" date null,
+  "flag_sis" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  constraint "pk_br_reducaoz" primary key  ("serial", "data_movimento")
+)
+with (oids=false)
+;
+
+
+create table "public"."br_itens_rz" (
+  "serial" varchar(60)  not null,
+  "data_movimento" date not null,
+  "tag" varchar(50)  not null,
+  "descricao" varchar(60)  not null,
+  "valor" varchar(20)  null,
+  "indice" varchar(10)  not null,
+  "sequencial" varchar(10)  null,
+  "aliquota" varchar(10)  null,
+  "contador" char(10)  null,
+  "tipo" varchar(20)  null,
+  "sigla" varchar(20)  null,
+  "flag_sis" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  constraint "pk_br_itens_rz" primary key  ("serial", "data_movimento", "tag", "descricao", "indice"),
+  constraint "fk_br_itens_rz_1" foreign key ("serial", "data_movimento") 
+  references "public"."br_reducaoz" ("serial", "data_movimento") 
+  on update cascade
+  on delete no action
+)
+with (oids=false)
+;
+
+
+
+create table "public"."br_mnt_bombas" (
+  "tanque" varchar(3)  not null,
+  "bico" varchar(3)  not null,
+  "bomba" varchar(3)  not null,
+  "data_sub" date not null,
+  "hora_sub" date not null,
+  "motivo" varchar(200)  null,
+  "cnpj_sub" varchar(14)  null,
+  "cpf_sub" varchar(14)  null,
+  "lacre_anterior" varchar(20)  null,
+  "lacre_novo" varchar(20)  null,
+  "ei" numeric(15, 3) null,
+  "ef" numeric(15, 3) null,
+  "flag_sis" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  "codigo" int not null,
+  constraint "pk_br_mnt_bombas" primary key  ("codigo")
+)
+with (oids=false)
+;
+
+
+create table "public"."br_naofiscal" (
+  "numcoo" int not null,
+  "serial" varchar(60)  not null,
+  "numgrg" int null,
+  "numecf" int null,
+  "numgnf" int null,
+  "cer" int null,
+  "indice_pg" varchar(20)  null,
+  "descricao_pg" varchar(60)  null,
+  "indice_doc" varchar(10)  null,
+  "descricao_doc" varchar(100)  null,
+  "data" date null,
+  "valor" numeric(18, 2) null,
+  "numcdc" int null,
+  "hora" date null,
+  "flag_sis" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  constraint "pk_br_naofiscal" primary key  ("numcoo", "serial")
+)
+with (oids=false)
+;
+
+
+create table "public"."br_ped_mestre" (
+  "dtemissao" date not null,
+  "numero" varchar(20)  not null,
+  "serie" varchar(3)  not null,
+  "sub_serie" varchar(3)  null,
+  "base_icms" float null,
+  "val_icms" float null,
+  "total_nota" float null,
+  "modelo" varchar(6)  null,
+  "flag_sis" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  "flag_servico" varchar(1)  null,
+  "cpf_cnpj" varchar(14)  null,
+  constraint "pk_br_ped_mestre" primary key  ("dtemissao", "numero", "serie")
+)
+with (oids=false)
+;
+
+
+
+create table "public"."br_ped_detalhe" (
+  "dtemissao" date not null,
+  "numero_nota" varchar(20)  not null,
+  "serie_nota" varchar(3)  not null,
+  "cod_produto" varchar(14)  not null,
+  "desc_produto" varchar(100)  null,
+  "preco" float null,
+  "quantidade" float null,
+  "acrescimo" float null,
+  "desconto" float null,
+  "total_item" float null,
+  "un" varchar(3)  null,
+  "aliquota" varchar(10)  null,
+  "flag_sis" varchar(1)  null,
+  "flag_aceito" varchar(3)  null,
+  constraint "pk_br_ped_detalhe" primary key  ("dtemissao", "numero_nota", "serie_nota", "cod_produto"),
+  constraint "fk_br_ped_detalhe_1" foreign key ("dtemissao", "numero_nota", "serie_nota") 
+  references "public"."br_ped_mestre" ("dtemissao", "numero", "serie") 
+  on update no action
+  on delete no action
+)
+with (oids=false)
+;
+
+create table "public"."br_prevenda_pagamento" (
+  "cod_retaguarda" varchar(20)  not null,
+  "numprevenda" int not null,
+  "tipo" varchar(1)  not null,
+  "valor" numeric(18, 3) null,
+  constraint "pk_br_prevenda_pagamento" primary key  ("cod_retaguarda", "numprevenda", "tipo")
+)
+with (oids=false)
+;

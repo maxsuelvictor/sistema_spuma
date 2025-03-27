@@ -1,0 +1,5 @@
+/**** 30/04/2019 ****/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ALTER COLUMN "pcp_obs" TYPE varchar(200) COLLATE "default";
+

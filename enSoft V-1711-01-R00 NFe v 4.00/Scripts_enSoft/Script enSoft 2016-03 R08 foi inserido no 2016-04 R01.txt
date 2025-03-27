@@ -1,0 +1,259 @@
+ALTER TABLE "public"."cad_tb_c_tri_reg"
+ADD COLUMN "part_per_ope_int_isen" bool,
+ADD COLUMN "part_per_ope_ext_isen" bool;
+
+
+update cad_tb_c_tri_reg
+set part_per_ope_int_isen = false    
+WHERE
+   part_per_ope_int_isen is null;
+   
+
+update cad_tb_c_tri_reg
+set part_per_ope_ext_isen = false
+WHERE
+   part_per_ope_ext_isen is null;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "vlr_fcp" numeric(18,2);
+
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "per_fcp" float8;
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite" RENAME "part_vlr_fcp" TO "vlr_fcp";
+
+
+
+CREATE TABLE "public"."fat_tb_m_pca" (
+"id_carregamento" int4 NOT NULL,
+"id_responsavel" int4 NOT NULL,
+"dta_carregamento" date NOT NULL,
+CONSTRAINT "fat_tb_m_pca_pkey" PRIMARY KEY ("id_carregamento"),
+CONSTRAINT "fk_fat_tb_m_pca__cad_tb_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_pca" OWNER TO "postgres";
+
+
+ALTER TABLE "public"."fat_tb_m_pca"
+DROP CONSTRAINT "fk_fat_tb_m_pca__cad_tb_c_fun",
+ADD CONSTRAINT "fk_fat_m_pca__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_pca_ped" (
+"id_carregamento" int4 NOT NULL,
+"id_pedido" int4 NOT NULL,
+"status" int4 NOT NULL,
+CONSTRAINT "fat_tb_m_pca_ped_pkey" PRIMARY KEY ("id_carregamento", "id_pedido"),
+CONSTRAINT "tk_fat_m_pca_ped__fat_m_pca" FOREIGN KEY ("id_carregamento") REFERENCES "public"."fat_tb_m_pca" ("id_carregamento") ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT "tk_fat_m_pca_ped__fat_m_ped" FOREIGN KEY ("id_pedido") REFERENCES "public"."fat_tb_m_ped" ("id_pedido") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_pca_ped" OWNER TO "postgres";
+
+
+
+
+
+
+CREATE TABLE "public"."cad_tb_c_par_bxp" (
+"id_empresa" int4 NOT NULL,
+"id_empresa_bxp" int4 NOT NULL,
+"permite_baixar" bool,
+CONSTRAINT "cad_tb_c_par_bxp_pkey" PRIMARY KEY ("id_empresa", "id_empresa_bxp"),
+CONSTRAINT "fk_cad_c_par_bxp__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_par_bxp" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_par_bxp" IS 'Empresas permitidas baixar contas a pagar na empresa logada.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "perm_bxa_pag_n_emp" bool;
+
+update cad_tb_c_par_ctr
+  set perm_bxa_pag_n_emp = false
+where perm_bxa_pag_n_emp is null; 
+
+
+
+ALTER TABLE "public"."cad_tb_c_cli_bco"
+ALTER COLUMN "obs" TYPE varchar(2800);
+
+
+
+
+/** inserido no dia 04/04/16 ***/
+
+
+
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "id_pca" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_rom"."id_pca" IS 'Campo utilizado na importação de carregamento de pedido';
+
+
+ALTER TABLE "public"."fin_tb_m_pag_pag"
+ADD COLUMN "id_empresa_bxa" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_pag_pag"."id_empresa_bxa" IS 'Empresa que recebeu o pagamento.';
+
+
+
+update fin_tb_m_pag_pag
+   set id_empresa_bxa = (select id_empresa from fin_tb_m_pag pag
+                          where pag.id_titulo = fin_tb_m_pag_pag.id_titulo)
+where fin_tb_m_pag_pag.id_empresa_bxa is null;
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seq_vis_msg_ped_exp_fat" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seq_vis_msg_ped_exp_fat" IS 'Permite que o usuário veja os pedidos com prazo de entrega experiado.';
+
+
+
+UPDATE cad_tb_c_fun
+   SET seq_vis_msg_ped_exp_fat = false
+where seq_vis_msg_ped_exp_fat is null;
+
+
+CREATE TABLE "public"."fat_tb_m_xml" (
+"nota_fiscal" int4 NOT NULL,
+"dta_emissao" date NOT NULL,
+"serie" varchar(3),
+"cfop" varchar(5),
+"id_tipo_estoque" int4,
+"id_condicao_pag" int4,
+"chave" varchar(44) NOT NULL,
+"vlr_bruto" numeric(18,4),
+"vlr_liquido" numeric(18,4) NOT NULL,
+"cnpj_emitente" varchar(14) NOT NULL,
+"nome_emitente" varchar(50),
+"id_almoxarifado" int4,
+"vlr_icm_desc" numeric(18,4),
+"id_controle" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+"id_iqm" int4,
+"id_fiscal" int4,
+CONSTRAINT "fat_tb_m_xml_pkey" PRIMARY KEY ("id_controle"),
+CONSTRAINT "fk_fat_m_xml__cad_tb_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_xml" OWNER TO "postgres";
+
+
+
+
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_xml_ite" (
+"seq" int4 NOT NULL,
+"cod_fabrica" varchar(30),
+"id_item" int4,
+"id_cst_icms" varchar(3),
+"id_cfop" varchar(5),
+"vlr_bruto" numeric(18,4),
+"vlr_liquido" numeric(18,4),
+"desc_item" varchar(50),
+"und" varchar(3),
+"qtde" float8,
+"vlr_unitario" numeric(18,4),
+"vlr_desconto" numeric(18,4),
+"id_cor" int4,
+"id_tamanho" int4,
+"num_lote" varchar(15),
+"id_controle" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_sequencia_ite_iqm" int4,
+"id_busca_item" varchar(30),
+"icm_n_aliquota" numeric(18,4),
+"icm_per_reducao" numeric(18,4),
+"icm_n_base" numeric(18,4),
+"icm_n_valor" numeric(18,4),
+"icm_s_base" numeric(18,4),
+"icm_s_valor" numeric(18,4),
+"vlr_outras_desp" numeric(18,4),
+"ipi_base" numeric(18,4),
+"ipi_aliquota" numeric(18,4),
+"ipi_valor" numeric(18,4),
+"pis_base" numeric(18,4),
+"pis_aliquota" numeric(18,4),
+"pis_valor" numeric(18,4),
+"fre_valor" numeric(18,4),
+"cof_base" numeric(18,4),
+"cof_aliquota" numeric(18,4),
+"cof_valor" numeric(18,4),
+CONSTRAINT "fat_tb_m_xml_ite_pkey" PRIMARY KEY ("id_controle", "id_sequencia"),
+CONSTRAINT "fk_fat_m_xml_ite__fat_m_xml" FOREIGN KEY ("id_controle") REFERENCES "public"."fat_tb_m_xml" ("id_controle") ON DELETE CASCADE ON UPDATE CASCADE
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_xml_ite" OWNER TO "postgres";
+
+
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_xml_tit" (
+"id_controle" int4 NOT NULL,
+"id_forma_pag" int4,
+"id_titulo" int4 NOT NULL,
+"num_titulo" varchar(20) NOT NULL,
+"vlr_titulo" numeric(18,4),
+"dta_vencimento" date,
+"id_plano" char(11),
+CONSTRAINT "fat_tb_m_xml_tit_pkey" PRIMARY KEY ("id_controle", "id_titulo"),
+CONSTRAINT "fk_fat_m_xml_tit__fat_m_xml" FOREIGN KEY ("id_controle") REFERENCES "public"."fat_tb_m_xml" ("id_controle") ON DELETE CASCADE ON UPDATE CASCADE
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_xml_tit" OWNER TO "postgres";
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "bol_banco" int4;
+
+
+update fin_tb_m_rec
+  set bol_banco = (select ctc.banco from cad_tb_c_ctc ctc where ctc.id_conta = fin_tb_m_rec.bol_id_conta  )
+where COALESCE(bol_banco,0) = 0
+  and COALESCE(bol_id_conta,0) <> 0; 
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "rcr_cri_forma_pag" bool;
+
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "mdf_numero" int4;
+
+ALTER TABLE "public"."pcp_tb_m_ors"
+ADD COLUMN "fin_gerado" bool;
+
+
+drop table cad_tb_c_chh;
+drop table cad_tb_c_chs;

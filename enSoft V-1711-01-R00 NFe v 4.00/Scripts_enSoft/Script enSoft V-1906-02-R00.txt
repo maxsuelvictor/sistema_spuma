@@ -1,0 +1,7 @@
+/******* 11/06/2019 ********* /
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "pcp_id_empresa_base_fat" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."pcp_id_empresa_base_fat" IS 'se o campo "pcp_atualiza_fin_base_prod" = true, este campo será obrigatório o preenchimento.';
+

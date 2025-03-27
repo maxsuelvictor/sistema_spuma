@@ -1,0 +1,38 @@
+/***** 25/01/2022 *****/
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "tam_esp_espessura_revest_1" float8,
+ADD COLUMN "tam_esp_espessura_revest_2" float8,
+ADD COLUMN "tam_esp_comp_revest_1" float8,
+ADD COLUMN "tam_esp_comp_revest_2" float8,
+ADD COLUMN "tam_esp_largura_revest_1" float8,
+ADD COLUMN "tam_esp_largura_revest_2" float8,
+ADD COLUMN "cubagem_esp_revest_1" float8,
+ADD COLUMN "cubagem_esp_revest_2" float8;
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "densidade_esp_revest_1" float8,
+ADD COLUMN "densidade_esp_revest_2" float8;
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "id_item_bloco_espuma_revest_1" int4,
+ADD COLUMN "id_item_bloco_espuma_revest_2" int4;
+
+
+
+
+/****** 03/02/2022 *******/
+
+ALTER TABLE "public"."pcp_tb_m_opr_ped"
+ADD COLUMN "id_responsavel" int4,
+ADD COLUMN "dta_importacao" date,
+ADD COLUMN "hor_importacao" time(6);
+
+
+/****** 14/02/2022 *******/
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "id_plano" char(11);

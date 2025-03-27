@@ -1,0 +1,861 @@
+/******* 16/11/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "omp" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "omp" bool;
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_meq" int4;
+
+
+/******** 20/11/2017 *******/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "correcao_prc_por_grupo" bool;
+
+
+
+ALTER TABLE "public"."pcp_tb_c_meq" 
+ADD COLUMN "id_placa" char(8) COLLATE "default",
+ADD COLUMN "km_aquisicao" float8,
+ADD COLUMN "dta_aquisicao" date,
+ADD COLUMN "km_atual" float8,
+ADD COLUMN "chassi" varchar(20) COLLATE "default",
+ADD COLUMN "ano_modelo" char(4) COLLATE "default",
+ADD COLUMN "ano_fabricacao" char(4) COLLATE "default",
+ADD COLUMN "renavam" varchar(20) COLLATE "default",
+ADD COLUMN "alimentacao" int4 ,
+ADD COLUMN "combustivel" int4 ,
+ADD COLUMN "motor" varchar(11) COLLATE "default",
+ADD COLUMN "motor_num" varchar(20) COLLATE "default",
+ADD COLUMN "rastreado" bool ,
+ADD COLUMN "tipo" int4 ,
+ADD COLUMN "status" int4,
+ADD COLUMN "id_cor" int4,
+ADD COLUMN "media_consumo" float8,
+ADD COLUMN "eqp_terceiro" bool,
+ADD COLUMN "tipo_rodado" int2,
+ADD COLUMN "tipo_carroceria" int2,
+ADD COLUMN "cap_veiculo" float8,
+ADD COLUMN "tara" float4,
+ADD COLUMN "uf_licenciado" char(2) COLLATE "default",
+ADD CONSTRAINT "fk_pcp_c_meq__cad_c_cor" FOREIGN KEY ("id_cor") 
+REFERENCES "public"."cad_tb_c_cor" ("id_cor") ON DELETE RESTRICT ON UPDATE NO ACTION;
+
+
+
+
+COMMENT ON TABLE "public"."pcp_tb_c_meq" IS 'Cadastro de Veiculos';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."alimentacao" IS '0-Injeção Eletrônica
+1-Carburador
+2-Bomba Injetora';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."combustivel" IS '0-Gasolina
+1-Alcool
+2-Diesel
+3-Gas Natural
+4-Eletrico
+5-Flex';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."tipo" IS '0-Veiculo
+1-Trator/Implemento';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."media_consumo" IS 'media de consumo';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."eqp_terceiro" IS 'equipamento de terceiro';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."tipo_rodado" IS '0-Não Aplicavel, 
+1-Truck, 
+2-Toco, 
+3-Cavalo Mecanico, 
+4-VAN, 
+5-Utilitario, 
+6-Outros';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."tipo_carroceria" IS '0-NaoAplicavel, 
+1-Aberta, 
+2-Fechada, 
+3-Graneleira, 
+4-PortaContainer, 
+5-Sider';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."cap_veiculo" IS 'Capacidade do veiculo';
+
+COMMENT ON COLUMN "public"."pcp_tb_c_meq"."uf_licenciado" IS 'UF em que veículo está licenciado.';
+
+/******* 21/11/2017 ********/
+
+ALTER TABLE "public"."cad_tb_c_par"
+ADD COLUMN "chave_bloqueio" varchar(100);
+
+/****** 22/11/2017 ******/
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "horimetro" float8;
+
+
+/******** 27/11/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "chave_bloqueio" varchar(100),
+ADD COLUMN "status_internet" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "adm_sistema" bool;
+
+
+/********* 28/11/2017 ********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "id_fun_aviso_debito" int4,
+ADD COLUMN "horario_aviso_debito" time(0);
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ALTER COLUMN "id_cidade" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ALTER COLUMN "id_perfil_cli" DROP NOT NULL;
+
+
+ALTER TABLE "public"."cad_tb_c_par"
+DROP COLUMN "chave_bloqueio";
+
+
+
+CREATE TABLE "public"."ofi_tb_m_cvl" (
+"id_controle" int4 NOT NULL,
+"dta_controle" date NOT NULL,
+"tipo_movimento" int4 NOT NULL,
+"id_meq" int4 NOT NULL,
+"id_empresa" int4 NOT NULL,
+CONSTRAINT "ofi_tb_m_cvl_pkey" PRIMARY KEY ("id_controle"),
+CONSTRAINT "fk_ofi_cvl__pcp_meq" FOREIGN KEY ("id_meq") REFERENCES "public"."pcp_tb_c_meq" ("id_meq") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_ofi_cvl__cad_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_cvl" OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."ofi_tb_m_cvl"."tipo_movimento" IS '0 - IPVA; 1 - Multa; 2 - Seguro';
+
+
+
+
+CREATE TABLE "public"."ofi_tb_m_cvl_ipv" (
+"id_controle" int4 NOT NULL,
+"id_ipva" int4 NOT NULL,
+"ano_exercicio" char(4) COLLATE "default" NOT NULL,
+"vlr_seguro_obg" numeric(18,4),
+"vlr_ipva" numeric(18,4),
+"dta_venc_unica" date,
+"dta_pag_unica" date,
+"dta_venc_cta01" date,
+"dta_pag_cta01" date,
+"valor_cta01" numeric(18,4),
+"dta_venc_cta02" date,
+"dta_pag_cta02" date,
+"valor_cta02" numeric(18,4),
+"dta_venc_cta03" date,
+"dta_pag_cta03" date,
+"valor_cta03" numeric(18,4),
+CONSTRAINT "ofi_tb_m_cvl_ipv_pkey" PRIMARY KEY ("id_controle", "id_ipva"),
+CONSTRAINT "fk_ofi_cvl_ipv__ofi_cvl" FOREIGN KEY ("id_controle") REFERENCES "public"."ofi_tb_m_cvl" ("id_controle") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_cvl_ipv" OWNER TO "postgres";
+
+
+
+
+
+CREATE TABLE "public"."ofi_tb_m_cvl_mlt" (
+"id_controle" int4 NOT NULL,
+"id_multa" int4 NOT NULL,
+"local" varchar(100) COLLATE "default" NOT NULL,
+"cod_infracao" varchar(30) COLLATE "default" NOT NULL,
+"dta_vencimento" date,
+"vlr_multa" numeric(18,4),
+"vlr_pago" numeric(18,4),
+"dta_pagamento" date,
+"processo" varchar(30) COLLATE "default",
+"recurso" bool,
+"recurso_aceito" bool,
+"pago" bool,
+"obs" varchar(100) COLLATE "default",
+CONSTRAINT "ofi_tb_m_cvl_mlt_pkey" PRIMARY KEY ("id_controle", "id_multa"),
+CONSTRAINT "fk_ofi_cvl_mlt__ofi_cvl" FOREIGN KEY ("id_controle") REFERENCES "public"."ofi_tb_m_cvl" ("id_controle") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_cvl_mlt" OWNER TO "postgres";
+
+
+
+
+
+
+CREATE TABLE "public"."ofi_tb_m_cvl_sgr" (
+"id_controle" int4 NOT NULL,
+"id_seguro" int4 NOT NULL,
+"dta_contrato" date,
+"dta_vigencia" date,
+"num_apolice" varchar(30) COLLATE "default" NOT NULL,
+"vlr_seguro" numeric(18,4),
+"vlr_franquia" numeric(18,4),
+"vlr_cobertura" numeric(18,4),
+"vlr_danos_materiais" numeric(18,4),
+"vlr_danos_corporais" numeric(18,4),
+"corretor_nome" varchar(50) COLLATE "default",
+"corretor_telefone" varchar(15) COLLATE "default",
+"corretor_celular" varchar(15) COLLATE "default",
+CONSTRAINT "ofi_tb_m_cvl_sgr_pkey" PRIMARY KEY ("id_controle"),
+CONSTRAINT "fk_ofi_cvl_sgr__ofi_cvl" FOREIGN KEY ("id_controle") REFERENCES "public"."ofi_tb_m_cvl" ("id_controle") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ofi_tb_m_cvl_sgr" OWNER TO "postgres";
+
+/****** 05/12/2017 *******/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "data_aviso_debito" date;
+
+
+/******* 12/12/17 *******/
+
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ALTER COLUMN "alimentacao" DROP NOT NULL;
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ALTER COLUMN "combustivel" DROP NOT NULL;
+
+
+
+CREATE TABLE "public"."cad_tb_c_cli_crd" (
+"id_cliente" int4 NOT NULL,
+"id_forma_pag" int4 NOT NULL,
+"lim_valor" numeric(18,4),
+"lim_saldo" numeric(18,4),
+CONSTRAINT "cad_tb_c_cli_crd_pkey" PRIMARY KEY ("id_cliente", "id_forma_pag"),
+CONSTRAINT "fk_cad_cli_crd__cad_cli" FOREIGN KEY ("id_cliente") REFERENCES "public"."cad_tb_c_cli" ("id_cliente") ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_cli_crd__cad_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_cli_crd" OWNER TO "postgres";
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "limite_cred_fpg" bool;
+
+
+/****** 15/12/2017 ********/
+
+
+CREATE TABLE "public"."ctc_tb_m_bde_vrf" (
+"id_bde" int4,
+"id_verificacao" int4,
+"pad_buz_funciona" char(1) COLLATE "default",
+"pad_extintor_incendio" char(1) COLLATE "default",
+"pad_verif_cinto_seguranca" char(1) COLLATE "default",
+"pad_veic_possui_mac" char(1) COLLATE "default",
+"pad_veic_possui_chv_roda" char(1) COLLATE "default",
+"pad_veic_possui_mao_forca" char(1) COLLATE "default",
+"pad_veic_possui_triangulo" char(1) COLLATE "default",
+"pad_veic_possui_martelo_mad" char(1) COLLATE "default",
+"pad_sis_freio_funciona" char(1) COLLATE "default",
+"pad_ind_pres_oleo_funciona" char(1) COLLATE "default",
+"pad_drenagem_tanq_filtro" char(1) COLLATE "default",
+"pad_verif_pres_calib_pneus" char(1) COLLATE "default",
+"pad_verif_folga_rol_rosca_fim" char(1) COLLATE "default",
+"pad_feita_dren_baloes_ar" char(1) COLLATE "default",
+"pad_verif_estado_correias" char(1) COLLATE "default",
+"pad_verif_estado_maq_geral" char(1) COLLATE "default",
+"pad_feita_lubrif_ger_equip" char(1) COLLATE "default",
+"pad_equip_ise_vaz_hidraulico" char(1) COLLATE "default",
+"pad_verif_nivel_agua_radiador" char(1) COLLATE "default",
+"pad_verif_nivel_oleo_mot_hid_freio" char(1) COLLATE "default",
+"pad_verif_conserv_polos_baterias" char(1) COLLATE "default",
+"pad_verif_filtro_ar_cabine" char(1) COLLATE "default",
+"pad_verif_instalacao_instrum_eletr" char(1) COLLATE "default",
+"pad_verif_estado_vidragem_ger" char(1) COLLATE "default",
+"pad_verif_doc_equip" char(1) COLLATE "default",
+"pad_verif_estado_mat_rodante" char(1) COLLATE "default",
+"pad_ha_vazamento_oleo_combust" char(1) COLLATE "default",
+"pad_maq_kit_mitigacao" char(1) COLLATE "default",
+"pad_maq_ruid_excess" char(1) COLLATE "default",
+"pneu_isento_picotamento" char(1) COLLATE "default",
+"pneu_livre_corte_lateral" char(1) COLLATE "default",
+"pneu_banda_rol_isenta_solt" char(1) COLLATE "default",
+"imple_p_lubrif_cruz_eixo_conjunto" char(1) COLLATE "default",
+"imple_p_bord_tom_isenta_vazam" char(1) COLLATE "default",
+"imple_p_verif_niv_oleo_cxa_mult" char(1) COLLATE "default",
+"imple_p_verif_corr_gax_bomba" char(1) COLLATE "default",
+"imple_p_algum_vaz_tanq_trans_ag" char(1) COLLATE "default",
+"imple_b_verif_niv_oleo_hid_basc" char(1) COLLATE "default",
+"imple_b_sis_hid_isento_vaz" char(1) COLLATE "default",
+"imple_b_lub_pin_cilin_cruz_tom" char(1) COLLATE "default",
+"imple_m_verif_niv_oleo_mot_comp" char(1) COLLATE "default",
+"imple_m_drenag_reserv_ar_comp" char(1) COLLATE "default",
+"imple_m_prop_j_v_c_tub_isento_vaz" char(1) COLLATE "default",
+"imple_m_lub_ger_grax" char(1) COLLATE "default",
+"imple_m_verif_corr_acopl_sis" char(1) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_bde_vrf" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."ctc_tb_m_bde_vrf" IS '
+Veificações do equipamento informado.';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_buz_funciona" IS 'A buzina está funcionando?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_extintor_incendio" IS 'O extintor de incêndio está em condições de uso?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_cinto_seguranca" IS 'Foi verificado o cinto de segurança?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_veic_possui_mac" IS 'O veículo possui macaco?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_veic_possui_chv_roda" IS 'O veículo possui chave de roda?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_veic_possui_mao_forca" IS 'O veículo possui mão de força?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_veic_possui_triangulo" IS 'O veículo possui triângulo de sinalização?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_veic_possui_martelo_mad" IS 'O veículo possui martelo de madeira?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_sis_freio_funciona" IS 'Sistema de freio está funcionando corretamente?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_ind_pres_oleo_funciona" IS 'O indicador de pressão de óleo está funcionando?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_drenagem_tanq_filtro" IS 'Foi feito a drenagem do tanque e do filtro de combustível?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_pres_calib_pneus" IS 'Foi verificado a pressão de calibragem dos pneus?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_folga_rol_rosca_fim" IS 'Foi verificada a folga dos rolamentos da rosca sem fim?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_feita_dren_baloes_ar" IS 'Foi feita a drenagem dos balões de ar?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_estado_correias" IS 'Foi verificado o estado das correias?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_estado_maq_geral" IS 'Foi verificado o estado das mangueiras em geral?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_feita_lubrif_ger_equip" IS 'Foi feita a lubrificação geral do equipamento?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_equip_ise_vaz_hidraulico" IS 'Equipamento isento de vazamento hidraúlico?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_nivel_agua_radiador" IS 'Foi verificado o nivel de água do radiador?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_nivel_oleo_mot_hid_freio" IS 'Foram verificados os niveis de óleo motor, hidráulico e freio?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_conserv_polos_baterias" IS 'Foi verificado conservação dos polos das baterias?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_filtro_ar_cabine" IS 'Foi verificado o filtro de ar da cabine?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_instalacao_instrum_eletr" IS 'Foi verificado a instalação e instrumentos elétricos?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_estado_vidragem_ger" IS 'Foi verificado o estado da vidraçaria em geral?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_doc_equip" IS 'Foi verificada a documentação do equipamento?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_verif_estado_mat_rodante" IS 'Foi verificado o estado do material rodante?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_ha_vazamento_oleo_combust" IS 'Há vazamento de óleo ou combustível?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_maq_kit_mitigacao" IS 'A máquina está equipada com kit de mitigação (Pá, bandeja de contenção, lona, pó de serra e sacolas plásticas?)';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pad_maq_ruid_excess" IS 'A máquina apresenta ruídos excessivos?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pneu_isento_picotamento" IS 'Pneus isentos de picotamentos?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pneu_livre_corte_lateral" IS 'Pneus livres de cortes na lateral?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."pneu_banda_rol_isenta_solt" IS 'Banda de rolagem dos pneus isenta de soltura?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_p_lubrif_cruz_eixo_conjunto" IS 'Foram lubrificadas as cruzetas do eixo cardam do conjunto?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_p_bord_tom_isenta_vazam" IS 'Borda da tomada de força isenta de vazamento?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_p_verif_niv_oleo_cxa_mult" IS 'Foi verificado o nível de óleo da caixa multiplicadora';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_p_verif_corr_gax_bomba" IS 'Foi verificado a correia e a gazeta da bomba?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_p_algum_vaz_tanq_trans_ag" IS 'Há algum vazamento_no_tanque de transporte de água?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_b_verif_niv_oleo_hid_basc" IS 'Foi verificado o nível do oléo hidráulico do basculante?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_b_sis_hid_isento_vaz" IS 'Sistema hidráulico isento de vazamento?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_b_lub_pin_cilin_cruz_tom" IS 'Foi feita a lubrificação dos pinos dos mancais de giro, do cilindro e da cruzeta da tomada de força?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_m_verif_niv_oleo_mot_comp" IS 'Foi verificado o nível de óleo do motor e do compressor?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_m_drenag_reserv_ar_comp" IS 'Foi feito a drenagem do reservatório de ar do compressor?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_m_prop_j_v_c_tub_isento_vaz" IS 'Propulsora, juntas, válvulas, conexões e tubulações do compressor isentos de vazamentos?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_m_lub_ger_grax" IS 'Foi feita a lubrificação geral dos graxeiros?';
+
+COMMENT ON COLUMN "public"."ctc_tb_m_bde_vrf"."imple_m_verif_corr_acopl_sis" IS 'Foi verificado a correia de acoplamento do sistema?';
+
+
+
+/******** 22/12/2017 **********/
+
+ALTER TABLE "public"."cad_tb_c_ecf"
+ADD COLUMN "id_empresa" int4;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "permitir_saida_est_emp" bool;
+
+
+/******* 26/12/2017 ***********/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "utiliza_lote" bool;
+
+
+CREATE TABLE "public"."fat_tb_m_xml_ite_lot" (
+"id_controle" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"num_lote" varchar(15) COLLATE "default" NOT NULL,
+"qtde" float8 NOT NULL,
+CONSTRAINT "fat_tb_m_xml_ite_lot_pkey" PRIMARY KEY ("id_controle", "id_sequencia", "num_lote"),
+CONSTRAINT "fk_fat_xml_ite_lot__fat_xml_ite" FOREIGN KEY ("id_controle", "id_sequencia") REFERENCES "public"."fat_tb_m_xml_ite" ("id_controle", "id_sequencia") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_xml_ite_lot" OWNER TO "postgres";
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "tipo_controle_lote" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."tipo_controle_lote" IS '0 - Por item; 1 - Por grupo';
+
+ALTER TABLE "public"."fat_tb_m_xml_ite_lot"
+ADD COLUMN "dta_vencimento" date;
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "num_lote" varchar(15);
+
+
+/******* 28/12/2017 ********/
+
+ALTER TABLE "public"."fat_tb_m_mkt_cli"
+ADD COLUMN "cliente_contato" bool;
+
+COMMENT ON COLUMN "public"."fat_tb_m_mkt_cli"."cliente_contato" IS 'Indica se o cliente entrou em contato com telemarking';
+
+ALTER TABLE "public"."fat_tb_m_mkt_cli"
+ADD COLUMN "cliente_avulso" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cad_cli_simplificado" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cad_vei_simplificado" bool;
+
+
+
+/******* 03/01/2018 *********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "enviar_rel_grv" bool;
+
+CREATE TABLE "public"."cad_tb_c_par_eml" (
+"id_empresa" int4 NOT NULL,
+"email" varchar(60) COLLATE "default" NOT NULL,
+CONSTRAINT "cad_tb_c_par_eml_pkey" PRIMARY KEY ("id_empresa", "email"),
+CONSTRAINT "fk_cad_par_eml__cad_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_par_eml" OWNER TO "postgres";
+
+
+
+/******* 04/01/2018 **********/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_desc_produtos" numeric(18,4),
+ADD COLUMN "per_desc_produtos" float8,
+ADD COLUMN "vlr_produtos" numeric(18,4),
+ADD COLUMN "vlr_serv_bruto" numeric(18,4),
+ADD COLUMN "vlr_desc_servicos" numeric(18,4),
+ADD COLUMN "per_desc_servicos" float8,
+ADD COLUMN "vlr_ser_liquido" numeric(18,4),
+ADD COLUMN "vlr_terceiro" numeric(18,4),
+ADD COLUMN "vlr_desc_terceiro" numeric(18,4),
+ADD COLUMN "per_desc_terceiro" float8,
+ADD COLUMN "vlr_terc_liquido" numeric(18,4),
+ADD COLUMN "ped_gera_fin_separado" bool;
+
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "especie_tit" varchar(3),
+ADD COLUMN "aceite_tit" char(1);
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."especie_tit" IS 'Espécie do Título
+Código adotado pela FEBRABAN para identificar o tipo de título de cobrança.
+
+DM - Duplicata Mercantil
+DS   - Duplicata de Serviço
+NP  - Nota Promissória
+NS  - Nota de Seguro
+RC  - Recibo
+ND -  Nota de Débito
+LC  -  Letra de Câmbio
+
+
+';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctc"."aceite_tit" IS 'Código adotado pela FEBRABAN para identificar se o título de cobrança foi aceito
+(reconhecimento da dívida pelo Sacado).
+
+A - Aceite
+N - Não aceite';
+
+
+
+update cad_tb_c_ctc
+  set especie_tit = 'DM'
+where 
+   especie_tit is null AND
+   tipo = 1;
+
+
+update cad_tb_c_ctc
+  set aceite_tit = 'N'
+where 
+   aceite_tit is null 
+and tipo = 1;
+
+
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "per_comissao" float8;
+
+
+
+
+
+CREATE TABLE "public"."fat_tb_m_ped_tit_ser" (
+"id_pedido" int4 NOT NULL,
+"id_titulo" int4 NOT NULL,
+"dias" int4 NOT NULL,
+"dta_vencimento" date NOT NULL,
+"vlr_titulo" numeric(18,4) NOT NULL,
+"che_banco" char(10) COLLATE "default",
+"che_agencia" char(10) COLLATE "default",
+"che_conta" int4,
+"che_numero" int4,
+"che_emitente" varchar(50) COLLATE "default",
+"id_forma_pag" int4,
+"bol_nosso_numero" int4,
+"id_maquineta" int4,
+CONSTRAINT "PK_dbo.FAT_TB_M_PED_TIT_SER" PRIMARY KEY ("id_pedido", "id_titulo"),
+CONSTRAINT "fk_fat_m_ped_tit_ser__cad_c_fpg" FOREIGN KEY ("id_forma_pag") REFERENCES "public"."cad_tb_c_fpg" ("id_forma_pag") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_fat_m_ped_tit_ser__fat_m_ped" FOREIGN KEY ("id_pedido") REFERENCES "public"."fat_tb_m_ped" ("id_pedido") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_ped_tit_ser" OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped_tit_ser"."id_maquineta" IS 'Campo utilizado pela tela FAT_FM_M_PNF (Pedido Cupom).';
+
+
+
+/****** 05/01/2017 *********/
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_prod_liquido" numeric(18,4);
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "separa_prod_serv" bool;
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "vlr_cred_produtos" numeric(18,4),
+ADD COLUMN "vlr_cred_servicos" numeric(18,4);
+
+
+/******* 08/01/17 *********/
+
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "danfe_cod_item" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."danfe_cod_item" IS '0 - Cod. Item; 1 - Cod. Fabrica';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "informar_mec_ped_vnd" bool;
+
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "id_mecanico" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "pneu_largura" varchar(10),
+ADD COLUMN "pneu_altura" varchar(10),
+ADD COLUMN "pneu_aro" varchar(10);
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "tipo_produto" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."tipo_produto" IS '1 - Pneu';
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "exibir_cond_sem_pag" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_cfo"
+ADD COLUMN "cod_cta" varchar(20);
+
+
+CREATE TABLE "public"."cad_tb_c_pcc" (
+"cod_nat_cc" char(2) COLLATE "default",
+"ind_cta" char(1) COLLATE "default",
+"cod_cta" varchar(20) COLLATE "default" NOT NULL,
+"nome_cta" varchar(60) COLLATE "default",
+"cod_cta_ref" varchar(20) COLLATE "default",
+CONSTRAINT "cad_tb_c_pcc_pkey" PRIMARY KEY ("cod_cta")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_pcc" OWNER TO "postgres";
+
+
+
+update cad_tb_c_par_ctr set exibir_cond_sem_pag=TRUE
+where exibir_cond_sem_pag is null;
+
+
+/***** 10/01/2018 *******/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ped_utiliza_mecanico" bool;
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ALTER COLUMN "obs" TYPE varchar(255) COLLATE "default";
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "exibir_obs_ped_nfe_fisco" bool;
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_atendente" int4;
+
+
+/********* 11/01/2018 ********************/
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "permitir_nova_os_cli_placa" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "obrig_dados_cheque_ped_vnd" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ped_vnd_tme_padrao" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ativo_ped_vnd_tme_padrao" bool;
+
+
+
+/******* 12/01/2017 *********/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "gerar_nota_fechamento_os" bool;
+
+update cad_tb_c_par_ctr  set obrig_dados_cheque_ped_vnd=true 
+where obrig_dados_cheque_ped_vnd is null;
+
+
+update cad_tb_c_par_ctr  set gerar_nota_fechamento_os=true 
+where gerar_nota_fechamento_os is null;ALTER TABLE "public"."cad_tb_c_ite_loc"
+ALTER COLUMN "loca_rua" TYPE varchar(20) COLLATE "default",
+ALTER COLUMN "loca_prateleira" TYPE varchar(20) COLLATE "default",
+ALTER COLUMN "loca_escaninho" TYPE varchar(20) COLLATE "default";
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "alterar_vlr_dup_nota_fat" bool;
+
+
+
+/******* 15/01/2017 ***********/
+
+ALTER TABLE "public"."cad_tb_c_ite_loc"
+ALTER COLUMN "loca_rua" TYPE varchar(20) COLLATE "default",
+ALTER COLUMN "loca_prateleira" TYPE varchar(20) COLLATE "default",
+ALTER COLUMN "loca_escaninho" TYPE varchar(20) COLLATE "default";
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "alterar_vlr_dup_nota_fat" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "n_utilizar_cond_pag_os" bool,
+ADD COLUMN "tipo_preco_sem_cond_pag_os" int4;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "permitir_alterar_dta_baixa_rbx" bool;
+
+
+/****** 19/01/2017 *******/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ativar_util_fpg_ped_vnd" bool;
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "utilizado_ped_vnd" bool;
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "letras_maius_obs_ped" bool
+
+
+/******** 29/01/2018 *******/
+
+
+ALTER TABLE "public"."ctc_tb_m_bde"
+ADD COLUMN "obs" varchar(255);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "utilizar_ped_bonificacao" bool;
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "ped_vnd_bonificacao" bool;
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_alt_cli_ped" bool;
+
+
+
+CREATE TABLE "public"."cad_tb_c_ntr" (
+"codigo" char(3) COLLATE "default" NOT NULL,
+"descricao" varchar(100) COLLATE "default",
+CONSTRAINT "cad_tb_c_ntr_pkey" PRIMARY KEY ("codigo")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_ntr" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_ntr" IS 'Cadastro Natureza da Receita';
+
+
+
+/******** 30/01/2018 ***********/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "cod_ntr" char(3);
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."cod_ntr" IS 'Está ligado a tabela CAD_TB_C_NTR (Natureza da Receita)';
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD CONSTRAINT "fk_cad_c_gru__cad_c_ntr" FOREIGN KEY ("cod_ntr") REFERENCES "public"."cad_tb_c_ntr" ("codigo") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "id_marca" int4;
+
+
+
+/********** 05/02/2018 *************/
+
+ALTER TABLE "public"."cad_tb_c_tme"
+ADD COLUMN "bonificacao" bool;
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_pedido_orig" int4;
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "id_mecanico" int4;
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "id_mecanico" int4;
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "informar_mec_por_item_ped" bool,
+ADD COLUMN "informar_mec_por_item_os" bool;
+
+/*********** 06/02/2018 *******************/
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "id_cliente" int4;
+
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "pag_cred_cli" int4;
+
+
+ALTER TABLE "public"."fin_tb_m_rcr"
+ADD COLUMN "id_cta" int4;
+
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rcr"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Devolução de vendas 3-Nota Fiscal de Venda; 
+4 - Movimento de Caixa';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "csu_cli_fin_separar_fpg" bool;
+
+ALTER TABLE "public"."est_tb_m_mal"
+ADD COLUMN "km_atual" float8;
+
+
+
+
+
+

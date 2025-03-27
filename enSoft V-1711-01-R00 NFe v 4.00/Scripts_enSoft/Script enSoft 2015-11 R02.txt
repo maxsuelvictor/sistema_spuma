@@ -1,0 +1,36 @@
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "car_bandeira" char(2),
+ADD COLUMN "car_cnpj_credenciadora" varchar(14);
+
+COMMENT ON COLUMN "public"."cad_tb_c_fpg"."car_bandeira" IS '01- Visa
+02- Mastercard
+03- American Express
+04- Sorocred
+99- Outros ';
+
+
+CREATE TABLE "public"."cad_tb_c_ccr" (
+"id_ccr" int4 NOT NULL,
+"descricao" varchar(60),
+"cnpj" varchar(14),
+"fone" varchar(14),
+CONSTRAINT "cad_tb_c_ccr_pkey" PRIMARY KEY ("id_ccr")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_ccr" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_ccr" IS 'Cadastro de Credenciadora de Cartão de Crédito';
+
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+DROP COLUMN "car_cnpj_credenciadora";
+
+
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "id_ccr" int4,
+ADD CONSTRAINT "fk_cad_c_fpg__cad_c_ccr" FOREIGN KEY ("id_ccr") REFERENCES "public"."cad_tb_c_ccr" ("id_ccr") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+

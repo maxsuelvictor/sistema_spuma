@@ -1,0 +1,9 @@
+/******* 09/12/2019 ********/
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_alterar_fpg_tit_fin" bool;
+
+
+update cad_tb_c_fun
+set seg_alterar_fpg_tit_fin = false
+where seg_alterar_fpg_tit_fin is null;

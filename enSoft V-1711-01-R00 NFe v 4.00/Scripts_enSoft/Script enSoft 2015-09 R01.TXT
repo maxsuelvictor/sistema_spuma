@@ -1,0 +1,32 @@
+ALTER TABLE "public"."fin_tb_m_rcr"
+ADD COLUMN "id_abertura" int4;
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "id_credito" int4;
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."id_credito" IS 'Refere-se a tabela FIN_TB_M_RCR';
+
+/**** Mariel ******/
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "id_veiculo" int4;
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "mdfe_tipo_emissao" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."mdfe_tipo_emissao" IS '0-normal
+1- contiguecia';
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "mdfe_tipo_emitente" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."mdfe_tipo_emitente" IS '1 - Prestador de serviço de transporte
+2 - transportador de carga propria';
+
+ALTER TABLE "public"."pcp_tb_c_mta"
+ADD COLUMN "doc_cpf" varchar(11);
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "tara" float4;
+

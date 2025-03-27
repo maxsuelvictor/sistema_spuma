@@ -1,0 +1,133 @@
+﻿ALTER TABLE "public"."cmp_tb_m_ped"
+ADD COLUMN "aprovado" bool;
+
+
+COMMENT ON COLUMN "public"."cmp_tb_m_ped"."aprovado" IS 'Este campo terá utilidade caso módulo SGQ = true;';
+
+
+ALTER TABLE "public"."cmp_tb_m_ped"
+ADD COLUMN "id_resp_aprov" int4,
+ADD COLUMN "dta_aprov" date,
+ADD COLUMN "hor_aprov" time(6);
+
+COMMENT ON COLUMN "public"."cmp_tb_m_ped"."id_resp_aprov" IS 'Este campo terá utilidade caso módulo SGQ = true;';
+
+COMMENT ON COLUMN "public"."cmp_tb_m_ped"."dta_aprov" IS 'Este campo terá utilidade caso módulo SGQ = true;';
+
+COMMENT ON COLUMN "public"."cmp_tb_m_ped"."hor_aprov" IS 'Este campo terá utilidade caso módulo SGQ = true;';
+
+
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_vis_msg_sol_cmp" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_vis_msg_sol_cmp" IS 'Este campo tem a função de mostrar para o usuário uma msg com as soliçitações de compras em aberto.';
+
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "bol_chave" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."bol_chave" IS 'Campo utilizado pela geração de boleto.';
+
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "bol_id_conta" int4;
+
+COMMENT ON COLUMN "public"."fin_tb_m_rec"."bol_id_conta" IS 'Campo utilizado pela geração de boleto.';
+
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "cedente_ident" varchar(260);
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "nfe_ecf_id_condicao_pag" int4,
+ADD COLUMN "nfe_ecf_tipo_estoque" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."nfe_ecf_id_condicao_pag" IS 'Campo utilizado no momento da Geração de uma NFE partindo de uma ECF.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."nfe_ecf_tipo_estoque" IS 'Campo utilizado no momento da Geração de uma NFE partindo de uma ECF.';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."origem_nf" IS 'A - Pedido de Venda  B - Estoque  C - Oficina  X - Importação XML   G - Gerada de cupom fiscal';
+
+
+ALTER TABLE "public"."fat_tb_m_orc_ite"
+DROP CONSTRAINT "fk_fat_m_orc_ite__fat_m_orc",
+ADD CONSTRAINT "fk_fat_m_orc_ite__fat_m_orc" FOREIGN KEY ("id_orcamento") REFERENCES "public"."fat_tb_m_orc" ("id_orcamento") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "tam_observacoes" varchar(150);
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "metodo2_sit_justificativa" varchar(100);
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."metodo2_sit_justificativa" IS 'Este campo nasceu na necessidade do módulo CTC.';
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "metodo3_observacoes" varchar(150);
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."metodo3_observacoes" IS 'Este campo surgiu na necessidade do módulo CTC.';
+
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "rev" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_mod"."rev" IS 'Revenda';
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+DROP CONSTRAINT "fk_cad_c_par_ctr__cad_c_par",
+ADD CONSTRAINT "fk_cad_c_par_ctr__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE "public"."cad_tb_c_par_ser"
+DROP CONSTRAINT "fk_cad_c_par_ser__cad_c_par",
+ADD CONSTRAINT "fk_cad_c_par_ser__cad_c_par" FOREIGN KEY ("id_empresa") REFERENCES "public"."cad_tb_c_par" ("id_empresa") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."situacao_emissor" IS '1-Produção
+; 2-Homologação
+';
+
+
+ALTER TABLE "public"."fat_tb_m_iqm_ite"
+ALTER COLUMN "id_responsavel" DROP NOT NULL,
+ALTER COLUMN "cnd_comercial" DROP NOT NULL,
+ALTER COLUMN "qtd_pc_nf" DROP NOT NULL,
+ALTER COLUMN "pres_produto" DROP NOT NULL,
+ALTER COLUMN "cert_qualidade" DROP NOT NULL,
+ALTER COLUMN "resultado" DROP NOT NULL,
+ALTER COLUMN "demerito" DROP NOT NULL,
+ALTER COLUMN "qualidade" DROP NOT NULL,
+ALTER COLUMN "dta_inspecao" DROP NOT NULL;
+
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "cubagem" float8;
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."cubagem" IS 'Campo utilizado quando o parâmetro SGQ = True.
+Este campo irá ter o total de cubagem de cada item do pedido.
+Cálculo:
+cubagem do CAD_TB_C_ITE * qtde  do PED_ITE
+depois SOMA o total de cada item e grava o valor no campo CUBAGEM do FAT_TB_M_PED.
+';
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cxa_imprime_etq" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_imprime_etq" IS 'Campo utilizado pela rotina de Controle de Caixa, no botão Gerar Nfe.';
+
+
+COMMENT ON COLUMN "public"."est_tb_m_fea"."origem" IS '0 - Por Nota fiscal de entrada
+1 - Por Nota fiscal de saída
+2 - Por Ordem de saída
+3 - Por almoxarifado - Saída
+4 - Por inventário
+5 - Por almoxarifado - Devolucao. 6- Por Pedido de Venda 7 - Por Dev. de NF de Fornecedor  8 - Por Dev. de NF de Cliente';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cxa_f11_pedido" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_f11_pedido" IS 'Campo utilizado pela tela FAT_FM_M_CXA_NFE.';
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ALTER COLUMN "id_inf_fisco" DROP NOT NULL;

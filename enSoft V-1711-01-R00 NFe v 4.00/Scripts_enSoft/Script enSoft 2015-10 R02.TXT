@@ -1,0 +1,81 @@
+ALTER TABLE "public"."ctc_tb_m_orc_ite_com"
+ALTER COLUMN "id_item" TYPE varchar(20);
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite"
+ALTER COLUMN "id_item" TYPE varchar(20);
+
+
+ALTER TABLE "public"."ofi_tb_m_orv"
+ADD COLUMN "status_painel" int4;
+
+COMMENT ON COLUMN "public"."ofi_tb_m_orv"."status_painel" IS '0 - Aguardando Ordem de Serviço
+1 - Próximo Ordem de Serviço
+2 - Em Serviço
+3 - Pré-Inspeção
+4 - Aguardando Lavagem
+5 - Inspeção Final
+6 - Aguardando Aprovação
+7 - Aguardando Peças
+8 - Aguardando Serviço
+9 - Aguardando Pré-Entrega
+10 - Aguardando Entrega
+11 - Entregue
+';
+
+
+
+ALTER TABLE "public"."pcp_tb_c_meq"
+ADD COLUMN "nome_fabricante" varchar(60);
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+DROP CONSTRAINT "pk_fin_tb_m_con_ger" ,
+ADD CONSTRAINT "pk_fin_tb_m_con_ger" PRIMARY KEY ("id_conciliacao", "id_cxb", "id_controle");
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+DROP CONSTRAINT "pk_fin_tb_m_con_ger";
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det"
+ADD PRIMARY KEY ("id_conciliacao", "id_cxb", "id_controle");
+
+
+CREATE TABLE "public"."fin_tb_m_con_cxb_aux" (
+"id_conciliacao" int4 NOT NULL,
+"id_controle" int4 NOT NULL,
+"id_plano" char(11),
+"id_conta" int4,
+"id_tipo_financeiro" int4,
+"vlr_lancamento" numeric(18,4),
+"id_titulo" int4,
+"historico" varchar(100),
+"num_doc" int4,
+"id_cxb" int4 NOT NULL,
+"dta_movimento" date,
+"tipo" int4,
+CONSTRAINT "fin_tb_m_con_cxb_aux_pkey" PRIMARY KEY ("id_conciliacao", "id_cxb", "id_controle"),
+CONSTRAINT "fk_fin_m_con_cxb_aux__fin_m_con_cxb" FOREIGN KEY ("id_conciliacao", "id_cxb") REFERENCES "public"."fin_tb_m_con_cxb" ("id_conciliacao", "id_cxb") ON DELETE CASCADE ON UPDATE RESTRICT
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_aux" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_con_cxb_aux" IS 'Tabela Auxiliar do Arquivo de Conciliação';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_aux"."id_titulo" IS 'Identificador do titulo no contas a pagar que foi gerado na conciliacao.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_aux"."id_cxb" IS 'Este campo faz relação com a tabela fin_tb_m_con_cxb.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_aux"."tipo" IS '0 - Sugestão 
+1 - Novo movimento';
+
+
+
+ALTER TABLE "public"."fin_tb_m_con_cxb"
+ADD COLUMN "status" char(1);
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb"."status" IS 'F - Fechado (o usuário fez o relacionamento do registro do arquivo ofx com o movimento do sistema FIN_TB_M_CTA)
+A - Em aberto (o usuário ainda não fez o relacionamento do registro do arquivo ofx com o movimento do sistema)';
+
+

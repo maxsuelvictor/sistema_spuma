@@ -1,0 +1,29 @@
+ALTER TABLE "public"."cad_tb_c_pct"
+ADD COLUMN "estr_dre" int4;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "part_per_aliq_dest" float8,
+ADD COLUMN "part_per_part_orig" float8,
+ADD COLUMN "part_per_part_dest" float8,
+ADD COLUMN "part_vlr_fcp" numeric(18,2);
+
+DROP INDEX "public"."ix_ft_nfe_i_item";
+
+CREATE INDEX "ix_ft_nfe_i_item" ON "public"."fat_tb_m_nfe_ite" ("id_item");
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."part_vlr_fcp" IS 'Fundo de combate a pobreza.';
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "part_perc_fcp" float8;
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."part_perc_fcp" IS 'Percentual de fundo de combate a pobreza.';
+
+
+ALTER TABLE "public"."cad_tb_c_tri_reg"
+ADD COLUMN "part_per_aliq_dest" float8;
+
+
+

@@ -1,0 +1,37 @@
+ALTER TABLE "public"."cad_tb_c_ncm"
+ADD COLUMN "cest" varchar(7);
+
+ALTER TABLE "public"."fin_tb_m_rcr"
+ADD COLUMN "dta_vencimento" date;
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "id_ors" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."id_ors" IS 'Campo utilizado pelo PCP_FM_M_ORS; (Ordem de Faturamento);';
+
+ALTER TABLE "public"."pcp_tb_m_ors"
+ADD COLUMN "id_tipo_mov_estoque" int4;
+
+
+
+/** Criado em 16/03/2016 **/
+
+ALTER TABLE "public"."pcp_tb_m_ors"
+ADD COLUMN "id_almoxarifado" int4,
+ADD COLUMN "vlr_bruto" numeric(18,2),
+ADD COLUMN "vlr_desconto" numeric(18,2),
+ADD COLUMN "per_desconto" float8,
+ADD COLUMN "vlr_liquido" numeric(18,2),
+ADD COLUMN "hor_emissao" time(6),
+ADD COLUMN "id_abertura" int4;
+
+
+ALTER TABLE "public"."pcp_tb_m_ors_ite"
+ADD COLUMN "vlr_liquido" numeric(18,2),
+ADD COLUMN "vlr_desconto" numeric(18,2),
+ADD COLUMN "per_desconto" float8;
+
+
+ALTER TABLE "public"."pcp_tb_m_ors_ite" RENAME "vlr_total" TO "vlr_bruto";
+
+

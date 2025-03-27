@@ -1,0 +1,69 @@
+/**** 23/09/2024 ****/
+
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "vlr_bruto" numeric(18,4),
+ADD COLUMN "vlr_liquido" numeric(18,4),
+ADD COLUMN "vlr_frete" numeric(18,4),
+ADD COLUMN "vlr_desc_basico" numeric(18,4),
+ADD COLUMN "per_desc_basico" float8,
+ADD COLUMN "vlr_desc_especial" numeric(18,4),
+ADD COLUMN "per_desc_especial" float8;
+
+
+
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "vlr_desconto" numeric(18,4),
+ADD COLUMN "per_desconto" float8;
+
+
+ALTER TABLE "public"."fat_tb_m_orc_ite"
+ADD COLUMN "per_desc_max" float8;
+
+
+/**** 08/11/2024 *****/
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "separa_prod_serv" bool;
+
+/**** 12/11/2024 *****/
+ALTER TABLE "public"."fat_tb_m_orc_ite"
+ADD COLUMN "vlr_frete"  numeric(18,4);
+
+
+/*** 14/11/2024 ***/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_fat_orc_id_condicao_pag" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_fat_orc_id_condicao_pag" IS 'Condição de pagamento padrão para orçamento usado pelo SGQ=TRUE';
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_fat_ped_id_condicao_pag" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_fat_ped_id_condicao_pag" IS 'Condição de pagamento padrão para pedido de venda usado pelo SGQ=TRUE';
+
+/***** 25/11/2024 *****/
+ALTER TABLE "public"."fat_tb_m_orc_ite"
+ADD COLUMN "per_desc_basico" float8,
+ADD COLUMN "vlr_desc_basico" numeric(18,4),
+ADD COLUMN "per_desc_especial" float8,
+ADD COLUMN "vlr_desc_especial" numeric(18,4);
+
+
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "vlr_icm_desn" numeric(18,4);
+
+/***** 27/11/2024 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "fat_validade_orc" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."fat_validade_orc" IS 'Qtde de dias de validade para um orçamento';
+
+/***** 02/12/2024 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "fat_id_tipo_mov_estoque_rep" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."fat_id_tipo_mov_estoque_rep" IS 'Tipo de movimento de estoque para pedido de venda com vendedor externo';
+

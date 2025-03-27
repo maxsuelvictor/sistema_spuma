@@ -1,0 +1,426 @@
+ALTER TABLE "public"."cad_tb_c_ccu"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_cfo"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_chh"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_chs"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_cid"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_cin"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_cne"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_cor"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_cpg"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_ctc"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_ecf"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_fpg"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_inf"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_ite"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_lto"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_mve"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_nat"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_ncm"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_par"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_pct"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_pec"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_pes"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_ram"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_set"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_tam"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_tdf"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_tif"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_tme"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_tri"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_und"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cad_tb_c_vei"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+--Compras
+
+ALTER TABLE "public"."cmp_tb_m_cot"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."cmp_tb_m_ped"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+--ALTER TABLE "public"."cmp_tb_m_sol"
+--ADD COLUMN "cod_lme" varchar(20),
+--ADD COLUMN "rev_lme" varchar(5);
+
+--Estoque
+
+ALTER TABLE "public"."est_tb_m_cte"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."est_tb_m_fea"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."est_tb_m_fes"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."est_tb_m_inv"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."est_tb_m_lot"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+--ALTER TABLE "public"."est_tb_m_mal"
+--ADD COLUMN "cod_lme" varchar(20),
+--ADD COLUMN "rev_lme" varchar(5);
+
+--Faturamento
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fat_tb_m_pos"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fat_tb_m_rom"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+
+--Financeiro
+
+ALTER TABLE "public"."fin_tb_m_cob"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_cta"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_cxa"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_pag"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_pbx"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_pcr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_rbx"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_rcr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."fin_tb_m_rec"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+--Controle de Construtora
+
+ALTER TABLE "public"."ctc_tb_c_eqp"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."ctc_tb_c_gru"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."ctc_tb_c_obr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."ctc_tb_m_avf"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."ctc_tb_m_fac"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+--PCP Cadastros
+
+ALTER TABLE "public"."pcp_tb_c_cdp"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_cdr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_cin"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+
+ALTER TABLE "public"."pcp_tb_c_cnf"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_crg"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_dis"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_esp"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_ins"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_lme"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_mde"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_meq"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_mta"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_ori"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_prp"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_prq"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_reg"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_rot"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_rpt"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_tin"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_tlm"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_c_tpp"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+--PCP - Movimentações
+
+ALTER TABLE "public"."pcp_tb_m_acr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_cac"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_cme"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_crp"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_crq"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_iqf"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_lbe"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_lpr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_mcp"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_ncf"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_opb"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_opr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_ors"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_psc"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+--ALTER TABLE "public"."pcp_tb_m_raa"
+--ADD COLUMN "cod_lme" varchar(20),
+--ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_rec"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_rom"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_rvc"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+ALTER TABLE "public"."pcp_tb_m_vve"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);

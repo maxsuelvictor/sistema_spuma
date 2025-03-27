@@ -1,0 +1,192 @@
+ALTER TABLE "public"."cad_tb_c_fun"
+ADD COLUMN "seg_habilitar_seg" bool,
+ADD COLUMN "seg_redef_senha" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_habilitar_seg" IS 'Caso este campo seja marcado, então o usuário será obrigado a preencher os dados para login do sistema no cadastro.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_fun"."seg_redef_senha" IS 'Caso este campo esteja marcado, assim que este funcionário fizer o Login, o sistema irá abrir uma tela para que ele redefina a senha de acesso.';
+
+
+/**** Mariel *******/
+
+CREATE TABLE "public"."ctc_tb_c_ser" (
+"id" int4 NOT NULL,
+"descricao" varchar(600),
+"id_unidade" char(3),
+CONSTRAINT "ctc_tb_c_ser_pkey" PRIMARY KEY ("id")
+)
+WITH (OIDS=FALSE)
+;
+
+CREATE TABLE "public"."ctc_tb_c_ser_com" (
+"id_ser" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"id_tpr" int4 NOT NULL,
+"qtde" float8,
+"vlr_unitario" numeric(18,4),
+CONSTRAINT "ctc_tb_c_ser_com_pkey" PRIMARY KEY ("id_ser", "id_item", "id_tpr")
+)
+WITH (OIDS=FALSE)
+;
+
+delete from ctc_tb_m_orc;
+
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite" RENAME "id_item" TO "id_ser";
+
+
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite"
+ADD PRIMARY KEY ("id_orc", "id_sequencia");
+
+
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "ctc_epi" bool;
+
+
+drop table fin_tb_m_con_cta;
+drop table fin_tb_m_con_ger;
+
+
+
+CREATE TABLE "public"."fin_tb_m_con_cxb_det" (
+"id_conciliacao" int4 NOT NULL,
+"id_controle" int4 NOT NULL,
+"id_plano" char(11),
+"id_conta" int4,
+"id_tipo_financeiro" int4,
+"vlr_lancamento" numeric(18,4),
+"id_titulo" int4,
+"historico" varchar(100),
+"num_doc" int4,
+"id_cxb" int4 NOT NULL,
+"dta_mov_cxb" date,
+"mov_gerado" bool,
+CONSTRAINT "pk_fin_tb_m_con_ger" PRIMARY KEY ("id_conciliacao", "id_controle", "id_cxb"),
+CONSTRAINT "fk_fin_m_con_cxb_det__fin_m_con" FOREIGN KEY ("id_conciliacao") REFERENCES "public"."fin_tb_m_con" ("id_conciliacao") ON DELETE CASCADE ON UPDATE RESTRICT
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fin_tb_m_con_cxb_det" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fin_tb_m_con_cxb_det" IS 'Lançamento Gerado na conciliação';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_det"."id_titulo" IS 'Identificador do titulo no contas a pagar que foi gerado na conciliacao.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_det"."id_cxb" IS 'Este campo faz relação com a tabela fin_tb_m_con_cxb.';
+
+COMMENT ON COLUMN "public"."fin_tb_m_con_cxb_det"."mov_gerado" IS 'Se "true", quer dizer que no momento da conciliação este registro foi criado;
+Se "false", quer dizer que o registro foi importado do FIN_TB_M_CTA.';
+
+
+
+CREATE TABLE "public"."ctc_tb_m_orc_ite_med" (
+"id_orc" int4 NOT NULL,
+"sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"qtde" float8,
+"dta_medicao" date,
+"id_responsavel" int4,
+CONSTRAINT "ctc_tb_m_orc_ite_med_pkey" PRIMARY KEY ("id_orc", "sequencia", "id_item")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite" RENAME "id_ser" TO "id_item";
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite"
+ADD COLUMN "qtde_saldo_medicao" float8;
+
+
+CREATE TABLE "public"."ctc_tb_c_tpr_ite" (
+"id_tpr" int4 NOT NULL,
+"id_item" varchar(20) NOT NULL,
+"descricao" varchar(800),
+"classe" int4,
+"unidade" varchar(10),
+"preco_unitario" numeric(15,6),
+"data_base" date,
+CONSTRAINT "ctc_tb_c_tpr_ite_pkey" PRIMARY KEY ("id_tpr", "id_item")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_c_tpr_ite" OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."ctc_tb_c_tpr_ite"."classe" IS '0-Material
+1-Mao-de-obra
+';
+
+drop TABLE ctc_tb_c_ser_com;
+drop TABLE ctc_tb_c_ser;
+
+
+
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite_med"
+DROP CONSTRAINT "ctc_tb_m_orc_ite_med_pkey" ,
+ADD CONSTRAINT "ctc_tb_m_orc_ite_med_pkey" PRIMARY KEY ("id_orc", "sequencia");
+
+CREATE TABLE "public"."ctc_tb_m_orc_ite_com" (
+"id_orc" int4 NOT NULL,
+"sequencia" int4 NOT NULL,
+"id_item" int4 NOT NULL,
+"coeficiente" float8,
+"vlr_unitario" numeric(18,4),
+"vlr_total" numeric(18,4),
+CONSTRAINT "ctc_tb_m_orc_ite_com_pkey" PRIMARY KEY ("id_orc", "sequencia")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite"
+ADD COLUMN "vlr_mo" numeric(18,4),
+ADD COLUMN "vlr_mat" numeric(18,4),
+ADD COLUMN "per_ls" float8,
+ADD COLUMN "vlr_ls" numeric(18,4),
+ADD COLUMN "per_bdi" float8,
+ADD COLUMN "vlr_bdi" numeric(18,4),
+ADD COLUMN "per_adm" float8,
+ADD COLUMN "vlr_adm" numeric(18,4),
+ADD COLUMN "total_taxa" numeric(18,4);
+
+ALTER TABLE "public"."ctc_tb_c_tpr_ite"
+ADD COLUMN "id_item_interno" int4;
+
+COMMENT ON COLUMN "public"."ctc_tb_c_tpr_ite"."id_item_interno" IS 'Este campo vai servir para fazer a correspondcia entre o codigo das tabelas tcpo... com o codigo do nosso sistema.';
+
+
+CREATE TABLE "public"."ctc_tb_c_tpr_ite_com" (
+"id_tpr" int4 NOT NULL,
+"id_item" varchar(20) NOT NULL,
+"id_item_comp" varchar(20) NOT NULL,
+"qtde" float8,
+CONSTRAINT "ctc_tb_c_tpr_ite_com_pkey" PRIMARY KEY ("id_tpr", "id_item", "id_item_comp")
+)
+WITH (OIDS=FALSE)
+;
+
+/*************/
+
+
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite_com"
+ADD COLUMN "id_com" int4,
+DROP CONSTRAINT "ctc_tb_m_orc_ite_com_pkey" ,
+ADD CONSTRAINT "ctc_tb_m_orc_ite_com_pkey" PRIMARY KEY ("id_orc", "sequencia", "id_com"),
+ADD CONSTRAINT "fk_ctc_m_orc_ite_com__ctc_m_orc_ite" FOREIGN KEY ("id_orc", "sequencia") REFERENCES "public"."ctc_tb_m_orc_ite" ("id_orc", "id_sequencia") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."ctc_tb_m_orc_ite_med"
+ADD COLUMN "id_med" int4,
+DROP CONSTRAINT "ctc_tb_m_orc_ite_med_pkey" ,
+ADD CONSTRAINT "ctc_tb_m_orc_ite_med_pkey" PRIMARY KEY ("id_orc", "sequencia", "id_med"),
+ADD CONSTRAINT "fk_ctc_m_orc_ite_med__ctc_m_orc_ite" FOREIGN KEY ("id_orc", "sequencia") REFERENCES "public"."ctc_tb_m_orc_ite" ("id_orc", "id_sequencia") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."ctc_tb_c_tpr_ite"
+ADD CONSTRAINT "fk_ctc_c_tpr_ite__ctc_c_tpr" FOREIGN KEY ("id_tpr") REFERENCES "public"."ctc_tb_c_tpr" ("id_tpr") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+

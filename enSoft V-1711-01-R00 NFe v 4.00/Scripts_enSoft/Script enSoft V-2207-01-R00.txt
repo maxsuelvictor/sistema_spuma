@@ -1,0 +1,21 @@
+/***** 20-07-2022 ******/
+
+ALTER TABLE "public"."cad_tb_c_par_nfe"
+ADD COLUMN "nfc_nome_arq_rel" varchar(30);
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_nfe"."nfc_nome_arq_rel" IS 'Nome do arquivo fast report (*.fr3) para emissão da NFCe';
+
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_fpg"."doc_impresso" IS '0 - Nenhum,
+1 - Duplicata,
+2 - Promissoria,
+3 - Cartao,
+4 - Boleto,
+5 - Dinheiro,
+6 - Cheque 
+7 - Credito, 8 - PIX';
+
+
+
+

@@ -1,0 +1,289 @@
+ALTER TABLE "public"."ctc_tb_m_pro"
+ADD COLUMN "doc_pro" bytea;
+
+
+ALTER TABLE "public"."fin_tb_m_rbx"
+ADD COLUMN "vlr_tot_ger" numeric(18,4);
+
+update fin_tb_m_rbx  
+   set vlr_tot_ger = rgr.valor
+from
+(select rbx.id_baixa,coalesce(sum(ger.vlr_pagamento),0) as valor from fin_tb_m_rbx_ger ger
+left outer join fin_tb_m_rbx rbx on rbx.id_baixa=ger.id_baixa 
+group by rbx.id_baixa) rgr
+where fin_tb_m_rbx.id_baixa=rgr.id_baixa; 
+
+update fin_tb_m_rbx  
+   set vlr_tot_ger = 0 where vlr_tot_ger is null;
+
+
+
+
+
+update fin_tb_m_rbx  
+   set vlr_a_pagar = 0;
+
+update fin_tb_m_rbx  
+   set vlr_a_pagar = rgr.valor
+from
+(select rbx.id_baixa,coalesce(sum(tit.vlr_a_pagar),0) as valor from fin_tb_m_rbx_tit tit
+left outer join fin_tb_m_rbx rbx on rbx.id_baixa=tit.id_baixa 
+group by rbx.id_baixa) rgr
+where fin_tb_m_rbx.id_baixa=rgr.id_baixa; 
+
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "cxa_id_tipo_fin_canc_ant" int4,
+ADD COLUMN "cxa_id_plano_canc_ant" char(11);
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_id_tipo_fin_canc_ant" IS 'Tipo financeiro usado no momento que é cancelado uma nota fiscal do dia anterior.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."cxa_id_plano_canc_ant" IS 'Plano de Contas usado no momento que é cancelado uma nota fiscal do dia anterior.';
+
+
+
+
+
+
+
+COMMENT ON COLUMN "public"."fin_tb_m_cta"."origem" IS '0-Manual
+1-Baixa de Conta a Receber
+2-Baixa de Contas a Pagar
+3-Devolução de vendas 4-Conciliação bancária  5-Nota Fiscal de Saída 6-Nota de Crédito  7 - Abertura de caixa  8 - Controle de Caixa;
+9 - Movimentação de cheque;
+10 - Baixa de cartões de crédito;
+11 - Baixa automática de boletos (Rec);
+ 12 - Cancelamento NF dia Anterior';
+
+
+/* 25/07/2016 */
+
+ALTER TABLE "public"."pcp_tb_m_opr_ops"
+ALTER COLUMN "num_lote" TYPE varchar(150);
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_ops"."num_lote" IS 'O usuário poderá informar N lotes.';
+
+
+
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ALTER COLUMN "obs_alt" TYPE varchar(500),
+ADD COLUMN "motivo_alt" varchar(100);
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."obs_alt" IS 'Cada vez que houver alguma alteração neste registro o sistema irá guardando o conteúdo do campo Motivo da alteração.';
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp" RENAME "obs_alt" TO "historico_alt";
+
+
+/*** 26/07/2016 ***/
+
+ALTER TABLE "public"."aud_tb_m_aud"
+ALTER COLUMN "id_usuario" DROP NOT NULL,
+ALTER COLUMN "id_empresa" DROP NOT NULL;
+
+
+
+/*** 27/07/2016 ***/
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_etq"
+ADD COLUMN "dta_entrada_est" date,
+ADD COLUMN "hor_entrada_est" time(6),
+ADD COLUMN "id_funcionario_est" int4;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_etq"."dta_entrada_est" IS 'Data que o item entrou no estoque.';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_etq"."hor_entrada_est" IS 'Hora em que o item entrou no estoque.';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_etq"."id_funcionario_est" IS 'Funcionário responsável de dar entrada no estoque.';
+
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "di_draw" varchar(11),
+ADD COLUMN "di_tp_viatransp" int4,
+ADD COLUMN "di_tp_intermedio" int4;
+
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "prc_ite_manual" bool;
+
+CREATE TABLE "public"."cad_tb_c_ite_prc" (
+"id_item" int4 NOT NULL,
+"id_perfil_cli" int4 NOT NULL,
+"preco_avista" numeric(18,4),
+"preco1" numeric(18,4),
+"preco2" numeric(18,4),
+"preco3" numeric(18,4),
+"preco4" numeric(18,4),
+CONSTRAINT "cad_tb_c_ite_prc_pkey" PRIMARY KEY ("id_item", "id_perfil_cli"),
+CONSTRAINT "fk_cad_c_ite_prc__cad_c_pec" FOREIGN KEY ("id_perfil_cli") REFERENCES "public"."cad_tb_c_pec" ("id_perfil_cli") ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT "fk_cad_c_ite_prc__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_ite_prc" OWNER TO "postgres";
+
+
+/*** 29/07/2016  ***/
+ALTER TABLE "public"."est_tb_m_lot"
+ADD COLUMN "dta_vencimento" date;
+
+
+
+
+/*** 30/07/2016 ***/
+
+ALTER TABLE "public"."pcp_tb_m_opr_req"
+ADD COLUMN "id_funcionario_canc" int4,
+ADD COLUMN "dta_canc" date,
+ADD COLUMN "hor_canc" time(6);
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite"
+ADD COLUMN "qtde_atendida" float8,
+ADD COLUMN "dta_canc" date,
+ADD COLUMN "hor_canc" time(6),
+ADD COLUMN "id_funcionario_canc" int4,
+ADD COLUMN "situacao" int4;
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite" RENAME "id_setor" TO "id_opr_req_ite";
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_req_ite"."situacao" IS '1 - Em aberto
+2 - Atendido parcial
+3 - Atendido total';
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite"
+ADD COLUMN "id_setor" int4 NOT NULL;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_req"
+ADD COLUMN "id_responsavel" int4,
+ADD CONSTRAINT "fk_pcp_m_opr_req__cad_c_fun" FOREIGN KEY ("id_responsavel") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+/*** 01/08/2016 ***/
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite"
+ADD COLUMN "id_busca_item" varchar(30);
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite"
+ADD COLUMN "num_lote" varchar(15);
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite"
+ADD COLUMN "gerado_automatico" bool;
+
+
+ALTER TABLE "public"."pcp_tb_m_opr"
+ADD COLUMN "id_almoxarifado" int4;
+
+ALTER TABLE "public"."pcp_tb_m_opr_req"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+
+
+/*** 04/08/2016 ***/
+
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "sgq_opr_id_setor" int4;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."sgq_opr_id_setor" IS 'Campo utilizado pela tela de Ordem de Produção (PCP_FM_M_OPR), para quando for necessário gerar a Solicitação de 
+Compras.';
+
+
+
+ALTER TABLE "public"."cmp_tb_m_sol"
+ADD COLUMN "id_opr" int4;
+
+COMMENT ON COLUMN "public"."cmp_tb_m_sol"."id_opr" IS 'Campo preenchido quando a solicitação é gerada pela Ordem de Produção (PCP_FM_M_OPR).';
+
+
+/*** 05/08/2016 ***/
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite"
+DROP CONSTRAINT "fk_pcp_m_opr_req_ite__cad_c_set",
+ADD CONSTRAINT "fk_pcp_m_opr_req_ite__cad_c_set" FOREIGN KEY ("id_setor") REFERENCES "public"."cad_tb_c_set" ("id_setor") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."cmp_tb_m_sol"
+ADD COLUMN "id_opr_req" int4;
+
+ALTER TABLE "public"."cmp_tb_m_sol"
+DROP COLUMN "id_opr";
+
+
+ALTER TABLE "public"."cad_tb_c_cid"
+ADD COLUMN "cod_pais" char(5);
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_ops"
+ADD COLUMN "num_lote_bordadeira" varchar(150),
+ADD COLUMN "num_lote_espuma" varchar(150),
+ADD COLUMN "num_lote_tecido" varchar(150),
+ADD COLUMN "num_lote_tnt" varchar(150);
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_ops"
+ADD COLUMN "qtde_acabado" float8;
+
+
+/*** 06/08/2016 ***/
+
+ALTER TABLE "public"."pcp_tb_m_opr_req_ite"
+ADD COLUMN "cancelado" bool;
+
+ALTER TABLE "public"."pcp_tb_m_opr_req"
+ADD COLUMN "cancelado" bool;
+
+
+
+
+
+
+/*** 10/08/2016 ***/
+
+ALTER TABLE "public"."pcp_tb_m_opr_etq"
+DROP CONSTRAINT "pcp_tb_m_opr_etq_pkey" ,
+ADD CONSTRAINT "pcp_tb_m_opr_etq_pkey" PRIMARY KEY ("id_opr_etq");
+
+
+ALTER TABLE pcp_tb_m_opr_etq RENAME TO pcp_tb_m_etq;
+
+
+COMMENT ON COLUMN "public"."cad_tb_c_set"."tipo" IS '0 - Laminação
+;1 - Bordadeira;2 - Colagem
+;3 - Costura;4 - Alfinetagem
+;5 - Espumação;6 - Revisão;7 - Outros';
+
+
+ALTER TABLE "public"."pcp_tb_m_etq" RENAME "id_opr_etq" TO "id_etq";
+
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "hor_impressa" time(6),
+ADD COLUMN "dta_impressa" date,
+ADD COLUMN "id_func_impressa" int4,
+DROP CONSTRAINT "fk_pcp_m_opr_etq__cad_c_ite",
+ADD CONSTRAINT "fk_pcp_m_etq__cad_c_ite" FOREIGN KEY ("id_item") REFERENCES "public"."cad_tb_c_ite" ("id_item") ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT "fk_pcp_m_etq__cad_c_fun" FOREIGN KEY ("id_func_impressa") REFERENCES "public"."cad_tb_c_fun" ("id_funcionario") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "id_opr_origem" int4;
+
+
+

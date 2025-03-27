@@ -1,0 +1,5 @@
+/******* 31/05/2021 *********/
+
+ALTER TABLE "public"."pcp_tb_m_etq"
+ADD COLUMN "temp_obs_geral" varchar(80);
+

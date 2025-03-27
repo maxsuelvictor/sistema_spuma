@@ -1,0 +1,116 @@
+alter table ctc_tb_m_pro
+alter COLUMN lote TYPE VARCHAR(30);
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "id_fiscal_dev" int4,
+ADD CONSTRAINT "fk_fat_m_nfe_ite__fat_m_nfe2" FOREIGN KEY ("id_fiscal_dev") REFERENCES "public"."fat_tb_m_nfe" ("id_fiscal") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+CREATE TABLE "public"."pcp_tb_m_opb_ope_opr" (
+"id_opb" int4 NOT NULL,
+"id_opb_ope" int4 NOT NULL,
+"id_opr" int4 NOT NULL,
+"dta_utilizado" date NOT NULL,
+"hor_utilizado" time(6) NOT NULL,
+CONSTRAINT "pcp_tb_m_opb_ope_opr_pkey" PRIMARY KEY ("id_opb", "id_opb_ope", "id_opr"),
+CONSTRAINT "fk_pcp_m_opb_ope_opr__pcp_m_opb_ope" FOREIGN KEY ("id_opb", "id_opb_ope") REFERENCES "public"."pcp_tb_m_opb_ope" ("id_opb", "id_opb_ope") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_opb_ope_opr" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_opb_ope_opr" IS 'O.P.Rs que utilizaram este bloco.';
+
+
+
+CREATE TABLE "public"."pcp_tb_m_opr_opp_sop" (
+"id_opr" int4 NOT NULL,
+"id_opr_opp" int4 NOT NULL,
+"id_opr_sop" int4 NOT NULL,
+"id_opr_ext" int4 NOT NULL,
+"id_opr_opp_ext" int4 NOT NULL,
+"dta_utilizado" date NOT NULL,
+"hor_utilizado" time(6) NOT NULL,
+"qtd_utilizado" float8 NOT NULL,
+CONSTRAINT "pcp_tb_m_opr_opp_sop_pkey" PRIMARY KEY ("id_opr", "id_opr_opp", "id_opr_sop"),
+CONSTRAINT "fk_pcp_m_opr_opp_sop__pcp_m_opr_opp" FOREIGN KEY ("id_opr", "id_opr_opp") REFERENCES "public"."pcp_tb_m_opr_opp" ("id_opr", "id_opr_opp") ON DELETE CASCADE ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp_sop" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."pcp_tb_m_opr_opp_sop" IS 'Saldo utilizado por outras O.P.Rs.';
+
+
+
+/* 20-06-2016 */
+
+ALTER TABLE "public"."pcp_tb_m_opb_ope_opr"
+ADD CONSTRAINT "fk_pcp_m_opb_ope_opr__pcp_m_opr" FOREIGN KEY ("id_opr") REFERENCES "public"."pcp_tb_m_opr" ("id_opr") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp_sop"
+ADD CONSTRAINT "fk_pcp_m_opr_opp_sop__pcp_m_opr_opp_ext" FOREIGN KEY ("id_opr_ext", "id_opr_opp_ext") REFERENCES "public"."pcp_tb_m_opr_opp" ("id_opr", "id_opr_opp") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+ALTER TABLE "public"."pcp_tb_m_opr_opp"
+ALTER COLUMN "hora_alt" TYPE time(6),
+ADD COLUMN "qtde_atender_opr" float8 NOT NULL,
+ADD COLUMN "qtde_atender_opr_ext" float8 NOT NULL,
+ADD COLUMN "saldo_disponivel" float8 NOT NULL,
+ADD COLUMN "reg_alt" bool;
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."qtde_atender_opr" IS 'Este campo tem a função de informar à O.P.R a qtde real que será utilizada para ela. De inicio ela pode ter mandado Produzir 100, mas depois teve pedido com desistência , onde a qtde a produzir baixaria pra 80, mas o usuário resolveu deixar a Produzir 100, com isso a O.P.R terá um saldo de 20 que servirá para demais O.P.R.';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."qtde_atender_opr_ext" IS 'Toda vez que uma O.P.R externa utiliza o saldo disponível de uma O.P.R, ela deverá quardar a qtde utilizada neste campo.   
+	Imagine que: QTDE_A_PRODUZIR = 70 
+                                      QTDE_ATENDER_OPR = 60 
+                                      QTD_ATENDER_OPR_EXT = 4
+                                      SALDO_DISPONIVEL = 6 
+ e a O.P.R Externa está precisando de 2.  
+               Então  ficará:   QTDE_A_PRODUZIR = 70 
+                                      QTDE_ATENDER_OPR = 60 
+                                      QTD_ATENDER_OPR_EXT = 6
+                                      SALDO_DISPONIVEL = 4 
+';
+
+COMMENT ON COLUMN "public"."pcp_tb_m_opr_opp"."saldo_disponivel" IS 'SALDO_DISPONIVEL:  float    QTDE_A_PRODUZIR – ( QTD_ATENDER_OPR +  QTD_ATENDER_OPR_EXT)';
+
+
+
+
+
+ALTER TABLE "public"."pcp_tb_m_opr"
+ALTER COLUMN "obs_administrativa" TYPE varchar(800),
+ALTER COLUMN "obs_producao" TYPE varchar(800);
+
+
+
+/* 21/06/2016 */
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+DROP CONSTRAINT "fk_fat_m_nfe_ite__fat_m_nfe2";
+
+update fat_tb_m_nfe_ite set id_fiscal_dev=0 where id_fiscal_dev is null;
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+DROP CONSTRAINT "pk_fat_tb_m_nfe_ite" ,
+ADD CONSTRAINT "pk_fat_tb_m_nfe_ite" PRIMARY KEY ("id_fiscal", "id_sequencia", "id_fiscal_dev");
+
+
+
+/* 25/06/2016 */
+
+ALTER TABLE "public"."fat_tb_m_pca"
+ADD COLUMN "id_motorista" int4,
+ADD COLUMN "placa" char(8),
+ADD CONSTRAINT "fk_fat_m_pca__pcp_c_mta" FOREIGN KEY ("id_motorista") REFERENCES "public"."pcp_tb_c_mta" ("id_motorista") ON DELETE NO ACTION ON UPDATE RESTRICT;
+
+
+ALTER TABLE "public"."cad_tb_c_par_mod"
+ADD COLUMN "car" bool;
