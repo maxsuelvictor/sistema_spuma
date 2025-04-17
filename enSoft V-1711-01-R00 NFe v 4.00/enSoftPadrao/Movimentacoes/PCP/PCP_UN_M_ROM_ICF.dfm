@@ -73,10 +73,10 @@ object PCP_FM_M_ROM_ICF: TPCP_FM_M_ROM_ICF
           40)
         object btnGravar: TButton
           AlignWithMargins = True
-          Left = 642
+          Left = 638
           Top = 4
           Width = 103
-          Height = 0
+          Height = -4
           Anchors = [akTop, akRight, akBottom]
           Caption = 'Gravar'
           Font.Charset = DEFAULT_CHARSET
@@ -88,13 +88,15 @@ object PCP_FM_M_ROM_ICF: TPCP_FM_M_ROM_ICF
           ParentFont = False
           TabOrder = 0
           OnClick = btnGravarClick
+          ExplicitLeft = 642
+          ExplicitHeight = 0
         end
         object btnSair: TButton
           AlignWithMargins = True
-          Left = 746
+          Left = 742
           Top = 4
           Width = 105
-          Height = 0
+          Height = -4
           Anchors = [akTop, akRight, akBottom]
           Caption = 'Sair'
           Font.Charset = DEFAULT_CHARSET
@@ -106,6 +108,8 @@ object PCP_FM_M_ROM_ICF: TPCP_FM_M_ROM_ICF
           ParentFont = False
           TabOrder = 1
           OnClick = btnSairClick
+          ExplicitLeft = 746
+          ExplicitHeight = 0
         end
         object btnRealocarEtiq: TBitBtn
           Left = 4

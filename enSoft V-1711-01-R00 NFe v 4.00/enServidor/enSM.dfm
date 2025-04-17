@@ -9258,14 +9258,22 @@
   object FAT_SQ_M_ORC: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
-      'select ORC.*, CLI.NOME AS INT_NOMECLI, FUN.NOME AS INT_NOMEFUN,'#13 +
-      #10'          CPG.DESCRICAO INT_NOMECPG, FPG.DESCRICAO AS INT_NOMEF' +
-      'PG, CLI.ID_PERFIL_CLI AS INT_ID_PERFIL'#13#10'from FAT_TB_M_ORC ORC'#13#10'L' +
-      'EFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIENTE=ORC.ID_CLIENTE' +
-      #13#10'LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=ORC.ID_' +
-      'FUNCIONARIO'#13#10'LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_CONDICAO' +
-      '_PAG=ORC.ID_CONDICAO_PAG'#13#10'LEFT OUTER JOIN CAD_TB_C_FPG FPG ON FP' +
-      'G.ID_FORMA_PAG = ORC.ID_FORMA_PAG'
+      'select ORC.*, CLI.NOME AS INT_NOMECLI, FUN.NOME AS INT_NOMEFUN, ' +
+      'FFT.NOME AS INT_NOMEATENDENTE,'#13#10'          CPG.DESCRICAO INT_NOME' +
+      'CPG, FPG.DESCRICAO AS INT_NOMEFPG, CLI.ID_PERFIL_CLI AS INT_ID_P' +
+      'ERFIL,'#13#10'          CLI.ENDERECO AS INT_ENDERCLI, CLI.NUMERO AS IN' +
+      'T_NUMEROEND, CLI.CEP AS INT_CEPCLI, CLI.BAIRRO AS INT_BAIRROCLI,' +
+      ' '#13#10'          CID.NOME AS INT_NOMECID, '#13#10'          CID.UF AS INT_' +
+      'NOMEEST, CLI.doc_cnpj_cpf AS INT_CPFCNPJ, '#13#10'          cli.doc_ie' +
+      '_identidade as int_ie_rg_cli, cli.tel_movel as  int_tel_movel, c' +
+      'li.tel_fixo as int_tel_fixo'#13#10#13#10'from FAT_TB_M_ORC ORC'#13#10'LEFT OUTER' +
+      ' JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIENTE=ORC.ID_CLIENTE'#13#10'LEFT OU' +
+      'TER JOIN CAD_TB_C_CID CID ON CID.ID_CIDADE=CLI.ID_CIDADE '#13#10'LEFT ' +
+      'OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=ORC.ID_FUNCION' +
+      'ARIO'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FFT ON FFT.ID_FUNCIONARIO=ORC' +
+      '.ID_ATENDENTE'#13#10'LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_CONDIC' +
+      'AO_PAG=ORC.ID_CONDICAO_PAG'#13#10'LEFT OUTER JOIN CAD_TB_C_FPG FPG ON ' +
+      'FPG.ID_FORMA_PAG = ORC.ID_FORMA_PAG'#13#10'where 1 = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
@@ -9411,15 +9419,79 @@
     object FAT_SQ_M_ORCsepara_prod_serv: TBooleanField
       FieldName = 'separa_prod_serv'
     end
+    object FAT_SQ_M_ORCvlr_icm_desn: TFMTBCDField
+      FieldName = 'vlr_icm_desn'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_SQ_M_ORCcubagem: TFloatField
+      FieldName = 'cubagem'
+    end
+    object FAT_SQ_M_ORCid_atendente: TIntegerField
+      FieldName = 'id_atendente'
+    end
+    object FAT_SQ_M_ORCint_nomeatendente: TWideStringField
+      FieldName = 'int_nomeatendente'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_SQ_M_ORCint_nomecid: TWideStringField
+      FieldName = 'int_nomecid'
+      ProviderFlags = []
+      Size = 60
+    end
+    object FAT_SQ_M_ORCint_nomeest: TWideStringField
+      FieldName = 'int_nomeest'
+      ProviderFlags = []
+      Size = 2
+    end
+    object FAT_SQ_M_ORCint_cpfcnpj: TWideStringField
+      FieldName = 'int_cpfcnpj'
+      ProviderFlags = []
+      Size = 14
+    end
+    object FAT_SQ_M_ORCint_ie_rg_cli: TWideStringField
+      FieldName = 'int_ie_rg_cli'
+      ProviderFlags = []
+    end
+    object FAT_SQ_M_ORCint_tel_movel: TWideStringField
+      FieldName = 'int_tel_movel'
+      ProviderFlags = []
+      Size = 14
+    end
+    object FAT_SQ_M_ORCint_tel_fixo: TWideStringField
+      FieldName = 'int_tel_fixo'
+      ProviderFlags = []
+      Size = 14
+    end
+    object FAT_SQ_M_ORCint_endercli: TWideStringField
+      FieldName = 'int_endercli'
+      ProviderFlags = []
+      Size = 60
+    end
+    object FAT_SQ_M_ORCint_numeroend: TWideStringField
+      FieldName = 'int_numeroend'
+      ProviderFlags = []
+      Size = 10
+    end
+    object FAT_SQ_M_ORCint_cepcli: TWideStringField
+      FieldName = 'int_cepcli'
+      ProviderFlags = []
+      Size = 9
+    end
+    object FAT_SQ_M_ORCint_bairrocli: TWideStringField
+      FieldName = 'int_bairrocli'
+      ProviderFlags = []
+      Size = 40
+    end
     object FAT_SQ_M_ORCvlr_desc_especial: TFMTBCDField
       FieldName = 'vlr_desc_especial'
       Precision = 18
       Size = 4
     end
-    object FAT_SQ_M_ORCvlr_icm_desn: TFMTBCDField
-      FieldName = 'vlr_icm_desn'
-      Precision = 18
-      Size = 4
+    object FAT_SQ_M_ORCsgq_texto_cond_pgto: TWideStringField
+      FieldName = 'sgq_texto_cond_pgto'
+      Size = 80
     end
   end
   object FAT_SQ_M_ORC_ITE: TSQLDataSet
@@ -30440,6 +30512,7 @@
   end
   object Conexao: TSQLConnection
     DriverName = 'DevartPostgreSQL'
+    KeepConnection = False
     LoginPrompt = False
     Params.Strings = (
       'DriverUnit=DbxDevartPostgreSQL'
@@ -30462,7 +30535,7 @@
       'BlobSize=-1'
       'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftGloboP140125'
+      'Database=enSoftGloboP090425'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')

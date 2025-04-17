@@ -339,7 +339,7 @@ begin
                          dmgeral.PCP_CD_M_ROM_PED_ITE.Filtered := true;
                          dmgeral.PCP_CD_M_ROM_PED_ITE.Filter   :=    ' ID_ITEM = ' + inttostr(id_item)        +
                                                                      ' AND INT_NOMEITE = ' + QuotedStr(nome_ite) +
-                                                                   + ' AND QTDE_CONFERIDA > 0 ';
+                                                                     ' AND QTDE_CONFERIDA > 0 ';
 
                          // Maxsuel Victor, 24/03/25 - Utilizado para retirar a QTDE CONFERIDA, do ROM_ITE, da mesma cor que foi
                             // retirada do pedido de venda.
@@ -348,7 +348,7 @@ begin
                          // -------------------------------------------------------------------------------
 
                          // Maxsuel Victor, 24/03/25 - No if abaixo foi adicionado a cor e nomte do item
-                         if dmgeral.PCP_CD_M_ROM_ITE.Locate('id_item;INT_NOMEITE;id_cor',VarArrayof([id_item,nome_ite,x_id_cor_rom_ite])) then
+                         if dmgeral.PCP_CD_M_ROM_ITE.Locate('id_item;INT_NOMEITE;id_cor',VarArrayof([id_item,nome_ite,x_id_cor_rom_ite]),[]) then
                             begin
                                x_id_rom_ite := dmGeral.PCP_CD_M_ROM_ITE.FieldByName('id_rom_ite').AsInteger;
                             end;

@@ -11544,7 +11544,6 @@ type
     FAT_SQ_M_ORC_ITEper_desc_max: TFloatField;
     FAT_SQ_M_ORCsepara_prod_serv: TBooleanField;
     FAT_SQ_M_ORC_ITEvlr_frete: TFMTBCDField;
-    FAT_SQ_M_ORCvlr_desc_especial: TFMTBCDField;
     CAD_SQ_C_PAR_CTRsgq_fat_orc_id_condicao_pag: TIntegerField;
     CAD_SQ_C_PAR_CTRsgq_fat_ped_id_condicao_pag: TIntegerField;
     FAT_SQ_M_ORC_ITEper_desc_basico: TFloatField;
@@ -11557,6 +11556,21 @@ type
     CAD_SQ_C_FUNbus_som_ped_sem_pagtos: TBooleanField;
     CAD_SQ_C_FUNsgq_perm_inserir_itens_op: TBooleanField;
     CAD_SQ_C_PAR_CTRfat_qtde_dias_canc_ped_autom: TIntegerField;
+    FAT_SQ_M_ORCcubagem: TFloatField;
+    FAT_SQ_M_ORCid_atendente: TIntegerField;
+    FAT_SQ_M_ORCint_nomeatendente: TWideStringField;
+    FAT_SQ_M_ORCint_nomecid: TWideStringField;
+    FAT_SQ_M_ORCint_nomeest: TWideStringField;
+    FAT_SQ_M_ORCint_cpfcnpj: TWideStringField;
+    FAT_SQ_M_ORCint_ie_rg_cli: TWideStringField;
+    FAT_SQ_M_ORCint_tel_movel: TWideStringField;
+    FAT_SQ_M_ORCint_tel_fixo: TWideStringField;
+    FAT_SQ_M_ORCint_endercli: TWideStringField;
+    FAT_SQ_M_ORCint_numeroend: TWideStringField;
+    FAT_SQ_M_ORCint_cepcli: TWideStringField;
+    FAT_SQ_M_ORCint_bairrocli: TWideStringField;
+    FAT_SQ_M_ORCvlr_desc_especial: TFMTBCDField;
+    FAT_SQ_M_ORCsgq_texto_cond_pgto: TWideStringField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -43889,12 +43903,18 @@ function TSM.FAT_DP_M_ORCDataRequest(Sender: TObject;
   function enSqlFatOrc: String;
   begin
     Result :=
-      'select ORC.*, CLI.NOME AS INT_NOMECLI, FUN.NOME AS INT_NOMEFUN, '+
+      'select ORC.*, CLI.NOME AS INT_NOMECLI, FUN.NOME AS INT_NOMEFUN,FFT.NOME AS INT_NOMEATENDENTE, '+
       '       CPG.DESCRICAO INT_NOMECPG, FPG.DESCRICAO AS INT_NOMEFPG, '+
-      '       CLI.ID_PERFIL_CLI AS INT_ID_PERFIL '+
+      '       CLI.ID_PERFIL_CLI AS INT_ID_PERFIL, '+
+      '       CLI.ENDERECO AS INT_ENDERCLI, CLI.NUMERO AS INT_NUMEROEND, CLI.CEP AS INT_CEPCLI, CLI.BAIRRO AS INT_BAIRROCLI, ' +
+      '       CID.NOME AS INT_NOMECID, ' +
+      '       CID.UF AS INT_NOMEEST, CLI.doc_cnpj_cpf AS INT_CPFCNPJ, ' +
+      '       cli.doc_ie_identidade as int_ie_rg_cli, cli.tel_movel as  int_tel_movel, cli.tel_fixo as int_tel_fixo ' +
       'from FAT_TB_M_ORC ORC '+
       'LEFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIENTE=ORC.ID_CLIENTE '+
+      'LEFT OUTER JOIN CAD_TB_C_CID CID ON CID.ID_CIDADE=CLI.ID_CIDADE '+
       'LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=ORC.ID_FUNCIONARIO '+
+      'LEFT OUTER JOIN CAD_TB_C_FUN FFT ON FFT.ID_FUNCIONARIO=ORC.ID_ATENDENTE ' +
       'LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_CONDICAO_PAG=ORC.ID_CONDICAO_PAG '+
       'LEFT OUTER JOIN CAD_TB_C_FPG FPG ON FPG.ID_FORMA_PAG = ORC.ID_FORMA_PAG ';
 
@@ -43954,6 +43974,11 @@ begin
            ' WHERE ORC.ID_EMPRESA = ''' + VarToStr(Input[1]) + ''' AND ' +
            '       ORC.ID_CLIENTE = '''+ VarToStr(Input[2]) +''' AND ORC.STATUS=0 AND ' +
            '       ORC.ID_FUNCIONARIO = '''+ VarToStr(Input[3]) +''' ';
+      end;
+
+   if Input[0] <> 7 then
+      begin
+        FAT_SQ_M_ORC.CommandText := FAT_SQ_M_ORC.CommandText + 'order by ORC.ID_ORCAMENTO DESC'
       end;
 
    Result := FAT_DP_M_ORC.Data;

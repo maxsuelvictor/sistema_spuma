@@ -26,6 +26,7 @@ procedure FatRatVlrEntreItensOrcamento2(const lVlrTotDoc, lVlrMontante: Currency
                                     int_unif_desc_reg:boolean);
 
 procedure FAT_CD_M_ORC_ITEPER_DESCONTOChange(Sender: TField);
+procedure BusFuncionarioAtivo;
 
 function  FatValidBloqueiaOrc(Letra: String): Boolean;
 
@@ -79,8 +80,9 @@ begin
   dmGeral.FAT_CD_M_ORC.FieldByName('ID_PEDIDO').AsInteger         := 0;
   dmGeral.FAT_CD_M_ORC.FieldByName('DTA_ORCAMENTO').AsDateTime    := xDataSis;
 
-  dmGeral.FAT_CD_M_ORC.FieldByName('DTA_ENTREGA').AsDateTime :=
-          dmGeral.FAT_CD_M_ORC.FieldByName('DTA_ORCAMENTO').AsDateTime;
+  // Maxsuel Victor, 04/04/2025 comentado neste dia.
+  //dmGeral.FAT_CD_M_ORC.FieldByName('DTA_ENTREGA').AsDateTime :=
+  //        dmGeral.FAT_CD_M_ORC.FieldByName('DTA_ORCAMENTO').AsDateTime;
 
   dmGeral.FAT_CD_M_ORC.FieldByName('DTA_VALIDADE').AsDateTime := xDataSis + 5;
 
@@ -102,6 +104,7 @@ begin
   dmGeral.FAT_CD_M_ORC.FieldByName('VLR_SERVICOS_LIQ').AsCurrency := 0;
   dmGeral.FAT_CD_M_ORC.FieldByName('VLR_PRODUTOS_LIQ').AsCurrency := 0;
   dmGeral.FAT_CD_M_ORC.FieldByName('VLR_TOTAL').AsCurrency        := 0;
+  dmGeral.FAT_CD_M_ORC.FieldByName('CUBAGEM').AsCurrency          := 0;
 
   dmGeral.BusCodigoRevListMestre(true,false,'FAT_FM_M_ORC',xCodLme,xRevLme,dmGeral.FAT_CD_M_ORC);
 end;
@@ -127,6 +130,7 @@ begin
 
   dmGeral.FAT_CD_M_ORC.FieldByName('VLR_LIQUIDO').AsCurrency  := 0;
   //  dmGeral.FAT_CD_M_ORC.FieldByName('VLR_TOTAL').AsCurrency        := 0;
+  dmGeral.FAT_CD_M_ORC.FieldByName('CUBAGEM').AsCurrency      := 0;
 
   if dmGeral.FAT_CD_M_ORC.FieldByName('VLR_DESC_ESPECIAL').AsCurrency = 0 then
      begin
@@ -197,6 +201,16 @@ begin
             dmGeral.FAT_CD_M_ORC.FieldByName('VLR_FRETE').AsCurrency :=
                   dmGeral.FAT_CD_M_ORC.FieldByName('VLR_FRETE').AsCurrency +
                   dmGeral.FAT_CD_M_ORC_ITE.FieldByName('VLR_FRETE').AsCurrency;
+
+            // Maxsuel Victor, 29/03/25
+            if dmGeral.CAD_CD_C_PAR_MOD.FieldByName('SGQ').AsBoolean then
+                 begin
+                   dmGeral.FAT_CD_M_ORC.FieldByName('CUBAGEM').AsFloat      :=
+                           dmGeral.FAT_CD_M_ORC.FieldByName('CUBAGEM').AsFloat +
+                           (dmGeral.BUS_CD_C_ITE.FieldByName('CUBAGEM').AsFloat *
+                            dmGeral.FAT_CD_M_ORC_ITE.FieldByName('QTDE').AsFloat);
+                 end;
+            //----------------------------
 
             {dmGeral.FAT_CD_M_ORC.FieldByName('VLR_ICM_DESN').AsCurrency :=
                   dmGeral.FAT_CD_M_ORC.FieldByName('VLR_ICM_DESN').AsCurrency +
@@ -978,6 +992,14 @@ begin
      dmGeral.CAD_CD_C_PAR_RST.Filtered := false;
   end;
 
+end;
+
+
+procedure BusFuncionarioAtivo;
+begin
+  dmGeral.BUS_CD_C_FUN.Close;
+  dmGeral.BUS_CD_C_FUN.Data :=
+  dmGeral.BUS_CD_C_FUN.DataRequest(VarArrayOf([8,1,'']));
 end;
 
 

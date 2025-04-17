@@ -10709,15 +10709,79 @@
     object FAT_CD_M_ORCsepara_prod_serv: TBooleanField
       FieldName = 'separa_prod_serv'
     end
+    object FAT_CD_M_ORCvlr_icm_desn: TFMTBCDField
+      FieldName = 'vlr_icm_desn'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_ORCcubagem: TFloatField
+      FieldName = 'cubagem'
+    end
+    object FAT_CD_M_ORCid_atendente: TIntegerField
+      FieldName = 'id_atendente'
+    end
+    object FAT_CD_M_ORCint_nomeatendente: TWideStringField
+      FieldName = 'int_nomeatendente'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_M_ORCint_nomecid: TWideStringField
+      FieldName = 'int_nomecid'
+      ProviderFlags = []
+      Size = 60
+    end
+    object FAT_CD_M_ORCint_nomeest: TWideStringField
+      FieldName = 'int_nomeest'
+      ProviderFlags = []
+      Size = 2
+    end
+    object FAT_CD_M_ORCint_cpfcnpj: TWideStringField
+      FieldName = 'int_cpfcnpj'
+      ProviderFlags = []
+      Size = 14
+    end
+    object FAT_CD_M_ORCint_ie_rg_cli: TWideStringField
+      FieldName = 'int_ie_rg_cli'
+      ProviderFlags = []
+    end
+    object FAT_CD_M_ORCint_tel_movel: TWideStringField
+      FieldName = 'int_tel_movel'
+      ProviderFlags = []
+      Size = 14
+    end
+    object FAT_CD_M_ORCint_tel_fixo: TWideStringField
+      FieldName = 'int_tel_fixo'
+      ProviderFlags = []
+      Size = 14
+    end
+    object FAT_CD_M_ORCint_endercli: TWideStringField
+      FieldName = 'int_endercli'
+      ProviderFlags = []
+      Size = 60
+    end
+    object FAT_CD_M_ORCint_numeroend: TWideStringField
+      FieldName = 'int_numeroend'
+      ProviderFlags = []
+      Size = 10
+    end
+    object FAT_CD_M_ORCint_cepcli: TWideStringField
+      FieldName = 'int_cepcli'
+      ProviderFlags = []
+      Size = 9
+    end
+    object FAT_CD_M_ORCint_bairrocli: TWideStringField
+      FieldName = 'int_bairrocli'
+      ProviderFlags = []
+      Size = 40
+    end
     object FAT_CD_M_ORCvlr_desc_especial: TFMTBCDField
       FieldName = 'vlr_desc_especial'
       Precision = 18
       Size = 4
     end
-    object FAT_CD_M_ORCvlr_icm_desn: TFMTBCDField
-      FieldName = 'vlr_icm_desn'
-      Precision = 18
-      Size = 4
+    object FAT_CD_M_ORCsgq_texto_cond_pgto: TWideStringField
+      FieldName = 'sgq_texto_cond_pgto'
+      Size = 80
     end
   end
   object FAT_CD_M_ORC_ITE: TClientDataSet

@@ -24,7 +24,7 @@ uses
   dxSkinXmas2008Blue, frxExportXLS, frxClass, frxExportPDF, frxDBSet,
   Datasnap.DBClient, dxSkinMetropolis, dxSkinMetropolisDark,
   dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White,
-  vcl.Wwdbedit, enFunc, System.Math;
+  vcl.Wwdbedit, enFunc, System.Math, IdStack, Vcl.AppEvnts;
 
 type
   TFAT_FM_M_ORC = class(TPAD_FM_X_PAD)
@@ -81,8 +81,6 @@ type
     lblAtendente: TLabel;
     dpkDataValidade: TJvDBDateEdit;
     dpkDataEntrega: TJvDBDateEdit;
-    txtAtendenteNome: TDBText;
-    txtAtendente: TDBEdit;
     pnlCorTamanho: TPanel;
     lblTamanho: TLabel;
     lblCor: TLabel;
@@ -126,6 +124,19 @@ type
     txtFrete: TwwDBEdit;
     lblTotalPed: TLabel;
     wwDBEdTotalLiqItens: TwwDBEdit;
+    Label2: TLabel;
+    wwDBEdit1: TwwDBEdit;
+    Label3: TLabel;
+    lblVendedor: TLabel;
+    cbbVendedor: TwwDBLookupCombo;
+    cbbAtendente: TwwDBLookupCombo;
+    Button1: TButton;
+    Button2: TButton;
+    ApplicationEvents1: TApplicationEvents;
+    Timer1: TTimer;
+    pnReconectar: TPanel;
+    txtTextoCondPgto: TwwDBEdit;
+    lblTextoCondPgto: TLabel;
     procedure acAdicionaExecute(Sender: TObject);
     procedure acAlterarExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
@@ -178,6 +189,13 @@ type
     procedure txtTotalVlrDescExit(Sender: TObject);
     procedure txtTotalVlrDescEnter(Sender: TObject);
     procedure txtQtdeEnter(Sender: TObject);
+    procedure cbbVendedorEnter(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure ApplicationEvents1Exception(Sender: TObject; E: Exception);
+    procedure Timer1Timer(Sender: TObject);
+    procedure cbbCondicaoPagamentoExit(Sender: TObject);
+    procedure dbGridRowChanged(Sender: TObject);
   private
     { Private declarations }
     function BtnAdicItemFocused: Boolean;
@@ -188,6 +206,7 @@ type
     procedure ChamaCorTamanho;
     procedure AtualizarGridItens(grdItens: TwwDBGrid; NomeColItem: String; TamLargCor, TamLargTam: Integer);
     procedure AtivarDesativarTabStopsDosDescontos(estado: Boolean);
+    procedure testar(Sender: TObject; E: Exception);
     var
       xVlrDescIteAnterior, xPerDescIteAnterior: Currency;
       xPercDescPermRegIte,vlrDescTotalAnt,vlrDescBasicTotalAnt,
@@ -227,6 +246,7 @@ begin
   Botoes(dso.DataSet, TAction(Sender).Tag,dmGeral.FAT_CD_M_ORC);
 
   dmGeral.FAT_CD_M_ORC.FieldByName('ID_FUNCIONARIO').AsInteger := xFuncionario;
+  dmGeral.FAT_CD_M_ORC.FieldByName('ID_ATENDENTE').AsInteger   := xFuncionario;
 
   if dmGeral.CAD_CD_C_FUN.FieldByName('vnd_interno_externo').AsInteger = 1 then  // Se for vendedor externo
      begin
@@ -237,11 +257,33 @@ begin
            end;
      end;
 
+
+  dmGeral.BUS_CD_C_FUN_CRG.Close;
+  dmGeral.BUS_CD_C_FUN_CRG.Data :=
+  dmGeral.BUS_CD_C_FUN_CRG.DataRequest(
+                  VarArrayOf([IntToStr(xFuncionario)]));
+
+  try
+     dmGeral.BUS_CD_C_FUN_CRG.Filtered := true;
+     dmGeral.BUS_CD_C_FUN_CRG.Filter := 'INT_TIPO=0';
+
+     if not dmgeral.BUS_CD_C_FUN_CRG.IsEmpty then
+        dmGeral.FAT_CD_M_ORC.FieldByName('ID_FUNCIONARIO').AsInteger := xFuncionario;
+
+  finally
+     dmGeral.BUS_CD_C_FUN_CRG.Filtered := false;
+     dmGeral.BUS_CD_C_FUN_CRG.Close;
+  end;
+
+
   if xbusca_item = '' then
      begin
        lblItem.Caption := '<F7> Cód. item';
        xbusca_item := 'ID_ITEM';
      end;
+
+  lblTextoCondPgto.visible := false;
+  txtTextoCondPgto.visible := false;
 
   HabilDesabCampos(true,clWindow);
   btnAtualizaCont.Enabled := false;
@@ -273,6 +315,18 @@ begin
            clienteConsumidor := true;
          end;
 
+      dmGeral.BusCondPgto(0,dmGeral.FAT_CD_M_PED.FieldByName('ID_CONDICAO_PAG').AsString);
+
+      if (dmGeral.CAD_CD_C_PAR_MODsgq.AsBoolean = true) and
+         (dmGeral.BUS_CD_C_CPGsgq_texto_cnd_ped.AsBoolean = true) then
+          begin
+             //cbbCondicaoPagamento.Width := 37;
+             lblTextoCondPgto.visible := true;
+             txtTextoCondPgto.visible := true;
+             //txtTextoCondPgto.Width   := 187;
+          end;
+
+
       txtObservacao.SetFocus;
     end;
 
@@ -291,6 +345,9 @@ begin
         inherited;
         btnAtualizaCont.Enabled := true;
         dbGrid.SetFocus;
+        lblTextoCondPgto.Visible := false;
+        txtTextoCondPgto.visible := false;
+
         if (dmGeral.CAD_CD_C_PAR_MOD.FieldByName('SGQ').AsBoolean = false) then
             begin
               txtTotalVlrDesc.enabled := true;
@@ -316,6 +373,7 @@ end;
 procedure TFAT_FM_M_ORC.acGravarExecute(Sender: TObject);
 var
   codigo: string;
+  vlrDescEspecial: String;
 begin
 
   FatOrcRatearDescBasico_Especial;
@@ -327,6 +385,7 @@ begin
              codigo := dmGeral.FAT_CD_M_ORC.FieldByName('ID_ORCAMENTO').AsString;
 
              DmGeral.Grava(dmGeral.FAT_CD_M_ORC);
+
              inherited;
 
              dmGeral.FAT_CD_M_ORC.Close;
@@ -340,6 +399,9 @@ begin
                    txtTotalVlrDesc.ReadOnly := false;
                    txtTotalVlrDesc.Color := clWhite;
                  end;
+
+             lblTextoCondPgto.Visible := false;
+             txtTextoCondPgto.visible := false;
 
              btnAtualizaCont.Enabled := true;
            end
@@ -358,6 +420,49 @@ begin
        if txtObservacao.CanFocus then
           txtObservacao.SetFocus;
      end;
+end;
+
+procedure TFAT_FM_M_ORC.ApplicationEvents1Exception(Sender: TObject;
+  E: Exception);
+//var
+ //SMPrincipal: TSMClient;
+ //x: string;
+begin
+  inherited;
+      //application.OnException := testar;
+
+ { if (E is EIdSocketError) or (Pos('Socket Error #10053', E.Message) > 0) then
+  begin
+    //ShowMessage('A conexão com o servidor foi perdida. O sistema tentará se reconectar.');
+    // Aqui você pode chamar o ClientModule.EnsureConnection ou encerrar de forma amigável.
+  end
+  else
+    begin
+      //ShowMessage('Erro inesperado: ' + E.Message);
+      dmgeral.Conexao.Connected := false;
+      dmgeral.Conexao.Connected := true;
+      dmgeral.Conexao.Open;
+      Timer1.Enabled := true;
+      pnReconectar.Visible := true;
+      FAT_FM_M_ORC.Refresh;
+      dmGeral.FAT_CD_M_ORC.open;
+      if dmGeral.FAT_CD_M_ORC.state in [dsEdit] then
+         begin
+           dmGeral.FAT_CD_M_ORC.post;
+           dmGeral.FAT_CD_M_ORC.edit;
+         end;
+
+
+      try
+        SMPrincipal := TSMClient.Create(dmGeral.Conexao.DBXConnection);
+        x := DatetoStr(SMPrincipal.enDataServer);
+      except
+        ShowMessage('O sistema não está conseguindo restabelecer a conexão com o servidor.');
+        FreeAndNil(SMPrincipal);
+        exit;
+      end;
+      FreeAndNil(SMPrincipal);
+    end;   }
 end;
 
 procedure TFAT_FM_M_ORC.AtivarDesativarTabStopsDosDescontos(estado: Boolean);
@@ -451,6 +556,11 @@ begin
                   end;
 
                   dmGeral.BusCodigoRevListMestre(true,false,FAT_FR_R_ORC.Name,xCodLme,xRevLme,nil);
+
+                  if trim(dmGeral.FAT_CD_M_ORC.FieldByName('sgq_texto_cond_pgto').AsString) <> '' then
+                     FAT_FR_R_ORC.Variables['ft_texto_cond_pgto'] :=  QuotedStr(dmGeral.FAT_CD_M_ORC.FieldByName('sgq_texto_cond_pgto').AsString)
+                  else
+                     FAT_FR_R_ORC.Variables['ft_texto_cond_pgto'] :=  QuotedStr(dmGeral.BUS_CD_C_CPG.FieldByName('descricao').AsString);
                   FAT_FR_R_ORC.Variables['ft_codlme'] := QuotedStr(dmGeral.MontarCodRevLme(xCodLme,xRevLme));
                   FAT_FR_R_ORC.PrepareReport();
                   FAT_FR_R_ORC.ShowReport();
@@ -502,6 +612,56 @@ begin
   dmGeral.FAT_CD_M_ORC_ITE.Insert;
   txtBuscaItem.Enabled := true;
   txtBuscaItem.SetFocus;
+
+  if dmGeral.CAD_CD_C_PAR_MOD.FieldByName('SGQ').AsBoolean = True then
+     begin
+       if dmGeral.FAT_CD_M_ORC.FieldByName('VLR_DESC_ESPECIAL').AsCurrency > 0 then
+          begin
+            dmGeral.FAT_CD_M_ORC_ITE.Cancel;
+            pnItens.Enabled  := false;
+            ShowMessage('É preciso que zere o valor do desconto especial para poder lançar um novo item!');
+            btn_Add_Itens.setfocus;
+            abort;
+         end;
+     end;
+end;
+
+procedure TFAT_FM_M_ORC.Button1Click(Sender: TObject);
+begin
+  inherited;
+  dmGeral.Conexao.Close;
+end;
+
+procedure TFAT_FM_M_ORC.Button2Click(Sender: TObject);
+var
+ SMPrincipal: TSMClient;
+ x: String;
+begin
+
+
+
+    dmgeral.Conexao.Connected := false;
+  try
+    dmgeral.Conexao.Connected := true;
+    if dmgeral.Conexao.Connected = true then
+       begin
+         Showmessage('A conexão foi restabelecida!');
+       end;
+  except
+    showmessage('Não conseguiu restabelecer a conexão!');
+  end;
+
+ { if dmgeral.Conexao.Connected = false then
+     dmgeral.Conexao.Connected := true;
+
+  dmgeral.Conexao.Open;
+
+  SMPrincipal := TSMClient.Create(dmGeral.Conexao.DBXConnection);
+  x := DatetoStr(SMPrincipal.enDataServer);
+
+  FreeAndNil(SMPrincipal);}
+
+
 end;
 
 procedure TFAT_FM_M_ORC.cbbCondicaoPagamentoEnter(Sender: TObject);
@@ -509,6 +669,30 @@ begin
   inherited;
   dmGeral.BusCondPgto(1,'%');
   cbbCondicaoPagamento.DropDown;
+end;
+
+procedure TFAT_FM_M_ORC.cbbCondicaoPagamentoExit(Sender: TObject);
+begin
+  inherited;
+
+  if dmGeral.CAD_CD_C_PAR_MODsgq.AsBoolean = true then
+     begin
+       lblTextoCondPgto.visible := false;
+       txtTextoCondPgto.visible := false;
+
+       if (dmGeral.BUS_CD_C_CPGsgq_texto_cnd_ped.AsBoolean = true) then
+           begin
+
+             lblTextoCondPgto.visible := true;
+             txtTextoCondPgto.visible := true;
+
+
+             ActiveControl := nil;
+             PostMessage(txtTextoCondPgto.Handle, WM_SETFOCUS, 0, 0);
+             txtTextoCondPgto.SetFocus;
+           end;
+     end;
+
 end;
 
 procedure TFAT_FM_M_ORC.cbbCorEnter(Sender: TObject);
@@ -646,6 +830,13 @@ procedure TFAT_FM_M_ORC.cbbTamanhoExit(Sender: TObject);
 
 
 
+end;
+
+procedure TFAT_FM_M_ORC.cbbVendedorEnter(Sender: TObject);
+begin
+  inherited;
+  dmGeral.BusFuncionario(10,'0');
+  cbbVendedor.DropDown;
 end;
 
 procedure TFAT_FM_M_ORC.ChamaCorTamanho;
@@ -809,6 +1000,27 @@ begin
       Afont.Color := clHotLight;
 end;
 
+procedure TFAT_FM_M_ORC.dbGridRowChanged(Sender: TObject);
+begin
+  inherited;
+
+  if not dmGeral.FAT_CD_M_ORC_ITE.IsEmpty then
+     begin
+       lblTextoCondPgto.visible := false;
+       txtTextoCondPgto.visible := false;
+
+       if (dmGeral.CAD_CD_C_PAR_MODsgq.AsBoolean = true) and
+         (dmGeral.BUS_CD_C_CPGsgq_texto_cnd_ped.AsBoolean = true) then
+          begin
+             //cbbCondicaoPagamento.Width := 37;
+             lblTextoCondPgto.visible := true;
+             txtTextoCondPgto.visible := true;
+             //txtTextoCondPgto.Width   := 187;
+          end;
+     end;
+
+end;
+
 procedure TFAT_FM_M_ORC.DesabilitarCampos(Estado: Boolean; Cor: TColor);
 begin
   txtCliente.Enabled := estado;
@@ -851,7 +1063,7 @@ begin
   dmGeral.FAT_CD_M_ORC.Close;
         dmGeral.FAT_CD_M_ORC.Data :=
         dmGeral.FAT_CD_M_ORC.DataRequest(
-                VarArrayOf([0,dmGeral.CAD_CD_C_PARid_empresa.Text, 0]));;
+                VarArrayOf([0,'']));;
 
   dmGeral.BusFormaPgtos(1,'%');
   dmGeral.BusCondPgto(1,'%');
@@ -861,6 +1073,8 @@ begin
   dmGeral.BusCor(1,'%');
   dmGeral.BusTipoEstoque(1,'%');
   dmGeral.BusTamanho(1,'%');
+  dmGeral.BusFuncionario(1,'%');
+  dmGeral.BusFuncionario2(1,'%');
 
   AtualizarGridItens(grdItens,'int_descitem',10,10);
 end;
@@ -1000,6 +1214,13 @@ procedure TFAT_FM_M_ORC.HabilDesabCampos(Estado: Boolean; Cor: TColor);
 begin
   txtCliente.Enabled := Estado;
   txtCliente.Color   := Cor;
+
+  if (not ((dmGeral.BUS_CD_C_FU3.FieldByName('seg_habilitar_seg').AsBoolean=true) and
+           (dmGeral.BUS_CD_C_FU3.FieldByName('seg_alt_vend_ped').AsBoolean=true))) then
+    begin
+     cbbVendedor.Enabled    := Estado;
+     cbbVendedor.Color      := Cor;
+    end;
 end;
 
 procedure TFAT_FM_M_ORC.HabilitarCampos(Estado: Boolean; Cor: TColor);
@@ -1224,6 +1445,81 @@ begin
       end;
 end;
 
+procedure TFAT_FM_M_ORC.testar(Sender: TObject; E: Exception);
+//var
+ // SMPrincipal: TSMClient;
+ // x: string;
+begin
+  {try
+
+  if (E is EIdSocketError) or (Pos('Socket Error # 10053', E.Message) > 0) then
+     begin
+
+       showmessage('deu ...');
+       dmgeral.Conexao.Connected := false;
+       dmgeral.Conexao.Connected := true;
+       SMPrincipal := TSMClient.Create(dmGeral.Conexao.DBXConnection);
+       x := DatetoStr(SMPrincipal.enDataServer);
+
+       FreeAndNil(SMPrincipal);
+      // dmgeral.Conexao.Open;
+       //showmessage('deu open');
+       if dmGeral.FAT_CD_M_ORC.State in [dsBrowse] then
+          begin
+            showmessage('oiB');
+            dmGeral.FAT_CD_M_ORC.Close;
+            dmGeral.FAT_CD_M_ORC.Data :=
+            dmGeral.FAT_CD_M_ORC.DataRequest(
+                VarArrayOf([0,dmGeral.CAD_CD_C_PARid_empresa.Text, 0]));
+            exit;
+          end;
+
+       if dmGeral.FAT_CD_M_ORC.State in [dsEdit] then
+          begin
+            showmessage('oiE');
+            dmGeral.FAT_CD_M_ORC.edit;
+
+            exit;
+          end;
+       if dmGeral.FAT_CD_M_ORC.State in [dsInsert] then
+          begin
+            showmessage('oiI');
+            dmGeral.FAT_CD_M_ORC.Close;
+            dmGeral.FAT_CD_M_ORC.Data :=
+            dmGeral.FAT_CD_M_ORC.DataRequest(
+                VarArrayOf([0,dmGeral.CAD_CD_C_PARid_empresa.Text, 0]));;
+
+            exit;
+          end
+       else
+          begin
+            ///showmessage('oiF');
+            FAT_FM_M_ORC.Refresh;
+            {dmGeral.FAT_CD_M_ORC.Close;
+            dmGeral.FAT_CD_M_ORC.Data :=
+            dmGeral.FAT_CD_M_ORC.DataRequest(
+                VarArrayOf([0,dmGeral.CAD_CD_C_PARid_empresa.Text, 0]));}
+{            FAT_FM_M_ORC.Refresh;
+
+          end;
+     end
+  else
+     begin
+      // showmessage('oi2');
+     end;
+  finally
+    Screen.Cursor := crDefault;
+  end;   }
+end;
+
+procedure TFAT_FM_M_ORC.Timer1Timer(Sender: TObject);
+begin
+  inherited;
+  Timer1.enabled := false;
+  pnReconectar.Visible := false;
+  FAT_FM_M_ORC.Refresh;
+end;
+
 procedure TFAT_FM_M_ORC.txtClienteButtonClick(Sender: TObject);
 begin
   inherited;
@@ -1262,7 +1558,7 @@ begin
 
   dmGeral.BUS_CD_C_CLI.Close;
   dmGeral.BUS_CD_C_CLI.Data :=
-  dmGeral.BUS_CD_C_CLI.DataRequest(VarArrayOf([0, txtCliente.Text]));
+     dmGeral.BUS_CD_C_CLI.DataRequest(VarArrayOf([0, txtCliente.Text]));
 
   if not dmGeral.CAD_CD_C_CLI_TesValObrigatorio(dmGeral.BUS_CD_C_CLI) then
      begin
@@ -1283,13 +1579,56 @@ begin
            end;
       end;
 
+
+  cbbVendedor.Enabled := true;
+  if dmGeral.BUS_CD_C_CLI.FieldByName('ID_VENDEDOR').AsString <> '' then
+    begin
+      dmGeral.BusFuncionario(0,dmGeral.BUS_CD_C_CLI.FieldByName('ID_VENDEDOR').AsString);
+      if not dmGeral.BUS_CD_C_FUN.IsEmpty then
+        begin
+          if dmGeral.BUS_CD_C_FUN.FieldByName('ATIVO').AsBoolean = false then
+             begin
+               ShowMessage('O vendedor do cliente está inativo.');
+             end
+          else
+             begin
+                dmGeral.FAT_CD_M_ORC.FieldByName('ID_FUNCIONARIO').AsInteger :=
+                                      dmGeral.BUS_CD_C_CLI.FieldByName('ID_VENDEDOR').AsInteger;
+
+               // dmgeral.FAT_CD_M_ORC.FieldByName('SGQ_PER_COMISSAO').AsCurrency  :=
+                 //       dmGeral.BUS_CD_C_FUN.FieldByName('SGQ_PER_COMISSAO').AsCurrency;
+
+                FAT_RN_M_ORC.BusFuncionarioAtivo;
+                dmGeral.BusFuncionario4(0,IntToStr(xFuncionario));
+                cbbVendedor.Enabled := false;
+                IF dmGeral.BUS_CD_C_FU4.FieldByname('SEG_ALT_VEND_PED').AsBoolean = True then
+                  begin
+                   cbbVendedor.Enabled := true;
+                  end;
+                dmGeral.BUS_CD_C_FU4.Close;
+             end;
+        end;
+    end;
+
+
+  if  ((not dmGeral.CAD_CD_C_PAR_MOD.FieldByName('SGQ').IsNull) and
+       (dmGeral.CAD_CD_C_PAR_MOD.FieldByName('SGQ').AsBoolean = True)) then
+        begin
+          if (TRIM(dmGeral.BUS_CD_C_CLI.FieldByName('ID_CIDADE').AsString) <> TRIM(dmGeral.CAD_CD_C_PAR.FieldByName('ID_CIDADE').AsString)) then
+            begin
+               dmGeral.FAT_CD_M_ORC.FieldByName('DTA_ENTREGA').AsDateTime := xDataSis + dmGeral.CAD_CD_C_PAR_CTR.FieldByName('sgq_dias_prev_cid_fora').AsInteger;
+            end;
+          if (TRIM(dmGeral.BUS_CD_C_CLI.FieldByName('ID_CIDADE').AsString) = TRIM(dmGeral.CAD_CD_C_PAR.FieldByName('ID_CIDADE').AsString)) then
+            begin
+               dmGeral.FAT_CD_M_ORC.FieldByName('DTA_ENTREGA').AsDateTime := xDataSis + dmGeral.CAD_CD_C_PAR_CTR.FieldByName('sgq_dias_prev_cid_dentro').AsInteger;
+            end;
+        end;
+
   dmGeral.FAT_CD_M_ORC.FieldByName('INT_NOMECLI').Text :=
        dmGeral.BUS_CD_C_CLI.FieldByName('NOME').AsString;
 
   dmGeral.FAT_CD_M_ORC.FieldByName('INT_ID_PERFIL').AsInteger :=
        dmGeral.BUS_CD_C_CLI.FieldByName('ID_PERFIL_CLI').AsInteger;
-
-
 end;
 
 procedure TFAT_FM_M_ORC.txtDescBascEnter(Sender: TObject);

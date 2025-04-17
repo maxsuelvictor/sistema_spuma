@@ -1,6 +1,7 @@
 inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   Caption = 'Movimenta'#231#227'o'
   ClientHeight = 597
+  ExplicitWidth = 1156
   ExplicitHeight = 626
   PixelsPerInch = 96
   TextHeight = 13
@@ -63,8 +64,18 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           'id_orcamento'#9'15'#9'C'#243'd.Or'#231'amento'#9'F'
           'id_cliente'#9'15'#9'C'#243'd.Cliente'#9'F'
           'int_nomecli'#9'21'#9'Nome Cliente'#9'F')
+        OnRowChanged = dbGridRowChanged
         OnCalcCellColors = dbGridCalcCellColors
         ExplicitHeight = 362
+      end
+      object pnReconectar: TPanel
+        Left = 64
+        Top = 272
+        Width = 185
+        Height = 41
+        Caption = 'Reconectando...'
+        TabOrder = 1
+        Visible = False
       end
     end
     inherited pnlBotoes: TPanel
@@ -189,50 +200,50 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       end
       object lblCliente: TLabel
         Left = 147
-        Top = 51
+        Top = 74
         Width = 42
         Height = 13
         Caption = 'Cliente :'
       end
       object lblDataEntrega: TLabel
-        Left = 579
-        Top = 56
+        Left = 408
+        Top = 99
         Width = 73
         Height = 13
-        Caption = 'Data entrega :'
+        Caption = 'Prev. entrega :'
         Visible = False
       end
       object lblDataValidade: TLabel
         Left = 388
-        Top = 75
+        Top = 52
         Width = 93
         Height = 13
         Caption = 'Data de Validade :'
       end
       object lblData: TLabel
         Left = 159
-        Top = 75
+        Top = 52
         Width = 30
         Height = 13
         Caption = 'Data :'
       end
       object lblFormaPagamento: TLabel
         Left = 74
-        Top = 120
+        Top = 145
         Width = 115
         Height = 13
         Caption = 'Forma de Pagamento :'
       end
       object lblCondicaoPagamento: TLabel
         Left = 57
-        Top = 97
+        Top = 122
         Width = 132
         Height = 13
         Caption = 'Condi'#231#227'o de Pagamento :'
       end
       object lblObservacao: TLabel
         Left = 123
-        Top = 144
+        Top = 169
         Width = 66
         Height = 13
         Caption = 'Observa'#231#227'o :'
@@ -263,7 +274,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       end
       object txtClienteNome: TDBText
         Left = 288
-        Top = 48
+        Top = 71
         Width = 285
         Height = 21
         Color = 14342874
@@ -305,23 +316,12 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         Visible = False
       end
       object lblAtendente: TLabel
-        Left = 129
-        Top = 28
-        Width = 60
+        Left = 133
+        Top = 99
+        Width = 56
         Height = 13
         Alignment = taRightJustify
-        Caption = 'Atendente :'
-      end
-      object txtAtendenteNome: TDBText
-        Left = 288
-        Top = 25
-        Width = 285
-        Height = 21
-        Color = 14342874
-        DataField = 'INT_NOMEFUN'
-        DataSource = dso
-        ParentColor = False
-        Transparent = False
+        Caption = 'Vendedor :'
       end
       object Label53: TLabel
         Left = 475
@@ -338,6 +338,30 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         ParentColor = False
         ParentFont = False
       end
+      object lblVendedor: TLabel
+        Left = 129
+        Top = 29
+        Width = 60
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Atendente :'
+      end
+      object lblTextoCondPgto: TLabel
+        Left = 346
+        Top = 118
+        Width = 90
+        Height = 22
+        Alignment = taRightJustify
+        Caption = 'Texto a imprimir da condi'#231#227'o de pgto:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Visible = False
+        WordWrap = True
+      end
       object txtCodigo: TDBEdit
         Left = 195
         Top = 2
@@ -349,11 +373,11 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataSource = dso
         Enabled = False
         ReadOnly = True
-        TabOrder = 0
+        TabOrder = 6
       end
       object txtCliente: TJvDBComboEdit
         Left = 195
-        Top = 48
+        Top = 71
         Width = 90
         Height = 21
         ClickKey = 114
@@ -386,13 +410,13 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 3
+        TabOrder = 0
         OnButtonClick = txtClienteButtonClick
         OnExit = txtClienteExit
       end
       object cbbFormaPagamento: TwwDBLookupCombo
         Left = 195
-        Top = 117
+        Top = 142
         Width = 378
         Height = 21
         DropDownAlignment = taLeftJustify
@@ -403,7 +427,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         LookupTable = dmGeral.BUS_CD_C_FPG
         LookupField = 'ID_FORMA_PAG'
         Color = clWhite
-        TabOrder = 8
+        TabOrder = 3
         AutoDropDown = False
         ShowButton = True
         UseTFields = False
@@ -414,8 +438,8 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       end
       object cbbCondicaoPagamento: TwwDBLookupCombo
         Left = 195
-        Top = 94
-        Width = 378
+        Top = 118
+        Width = 151
         Height = 21
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -425,30 +449,31 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         LookupTable = dmGeral.BUS_CD_C_CPG
         LookupField = 'ID_CONDICAO_PAG'
         Color = clWhite
-        TabOrder = 7
+        TabOrder = 1
         AutoDropDown = False
         ShowButton = True
         UseTFields = False
         PreciseEditRegion = False
         AllowClearKey = False
         OnEnter = cbbCondicaoPagamentoEnter
+        OnExit = cbbCondicaoPagamentoExit
       end
       object txtObservacao: TDBMemo
         Left = 195
-        Top = 141
+        Top = 166
         Width = 378
-        Height = 44
+        Height = 28
         DataField = 'OBS'
         DataSource = dso
-        TabOrder = 9
+        TabOrder = 4
       end
       object gbItens: TGroupBox
         Left = 3
-        Top = 191
+        Top = 195
         Width = 690
         Height = 304
         Caption = ' Itens '
-        TabOrder = 10
+        TabOrder = 5
         object lblItemSobMed: TLabel
           Left = 3
           Top = 207
@@ -458,48 +483,48 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         end
         object lblPerDescBasc: TLabel
           Left = 3
-          Top = 250
+          Top = 249
           Width = 65
           Height = 13
           Caption = '% Desc b'#225'sic'
         end
         object lblDescBasc: TLabel
           Left = 71
-          Top = 250
+          Top = 249
           Width = 63
           Height = 13
           Caption = 'Desc. b'#225'sico'
         end
         object lblPerDescEspecial: TLabel
           Left = 137
-          Top = 250
+          Top = 249
           Width = 60
           Height = 13
           Caption = '% Desc esp.'
         end
         object lblDescEspecial: TLabel
           Left = 201
-          Top = 250
+          Top = 249
           Width = 71
           Height = 13
           Caption = 'Desc. especial'
         end
         object lblBruto: TLabel
-          Left = 333
-          Top = 250
+          Left = 302
+          Top = 249
           Width = 56
           Height = 13
           Caption = 'Total Bruto'
         end
         object lblPerDesc: TLabel
-          Left = 411
+          Left = 383
           Top = 250
           Width = 9
           Height = 13
           Caption = '%'
         end
         object lblVlrDesc: TLabel
-          Left = 442
+          Left = 411
           Top = 249
           Width = 52
           Height = 13
@@ -519,6 +544,32 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Width = 42
           Height = 13
           Caption = 'Vlr.Total'
+        end
+        object Label2: TLabel
+          Left = 478
+          Top = 249
+          Width = 63
+          Height = 13
+          Caption = 'Cubagem m'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 541
+          Top = 246
+          Width = 5
+          Height = 11
+          Caption = '3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
         object btn_Add_Itens: TBitBtn
           Left = 4
@@ -899,7 +950,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         object txtPcpObsItem: TDBMemo
           Left = 3
           Top = 221
-          Width = 684
+          Width = 607
           Height = 21
           Color = 14342874
           DataField = 'pcp_obs_item'
@@ -957,7 +1008,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         end
         object txtDescEspecial: TwwDBEdit
           Tag = 1
-          Left = 201
+          Left = 202
           Top = 263
           Width = 72
           Height = 21
@@ -972,7 +1023,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           OnExit = txtDescEspecialExit
         end
         object txtVlrBruto: TwwDBEdit
-          Left = 324
+          Left = 293
           Top = 263
           Width = 65
           Height = 21
@@ -987,7 +1038,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           WordWrap = False
         end
         object txtPerDesc: TwwDBEdit
-          Left = 392
+          Left = 361
           Top = 263
           Width = 47
           Height = 21
@@ -1003,7 +1054,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         end
         object txtTotalVlrDesc: TwwDBEdit
           Tag = 1
-          Left = 442
+          Left = 411
           Top = 263
           Width = 55
           Height = 21
@@ -1025,7 +1076,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Height = 21
           DataField = 'vlr_frete'
           DataSource = dso
-          TabOrder = 12
+          TabOrder = 13
           UnboundDataType = wwDefault
           Visible = False
           WantReturns = False
@@ -1041,7 +1092,28 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DataField = 'VLR_LIQUIDO'
           DataSource = dso
           ReadOnly = True
-          TabOrder = 13
+          TabOrder = 14
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
+        end
+        object wwDBEdit1: TwwDBEdit
+          Left = 478
+          Top = 263
+          Width = 65
+          Height = 21
+          TabStop = False
+          Color = clSkyBlue
+          DataField = 'cubagem'
+          DataSource = dso
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 12
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -1057,7 +1129,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataField = 'VLR_DESCONTO_SER'
         DataSource = dso
         ReadOnly = True
-        TabOrder = 12
+        TabOrder = 13
         Visible = False
       end
       object txtVlrDesconto3: TDBEdit
@@ -1070,7 +1142,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataField = 'VLR_DESCONTO_PRO'
         DataSource = dso
         ReadOnly = True
-        TabOrder = 15
+        TabOrder = 16
         Visible = False
       end
       object txtVlrProdLiquido: TDBEdit
@@ -1083,7 +1155,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataField = 'VLR_PRODUTOS_LIQ'
         DataSource = dso
         ReadOnly = True
-        TabOrder = 16
+        TabOrder = 17
         Visible = False
       end
       object txtVlrServicoLiquido: TDBEdit
@@ -1096,7 +1168,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataField = 'VLR_SERVICOS_LIQ'
         DataSource = dso
         ReadOnly = True
-        TabOrder = 13
+        TabOrder = 14
         Visible = False
       end
       object txtVlrServico: TDBEdit
@@ -1109,7 +1181,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataField = 'VLR_SERVICOS_BRU'
         DataSource = dso
         ReadOnly = True
-        TabOrder = 11
+        TabOrder = 12
         Visible = False
       end
       object txtVlrProduto: TDBEdit
@@ -1122,7 +1194,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataField = 'VLR_PRODUTOS_BRU'
         DataSource = dso
         ReadOnly = True
-        TabOrder = 14
+        TabOrder = 15
         Visible = False
       end
       object txtVlrTotal2: TDBEdit
@@ -1135,12 +1207,12 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataField = 'VLR_TOTAL'
         DataSource = dso
         ReadOnly = True
-        TabOrder = 17
+        TabOrder = 18
         Visible = False
       end
       object dpkData: TJvDBDateEdit
         Left = 195
-        Top = 71
+        Top = 48
         Width = 90
         Height = 21
         TabStop = False
@@ -1149,11 +1221,11 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         ReadOnly = True
         Color = 14342874
         ShowNullDate = False
-        TabOrder = 5
+        TabOrder = 10
       end
       object dpkDataValidade: TJvDBDateEdit
         Left = 488
-        Top = 71
+        Top = 48
         Width = 85
         Height = 21
         TabStop = False
@@ -1162,32 +1234,20 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         ReadOnly = True
         Color = 14342874
         ShowNullDate = False
-        TabOrder = 6
+        TabOrder = 11
       end
       object dpkDataEntrega: TJvDBDateEdit
-        Left = 579
-        Top = 75
+        Left = 488
+        Top = 95
         Width = 85
         Height = 21
         TabStop = False
         DataField = 'DTA_ENTREGA'
         DataSource = dso
-        ShowNullDate = False
-        TabOrder = 4
-        Visible = False
-      end
-      object txtAtendente: TDBEdit
-        Left = 195
-        Top = 25
-        Width = 90
-        Height = 21
-        TabStop = False
-        Color = 14342874
-        DataField = 'ID_FUNCIONARIO'
-        DataSource = dso
-        Enabled = False
         ReadOnly = True
-        TabOrder = 2
+        Color = 14342874
+        ShowNullDate = False
+        TabOrder = 9
       end
       object txtCodRev: TDBEdit
         Left = 513
@@ -1200,7 +1260,86 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         DataSource = dso
         Enabled = False
         ReadOnly = True
-        TabOrder = 1
+        TabOrder = 7
+      end
+      object cbbVendedor: TwwDBLookupCombo
+        Left = 195
+        Top = 95
+        Width = 182
+        Height = 21
+        DropDownAlignment = taLeftJustify
+        Selected.Strings = (
+          'nome'#9'30'#9'nome'#9'F')
+        DataField = 'id_funcionario'
+        DataSource = dso
+        LookupTable = dmGeral.BUS_CD_C_FUN
+        LookupField = 'id_funcionario'
+        Options = [loTitles]
+        Style = csDropDownList
+        Color = clWhite
+        TabOrder = 8
+        AutoDropDown = False
+        ShowButton = False
+        UseTFields = False
+        PreciseEditRegion = False
+        AllowClearKey = False
+        OnEnter = cbbVendedorEnter
+      end
+      object cbbAtendente: TwwDBLookupCombo
+        Left = 195
+        Top = 25
+        Width = 182
+        Height = 21
+        TabStop = False
+        DropDownAlignment = taLeftJustify
+        Selected.Strings = (
+          'nome'#9'30'#9'nome'#9'F')
+        DataField = 'id_atendente'
+        DataSource = dso
+        LookupTable = dmGeral.BUS_CD_C_FU2
+        LookupField = 'id_funcionario'
+        Style = csDropDownList
+        Color = clWhite
+        ReadOnly = True
+        TabOrder = 19
+        AutoDropDown = False
+        ShowButton = False
+        UseTFields = False
+        PreciseEditRegion = False
+        AllowClearKey = False
+      end
+      object Button1: TButton
+        Left = 579
+        Top = 23
+        Width = 75
+        Height = 25
+        Caption = 'fechar'
+        TabOrder = 20
+        Visible = False
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Left = 579
+        Top = 64
+        Width = 75
+        Height = 25
+        Caption = 'reconnectar'
+        TabOrder = 21
+        Visible = False
+        OnClick = Button2Click
+      end
+      object txtTextoCondPgto: TwwDBEdit
+        Left = 440
+        Top = 118
+        Width = 133
+        Height = 21
+        DataField = 'sgq_texto_cond_pgto'
+        DataSource = dso
+        TabOrder = 2
+        UnboundDataType = wwDefault
+        Visible = False
+        WantReturns = False
+        WordWrap = False
       end
     end
   end
@@ -1228,7 +1367,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited imgBotoesAtivo: TImageList
     Bitmap = {
-      494C01010800A800080218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800300218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2128,7 +2267,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C0101080030015C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108003001840218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3028,7 +3167,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200000158020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200000180020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3544,7 +3683,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00000218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00280218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4444,7 +4583,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C01010600000150020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000178020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4656,7 +4795,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00100218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00380218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5556,7 +5695,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C01010600000160020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000188020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5768,7 +5907,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00D80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00000218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6668,7 +6807,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C01010600000110020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000138020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -6887,7 +7026,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41822.420257245400000000
-    ReportOptions.LastChange = 45621.690787419000000000
+    ReportOptions.LastChange = 45763.412664826400000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'procedure Footer1OnBeforePrint(Sender: TfrxComponent);'
@@ -6911,6 +7050,11 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       '                        '
+      'end;'
+      ''
+      'procedure Page1OnAfterPrint(Sender: TfrxComponent);'
+      'begin'
+      ''
       'end;'
       ''
       'begin'
@@ -6942,6 +7086,10 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       end
       item
         Name = 'ft_desc_item'
+        Value = Null
+      end
+      item
+        Name = 'ft_texto_cond_pgto'
         Value = ''
       end>
     Style = <>
@@ -6957,23 +7105,16 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
+      OnAfterPrint = 'Page1OnAfterPrint'
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
-        Height = 230.551330000000000000
+        Height = 219.212740000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
-        object Line1: TfrxLineView
-          Left = 7.559060000000000000
-          Top = 52.133892440000000000
-          Width = 574.488560000000000000
-          Color = clBlack
-          ArrowSolid = True
-          Frame.Typ = [ftTop]
-        end
         object Memo1: TfrxMemoView
-          Left = 3.779530000000000000
-          Top = 0.000002439999999999
-          Width = 385.512060000000000000
+          Left = 296.693105000000000000
+          Top = 22.897652440000000000
+          Width = 124.724490000000000000
           Height = 27.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -6981,22 +7122,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           Memo.UTF8W = (
-            'Or'#231'amento')
-          ParentFont = False
-        end
-        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
-          Left = 3.779530000000000000
-          Top = 25.677182440000000000
-          Width = 385.512060000000000000
-          Height = 26.456710000000000000
-          DataField = 'emp_fantasia'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -19
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[CAD_DB_C_PAR."emp_fantasia"]')
+            'OR'#199'AMENTO')
           ParentFont = False
         end
         object ft_codlme: TfrxMemoView
@@ -7017,18 +7143,13 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         object Memo22: TfrxMemoView
           Top = 64.252010000000000000
           Width = 718.110700000000000000
-          Height = 79.370130000000000000
-          Fill.BackColor = clSilver
-        end
-        object Memo2: TfrxMemoView
-          Top = 148.181200000000000000
-          Width = 718.110700000000000000
-          Height = 75.590600000000000000
-          Fill.BackColor = 14342874
+          Height = 98.267780000000000000
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Fill.BackColor = clWhite
         end
         object Memo5: TfrxMemoView
-          Left = 0.779530000000000000
-          Top = 64.031540000000000000
+          Left = 1.779530000000000000
+          Top = 66.031540000000000000
           Width = 384.362090000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -7041,10 +7162,10 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Memo6: TfrxMemoView
-          Left = 17.779530000000000000
-          Top = 82.929190000000000000
-          Width = 694.283550000000000000
-          Height = 15.118120000000000000
+          Left = 2.000000000000000000
+          Top = 84.484309030000000000
+          Width = 713.181200000000000000
+          Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -7052,15 +7173,28 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Font.Style = []
           Memo.UTF8W = (
             
-              'Endere'#231'o : [CAD_DB_C_PAR."emp_endereco"] [CAD_DB_C_PAR."emp_nume' +
-              'ro"] [CAD_DB_C_PAR."emp_bairro"] [CAD_DB_C_PAR."int_nomecid"] [C' +
-              'AD_DB_C_PAR."int_uf"] [CAD_DB_C_PAR."emp_cep"]')
+              'Endere'#231'o .....: [CAD_DB_C_PAR."emp_endereco"] - [CAD_DB_C_PAR."e' +
+              'mp_numero"] - [CAD_DB_C_PAR."emp_bairro"] - [CAD_DB_C_PAR."int_n' +
+              'omecid"] - [CAD_DB_C_PAR."int_uf"] - [CAD_DB_C_PAR."emp_cep"]')
           ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end
+            item
+            end
+            item
+            end
+            item
+            end
+            item
+            end>
         end
         object Memo7: TfrxMemoView
-          Left = 35.779530000000000000
-          Top = 101.826840000000000000
-          Width = 312.551020000000000000
+          Left = 1.779530000000000000
+          Top = 102.937078050000000000
+          Width = 346.566790000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -7068,12 +7202,12 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
-            'CNPJ : [CAD_DB_C_PAR."emp_cnpj"]')
+            'CNPJ ...........: [CAD_DB_C_PAR."emp_cnpj"]')
           ParentFont = False
         end
         object Memo8: TfrxMemoView
           Left = 431.512060000000000000
-          Top = 101.826840000000000000
+          Top = 102.937078050000000000
           Width = 278.535250000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -7086,9 +7220,9 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Memo9: TfrxMemoView
-          Left = 21.779530000000000000
-          Top = 120.724490000000000000
-          Width = 327.669140000000000000
+          Left = 1.000000000000000000
+          Top = 121.389847080000000000
+          Width = 350.346320000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -7096,12 +7230,12 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
-            'Telefone : [CAD_DB_C_PAR."emp_telefone"]')
+            'Telefone .......: [CAD_DB_C_PAR."emp_telefone"]')
           ParentFont = False
         end
         object Memo10: TfrxMemoView
           Left = 480.661720000000000000
-          Top = 120.724490000000000000
+          Top = 121.389847080000000000
           Width = 225.621830000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -7113,38 +7247,1300 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
             'Fax : [CAD_DB_C_PAR."emp_fax"]')
           ParentFont = False
         end
-        object Memo11: TfrxMemoView
-          Left = 38.779530000000000000
-          Top = 148.181200000000000000
-          Width = 327.669140000000000000
-          Height = 15.118120000000000000
+        object Memo59: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 139.842616100000000000
+          Width = 136.363018100000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'www.colchoesglobo.com.br')
+          ParentFont = False
+        end
+        object Picture1: TfrxPictureView
+          Left = 259.126160000000000000
+          Top = 139.842610000000000000
+          Width = 18.897650000000000000
+          Height = 18.897650000000000000
+          Picture.Data = {
+            07544269746D617076480000424D764800000000000036000000280000004400
+            0000440000000100200000000000404800000000000000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EDF6
+            FE00BADAFD0089BFFA0073B1F9005FA5F9004E9AF8004D98F7004B95F7004992
+            F7004790F700468DF600448AF6004288F6004085F6003F83F5003D80F5003B7D
+            F5003A7BF5003878F4003676F4003473F4003371F400346FF300356EF200376D
+            F000386CEF003A6AEE003B69ED003D68EC003E67EB004065EA004164E9004363
+            E8004462E7004660E600485FE400495EE3004B5CE2004C5BE1004E5AE0004F59
+            DF005F66E1007376E300898AE700BAB9F000EEEDFB00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00DFEFFE0086C0FB0055A4F90053A2F800529FF800509DF8004E9A
+            F8004D98F7004B95F7004992F7004790F700468DF600448AF6004288F6004186
+            F6003F83F5003D80F5003B7DF5003A7BF5003878F4003676F4003473F4003371
+            F400346FF300356EF200376DF000386CEF003A6AEE003B69ED003D68EC003E67
+            EB004065EA004164E9004363E8004462E7004660E600485FE400495EE3004B5C
+            E2004C5BE1004D5AE0004F59DF005058DE005256DD005355DC005554DB005653
+            DA005851D9008881E300E0DEF700FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F7FBFF0097CAFB0057A7F90055A4F90053A2
+            F800529FF800509DF8004E9AF8004D98F7004B95F7004992F7004790F700468D
+            F600448AF6004288F6004186F6003F83F5003D80F5003B7DF5003A7BF5003878
+            F4003676F4003473F4003371F400346FF300356EF200376DF000386CEF003A6A
+            EE003B69ED003D68EC003E67EB004065EA004164E9004363E8004462E7004660
+            E600485FE400495EE3004B5CE2004C5BE1004D5AE0004F59DF005058DE005256
+            DD005355DC005554DB005653DA005851D9005950D8005B4FD7005D4FD6009A8F
+            E400F7F7FD00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EAF5FE0076B9
+            FA0057A7F90055A4F90054A2F800529FF800509DF8004E9AF8004D98F7004B95
+            F7004992F7004790F700468DF600448BF6004288F6004186F6003F83F5003D80
+            F5003B7DF5003A7BF5003878F4003676F4003473F4003371F400346FF300356E
+            F200376DF000386CEF003A6AEE003B69ED003D68EC003E67EB004065EA004164
+            E9004363E8004462E7004660E600485FE400495EE3004A5DE2004C5BE1004D5A
+            E0004F59DF005058DE005256DD005355DC005554DB005653DA005852D9005950
+            D8005B4FD7005C4ED6005E4CD4005F4BD3007D6ADA00EBE8F900FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00EAF5FE0067B1FA0057A7F90055A4F90054A2F800529FF800509D
+            F8004E9AF8004D98F7004B95F7004992F7004790F700468DF600448BF6004288
+            F6004186F6003F83F5003D80F5003B7DF5003A7BF5003878F4003676F4003473
+            F4003371F400346FF300356EF200376DF000386CEF003A6AEE003B69ED003D68
+            EC003E67EB004065EA004164E9004363E8004462E7004660E600485FE400495E
+            E4004A5DE2004C5BE1004D5AE0004F59DF005058DE005256DD005355DC005554
+            DB005653DA005852D9005950D8005B4FD7005C4ED6005E4CD4005F4BD300614A
+            D2006249D1007157D400ECE8F900FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F7FBFF0076B9FA0057A7F90055A4
+            F90054A2F800529FF800509DF8004E9AF8004D98F7004B95F7004992F7004890
+            F700468DF600448BF6004288F6004186F6003F83F5003D80F5003B7DF5003A7B
+            F5003879F4003676F4003473F4003371F400346FF300356EF200376DF000386C
+            EF003A6AEE003B69ED003D68EC003E67EB004065EA004164E9004363E8004462
+            E7004660E600485FE400495EE4004A5DE2004C5BE1004D5AE0004F59DF005058
+            DE005256DD005355DC005554DB005653DA005852D9005950D8005B4FD7005C4E
+            D6005E4CD4005F4BD300614AD2006249D1006447D0006546CF008266D700F8F6
+            FD00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0096C9FB0057A7F90055A4F90054A2F800529FF800509DF8004E9AF8004D98
+            F7004B95F7004992F7004890F700468DF600448BF6004288F6004186F6003F83
+            F5003D80F5003B7DF5003A7BF5003879F4003676F4003473F4003371F400346F
+            F300356EF200376DF000386CEF003A6AEE003B69ED003D68EC003E67EB004065
+            EA004164E9004363E8004462E7004660E600475FE500495EE4004A5DE2004C5B
+            E1004D5AE0004F59DF005058DE005256DD005355DC005554DB005653DA005852
+            D9005950D8005B4FD7005C4ED6005E4CD4005F4BD300614AD2006249D1006447
+            D0006546CF006745CE006844CD00A288DF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00DFEFFE0057A7F90055A4F90054A2F800529F
+            F800509DF8004E9AF8004D98F7004B95F7004992F7004890F700468DF600448B
+            F6004288F6004186F6003F83F5003D80F5003B7EF5003A7BF5003879F4003676
+            F4003473F4003371F400346FF300356EF200376DF000386CEF003A6AEE003B69
+            ED003D68EC003E67EB004065EA004164E9004363E8004462E7004661E600475F
+            E500495EE4004A5DE2004C5BE1004D5AE0004F59DF005058DE005256DD005355
+            DC005554DB005653DA005852D9005950D8005B4FD7005C4ED6005E4CD4005F4B
+            D300614AD2006249D1006447D0006546CF006745CE006844CD006A42CC006B41
+            CB00E4DBF500FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0086C0
+            FB0055A4F90054A2F800529FF800509DF8004E9AF8004D98F7004B95F7004992
+            F7004890F700468DF600448BF6004288F6004186F6003F83F5003D81F5003B7E
+            F5003A7BF5003879F4003676F4003473F4003371F400346FF300356EF200376D
+            F000386CEF003A6AEE003B69ED003D68EC003E67EB004065EA004164E9004363
+            E8004462E7004661E600475FE500495EE4004A5DE2004C5BE1004D5AE0004F59
+            DF005058DE005257DD005355DC005554DB005653DA005852D9005950D8005B4F
+            D7005C4ED6005E4CD4005F4BD300614AD2006249D1006447D0006546CF006745
+            CE006844CD006A42CC006B41CB006D40CA009674D800FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00EDF6FE0055A4F90054A2F800529FF800509DF8004F9A
+            F8004D98F7004B95F7004992F7004890F700468DF600448BF6004288F6004186
+            F6003F83F5003D81F5003B7EF5003A7BF5003879F4003676F4003473F4003371
+            F400346FF300356EF200376DF000386CEF003A6AEE003B69ED003D68EC003E67
+            EB004065EA004164E9004363E8004462E7004661E600475FE500495EE4004A5D
+            E2004C5BE1004D5AE0004F59DF005058DE005257DD005355DC005554DB005653
+            DA005852D9005950D8005B4FD7005C4ED6005E4CD4005F4BD300614AD2006249
+            D1006447D0006546CF006745CE006844CD006A43CC006B41CB006D40CA006E3F
+            C900703DC800F1EBF900FFFFFF00FFFFFF00FFFFFF00FFFFFF00B9DAFD0054A2
+            F800529FF800509DF8004F9AF8004D98F7004B95F7004992F7004890F700468D
+            F600448BF6004288F6004186F6003F83F5003D81F5003B7EF5003A7BF5003879
+            F4003676F4003473F4003371F400346FF300356EF200376DF000386CEF003A6A
+            EE003B69ED003D68EC003E67EB004065EA004164E9004363E8004462E7004661
+            E600475FE500495EE4004A5DE2004C5BE1004D5AE0004F59DF005058DE005257
+            DD005355DC005554DB005653DA005852D9005950D8005B4FD7005C4ED6005E4C
+            D4005F4BD300614AD2006249D1006447D0006546CF006745CE006844CD006A43
+            CC006B41CB006D40CA006E3FC900703DC800713CC600C6AFE700FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0089BFFA00529FF800509DF8004F9AF8004D98F7004B95
+            F7004992F7004890F700468DF600448BF6004288F6004186F6003F83F5003D81
+            F5003B7EF5003A7BF5003879F4003676F4003876F4006996F70098B6F900BDD0
+            FB00C8D7FB00D0DCFB00D1DDFB00D2DCFB00D2DCFB00D2DCFA00D3DCFA00D3DB
+            FA00D4DBFA00D4DBF900D4DAF900D4DAF900D5DAF900D5DAF800D6D9F800D6D9
+            F800D6D9F800D7D8F700D4D5F600CACAF400C1C1F200A2A0EB00726CDF005A51
+            D8005B4FD7005C4ED6005E4CD4005F4BD300614AD2006249D1006447D0006546
+            CF006745CE006844CD006A43CC006B41CB006D40CA006E3FC900703DC800713C
+            C600733BC500A078D700FFFFFF00FFFFFF00FFFFFF00FFFFFF0072B2F900509D
+            F8004F9AF8004D98F7004B95F7004992F7004890F700468DF600448BF6004288
+            F6004186F6003F83F5003D81F5003B7EF5003A7BF5003879F4003E7BF40094B5
+            F900E9EFFE00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00E5E3F9009087E3005F4DD4005F4BD300614A
+            D2006249D1006447D0006546CF006745CE006844CD006A43CC006B41CB006D40
+            CA006E3FC900703DC800713CC600733BC500743AC400905ECE00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF005EA5F9004F9AF8004D98F7004B95F7004992F7004890
+            F700468DF600448BF6004288F6004186F6003F83F5003D81F5003B7EF5003A7B
+            F5003879F4006596F700E2EBFD00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00D8D3F4007561D8006249D1006447D0006546CF006745CE006844
+            CD006A43CC006B41CB006D40CA006E3FC900703DC800713CC600723BC600743A
+            C4007639C3008348C700FFFFFF00FFFFFF00FFFFFF00FFFFFF004F9AF8004D98
+            F7004B95F7004992F7004890F700468EF600448BF6004288F6004186F6003F83
+            F5003D81F5003B7EF5003A7BF5003879F4006E9CF700FBFCFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FEFEFF00FFFFFF00FFFFFF00FCFD
+            FF00F8FAFE00F5F6FE00F0F3FD00EDF0FD00E9ECFC00E6E9FB00E5E8FB00E9EB
+            FB00EDEEFC00F1F1FC00F4F5FD00F8F8FE00FBFBFE00FEFEFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EFECFA007E67
+            D8006546CF006745CE006844CD006A43CC006B41CB006D40CA006E3FC900703D
+            C800713CC700723BC600743AC4007639C3007737C2007936C100FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF004D98F7004B95F7004992F7004890F700468EF600448B
+            F6004288F6004186F6003F83F5003D81F5003B7EF5003A7BF5003879F4006294
+            F600F7FAFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00D2DEFB0082A0F4005179
+            EF003E69EC004068EB004167EA004164E9004363E8004462E7004661E600475F
+            E500485EE4004A5DE3004B5CE2004D5AE0004F59DF005058DE005257DD005355
+            DC005554DB005653DA005A54D9005F56D9007369DD00968DE500D0CBF300FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F5F3FC007C5FD5006844CD006A43CC006B41
+            CB006D40CA006E3FC9006F3EC800713CC700723BC600743AC4007639C3007737
+            C2007936C1007A35C000FFFFFF00FFFFFF00FFFFFF00FFFFFF004B95F7004A93
+            F7004890F700468EF600448BF6004288F6004186F6003F83F5003D81F5003B7E
+            F5003A7CF5003879F4003C7AF400E6EEFE00FFFFFF00FFFFFF00FFFFFF00FAFC
+            FF0086A6F5003B6CEE003B69ED003D68EC003E67EB004066EA004164E9004363
+            E8004462E7004661E600475FE500485EE4004A5DE3004B5CE2004D5AE0004F59
+            DF005058DE005257DD005355DC005554DB005653DA005852D9005950D8005B4F
+            D7005C4ED6005E4CD4005F4BD3008675DD00EDEAFA00FFFFFF00FFFFFF00FFFF
+            FF00CBBFEE006A43CC006B41CB006D40CA006E3FC9006F3EC800713CC700723B
+            C600743AC4007639C3007737C2007936C1007A35C0007B34BF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF004A93F7004890F700468EF600448BF6004288F6004186
+            F6003F83F5003D81F5003C7EF5003A7CF5003879F4003676F40095B6F900FFFF
+            FF00FFFFFF00FFFFFF00FDFEFF006F94F4003A6BEE003B69ED003D68EC003E67
+            EB004066EA004164E9004363E8004462E7004561E600475FE500485EE4004A5D
+            E3004B5CE2004D5AE0004F59DF005058DE005257DD005355DC005554DB005653
+            DA005852D9005950D8005B4FD7005C4ED6005E4CD4005F4BD400614AD2006249
+            D100775ED600F1EEFA00FFFFFF00FFFFFF00FFFFFF008866D5006C40CA006E3F
+            C9006F3EC800713CC700723BC600743AC4007639C3007737C2007936C1007A35
+            C0007B34BF007D33BE00FFFFFF00FFFFFF00FFFFFF00FFFFFF004890F700468E
+            F600448BF6004288F6004186F6003F83F5003D81F5003C7EF5003A7CF5003879
+            F4003676F4003D79F400F5F8FE00FFFFFF00FFFFFF00FFFFFF0097B2F7003A6B
+            EE003B69ED003D68EC003E67EB004066EA004164E9004363E8004462E7004561
+            E600475FE500485EE4004A5DE3004B5CE2004D5AE0004F59DF005058DE005257
+            DD005355DC005554DB005653DA005852D9005950D8005B4FD7005C4ED6005D4D
+            D5005F4BD400614AD2006249D1006448D0006546CF00937BDC00FFFFFF00FFFF
+            FF00FFFFFF00D5C9F0006E3FC9006F3EC800713CC700723BC600743AC4007639
+            C3007737C2007836C1007A35C0007B34BF007D33BE007E31BD00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00468EF600448BF6004288F6004186F6003F84F5003D81
+            F5003C7EF5003A7CF5003879F4003676F4003574F400719CF700FFFFFF00FFFF
+            FF00FFFFFF00EBF1FE003F6EEE003B69ED003D68EC003E67EB004066EA004164
+            E9004263E8004462E7004561E600475FE500485EE4004A5DE3004B5CE2004D5A
+            E0004F59DF005058DE005257DD005355DC005554DB005653DA005852D9005950
+            D8005B4FD7005C4ED6005D4DD5005F4BD400614AD2006249D1006448D0006546
+            CF006745CE006945CD00DFD7F400FFFFFF00FFFFFF00FEFDFF007749CB00713C
+            C700723BC600743AC4007639C3007738C3007836C1007A35C0007B34BF007D33
+            BE007E31BD008030BC00FFFFFF00FFFFFF00FFFFFF00FFFFFF00448BF6004288
+            F6004186F6003F84F5003D81F5003C7EF5003A7CF5003879F4003676F4003574
+            F4003371F400AEC6FA00FFFFFF00FFFFFF00FFFFFF00A8BEF8003B69ED003D68
+            EC003E67EB004066EA004165E9004263E8004462E7004561E600475FE500485E
+            E4004A5DE3004B5CE2004D5AE0004F59DF005058DE00555ADE005E60DE005655
+            DB005653DA005852D9005950D8005B4FD7005C4ED6005D4DD5005F4BD400614A
+            D2006249D1006448D0006546CF006745CE006844CD006943CC00AB94E200FFFF
+            FF00FFFFFF00FFFFFF009B76D800723BC600743AC4007539C4007738C3007836
+            C1007A35C0007B34BF007D33BE007E31BD008030BC008130BA00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF004389F6004186F6003F84F5003D81F5003C7EF5003A7C
+            F5003879F4003676F4003574F4003372F4003370F300D3E0FC00FFFFFF00FFFF
+            FF00FFFFFF007F9DF3003D68EC003E67EB003F66EA004165E9004263E8004462
+            E7004561E600475FE500485EE4004A5DE3004B5CE200525FE1008A91EA00C4C7
+            F400EDEEFC00FEFEFF00FFFFFF00FAFAFE00E3E3F900B2AEED007A71DF005C4E
+            D6005D4DD5005F4BD400614AD2006249D1006448D0006546CF006745CE006844
+            CD006943CC006B42CB008966D500FFFFFF00FFFFFF00FFFFFF00C1A8E600743A
+            C5007539C4007738C3007836C1007A35C0007B34BF007D33BE007E31BD008030
+            BC008130BB008331B800FFFFFF00FFFFFF00FFFFFF00FFFFFF004186F6003F84
+            F5003D81F5003C7EF5003A7CF5003879F4003676F4003574F4003372F4003370
+            F300356EF200E0E9FD00FFFFFF00FFFFFF00FFFFFF007291F1003E67EB003F66
+            EA004165E9004263E8004462E7004561E600475FE500485EE4004A5DE3004B5C
+            E2008790EA00E8E9FB00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00C9C4F1007462DA00614AD2006249D1006448
+            D0006546CF006645CE006844CD006943CC006B42CB006C40CA00774BCC00FFFF
+            FF00FFFFFF00FFFFFF00DDCFF1007539C4007738C3007836C1007A35C0007B34
+            BF007D33BE007E31BD008030BC008130BB008331B8008432B700FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF003F84F5003D81F5003C7EF5003A7CF5003879F4003777
+            F4003574F4003372F4003370F300356EF200366DF100EDF2FE00FFFFFF00FFFF
+            FF00FFFFFF007894F1003F66EA004165E9004263E8004462E7004561E600475F
+            E500485EE4004A5DE3004F5FE300B4BAF200FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00F4F3FC008B78DD006448D0006547CF006645CE006844CD006943CC006B42
+            CB006C40CA006E3FC9007140C900FFFFFF00FFFFFF00FFFFFF00DFD1F1007738
+            C3007836C1007A35C0007B34BF007D33BE007E31BD008030BC008130BB008331
+            B8008432B7008633B500FFFFFF00FFFFFF00FFFFFF00FFFFFF003D81F5003C7E
+            F5003A7CF5003879F4003777F4003574F4003372F4003370F300356EF200366D
+            F100386CF000F0F4FE00FFFFFF00FFFFFF00FFFFFF007894F0004165E9004263
+            E8004462E7004561E600475FE500485EE4004A5DE3004C5DE200C4C8F500FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FDFCFE008D77DB006645
+            CE006844CD006943CC006B42CB006C40CA006E3FC9006F3EC800713DC700FEFE
+            FF00FFFFFF00FFFFFF00E0D1F1007836C1007A35C0007B34BF007D33BE007E31
+            BD008030BC008130BB008331B8008432B7008633B5008733B300FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF003C7EF5003A7CF5003979F4003777F4003574F4003372
+            F4003370F300356EF200366DF100386CF0003A6BEE00F0F4FE00FFFFFF00FFFF
+            FF00FFFFFF007A93F0004263E8004462E7004561E600475FE500485EE4004A5D
+            E3004B5CE200A5ACEF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FEFEFF00D1D0
+            F5009692E700736CDE007168DD00938AE400BFB8EE00FBFAFE00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00F5F3FC007C5CD3006943CC006B42CB006C40CA006E3F
+            C9006F3EC800713DC700723BC600FCFAFE00FFFFFF00FFFFFF00E0D0F1007A35
+            C0007B34BF007D33BE007E31BD008030BC008130BB008331B8008432B7008633
+            B5008733B3008834B100FFFFFF00FFFFFF00FFFFFF00FFFFFF003A7CF5003979
+            F4003777F4003574F4003372F4003370F300356EF200366DF100386CF000396B
+            EF003B6AEE00F0F4FE00FFFFFF00FFFFFF00FFFFFF007A91EF004462E7004561
+            E600475FE500485EE4004A5DE3004B5CE2006772E400FCFCFE00FFFFFF00FFFF
+            FF00FFFFFF00EEEEFB008280E4005752D9005951D8005A4FD7005C4ED6005D4D
+            D5005F4BD4007664D900D8D2F400FFFFFF00FFFFFF00FFFFFF00FFFFFF00CEC1
+            EE006B42CB006C40CA006E3FC9006F3EC800713DC700723BC600743AC500F9F6
+            FC00FFFFFF00FFFFFF00E0D0F0007B34BF007D33BE007E31BD008030BC008130
+            BB008331B8008432B7008633B5008733B3008834B1008A35AF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF003979F4003777F4003574F4003372F4003370F300356E
+            F200366DF100386CF000396BEF003B6AEE003C68ED00F1F4FE00FFFFFF00FFFF
+            FF00FFFFFF007C91EE004561E600475FE500485EE4004A5DE3004B5CE2004D5A
+            E000C3C6F400FFFFFF00FFFFFF00FFFFFF00F4F4FD006B68DE005752D9005951
+            D8005A4FD7005C4ED6005D4DD5005F4CD400604AD3006249D200694FD300DDD7
+            F400FFFFFF00FFFFFF00FFFFFF00FFFFFF008866D4006E3FC9006F3EC800713D
+            C700723BC600743AC5007539C400F6F3FB00FFFFFF00FFFFFF00E0D0F0007D33
+            BE007E31BD008030BC008130BB008331B8008432B7008633B5008733B3008834
+            B1008A35AF008B36AD00FFFFFF00FFFFFF00FFFFFF00FFFFFF003777F4003574
+            F4003372F4003370F300356EF200366DF100386CF000396BEF003B6AEE003C68
+            ED003E67EB00F1F4FD00FFFFFF00FFFFFF00FFFFFF007C90ED00475FE500485E
+            E4004A5DE3004B5CE2004D5AE0005962E100FBFBFE00FFFFFF00FFFFFF00FFFF
+            FF008C8AE6005752D9005951D8005A4FD7005C4ED6005D4DD5005F4CD400604A
+            D3006249D2006348D1006547CF007658D300FBFBFE00FFFFFF00FFFFFF00FFFF
+            FF00BCA6E6006F3EC800713DC700723BC600743AC5007539C4007738C300F4EE
+            FA00FFFFFF00FFFFFF00E1D0F0007E31BD008030BC008130BB008331B8008432
+            B7008532B5008733B3008834B1008A35AF008B36AD008D37AB00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF003574F4003372F4003370F300356FF200366DF100386C
+            F000396BEF003B6AEE003C68ED003E67EB003F66EA00F1F4FD00FFFFFF00FFFF
+            FF00FFFFFF007E8FED00485EE4004A5DE3004B5CE2004D5AE0004F59DF008A8F
+            EA00FFFFFF00FFFFFF00FFFFFF00E8E8FA005853D9005951D8005A4FD7005C4E
+            D6005D4DD5005F4CD400604AD3006249D2006348D1006547CF006645CE006844
+            CD00C5B7EB00FFFFFF00FFFFFF00FFFFFF00E7DFF600713DC700723BC600743A
+            C5007539C4007738C3007836C100F1EAF900FFFFFF00FFFFFF00E1CFF0008030
+            BC008130BB008331B8008432B7008532B5008733B3008834B1008A35AF008B36
+            AD008D37AB008E38A900FFFFFF00FFFFFF00FFFFFF00FFFFFF003372F4003370
+            F300356FF200366DF100386CF000396BEF003B6AEE003C68ED003E67EB003F66
+            EA004165E900F1F3FD00FFFFFF00FFFFFF00FFFFFF007F8EEC004A5DE3004B5C
+            E2004D5AE0004E59E0005058DF00A5A8ED00FFFFFF00FFFFFF00FFFFFF00B1AE
+            ED005951D8005A4FD7005C4ED6005D4DD5005F4CD400604AD3006249D2006348
+            D1006547CF006645CE006844CD006943CC009B7FDC00FFFFFF00FFFFFF00FFFF
+            FF00FBF9FD00733CC600743AC5007539C4007738C3007836C1007A35C000EFE6
+            F700FFFFFF00FFFFFF00E2CFEF008130BB008231B9008432B7008532B5008733
+            B3008834B1008A35AF008B36AD008D37AB008E38A9008F39A700FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF003370F300356FF200366DF100386CF000396BEF003B6A
+            EE003C68ED003E67EB003F66EA004165E9004263E800F1F3FD00FFFFFF00FFFF
+            FF00FFFFFF00808DEB004B5CE2004D5BE1004E59E0005058DF005157DD00B9BA
+            F100FFFFFF00FFFFFF00FFFFFF009893E7005A4FD7005C4ED6005D4DD5005F4C
+            D400604AD3006249D2006348D1006547CF006646CF006844CD006943CC006B42
+            CB008763D400FFFFFF00FFFFFF00FFFFFF00FFFFFF007D46C9007539C4007738
+            C3007836C1007A35C0007B34BF00EDE2F600FFFFFF00FFFFFF00E2CFEF008231
+            B9008432B7008532B5008733B3008834B1008A35AF008B36AD008D37AB008E38
+            A9008F39A700913AA500FFFFFF00FFFFFF00FFFFFF00FFFFFF00356FF200366D
+            F100386CF000396BEF003B6AEE003C68ED003E67EB003F66EA004165E9004263
+            E8004462E700F1F3FD00FFFFFF00FFFFFF00FFFFFF00818DEB004D5BE1004E59
+            E0005058DF005157DD005356DC00B3B3EF00FFFFFF00FFFFFF00FFFFFF009E97
+            E7005C4ED6005D4DD5005F4CD400604AD3006249D2006348D1006547CF006646
+            CF006844CD006943CC006B42CB006C41CA00845CD100FFFFFF00FFFFFF00FFFF
+            FF00FEFEFF00783DC5007738C3007836C1007A35C0007B34BF007D33BE00EDE3
+            F600FFFFFF00FFFFFF00E2CFEF008432B7008532B5008733B3008834B1008A35
+            AF008B36AD008C37AB008E38A9008F39A700913AA500923AA300FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00366DF100386CF000396BEF003B6AEE003C68ED003E67
+            EB003F66EA004165E9004263E8004462E7004561E600F1F3FD00FFFFFF00FFFF
+            FF00FFFFFF00828CEA004E59E0005058DF005157DD005356DC005454DB00A3A1
+            EB00FFFFFF00FFFFFF00FFFFFF00C3BEF0005D4DD5005F4CD400604AD3006249
+            D2006348D1006447D0006646CF006844CD006943CC006B42CB006C41CA006E3F
+            C9009A78D800FFFFFF00FFFFFF00FFFFFF00F1EBF9007738C3007836C1007A35
+            C0007B34BF007D33BE007E32BD00F0E7F700FFFFFF00FFFFFF00E3D0EE008532
+            B5008733B3008834B1008A35AF008B36AD008C37AB008E38A9008F39A700913A
+            A500923AA300933BA100FFFFFF00FFFFFF00FFFFFF00FFFFFF00386CF000396B
+            EF003B6AEE003C68ED003E67EB003F66EA004165E9004263E8004462E7004561
+            E600475FE500F1F3FD00FFFFFF00FFFFFF00FFFFFF00838AE9005058DF005157
+            DD005356DC005454DB005653DA007F7BE200FFFFFF00FFFFFF00FFFFFF00F0EE
+            FB006452D500604AD3006249D2006348D1006447D0006646CF006844CD006943
+            CC006B42CB006C41CA006E3FC9006F3EC800CCB9EB00FFFFFF00FFFFFF00FFFF
+            FF00D1BCEB007836C1007A35C0007B34BF007D33BE007E32BD008030BC00F3EB
+            F800FFFFFF00FFFFFF00E3D0EE008733B3008834B1008935AF008B36AD008C37
+            AB008E38A9008F39A700913AA500923AA300933BA100953CA000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00396BEF003B6AEE003C68ED003E67EB003F66EA004165
+            E9004263E8004462E7004561E6004760E500485EE400F2F3FD00FFFFFF00FFFF
+            FF00FFFFFF00848AE9005157DD005356DC005455DB005653DA005752D9005B53
+            D800F1F0FC00FFFFFF00FFFFFF00FFFFFF00AFA4E9006149D2006348D1006447
+            D0006646CF006844CD006943CC006B42CB006C41CA006E3FC9006F3EC8009771
+            D600FFFFFF00FFFFFF00FFFFFF00FFFFFF00A67AD6007A35C0007B34BF007D33
+            BE007E32BD008030BC008130BB00F5EFFA00FFFFFF00FFFFFF00E3D0ED008834
+            B1008935AF008B36AD008C37AB008E38A9008F39A700913AA500923AA300933B
+            A100943CA000963D9E00FFFFFF00FFFFFF00FFFFFF00FFFFFF003B6AEE003C68
+            ED003E67EB003F66EA004165E9004263E8004462E7004561E6004760E500485E
+            E4004A5DE300F2F3FD00FFFFFF00FFFFFF00FFFFFF008589E7005256DD005455
+            DB005653DA005752D9005951D8005A4FD700ACA5EA00FFFFFF00FFFFFF00FFFF
+            FF00FBFBFE00917FDF006447D0006646CF006844CD006943CC006B42CB006C41
+            CA006E3FC9006F3EC8007F50CC00EFE9F900FFFFFF00FFFFFF00FFFFFF00EDE4
+            F7007D3AC1007B34BF007D33BE007E32BD008030BC008130BB008231B900F8F4
+            FB00FFFFFF00FFFFFF00E3D0ED008935AF008B36AD008C37AB008E38A9008F39
+            A700913AA500923AA300933BA200943CA000963D9E00973E9C00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF003C68ED003E67EB003F66EA004165E9004263E8004462
+            E7004561E6004760E500485EE4004A5DE3004B5CE200F2F3FD00FFFFFF00FFFF
+            FF00FFFFFF008688E7005455DB005653DA005752D9005951D8005A4FD7005C4E
+            D6006455D700EFEDFB00FFFFFF00FFFFFF00FFFFFF00FEFEFF00AD9CE5006F4C
+            CF006943CC006B42CB006C41CA006E3FC900703FC800A280DA00F5F1FB00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00A577D5007B34BF007D33BE007E32BD008030
+            BC008130BB008231B9008432B700FBF8FC00FFFFFF00FFFFFF00E4D0EC008B36
+            AD008C37AB008E38A9008F39A700913AA500923AA400933BA200943CA000963D
+            9E00973E9C00993F9A00FFFFFF00FFFFFF00FFFFFF00FFFFFF003E67EB003F66
+            EA004165E9004263E8004462E7004561E6004760E500485EE4004A5DE3004B5C
+            E2004D5BE100F2F3FD00FFFFFF00FFFFFF00FFFFFF008788E6005653DA005752
+            D9005951D8005A4FD7005C4ED6005D4DD5005E4CD4008676DE00FCFBFE00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F4F1FB00C4B3EA00AF97E200A587DD00B69D
+            E300DFD4F200FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C7AAE5007B34
+            BF007D33BE007E32BD008030BC008130BB008231B9008432B7008532B500FDFC
+            FE00FFFFFF00FFFFFF00E4D0EC008C37AB008E38A9008F39A700913AA500923A
+            A400933BA200943CA000963D9E00973E9C00993F9A009A409800FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF003F66EA004165E9004264E8004462E7004561E6004760
+            E500485EE4004A5DE3004B5CE2004D5BE1004E5AE000EFF0FC00FFFFFF00FFFF
+            FF00FFFFFF008886E5005752D9005951D8005A4FD7005B4ED6005D4DD5005E4C
+            D400604BD3006149D2009A89E100FCFBFE00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00D2BCEA007E38C0007D33BE007E32BD008030BC008130BB008231
+            B9008431B7008532B5008734B300FFFFFF00FFFFFF00FFFFFF00E4D1EC008E38
+            A9008F39A7009039A600923AA400933BA200943CA000963D9E00973E9C00993F
+            9A009A4098009B409600FFFFFF00FFFFFF00FFFFFF00FFFFFF004165E9004264
+            E8004462E7004561E6004760E500485EE4004A5DE3004B5CE2004D5BE1004E5A
+            E0004F58DF00E4E5FA00FFFFFF00FFFFFF00FFFFFF008884E4005951D8005A50
+            D7005B4ED6005D4DD5005E4CD400604BD3006149D2006348D1006447D0008B72
+            DA00F0EDFA00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FDFCFE00BB99E0007C36BF007D33BE00843C
+            C000B88CDA00C9A6E200A66DCD008431B7008532B5008733B3008936B200FFFF
+            FF00FFFFFF00FFFFFF00E5D1EB008F38A8009039A600923AA400933BA200943C
+            A000963D9E00973E9C00993F9A009A4098009B4096009D419400FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF004264E8004462E7004561E6004760E500485EE4004A5D
+            E3004B5CE2004C5BE1004E5AE0004F58DF005157DE00D8D9F700FFFFFF00FFFF
+            FF00FFFFFF008983E3005A50D7005B4ED6005D4DD5005E4CD400604BD3006149
+            D2006348D1006447D0006646CF006844CD00704CCE00B49FE400F2EFFA00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FBFAFD00D1BBEA008C52
+            CA007B34BF007D33BE008035BE00E4D3F100FFFFFF00FFFFFF00FFFFFF00BB8C
+            D6008733B3008834B1008C3BB100FFFFFF00FFFFFF00FFFFFF00E5D1EB009039
+            A600923AA400933BA200943CA000963D9E00973E9C00993F9A009A4098009B40
+            96009D4194009E429200FFFFFF00FFFFFF00FFFFFF00FFFFFF004462E7004561
+            E6004760E500485EE4004A5DE3004B5CE2004C5BE1004E5AE0004F58DF005157
+            DE005256DD00CCCCF400FFFFFF00FFFFFF00FFFFFF009B95E7005B4ED6005D4D
+            D5005E4CD400604BD3006149D2006348D1006447D0006646CF006844CD006943
+            CC006B42CB006C41CA007041CA00916CD500B295E000C1A9E600C6AFE700B899
+            E000A37AD7007F42C5007935C1007B34BF007D33BE007E32BD00A269CE00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F3EBF8008834B1008935AF009F58BB00FFFF
+            FF00FFFFFF00FFFFFF00D6B6DE00923AA400933BA200943CA000963D9E00973E
+            9C00993F9A009A4098009B4096009D4194009E429200A0439000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF004561E6004760E500485EE400495DE3004B5CE2004C5B
+            E1004E5AE0004F58DF005157DE005256DD005455DB00B7B5EF00FFFFFF00FFFF
+            FF00FFFFFF00C6C1F1005D4DD5005E4CD400604BD3006149D2006348D1006447
+            D0006646CF006844CD006943CC006B42CB006C41CA006E3FC9006F3EC800703D
+            C700723CC600733AC5007539C4007638C3007837C2007935C1007B34BF007D33
+            BE007E32BD007F31BC00A870D000FFFFFF00FFFFFF00FFFFFF00FFFFFF00F4EC
+            F8008935AF008B36AE00BF90D100FFFFFF00FFFFFF00FFFFFF00C18ECB00933B
+            A200943CA000963D9E00973E9C00993F9A009A4098009B4096009D4194009E42
+            9200A0439000A1448E00FFFFFF00FFFFFF00FFFFFF00FFFFFF004760E500485F
+            E400495DE3004B5CE2004C5BE1004E5AE0004F58DF005157DE005256DD005455
+            DB005554DB00908DE600FFFFFF00FFFFFF00FFFFFF00FBFAFE006D5DD800604B
+            D3006149D2006348D1006447D0006646CF006844CD006943CC006B42CB006C41
+            CA006E3FC9006F3EC800703DC700723CC600733AC5007539C4007638C3007837
+            C2007935C1007B34BF007C33BF007E32BD007F31BC008130BB00883CBD00F2EA
+            F800FFFFFF00FFFFFF00FFFFFF00BF92D4008B36AE008E3BAE00EFE4F300FFFF
+            FF00FFFFFF00FFFFFF00AC68B700943CA000963D9E00973E9C00993F9A009A40
+            98009B4096009D4194009E429200A0439000A1448E00A2458D00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00485FE400495DE3004B5CE2004C5BE1004E5AE0004F58
+            DF005157DE005256DD005455DC005554DB005752D900615BDA00F9F8FD00FFFF
+            FF00FFFFFF00FFFFFF00CCC6F100624AD2006348D1006447D0006646CF006844
+            CD006943CC006B42CB006C41CA006E3FC9006F3EC800703DC700723CC600733A
+            C5007539C4007638C3007837C2007935C1007B34C0007C33BF007E32BD007F31
+            BC008130BB008231B9008431B700964EBF00D1B1E200DCC2E800B47FCD008B37
+            AE008C37AC00CAA3D800FFFFFF00FFFFFF00FFFFFF00F5EDF6009741A300963D
+            9E00973E9C00993F9A009A4098009B4096009D4194009E429200A0439000A144
+            8F00A2458D00A4468B00FFFFFF00FFFFFF00FFFFFF00FFFFFF00495DE3004B5C
+            E2004C5BE1004E5AE0004F58DF005157DE005256DD005455DC005554DB005752
+            D9005851D8005A50D700A9A2E900FFFFFF00FFFFFF00FFFFFF00FFFFFF00B5A8
+            E9006548D0006646CF006844CD006943CC006B42CB006C41CA006D3FC9006F3E
+            C800703DC700723CC600733AC5007539C4007638C3007837C2007935C1007B34
+            C0007C33BF007E32BD007F31BC008130BB008231B9008431B7008532B5008633
+            B4008834B1008935B0008B36AE008C37AC00BD8CCE00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00C595CC00963D9E00973E9C00993F9A009A4098009B4096009D41
+            94009E429200A0439100A1448F00A2458D00A4468B00A5478900FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF004B5CE2004C5BE1004E5AE0004F58DF005157DE005256
+            DD005455DC005554DB005752D9005851D8005A50D7005B4ED6006050D600E3DF
+            F700FFFFFF00FFFFFF00FFFFFF00FFFFFF00CEC4F0007656D2006943CC006B42
+            CB006C41CA006D3FC9006F3EC800703DC700723CC600733AC5007539C4007638
+            C3007837C2007936C1007B34C0007C33BF007E32BD007F31BC008130BB008231
+            B9008431B7008532B5008633B4008834B1008935B0008B36AE009547B300D3B3
+            DE00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F8F2F9009C48A300973E9C00993F
+            9A009A4098009B4096009D4194009E429300A0439100A1448F00A2458D00A446
+            8B00A5478900A6478700FFFFFF00FFFFFF00FFFFFF00FFFFFF004C5BE1004E5A
+            E0004F59DF005157DE005256DD005455DC005554DB005752D9005851D8005A50
+            D7005B4ED6005D4DD5005E4CD4008272DC00FCFBFE00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FBFAFE00CBBDED00A68CDF009776D8009875D8009873D700966E
+            D5009469D3009364D100915FCF00905ACD008E56CB008D50C9008D4EC8009251
+            C7009555C8009958C8009C5DC800A061C800A465C800A76AC800AB6FC800AC71
+            C800BA87CF00D6B8E100FAF6FB00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FDFC
+            FE00B271B800973E9C00993F9A009A4098009B4096009D4195009E429300A043
+            9100A1448F00A2458D00A4468B00A5478900A6478700A8488500FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF004E5AE0004F59DF005157DE005256DD005455DC005554
+            DB005752D9005851D8005A50D7005B4ED6005D4DD5005E4CD400604BD3006149
+            D2008873DC00F2F0FB00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE86C300973E9C00993F9A009A4098009B40
+            96009D4195009E429300A0439100A1448F00A2458D00A4468B00A5478900A647
+            8700A8488500A9498300FFFFFF00FFFFFF00FFFFFF00FFFFFF005D67E2005157
+            DE005256DD005455DC005554DB005752D9005851D8005A50D7005B4ED6005D4D
+            D5005E4CD400604BD3006149D2006348D1006447D000795CD500E2DCF600FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F4EAF500B576BB00973E
+            9C00993F9A009A3F99009B4096009D4195009E429300A0439100A1448F00A245
+            8D00A4468B00A5478900A6478700A8488500A9498300B25A8C00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF007176E4005256DD005455DC005554DB005752D9005851
+            D8005A50D7005B4ED6005D4DD5005E4CD400604BD3006149D2006348D1006447
+            D0006646CF006745CE006B46CE00A086DE00E3DAF500FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F4EC
+            F600D0A9D5009C48A400973E9C00993F9A009A3F99009B4096009D4195009E42
+            9300A0439100A1448F00A2458D00A4468B00A5468900A6478700A8488500A949
+            8300AB4A8100BC6D9700FFFFFF00FFFFFF00FFFFFF00FFFFFF00888AE8005455
+            DC005554DB005752D9005851D8005A50D7005B4ED6005D4DD5005E4CD400604B
+            D3006149D2006348D1006447D0006646CF006745CE006943CD006A42CB006C41
+            CA006D3FC9007F53CE00A98BDD00D7C8EF00F4F0FA00F5F0FB00F5F0FB00F5F0
+            FA00F5F0FA00F5F0FA00F5F0FA00F5F0FA00F5F0FA00F6F0FA00F6F0FA00F6F0
+            FA00F6F0F900F6F0F900F6F0F900F6F0F900F6F0F900F6F0F900F7F0F900F7F0
+            F900E8D7ED00CDA4D500AA65B600953EA100963D9E00973E9C00993F9A009A3F
+            99009B4096009D4195009E429300A0439100A1448F00A2458D00A4468B00A546
+            8900A6478700A8488500A9498300AB4A8100AC4B7F00C784A600FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00B9B9F1005554DB005752D9005851D8005A50D7005B4E
+            D6005D4DD5005E4CD400604BD3006149D2006348D1006447D0006646CF006745
+            CE006943CD006A42CB006C41CA006D3FC9006F3EC800703DC700723CC600733B
+            C5007539C4007638C3007837C2007936C1007B34C0007C33BF007E32BD007F31
+            BC008130BB008230B9008431B7008532B5008633B4008834B1008935B0008A36
+            AE008C37AC008D37AA008F38A8009039A600923AA400933BA200943CA000963D
+            9E00973E9C00993F9A009A3F99009B4096009D4195009E429300A0439100A144
+            8F00A2458D00A4468B00A5468900A6478700A8488500A9498300AB4A8100AC4B
+            7F00AD4C7D00DEB6CA00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EDEDFB005752
+            D9005851D8005A50D7005B4ED6005D4DD5005E4CD400604BD3006149D2006348
+            D1006447D0006646CF006745CE006943CD006A42CB006C41CA006D3FC9006F3E
+            C800703DC700723CC600733BC5007539C4007638C3007837C2007936C1007B34
+            C0007C33BF007E32BD007F31BC008130BB008230B9008431B7008532B5008633
+            B4008834B1008935B0008A36AE008C37AC008D37AA008F38A8009039A600923A
+            A400933BA200943CA000963D9E00973E9C00993F9A009A3F99009B4096009D41
+            95009E429300A0439100A1448F00A2458D00A4468B00A5468900A6478700A848
+            8500A9498300AB4A8100AC4B7F00AD4C7D00AF4D7C00F7EDF100FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF008681E3005A50D7005B4ED6005D4DD5005E4C
+            D400604BD300614AD2006348D1006447D0006646CF006745CE006943CD006A42
+            CB006C41CA006D3FC9006F3EC800703DC700723CC600733BC5007539C4007638
+            C3007837C2007936C1007B34C0007C33BF007E32BD007F31BC008130BB008230
+            B9008431B7008532B5008633B4008734B2008935B0008A36AE008C37AC008D37
+            AA008F38A8009039A600923AA400933BA200943CA000963D9E00973E9C00993F
+            9A009A3F99009B4096009D4195009E429300A0439100A1448F00A2458D00A446
+            8B00A5468900A6478700A8488500A9498300AB4A8100AC4B7F00AD4C7D00AF4D
+            7C00C67F9E00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00DFDD
+            F7005B4ED6005D4DD5005E4CD400604BD300614AD2006348D1006447D0006646
+            CF006745CE006943CD006A42CB006C41CA006D40CA006F3EC800703DC700723C
+            C600733BC5007539C4007638C3007837C2007936C1007B34C0007C33BF007E32
+            BD007F31BC008130BB008230B9008431B7008532B5008633B4008734B2008935
+            B0008A36AE008C37AC008D37AA008F38A8009039A600923AA400933BA200943C
+            A000963D9E00973E9C00993F9A009A3F99009B4096009D4195009E4293009F43
+            9100A1448F00A2458D00A4468B00A5468900A6478700A8488500A9498300AB4A
+            8100AC4B8000AD4C7D00AF4D7C00B04E7900F0DDE500FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00998FE4005E4CD400604BD300614A
+            D2006348D1006447D0006646CF006745CE006943CD006A42CB006B41CB006D40
+            CA006F3EC800703DC700723CC600733BC5007539C4007638C3007837C2007936
+            C1007B34C0007C33BF007E32BD007F31BC008130BB008230B9008431B7008532
+            B6008633B4008734B2008935B0008A36AE008C37AC008D37AA008F38A8009039
+            A600913AA400933BA200943CA000963D9E00973E9C00993F9A009A3F99009B40
+            96009D4195009E4293009F439100A1448F00A2458D00A4468B00A5468900A647
+            8700A8488500A9498300AB4A8100AC4B8000AD4C7D00AF4D7C00B04E7900CF90
+            AA00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00F7F6FD007C6BDB00614AD2006348D1006447D0006646CF006745CE006943
+            CD006A42CC006B41CB006D40CA006F3EC800703DC700723CC600733BC5007539
+            C4007638C3007837C2007936C1007B34C0007C33BF007E32BD007F31BC008130
+            BB008230B9008331B8008532B6008633B4008734B2008935B0008A36AE008C37
+            AC008D37AA008F38A8009039A600913AA400933BA200943CA000963D9E00973E
+            9C00993F9A009A3F99009B4096009C4195009E4293009F439100A1448F00A245
+            8D00A4468B00A5468900A6478700A8488500A9498400AB4A8100AC4B8000AD4C
+            7D00AF4D7C00B04E7900C06D9000FBF7F900FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EBE8F9007058D5006447
+            D0006646CF006745CE006844CD006A42CC006B41CB006D40CA006F3EC800703D
+            C700723CC600733BC5007539C4007638C3007837C2007936C1007B34C0007C33
+            BF007E32BD007F31BC008130BB008230B9008331B8008532B6008633B4008734
+            B2008935B0008A36AE008C37AC008D37AA008E38A8009039A600913AA400933B
+            A200943CA000963D9E00973E9C00993F9A009A3F99009B4097009C4195009E42
+            93009F439100A1448F00A2458D00A4468B00A5468900A6478700A8488500A949
+            8400AB4A8100AC4B8000AD4C7D00AF4D7C00B04E7900B95D8400F5E9EE00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00EBE7F9008167D7006745CE006844CD006A42CC006B41
+            CB006D40CA006F3EC800703DC700723CC600733BC5007539C4007638C3007837
+            C2007936C1007B34C0007C33BF007E32BD007F31BC008130BB008230BA008331
+            B8008532B6008633B4008734B2008935B0008A36AE008C37AC008D37AA008E38
+            A8009039A600913AA400933BA200943CA000963D9E00973E9C00993F9A00993F
+            99009B4097009C4195009E4293009F439100A1448F00A2458D00A4468B00A546
+            8900A6478700A8488500A9498400AB4A8100AC4B8000AD4C7D00AF4D7C00B04E
+            7900C06D9000F5E9EE00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F8F6
+            FD00A089DF006A42CC006B41CB006D40CA006F3EC800703DC700723CC600733B
+            C5007539C4007638C3007837C2007936C1007B34C0007C33BF007E32BD007F31
+            BC008130BC008230BA008331B8008532B6008633B4008734B2008935B0008A36
+            AE008C37AC008D37AA008E38A8009039A600913AA400933BA200943CA000963D
+            9E00973E9C00983E9B00993F99009B4097009C4195009E4293009F439100A144
+            8F00A2458D00A4468B00A5468900A6478700A8488500A9498400AB4A8100AC4B
+            8000AD4C7D00AF4D7C00B04E7900CE90AA00FBF7F900FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00E3DAF5009675D9006F3E
+            C800703DC700723CC600733BC5007539C4007638C3007837C2007936C1007B34
+            C0007C33BF007E32BD007F31BD008130BC008230BA008331B8008532B6008633
+            B4008734B2008935B0008A36AE008C36AC008D37AA008E38A8009039A600913A
+            A400933BA200943CA000963D9E00973E9C00983E9B00993F99009B4097009C41
+            95009E4293009F439100A1448F00A2458D00A3458B00A5468900A6478700A848
+            8500A9498400AB4A8100AC4B8000AD4C7D00AF4D7C00C67F9F00F0DDE500FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F0EAF900C5AFE8009E78D7008E5DCF008148
+            C8007837C2007936C1007B34C0007C33BF007D32BE007F31BD008130BC008230
+            BA008331B8008532B6008633B4008734B2008935B0008A36AE008C36AC008D37
+            AA008E38A8009039A600913AA400933BA200943CA000963D9E00973D9D00983E
+            9B00993F99009B4097009C4195009E4293009F439100A1448F00A2458D00A345
+            8B00A5468900A6478700A8488500A9498400B2598B00BB6C9700C683A500DEB5
+            C900F7ECF100FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00}
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object Picture2: TfrxPictureView
+          Left = 146.960730000000000000
+          Top = 140.063080000000000000
+          Width = 18.897650000000000000
+          Height = 18.897650000000000000
+          Picture.Data = {
+            07544269746D6170964A0000424D964A00000000000036000000280000004600
+            0000440000000100200000000000604A00000000000000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F8F0EC00E4C7
+            B600D2A18400CA906E00C4825B00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00C482
+            5B00CA906E00D2A18400E4C7B600F8F1ED00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00F3E5DD00D09C7E00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00D09C7E00F3E5DD00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FCF9F700D6A9
+            8F00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE774D00D6A98F00FCF9F700FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F7EEE900C98E6C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00C98E6C00F7EEE900FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00F7EEE900C4825B00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00C4825B00F7EEE900FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FCF9F700C98E6C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00C98E
+            6C00FCF9F700FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00D6A98E00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00D6A98F00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00F3E5DD00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00F3E5DD00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00D09C7E00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00D09C7E00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F8F0EC00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00F8F1ED00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00E4C7B500BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00E4C7B600FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00D2A0
+            8300BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00D2A18400FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00CA8F6D00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00CA906E00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00C3815B00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00C4825B00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00D3A28600DBB29B00DBB2
+            9B00DBB29B00DBB29B00DBB29B00D4A48800BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00F0DFD600BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DF
+            D600BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00EEDB
+            D000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DFD600BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00EEDBD000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F0DFD600BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00F0DFD600BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DF
+            D600BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00EEDB
+            D000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DFD600BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00EEDBD000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F0DFD600BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00F0DFD600BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DF
+            D600BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00EEDB
+            D000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DFD600BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00EEDBD000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00F0DFD600BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00F0DFD600BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00EEDBD000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DF
+            D600BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00EEDB
+            D000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F0DFD600BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00C17C
+            5400F0DFD600F0DFD600F0DFD600F0DFD600F0DFD600FBF7F400FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FBF7F400EEDBD000EEDBD000EEDBD000EEDB
+            D000EEDBD000C3815A00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00C27F5700FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00CC94
+            7300BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00C27F5700FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00D5A68A00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00C27F5700FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00DDB8A200BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00C27F
+            5700FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00E6CABA00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00C27F5700FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EEDC
+            D100BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00C07A5100DDB6A000DDB6A000DDB6A000DDB6
+            A000DDB6A000F5EBE400FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F7ED
+            E800E1BFAB00E1BFAB00E1BFAB00E1BFAB00E1BFAB00DBB39C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00EDD9
+            CD00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EDD9CD00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00EDD9CD00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00EDD9CD00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00EDD9CD00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00EDD9CD00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00EDD8CC00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00EDD9
+            CD00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00E9D0
+            C100FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F2E3DA00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00E3C4B200FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFEFE00CE987800BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00DAB29A00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FEFDFC00ECD8CC00E5C8B700E5C8B700E5C8B700E5C8
+            B700BF784F00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00C88B6700FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C07A5200BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00EBD5C800FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C07A5200BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00C5845E00F9F2
+            ED00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00C07A5200BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00C88A6700F4E7E000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00C07A5200BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BF774D00D4A48800F1E1D800FDFB
+            F900FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C07A5200BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BF774D00C6876200CA90
+            6E00CA906E00CA906E00C88B6800C17C5400BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00C3815B00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00C4825B00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00CA8F
+            6D00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00CA906E00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00D2A08300BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00D2A18400FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00E4C7B500BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00E4C7B600FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00F8F0EC00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00F8F1ED00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00D09C7E00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00D09C7E00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F3E5DD00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00F3E5DD00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00D6A98E00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00D6A98F00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FCF8F600C98E6C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00C98E6C00FCF9F700FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00F7EEE900C4825B00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00C4825B00F7EEE900FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00F7EDE800C98E6C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00C98E
+            6C00F7EEE900FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FCF9F700D6A98E00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00D6A98F00FCF9F700FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00F3E5DD00D09C7E00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00D09C7E00F3E5DD00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00F8F0EC00E4C7B500D2A08300CA8F6D00C3815B00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE764C00BE76
+            4C00BE764C00C3815B00CA8F6D00D2A08300E4C7B500F8F0EC00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00}
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object Memo60: TfrxMemoView
+          Left = 277.803340000000000000
+          Top = 139.842616100000000000
+          Width = 87.229128100000000000
+          Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
-            'Cliente : [FAT_DB_M_ORC1."int_nomecli"]')
+            '@colchoesglobo')
+          ParentFont = False
+        end
+        object Memo61: TfrxMemoView
+          Left = 164.637910000000000000
+          Top = 140.063086100000000000
+          Width = 87.229128100000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '/colchoesglobo')
+          ParentFont = False
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 205.315090000000000000
+        Top = 298.582870000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Memo2: TfrxMemoView
+          Top = 0.779530000000000000
+          Width = 718.110700000000000000
+          Height = 203.716535430000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Fill.BackColor = clWhite
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 3.425170000000000000
+          Top = 28.456710000000000000
+          Width = 44.204390000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Cliente')
           ParentFont = False
         end
         object Memo12: TfrxMemoView
-          Left = 446.630180000000000000
-          Top = 148.181200000000000000
-          Width = 255.858070000000000000
-          Height = 15.118120000000000000
+          Left = 523.338900000000000000
+          Top = 51.942280000000000000
+          Width = 191.606060000000000000
+          Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Height = -16
+          Font.Name = 'Arial narrow'
+          Font.Style = [fsBold]
           Memo.UTF8W = (
-            'Or'#231'amento : [FAT_DB_M_ORC1."id_orcamento"]')
+            '[FAT_DB_M_ORC1."id_orcamento"]')
           ParentFont = False
         end
         object Memo13: TfrxMemoView
-          Left = 3.779530000000000000
-          Top = 167.078850000000000000
-          Width = 263.417130000000000000
+          Left = 122.606370000000000000
+          Top = 46.832045000000000000
+          Width = 176.487940000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -7152,69 +8548,13 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
-            'Data Emiss'#227'o : [FAT_DB_M_ORC1."dta_orcamento"]')
+            '[FAT_DB_M_ORC1."dta_orcamento"]')
           ParentFont = False
         end
         object Memo14: TfrxMemoView
-          Left = 459.189240000000000000
-          Top = 167.078850000000000000
-          Width = 240.739950000000000000
-          Height = 15.118120000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Validade : [FAT_DB_M_ORC1."dta_validade"]')
-          ParentFont = False
-        end
-        object Memo15: TfrxMemoView
-          Left = 24.118120000000000000
-          Top = 205.228346456693000000
-          Width = 339.007730000000000000
-          Height = 15.118120000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Vendedor : [FAT_DB_M_ORC1."int_nomefun"]')
-          ParentFont = False
-        end
-        object Memo16: TfrxMemoView
-          Left = 397.189240000000000000
-          Top = 185.976500000000000000
-          Width = 304.991960000000000000
-          Height = 15.118120000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Condi'#231#227'o Pagamento : [FAT_DB_M_ORC1."int_nomecpg"]')
-          ParentFont = False
-        end
-        object Memo17: TfrxMemoView
-          Left = 435.323130000000000000
-          Top = 205.094620000000000000
-          Width = 270.976190000000000000
-          Height = 15.118120000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Tipo do Titulo : [FAT_DB_M_ORC1."int_nomefpg"]')
-          ParentFont = False
-        end
-        object Memo34: TfrxMemoView
-          Left = 7.559060000000000000
-          Top = 185.952755910000000000
-          Width = 260.787570000000000000
+          Left = 122.606370000000000000
+          Top = 65.207380000000000000
+          Width = 191.606060000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -7222,160 +8562,717 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
-            'Data Entrega : [FAT_DB_M_ORC1."dta_entrega"]')
+            '[FAT_DB_M_ORC1."dta_validade"]')
           ParentFont = False
         end
-      end
-      object Header1: TfrxHeader
-        FillType = ftBrush
-        Height = 26.456710000000000000
-        Top = 309.921460000000000000
-        Width = 718.110700000000000000
-        ReprintOnNewPage = True
+        object Memo15: TfrxMemoView
+          Left = 122.606370000000000000
+          Top = 83.582715000000000000
+          Width = 304.991960000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              '[FAT_DB_M_ORC1."int_endercli"] - N'#186' [FAT_DB_M_ORC1."int_numeroen' +
+              'd"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo16: TfrxMemoView
+          Left = 3.425170000000000000
+          Top = 138.708720000000000000
+          Width = 93.338280000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Cond. Pagamento')
+          ParentFont = False
+        end
+        object Memo34: TfrxMemoView
+          Left = 523.457020000000000000
+          Top = 72.207380000000000000
+          Width = 272.126160000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC1."dta_entrega"]')
+          ParentFont = False
+        end
         object Memo3: TfrxMemoView
-          Left = 3.779530000000000000
+          Left = 1.779530000000000000
+          Top = 183.567100000000000000
           Width = 45.354318500000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
             'Produto')
           ParentFont = False
         end
         object Memo4: TfrxMemoView
-          Left = 51.370130000000000000
-          Width = 249.448860390000000000
+          Left = 49.370130000000000000
+          Top = 183.567100000000000000
+          Width = 211.653560390000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           Memo.UTF8W = (
             'Descri'#231#227'o')
           ParentFont = False
         end
         object Memo19: TfrxMemoView
-          Left = 360.716760000000000000
-          Width = 26.456673390000000000
+          Left = 339.716760000000000000
+          Top = 183.567100000000000000
+          Width = 30.236203390000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           Memo.UTF8W = (
             'UND')
           ParentFont = False
         end
         object Memo20: TfrxMemoView
-          Left = 393.527830000000000000
-          Width = 41.574795830000000000
+          Left = 382.866420000000000000
+          Top = 183.567100000000000000
+          Width = 30.236205830000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
-            'Qdte.')
+            'Qtde')
           ParentFont = False
         end
         object Memo21: TfrxMemoView
-          Left = 441.338900000000000000
-          Width = 52.913368740000000000
+          Left = 416.779891260000000000
+          Top = 183.567100000000000000
+          Width = 68.031488740000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
             'Vlr. Unitario')
           ParentFont = False
         end
         object Memo23: TfrxMemoView
-          Left = 539.031850000000000000
-          Width = 52.913368740000000000
+          Left = 536.031850000000000000
+          Top = 183.567100000000000000
+          Width = 56.692898740000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
             'Desc. unit.')
           ParentFont = False
         end
         object Memo24: TfrxMemoView
-          Left = 651.299630000000000000
-          Width = 64.251958740000000000
+          Left = 659.858690000000000000
+          Top = 183.567100000000000000
+          Width = 56.692898740000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
             'Vlr. Total')
           ParentFont = False
         end
-        object Line2: TfrxLineView
-          Top = 20.118120000000000000
-          Width = 718.110700000000000000
-          Color = clBlack
-          ArrowSolid = True
-          Frame.Typ = [ftTop]
-        end
         object Memo36: TfrxMemoView
-          Left = 497.457020000000000000
-          Width = 37.795248740000000000
+          Left = 487.897960000000000000
+          Top = 183.567100000000000000
+          Width = 45.354308740000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
             '% Desc.')
           ParentFont = False
         end
         object Memo38: TfrxMemoView
-          Left = 595.606680000000000000
-          Width = 52.913368740000000000
+          Left = 594.047620000000000000
+          Top = 183.567100000000000000
+          Width = 68.031488740000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Liq. unit'#225'rio')
+          ParentFont = False
+        end
+        object Line6: TfrxLineView
+          Top = 22.456710000000000000
+          Width = 718.110236220000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo28: TfrxMemoView
+          Left = 287.819265000000000000
+          Top = 0.779530000000000000
+          Width = 142.472170000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'DADOS DO CLIENTE')
+          ParentFont = False
+        end
+        object Memo29: TfrxMemoView
+          Left = 428.307360000000000000
+          Top = 24.811045590000000000
+          Width = 179.149537950000000000
+          Height = 20.409448820000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial narrow'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Total cubagem .: [FAT_DB_M_ORC1."cubagem"] m'#179)
+          ParentFont = False
+        end
+        object Memo40: TfrxMemoView
+          Left = 523.338900000000000000
+          Top = 127.333385000000000000
+          Width = 180.267470000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC1."int_nomefun"]')
+          ParentFont = False
+        end
+        object Memo41: TfrxMemoView
+          Left = 122.606370000000000000
+          Top = 120.333385000000000000
+          Width = 210.503710000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC1."int_nomeatendente"]')
+          ParentFont = False
+        end
+        object Line2: TfrxLineView
+          Top = 180.685220000000000000
+          Width = 718.110700000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo17: TfrxMemoView
+          Left = 523.338900000000000000
+          Top = 90.582715000000000000
+          Width = 191.606060000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC1."int_bairrocli"]')
+          ParentFont = False
+        end
+        object Memo42: TfrxMemoView
+          Left = 122.606370000000000000
+          Top = 101.958050000000000000
+          Width = 297.432900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC1."int_nomecid"] - [FAT_DB_M_ORC1."int_nomeest"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo43: TfrxMemoView
+          Left = 523.338900000000000000
+          Top = 108.958050000000000000
+          Width = 187.826530000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC1."int_tel_fixo"] / [FAT_DB_M_ORC1."int_tel_movel"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo44: TfrxMemoView
+          Left = 265.126160000000000000
+          Top = 183.567100000000000000
+          Width = 26.456673390000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Cor')
+          ParentFont = False
+        end
+        object Memo45: TfrxMemoView
+          Left = 48.015770000000000000
+          Top = 28.456710000000000000
+          Width = 70.661100000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
           Memo.UTF8W = (
-            'Liq. unit'#225'rio')
+            '...................:')
+          ParentFont = False
+        end
+        object Memo46: TfrxMemoView
+          Left = 122.606370000000000000
+          Top = 28.456710000000000000
+          Width = 312.551020000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC1."int_nomecli"]')
+          ParentFont = False
+        end
+        object Memo47: TfrxMemoView
+          Left = 3.425170000000000000
+          Top = 46.832045000000000000
+          Width = 74.440630000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Data Emiss'#227'o')
+          ParentFont = False
+        end
+        object Memo48: TfrxMemoView
+          Left = 74.472480000000000000
+          Top = 46.832045000000000000
+          Width = 44.204390000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '............:')
+          ParentFont = False
+        end
+        object Memo49: TfrxMemoView
+          Left = 429.409710000000000000
+          Top = 72.207380000000000000
+          Width = 86.929190000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Prev. da entrega : [FAT_DB_M_ORC1."dta_entrega"]')
+          ParentFont = False
+        end
+        object Memo50: TfrxMemoView
+          Left = 506.338900000000000000
+          Top = 72.207386100000000000
+          Width = 13.968150000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '.:')
+          ParentFont = False
+        end
+        object Memo51: TfrxMemoView
+          Left = 3.425170000000000000
+          Top = 83.582715000000000000
+          Width = 59.322510000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Endere'#231'o')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo52: TfrxMemoView
+          Left = 59.354360000000000000
+          Top = 83.582721100000000000
+          Width = 59.322510000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '.................:')
+          ParentFont = False
+        end
+        object Memo53: TfrxMemoView
+          Left = 3.425170000000000000
+          Top = 101.958050000000000000
+          Width = 47.983920000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Cidade')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo54: TfrxMemoView
+          Left = 48.015770000000000000
+          Top = 101.958056100000000000
+          Width = 70.661100000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '.....................:')
+          ParentFont = False
+        end
+        object Memo55: TfrxMemoView
+          Left = 3.425170000000000000
+          Top = 120.333385000000000000
+          Width = 55.542980000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Atendente')
+          ParentFont = False
+        end
+        object Memo56: TfrxMemoView
+          Left = 55.574830000000000000
+          Top = 120.333391100000000000
+          Width = 63.102040000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '..................:')
+          ParentFont = False
+        end
+        object Memo57: TfrxMemoView
+          Left = 122.606370000000000000
+          Top = 138.708720000000000000
+          Width = 308.771490000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[ft_texto_cond_pgto]')
+          ParentFont = False
+        end
+        object Memo58: TfrxMemoView
+          Left = 93.370130000000000000
+          Top = 138.708726100000000000
+          Width = 25.306740000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '......:')
+          ParentFont = False
+        end
+        object Memo62: TfrxMemoView
+          Left = 426.850650000000000000
+          Top = 50.052515000000000000
+          Width = 74.440630000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Or'#231'amento')
+          ParentFont = False
+        end
+        object Memo63: TfrxMemoView
+          Left = 498.779840000000000000
+          Top = 51.942286100000000000
+          Width = 21.527210000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '...:')
+          ParentFont = False
+        end
+        object Memo64: TfrxMemoView
+          Left = 3.425170000000000000
+          Top = 65.207380000000000000
+          Width = 47.983920000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Validade')
+          ParentFont = False
+        end
+        object Memo65: TfrxMemoView
+          Left = 48.307360000000000000
+          Top = 65.207386100000000000
+          Width = 70.661100000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '....................:')
+          ParentFont = False
+        end
+        object Memo66: TfrxMemoView
+          Left = 429.409710000000000000
+          Top = 90.582715000000000000
+          Width = 36.645330000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Bairro')
+          ParentFont = False
+        end
+        object Memo67: TfrxMemoView
+          Left = 460.984540000000000000
+          Top = 90.582721100000000000
+          Width = 59.322510000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '................:')
+          ParentFont = False
+        end
+        object Memo68: TfrxMemoView
+          Left = 429.409710000000000000
+          Top = 108.958050000000000000
+          Width = 63.102040000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Fixo/Celular')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo69: TfrxMemoView
+          Left = 491.220780000000000000
+          Top = 108.958056100000000000
+          Width = 29.086270000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '.......:')
+          ParentFont = False
+        end
+        object Memo70: TfrxMemoView
+          Left = 429.409710000000000000
+          Top = 127.333385000000000000
+          Width = 78.220160000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Representante')
+          ParentFont = False
+        end
+        object Memo71: TfrxMemoView
+          Left = 502.559370000000000000
+          Top = 127.333391100000000000
+          Width = 17.747680000000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '....:')
           ParentFont = False
         end
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 19.897650000000000000
-        Top = 359.055350000000000000
+        Top = 525.354670000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = FAT_DB_M_ORC_ITE1
         DataSetName = 'FAT_DB_M_ORC_ITE1'
         RowCount = 0
         Stretched = True
+        object Memo72: TfrxMemoView
+          Align = baClient
+          Width = 718.110700000000000000
+          Height = 19.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight]
+          Fill.BackColor = clWhite
+          ParentFont = False
+        end
         object FAT_DP_M_ORC_ITEid_item: TfrxMemoView
-          Left = 3.779530000000000000
+          Left = 1.779530000000000000
           Top = 1.000000000000000000
           Width = 45.354360000000000000
           Height = 15.118120000000000000
@@ -7383,7 +9280,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DataSetName = 'FAT_DB_M_ORC_ITE1'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7392,16 +9289,16 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object FAT_DP_M_ORC_ITEint_descitem: TfrxMemoView
-          Left = 51.590600000000000000
+          Left = 49.370130000000000000
           Top = 1.000000000000000000
-          Width = 226.771680390000000000
+          Width = 211.653560390000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DataSet = FAT_DB_M_ORC_ITE1
           DataSetName = 'FAT_DB_M_ORC_ITE1'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
@@ -7409,7 +9306,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object FAT_DP_M_ORC_ITEint_unidade: TfrxMemoView
-          Left = 360.716760000000000000
+          Left = 339.716760000000000000
           Top = 1.000000000000000000
           Width = 30.236203390000000000
           Height = 15.118120000000000000
@@ -7418,7 +9315,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DataSetName = 'FAT_DB_M_ORC_ITE1'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
@@ -7426,7 +9323,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object FAT_DP_M_ORC_ITEqtde: TfrxMemoView
-          Left = 392.527830000000000000
+          Left = 371.527830000000000000
           Top = 1.000000000000000000
           Width = 41.574795830000000000
           Height = 15.118120000000000000
@@ -7435,7 +9332,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DataSetName = 'FAT_DB_M_ORC_ITE1'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7444,7 +9341,26 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object FAT_DP_M_ORC_ITEvlr_unitario: TfrxMemoView
-          Left = 437.559370000000000000
+          Left = 420.559370000000000000
+          Top = 1.000000000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          DataSet = FAT_DB_M_ORC_ITE1
+          DataSetName = 'FAT_DB_M_ORC_ITE1'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[FAT_DB_M_ORC_ITE1."vlr_unitario"]')
+          ParentFont = False
+        end
+        object FAT_DP_M_ORC_ITEvlr_desconto: TfrxMemoView
+          Left = 536.031798740000000000
           Top = 1.000000000000000000
           Width = 56.692950000000000000
           Height = 15.118120000000000000
@@ -7454,26 +9370,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[FAT_DB_M_ORC_ITE1."vlr_unitario"]')
-          ParentFont = False
-        end
-        object FAT_DP_M_ORC_ITEvlr_desconto: TfrxMemoView
-          Left = 539.031850000000000000
-          Top = 1.000000000000000000
-          Width = 52.913420000000000000
-          Height = 15.118120000000000000
-          DataSet = FAT_DB_M_ORC_ITE1
-          DataSetName = 'FAT_DB_M_ORC_ITE1'
-          DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7482,9 +9379,9 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object FAT_DP_M_ORC_ITEvlr_liquido: TfrxMemoView
-          Left = 651.299630000000000000
+          Left = 659.858690000000000000
           Top = 1.000000000000000000
-          Width = 64.251958740000000000
+          Width = 56.692898740000000000
           Height = 15.118120000000000000
           DataSet = FAT_DB_M_ORC_ITE1
           DataSetName = 'FAT_DB_M_ORC_ITE1'
@@ -7492,7 +9389,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7501,16 +9398,16 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Memo35: TfrxMemoView
-          Left = 282.126160000000000000
+          Left = 265.126160000000000000
           Top = 1.000000000000000000
-          Width = 75.590480390000000000
+          Width = 71.810950390000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DataSet = FAT_DB_M_ORC_ITE1
           DataSetName = 'FAT_DB_M_ORC_ITE1'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
@@ -7518,9 +9415,9 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Memo37: TfrxMemoView
-          Left = 497.456968740000000000
+          Left = 491.677438740000000000
           Top = 1.000000000000000000
-          Width = 37.795300000000000000
+          Width = 41.574830000000000000
           Height = 15.118120000000000000
           DataSet = FAT_DB_M_ORC_ITE1
           DataSetName = 'FAT_DB_M_ORC_ITE1'
@@ -7528,7 +9425,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7537,9 +9434,9 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Memo39: TfrxMemoView
-          Left = 595.606628740000000000
+          Left = 601.606628740000000000
           Top = 1.000000000000000000
-          Width = 52.913420000000000000
+          Width = 60.472480000000000000
           Height = 15.118120000000000000
           DataSet = FAT_DB_M_ORC_ITE1
           DataSetName = 'FAT_DB_M_ORC_ITE1'
@@ -7547,7 +9444,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7558,11 +9455,12 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
-        Height = 18.897650000000000000
-        Top = 646.299630000000000000
+        Height = 22.677180000000000000
+        Top = 786.142240000000000000
         Width = 718.110700000000000000
         object Memo25: TfrxMemoView
           Left = 264.567100000000000000
+          Top = 0.897650000000000000
           Width = 188.976500000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -7577,6 +9475,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         end
         object Memo26: TfrxMemoView
           Left = 604.724800000000000000
+          Top = 0.897650000000000000
           Width = 113.385900000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -7592,11 +9491,33 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       end
       object Footer1: TfrxFooter
         FillType = ftBrush
-        Height = 185.196970000000000000
-        Top = 400.630180000000000000
+        Height = 158.740260000000000000
+        Top = 566.929500000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'Footer1OnBeforePrint'
         Stretched = True
+        object Line5: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 135.708720000000000000
+          Width = 245.669450000000000000
+          Color = clBlack
+          ArrowSolid = True
+          Frame.Typ = [ftTop]
+        end
+        object Memo33: TfrxMemoView
+          Left = 88.031599800000000000
+          Top = 137.724490000000000000
+          Width = 56.692830390000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Assinatura')
+          ParentFont = False
+        end
         object Memo18: TfrxMemoView
           Left = 548.031850000000000000
           Top = 6.779530000000000000
@@ -7604,7 +9525,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7613,7 +9534,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Memo27: TfrxMemoView
-          Left = 636.181510000000000000
+          Left = 637.181510000000000000
           Top = 6.779530000000000000
           Width = 79.370078740000000000
           Height = 15.118120000000000000
@@ -7621,7 +9542,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7630,7 +9551,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Line3: TfrxLineView
-          Top = 4.000000000000000000
+          Top = 1.000000000000000000
           Width = 718.110700000000000000
           Color = clBlack
           ArrowSolid = True
@@ -7640,10 +9561,10 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           Left = 457.323130000000000000
           Top = 27.015770000000000000
           Width = 170.078798740000000000
-          Height = 15.118120000000000000
+          Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7654,7 +9575,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object mmTotDescEsp: TfrxMemoView
-          Left = 636.181510000000000000
+          Left = 637.181510000000000000
           Top = 27.015770000000000000
           Width = 79.370078740000000000
           Height = 15.118120000000000000
@@ -7662,7 +9583,7 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -7671,31 +9592,31 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
           ParentFont = False
         end
         object Memo30: TfrxMemoView
-          Left = 548.031850000000000000
+          Left = 532.913730000000000000
           Top = 55.913420000000000000
-          Width = 79.370078740000000000
-          Height = 15.118120000000000000
+          Width = 94.488198740000000000
+          Height = 18.897650000000000000
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
+          Font.Height = -15
+          Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
-            'Total :')
+            'Total l'#237'quido :')
           ParentFont = False
         end
         object Memo31: TfrxMemoView
-          Left = 636.181510000000000000
-          Top = 55.913420000000000000
-          Width = 79.370078740000000000
-          Height = 15.118120000000000000
+          Left = 629.622450000000000000
+          Top = 57.803185000000000000
+          Width = 86.929138740000000000
+          Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
+          Font.Height = -15
+          Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
@@ -7704,52 +9625,30 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
         end
         object Line4: TfrxLineView
           Left = 631.181510000000000000
-          Top = 49.133890000000000000
+          Top = 56.133890000000000000
           Width = 86.929190000000000000
           Color = clBlack
           ArrowSolid = True
           Frame.Typ = [ftTop]
         end
         object Memo32: TfrxMemoView
-          Left = 6.149660000000000000
-          Top = 75.590600000000000000
-          Width = 702.992460390000000000
-          Height = 45.354360000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Observa'#231#245'es : [FAT_DB_M_ORC1."obs"]')
-          ParentFont = False
-        end
-        object Line5: TfrxLineView
-          Left = 411.968770000000000000
-          Top = 156.063080000000000000
-          Width = 291.023810000000000000
-          Color = clBlack
-          ArrowSolid = True
-          Frame.Typ = [ftTop]
-        end
-        object Memo33: TfrxMemoView
-          Left = 502.677490000000000000
-          Top = 160.960730000000000000
-          Width = 102.047190390000000000
-          Height = 18.897650000000000000
+          Left = 2.149660000000000000
+          Top = 12.559060000000000000
+          Width = 445.984420390000000000
+          Height = 37.795300000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
-            'Ass. representante')
+            'Observa'#231#245'es : [FAT_DB_M_ORC1."obs"]')
           ParentFont = False
         end
       end
       object imgEmpresa1: TfrxPictureView
         Left = 592.047620000000000000
-        Top = -8.661410000000000000
+        Top = -2.661410000000000000
         Width = 124.724490000000000000
         Height = 71.811070000000000000
         HightQuality = False
@@ -7799,7 +9698,20 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
       'vlr_frete=vlr_frete'
       'separa_prod_serv=separa_prod_serv'
       'vlr_desc_especial=vlr_desc_especial'
-      'vlr_icm_desn=vlr_icm_desn')
+      'vlr_icm_desn=vlr_icm_desn'
+      'cubagem=cubagem'
+      'id_atendente=id_atendente'
+      'int_nomeatendente=int_nomeatendente'
+      'int_nomecid=int_nomecid'
+      'int_nomeest=int_nomeest'
+      'int_cpfcnpj=int_cpfcnpj'
+      'int_ie_rg_cli=int_ie_rg_cli'
+      'int_tel_movel=int_tel_movel'
+      'int_tel_fixo=int_tel_fixo'
+      'int_endercli=int_endercli'
+      'int_numeroend=int_numeroend'
+      'int_cepcli=int_cepcli'
+      'int_bairrocli=int_bairrocli')
     DataSet = dmGeral.FAT_CD_M_ORC
     BCDToCurrency = False
     Left = 1082
@@ -7870,5 +9782,17 @@ inherited FAT_FM_M_ORC: TFAT_FM_M_ORC
     BCDToCurrency = False
     Left = 1082
     Top = 344
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnException = ApplicationEvents1Exception
+    Left = 389
+    Top = 97
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = Timer1Timer
+    Left = 232
+    Top = 311
   end
 end
