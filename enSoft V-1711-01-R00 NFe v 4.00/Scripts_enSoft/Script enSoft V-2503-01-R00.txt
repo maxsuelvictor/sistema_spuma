@@ -1,0 +1,25 @@
+/***** 29-03-2025 ******/
+
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "cubagem" float8;
+
+
+/***** 31/03/2025 ******/
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "id_atendente" int4;
+
+
+/***** 04/04/2025 ******/
+
+ALTER TABLE "public"."fat_tb_m_orc"
+ALTER COLUMN "vlr_desc_especial" TYPE numeric(18,4);
+
+
+/***** 16/04/2025 ******/
+
+ALTER TABLE "public"."fat_tb_m_orc"
+ADD COLUMN "sgq_texto_cond_pgto" varchar(80);
+
+
+
+
