@@ -160,36 +160,37 @@ begin
      end
    else
      begin
-        if dmgeral.PCP_CD_M_ROM_ITE.Locate('ID_ITEM;NOME_ITE',VarArrayOf([id_item,nome_ite]),[]) then
+       if dmgeral.PCP_CD_M_ROM_ITE.Locate('ID_ITEM;NOME_ITE',VarArrayOf([id_item,nome_ite]),[]) then
          begin
-           try
-             dmgeral.PCP_CD_M_ROM_ITE.Filtered := true;
+            try
+              id_cor := x_id_cor_rom_ite;
 
-             dmgeral.PCP_CD_M_ROM_ITE.Filter   := ' ID_ITEM = ' + inttostr(id_item) +
-                                                  ' AND ID_COR = ' + inttostr(id_cor) +
-                                                  ' AND NOME_ITE = ' + QuotedStr(nome_ite) +
-                                                  ' AND QTDE_CONFERIDA > 0 ';
+              dmgeral.PCP_CD_M_ROM_ITE.Filtered := true;
+              dmgeral.PCP_CD_M_ROM_ITE.Filter   := ' ID_ITEM = ' + inttostr(id_item) +
+                                                   ' AND ID_COR = ' + inttostr(id_cor) +
+                                                   ' AND NOME_ITE = ' + QuotedStr(nome_ite) +
+                                                   ' AND QTDE_CONFERIDA > 0 ';
 
-             { dmgeral.PCP_CD_M_ROM_ITE.Filter   := ' ID_ITEM = ' + inttostr(id_item) +
-                                                  ' AND ID_COR = ' + inttostr(id_cor) +
-                                                  ' AND QTDE_CONFERIDA > 0 '; }
+              {dmgeral.PCP_CD_M_ROM_ITE.Filter   := ' ID_ITEM = ' + inttostr(id_item) +
+                                                    ' AND ID_COR = ' + inttostr(id_cor) +
+                                                    ' AND QTDE_CONFERIDA > 0 '; }
 
 
-             if (dmgeral.PCP_CD_M_ROM_ITE.IsEmpty) then
-                 begin
-                   dmgeral.PCP_CD_M_ROM_ITE.Filtered := true;
-                   dmgeral.PCP_CD_M_ROM_ITE.Filter   := ' ID_ITEM = ' + inttostr(id_item) +
-                                                        ' AND NOME_ITE = ' + QuotedStr(nome_ite) +
-                                                        ' AND QTDE_CONFERIDA > 0 ';
-                 end;
-             //x_id_ped     := dmgeral.PCP_CD_M_ROM_PED.FieldByName('id_pedido').AsInteger;
-             //x_id_ped_ite := dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('id_ped_ite').AsInteger;
+              if (dmgeral.PCP_CD_M_ROM_ITE.IsEmpty) then
+                  begin
+                    dmgeral.PCP_CD_M_ROM_ITE.Filtered := true;
+                    dmgeral.PCP_CD_M_ROM_ITE.Filter   := ' ID_ITEM = ' + inttostr(id_item) +
+                                                         ' AND NOME_ITE = ' + QuotedStr(nome_ite) +
+                                                         ' AND QTDE_CONFERIDA > 0 ';
+                  end;
+              //x_id_ped     := dmgeral.PCP_CD_M_ROM_PED.FieldByName('id_pedido').AsInteger;
+              //x_id_ped_ite := dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('id_ped_ite').AsInteger;
 
-             dmgeral.PCP_CD_M_ROM_ITE.Addindex('IndQtdeConf', 'ID_ITEM;QTDE_CONFERIDA', [ixDescending]);
-             dmgeral.PCP_CD_M_ROM_ITE.IndexName := 'IndQtdeConf';
+              dmgeral.PCP_CD_M_ROM_ITE.Addindex('IndQtdeConf', 'ID_ITEM;QTDE_CONFERIDA', [ixDescending]);
+              dmgeral.PCP_CD_M_ROM_ITE.IndexName := 'IndQtdeConf';
 
-             while not dmgeral.PCP_CD_M_ROM_ITE.eof do
-               begin
+              while not dmgeral.PCP_CD_M_ROM_ITE.eof do
+                begin
                   if dmgeral.PCP_CD_M_ROM_ITE.FieldByName('QTDE_CONFERIDA').AsFloat > 0 then
                      begin
                        dmgeral.PCP_CD_M_ROM_ITE.Edit;
@@ -202,12 +203,15 @@ begin
                        Result := true;
                      end;
                   dmgeral.PCP_CD_M_ROM_ITE.Next;
-               end;
-           finally
-             dmgeral.PCP_CD_M_ROM_ITE.Filtered := false;
-             dmgeral.PCP_CD_M_ROM_ITE.DeleteIndex('IndQtdeConf');
-           end;
+                end;
+            finally
+              dmgeral.PCP_CD_M_ROM_ITE.Filtered := false;
+              dmgeral.PCP_CD_M_ROM_ITE.DeleteIndex('IndQtdeConf');
+            end;
          end;
+       // 23/04/2025 , por Maxsuel Victor
+          // depois de passar pelo AtualizarQtdeConferidaPed e por esse método, a variável abaixo deve ser zerada.
+       x_id_cor_rom_ite := 0;
      end;
 end;
 
@@ -284,23 +288,32 @@ begin
                                      dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('int_qtde_ped_ite').AsFloat) then
                                      //dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('QTDE').AsFloat) then
                                 begin
+                                  // Maxsuel Victor, em 24/04/2025 - Esse if serve para o sistema adicionar qtde_conferida
+                                  // somente se a cor for realmente IGUAL ao do item do pedido ou se a cor for DIFERENTE só irá aceitar
+                                  //    se o usuário autorizar pela variável:  xPermiteOutraCor = true
+                                  if (dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('ID_COR').AsInteger = id_cor) or
 
-                                  continua := false;
+                                     (dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('ID_COR').AsInteger <> id_cor) and
+                                     (xPermiteOutraCor = true) then
+                                     begin
 
-                                  dmgeral.PCP_CD_M_ROM_PED_ITE.Edit;
+                                        continua := false;
 
-                                  dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('QTDE_CONFERIDA').AsFloat :=
-                                      dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('QTDE_CONFERIDA').AsFloat + 1;
-                                  //-----
-                                  dmGeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsString :=
-                                          dmGeral.PCP_CD_M_ROM_PED.FieldByName('id_pedido').AsString;
-                                  //-----
+                                        dmgeral.PCP_CD_M_ROM_PED_ITE.Edit;
 
-                                  InserirPedIcf;
+                                        dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('QTDE_CONFERIDA').AsFloat :=
+                                            dmgeral.PCP_CD_M_ROM_PED_ITE.FieldByName('QTDE_CONFERIDA').AsFloat + 1;
+                                        //-----
+                                        dmGeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsString :=
+                                                dmGeral.PCP_CD_M_ROM_PED.FieldByName('id_pedido').AsString;
+                                        //-----
 
-                                  dmgeral.PCP_CD_M_ROM_PED_ITE.Post;
-                                  dmgeral.PCP_CD_M_ROM_PED_ITE.Last;
-                                  Result := true;
+                                        InserirPedIcf;
+
+                                        dmgeral.PCP_CD_M_ROM_PED_ITE.Post;
+                                        dmgeral.PCP_CD_M_ROM_PED_ITE.Last;
+                                        Result := true;
+                                     end;
                                 end;
                              dmgeral.PCP_CD_M_ROM_PED_ITE.Next
                            end;
@@ -325,6 +338,11 @@ begin
             if dmgeral.PCP_CD_M_ROM_PED_ITE.Locate('ID_ITEM',VarArrayOf([id_item]),[]) then
                begin
                  try
+                   // Maxsuel Victor, 23/04/25 - Pega a mesma cor da etiqueta
+                      // mais a frente pode ser que mude para a cor do item do pedido que foi retirado.
+                   x_id_cor_rom_ite := id_cor;
+
+
                    dmgeral.PCP_CD_M_ROM_PED_ITE.Filtered := true;
                    dmgeral.PCP_CD_M_ROM_PED_ITE.Filter   := ' ID_ITEM = ' + inttostr(id_item) +
                                                             ' AND ID_COR = ' + inttostr(id_cor) +
@@ -1540,16 +1558,28 @@ begin
 
           x_id_rom_ite := dmGeral.PCP_CD_M_ROM_ITE.FieldByName('id_rom_ite').AsInteger;
 
-          if  AtualizarQtdeConferida(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
+          // 23/04/2025, Maxsuel Victor, esse if abaixo foi invertido , o  AtualizarQtdeConferidaPed  executa primeiro agora.
+          {  if  AtualizarQtdeConferida(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_COR').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_TAMANHO').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString) then
-             begin
+              begin
                //showmessage(dmGeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsString);
                AtualizarQtdeConferidaPed(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_COR').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_TAMANHO').AsInteger,0,strtoint(txtPedido.Text),
+                           dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString);   }
+
+          if AtualizarQtdeConferidaPed(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
+             dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_COR').AsInteger,
+             dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_TAMANHO').AsInteger,0,strtoint(txtPedido.Text),
+             dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString)  then
+             begin
+               AtualizarQtdeConferida(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
+                           dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_COR').AsInteger,
+                           dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_TAMANHO').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString);
+
 
                //dmGeral.PCP_CD_M_ROM_ICF.Delete;
                ExibirTotais;
