@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids,
   vcl.wwdbigrd, vcl.wwdbgrid, Vcl.Buttons, Vcl.Mask, vcl.Wwdbedit,
-  System.IniFiles,Data.DB, winapi.MMSystem;
+  System.IniFiles,Data.DB, winapi.MMSystem, Datasnap.DBClient;
 
 type
   TPCP_FM_M_ROM_ICF = class(TForm)
@@ -47,6 +47,7 @@ type
     Label1: TLabel;
     txtPedido: TEdit;
     btnRealocarEtiq: TBitBtn;
+    BUS_CD_M_ETQ: TClientDataSet;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure grdItensIButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -73,7 +74,7 @@ type
   public
     { Public declarations }
     procedure PcpRetirarItensDoRomaneio;
-    function  AtualizarQtdeConferida(incrementar:boolean;id_item,id_cor,id_tamanho:integer; nome_ite: String):Boolean;
+    function  AtualizarQtdeConferida(incrementar:boolean;id_item,id_cor,id_tamanho:integer; nome_ite: String; pedido: Integer):Boolean;
     function  AtualizarQtdeConferidaPed(incrementar:boolean;id_item,id_cor,id_tamanho,id_rom_icf,pedido:integer; nome_ite: String):Boolean;
     procedure ExibirTotais;
     procedure AtualizarStatusIte;
@@ -103,10 +104,13 @@ implementation
 uses uDmGeral, uProxy, PCP_UN_M_ROM_ICF_REE;
 
 function TPCP_FM_M_ROM_ICF.AtualizarQtdeConferida(incrementar: boolean; id_item,
-  id_cor, id_tamanho: integer; nome_ite: String): Boolean;
+  id_cor, id_tamanho: integer; nome_ite: String; pedido: Integer): Boolean;
+var
+   pedidoNovo: integer;
+   pedidoAntigo,cod_barra, int_nomeite: String;
 begin
   Result := false;
-   if incrementar = true then
+  if incrementar = true then
      begin
        if dmgeral.PCP_CD_M_ROM_ITE.Locate('ID_ITEM;NOME_ITE',VarArrayOf([id_item,nome_ite]),[]) then
           begin
@@ -162,7 +166,7 @@ begin
      begin
        if dmgeral.PCP_CD_M_ROM_ITE.Locate('ID_ITEM;NOME_ITE',VarArrayOf([id_item,nome_ite]),[]) then
          begin
-            try
+           try
               id_cor := x_id_cor_rom_ite;
 
               dmgeral.PCP_CD_M_ROM_ITE.Filtered := true;
@@ -204,10 +208,78 @@ begin
                      end;
                   dmgeral.PCP_CD_M_ROM_ITE.Next;
                 end;
-            finally
+           finally
               dmgeral.PCP_CD_M_ROM_ITE.Filtered := false;
               dmgeral.PCP_CD_M_ROM_ITE.DeleteIndex('IndQtdeConf');
-            end;
+           end;
+
+
+           // Ao retirar um produto (etiqueta) da carga, pode acontecer que essa etiqueta esteja com
+           // código de um outro pedido, daí o sistema tem que pegar uma outra etiqueta da carga, com o mesmo id_item,
+           // id_cor, id_tamanho e nome_ite igual e alterar o id_pedido para o id_pedido da etiqueta que foi deletada.
+           // Lembrando que o sistema irá atrás de uma etiqueta do pedido que o usuário digitou na hora de retirar o produto.
+
+
+           // Maxsuel Victor, 28/04/2025, o if abaixo saiu da rotina AtualizarQtdeConferidaPed, e veio para essa.
+           if pedido <> dmGeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsInteger then
+              begin
+                int_nomeite := dmgeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString;
+                pedidoNovo  := dmGeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsInteger;
+
+                dmGeral.PCP_CD_M_ROM_ICF.BeforePost := nil;
+
+                dmGeral.PCP_CD_M_ROM_ICF.delete;
+
+                dmGeral.PCP_CD_M_ROM_ICF.BeforePost := dmgeral.PCP_CD_M_ROM_ICFBeforePost;
+
+                if dmGeral.PCP_CD_M_ROM_PED.Locate('id_pedido',pedido,[]) then
+                   begin
+                     if dmgeral.PCP_CD_M_ROM_PED_ICF.Locate('id_pedido;id_item;id_cor;id_tamanho;int_nomeite',
+                        VarArrayof([pedido, id_item, id_cor, id_tamanho, int_nomeite]),[]) then
+                        begin
+                           cod_barra := dmgeral.PCP_CD_M_ROM_PED_ICF.FieldByName('cod_barra').AsString;
+
+                           dmgeral.PCP_CD_M_ROM_PED_ICF.edit;
+                           dmgeral.PCP_CD_M_ROM_PED_ICF.FieldByName('id_pedido').AsInteger := pedidoNovo;
+                           dmgeral.PCP_CD_M_ROM_PED_ICF.post;
+
+                           if dmgeral.PCP_CD_M_ROM_ICF.Locate('cod_barra',VarArrayOf([cod_barra]),[]) then
+                              begin
+                                dmgeral.PCP_CD_M_ROM_ICF.edit;
+                                dmgeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsInteger := pedidoNovo;
+                                dmgeral.PCP_CD_M_ROM_ICF.post;
+                              end;
+                        end
+                     else
+                        begin
+                          if dmgeral.PCP_CD_M_ROM_PED_ICF.Locate('id_pedido;id_item',
+                             VarArrayof([pedido, id_item]),[]) then
+                             begin
+                                 cod_barra := dmgeral.PCP_CD_M_ROM_PED_ICF.FieldByName('cod_barra').AsString;
+
+                                 dmgeral.PCP_CD_M_ROM_PED_ICF.edit;
+                                 dmgeral.PCP_CD_M_ROM_PED_ICF.FieldByName('id_pedido').AsInteger := pedidoNovo;
+                                 dmgeral.PCP_CD_M_ROM_PED_ICF.post;
+
+                                 if dmgeral.PCP_CD_M_ROM_ICF.Locate('cod_barra',VarArrayOf([cod_barra]),[]) then
+                                    begin
+                                      dmgeral.PCP_CD_M_ROM_ICF.edit;
+                                      dmgeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsInteger := pedidoNovo;
+                                      dmgeral.PCP_CD_M_ROM_ICF.post;
+                                    end;
+                              end
+                        end;
+                   end;
+              end
+           else
+              begin
+                dmGeral.PCP_CD_M_ROM_ICF.BeforePost := nil;
+
+                dmGeral.PCP_CD_M_ROM_ICF.delete;
+
+                dmGeral.PCP_CD_M_ROM_ICF.BeforePost := dmgeral.PCP_CD_M_ROM_ICFBeforePost;
+              end;
+
          end;
        // 23/04/2025 , por Maxsuel Victor
           // depois de passar pelo AtualizarQtdeConferidaPed e por esse método, a variável abaixo deve ser zerada.
@@ -366,7 +438,7 @@ begin
                          // -------------------------------------------------------------------------------
 
                          // Maxsuel Victor, 24/03/25 - No if abaixo foi adicionado a cor e nomte do item
-                         if dmgeral.PCP_CD_M_ROM_ITE.Locate('id_item;INT_NOMEITE;id_cor',VarArrayof([id_item,nome_ite,x_id_cor_rom_ite]),[]) then
+                         if dmgeral.PCP_CD_M_ROM_ITE.Locate('id_item;nome_ite;id_cor',VarArrayof([id_item,nome_ite,x_id_cor_rom_ite]),[]) then
                             begin
                                x_id_rom_ite := dmGeral.PCP_CD_M_ROM_ITE.FieldByName('id_rom_ite').AsInteger;
                             end;
@@ -442,6 +514,9 @@ begin
                  // código de um outro pedido, daí o sistema tem que pegar uma outra etiqueta da carga, com o mesmo id_item,
                  // id_cor, id_tamanho e nome_ite igual e alterar o id_pedido para o id_pedido da etiqueta que foi deletada.
                  // Lembrando que o sistema irá atrás de uma etiqueta do pedido que o usuário digitou na hora de retirar o produto.
+
+
+                 {
                  if pedido <> dmGeral.PCP_CD_M_ROM_ICF.FieldByName('id_pedido').AsInteger then
                     begin
                       int_nomeite := dmgeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString;
@@ -499,7 +574,7 @@ begin
                       dmGeral.PCP_CD_M_ROM_ICF.delete;
 
                       dmGeral.PCP_CD_M_ROM_ICF.BeforePost := dmgeral.PCP_CD_M_ROM_ICFBeforePost;
-                    end;
+                    end;   }
                end;
           end;
        dmgeral.PCP_CD_M_ROM_PED.First;
@@ -723,7 +798,7 @@ begin
     if  AtualizarQtdeConferida(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
                      dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_COR').AsInteger,
                      dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_TAMANHO').AsInteger,
-                     dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString) then
+                     dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString,strtoint(txtPedido.Text)) then
        begin
 
          AtualizarQtdeConferidaPed(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
@@ -860,6 +935,12 @@ begin
 
     // frmSoftMenu.rbMenu.ShowTabGroups := false;
 
+    // Maxsuel Victor, 28/04/2025
+    BUS_CD_M_ETQ.Close;
+    BUS_CD_M_ETQ.Data :=
+               BUS_CD_M_ETQ.DataRequest(VarArrayOf([0,'-1']));
+    // ---------------------------
+
     ExibirTotais;
 
     btnAddIteClick(self);
@@ -880,7 +961,7 @@ begin
         if  AtualizarQtdeConferida(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
                          dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_COR').AsInteger,
                          dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_TAMANHO').AsInteger,
-                         dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString) then
+                         dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString,strtoint(txtPedido.text)) then
            begin
 
              AtualizarQtdeConferidaPed(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
@@ -1098,6 +1179,29 @@ begin
 
 
 
+           // Maxsuel Victor, 28/04/2025 ------------
+            // Verificar se a etiqueta existe
+           BUS_CD_M_ETQ.Close;
+           BUS_CD_M_ETQ.Data :=
+               BUS_CD_M_ETQ.DataRequest(VarArrayOf([0,codBarra]));
+
+           if BUS_CD_M_ETQ.IsEmpty then
+              begin
+                if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_ROM\Etiqueta_Nao_Encontrada.wav') then
+                   begin
+                     sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_ROM\Etiqueta_Nao_Encontrada.wav'),SND_LOOP);
+                   end;
+                ShowMessage('Código de barra não existe.');
+
+                //dmGeral.PCP_CD_M_ROM_ICF.FieldByName('cod_barra').AsString := '';
+                txtIdItem.Text := '';
+                BUS_CD_M_ETQ.Close;
+                btnAddIteClick(self);
+                exit;
+              end;
+           BUS_CD_M_ETQ.Close;
+           //-----------------------------------------
+
            dmGeral.PCP_CD_M_ROM_ICF.Insert;
            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('cod_barra').AsString := codBarra;
 
@@ -1282,7 +1386,7 @@ begin
                        IF AtualizarQtdeConferida(true,dmGeral.BUS_CD_M_ROM_ETQ.FieldByName('ID_ITEM').AsInteger,
                           dmGeral.BUS_CD_M_ROM_ETQ.FieldByName('ID_COR').AsInteger,
                           dmGeral.BUS_CD_M_ROM_ETQ.FieldByName('ID_TAMANHO').AsInteger,
-                          dmGeral.BUS_CD_M_ROM_ETQ.FieldByName('INT_NOMEITE').AsString) then
+                          dmGeral.BUS_CD_M_ROM_ETQ.FieldByName('INT_NOMEITE').AsString,0) then
                           begin
 
                             codBarra := dmGeral.BUS_CD_M_ROM_ETQ.FieldByName('cod_barra').AsString;
@@ -1578,7 +1682,7 @@ begin
                AtualizarQtdeConferida(false,dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_ITEM').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_COR').AsInteger,
                            dmGeral.PCP_CD_M_ROM_ICF.FieldByName('ID_TAMANHO').AsInteger,
-                           dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString);
+                           dmGeral.PCP_CD_M_ROM_ICF.FieldByName('INT_NOMEITE').AsString,strtoint(txtPedido.Text));
 
 
                //dmGeral.PCP_CD_M_ROM_ICF.Delete;

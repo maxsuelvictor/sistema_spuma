@@ -258,7 +258,7 @@ uses
   FAT_UN_M_LIB in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_LIB.pas' {FAT_FM_M_LIB},
   FAT_UN_M_ORC in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_ORC.pas' {FAT_FM_M_ORC},
   FAT_UN_M_PED in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED.pas' {FAT_FM_M_PED},
-  FAT_UN_M_PED_IPE in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_IPE.pas' {FAT_FM_M_PED_IPE},
+  FAT_UN_M_PED_SQA in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_SQA.pas' {FAT_FM_M_PED_SQA},
   FAT_UN_M_POS in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_POS.pas' {FAT_FM_M_POS},
   CSU_UN_C_CLI in '..\enSoftPadrao\Estatistica\CSU_UN_C_CLI.pas' {CSU_FM_C_CLI},
   CSU_UN_C_CLI_FIN in '..\enSoftPadrao\Estatistica\CSU_UN_C_CLI_FIN.pas' {CSU_FM_C_CLI_FIN},
@@ -538,7 +538,8 @@ uses
   FAT_UN_M_GAM in '..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_GAM.pas' {FAT_FM_M_GAM},
   FAT_UN_M_SIN in '..\enSoftPadrao\Movimentacoes\Faturamento\FAT_UN_M_SIN.pas' {FAT_FM_M_SIN},
   uChat in '..\enSoftPadrao\Padrao\uChat.pas' {frmChat},
-  FAT_UN_R_RFV in '..\enSoftPadrao\Relatorios\Movimentações\FAT_UN_R_RFV.pas' {FAT_FM_R_RFV};
+  FAT_UN_R_RFV in '..\enSoftPadrao\Relatorios\Movimentações\FAT_UN_R_RFV.pas' {FAT_FM_R_RFV},
+  FAT_UN_M_PED_IPE in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_IPE.pas' {FAT_FM_M_PED_IPE};
 
 {$R *.res}
 

@@ -1125,7 +1125,7 @@
     OnNewRecord = EST_CD_M_FEANewRecord
     OnReconcileError = EST_CD_M_FEAReconcileError
     Left = 560
-    Top = 728
+    Top = 800
     object EST_CD_M_FEAid_fea: TIntegerField
       FieldName = 'id_fea'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3480,7 +3480,7 @@
     OnNewRecord = FAT_CD_M_PEDNewRecord
     OnReconcileError = FAT_CD_M_PEDReconcileError
     Left = 560
-    Top = 1488
+    Top = 1576
     object FAT_CD_M_PEDid_pedido: TIntegerField
       FieldName = 'id_pedido'
     end
@@ -3961,6 +3961,9 @@
       ProviderFlags = []
       Size = 14
     end
+    object FAT_CD_M_PEDFAT_SQ_M_PED_SQA: TDataSetField
+      FieldName = 'FAT_SQ_M_PED_SQA'
+    end
   end
   object FAT_CD_M_POS: TClientDataSet
     Aggregates = <>
@@ -3972,7 +3975,7 @@
     OnNewRecord = FAT_CD_M_POSNewRecord
     OnReconcileError = FAT_CD_M_POSReconcileError
     Left = 560
-    Top = 1680
+    Top = 1856
     object FAT_CD_M_POSid_posvenda: TIntegerField
       FieldName = 'id_posvenda'
     end
@@ -4018,7 +4021,7 @@
     OnReconcileError = FAT_CD_M_NFEReconcileError
     BeforeApplyUpdates = FAT_CD_M_NFEBeforeApplyUpdates
     Left = 560
-    Top = 1016
+    Top = 1088
     object FAT_CD_M_NFEid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -4914,7 +4917,7 @@
     BeforePost = FAT_CD_M_PED_TITBeforePost
     OnNewRecord = FAT_CD_M_PED_TITNewRecord
     Left = 560
-    Top = 1584
+    Top = 1672
     object FAT_CD_M_PED_TITint_nomefpg: TWideStringField
       DisplayLabel = 'Forma Pagto'
       DisplayWidth = 16
@@ -5008,7 +5011,7 @@
     AfterDelete = FAT_CD_M_PED_ITEAfterDelete
     OnNewRecord = FAT_CD_M_PED_ITENewRecord
     Left = 560
-    Top = 1536
+    Top = 1624
     object FAT_CD_M_PED_ITEint_nomeite: TWideStringField
       DisplayLabel = 'Descri'#231#227'o'
       DisplayWidth = 23
@@ -5246,7 +5249,7 @@
     AfterDelete = FAT_CD_M_NFE_ITEAfterDelete
     OnNewRecord = FAT_CD_M_NFE_ITENewRecord
     Left = 560
-    Top = 1064
+    Top = 1136
     object FAT_CD_M_NFE_ITEid_item: TIntegerField
       DisplayLabel = 'C'#243'digo'
       DisplayWidth = 10
@@ -5966,7 +5969,7 @@
     BeforePost = FAT_CD_M_NFE_TITBeforePost
     OnNewRecord = FAT_CD_M_NFE_TITNewRecord
     Left = 560
-    Top = 1112
+    Top = 1184
     object FAT_CD_M_NFE_TITid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -6052,7 +6055,7 @@
     DataSetField = FAT_CD_M_NFE_DEVFAT_SQ_M_NFE_DEV_ITE
     Params = <>
     Left = 560
-    Top = 1256
+    Top = 1328
     object FAT_CD_M_NFE_DEV_ITEid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -6115,7 +6118,7 @@
     DataSetField = FAT_CD_M_NFEFAT_SQ_M_NFE_DEV
     Params = <>
     Left = 560
-    Top = 1208
+    Top = 1280
     object FAT_CD_M_NFE_DEVid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -6151,7 +6154,7 @@
     BeforePost = FAT_CD_M_IQM_ITE_ANABeforePost
     OnNewRecord = FAT_CD_M_IQM_ITE_ANANewRecord
     Left = 560
-    Top = 1440
+    Top = 1520
     object FAT_CD_M_IQM_ITE_ANAid_sequencia: TIntegerField
       FieldName = 'id_sequencia'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -6335,7 +6338,7 @@
     DataSetField = FAT_CD_M_POSFAT_SQ_M_POS_ITE
     Params = <>
     Left = 560
-    Top = 1728
+    Top = 1904
     object FAT_CD_M_POS_ITEid_posvenda: TIntegerField
       FieldName = 'id_posvenda'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -8369,7 +8372,7 @@
     ProviderName = 'BUS_DP_M_NFE'
     RemoteServer = pcConecao
     Left = 696
-    Top = 1064
+    Top = 1136
     object BUS_CD_M_BUS_NFEid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -10564,7 +10567,7 @@
     OnNewRecord = FAT_CD_M_ORCNewRecord
     OnReconcileError = FAT_CD_M_ORCReconcileError
     Left = 560
-    Top = 1776
+    Top = 1952
     object FAT_CD_M_ORCid_orcamento: TIntegerField
       FieldName = 'id_orcamento'
     end
@@ -10794,7 +10797,7 @@
     AfterDelete = FAT_CD_M_ORC_ITEAfterDelete
     OnNewRecord = FAT_CD_M_ORC_ITENewRecord
     Left = 560
-    Top = 1824
+    Top = 2000
     object FAT_CD_M_ORC_ITEid_orcamento: TIntegerField
       FieldName = 'id_orcamento'
     end
@@ -16967,7 +16970,7 @@
     ProviderName = 'EST_DP_M_FEA'
     RemoteServer = pcConecao
     Left = 696
-    Top = 728
+    Top = 800
     object BUS_CD_M_FEAid_fea: TIntegerField
       FieldName = 'id_fea'
     end
@@ -17154,7 +17157,7 @@
     RemoteServer = pcConecao
     OnReconcileError = EST_CD_M_FES_ALMReconcileError
     Left = 560
-    Top = 680
+    Top = 752
     object EST_CD_M_FES_ALMid_item: TIntegerField
       FieldName = 'id_item'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -17222,7 +17225,7 @@
     ProviderName = 'EST_DP_M_FES_ALM'
     RemoteServer = pcConecao
     Left = 696
-    Top = 680
+    Top = 752
     object BUS_CD_M_FES_ALMid_item: TIntegerField
       FieldName = 'id_item'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -17289,7 +17292,7 @@
     RemoteServer = pcConecao
     BeforeOpen = BUS_CD_M_NFE_NFFBeforeOpen
     Left = 696
-    Top = 1257
+    Top = 1329
     object BUS_CD_M_NFE_NFFid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -18176,7 +18179,7 @@
     OnNewRecord = EST_CD_M_CTENewRecord
     OnReconcileError = EST_CD_M_CTEReconcileError
     Left = 560
-    Top = 826
+    Top = 898
     object EST_CD_M_CTEid_controle: TIntegerField
       FieldName = 'id_controle'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -18244,7 +18247,7 @@
     BeforePost = EST_CD_M_CTE_ITEBeforePost
     OnNewRecord = EST_CD_M_CTE_ITENewRecord
     Left = 560
-    Top = 872
+    Top = 944
     object EST_CD_M_CTE_ITEid_item: TIntegerField
       DisplayLabel = 'C'#243'digo'
       DisplayWidth = 16
@@ -18363,7 +18366,7 @@
     BeforeOpen = BUS_CD_M_PEDBeforeOpen
     BeforePost = BUS_CD_M_PEDBeforePost
     Left = 696
-    Top = 1488
+    Top = 1576
     object BUS_CD_M_PEDid_pedido: TIntegerField
       DisplayLabel = 'Pedido'
       DisplayWidth = 10
@@ -18801,7 +18804,7 @@
     ProviderName = 'EST_DP_M_CTE'
     RemoteServer = pcConecao
     Left = 696
-    Top = 826
+    Top = 898
     object BUS_CD_M_CTEid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -18873,7 +18876,7 @@
     OnNewRecord = EST_CD_M_LOTNewRecord
     OnReconcileError = EST_CD_M_LOTReconcileError
     Left = 560
-    Top = 776
+    Top = 848
     object EST_CD_M_LOTid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -19176,7 +19179,7 @@
     BeforeOpen = FAT_CD_M_NFE_NFFBeforeOpen
     BeforePost = FAT_CD_M_NFE_NFFBeforePost
     Left = 560
-    Top = 1160
+    Top = 1232
     object FAT_CD_M_NFE_NFFid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -19530,7 +19533,7 @@
     BeforePost = FAT_CD_M_IQM_ITEBeforePost
     OnNewRecord = FAT_CD_M_IQM_ITENewRecord
     Left = 560
-    Top = 1392
+    Top = 1464
     object FAT_CD_M_IQM_ITEid_iqm: TIntegerField
       FieldName = 'id_iqm'
     end
@@ -20349,7 +20352,7 @@
     ProviderName = 'BUS_DP_M_NFI_RAA'
     RemoteServer = pcConecao
     Left = 696
-    Top = 1345
+    Top = 1417
     object BUS_CD_M_NFI_RAAnumero: TIntegerField
       FieldName = 'numero'
     end
@@ -20429,7 +20432,7 @@
     OnNewRecord = EST_CD_M_MALNewRecord
     OnReconcileError = EST_CD_M_MALReconcileError
     Left = 560
-    Top = 920
+    Top = 992
     object EST_CD_M_MALid_mal: TIntegerField
       FieldName = 'id_mal'
     end
@@ -20533,7 +20536,7 @@
     BeforePost = EST_CD_M_MAL_ITEBeforePost
     OnNewRecord = EST_CD_M_MAL_ITENewRecord
     Left = 560
-    Top = 968
+    Top = 1040
     object EST_CD_M_MAL_ITEid_mal: TIntegerField
       FieldName = 'id_mal'
     end
@@ -25616,7 +25619,7 @@
     BeforePost = BUS_CD_M_NFEBeforePost
     AfterPost = BUS_CD_M_NFEAfterPost
     Left = 696
-    Top = 1016
+    Top = 1088
     object BUS_CD_M_NFEint_nometme: TWideStringField
       DisplayLabel = 'Tipo de Estoque'
       DisplayWidth = 15
@@ -26633,7 +26636,7 @@
     BeforeOpen = BUS_CD_M_NFE_ITEBeforeOpen
     AfterPost = BUS_CD_M_NFE_ITEAfterPost
     Left = 696
-    Top = 1112
+    Top = 1184
     object BUS_CD_M_NFE_ITEid_item: TIntegerField
       DisplayLabel = 'Item'
       DisplayWidth = 10
@@ -27325,7 +27328,7 @@
     Params = <>
     BeforeOpen = BUS_CD_M_NFE_TITBeforeOpen
     Left = 696
-    Top = 1160
+    Top = 1232
     object BUS_CD_M_NFE_TITid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -28093,7 +28096,7 @@
     OnNewRecord = FAT_CD_M_IQMNewRecord
     OnReconcileError = FAT_CD_M_IQMReconcileError
     Left = 560
-    Top = 1344
+    Top = 1416
     object FAT_CD_M_IQMid_iqm: TIntegerField
       FieldName = 'id_iqm'
     end
@@ -28360,7 +28363,7 @@
     ProviderName = 'FAT_DP_M_IQM'
     RemoteServer = pcConecao
     Left = 696
-    Top = 1393
+    Top = 1465
     object BUS_CD_M_IQMid_iqm: TIntegerField
       FieldName = 'id_iqm'
     end
@@ -28407,7 +28410,7 @@
     DataSetField = BUS_CD_M_IQMFAT_SQ_M_IQM_ITE
     Params = <>
     Left = 696
-    Top = 1441
+    Top = 1521
     object BUS_CD_M_IQM_ITEid_sequencia: TIntegerField
       FieldName = 'id_sequencia'
     end
@@ -30985,7 +30988,7 @@
     Params = <>
     BeforeOpen = BUS_CD_M_PED_ITEBeforeOpen
     Left = 696
-    Top = 1536
+    Top = 1624
     object BUS_CD_M_PED_ITEid_item: TIntegerField
       DisplayLabel = 'C'#243'digo'
       DisplayWidth = 10
@@ -31128,7 +31131,7 @@
     Params = <>
     BeforeOpen = BUS_CD_M_PED_TITBeforeOpen
     Left = 696
-    Top = 1584
+    Top = 1672
     object BUS_CD_M_PED_TITid_forma_pag: TIntegerField
       DisplayLabel = 'C'#243'digo'
       DisplayWidth = 10
@@ -33927,7 +33930,7 @@
     ProviderName = 'BUS_DP_M_POS_ITE'
     RemoteServer = pcConecao
     Left = 695
-    Top = 1728
+    Top = 1904
     object BUS_CD_M_POS_ITEid_posvenda: TIntegerField
       FieldName = 'id_posvenda'
     end
@@ -33976,7 +33979,7 @@
     ProviderName = 'EST_DP_M_MAL'
     RemoteServer = pcConecao
     Left = 696
-    Top = 920
+    Top = 992
     object BUS_CD_M_MALid_mal: TIntegerField
       FieldName = 'id_mal'
     end
@@ -34073,7 +34076,7 @@
     DataSetField = BUS_CD_M_MALEST_SQ_M_MAL_ITE
     Params = <>
     Left = 696
-    Top = 968
+    Top = 1040
     object BUS_CD_M_MAL_ITEid_mal: TIntegerField
       FieldName = 'id_mal'
     end
@@ -34325,7 +34328,7 @@
     ProviderName = 'BUS_DP_M_NFE_ITE'
     RemoteServer = pcConecao
     Left = 696
-    Top = 1208
+    Top = 1280
     object BUS_CD_M_CSU_NFE_ITEid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -38047,7 +38050,7 @@
     OnNewRecord = FAT_CD_M_ROMNewRecord
     OnReconcileError = FAT_CD_M_ROMReconcileError
     Left = 560
-    Top = 1872
+    Top = 2048
     object FAT_CD_M_ROMid_romaneio: TIntegerField
       DisplayLabel = 'Romaneio'
       DisplayWidth = 10
@@ -38314,7 +38317,7 @@
     AfterPost = FAT_CD_M_ROM_NFEAfterPost
     AfterDelete = FAT_CD_M_ROM_NFEAfterDelete
     Left = 560
-    Top = 1920
+    Top = 2096
     object FAT_CD_M_ROM_NFEid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -38381,7 +38384,7 @@
     DataSetField = FAT_CD_M_ROM_NFEFAT_SQ_M_ROM_NFE_ITE
     Params = <>
     Left = 560
-    Top = 1968
+    Top = 2144
     object FAT_CD_M_ROM_NFE_ITEid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -39593,7 +39596,7 @@
     ProviderName = 'FAT_DP_M_ROM'
     RemoteServer = pcConecao
     Left = 696
-    Top = 1872
+    Top = 2048
     object BUS_CD_M_ROMid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
     end
@@ -39754,7 +39757,7 @@
     DataSetField = BUS_CD_M_ROMFAT_SQ_M_ROM_NFE
     Params = <>
     Left = 696
-    Top = 1920
+    Top = 2096
     object BUS_CD_M_ROM_NFEid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
     end
@@ -39818,7 +39821,7 @@
     DataSetField = BUS_CD_M_ROM_NFEFAT_SQ_M_ROM_NFE_ITE
     Params = <>
     Left = 696
-    Top = 1967
+    Top = 2143
     object BUS_CD_M_ROM_NFE_ITEid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
     end
@@ -39869,7 +39872,7 @@
     DataSetField = FAT_CD_M_ROMFAT_SQ_M_ROM_LAC
     Params = <>
     Left = 560
-    Top = 2016
+    Top = 2192
     object FAT_CD_M_ROM_LACid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
     end
@@ -41053,7 +41056,7 @@
     RemoteServer = pcConecao
     OnReconcileError = FAT_CD_M_PDVReconcileError
     Left = 560
-    Top = 2239
+    Top = 2399
     object FAT_CD_M_PDVid_pedido: TIntegerField
       FieldName = 'id_pedido'
     end
@@ -41227,7 +41230,7 @@
     DataSetField = FAT_CD_M_PDVFAT_SQ_M_PED_ITE
     Params = <>
     Left = 560
-    Top = 2287
+    Top = 2447
     object FAT_CD_M_PDV_ITEid_pedido: TIntegerField
       FieldName = 'id_pedido'
     end
@@ -41309,7 +41312,7 @@
     DataSetField = FAT_CD_M_PDVFAT_SQ_M_PED_TIT
     Params = <>
     Left = 560
-    Top = 2335
+    Top = 2495
     object FAT_CD_M_PDV_TITid_pedido: TIntegerField
       FieldName = 'id_pedido'
     end
@@ -43589,7 +43592,7 @@
     RemoteServer = pcConecao
     OnReconcileError = CD_BR_CUPOM_MESTREReconcileError
     Left = 554
-    Top = 2683
+    Top = 2843
     object CD_BR_CUPOM_MESTREn_cupom: TIntegerField
       FieldName = 'n_cupom'
     end
@@ -43789,7 +43792,7 @@
     DataSetField = CD_BR_CUPOM_MESTRESQ_BR_CUPOM_DETALHE
     Params = <>
     Left = 554
-    Top = 2739
+    Top = 2899
     object CD_BR_CUPOM_DETALHEn_cupom: TIntegerField
       FieldName = 'n_cupom'
     end
@@ -44011,7 +44014,7 @@
     DataSetField = CD_BR_CUPOM_MESTRESQ_BR_CUPOM_PAGAMENTO
     Params = <>
     Left = 554
-    Top = 2795
+    Top = 2955
     object CD_BR_CUPOM_PAGAMENTOn_cupom: TIntegerField
       FieldName = 'n_cupom'
     end
@@ -44513,7 +44516,7 @@
     OnNewRecord = EST_CD_M_METNewRecord
     OnReconcileError = EST_CD_M_METReconcileError
     Left = 712
-    Top = 2172
+    Top = 2332
     object EST_CD_M_METid_met: TIntegerField
       FieldName = 'id_met'
     end
@@ -44561,7 +44564,7 @@
     BeforePost = EST_CD_M_MET_ITEBeforePost
     OnNewRecord = EST_CD_M_MET_ITENewRecord
     Left = 712
-    Top = 2236
+    Top = 2396
     object EST_CD_M_MET_ITEid_met: TIntegerField
       FieldName = 'id_met'
     end
@@ -44717,7 +44720,7 @@
     OnNewRecord = FAT_CD_M_PCANewRecord
     OnReconcileError = FAT_CD_M_PCAReconcileError
     Left = 560
-    Top = 2064
+    Top = 2240
     object FAT_CD_M_PCAid_carregamento: TIntegerField
       FieldName = 'id_carregamento'
     end
@@ -44760,7 +44763,7 @@
     Params = <>
     BeforePost = FAT_CD_M_PCA_PEDBeforePost
     Left = 560
-    Top = 2112
+    Top = 2288
     object FAT_CD_M_PCA_PEDid_carregamento: TIntegerField
       FieldName = 'id_carregamento'
     end
@@ -44847,7 +44850,7 @@
     ProviderName = 'BUS_DP_M_PCA'
     RemoteServer = pcConecao
     Left = 696
-    Top = 2056
+    Top = 2232
     object BUS_CD_M_PCAid_carregamento: TIntegerField
       FieldName = 'id_carregamento'
     end
@@ -44877,7 +44880,7 @@
     DataSetField = BUS_CD_M_PCABUS_SQ_M_PCA_PED
     Params = <>
     Left = 696
-    Top = 2112
+    Top = 2288
     object BUS_CD_M_PCA_PEDid_carregamento: TIntegerField
       FieldName = 'id_carregamento'
     end
@@ -44951,7 +44954,7 @@
     OnNewRecord = FAT_CD_M_XMLNewRecord
     OnReconcileError = FAT_CD_M_XMLReconcileError
     Left = 560
-    Top = 2383
+    Top = 2543
     object FAT_CD_M_XMLnota_fiscal: TIntegerField
       FieldName = 'nota_fiscal'
     end
@@ -45085,7 +45088,7 @@
     BeforeOpen = FAT_CD_M_XML_ITEBeforeOpen
     OnNewRecord = FAT_CD_M_XML_ITENewRecord
     Left = 560
-    Top = 2431
+    Top = 2591
     object FAT_CD_M_XML_ITEseq: TIntegerField
       FieldName = 'seq'
     end
@@ -45291,7 +45294,7 @@
     BeforeOpen = FAT_CD_M_XML_TITBeforeOpen
     OnNewRecord = FAT_CD_M_XML_TITNewRecord
     Left = 560
-    Top = 2527
+    Top = 2687
     object FAT_CD_M_XML_TITid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -57175,7 +57178,7 @@
     DataSetField = FAT_CD_M_ROMFAT_SQ_M_ROM_PER
     Params = <>
     Left = 696
-    Top = 2016
+    Top = 2192
     object FAT_CD_M_ROM_PERid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -59468,7 +59471,7 @@
     DataSetField = FAT_CD_M_NFEFAT_SQ_M_NFE_ARQ
     Params = <>
     Left = 560
-    Top = 1304
+    Top = 1376
     object FAT_CD_M_NFE_ARQid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -59481,7 +59484,7 @@
     DataSetField = BUS_CD_M_NFEFAT_SQ_M_NFE_ARQ
     Params = <>
     Left = 696
-    Top = 1304
+    Top = 1376
     object BUS_CD_M_NFE_ARQid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -59779,7 +59782,7 @@
     RemoteServer = pcConecao
     OnNewRecord = FAT_CD_M_ETGNewRecord
     Left = 560
-    Top = 2579
+    Top = 2739
     object FAT_CD_M_ETGid_entrega: TIntegerField
       FieldName = 'id_entrega'
     end
@@ -59816,7 +59819,7 @@
     Params = <>
     OnNewRecord = FAT_CD_M_ETG_DEVNewRecord
     Left = 560
-    Top = 2635
+    Top = 2795
     object FAT_CD_M_ETG_DEVid_entrega: TIntegerField
       FieldName = 'id_entrega'
     end
@@ -60195,7 +60198,7 @@
     DataSetField = FAT_CD_M_XML_ITEFAT_SQ_M_XML_ITE_LOT
     Params = <>
     Left = 560
-    Top = 2475
+    Top = 2635
     object FAT_CD_M_XML_ITE_LOTid_controle: TIntegerField
       DisplayWidth = 10
       FieldName = 'id_controle'
@@ -60241,7 +60244,7 @@
     BeforeOpen = FAT_CD_M_PED_TIT_SERBeforeOpen
     OnNewRecord = FAT_CD_M_PED_TIT_SERNewRecord
     Left = 560
-    Top = 1632
+    Top = 1720
     object FAT_CD_M_PED_TIT_SERid_pedido: TIntegerField
       FieldName = 'id_pedido'
     end
@@ -60379,7 +60382,7 @@
     ProviderName = 'BUS_DP_M_FEA_SLD'
     RemoteServer = pcConecao
     Left = 712
-    Top = 2296
+    Top = 2456
   end
   object FIN_CD_M_RBX_PPE: TClientDataSet
     Aggregates = <>
@@ -60424,7 +60427,7 @@
     DataSetField = FAT_CD_M_PCA_PEDFAT_SQ_M_PCA_PED_ITE
     Params = <>
     Left = 560
-    Top = 2176
+    Top = 2336
     object FAT_CD_M_PCA_PED_ITEid_sequencia: TIntegerField
       DisplayLabel = 'Seq.'
       DisplayWidth = 9
@@ -60662,7 +60665,7 @@
     BeforeOpen = BUS_CD_M_PEDBeforeOpen
     BeforePost = BUS_CD_M_PEDBeforePost
     Left = 696
-    Top = 1632
+    Top = 1720
     object IntegerField53: TIntegerField
       DisplayLabel = 'Pedido'
       DisplayWidth = 10
@@ -61542,6 +61545,100 @@
     end
     object BUS_CD_C_FUNsgq_perm_inserir_itens_op: TBooleanField
       FieldName = 'sgq_perm_inserir_itens_op'
+    end
+  end
+  object FAT_CD_M_PED_SQA: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_SQA
+    Params = <>
+    Left = 560
+    Top = 1776
+    object FAT_CD_M_PED_SQAid_item: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'id_item'
+    end
+    object FAT_CD_M_PED_SQAint_nomeite: TWideStringField
+      DisplayWidth = 100
+      FieldName = 'int_nomeite'
+      ProviderFlags = []
+      Size = 100
+    end
+    object FAT_CD_M_PED_SQAint_nomecor: TWideStringField
+      DisplayWidth = 40
+      FieldName = 'int_nomecor'
+      ProviderFlags = []
+      Size = 40
+    end
+    object FAT_CD_M_PED_SQAint_nomefun: TWideStringField
+      DisplayWidth = 50
+      FieldName = 'int_nomefun'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_CD_M_PED_SQAdta_solicitacao: TDateField
+      DisplayWidth = 10
+      FieldName = 'dta_solicitacao'
+    end
+    object FAT_CD_M_PED_SQAhora_solicitacao: TTimeField
+      DisplayWidth = 10
+      FieldName = 'hora_solicitacao'
+    end
+    object FAT_CD_M_PED_SQAdta_liberado: TDateField
+      DisplayWidth = 10
+      FieldName = 'dta_liberado'
+    end
+    object FAT_CD_M_PED_SQAhora_liberado: TTimeField
+      DisplayWidth = 10
+      FieldName = 'hora_liberado'
+    end
+    object FAT_CD_M_PED_SQAliberado_destinatario: TBooleanField
+      DisplayWidth = 5
+      FieldName = 'liberado_destinatario'
+    end
+    object FAT_CD_M_PED_SQAid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+      Visible = False
+    end
+    object FAT_CD_M_PED_SQAid_sequencia: TIntegerField
+      FieldName = 'id_sequencia'
+      Visible = False
+    end
+    object FAT_CD_M_PED_SQAid_cor: TIntegerField
+      FieldName = 'id_cor'
+      Visible = False
+    end
+    object FAT_CD_M_PED_SQAid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+      Visible = False
+    end
+    object FAT_CD_M_PED_SQApcp_obs_item: TWideStringField
+      FieldName = 'pcp_obs_item'
+      Visible = False
+      Size = 150
+    end
+    object FAT_CD_M_PED_SQAid_func_solicitacao: TIntegerField
+      FieldName = 'id_func_solicitacao'
+      Visible = False
+    end
+    object FAT_CD_M_PED_SQAqtde_retirar_conf: TFloatField
+      FieldName = 'qtde_retirar_conf'
+      Visible = False
+    end
+    object FAT_CD_M_PED_SQAid_usu_destinatario: TIntegerField
+      FieldName = 'id_usu_destinatario'
+      Visible = False
+    end
+    object FAT_CD_M_PED_SQAint_nomefct: TWideStringField
+      FieldName = 'int_nomefct'
+      ProviderFlags = []
+      Visible = False
+      Size = 50
+    end
+    object FAT_CD_M_PED_SQAint_nometam: TWideStringField
+      FieldName = 'int_nometam'
+      ProviderFlags = []
+      Visible = False
+      Size = 40
     end
   end
 end

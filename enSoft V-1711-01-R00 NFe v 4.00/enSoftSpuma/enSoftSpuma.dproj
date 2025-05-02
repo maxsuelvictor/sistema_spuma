@@ -925,8 +925,8 @@
         <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED.pas">
             <Form>FAT_FM_M_PED</Form>
         </DCCReference>
-        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_IPE.pas">
-            <Form>FAT_FM_M_PED_IPE</Form>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_SQA.pas">
+            <Form>FAT_FM_M_PED_SQA</Form>
         </DCCReference>
         <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_POS.pas">
             <Form>FAT_FM_M_POS</Form>
@@ -1761,6 +1761,10 @@
         </DCCReference>
         <DCCReference Include="..\enSoftPadrao\Relatorios\Movimentações\FAT_UN_R_RFV.pas">
             <Form>FAT_FM_R_RFV</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_IPE.pas">
+            <Form>FAT_FM_M_PED_IPE</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

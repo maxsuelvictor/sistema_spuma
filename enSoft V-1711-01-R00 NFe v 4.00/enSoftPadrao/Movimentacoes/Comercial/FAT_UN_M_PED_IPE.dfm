@@ -661,6 +661,7 @@ object FAT_FM_M_PED_IPE: TFAT_FM_M_PED_IPE
       Width = 71
       Height = 21
       TabStop = False
+      Alignment = taRightJustify
       ClickKey = 114
       Color = 14342874
       DataField = 'id_cliente'

@@ -73,7 +73,7 @@ object PCP_FM_M_ROM_ICF: TPCP_FM_M_ROM_ICF
           40)
         object btnGravar: TButton
           AlignWithMargins = True
-          Left = 626
+          Left = 622
           Top = 4
           Width = 103
           Height = 0
@@ -91,7 +91,7 @@ object PCP_FM_M_ROM_ICF: TPCP_FM_M_ROM_ICF
         end
         object btnSair: TButton
           AlignWithMargins = True
-          Left = 730
+          Left = 726
           Top = 4
           Width = 105
           Height = 0
@@ -536,12 +536,12 @@ object PCP_FM_M_ROM_ICF: TPCP_FM_M_ROM_ICF
         Width = 996
         Height = 275
         Selected.Strings = (
-          'id_item'#9'10'#9'C'#243'digo'
-          'nome_ite'#9'52'#9'Descri'#231#227'o'
-          'int_undvenda'#9'3'#9'Und'
-          'int_nomecor'#9'27'#9'Cor'
-          'qtde'#9'10'#9'Qtde'
-          'qtde_conferida'#9'12'#9'Qtde conferida')
+          'id_item'#9'10'#9'C'#243'digo'#9#9
+          'nome_ite'#9'52'#9'Descri'#231#227'o'#9#9
+          'int_undvenda'#9'3'#9'Und'#9#9
+          'int_nomecor'#9'27'#9'Cor'#9#9
+          'qtde'#9'10'#9'Qtde'#9#9
+          'qtde_conferida'#9'12'#9'Qtde conferida'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -578,5 +578,13 @@ object PCP_FM_M_ROM_ICF: TPCP_FM_M_ROM_ICF
     DataSet = dmGeral.PCP_CD_M_ROM_ICF
     Left = 184
     Top = 232
+  end
+  object BUS_CD_M_ETQ: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'PCP_DP_M_ETQ'
+    RemoteServer = dmGeral.pcConecao
+    Left = 481
+    Top = 153
   end
 end

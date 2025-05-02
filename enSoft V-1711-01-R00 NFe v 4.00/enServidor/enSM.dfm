@@ -311,13 +311,13 @@
     DataSet = EST_SQ_M_FEA
     OnDataRequest = EST_DP_M_FEADataRequest
     Left = 469
-    Top = 1897
+    Top = 1969
   end
   object EST_DP_M_FES: TDataSetProvider
     DataSet = EST_SQ_M_FES
     OnDataRequest = EST_DP_M_FESDataRequest
     Left = 469
-    Top = 1945
+    Top = 2017
   end
   object CMP_DS_M_PED: TDataSource
     DataSet = CMP_SQ_M_PED
@@ -365,7 +365,7 @@
   object FAT_DS_M_NFE: TDataSource
     DataSet = FAT_SQ_M_NFE
     Left = 474
-    Top = 783
+    Top = 903
   end
   object FAT_DP_M_NFE: TDataSetProvider
     DataSet = FAT_SQ_M_NFE
@@ -375,19 +375,19 @@
     OnUpdateData = FAT_DP_M_NFEUpdateData
     OnGetDataSetProperties = FAT_DP_M_NFEGetDataSetProperties
     Left = 474
-    Top = 737
+    Top = 857
   end
   object FAT_DS_M_POS: TDataSource
     DataSet = FAT_SQ_M_POS
     Left = 472
-    Top = 1169
+    Top = 1289
   end
   object FAT_DP_M_POS: TDataSetProvider
     DataSet = FAT_SQ_M_POS
     Options = [poCascadeDeletes, poUseQuoteChar]
     OnDataRequest = FAT_DP_M_POSDataRequest
     Left = 472
-    Top = 1121
+    Top = 1241
   end
   object CAD_DP_C_PAR: TDataSetProvider
     DataSet = CAD_SQ_C_PAR
@@ -461,14 +461,14 @@
   object FAT_DS_M_ORC: TDataSource
     DataSet = FAT_SQ_M_ORC
     Left = 472
-    Top = 1265
+    Top = 1385
   end
   object FAT_DP_M_ORC: TDataSetProvider
     DataSet = FAT_SQ_M_ORC
     Options = [poCascadeDeletes, poUseQuoteChar]
     OnDataRequest = FAT_DP_M_ORCDataRequest
     Left = 472
-    Top = 1217
+    Top = 1337
   end
   object PCP_DS_C_PRQ: TDataSource
     DataSet = PCP_SQ_C_PRQ
@@ -742,12 +742,12 @@
     Options = [poCascadeDeletes, poUseQuoteChar]
     OnDataRequest = FIN_DP_M_COBDataRequest
     Left = 471
-    Top = 2195
+    Top = 2275
   end
   object FIN_DS_M_COB: TDataSource
     DataSet = FIN_SQ_M_COB
     Left = 471
-    Top = 2241
+    Top = 2321
   end
   object FIN_DP_M_PAG: TDataSetProvider
     DataSet = FIN_SQ_M_PAG
@@ -756,7 +756,7 @@
     BeforeUpdateRecord = FIN_DP_M_PAGBeforeUpdateRecord
     OnGetDataSetProperties = FIN_DP_M_PAGGetDataSetProperties
     Left = 471
-    Top = 2343
+    Top = 2423
   end
   object FIN_DP_M_REC: TDataSetProvider
     DataSet = FIN_SQ_M_REC
@@ -764,14 +764,14 @@
     OnUpdateData = FIN_DP_M_RECUpdateData
     OnGetDataSetProperties = FIN_DP_M_RECGetDataSetProperties
     Left = 471
-    Top = 2391
+    Top = 2471
   end
   object FIN_DP_M_RCR: TDataSetProvider
     DataSet = FIN_SQ_M_RCR
     OnDataRequest = FIN_DP_M_RCRDataRequest
     OnUpdateData = FIN_DP_M_RCRUpdateData
     Left = 471
-    Top = 2485
+    Top = 2565
   end
   object FIN_DP_M_RBX: TDataSetProvider
     DataSet = FIN_SQ_M_RBX
@@ -780,12 +780,12 @@
     OnUpdateData = FIN_DP_M_RBXUpdateData
     OnGetDataSetProperties = FIN_DP_M_RBXGetDataSetProperties
     Left = 468
-    Top = 2630
+    Top = 2710
   end
   object FIN_DS_M_RBX: TDataSource
     DataSet = FIN_SQ_M_RBX
     Left = 468
-    Top = 2683
+    Top = 2763
   end
   object PCP_DP_M_VVE: TDataSetProvider
     DataSet = PCP_SQ_M_VVE
@@ -799,7 +799,7 @@
     OnUpdateData = FIN_DP_M_CXAUpdateData
     OnGetDataSetProperties = FIN_DP_M_CXAGetDataSetProperties
     Left = 471
-    Top = 2534
+    Top = 2614
   end
   object FIN_DP_M_CTA: TDataSetProvider
     DataSet = FIN_SQ_M_CTA
@@ -807,7 +807,7 @@
     OnUpdateData = FIN_DP_M_CTAUpdateData
     OnGetDataSetProperties = FIN_DP_M_CTAGetDataSetProperties
     Left = 470
-    Top = 2582
+    Top = 2662
   end
   object CAD_SQ_C_CNE: TSQLDataSet
     CommandText = 'select * from cad_tb_c_cne'
@@ -4369,7 +4369,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 331
-    Top = 2042
+    Top = 2114
     object EST_SQ_M_LOTid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -7350,7 +7350,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 737
+    Top = 857
     object FAT_SQ_M_NFEid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -8135,7 +8135,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 785
+    Top = 905
     object FAT_SQ_M_NFE_ITEid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -8794,7 +8794,7 @@
       end>
     SQLConnection = Conexao
     Left = 474
-    Top = 833
+    Top = 953
     object FAT_SQ_M_NFE_TITid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -8925,7 +8925,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1073
+    Top = 1193
     object FAT_SQ_M_IQM_ITE_ANAid_sequencia: TIntegerField
       FieldName = 'id_sequencia'
     end
@@ -9066,7 +9066,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 881
+    Top = 1001
     object FAT_SQ_M_NFE_DEVid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -9120,7 +9120,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 929
+    Top = 1049
     object FAT_SQ_M_NFE_DEV_ITEid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -9185,7 +9185,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 1121
+    Top = 1241
     object FAT_SQ_M_POSid_posvenda: TIntegerField
       FieldName = 'id_posvenda'
     end
@@ -9231,7 +9231,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1169
+    Top = 1289
     object FAT_SQ_M_POS_ITEid_posvenda: TIntegerField
       FieldName = 'id_posvenda'
     end
@@ -9278,7 +9278,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 1217
+    Top = 1337
     object FAT_SQ_M_ORCid_orcamento: TIntegerField
       FieldName = 'id_orcamento'
     end
@@ -9515,7 +9515,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1265
+    Top = 1385
     object FAT_SQ_M_ORC_ITEid_orcamento: TIntegerField
       FieldName = 'id_orcamento'
     end
@@ -9635,7 +9635,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2195
+    Top = 2275
     object FIN_SQ_M_COBid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -9743,7 +9743,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2241
+    Top = 2321
     object FIN_SQ_M_COB_TITid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -9820,7 +9820,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2343
+    Top = 2423
     object FIN_SQ_M_PAGid_titulo: TIntegerField
       FieldName = 'id_titulo'
     end
@@ -10002,7 +10002,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2391
+    Top = 2471
     object FIN_SQ_M_RECid_titulo: TIntegerField
       FieldName = 'id_titulo'
     end
@@ -10274,7 +10274,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2485
+    Top = 2565
     object FIN_SQ_M_RCRid_credito: TIntegerField
       FieldName = 'id_credito'
     end
@@ -10410,7 +10410,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2630
+    Top = 2710
     object FIN_SQ_M_RBXid_baixa: TIntegerField
       FieldName = 'id_baixa'
     end
@@ -10557,7 +10557,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2683
+    Top = 2763
     object FIN_SQ_M_RBX_TITid_baixa: TIntegerField
       FieldName = 'id_baixa'
     end
@@ -10667,7 +10667,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2732
+    Top = 2812
   end
   object FIN_SQ_M_CXA: TSQLDataSet
     SchemaName = 'sa'
@@ -10688,7 +10688,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2534
+    Top = 2614
     object FIN_SQ_M_CXAid_abertura: TIntegerField
       FieldName = 'id_abertura'
     end
@@ -10799,7 +10799,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2582
+    Top = 2662
     object FIN_SQ_M_CTAid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -12453,7 +12453,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 331
-    Top = 1897
+    Top = 1969
     object EST_SQ_M_FEAid_fea: TIntegerField
       FieldName = 'id_fea'
     end
@@ -12587,7 +12587,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 331
-    Top = 1945
+    Top = 2017
     object EST_SQ_M_FESid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -15405,7 +15405,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 331
-    Top = 1994
+    Top = 2066
     object EST_SQ_M_FES_ALMid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -15466,7 +15466,7 @@
     DataSet = EST_SQ_M_FES_ALM
     OnDataRequest = EST_DP_M_FES_ALMDataRequest
     Left = 467
-    Top = 1994
+    Top = 2066
   end
   object CAD_SQ_C_TAM: TSQLDataSet
     CommandText = 'select * from cad_tb_c_tam'
@@ -15505,7 +15505,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 331
-    Top = 2098
+    Top = 2170
     object EST_SQ_M_CTEid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -15583,7 +15583,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2150
+    Top = 2222
     object EST_SQ_M_CTE_ITEid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -15673,12 +15673,12 @@
     OnDataRequest = EST_DP_M_CTEDataRequest
     OnUpdateData = EST_DP_M_CTEUpdateData
     Left = 467
-    Top = 2098
+    Top = 2170
   end
   object EST_DS_M_CTE: TDataSource
     DataSet = EST_SQ_M_CTE
     Left = 471
-    Top = 2150
+    Top = 2222
   end
   object BUS_SQ_C_ITE_LOC: TSQLDataSet
     CommandText = 
@@ -15700,7 +15700,7 @@
     DataSet = EST_SQ_M_LOT
     OnDataRequest = EST_DP_M_LOTDataRequest
     Left = 467
-    Top = 2042
+    Top = 2114
   end
   object PCP_SQ_M_RAA: TSQLDataSet
     CommandText = 
@@ -16027,7 +16027,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 1806
+    Top = 1878
     object EST_SQ_M_MALid_mal: TIntegerField
       FieldName = 'id_mal'
     end
@@ -16140,7 +16140,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1849
+    Top = 1921
     object EST_SQ_M_MAL_ITEid_mal: TIntegerField
       FieldName = 'id_mal'
     end
@@ -16229,7 +16229,7 @@
   object EST_DS_M_MAL: TDataSource
     DataSet = EST_SQ_M_MAL
     Left = 470
-    Top = 1849
+    Top = 1921
   end
   object EST_DP_M_MAL: TDataSetProvider
     DataSet = EST_SQ_M_MAL
@@ -16238,7 +16238,7 @@
     OnUpdateData = EST_DP_M_MALUpdateData
     OnGetDataSetProperties = EST_DP_M_MALGetDataSetProperties
     Left = 470
-    Top = 1806
+    Top = 1878
   end
   object BUS_SQ_M_NFE_ITE: TSQLDataSet
     CommandText = 
@@ -16272,7 +16272,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2784
+    Top = 2864
     object FIN_SQ_M_PBXid_baixa: TIntegerField
       FieldName = 'id_baixa'
     end
@@ -16392,7 +16392,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2851
+    Top = 2931
     object FIN_SQ_M_PBX_TITid_baixa: TIntegerField
       FieldName = 'id_baixa'
     end
@@ -16478,12 +16478,12 @@
     BeforeUpdateRecord = FIN_DP_M_PBXBeforeUpdateRecord
     OnGetDataSetProperties = dspCustomerGetDataSetProperties
     Left = 468
-    Top = 2784
+    Top = 2864
   end
   object FIN_DS_M_PBX: TDataSource
     DataSet = FIN_SQ_M_PBX
     Left = 468
-    Top = 2851
+    Top = 2931
   end
   object CMP_SQ_M_PED_NFE: TSQLDataSet
     CommandText = 
@@ -16571,7 +16571,7 @@
   object FAT_DS_M_NFE_ITE: TDataSource
     DataSet = FAT_SQ_M_NFE_ITE
     Left = 474
-    Top = 882
+    Top = 1002
   end
   object FAT_SQ_M_IQM_ITE: TSQLDataSet
     CommandText = 
@@ -16595,7 +16595,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1025
+    Top = 1145
     object FAT_SQ_M_IQM_ITEid_sequencia: TIntegerField
       FieldName = 'id_sequencia'
     end
@@ -16784,7 +16784,7 @@
   object FAT_DS_M_IQM: TDataSource
     DataSet = FAT_SQ_M_IQM
     Left = 474
-    Top = 1027
+    Top = 1147
   end
   object BUS_SQ_M_RAA: TSQLDataSet
     CommandText = 'SELECT ID_RAA, NRO_RAA     '#13#10'FROM PCP_TB_M_RAA'
@@ -17993,7 +17993,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3069
+    Top = 3133
     object FIN_SQ_M_PCRid_credito: TIntegerField
       FieldName = 'id_credito'
     end
@@ -18055,7 +18055,7 @@
     DataSet = FIN_SQ_M_PCR
     OnDataRequest = FIN_DP_M_PCRDataRequest
     Left = 468
-    Top = 3069
+    Top = 3133
   end
   object BUS_SQ_C_REP: TSQLDataSet
     CommandText = 'select * from cad_tb_c_for_rep rep'
@@ -18077,7 +18077,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 2968
+    Top = 3032
     object FIN_SQ_M_PAG_PAGid_titulo: TIntegerField
       FieldName = 'id_titulo'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -18182,7 +18182,7 @@
     DataSet = FIN_SQ_M_PAG_PAG
     OnDataRequest = FIN_DP_M_PAG_PAGDataRequest
     Left = 468
-    Top = 2968
+    Top = 3032
   end
   object CAD_SQ_C_PAR_NFE: TSQLDataSet
     CommandText = 'select * from cad_tb_c_par_nfe'#13#10'WHERE id_empresa=:id_empresa'
@@ -19129,7 +19129,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 832
+    Top = 952
     object FAT_SQ_M_NFE_NFFid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -19164,7 +19164,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3255
+    Top = 3319
     object FIN_SQ_M_CONid_conciliacao: TIntegerField
       FieldName = 'id_conciliacao'
     end
@@ -19223,7 +19223,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3350
+    Top = 3414
     object FIN_SQ_M_CON_CXB_DETid_conciliacao: TIntegerField
       FieldName = 'id_conciliacao'
     end
@@ -19331,12 +19331,12 @@
     OnDataRequest = FIN_DP_M_CONDataRequest
     OnUpdateData = FIN_DP_M_CONUpdateData
     Left = 468
-    Top = 3255
+    Top = 3319
   end
   object FIN_DS_M_CON: TDataSource
     DataSet = FIN_SQ_M_CON
     Left = 468
-    Top = 3302
+    Top = 3366
   end
   object CMP_SQ_M_COT_FIT_APR: TSQLDataSet
     CommandText = 
@@ -21690,7 +21690,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 977
+    Top = 1097
     object FAT_SQ_M_IQMid_iqm: TIntegerField
       FieldName = 'id_iqm'
     end
@@ -21735,12 +21735,12 @@
     OnDataRequest = FAT_DP_M_IQMDataRequest
     OnUpdateData = FAT_DP_M_IQMUpdateData
     Left = 474
-    Top = 977
+    Top = 1097
   end
   object FAT_DS_M_IQM_ITE: TDataSource
     DataSet = FAT_SQ_M_IQM_ITE
     Left = 474
-    Top = 1075
+    Top = 1195
   end
   object BUS_SQ_M_IQF_FOR: TSQLDataSet
     CommandText = 
@@ -23726,7 +23726,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3018
+    Top = 3082
     object FIN_SQ_M_REC_PAGid_titulo: TIntegerField
       FieldName = 'id_titulo'
     end
@@ -23845,7 +23845,7 @@
     DataSet = FIN_SQ_M_REC_PAG
     OnDataRequest = FIN_DP_M_REC_PAGDataRequest
     Left = 468
-    Top = 3018
+    Top = 3082
   end
   object FIN_SQ_R_REC_ABE: TSQLDataSet
     CommandText = 
@@ -24104,7 +24104,7 @@
   object FAT_DS_M_NFE_DEV: TDataSource
     DataSet = FAT_SQ_M_NFE_DEV
     Left = 474
-    Top = 930
+    Top = 1050
   end
   object FIN_SQ_M_RBX_TIT_INT: TSQLDataSet
     CommandText = 'SELECT TIT.* FROM FIN_TB_M_PBX_TIT TIT'
@@ -24151,7 +24151,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3458
+    Top = 3522
     object FIN_SQ_M_MCHid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -24252,12 +24252,12 @@
     OnDataRequest = FIN_DP_M_MCHDataRequest
     OnUpdateData = FIN_DP_M_MCHUpdateData
     Left = 468
-    Top = 3458
+    Top = 3522
   end
   object FIN_DS_M_MCH: TDataSource
     DataSet = FIN_SQ_M_MCH
     Left = 468
-    Top = 3517
+    Top = 3567
   end
   object FIN_SQ_M_MCH_CHE: TSQLDataSet
     CommandText = 
@@ -24290,7 +24290,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3517
+    Top = 3567
     object FIN_SQ_M_MCH_CHEid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -25041,7 +25041,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3620
+    Top = 3670
     object FIN_SQ_M_ORCid_orc: TIntegerField
       FieldName = 'id_orc'
     end
@@ -25072,7 +25072,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3676
+    Top = 3726
     object FIN_SQ_M_ORC_PLCid_orc: TIntegerField
       FieldName = 'id_orc'
     end
@@ -25156,12 +25156,12 @@
     Options = [poCascadeDeletes, poUseQuoteChar]
     OnDataRequest = FIN_DP_M_ORCDataRequest
     Left = 470
-    Top = 3620
+    Top = 3670
   end
   object FIN_DS_M_ORC: TDataSource
     DataSet = FIN_SQ_M_ORC
     Left = 470
-    Top = 3676
+    Top = 3726
   end
   object FAT_SQ_R_PVE_01: TSQLDataSet
     CommandText = 
@@ -31514,7 +31514,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3575
+    Top = 3625
     object FIN_SQ_M_MCH_TITid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -31831,7 +31831,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3302
+    Top = 3366
     object FIN_SQ_M_CON_CXBid_conciliacao: TIntegerField
       FieldName = 'id_conciliacao'
     end
@@ -31894,7 +31894,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2438
+    Top = 2518
     object FIN_SQ_M_REC_HCHid_titulo: TIntegerField
       FieldName = 'id_titulo'
     end
@@ -31928,7 +31928,7 @@
   object FIN_DS_M_REC: TDataSource
     DataSet = FIN_SQ_M_REC
     Left = 471
-    Top = 2438
+    Top = 2518
   end
   object FAT_SQ_M_ROM: TSQLDataSet
     CommandText = 
@@ -31951,7 +31951,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 1312
+    Top = 1432
     object FAT_SQ_M_ROMid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -32192,7 +32192,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1360
+    Top = 1480
     object FAT_SQ_M_ROM_NFEid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -32278,7 +32278,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1408
+    Top = 1528
     object FAT_SQ_M_ROM_NFE_ITEid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -32335,12 +32335,12 @@
   object FAT_DS_M_ROM: TDataSource
     DataSet = FAT_SQ_M_ROM
     Left = 472
-    Top = 1360
+    Top = 1480
   end
   object FAT_DS_M_ROM_NFE: TDataSource
     DataSet = FAT_SQ_M_ROM_NFE
     Left = 472
-    Top = 1408
+    Top = 1528
   end
   object FAT_DP_M_ROM: TDataSetProvider
     DataSet = FAT_SQ_M_ROM
@@ -32350,7 +32350,7 @@
     OnUpdateData = FAT_DP_M_ROMUpdateData
     OnGetDataSetProperties = FAT_DP_M_ROMGetDataSetProperties
     Left = 472
-    Top = 1313
+    Top = 1433
   end
   object BUS_SQ_M_MCH_CHE_INT: TSQLDataSet
     CommandText = 
@@ -34677,7 +34677,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1456
+    Top = 1576
     object FAT_SQ_M_ROM_LACid_romaneio: TIntegerField
       FieldName = 'id_romaneio'
     end
@@ -36584,7 +36584,7 @@
   object FIN_DS_M_CON_CXB: TDataSource
     DataSet = FIN_SQ_M_CON_CXB
     Left = 468
-    Top = 3350
+    Top = 3414
   end
   object ctc_sq_m_orc_ite_com: TSQLDataSet
     CommandText = 
@@ -36922,7 +36922,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3406
+    Top = 3470
     object IntegerField115: TIntegerField
       FieldName = 'id_conciliacao'
     end
@@ -38836,7 +38836,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2905
+    Top = 2985
     object FIN_SQ_M_PBX_GERid_baixa: TIntegerField
       FieldName = 'id_baixa'
     end
@@ -38879,7 +38879,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 2296
+    Top = 2376
     object FIN_SQ_M_COB_TIT_FATid_fiscal: TIntegerField
       FieldName = 'id_fiscal'
     end
@@ -38943,7 +38943,7 @@
   object FIN_DS_M_COB_TIT: TDataSource
     DataSet = FIN_SQ_M_COB_TIT
     Left = 471
-    Top = 2291
+    Top = 2371
   end
   object DP_BR_CUPOM_MESTRE: TDataSetProvider
     DataSet = SQ_BR_CUPOM_MESTRE
@@ -40656,7 +40656,7 @@
     OnDataRequest = FAT_DP_M_PCADataRequest
     BeforeUpdateRecord = FAT_DP_M_PCABeforeUpdateRecord
     Left = 472
-    Top = 1504
+    Top = 1624
   end
   object FAT_SQ_M_PCA: TSQLDataSet
     CommandText = 
@@ -40668,7 +40668,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 1504
+    Top = 1624
     object FAT_SQ_M_PCAid_carregamento: TIntegerField
       FieldName = 'id_carregamento'
     end
@@ -40734,7 +40734,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1552
+    Top = 1672
     object FAT_SQ_M_PCA_PEDid_carregamento: TIntegerField
       FieldName = 'id_carregamento'
     end
@@ -40815,7 +40815,7 @@
   object FAT_DS_M_PCA: TDataSource
     DataSet = FAT_SQ_M_PCA
     Left = 472
-    Top = 1552
+    Top = 1672
   end
   object CAD_SQ_C_PAR_BXP: TSQLDataSet
     CommandText = 
@@ -47816,7 +47816,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 330
-    Top = 3118
+    Top = 3182
     object FAT_SQ_M_PEXid_pedido: TIntegerField
       FieldName = 'id_pedido'
     end
@@ -47942,7 +47942,7 @@
     DataSet = FAT_SQ_M_PEX
     OnDataRequest = FAT_DP_M_PEXDataRequest
     Left = 468
-    Top = 3118
+    Top = 3182
   end
   object BUS_SQ_M_CSU_GER_PGF: TSQLDataSet
     CommandText = 
@@ -49254,7 +49254,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3736
+    Top = 3786
     object FIN_SQ_M_BRDid_brd: TIntegerField
       FieldName = 'id_brd'
     end
@@ -49373,7 +49373,7 @@
     OnUpdateData = FIN_DP_M_BRDUpdateData
     OnGetDataSetProperties = FIN_DP_M_BRDGetDataSetProperties
     Left = 470
-    Top = 3736
+    Top = 3786
   end
   object FIN_SQ_M_BRD_TIT: TSQLDataSet
     CommandText = 
@@ -49396,7 +49396,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3792
+    Top = 3842
     object FIN_SQ_M_BRD_TITid_brd: TIntegerField
       FieldName = 'id_brd'
     end
@@ -49487,7 +49487,7 @@
   object FIN_DS_M_BRD: TDataSource
     DataSet = FIN_SQ_M_BRD
     Left = 470
-    Top = 3792
+    Top = 3842
   end
   object CAD_SQ_C_MAR: TSQLDataSet
     CommandText = 'select * from cad_tb_c_mar'#13#10'where 1 = 2'
@@ -51867,7 +51867,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 1697
+    Top = 1769
     object FAT_SQ_M_MKTid_mkt: TIntegerField
       FieldName = 'id_mkt'
     end
@@ -51919,12 +51919,12 @@
     OnUpdateData = FAT_DP_M_MKTUpdateData
     OnGetDataSetProperties = FAT_DP_M_MKTGetDataSetProperties
     Left = 472
-    Top = 1697
+    Top = 1769
   end
   object FAT_DS_M_MKT: TDataSource
     DataSet = FAT_SQ_M_MKT
     Left = 472
-    Top = 1748
+    Top = 1820
   end
   object FAT_SQ_M_MKT_CLI: TSQLDataSet
     CommandText = 
@@ -51948,7 +51948,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1752
+    Top = 1824
     object FAT_SQ_M_MKT_CLIid_mkt: TIntegerField
       FieldName = 'id_mkt'
     end
@@ -54893,7 +54893,7 @@
     OnDataRequest = FIN_DP_M_LMFDataRequest
     OnUpdateData = FIN_DP_M_LMFUpdateData
     Left = 472
-    Top = 3840
+    Top = 3890
   end
   object FIN_SQ_M_LMF: TSQLDataSet
     CommandText = 
@@ -54908,7 +54908,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3840
+    Top = 3890
     object FIN_SQ_M_LMFid_lmf: TIntegerField
       FieldName = 'id_lmf'
     end
@@ -54986,7 +54986,7 @@
     OnDataRequest = FIN_DP_M_PRCDataRequest
     OnUpdateData = FIN_DP_M_PRCUpdateData
     Left = 472
-    Top = 3896
+    Top = 3946
   end
   object FIN_SQ_M_PRC: TSQLDataSet
     CommandText = 
@@ -55000,7 +55000,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3896
+    Top = 3946
     object FIN_SQ_M_PRCid_prc: TIntegerField
       FieldName = 'id_prc'
     end
@@ -55047,7 +55047,7 @@
   object FIN_DS_M_PRC: TDataSource
     DataSet = FIN_SQ_M_PRC
     Left = 472
-    Top = 3960
+    Top = 4010
   end
   object FIN_SQ_M_PRC_DET: TSQLDataSet
     CommandText = 
@@ -55071,7 +55071,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3960
+    Top = 4010
     object FIN_SQ_M_PRC_DETid_prc: TIntegerField
       FieldName = 'id_prc'
     end
@@ -55690,7 +55690,7 @@
       end>
     SQLConnection = Conexao
     Left = 472
-    Top = 1456
+    Top = 1576
   end
   object BUS_SQ_C_VIT_CON: TSQLDataSet
     CommandText = 
@@ -56077,7 +56077,7 @@
     OnUpdateData = FIN_DP_M_DCTUpdateData
     OnGetDataSetProperties = FIN_DP_M_DCTGetDataSetProperties
     Left = 472
-    Top = 4032
+    Top = 4082
   end
   object FIN_SQ_M_DCT: TSQLDataSet
     CommandText = 
@@ -56090,7 +56090,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 336
-    Top = 4032
+    Top = 4082
     object FIN_SQ_M_DCTid_dct: TIntegerField
       FieldName = 'id_dct'
     end
@@ -56151,7 +56151,7 @@
   object FIN_DS_M_DCT: TDataSource
     DataSet = FIN_SQ_M_DCT
     Left = 472
-    Top = 4096
+    Top = 4146
   end
   object FIN_SQ_M_DCT_TIT: TSQLDataSet
     CommandText = 
@@ -56173,7 +56173,7 @@
       end>
     SQLConnection = Conexao
     Left = 336
-    Top = 4096
+    Top = 4146
     object FIN_SQ_M_DCT_TITid_dct: TIntegerField
       FieldName = 'id_dct'
     end
@@ -59319,7 +59319,7 @@
     DataSet = FIN_SQ_M_LDM
     OnDataRequest = FIN_DP_M_LDMDataRequest
     Left = 472
-    Top = 4168
+    Top = 4218
   end
   object FIN_SQ_M_LDM: TSQLDataSet
     CommandText = 
@@ -59331,7 +59331,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 336
-    Top = 4168
+    Top = 4218
     object FIN_SQ_M_LDMid_ldm: TIntegerField
       FieldName = 'id_ldm'
     end
@@ -59400,7 +59400,7 @@
     DataSet = FAT_SQ_M_ETG
     OnDataRequest = FAT_DP_M_ETGDataRequest
     Left = 472
-    Top = 3168
+    Top = 3232
   end
   object FAT_SQ_M_ETG: TSQLDataSet
     CommandText = 
@@ -59412,7 +59412,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 328
-    Top = 3168
+    Top = 3232
     object FAT_SQ_M_ETGid_entrega: TIntegerField
       FieldName = 'id_entrega'
     end
@@ -59456,7 +59456,7 @@
   object FAT_DS_M_ETG: TDataSource
     DataSet = FAT_SQ_M_ETG
     Left = 472
-    Top = 3216
+    Top = 3280
   end
   object FAT_SQ_M_ETG_DEV: TSQLDataSet
     CommandText = 
@@ -59477,7 +59477,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 3216
+    Top = 3280
     object FAT_SQ_M_ETG_DEVid_entrega: TIntegerField
       FieldName = 'id_entrega'
     end
@@ -61040,7 +61040,7 @@
       end>
     SQLConnection = Conexao
     Left = 464
-    Top = 2728
+    Top = 2808
     object FIN_SQ_M_RBX_PPEid_baixa: TIntegerField
       FieldName = 'id_baixa'
     end
@@ -61092,7 +61092,7 @@
       end>
     SQLConnection = Conexao
     Left = 328
-    Top = 1608
+    Top = 1720
     object FAT_SQ_M_PCA_PED_ITEid_carregamento: TIntegerField
       FieldName = 'id_carregamento'
     end
@@ -61137,7 +61137,7 @@
   object FAT_DS_M_PCA_PED: TDataSource
     DataSet = FAT_SQ_M_PCA_PED
     Left = 472
-    Top = 1608
+    Top = 1720
   end
   object FAT_DP_R_PCA: TDataSetProvider
     DataSet = FAT_SQ_R_PCA
@@ -63783,6 +63783,99 @@
     end
     object CAD_SQ_C_GRU_CORint_nomecor: TWideStringField
       FieldName = 'int_nomecor'
+      ProviderFlags = []
+      Size = 40
+    end
+  end
+  object FAT_SQ_M_PED_SQA: TSQLDataSet
+    CommandText = 
+      'select SQA.*, '#13#10'    FUN.NOME AS INT_NOMEFUN, '#13#10'    FCT.NOME AS I' +
+      'NT_NOMEFCT,'#13#10'    ITE.DESCRICAO AS INT_NOMEITE,'#13#10'    COR.DESCRICA' +
+      'O AS INT_NOMECOR,'#13#10'    TAM.DESCRICAO AS INT_NOMETAM  from FAT_TB' +
+      '_M_PED_SQA SQA '#13#10'    LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_' +
+      'FUNCIONARIO=SQA.ID_FUNC_SOLICITACAO'#13#10'    LEFT OUTER JOIN CAD_TB_' +
+      'C_FUN FCT ON FCT.ID_FUNCIONARIO=SQA.id_usu_destinatario'#13#10'    LEF' +
+      'T OUTER JOIN CAD_TB_C_ITE ITE ON ITE.ID_ITEM=SQA.ID_ITEM'#13#10'    LE' +
+      'FT OUTER JOIN CAD_TB_C_COR COR ON COR.ID_COR=SQA.ID_COR'#13#10'    LEF' +
+      'T OUTER JOIN CAD_TB_C_TAM TAM ON TAM.ID_TAMANHO=SQA.ID_TAMANHO'#13#10 +
+      'WHERE ID_PEDIDO=:ID_PEDIDO'#13#10'order by SQA.ID_PEDIDO, ITE.DESCRICA' +
+      'O, COR.DESCRICAO'
+    DataSource = FAT_DS_M_PED
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PEDIDO'
+        ParamType = ptInput
+      end>
+    SQLConnection = Conexao
+    Left = 328
+    Top = 744
+    object FAT_SQ_M_PED_SQAid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+    end
+    object FAT_SQ_M_PED_SQAid_sequencia: TIntegerField
+      FieldName = 'id_sequencia'
+    end
+    object FAT_SQ_M_PED_SQAid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object FAT_SQ_M_PED_SQAid_cor: TIntegerField
+      FieldName = 'id_cor'
+    end
+    object FAT_SQ_M_PED_SQAid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+    end
+    object FAT_SQ_M_PED_SQApcp_obs_item: TWideStringField
+      FieldName = 'pcp_obs_item'
+      Size = 150
+    end
+    object FAT_SQ_M_PED_SQAdta_solicitacao: TDateField
+      FieldName = 'dta_solicitacao'
+    end
+    object FAT_SQ_M_PED_SQAhora_solicitacao: TTimeField
+      FieldName = 'hora_solicitacao'
+    end
+    object FAT_SQ_M_PED_SQAid_func_solicitacao: TIntegerField
+      FieldName = 'id_func_solicitacao'
+    end
+    object FAT_SQ_M_PED_SQAqtde_retirar_conf: TFloatField
+      FieldName = 'qtde_retirar_conf'
+    end
+    object FAT_SQ_M_PED_SQAliberado_destinatario: TBooleanField
+      FieldName = 'liberado_destinatario'
+    end
+    object FAT_SQ_M_PED_SQAid_usu_destinatario: TIntegerField
+      FieldName = 'id_usu_destinatario'
+    end
+    object FAT_SQ_M_PED_SQAdta_liberado: TDateField
+      FieldName = 'dta_liberado'
+    end
+    object FAT_SQ_M_PED_SQAhora_liberado: TTimeField
+      FieldName = 'hora_liberado'
+    end
+    object FAT_SQ_M_PED_SQAint_nomefun: TWideStringField
+      FieldName = 'int_nomefun'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_SQ_M_PED_SQAint_nomefct: TWideStringField
+      FieldName = 'int_nomefct'
+      ProviderFlags = []
+      Size = 50
+    end
+    object FAT_SQ_M_PED_SQAint_nomeite: TWideStringField
+      FieldName = 'int_nomeite'
+      ProviderFlags = []
+      Size = 100
+    end
+    object FAT_SQ_M_PED_SQAint_nomecor: TWideStringField
+      FieldName = 'int_nomecor'
+      ProviderFlags = []
+      Size = 40
+    end
+    object FAT_SQ_M_PED_SQAint_nometam: TWideStringField
+      FieldName = 'int_nometam'
       ProviderFlags = []
       Size = 40
     end
