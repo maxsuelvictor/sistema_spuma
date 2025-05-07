@@ -2,7 +2,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
   Left = 0
   Top = 0
   ClientHeight = 627
-  ClientWidth = 896
+  ClientWidth = 970
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 896
+    Width = 970
     Height = 43
     Align = alTop
     BevelOuter = bvNone
@@ -29,7 +29,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
     object pnlCima: TPanel
       Left = 0
       Top = 0
-      Width = 896
+      Width = 970
       Height = 30
       Align = alTop
       BevelOuter = bvNone
@@ -39,14 +39,14 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       object lblTitulo: TLabel
         AlignWithMargins = True
         Left = 0
-        Top = -4
-        Width = 896
-        Height = 30
+        Top = 0
+        Width = 970
+        Height = 26
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 4
-        Align = alBottom
+        Align = alTop
         Alignment = taCenter
         AutoSize = False
         Caption = 'Solicita'#231#227'o de altera'#231#227'o da qtde do item a EXPEDI'#199#195'O'
@@ -59,12 +59,14 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         ParentColor = False
         ParentFont = False
         ExplicitTop = -9
+        ExplicitWidth = 896
+        ExplicitHeight = 30
       end
     end
     object pnlBaixo: TPanel
       Left = 0
       Top = 25
-      Width = 896
+      Width = 970
       Height = 18
       Align = alBottom
       BevelOuter = bvNone
@@ -75,7 +77,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         AlignWithMargins = True
         Left = 0
         Top = 0
-        Width = 891
+        Width = 965
         Height = 18
         Margins.Left = 0
         Margins.Top = 0
@@ -101,7 +103,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
   object pnlDireita: TPanel
     Left = 0
     Top = 43
-    Width = 896
+    Width = 970
     Height = 584
     Align = alClient
     BevelOuter = bvNone
@@ -124,7 +126,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
     object Label1: TLabel
       Left = 0
       Top = 0
-      Width = 896
+      Width = 970
       Height = 26
       Align = alTop
       Alignment = taCenter
@@ -139,13 +141,27 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       ParentColor = False
       ParentFont = False
       Transparent = False
+      ExplicitWidth = 896
     end
     object Label2: TLabel
-      Left = 249
-      Top = 232
-      Width = 217
+      Left = 213
+      Top = 265
+      Width = 221
       Height = 21
-      Caption = 'Qtde a retirar desse produto:'
+      Caption = 'Qtde a retirar desse produto :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 256
+      Top = 211
+      Width = 178
+      Height = 21
+      Caption = 'Qtde atual do produto :'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
@@ -156,13 +172,13 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
     object GroupBox1: TGroupBox
       Left = 20
       Top = 312
-      Width = 857
+      Width = 901
       Height = 236
       TabOrder = 0
       object Label10: TLabel
         Left = 2
         Top = 15
-        Width = 853
+        Width = 897
         Height = 25
         Align = alTop
         Alignment = taCenter
@@ -178,25 +194,26 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         ParentFont = False
         Transparent = False
         ExplicitTop = 23
+        ExplicitWidth = 853
       end
       object wwDBGrid1: TwwDBGrid
         Left = 2
         Top = 40
-        Width = 853
+        Width = 897
         Height = 194
         TabStop = False
         ControlType.Strings = (
           'liberado_destinatario;CheckBox;True;False')
         Selected.Strings = (
           'id_item'#9'10'#9'C'#243'digo'#9'F'
-          'int_nomeite'#9'40'#9'Descri'#231#227'o'#9'F'
+          'int_nomeite'#9'35'#9'Descri'#231#227'o'#9'F'
           'int_nomecor'#9'15'#9'Cor'#9'F'
           'int_nomefun'#9'20'#9'Funcion'#225'rio'#9'F'#9'Solicitacao'
           'dta_solicitacao'#9'10'#9'Data'#9'F'#9'Solicitacao'
           'hora_solicitacao'#9'10'#9'Hora'#9'F'#9'Solicitacao'
           'dta_liberado'#9'10'#9'Data'#9'F'#9'Liberacao'
           'hora_liberado'#9'10'#9'Hora'#9'F'#9'Liberacao'
-          'liberado_destinatario'#9'5'#9'Liberado'#9'F'#9'Liberacao')
+          'int_nomefct'#9'13'#9'Liberado por'#9'F'#9'Liberacao')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -212,13 +229,9 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         TitleFont.Height = -11
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
-        TitleLines = 1
+        TitleLines = 2
         TitleButtons = False
         UseTFields = False
-        ExplicitLeft = 3
-        ExplicitTop = 46
-        ExplicitWidth = 855
-        ExplicitHeight = 126
         object wwIButton1: TwwIButton
           Left = -1
           Top = -1
@@ -248,36 +261,35 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0080FFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             B102}
+          OnClick = wwIButton1Click
         end
       end
     end
-    object btnImporta: TButton
-      Left = 232
-      Top = 554
-      Width = 80
-      Height = 25
-      Caption = '&Importar'
-      TabOrder = 1
-    end
     object btnSair: TButton
-      Left = 313
-      Top = 554
-      Width = 80
-      Height = 25
+      Left = 407
+      Top = 549
+      Width = 82
+      Height = 28
       Caption = '&Sair'
-      TabOrder = 2
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btnSairClick
     end
     object grdItens: TwwDBGrid
       Left = 20
       Top = 45
-      Width = 855
+      Width = 899
       Height = 110
       TabStop = False
       Selected.Strings = (
         'ID_ITEM'#9'10'#9'C'#243'digo'#9'F'
-        'INT_NOMEITE'#9'25'#9'Descri'#231#227'o'#9'F'
+        'INT_NOMEITE'#9'45'#9'Descri'#231#227'o'#9'F'
         'int_nomecor'#9'10'#9'Cor'#9'F'
-        'int_nometam'#9'8'#9'Tamanho'#9'F'
         'int_nomecul'#9'15'#9'Cultura'#9'T'
         'QTDE'#9'5'#9'Qtde'#9'F'
         'VLR_UNITARIO'#9'10'#9'Vlr.Unit'#225'rio'#9'F'
@@ -292,7 +304,8 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       ShowHorzScrollBar = True
       DataSource = dsPedtIten
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
-      TabOrder = 3
+      ReadOnly = True
+      TabOrder = 2
       TitleAlignment = taLeftJustify
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clBlack
@@ -337,24 +350,43 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
     object txtPcpObsItem: TDBMemo
       Left = 20
       Top = 174
-      Width = 855
+      Width = 899
       Height = 21
       TabStop = False
       Color = 14342874
       DataField = 'pcp_obs_item'
       DataSource = dsPedtIten
       ReadOnly = True
-      TabOrder = 4
+      TabOrder = 3
       Visible = False
     end
     object txtQtdeRetirarConf: TwwDBSpinEdit
-      Left = 472
-      Top = 229
+      Left = 440
+      Top = 261
       Width = 69
       Height = 29
       Increment = 1.000000000000000000
+      MaxValue = 999.000000000000000000
+      Color = 14342874
       DataField = 'qtde_retirar_conf'
       DataSource = dsPedSqa
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      UnboundDataType = wwDefault
+      OnChange = txtQtdeRetirarConfChange
+    end
+    object Button1: TButton
+      Left = 511
+      Top = 260
+      Width = 120
+      Height = 30
+      Caption = '&Solicitar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
@@ -362,25 +394,38 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 5
-      UnboundDataType = wwDefault
+      OnClick = Button1Click
     end
-    object Button1: TButton
-      Left = 547
-      Top = 229
-      Width = 81
+    object txtQtde: TwwDBEdit
+      Left = 440
+      Top = 207
+      Width = 69
       Height = 29
-      Caption = '&Solicitar'
+      TabStop = False
+      Color = 14342874
+      DataField = 'QTDE'
+      DataSource = dsPedtIten
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
       TabOrder = 6
+      UnboundDataType = wwDefault
+      WantReturns = False
+      WordWrap = False
     end
   end
   object dsPedSqa: TwwDataSource
     DataSet = dmGeral.FAT_CD_M_PED_SQA
-    Left = 760
-    Top = 299
+    Left = 856
+    Top = 283
   end
   object dsPedtIten: TwwDataSource
     DataSet = dmGeral.FAT_CD_M_PED_ITE
-    Left = 15
-    Top = 255
+    Left = 31
+    Top = 279
   end
 end

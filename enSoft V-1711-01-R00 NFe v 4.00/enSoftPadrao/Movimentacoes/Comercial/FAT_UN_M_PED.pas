@@ -309,6 +309,8 @@ type
     PCP_CD_M_ROMseq_pca_carreg_anual: TIntegerField;
     PCP_CD_M_ROMPCP_SQ_M_ROM_PED: TDataSetField;
     PCP_CD_M_ROM_PED: TClientDataSet;
+    N1: TMenuItem;
+    Solicitaralteraonaqtdedoitem1: TMenuItem;
     procedure txtClienteButtonClick(Sender: TObject);
     procedure txtClienteExit(Sender: TObject);
     procedure btn_Add_ItensClick(Sender: TObject);
@@ -454,6 +456,7 @@ type
     procedure FAT_FR_M_PED_SGQ2AfterPrintReport(Sender: TObject);
     procedure Visualizarinformaesdaimpresso1Click(Sender: TObject);
     procedure btnGerarPDFClick(Sender: TObject);
+    procedure Solicitaralteraonaqtdedoitem1Click(Sender: TObject);
   private
     { Private declarations }
      procedure HabilDesabCampos(Estado: Boolean; Cor: TColor);
@@ -514,7 +517,7 @@ implementation
 uses uDmGeral, PSQ_UN_X_CLI, PSQ_UN_X_CPG, PSQ_UN_X_FUN, PSQ_UN_X_TME,uProxy,UApplayClassProxy,
   PSQ_UN_X_ITE, PSQ_UN_X_FPG, FAT_UN_M_PED_IOR,
   FAT_RN_M_PED, FAT_RN_M_NFE, FAT_UN_M_PED_RTC, enFunc, uDmSgq, PSQ_UN_X_MTA,
-  FAT_UN_M_PED_SEN, FAT_UN_M_PED_IPE, FAT_UN_M_PED_BIP, FAT_UN_M_PED_MOT,
+  FAT_UN_M_PED_SEN, FAT_UN_M_PED_IPE,FAT_UN_M_PED_SQA, FAT_UN_M_PED_BIP, FAT_UN_M_PED_MOT,
   enConstantes;
 
 procedure TFAT_FM_M_PED.AbrirBuscas;
@@ -772,6 +775,14 @@ begin
          dmGeral.FAT_CD_M_PED_ITEper_desconto.OnChange  := dmGeral.FAT_CD_M_PED_ITEper_descontoChange;
          dmGeral.FAT_CD_M_PED_ITEvlr_desconto.OnChange  := dmGeral.FAT_CD_M_PED_ITEvlr_descontoChange;
        end;
+end;
+
+procedure TFAT_FM_M_PED.Solicitaralteraonaqtdedoitem1Click(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TFAT_FM_M_PED_SQA,FAT_FM_M_PED_SQA);
+  FAT_FM_M_PED_SQA.ShowModal;
+  FAT_FM_M_PED_SQA.Free;
 end;
 
 procedure TFAT_FM_M_PED.acAlterarExecute(Sender: TObject);

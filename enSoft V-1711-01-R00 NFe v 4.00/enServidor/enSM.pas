@@ -11582,8 +11582,6 @@ type
     FAT_SQ_M_PED_SQAhora_solicitacao: TTimeField;
     FAT_SQ_M_PED_SQAid_func_solicitacao: TIntegerField;
     FAT_SQ_M_PED_SQAqtde_retirar_conf: TFloatField;
-    FAT_SQ_M_PED_SQAliberado_destinatario: TBooleanField;
-    FAT_SQ_M_PED_SQAid_usu_destinatario: TIntegerField;
     FAT_SQ_M_PED_SQAdta_liberado: TDateField;
     FAT_SQ_M_PED_SQAhora_liberado: TTimeField;
     FAT_SQ_M_PED_SQAint_nomefun: TWideStringField;
@@ -11591,6 +11589,9 @@ type
     FAT_SQ_M_PED_SQAint_nomeite: TWideStringField;
     FAT_SQ_M_PED_SQAint_nomecor: TWideStringField;
     FAT_SQ_M_PED_SQAint_nometam: TWideStringField;
+    FAT_SQ_M_PED_SQAliberado: TBooleanField;
+    FAT_SQ_M_PED_SQAid_usu_liberacao: TIntegerField;
+    FAT_SQ_M_PED_SQAid_registro: TIntegerField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;

@@ -11881,8 +11881,6 @@ type
     FAT_CD_M_PED_SQAhora_solicitacao: TTimeField;
     FAT_CD_M_PED_SQAid_func_solicitacao: TIntegerField;
     FAT_CD_M_PED_SQAqtde_retirar_conf: TFloatField;
-    FAT_CD_M_PED_SQAliberado_destinatario: TBooleanField;
-    FAT_CD_M_PED_SQAid_usu_destinatario: TIntegerField;
     FAT_CD_M_PED_SQAdta_liberado: TDateField;
     FAT_CD_M_PED_SQAhora_liberado: TTimeField;
     FAT_CD_M_PED_SQAint_nomefun: TWideStringField;
@@ -11890,6 +11888,9 @@ type
     FAT_CD_M_PED_SQAint_nomeite: TWideStringField;
     FAT_CD_M_PED_SQAint_nomecor: TWideStringField;
     FAT_CD_M_PED_SQAint_nometam: TWideStringField;
+    FAT_CD_M_PED_SQAliberado: TBooleanField;
+    FAT_CD_M_PED_SQAid_usu_liberacao: TIntegerField;
+    FAT_CD_M_PED_SQAid_registro: TIntegerField;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);

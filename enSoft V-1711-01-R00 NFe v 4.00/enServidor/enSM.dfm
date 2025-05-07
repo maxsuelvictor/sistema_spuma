@@ -63794,12 +63794,12 @@
       'O AS INT_NOMECOR,'#13#10'    TAM.DESCRICAO AS INT_NOMETAM  from FAT_TB' +
       '_M_PED_SQA SQA '#13#10'    LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_' +
       'FUNCIONARIO=SQA.ID_FUNC_SOLICITACAO'#13#10'    LEFT OUTER JOIN CAD_TB_' +
-      'C_FUN FCT ON FCT.ID_FUNCIONARIO=SQA.id_usu_destinatario'#13#10'    LEF' +
-      'T OUTER JOIN CAD_TB_C_ITE ITE ON ITE.ID_ITEM=SQA.ID_ITEM'#13#10'    LE' +
-      'FT OUTER JOIN CAD_TB_C_COR COR ON COR.ID_COR=SQA.ID_COR'#13#10'    LEF' +
-      'T OUTER JOIN CAD_TB_C_TAM TAM ON TAM.ID_TAMANHO=SQA.ID_TAMANHO'#13#10 +
-      'WHERE ID_PEDIDO=:ID_PEDIDO'#13#10'order by SQA.ID_PEDIDO, ITE.DESCRICA' +
-      'O, COR.DESCRICAO'
+      'C_FUN FCT ON FCT.ID_FUNCIONARIO=SQA.id_usu_liberacao'#13#10'    LEFT O' +
+      'UTER JOIN CAD_TB_C_ITE ITE ON ITE.ID_ITEM=SQA.ID_ITEM'#13#10'    LEFT ' +
+      'OUTER JOIN CAD_TB_C_COR COR ON COR.ID_COR=SQA.ID_COR'#13#10'    LEFT O' +
+      'UTER JOIN CAD_TB_C_TAM TAM ON TAM.ID_TAMANHO=SQA.ID_TAMANHO'#13#10'WHE' +
+      'RE ID_PEDIDO=:ID_PEDIDO'#13#10'order by SQA.ID_PEDIDO, ITE.DESCRICAO, ' +
+      'COR.DESCRICAO'
     DataSource = FAT_DS_M_PED
     MaxBlobSize = -1
     Params = <
@@ -63842,12 +63842,6 @@
     object FAT_SQ_M_PED_SQAqtde_retirar_conf: TFloatField
       FieldName = 'qtde_retirar_conf'
     end
-    object FAT_SQ_M_PED_SQAliberado_destinatario: TBooleanField
-      FieldName = 'liberado_destinatario'
-    end
-    object FAT_SQ_M_PED_SQAid_usu_destinatario: TIntegerField
-      FieldName = 'id_usu_destinatario'
-    end
     object FAT_SQ_M_PED_SQAdta_liberado: TDateField
       FieldName = 'dta_liberado'
     end
@@ -63878,6 +63872,15 @@
       FieldName = 'int_nometam'
       ProviderFlags = []
       Size = 40
+    end
+    object FAT_SQ_M_PED_SQAliberado: TBooleanField
+      FieldName = 'liberado'
+    end
+    object FAT_SQ_M_PED_SQAid_usu_liberacao: TIntegerField
+      FieldName = 'id_usu_liberacao'
+    end
+    object FAT_SQ_M_PED_SQAid_registro: TIntegerField
+      FieldName = 'id_registro'
     end
   end
 end

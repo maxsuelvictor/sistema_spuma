@@ -3470,6 +3470,7 @@
     end
   end
   object FAT_CD_M_PED: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'FAT_DP_M_PED'
@@ -4910,6 +4911,7 @@
     end
   end
   object FAT_CD_M_PED_TIT: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_TIT
     Params = <>
@@ -5001,6 +5003,7 @@
     end
   end
   object FAT_CD_M_PED_ITE: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_ITE
     Params = <>
@@ -60238,6 +60241,7 @@
     end
   end
   object FAT_CD_M_PED_TIT_SER: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_TIT_SER
     Params = <>
@@ -61591,10 +61595,6 @@
       DisplayWidth = 10
       FieldName = 'hora_liberado'
     end
-    object FAT_CD_M_PED_SQAliberado_destinatario: TBooleanField
-      DisplayWidth = 5
-      FieldName = 'liberado_destinatario'
-    end
     object FAT_CD_M_PED_SQAid_pedido: TIntegerField
       FieldName = 'id_pedido'
       Visible = False
@@ -61624,10 +61624,6 @@
       FieldName = 'qtde_retirar_conf'
       Visible = False
     end
-    object FAT_CD_M_PED_SQAid_usu_destinatario: TIntegerField
-      FieldName = 'id_usu_destinatario'
-      Visible = False
-    end
     object FAT_CD_M_PED_SQAint_nomefct: TWideStringField
       FieldName = 'int_nomefct'
       ProviderFlags = []
@@ -61639,6 +61635,15 @@
       ProviderFlags = []
       Visible = False
       Size = 40
+    end
+    object FAT_CD_M_PED_SQAliberado: TBooleanField
+      FieldName = 'liberado'
+    end
+    object FAT_CD_M_PED_SQAid_usu_liberacao: TIntegerField
+      FieldName = 'id_usu_liberacao'
+    end
+    object FAT_CD_M_PED_SQAid_registro: TIntegerField
+      FieldName = 'id_registro'
     end
   end
 end
