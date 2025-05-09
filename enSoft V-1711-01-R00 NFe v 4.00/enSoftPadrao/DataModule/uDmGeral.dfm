@@ -3470,7 +3470,6 @@
     end
   end
   object FAT_CD_M_PED: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'FAT_DP_M_PED'
@@ -4911,7 +4910,6 @@
     end
   end
   object FAT_CD_M_PED_TIT: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_TIT
     Params = <>
@@ -5003,7 +5001,6 @@
     end
   end
   object FAT_CD_M_PED_ITE: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_ITE
     Params = <>
@@ -60241,7 +60238,6 @@
     end
   end
   object FAT_CD_M_PED_TIT_SER: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_TIT_SER
     Params = <>

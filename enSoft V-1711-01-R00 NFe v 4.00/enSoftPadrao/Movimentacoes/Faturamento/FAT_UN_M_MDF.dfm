@@ -207,10 +207,6 @@ object FAT_FM_M_MDF: TFAT_FM_M_MDF
       object TabSheet6: TTabSheet
         Caption = 'XML Resposta'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object WBResposta: TWebBrowser
           Left = 0
           Top = 0
@@ -231,10 +227,6 @@ object FAT_FM_M_MDF: TFAT_FM_M_MDF
       object TabSheet8: TTabSheet
         Caption = 'Log'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object memoLog: TMemo
           Left = 0
           Top = 0
@@ -261,10 +253,6 @@ object FAT_FM_M_MDF: TFAT_FM_M_MDF
       object TabSheet10: TTabSheet
         Caption = 'Retorno Completo WS'
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object memoRespWS: TMemo
           Left = 0
           Top = 0
@@ -277,10 +265,6 @@ object FAT_FM_M_MDF: TFAT_FM_M_MDF
       object Dados: TTabSheet
         Caption = 'Dados'
         ImageIndex = 5
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object MemoDados: TMemo
           Left = 0
           Top = 0

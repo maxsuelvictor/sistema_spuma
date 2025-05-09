@@ -141,7 +141,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       ParentColor = False
       ParentFont = False
       Transparent = False
-      ExplicitWidth = 896
+      ExplicitTop = 3
     end
     object Label2: TLabel
       Left = 213
@@ -170,15 +170,15 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       ParentFont = False
     end
     object GroupBox1: TGroupBox
-      Left = 20
-      Top = 312
-      Width = 901
+      Left = 12
+      Top = 307
+      Width = 941
       Height = 236
       TabOrder = 0
       object Label10: TLabel
         Left = 2
         Top = 15
-        Width = 897
+        Width = 937
         Height = 25
         Align = alTop
         Alignment = taCenter
@@ -199,7 +199,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       object wwDBGrid1: TwwDBGrid
         Left = 2
         Top = 40
-        Width = 897
+        Width = 937
         Height = 194
         TabStop = False
         ControlType.Strings = (
@@ -208,7 +208,8 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
           'id_item'#9'10'#9'C'#243'digo'#9'F'
           'int_nomeite'#9'35'#9'Descri'#231#227'o'#9'F'
           'int_nomecor'#9'15'#9'Cor'#9'F'
-          'int_nomefun'#9'20'#9'Funcion'#225'rio'#9'F'#9'Solicitacao'
+          'int_nomefun'#9'15'#9'Funcion'#225'rio'#9'F'#9'Solicitacao'
+          'qtde_retirar_conf'#9'10'#9'Qtde solicitado'#9'F'
           'dta_solicitacao'#9'10'#9'Data'#9'F'#9'Solicitacao'
           'hora_solicitacao'#9'10'#9'Hora'#9'F'#9'Solicitacao'
           'dta_liberado'#9'10'#9'Data'#9'F'#9'Liberacao'

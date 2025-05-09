@@ -64,6 +64,8 @@ begin
 end;
 
 procedure TFAT_FM_M_PED_SQA.Button1Click(Sender: TObject);
+var
+  pedido: integer;
 begin
 
   if dmgeral.FAT_CD_M_PED_SQA.FieldByName('qtde_retirar_conf').AsCurrency = 0 then
@@ -86,18 +88,46 @@ begin
 
         dmgeral.FAT_CD_M_PED_SQA.FieldByName('id_func_solicitacao').AsInteger := xFuncionario;
 
+        pedido := dmgeral.FAT_CD_M_PED.FieldByName('id_pedido').AsInteger;
 
         dmgeral.FAT_CD_M_PED_SQA.Post;
-        dmgeral.FAT_CD_M_PED_SQA.ApplyUpdates(0);
+        dmgeral.FAT_CD_M_PED.ApplyUpdates(0);
 
-        txtQtdeRetirarConf.Enabled := true;
-        txtQtdeRetirarConf.Color := $00DADADA;
+        dmGeral.FAT_CD_M_PED.Close;
+            dmGeral.FAT_CD_M_PED.Data :=
+            dmGeral.FAT_CD_M_PED.DataRequest(
+                    VarArrayOf([0, dmGeral.CAD_CD_C_PAR_CTRid_empresa.Text,  pedido]));
+
+        txtQtdeRetirarConf.Enabled := false;
+        txtQtdeRetirarConf.Color := clWhite;
      end;
 
 end;
 
 procedure TFAT_FM_M_PED_SQA.grdItensDblClick(Sender: TObject);
 begin
+
+  if dmgeral.FAT_CD_M_PED_ITE.IsEmpty then
+     begin
+       ShowMessage('Não há item para poder solicitar alteração.');
+       exit;
+     end;
+
+
+  dmgeral.FAT_CD_M_PED_SQA.Filtered := true;
+  dmgeral.FAT_CD_M_PED_SQA.Filter := 'id_item = ' + dmgeral.FAT_CD_M_PED_ITE.FieldByName('id_item').AsString +
+                                     ' and ' +
+                                     'id_sequencia = ' + dmgeral.FAT_CD_M_PED_ITE.FieldByName('id_sequencia').AsString +
+                                     'and liberado = false';
+
+  if not dmgeral.FAT_CD_M_PED_SQA.IsEmpty then
+     begin
+       ShowMessage('Já existe solicitação para este item!');
+       dmgeral.FAT_CD_M_PED_SQA.Filtered := false;
+       exit;
+     end;
+  dmgeral.FAT_CD_M_PED_SQA.Filtered := false;
+
 
   dmgeral.FAT_CD_M_PED_SQA.cancel;
 
@@ -161,6 +191,8 @@ begin
 end;
 
 procedure TFAT_FM_M_PED_SQA.wwIButton1Click(Sender: TObject);
+var
+  pedido: integer;
 begin
 
   if not dmGeral.FAT_CD_M_PED_SQA.IsEmpty then
@@ -170,8 +202,19 @@ begin
             ShowMessage('Esse item já foi liberado!');
             exit;
           end;
+      // dsPedSqa.dataset.delete;
+
+       pedido := dmgeral.FAT_CD_M_PED.FieldByName('id_pedido').AsInteger;
+
        dmgeral.FAT_CD_M_PED_SQA.Delete;
-       dmgeral.FAT_CD_M_PED_SQA.ApplyUpdates(0);
+       dmgeral.FAT_CD_M_PED.ApplyUpdates(0);
+
+       dmGeral.FAT_CD_M_PED.Close;
+            dmGeral.FAT_CD_M_PED.Data :=
+            dmGeral.FAT_CD_M_PED.DataRequest(
+                    VarArrayOf([0, dmGeral.CAD_CD_C_PAR_CTRid_empresa.Text,  pedido]));
+
+
      end;
 end;
 

@@ -5,7 +5,7 @@ interface
 uses IniFiles, ShellAPI,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Buttons,SHDocVw, pcnConversao,
+  Buttons,SHDocVw,ACBrXmlBase, pcnConversao,
   pmdfeConversaoMDFe,
   ACBrMDFe, ACBrMDFeDAMDFeClass, ACBrBase, ACBrDFe, ACBrDFeSSL,
   Vcl.OleCtrls, ACBrUtil,  frxClass, frxExportPDF,
@@ -107,7 +107,7 @@ implementation
 {$R *.dfm}
 
 uses FAT_UN_M_MDF_STA, uDmGeral, enFunc, uProxy, uDmSgq, blcksock,enConstantes,
-  FAT_UN_M_ROM;
+  FAT_UN_M_ROM, ACBrMDFe.Classes;
 
 procedure TFAT_FM_M_MDF.MDFEStatusChange(Sender: TObject);
 begin
@@ -610,18 +610,26 @@ begin
             Protocolo  := MDFE.WebServices.Retorno.Protocolo;
             chave      := MDFE.WebServices.Retorno.ChaveMDFe; }
 
-        // Modo Síncrono a partir de 05/2024
 
-        Ambiente := TpAmbToStr(MDFE.WebServices.Enviar.tpAmb);
-        Versao   := MDFE.WebServices.Enviar.verAplic;
-        Status   := IntToStr(MDFE.WebServices.Enviar.cStat);
-        Estado   := IntToStr(MDFE.WebServices.Enviar.cUF);
-        Motivo   := MDFE.WebServices.Enviar.xMotivo;
-        //cMsg     := IntToStr(MDFE.WebServices.Enviar.msg);
-        xMsg     := MDFE.WebServices.Enviar.Msg;
-        Recibo   := MDFE.WebServices.Enviar.Recibo;
-        Protocolo := MDFE.WebServices.Enviar.Protocolo;
-        chave     := Copy(MDFe.Manifestos.Items[0].MDFe.infMDFe.ID,5,44);
+
+        // Modo Síncrono a partir de 05/2024
+        //Ambiente := TpAmbToStr(MDFE.WebServices.Enviar.tpAmb);
+
+            // Maxsuel Victor, 08-05-25 - Agora é utilizado TipoAmbienteToStr da Unit: ACBrXmlBase
+            Ambiente := TipoAmbienteToStr(MDFE.WebServices.Enviar.tpAmb);
+            //chave     := MDFE.Manifestos[0].MDFe.procMDFe.chDFe;
+            //Protocolo := MDFE.Manifestos[0].MDFe.procMDFe.nProt;
+            //----------------------------------------------------------
+
+            Versao   := MDFE.WebServices.Enviar.verAplic;
+            Status   := IntToStr(MDFE.WebServices.Enviar.cStat);
+            Estado   := IntToStr(MDFE.WebServices.Enviar.cUF);
+            Motivo   := MDFE.WebServices.Enviar.xMotivo;
+            //cMsg     := IntToStr(MDFE.WebServices.Enviar.msg);
+            xMsg     := MDFE.WebServices.Enviar.Msg;
+            Recibo   := MDFE.WebServices.Enviar.Recibo;
+            Protocolo := MDFE.WebServices.Enviar.Protocolo;
+            chave     := Copy(MDFe.Manifestos.Items[0].MDFe.infMDFe.ID,5,44);
 
         // --------------------------------------------------------------------
 
@@ -1124,7 +1132,20 @@ begin
   MDFE.Configuracoes.WebServices.AjustaAguardaConsultaRet := False;
   MDFE.Configuracoes.WebServices.Ambiente                 := StrToTpAmb(Ok,IntToStr(dmGeral.CAD_CD_C_PAR_NFE.FieldByName('situacao_emissor').AsInteger)); //ambiente de destino;
 
-  if MDFE.Configuracoes.WebServices.Ambiente = taProducao then
+
+  if MDFE.Configuracoes.WebServices.AmbienteCodigo = 1 then
+     begin
+       txtAmbiente.Text := 'Ambiente: Produção';
+       txtAmbiente.Color := $00BBFF77;
+     end;
+  if MDFE.Configuracoes.WebServices.AmbienteCodigo = 2 then
+     begin
+       txtAmbiente.Text := 'Ambiente: Homologação';
+       txtAmbiente.Color := $00ACC0FB;
+     end;
+
+
+  {if MDFE.Configuracoes.WebServices.Ambiente = taProducao then
      begin
        txtAmbiente.Text := 'Ambiente: Produção';
        txtAmbiente.Color := $00BBFF77;
@@ -1133,7 +1154,7 @@ begin
      begin
        txtAmbiente.Text := 'Ambiente: Homologação';
        txtAmbiente.Color := $00ACC0FB;
-     end;
+     end; }
 
 
   MDFE.Configuracoes.WebServices.IntervaloTentativas      := 0;
