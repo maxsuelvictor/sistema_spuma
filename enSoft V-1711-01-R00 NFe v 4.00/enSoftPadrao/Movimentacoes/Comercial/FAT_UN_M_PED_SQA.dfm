@@ -12,6 +12,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlTop: TPanel
@@ -196,7 +197,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         ExplicitTop = 23
         ExplicitWidth = 853
       end
-      object wwDBGrid1: TwwDBGrid
+      object wwGrdItensSolicitados: TwwDBGrid
         Left = 2
         Top = 40
         Width = 937
@@ -209,7 +210,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
           'int_nomeite'#9'35'#9'Descri'#231#227'o'#9'F'
           'int_nomecor'#9'15'#9'Cor'#9'F'
           'int_nomefun'#9'15'#9'Funcion'#225'rio'#9'F'#9'Solicitacao'
-          'qtde_retirar_conf'#9'10'#9'Qtde solicitado'#9'F'
+          'qtde_retirar_conf'#9'10'#9'Qtde solicitado'#9'F'#9'Solicitacao'
           'dta_solicitacao'#9'10'#9'Data'#9'F'#9'Solicitacao'
           'hora_solicitacao'#9'10'#9'Hora'#9'F'#9'Solicitacao'
           'dta_liberado'#9'10'#9'Data'#9'F'#9'Liberacao'
@@ -223,6 +224,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         Align = alClient
         DataSource = dsPedSqa
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        PopupMenu = pmLib
         TabOrder = 0
         TitleAlignment = taLeftJustify
         TitleFont.Charset = DEFAULT_CHARSET
@@ -233,7 +235,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         TitleLines = 2
         TitleButtons = False
         UseTFields = False
-        object wwIButton1: TwwIButton
+        object wwbtnGrdItens: TwwIButton
           Left = -1
           Top = -1
           Width = 22
@@ -262,19 +264,19 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0080FFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             B102}
-          OnClick = wwIButton1Click
+          OnClick = wwbtnGrdItensClick
         end
       end
     end
     object btnSair: TButton
-      Left = 407
-      Top = 549
+      Left = 441
+      Top = 546
       Width = 82
-      Height = 28
+      Height = 33
       Caption = '&Sair'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -11
+      Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
@@ -361,32 +363,11 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       TabOrder = 3
       Visible = False
     end
-    object txtQtdeRetirarConf: TwwDBSpinEdit
-      Left = 440
-      Top = 261
-      Width = 69
-      Height = 29
-      Increment = 1.000000000000000000
-      MaxValue = 999.000000000000000000
-      Color = 14342874
-      DataField = 'qtde_retirar_conf'
-      DataSource = dsPedSqa
-      Enabled = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 4
-      UnboundDataType = wwDefault
-      OnChange = txtQtdeRetirarConfChange
-    end
-    object Button1: TButton
-      Left = 511
-      Top = 260
+    object btnSolicitar: TButton
+      Left = 509
+      Top = 259
       Width = 120
-      Height = 30
+      Height = 32
       Caption = '&Solicitar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -395,7 +376,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 5
-      OnClick = Button1Click
+      OnClick = btnSolicitarClick
     end
     object txtQtde: TwwDBEdit
       Left = 440
@@ -418,6 +399,25 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       WantReturns = False
       WordWrap = False
     end
+    object txtQtdeRetirarConf: TSpinEdit
+      Left = 440
+      Top = 260
+      Width = 69
+      Height = 31
+      Color = 14342874
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      MaxValue = 0
+      MinValue = 0
+      ParentFont = False
+      TabOrder = 4
+      Value = 0
+      OnChange = txtQtdeRetirarConfChange
+    end
   end
   object dsPedSqa: TwwDataSource
     DataSet = dmGeral.FAT_CD_M_PED_SQA
@@ -428,5 +428,13 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
     DataSet = dmGeral.FAT_CD_M_PED_ITE
     Left = 31
     Top = 279
+  end
+  object pmLib: TPopupMenu
+    Left = 744
+    Top = 283
+    object Liberaralteraoparaesteitem1: TMenuItem
+      Caption = 'Liberar altera'#231#227'o para este item'
+      OnClick = Liberaralteraoparaesteitem1Click
+    end
   end
 end

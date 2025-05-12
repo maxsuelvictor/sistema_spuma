@@ -788,6 +788,7 @@ end;
 procedure TFAT_FM_M_PED.acAlterarExecute(Sender: TObject);
 var
   SMPrincipal : TSMClient;
+  pedido: String;
 begin
 
   if (dmgeral.FAT_CD_M_PED.FieldByName('SITUACAO').AsInteger = 1) then
@@ -850,6 +851,28 @@ begin
                 end;
            end;
      end;
+
+
+
+  if (dmGeral.CAD_CD_C_PAR_MOD.FieldByName('SGQ').AsBoolean = true) and
+     (dmGeral.FAT_CD_M_PED.FieldByName('situacao').AsInteger = 2) then
+      begin
+        try
+
+        SMPrincipal := TSMClient.Create(dmGeral.Conexao.DBXConnection);
+
+        pedido := SMPrincipal.enSgqolicitacao_AlteracaoQtdePedido(dmGeral.FAT_CD_M_PED.FieldByName('id_pedido').AsString);
+
+        if pedido <> '' then
+           begin
+             ShowMessage('Alteração não permitida.' + #13 +
+                         'Existe solicitação de alteração de qtde de item pendente a EXPEDIÇÃO.');
+             exit;
+           end;
+        finally
+          FreeAndNil(SMPrincipal);
+        end;
+      end;
 
   clienteConsumidor := false;
   if Botoes(dso.DataSet, TAction(Sender).Tag,dmGeral.FAT_CD_M_PED) then
@@ -8762,7 +8785,8 @@ begin
                  if existe_conferencia_de_carga = true then
                     begin
                       ShowMessage('Este item já passou por conferência!' + #13 +
-                                  'Para fazer esta alteração é necessário avisar o pessoal da expedição para que retire a conferência deste item.');
+                                  'Para fazer esta alteração é necessário solicitar a alteração a expedição.' + #3 +
+                                  'Você precisa cancelar essa alteração do pedido, clicar com o direito sobre o pedido e solicitar a alteração!');
                       dmGeral.FAT_CD_M_PED_ITE.cancel;
                       txtBuscaItem.Enabled := true;
                       dmGeral.FAT_CD_M_PED_ITE.edit;

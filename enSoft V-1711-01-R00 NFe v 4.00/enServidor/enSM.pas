@@ -13124,6 +13124,7 @@ type
     function  enSgqFatJuntarItensDosPedidos(IdEmpresa,pedidos: string): OleVariant;
 
     function  enSgqExistePistolagem_PcpRomPedIte(IdPedido,id_ped_ite: String): Boolean;
+    function  enSgqolicitacao_AlteracaoQtdePedido(id_pedido: string): String;
 
   end;
 
@@ -16654,6 +16655,80 @@ begin
 
 end;
 
+
+function TSM.enSgqolicitacao_AlteracaoQtdePedido(id_pedido: string): string;
+var
+  qry: TSQLQuery;
+  sql: String;
+  qtde_conferida: currency;
+  ordem: integer;
+begin
+
+  // por Maxsuel Victor , 09/05/25
+  // Utilizado pela rotina PCP_FM_M_ROM
+
+  result := '';
+  ordem:= 0;
+
+  try
+    qry := TSqlQuery.Create(self);
+    qry.SQLConnection := self.Conexao;
+
+    sql := '';
+
+    qry.Close;
+    qry.SQL.Clear;
+
+    if id_pedido = '' then
+       begin
+          sql :=
+                  ' select * from fat_tb_m_ped_sqa sqa ' + #13#10 +
+                  ' where ' + #13#10 +
+                  '    coalesce(id_func_solicitacao,0) <> 0 ' +
+                  '    and liberado = false';
+       end;
+
+    if id_pedido <> '' then
+       begin
+          sql :=
+                  ' select * from fat_tb_m_ped_sqa sqa ' + #13#10 +
+                  ' where ' + #13#10 +
+                  '    coalesce(id_func_solicitacao,0) <> 0 ' +
+                  '    and id_pedido = ''' + (id_pedido) + ''' ' +
+                  '    and liberado = false';
+       end;
+
+    qry.SQL.Add(sql);
+    qry.Open;
+
+    if not (qry.IsEmpty) then
+       begin
+         if id_pedido = '' then
+            begin
+               while not qry.eof do
+                  begin
+                    inc(ordem);
+
+                    if ordem = 1 then
+                       result := qry.FieldByName('id_pedido').AsString
+                    else
+                       result := result + ',' + qry.FieldByName('id_pedido').AsString;
+                    qry.Next;
+                  end;
+            end
+         else
+            begin
+              result := qry.FieldByName('id_pedido').AsString;
+            end;
+         qry.First;
+       end;
+
+    qry.Close;
+  finally
+     if qry <> nil then
+        FreeAndNil(qry);
+  end;
+end;
 
 function TSM.enSgqPcpBuscarDescRegIte(IdCliente, IdItem: String): currency;
 var

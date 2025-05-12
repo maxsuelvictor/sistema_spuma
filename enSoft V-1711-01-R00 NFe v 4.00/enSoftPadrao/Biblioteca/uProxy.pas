@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 14/03/2025 14:18:25
+// 09/05/2025 17:44:10
 //
 
 unit uProxy;
@@ -780,6 +780,7 @@ type
     FenSgqFatBuscarDescEspPedidosCommand: TDBXCommand;
     FenSgqFatJuntarItensDosPedidosCommand: TDBXCommand;
     FenSgqExistePistolagem_PcpRomPedIteCommand: TDBXCommand;
+    FenSgqolicitacao_AlteracaoQtdePedidoCommand: TDBXCommand;
   public
     constructor Create(ADBXConnection: TDBXConnection); overload;
     constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
@@ -1552,6 +1553,7 @@ type
     function enSgqFatBuscarDescEspPedidos(IdEmpresa: string; pedidos: string): Currency;
     function enSgqFatJuntarItensDosPedidos(IdEmpresa: string; pedidos: string): OleVariant;
     function enSgqExistePistolagem_PcpRomPedIte(IdPedido: string; id_ped_ite: string): Boolean;
+    function enSgqolicitacao_AlteracaoQtdePedido(id_pedido: string): string;
   end;
 
 implementation
@@ -22588,6 +22590,20 @@ begin
   Result := FenSgqExistePistolagem_PcpRomPedIteCommand.Parameters[2].Value.GetBoolean;
 end;
 
+function TSMClient.enSgqolicitacao_AlteracaoQtdePedido(id_pedido: string): string;
+begin
+  if FenSgqolicitacao_AlteracaoQtdePedidoCommand = nil then
+  begin
+    FenSgqolicitacao_AlteracaoQtdePedidoCommand := FDBXConnection.CreateCommand;
+    FenSgqolicitacao_AlteracaoQtdePedidoCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FenSgqolicitacao_AlteracaoQtdePedidoCommand.Text := 'TSM.enSgqolicitacao_AlteracaoQtdePedido';
+    FenSgqolicitacao_AlteracaoQtdePedidoCommand.Prepare;
+  end;
+  FenSgqolicitacao_AlteracaoQtdePedidoCommand.Parameters[0].Value.SetWideString(id_pedido);
+  FenSgqolicitacao_AlteracaoQtdePedidoCommand.ExecuteUpdate;
+  Result := FenSgqolicitacao_AlteracaoQtdePedidoCommand.Parameters[1].Value.GetWideString;
+end;
+
 
 constructor TSMClient.Create(ADBXConnection: TDBXConnection);
 begin
@@ -23371,6 +23387,7 @@ begin
   FenSgqFatBuscarDescEspPedidosCommand.DisposeOf;
   FenSgqFatJuntarItensDosPedidosCommand.DisposeOf;
   FenSgqExistePistolagem_PcpRomPedIteCommand.DisposeOf;
+  FenSgqolicitacao_AlteracaoQtdePedidoCommand.DisposeOf;
   inherited;
 end;
 

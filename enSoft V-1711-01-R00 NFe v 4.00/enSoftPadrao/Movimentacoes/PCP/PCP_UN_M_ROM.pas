@@ -23,6 +23,20 @@ uses
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, Vcl.ComCtrls, Datasnap.DBClient;
 
+
+type
+  TConsultaThread = class(TThread)
+  private
+    FPedidos: String;
+    procedure AtualizarUI;
+
+  protected
+    procedure Execute; override;
+  public
+    constructor Create;
+  end;
+
+
 type
   TPCP_FM_M_ROM = class(TPAD_FM_X_PAD)
     txtResponsavel: TDBEdit;
@@ -103,6 +117,9 @@ type
     pnAnoCorrentePcpRom: TPanel;
     Label14: TLabel;
     txtAnoCorrentePcpRom: TEdit;
+    pmLiberacao: TPopupMenu;
+    Liberaralteraodoitemnopedidodevenda1: TMenuItem;
+    mmSolicPedido: TMemo;
     procedure acAdicionaExecute(Sender: TObject);
     procedure acAlterarExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
@@ -139,6 +156,7 @@ type
     procedure txtCodCarregEnter(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnVlrCargaClick(Sender: TObject);
+    procedure Liberaralteraodoitemnopedidodevenda1Click(Sender: TObject);
   private
     { Private declarations }
     procedure Griditem;
@@ -152,6 +170,7 @@ type
     var
       ID_PED:string;
       Qtde_Ped,Qtde_Lot : integer;
+      ConsultaThread: TConsultaThread;
   public
     { Public declarations }
   end;
@@ -165,7 +184,7 @@ implementation
 {$R *.dfm}
 
 uses uDmGeral, PSQ_UN_X_PED, uDmSgq, PCP_UN_M_ROM_COF, uProxy, enSoftMenu,
-  PCP_UN_M_ROM_IPE, enFunc, PCP_UN_M_ROM_ICF, PCP_RN_M_ROM, PCP_UN_M_ROM_VLC;
+  PCP_UN_M_ROM_IPE, enFunc, PCP_UN_M_ROM_ICF, PCP_RN_M_ROM, PCP_UN_M_ROM_VLC, FAT_UN_M_PED_SQA;
 
 procedure TPCP_FM_M_ROM.acAdicionaExecute(Sender: TObject);
 begin
@@ -520,11 +539,22 @@ procedure TPCP_FM_M_ROM.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
   dmGeral.PCP_CD_M_ROM.Close;
+
+  // Maxsuel Victor, 09-05-25
+  if Assigned(ConsultaThread) then
+     begin
+       ConsultaThread.Terminate;
+       // ConsultaThread.WaitFor;
+       // FreeAndNil(ConsultaThread);
+     end;
+  // --------------------------
+
   FreeAndNil(PCP_FM_M_ROM);
   frmSoftMenu.rbMenu.ShowTabGroups := true;
 end;
 
 procedure TPCP_FM_M_ROM.FormCreate(Sender: TObject);
+
 begin
   inherited;
   dmGeral.PCP_CD_M_ROM.Close;
@@ -533,6 +563,12 @@ begin
   dmGeral.AtualizarGridItens(dgPedIte,'int_nomeite',20,9);
 
   dmSgq.BusMotorista(1,'%');
+
+  // Maxsuel Victor, 09-05-25
+   ConsultaThread := TConsultaThread.Create; //(False); // Inicia a thread automaticamente
+   //ConsultaThread :=  TConsultaThread.Create(False); // Inicia a thread automaticamente
+
+  // ------------------------
 end;
 
 procedure TPCP_FM_M_ROM.FormShow(Sender: TObject);
@@ -861,6 +897,42 @@ begin
       dmgeral.PCP_CD_M_ROM_PED_ITE.Post;
       dmgeral.BUS_CD_M_PED_ITE.Next;
     end;
+end;
+
+procedure TPCP_FM_M_ROM.Liberaralteraodoitemnopedidodevenda1Click(
+  Sender: TObject);
+var
+  SMPrincipal : TSMClient;
+  pedido: String;
+begin
+  inherited;
+
+  try
+    SMPrincipal := TSMClient.Create(dmGeral.Conexao.DBXConnection);
+
+    pedido := SMPrincipal.enSgqolicitacao_AlteracaoQtdePedido(dmGeral.PCP_CD_M_ROM_PED_ITE.FieldByName('id_pedido').AsString);
+
+    if pedido = '' then
+       begin
+         ShowMessage('Não há solicitação de alteração de quantidade para esse pedido.');
+         exit;
+       end;
+
+  finally
+    FreeAndNil(SMPrincipal);
+  end;
+
+
+
+
+  Application.CreateForm(TFAT_FM_M_PED_SQA,FAT_FM_M_PED_SQA);
+  FAT_FM_M_PED_SQA.xIdFunc_liberacao := xFuncionario;
+  FAT_FM_M_PED_SQA.grdItens.Enabled := false;
+  FAT_FM_M_PED_SQA.btnSolicitar.enabled := false;
+  FAT_FM_M_PED_SQA.wwbtnGrdItens.Enabled := false;
+  FAT_FM_M_PED_SQA.xIdPedido_liberacao := dmGeral.PCP_CD_M_ROM_PED_ITE.FieldByName('id_pedido').AsString;
+  FAT_FM_M_PED_SQA.ShowModal;
+  FAT_FM_M_PED_SQA.Free;
 end;
 
 procedure TPCP_FM_M_ROM.dgLoteIButtonClick(Sender: TObject);
@@ -1629,6 +1701,61 @@ begin
 {   ActiveControl := nil;
        PostMessage(btnAddComposicao.Handle, WM_SETFOCUS, 0, 0);
        btnAddComposicao.SetFocus;}
+end;
+
+{ TConsultaThread }
+
+procedure TConsultaThread.AtualizarUI;
+begin
+  if FPedidos <> '' then
+     begin
+       PCP_FM_M_ROM.mmSolicPedido.Lines.Add('Solicitação de alteração nos pedidos: '+FPedidos);
+       PCP_FM_M_ROM.mmSolicPedido.visible := true
+     end
+  else
+    PCP_FM_M_ROM.mmSolicPedido.visible := false;
+end;
+
+constructor TConsultaThread.Create;
+begin
+  inherited Create(False); // False = já inicia a execução
+  FreeOnTerminate := False; // Vamos gerenciar a liberação manualmente
+end;
+
+procedure TConsultaThread.Execute;
+var
+  SMPrincipal : TSMClient;
+  i:integer;
+begin
+  inherited;
+
+  // Maxsuel Victor, 09-05-25,
+     // Para atender a questão da Solicitação de alteração do item do pedido , pela tela de Pedido de Venda.
+        // FAT_FM_M_PED_SQA.
+
+  try
+    FPedidos := '';
+    SMPrincipal := TSMClient.Create(dmGeral.Conexao.DBXConnection);
+
+    while not Terminated do
+       begin
+          FPedidos := SMPrincipal.enSgqolicitacao_AlteracaoQtdePedido('');
+
+          Synchronize(AtualizarUI); // Atualiza a interface de forma segura
+
+          // Aguarda 5 minutos ou sai antes se Terminate for chamado
+          for i := 0 to 299 do
+              begin
+                if Terminated then Exit;
+                Sleep(150000); // Espera 1 segundo
+              end;
+
+          //Sleep(150000); // Espera 5 minutos (em milissegundos)
+       end;
+  finally
+    FreeAndNil(SMPrincipal);
+  end;
+
 end;
 
 end.
