@@ -30539,6 +30539,7 @@
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
+    Connected = True
     Left = 241
     Top = 23
   end
@@ -63882,5 +63883,100 @@
     object FAT_SQ_M_PED_SQAid_registro: TIntegerField
       FieldName = 'id_registro'
     end
+  end
+  object BUS_SQ_M_PED_SQA: TSQLDataSet
+    CommandText = 
+      'select SQA.*, '#13#10'    FUN.NOME AS INT_NOMEFUN, '#13#10'    FCT.NOME AS I' +
+      'NT_NOMEFCT,'#13#10'    ITE.DESCRICAO AS INT_NOMEITE,'#13#10'    COR.DESCRICA' +
+      'O AS INT_NOMECOR,'#13#10'    TAM.DESCRICAO AS INT_NOMETAM '#13#10'from FAT_T' +
+      'B_M_PED_SQA SQA '#13#10'    LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID' +
+      '_FUNCIONARIO=SQA.ID_FUNC_SOLICITACAO'#13#10'    LEFT OUTER JOIN CAD_TB' +
+      '_C_FUN FCT ON FCT.ID_FUNCIONARIO=SQA.id_usu_liberacao'#13#10'    LEFT ' +
+      'OUTER JOIN CAD_TB_C_ITE ITE ON ITE.ID_ITEM=SQA.ID_ITEM'#13#10'    LEFT' +
+      ' OUTER JOIN CAD_TB_C_COR COR ON COR.ID_COR=SQA.ID_COR'#13#10'    LEFT ' +
+      'OUTER JOIN CAD_TB_C_TAM TAM ON TAM.ID_TAMANHO=SQA.ID_TAMANHO'#13#10'WH' +
+      'ERE 1 =2'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = Conexao
+    Left = 1784
+    Top = 2654
+    object BUS_SQ_M_PED_SQAid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+    end
+    object BUS_SQ_M_PED_SQAid_sequencia: TIntegerField
+      FieldName = 'id_sequencia'
+    end
+    object BUS_SQ_M_PED_SQAid_registro: TIntegerField
+      FieldName = 'id_registro'
+    end
+    object BUS_SQ_M_PED_SQAid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object BUS_SQ_M_PED_SQAid_cor: TIntegerField
+      FieldName = 'id_cor'
+    end
+    object BUS_SQ_M_PED_SQAid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+    end
+    object BUS_SQ_M_PED_SQApcp_obs_item: TWideStringField
+      FieldName = 'pcp_obs_item'
+      Size = 150
+    end
+    object BUS_SQ_M_PED_SQAdta_solicitacao: TDateField
+      FieldName = 'dta_solicitacao'
+    end
+    object BUS_SQ_M_PED_SQAhora_solicitacao: TTimeField
+      FieldName = 'hora_solicitacao'
+    end
+    object BUS_SQ_M_PED_SQAid_func_solicitacao: TIntegerField
+      FieldName = 'id_func_solicitacao'
+    end
+    object BUS_SQ_M_PED_SQAqtde_retirar_conf: TFloatField
+      FieldName = 'qtde_retirar_conf'
+    end
+    object BUS_SQ_M_PED_SQAliberado: TBooleanField
+      FieldName = 'liberado'
+    end
+    object BUS_SQ_M_PED_SQAid_usu_liberacao: TIntegerField
+      FieldName = 'id_usu_liberacao'
+    end
+    object BUS_SQ_M_PED_SQAdta_liberado: TDateField
+      FieldName = 'dta_liberado'
+    end
+    object BUS_SQ_M_PED_SQAhora_liberado: TTimeField
+      FieldName = 'hora_liberado'
+    end
+    object BUS_SQ_M_PED_SQAint_nomefun: TWideStringField
+      FieldName = 'int_nomefun'
+      ProviderFlags = []
+      Size = 50
+    end
+    object BUS_SQ_M_PED_SQAint_nomefct: TWideStringField
+      FieldName = 'int_nomefct'
+      ProviderFlags = []
+      Size = 50
+    end
+    object BUS_SQ_M_PED_SQAint_nomeite: TWideStringField
+      FieldName = 'int_nomeite'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_SQ_M_PED_SQAint_nomecor: TWideStringField
+      FieldName = 'int_nomecor'
+      ProviderFlags = []
+      Size = 40
+    end
+    object BUS_SQ_M_PED_SQAint_nometam: TWideStringField
+      FieldName = 'int_nometam'
+      ProviderFlags = []
+      Size = 40
+    end
+  end
+  object BUS_DP_M_PED_SQA: TDataSetProvider
+    DataSet = BUS_SQ_M_PED_SQA
+    OnDataRequest = BUS_DP_M_PED_SQADataRequest
+    Left = 1928
+    Top = 2654
   end
 end

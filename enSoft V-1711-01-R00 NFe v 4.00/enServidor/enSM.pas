@@ -11592,6 +11592,28 @@ type
     FAT_SQ_M_PED_SQAliberado: TBooleanField;
     FAT_SQ_M_PED_SQAid_usu_liberacao: TIntegerField;
     FAT_SQ_M_PED_SQAid_registro: TIntegerField;
+    BUS_SQ_M_PED_SQA: TSQLDataSet;
+    BUS_DP_M_PED_SQA: TDataSetProvider;
+    BUS_SQ_M_PED_SQAid_pedido: TIntegerField;
+    BUS_SQ_M_PED_SQAid_sequencia: TIntegerField;
+    BUS_SQ_M_PED_SQAid_registro: TIntegerField;
+    BUS_SQ_M_PED_SQAid_item: TIntegerField;
+    BUS_SQ_M_PED_SQAid_cor: TIntegerField;
+    BUS_SQ_M_PED_SQAid_tamanho: TIntegerField;
+    BUS_SQ_M_PED_SQApcp_obs_item: TWideStringField;
+    BUS_SQ_M_PED_SQAdta_solicitacao: TDateField;
+    BUS_SQ_M_PED_SQAhora_solicitacao: TTimeField;
+    BUS_SQ_M_PED_SQAid_func_solicitacao: TIntegerField;
+    BUS_SQ_M_PED_SQAqtde_retirar_conf: TFloatField;
+    BUS_SQ_M_PED_SQAliberado: TBooleanField;
+    BUS_SQ_M_PED_SQAid_usu_liberacao: TIntegerField;
+    BUS_SQ_M_PED_SQAdta_liberado: TDateField;
+    BUS_SQ_M_PED_SQAhora_liberado: TTimeField;
+    BUS_SQ_M_PED_SQAint_nomefun: TWideStringField;
+    BUS_SQ_M_PED_SQAint_nomefct: TWideStringField;
+    BUS_SQ_M_PED_SQAint_nomeite: TWideStringField;
+    BUS_SQ_M_PED_SQAint_nomecor: TWideStringField;
+    BUS_SQ_M_PED_SQAint_nometam: TWideStringField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -12980,6 +13002,8 @@ type
     function PCP_DP_R_EPP_FUN_DETDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function BUS_DP_M_ETQDataRequest(Sender: TObject;
+      Input: OleVariant): OleVariant;
+    function BUS_DP_M_PED_SQADataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
 
 
@@ -26231,6 +26255,46 @@ begin
 
    Result := BUS_DP_M_PED_NIP.Data;
    BUS_SQ_M_PED_NIP.Close;
+end;
+
+function TSM.BUS_DP_M_PED_SQADataRequest(Sender: TObject;
+  Input: OleVariant): OleVariant;
+function enSqlFatPedSqa: String;
+  begin
+    Result :=
+        ' select sqa.*, ' + #13#10 +
+        '    fun.nome as int_nomefun, ' + #13#10 +
+        '    fct.nome as int_nomefct,' + #13#10 +
+        '    ite.descricao as int_nomeite,' + #13#10 +
+        '    cor.descricao as int_nomecor,' + #13#10 +
+        '    tam.descricao as int_nometam ' + #13#10 +
+        ' from fat_tb_m_ped_sqa sqa ' + #13#10 +
+        '    left outer join cad_tb_c_fun fun on fun.id_funcionario=sqa.id_func_solicitacao' + #13#10 +
+        '    left outer join cad_tb_c_fun fct on fct.id_funcionario=sqa.id_usu_liberacao' + #13#10 +
+        '    left outer join cad_tb_c_ite ite on ite.id_item=sqa.id_item' + #13#10 +
+        '    left outer join cad_tb_c_cor cor on cor.id_cor=sqa.id_cor' + #13#10 +
+        '    left outer join cad_tb_c_tam tam on tam.id_tamanho=sqa.id_tamanho' ;
+  end;
+begin
+   BUS_SQ_M_PED_SQA.Close;
+   if Input[0] = 0 then
+      begin
+        BUS_SQ_M_PED_SQA.CommandText := enSqlFatPedSqa +
+           ' where sqa.id_pedido = ''' + VarToStr(Input[1]) + ''' ';
+      end
+   else if Input[0] = 1 then
+      begin
+        // É importante que seja por data, pois pode acontecer de solicitar mais de 1 alteração, sendo em dias
+           // diferentes.
+        BUS_SQ_M_PED_SQA.CommandText := enSqlFatPedSqa +
+             ' where sqa.id_pedido = ''' + VarToStr(Input[1]) +''' ' +
+             '   and sqa.id_item   = ''' + VarToStr(Input[2]) +''' ' +
+             '   and sqa.id_sequencia = ''' + VarToStr(Input[3]) +''' ' +
+             '   and sqa.dta_solicitacao = '''+FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[4])))+''' ';
+      end;
+
+
+   Result := BUS_DP_M_PED_SQA.Data;
 end;
 
 function TSM.BUS_DP_M_PED_TIT_INTDataRequest(Sender: TObject;

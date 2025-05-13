@@ -39,6 +39,8 @@ type
     txtQtdeRetirarConf: TSpinEdit;
     pmLib: TPopupMenu;
     Liberaralteraoparaesteitem1: TMenuItem;
+    lblEmAberto: TLabel;
+    Label27: TLabel;
     procedure grdItensDblClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnSolicitarClick(Sender: TObject);
@@ -46,6 +48,9 @@ type
     procedure txtQtdeRetirarConfChange(Sender: TObject);
     procedure Liberaralteraoparaesteitem1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure wwGrdItensSolicitadosCalcCellColors(Sender: TObject;
+      Field: TField; State: TGridDrawState; Highlight: Boolean; AFont: TFont;
+      ABrush: TBrush);
   private
     { Private declarations }
   public
@@ -299,6 +304,21 @@ begin
 
              grdItens.SetFocus;
           end;
+     end;
+end;
+
+procedure TFAT_FM_M_PED_SQA.wwGrdItensSolicitadosCalcCellColors(Sender: TObject;
+  Field: TField; State: TGridDrawState; Highlight: Boolean; AFont: TFont;
+  ABrush: TBrush);
+begin
+  if (dmGeral.FAT_CD_M_PED_SQAliberado.AsBoolean = false) then
+    begin
+      aFont.Color := clBlack;
+    end;
+
+  if (dmGeral.FAT_CD_M_PED_SQAliberado.AsBoolean = true) then
+     begin
+       aFont.Color := clBlue;
      end;
 end;
 

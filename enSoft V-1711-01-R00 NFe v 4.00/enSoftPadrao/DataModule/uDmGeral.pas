@@ -11891,6 +11891,7 @@ type
     FAT_CD_M_PED_SQAliberado: TBooleanField;
     FAT_CD_M_PED_SQAid_usu_liberacao: TIntegerField;
     FAT_CD_M_PED_SQAid_registro: TIntegerField;
+    BUS_CD_M_PED_SAQ: TClientDataSet;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);

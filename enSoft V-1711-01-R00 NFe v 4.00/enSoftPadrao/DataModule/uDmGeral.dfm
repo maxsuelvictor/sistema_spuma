@@ -61642,4 +61642,12 @@
       FieldName = 'id_registro'
     end
   end
+  object BUS_CD_M_PED_SAQ: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'BUS_DP_M_PED_SQA'
+    RemoteServer = pcConecao
+    Left = 696
+    Top = 1776
+  end
 end

@@ -116,6 +116,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
     ParentBackground = False
     ParentFont = False
     TabOrder = 1
+    ExplicitTop = 46
     object lblItemSobMed: TLabel
       Left = 20
       Top = 161
@@ -169,6 +170,44 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object lblEmAberto: TLabel
+      Left = 20
+      Top = 547
+      Width = 75
+      Height = 14
+      Align = alCustom
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Em aberto'
+      Color = clBlack
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+    end
+    object Label27: TLabel
+      Left = 101
+      Top = 547
+      Width = 78
+      Height = 14
+      Align = alCustom
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Liberado'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
     end
     object GroupBox1: TGroupBox
       Left = 12
@@ -235,6 +274,7 @@ object FAT_FM_M_PED_SQA: TFAT_FM_M_PED_SQA
         TitleLines = 2
         TitleButtons = False
         UseTFields = False
+        OnCalcCellColors = wwGrdItensSolicitadosCalcCellColors
         object wwbtnGrdItens: TwwIButton
           Left = -1
           Top = -1

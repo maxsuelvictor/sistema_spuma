@@ -8784,16 +8784,38 @@ begin
 
                  if existe_conferencia_de_carga = true then
                     begin
-                      ShowMessage('Este item já passou por conferência!' + #13 +
-                                  'Para fazer esta alteração é necessário solicitar a alteração a expedição.' + #3 +
-                                  'Você precisa cancelar essa alteração do pedido, clicar com o direito sobre o pedido e solicitar a alteração!');
-                      dmGeral.FAT_CD_M_PED_ITE.cancel;
-                      txtBuscaItem.Enabled := true;
-                      dmGeral.FAT_CD_M_PED_ITE.edit;
-                      txtQtde.SetFocus;
-                      abort;
-                    end;
+                      dmGeral.BUS_CD_M_PED_SAQ.Close;
+                      dmGeral.BUS_CD_M_PED_SAQ.Data :=
+                         dmGeral.BUS_CD_M_PED_SAQ.DataRequest(
+                                 VarArrayOf([1, dmgeral.FAT_CD_M_PED.FieldByName('ID_PEDIDO').AsString,
+                                                dmgeral.FAT_CD_M_PED_ITE.FieldByName('ID_ITEM').AsString,
+                                                dmgeral.FAT_CD_M_PED_ITE.FieldByName('ID_SEQUENCIA').AsString,
+                                                date]));
 
+                      if dmGeral.BUS_CD_M_PED_SAQ.IsEmpty then
+                         begin
+                            ShowMessage('Este item já passou por conferência!' + #13 +
+                                        'Para fazer esta alteração é necessário solicitar a alteração a expedição.' + #13 +
+                                        'Você precisa cancelar essa alteração do pedido, clicar com o direito sobre o pedido e solicitar a alteração!');
+                            dmGeral.FAT_CD_M_PED_ITE.cancel;
+                            txtBuscaItem.Enabled := true;
+                            dmGeral.FAT_CD_M_PED_ITE.edit;
+                            txtQtde.SetFocus;
+                            abort;
+                         end
+                      else
+                         begin
+                           if dmGeral.BUS_CD_M_PED_SAQ.FieldByName('liberado').AsBoolean = false then
+                              begin
+                                 ShowMessage('A sua solicitação ainda não foi liberada pelo setor de expedição.');
+                                 dmGeral.FAT_CD_M_PED_ITE.cancel;
+                                 txtBuscaItem.Enabled := true;
+                                 dmGeral.FAT_CD_M_PED_ITE.edit;
+                                 txtQtde.SetFocus;
+                                 abort;
+                              end;
+                         end;
+                    end;
               finally
                  FreeAndNil(SMPrincipal);
               end;
