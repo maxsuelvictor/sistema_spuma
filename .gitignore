@@ -39,6 +39,7 @@
 #Linux64/
 Schemas/
 Report/
+Logs/
 
 # Delphi compiler-generated binaries (safe to delete)
 *.exe

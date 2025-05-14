@@ -1,0 +1,28 @@
+/**** 30/04/2025 *****/
+
+CREATE TABLE "public"."fat_tb_m_ped_sqa" (
+"id_pedido" int4 NOT NULL,
+"id_sequencia" int4 NOT NULL,
+"id_registro" int4 DEFAULT nextval('fat_tb_m_ped_sqa_id_registro_seq'::regclass) NOT NULL,
+"id_item" int4 NOT NULL,
+"id_cor" int4 NOT NULL,
+"id_tamanho" int4 NOT NULL,
+"pcp_obs_item" varchar(150) COLLATE "default",
+"dta_solicitacao" date NOT NULL,
+"hora_solicitacao" time(6) NOT NULL,
+"id_func_solicitacao" int4 NOT NULL,
+"qtde_retirar_conf" float8,
+"liberado" bool,
+"id_usu_liberacao" int4,
+"dta_liberado" date,
+"hora_liberado" time(6),
+CONSTRAINT "FAT_TB_M_PED_ITE_SQA_pkey" PRIMARY KEY ("id_pedido", "id_sequencia", "id_registro")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."fat_tb_m_ped_sqa" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."fat_tb_m_ped_sqa" IS 'Tabela Solicitação de qtde a alterar ao responsável do Relatório de Cargas.';
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped_sqa"."pcp_obs_item" IS 'Descrição do item personalizado';
