@@ -26,3 +26,9 @@ ALTER TABLE "public"."fat_tb_m_ped_sqa" OWNER TO "postgres";
 COMMENT ON TABLE "public"."fat_tb_m_ped_sqa" IS 'Tabela Solicitação de qtde a alterar ao responsável do Relatório de Cargas.';
 
 COMMENT ON COLUMN "public"."fat_tb_m_ped_sqa"."pcp_obs_item" IS 'Descrição do item personalizado';
+
+
+
+ALTER TABLE "public"."fat_tb_m_ped_sqa"
+ADD CONSTRAINT "fk_fat_m_ped_sqa__fat_m_ped_ite" FOREIGN KEY ("id_pedido", "id_sequencia") REFERENCES "public"."fat_tb_m_ped_ite" ("id_pedido", "id_sequencia") ON DELETE CASCADE ON UPDATE NO ACTION;
+

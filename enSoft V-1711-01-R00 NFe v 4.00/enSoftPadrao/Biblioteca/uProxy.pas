@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 09/05/2025 17:44:10
+// 14/05/2025 16:50:53
 //
 
 unit uProxy;
@@ -694,6 +694,7 @@ type
     FPCP_DP_R_EPP_FUNDataRequestCommand: TDBXCommand;
     FPCP_DP_R_EPP_FUN_DETDataRequestCommand: TDBXCommand;
     FBUS_DP_M_ETQDataRequestCommand: TDBXCommand;
+    FBUS_DP_M_PED_SQADataRequestCommand: TDBXCommand;
     FAbreBancoCommand: TDBXCommand;
     FGerarSqlTxtCommand: TDBXCommand;
     FGerarTxtCommand: TDBXCommand;
@@ -1467,6 +1468,7 @@ type
     function PCP_DP_R_EPP_FUNDataRequest(Sender: TObject; Input: OleVariant): OleVariant;
     function PCP_DP_R_EPP_FUN_DETDataRequest(Sender: TObject; Input: OleVariant): OleVariant;
     function BUS_DP_M_ETQDataRequest(Sender: TObject; Input: OleVariant): OleVariant;
+    function BUS_DP_M_PED_SQADataRequest(Sender: TObject; Input: OleVariant): OleVariant;
     procedure AbreBanco;
     procedure GerarSqlTxt(dataset: TSQLDataSet);
     procedure GerarTxt(path_arquivo: string; texto: string);
@@ -20419,6 +20421,33 @@ begin
   Result := FBUS_DP_M_ETQDataRequestCommand.Parameters[2].Value.AsVariant;
 end;
 
+function TSMClient.BUS_DP_M_PED_SQADataRequest(Sender: TObject; Input: OleVariant): OleVariant;
+begin
+  if FBUS_DP_M_PED_SQADataRequestCommand = nil then
+  begin
+    FBUS_DP_M_PED_SQADataRequestCommand := FDBXConnection.CreateCommand;
+    FBUS_DP_M_PED_SQADataRequestCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FBUS_DP_M_PED_SQADataRequestCommand.Text := 'TSM.BUS_DP_M_PED_SQADataRequest';
+    FBUS_DP_M_PED_SQADataRequestCommand.Prepare;
+  end;
+  if not Assigned(Sender) then
+    FBUS_DP_M_PED_SQADataRequestCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDBXClientCommand(FBUS_DP_M_PED_SQADataRequestCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FBUS_DP_M_PED_SQADataRequestCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FBUS_DP_M_PED_SQADataRequestCommand.Parameters[1].Value.AsVariant := Input;
+  FBUS_DP_M_PED_SQADataRequestCommand.ExecuteUpdate;
+  Result := FBUS_DP_M_PED_SQADataRequestCommand.Parameters[2].Value.AsVariant;
+end;
+
 procedure TSMClient.AbreBanco;
 begin
   if FAbreBancoCommand = nil then
@@ -23301,6 +23330,7 @@ begin
   FPCP_DP_R_EPP_FUNDataRequestCommand.DisposeOf;
   FPCP_DP_R_EPP_FUN_DETDataRequestCommand.DisposeOf;
   FBUS_DP_M_ETQDataRequestCommand.DisposeOf;
+  FBUS_DP_M_PED_SQADataRequestCommand.DisposeOf;
   FAbreBancoCommand.DisposeOf;
   FGerarSqlTxtCommand.DisposeOf;
   FGerarTxtCommand.DisposeOf;

@@ -30539,7 +30539,6 @@
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
-    Connected = True
     Left = 241
     Top = 23
   end
@@ -63978,5 +63977,96 @@
     OnDataRequest = BUS_DP_M_PED_SQADataRequest
     Left = 1928
     Top = 2654
+  end
+  object BUS_SQ_M_PED_SQA_GER: TSQLDataSet
+    CommandText = 
+      'select SQA.*, '#13#10'    FUN.NOME AS INT_NOMEFUN, '#13#10'    FCT.NOME AS I' +
+      'NT_NOMEFCT,'#13#10'    ITE.DESCRICAO AS INT_NOMEITE,'#13#10'    COR.DESCRICA' +
+      'O AS INT_NOMECOR,'#13#10'    TAM.DESCRICAO AS INT_NOMETAM  from FAT_TB' +
+      '_M_PED_SQA SQA '#13#10'    LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_' +
+      'FUNCIONARIO=SQA.ID_FUNC_SOLICITACAO'#13#10'    LEFT OUTER JOIN CAD_TB_' +
+      'C_FUN FCT ON FCT.ID_FUNCIONARIO=SQA.id_usu_liberacao'#13#10'    LEFT O' +
+      'UTER JOIN CAD_TB_C_ITE ITE ON ITE.ID_ITEM=SQA.ID_ITEM'#13#10'    LEFT ' +
+      'OUTER JOIN CAD_TB_C_COR COR ON COR.ID_COR=SQA.ID_COR'#13#10'    LEFT O' +
+      'UTER JOIN CAD_TB_C_TAM TAM ON TAM.ID_TAMANHO=SQA.ID_TAMANHO'#13#10'WHE' +
+      'RE ID_PEDIDO=:ID_PEDIDO'#13#10'order by SQA.ID_PEDIDO, ITE.DESCRICAO, ' +
+      'COR.DESCRICAO'
+    DataSource = BUS_DS_M_PED_GER
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PEDIDO'
+        ParamType = ptInput
+      end>
+    SQLConnection = Conexao
+    Left = 616
+    Top = 2912
+    object BUS_SQ_M_PED_SQA_GERid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+    end
+    object BUS_SQ_M_PED_SQA_GERid_sequencia: TIntegerField
+      FieldName = 'id_sequencia'
+    end
+    object BUS_SQ_M_PED_SQA_GERid_registro: TIntegerField
+      FieldName = 'id_registro'
+    end
+    object BUS_SQ_M_PED_SQA_GERid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object BUS_SQ_M_PED_SQA_GERid_cor: TIntegerField
+      FieldName = 'id_cor'
+    end
+    object BUS_SQ_M_PED_SQA_GERid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+    end
+    object BUS_SQ_M_PED_SQA_GERpcp_obs_item: TWideStringField
+      FieldName = 'pcp_obs_item'
+      Size = 150
+    end
+    object BUS_SQ_M_PED_SQA_GERdta_solicitacao: TDateField
+      FieldName = 'dta_solicitacao'
+    end
+    object BUS_SQ_M_PED_SQA_GERhora_solicitacao: TTimeField
+      FieldName = 'hora_solicitacao'
+    end
+    object BUS_SQ_M_PED_SQA_GERid_func_solicitacao: TIntegerField
+      FieldName = 'id_func_solicitacao'
+    end
+    object BUS_SQ_M_PED_SQA_GERqtde_retirar_conf: TFloatField
+      FieldName = 'qtde_retirar_conf'
+    end
+    object BUS_SQ_M_PED_SQA_GERliberado: TBooleanField
+      FieldName = 'liberado'
+    end
+    object BUS_SQ_M_PED_SQA_GERid_usu_liberacao: TIntegerField
+      FieldName = 'id_usu_liberacao'
+    end
+    object BUS_SQ_M_PED_SQA_GERdta_liberado: TDateField
+      FieldName = 'dta_liberado'
+    end
+    object BUS_SQ_M_PED_SQA_GERhora_liberado: TTimeField
+      FieldName = 'hora_liberado'
+    end
+    object BUS_SQ_M_PED_SQA_GERint_nomefun: TWideStringField
+      FieldName = 'int_nomefun'
+      Size = 50
+    end
+    object BUS_SQ_M_PED_SQA_GERint_nomefct: TWideStringField
+      FieldName = 'int_nomefct'
+      Size = 50
+    end
+    object BUS_SQ_M_PED_SQA_GERint_nomeite: TWideStringField
+      FieldName = 'int_nomeite'
+      Size = 100
+    end
+    object BUS_SQ_M_PED_SQA_GERint_nomecor: TWideStringField
+      FieldName = 'int_nomecor'
+      Size = 40
+    end
+    object BUS_SQ_M_PED_SQA_GERint_nometam: TWideStringField
+      FieldName = 'int_nometam'
+      Size = 40
+    end
   end
 end
