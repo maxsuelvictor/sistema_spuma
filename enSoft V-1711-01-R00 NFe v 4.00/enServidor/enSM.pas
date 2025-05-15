@@ -73233,14 +73233,14 @@ begin
   FAT_CD_M_PED.Data :=
       FAT_CD_M_PED.DataRequest(VarArrayOf([100,IdEmpresa,IdPedidos]));
 
-  FAT_CD_M_PED_TIT := TClientDataSet.Create(nil);
-  FAT_CD_M_PED_TIT.DataSetField := TDataSetField(FAT_CD_M_PED.FieldByName('FAT_SQ_M_PED_TIT'));
+ // FAT_CD_M_PED_TIT := TClientDataSet.Create(nil);
+ // FAT_CD_M_PED_TIT.DataSetField := TDataSetField(FAT_CD_M_PED.FieldByName('FAT_SQ_M_PED_TIT'));
 
-  SetLength(Pedido,FAT_CD_M_PED.RecordCount);
+  //SetLength(Pedido,FAT_CD_M_PED.RecordCount);
 
   try
-      Conn  := BuscarConnBanco;
-      Vtran := Conn.BeginTransaction;
+     // Conn  := BuscarConnBanco;
+      //Vtran := Conn.BeginTransaction;
 
       //for i := Low(Pedido) to High(pedido) do
       //    begin
@@ -73282,10 +73282,12 @@ begin
                        FAT_CD_M_PED.FieldByName('DTA_LIBERACAO').AsDateTime := date;
                        FAT_CD_M_PED.FieldByName('JUSTIFICATIVA').AsString   := msgJustificativa;
                        FAT_CD_M_PED.Post;
-                       if FAT_CD_M_PED.ApplyUpdates(0) <> 0 then
-                          result := 'Erro ao tentar atualizar o pedido';
+                       //if FAT_CD_M_PED.ApplyUpdates(0) <> 0 then
+                       //   result := 'Erro ao tentar atualizar o pedido';
                        FAT_CD_M_PED.Next;
                     end;
+                  if FAT_CD_M_PED.ApplyUpdates(0) <> 0 then
+                     result := 'Erro ao tentar atualizar o pedido';
                end;
             if TipoAcao = 'R' then
                begin
@@ -73306,9 +73308,9 @@ begin
                end;
          // end;
 
-      Conn.CommitFreeAndNil(Vtran);
+     // Conn.CommitFreeAndNil(Vtran);
   finally
-    Conn.RollbackIncompleteFreeAndNil(Vtran);
+   // Conn.RollbackIncompleteFreeAndNil(Vtran);
     FreeAndNil(FAT_CD_M_PED);
   end;
 

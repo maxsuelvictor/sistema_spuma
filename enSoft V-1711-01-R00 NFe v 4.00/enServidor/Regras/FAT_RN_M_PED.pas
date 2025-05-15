@@ -69,7 +69,8 @@ begin
       begin
         if (Pai_DataSet.Fields[i].FieldName <> 'FAT_SQ_M_PED_ITE') and
            (Pai_DataSet.Fields[i].FieldName <> 'FAT_SQ_M_PED_TIT') and
-           (Pai_DataSet.Fields[i].FieldName <> 'FAT_SQ_M_PED_TIT_SER') then
+           (Pai_DataSet.Fields[i].FieldName <> 'FAT_SQ_M_PED_TIT_SER') and
+           (Pai_DataSet.Fields[i].FieldName <> 'FAT_SQ_M_PED_SQA') then
             begin
               BUS_FAT_CD_M_PED.FieldByName(Pai_DataSet.Fields[i].FieldName).AsString :=  Pai_DataSet.Fields[i].AsString;
             end;

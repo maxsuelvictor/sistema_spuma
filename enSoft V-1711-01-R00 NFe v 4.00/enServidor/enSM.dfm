@@ -64050,22 +64050,27 @@
     end
     object BUS_SQ_M_PED_SQA_GERint_nomefun: TWideStringField
       FieldName = 'int_nomefun'
+      ProviderFlags = []
       Size = 50
     end
     object BUS_SQ_M_PED_SQA_GERint_nomefct: TWideStringField
       FieldName = 'int_nomefct'
+      ProviderFlags = []
       Size = 50
     end
     object BUS_SQ_M_PED_SQA_GERint_nomeite: TWideStringField
       FieldName = 'int_nomeite'
+      ProviderFlags = []
       Size = 100
     end
     object BUS_SQ_M_PED_SQA_GERint_nomecor: TWideStringField
       FieldName = 'int_nomecor'
+      ProviderFlags = []
       Size = 40
     end
     object BUS_SQ_M_PED_SQA_GERint_nometam: TWideStringField
       FieldName = 'int_nometam'
+      ProviderFlags = []
       Size = 40
     end
   end

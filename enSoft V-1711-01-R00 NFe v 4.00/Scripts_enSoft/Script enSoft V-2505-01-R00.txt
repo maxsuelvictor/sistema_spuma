@@ -3,7 +3,7 @@
 CREATE TABLE "public"."fat_tb_m_ped_sqa" (
 "id_pedido" int4 NOT NULL,
 "id_sequencia" int4 NOT NULL,
-"id_registro" int4 DEFAULT nextval('fat_tb_m_ped_sqa_id_registro_seq'::regclass) NOT NULL,
+"id_registro" SERIAL NOT NULL,
 "id_item" int4 NOT NULL,
 "id_cor" int4 NOT NULL,
 "id_tamanho" int4 NOT NULL,
