@@ -79995,6 +79995,7 @@ begin
    try
        Conn  := BuscarConnBanco;
        Vtran := Conn.BeginTransaction;
+
        result := 'OK';
        try
          if not (FIN_CD_M_PAG.ApplyUpdates(0) = 0) then

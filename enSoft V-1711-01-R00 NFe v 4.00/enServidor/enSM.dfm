@@ -30512,7 +30512,6 @@
   end
   object Conexao: TSQLConnection
     DriverName = 'DevartPostgreSQL'
-    KeepConnection = False
     LoginPrompt = False
     Params.Strings = (
       'DriverUnit=DbxDevartPostgreSQL'
