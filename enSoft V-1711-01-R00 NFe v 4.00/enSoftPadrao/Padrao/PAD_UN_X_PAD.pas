@@ -202,7 +202,7 @@ begin
            end;
     4 : if not DS.IsEmpty then
            begin
-              if MessageDlg('Confirma a Exclusão?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+              if MessageDlg('Confirma a exclusão?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
                  begin
                    DS.Delete;
                    Tabela.ApplyUpdates(0);
@@ -217,7 +217,7 @@ begin
              ShowMessage('Registro não encontrado para exclusão.');
              result := false;
            end;
-    6 : if MessageDlg('Deseja Cancelar?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    6 : if MessageDlg('Deseja cancelar?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
            Begin
              DS.Cancel;
              Ds.Close;

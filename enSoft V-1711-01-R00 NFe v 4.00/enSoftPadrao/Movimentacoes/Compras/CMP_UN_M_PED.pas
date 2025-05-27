@@ -242,9 +242,12 @@ end;
 
 procedure TCMP_FM_M_PED.acExcluirExecute(Sender: TObject);
 begin
-  if CMP_CD_M_PED_TesPermExclusao  then
+  if MessageDlg('Confirma a exclusão?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
      begin
-       ExcPedidoCompra;
+        if CMP_CD_M_PED_TesPermExclusao  then
+           begin
+             ExcPedidoCompra;
+           end;
      end;
 end;
 
@@ -767,7 +770,8 @@ end;
 procedure TCMP_FM_M_PED.dsoStateChange(Sender: TObject);
 begin
   inherited;
-  btnExcluir.enabled := false;
+  // Maxsuel Victor, 26/05/2025 - Não tem sentido esse código abaixo
+  // btnExcluir.enabled := false;
 end;
 
 procedure TCMP_FM_M_PED.ExcPedidoCompra;
