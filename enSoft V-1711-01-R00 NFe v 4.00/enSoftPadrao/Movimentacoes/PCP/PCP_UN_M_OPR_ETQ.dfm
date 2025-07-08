@@ -845,7 +845,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited imgBotoesAtivo: TImageList
     Bitmap = {
-      494C01010800A800E00218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800E80218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1745,7 +1745,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C010108003001340318001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080030013C0318001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2645,7 +2645,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200000130030E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200000138030E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3161,7 +3161,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00D80218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00E00218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4061,7 +4061,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C01010600000128030E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000130030E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4273,7 +4273,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00E80218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00F00218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5173,7 +5173,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C01010600000138030E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000140030E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5385,7 +5385,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00200218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00280218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6285,7 +6285,7 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C01010600000158020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000160020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -55341,6 +55341,539 @@ inherited PCP_FM_M_OPR_ETQ: TPCP_FM_M_OPR_ETQ
           ParentFont = False
         end
       end
+    end
+  end
+  object BUS_CD_C_ITT: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'CAD_DP_C_ITE'
+    RemoteServer = dmGeral.pcConecao
+    Left = 576
+    Top = 224
+    object BUS_CD_C_ITEid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object BUS_CD_C_ITEativo: TBooleanField
+      FieldName = 'ativo'
+    end
+    object BUS_CD_C_ITEcardapio: TBooleanField
+      FieldName = 'cardapio'
+    end
+    object BUS_CD_C_ITEdescricao: TWideStringField
+      FieldName = 'descricao'
+      Size = 100
+    end
+    object BUS_CD_C_ITEfantasia: TWideStringField
+      FieldName = 'fantasia'
+      Size = 30
+    end
+    object BUS_CD_C_ITEreferencia: TWideStringField
+      FieldName = 'referencia'
+      Size = 100
+    end
+    object BUS_CD_C_ITEaplicacao: TWideStringField
+      FieldName = 'aplicacao'
+      Size = 100
+    end
+    object BUS_CD_C_ITEid_fornecedor: TIntegerField
+      FieldName = 'id_fornecedor'
+    end
+    object BUS_CD_C_ITEid_grupo: TWideStringField
+      FieldName = 'id_grupo'
+      Size = 11
+    end
+    object BUS_CD_C_ITEid_und_compra: TWideStringField
+      FieldName = 'id_und_compra'
+      Size = 3
+    end
+    object BUS_CD_C_ITEid_und_venda: TWideStringField
+      FieldName = 'id_und_venda'
+      Size = 3
+    end
+    object BUS_CD_C_ITEemb_compra: TFloatField
+      FieldName = 'emb_compra'
+    end
+    object BUS_CD_C_ITEemb_venda: TFloatField
+      FieldName = 'emb_venda'
+    end
+    object WideStringField1: TWideStringField
+      FieldName = 'cod_barra'
+      Size = 50
+    end
+    object BUS_CD_C_ITEcod_fabrica: TWideStringField
+      FieldName = 'cod_fabrica'
+      Size = 30
+    end
+    object BUS_CD_C_ITEpes_liquido: TFloatField
+      FieldName = 'pes_liquido'
+    end
+    object BUS_CD_C_ITEpes_bruto: TFloatField
+      FieldName = 'pes_bruto'
+    end
+    object BUS_CD_C_ITEest_minimo: TFloatField
+      FieldName = 'est_minimo'
+    end
+    object BUS_CD_C_ITEloca_rua: TWideStringField
+      FieldName = 'loca_rua'
+      Size = 4
+    end
+    object BUS_CD_C_ITEloca_prateleira: TWideStringField
+      FieldName = 'loca_prateleira'
+      Size = 4
+    end
+    object BUS_CD_C_ITEloca_escaninho: TWideStringField
+      FieldName = 'loca_escaninho'
+      Size = 4
+    end
+    object BUS_CD_C_ITEtam_largura: TFloatField
+      FieldName = 'tam_largura'
+    end
+    object BUS_CD_C_ITEtam_comprimento: TFloatField
+      FieldName = 'tam_comprimento'
+    end
+    object BUS_CD_C_ITEtam_espessura: TFloatField
+      FieldName = 'tam_espessura'
+    end
+    object BUS_CD_C_ITEdensidade: TIntegerField
+      FieldName = 'densidade'
+    end
+    object BUS_CD_C_ITEdensidade_2: TIntegerField
+      FieldName = 'densidade_2'
+    end
+    object BUS_CD_C_ITEdensidade_3: TIntegerField
+      FieldName = 'densidade_3'
+    end
+    object BUS_CD_C_ITEtipo: TIntegerField
+      FieldName = 'tipo'
+    end
+    object BUS_CD_C_ITEgeracao_lote_interno: TIntegerField
+      FieldName = 'geracao_lote_interno'
+    end
+    object BUS_CD_C_ITEdestino_reclamado: TIntegerField
+      FieldName = 'destino_reclamado'
+    end
+    object BUS_CD_C_ITEetiq_classificacao_pro: TIntegerField
+      FieldName = 'etiq_classificacao_pro'
+    end
+    object BUS_CD_C_ITEetiq_medidas: TWideStringField
+      FieldName = 'etiq_medidas'
+      Size = 60
+    end
+    object BUS_CD_C_ITEetiq_recomendacoes_1: TWideStringField
+      FieldName = 'etiq_recomendacoes_1'
+      Size = 80
+    end
+    object BUS_CD_C_ITEetiq_recomendacoes_2: TWideStringField
+      FieldName = 'etiq_recomendacoes_2'
+      Size = 80
+    end
+    object BUS_CD_C_ITElote_fabric_obrigatorio: TIntegerField
+      FieldName = 'lote_fabric_obrigatorio'
+    end
+    object BUS_CD_C_ITEid_ncm: TWideStringField
+      FieldName = 'id_ncm'
+      Size = 10
+    end
+    object BUS_CD_C_ITEint_nomencm: TWideStringField
+      FieldName = 'int_nomencm'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_desc_grupo: TWideStringField
+      FieldName = 'int_desc_grupo'
+      ProviderFlags = []
+      Size = 30
+    end
+    object BUS_CD_C_ITEint_tipo_item: TWideStringField
+      FieldName = 'int_tipo_item'
+      ProviderFlags = []
+      Size = 2
+    end
+    object BUS_CD_C_ITEint_origem: TWideStringField
+      FieldName = 'int_origem'
+      ProviderFlags = []
+      Size = 1
+    end
+    object BUS_CD_C_ITEint_tributo: TIntegerField
+      FieldName = 'int_tributo'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_nomefor: TWideStringField
+      FieldName = 'int_nomefor'
+      ProviderFlags = []
+      Size = 50
+    end
+    object BUS_CD_C_ITECAD_SQ_C_ITE_ESP: TDataSetField
+      FieldName = 'CAD_SQ_C_ITE_ESP'
+    end
+    object BUS_CD_C_ITECAD_SQ_C_ITE_COM: TDataSetField
+      FieldName = 'CAD_SQ_C_ITE_COM'
+    end
+    object BUS_CD_C_ITEPRECO_AVISTA: TFMTBCDField
+      FieldName = 'PRECO_AVISTA'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITEPRECO_APRAZO: TFMTBCDField
+      FieldName = 'PRECO_APRAZO'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITEdta_cadastro: TDateField
+      FieldName = 'dta_cadastro'
+    end
+    object BUS_CD_C_ITEetiq_modelo: TWideStringField
+      FieldName = 'etiq_modelo'
+      Size = 70
+    end
+    object BUS_CD_C_ITEcod_lme: TWideStringField
+      FieldName = 'cod_lme'
+    end
+    object BUS_CD_C_ITErev_lme: TWideStringField
+      FieldName = 'rev_lme'
+      Size = 5
+    end
+    object BUS_CD_C_ITEint_mva: TFloatField
+      FieldName = 'int_mva'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_fteetq: TIntegerField
+      FieldName = 'int_fteetq'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_impselo: TBooleanField
+      FieldName = 'int_impselo'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_pis_entrada: TWideStringField
+      FieldName = 'int_pis_entrada'
+      ProviderFlags = []
+      Size = 2
+    end
+    object BUS_CD_C_ITEint_pis_saida: TWideStringField
+      FieldName = 'int_pis_saida'
+      ProviderFlags = []
+      Size = 2
+    end
+    object BUS_CD_C_ITEint_cof_entrada: TWideStringField
+      FieldName = 'int_cof_entrada'
+      ProviderFlags = []
+      Size = 2
+    end
+    object BUS_CD_C_ITEint_cof_saida: TWideStringField
+      FieldName = 'int_cof_saida'
+      ProviderFlags = []
+      Size = 2
+    end
+    object BUS_CD_C_ITEid_familia: TIntegerField
+      FieldName = 'id_familia'
+    end
+    object BUS_CD_C_ITEdes_completa: TWideStringField
+      FieldName = 'des_completa'
+      Size = 250
+    end
+    object BUS_CD_C_ITErt_pricipio_ativo: TWideStringField
+      FieldName = 'rt_pricipio_ativo'
+      Size = 400
+    end
+    object BUS_CD_C_ITErt_composicao: TWideStringField
+      FieldName = 'rt_composicao'
+      Size = 400
+    end
+    object BUS_CD_C_ITEcod_onu: TWideStringField
+      FieldName = 'cod_onu'
+    end
+    object BUS_CD_C_ITEret_emb_nao_lavavel: TIntegerField
+      FieldName = 'ret_emb_nao_lavavel'
+    end
+    object BUS_CD_C_ITEret_emb_lavaveis: TIntegerField
+      FieldName = 'ret_emb_lavaveis'
+    end
+    object BUS_CD_C_ITEtam_observacoes: TWideStringField
+      FieldName = 'tam_observacoes'
+      Size = 150
+    end
+    object BUS_CD_C_ITEint_perimpostoncm: TFloatField
+      FieldName = 'int_perimpostoncm'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEret_emb_capacidade: TWideStringField
+      FieldName = 'ret_emb_capacidade'
+    end
+    object BUS_CD_C_ITEsgq_critica_laudo_fab: TBooleanField
+      FieldName = 'sgq_critica_laudo_fab'
+    end
+    object BUS_CD_C_ITECAD_SQ_C_ITE_XML: TDataSetField
+      FieldName = 'CAD_SQ_C_ITE_XML'
+    end
+    object BUS_CD_C_ITECAD_SQ_C_ITE_APL: TDataSetField
+      FieldName = 'CAD_SQ_C_ITE_APL'
+    end
+    object BUS_CD_C_ITECAD_SQ_C_ITE_TPR: TDataSetField
+      FieldName = 'CAD_SQ_C_ITE_TPR'
+    end
+    object BUS_CD_C_ITEint_ipi_entrada: TWideStringField
+      FieldName = 'int_ipi_entrada'
+      ProviderFlags = []
+      Size = 2
+    end
+    object BUS_CD_C_ITEint_ipi_saida: TWideStringField
+      FieldName = 'int_ipi_saida'
+      ProviderFlags = []
+      Size = 2
+    end
+    object BUS_CD_C_ITEint_serterceiro: TBooleanField
+      FieldName = 'int_serterceiro'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEetiq_id_cue: TIntegerField
+      FieldName = 'etiq_id_cue'
+    end
+    object BUS_CD_C_ITEint_msg_etq1: TWideStringField
+      FieldName = 'int_msg_etq1'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_msg_etq2: TWideStringField
+      FieldName = 'int_msg_etq2'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_msg_etq3: TWideStringField
+      FieldName = 'int_msg_etq3'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_msg_etq4: TWideStringField
+      FieldName = 'int_msg_etq4'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_msg_etq5: TWideStringField
+      FieldName = 'int_msg_etq5'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_impmsgetq: TBooleanField
+      FieldName = 'int_impmsgetq'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_msg_etq6: TWideStringField
+      FieldName = 'int_msg_etq6'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_msg_etq7: TWideStringField
+      FieldName = 'int_msg_etq7'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEcubagem: TFMTBCDField
+      FieldName = 'cubagem'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITEpreco_avista_ant_reajuste: TFMTBCDField
+      FieldName = 'preco_avista_ant_reajuste'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITEpreco_aprazo_ant_reajuste: TFMTBCDField
+      FieldName = 'preco_aprazo_ant_reajuste'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITEdta_ult_reajuste: TDateField
+      FieldName = 'dta_ult_reajuste'
+    end
+    object BUS_CD_C_ITEint_ctcepi: TBooleanField
+      FieldName = 'int_ctcepi'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_dre_perc_ircs: TFloatField
+      FieldName = 'int_dre_perc_ircs'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_dre_perc_out_ded_ven: TFloatField
+      FieldName = 'int_dre_perc_out_ded_ven'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITErt_registro: TWideStringField
+      FieldName = 'rt_registro'
+      Size = 25
+    end
+    object BUS_CD_C_ITEint_ctr_lot_entr: TBooleanField
+      FieldName = 'int_ctr_lot_entr'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEcusto_servico: TFMTBCDField
+      FieldName = 'custo_servico'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITEint_impetqsimples: TBooleanField
+      FieldName = 'int_impetqsimples'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_pathetqsimples: TWideStringField
+      FieldName = 'int_pathetqsimples'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEint_inf_tempo_ite_coj: TBooleanField
+      FieldName = 'int_inf_tempo_ite_coj'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_ctc_epi: TBooleanField
+      FieldName = 'int_ctc_epi'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEper_cmv_interno: TFMTBCDField
+      FieldName = 'per_cmv_interno'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITEper_cmv_externo: TFMTBCDField
+      FieldName = 'per_cmv_externo'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_CD_C_ITECAD_SQ_C_ITE_LOC: TDataSetField
+      FieldName = 'CAD_SQ_C_ITE_LOC'
+    end
+    object BUS_CD_C_ITEetiq_marca: TWideStringField
+      FieldName = 'etiq_marca'
+      Size = 30
+    end
+    object BUS_CD_C_ITEint_lote_gru: TBooleanField
+      FieldName = 'int_lote_gru'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEsgq_personalizado: TBooleanField
+      FieldName = 'sgq_personalizado'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_verif_cod_barra_ped: TBooleanField
+      FieldName = 'int_verif_cod_barra_ped'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEetiq_madeira: TWideStringField
+      FieldName = 'etiq_madeira'
+      Size = 200
+    end
+    object BUS_CD_C_ITEetiq_espuma1: TWideStringField
+      FieldName = 'etiq_espuma1'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_espuma2: TWideStringField
+      FieldName = 'etiq_espuma2'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_espuma3: TWideStringField
+      FieldName = 'etiq_espuma3'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_revestimento1: TWideStringField
+      FieldName = 'etiq_revestimento1'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_revestimento2: TWideStringField
+      FieldName = 'etiq_revestimento2'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_revestimento3: TWideStringField
+      FieldName = 'etiq_revestimento3'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_espuma4: TWideStringField
+      FieldName = 'etiq_espuma4'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_espuma5: TWideStringField
+      FieldName = 'etiq_espuma5'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_espuma6: TWideStringField
+      FieldName = 'etiq_espuma6'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_revestimento4: TWideStringField
+      FieldName = 'etiq_revestimento4'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_revestimento5: TWideStringField
+      FieldName = 'etiq_revestimento5'
+      Size = 300
+    end
+    object BUS_CD_C_ITEetiq_revestimento6: TWideStringField
+      FieldName = 'etiq_revestimento6'
+      Size = 300
+    end
+    object BUS_CD_C_ITEint_sgqblocoespuma: TBooleanField
+      FieldName = 'int_sgqblocoespuma'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_sgqcalcbloco: TBooleanField
+      FieldName = 'int_sgqcalcbloco'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEcod_item_prod: TIntegerField
+      FieldName = 'cod_item_prod'
+    end
+    object BUS_CD_C_ITEetiq_tipo_produto: TIntegerField
+      FieldName = 'etiq_tipo_produto'
+    end
+    object BUS_CD_C_ITEint_etiq_tipo_produto: TWideStringField
+      FieldName = 'int_etiq_tipo_produto'
+      ProviderFlags = []
+      Size = 50
+    end
+    object BUS_CD_C_ITEtam_esp_espessura_1: TFloatField
+      FieldName = 'tam_esp_espessura_1'
+    end
+    object BUS_CD_C_ITEtam_esp_espessura_2: TFloatField
+      FieldName = 'tam_esp_espessura_2'
+    end
+    object BUS_CD_C_ITEtam_esp_espessura_3: TFloatField
+      FieldName = 'tam_esp_espessura_3'
+    end
+    object BUS_CD_C_ITEtam_esp_comprimento_1: TFloatField
+      FieldName = 'tam_esp_comprimento_1'
+    end
+    object BUS_CD_C_ITEtam_esp_comprimento_2: TFloatField
+      FieldName = 'tam_esp_comprimento_2'
+    end
+    object BUS_CD_C_ITEtam_esp_comprimento_3: TFloatField
+      FieldName = 'tam_esp_comprimento_3'
+    end
+    object BUS_CD_C_ITEtam_esp_largura_1: TFloatField
+      FieldName = 'tam_esp_largura_1'
+    end
+    object BUS_CD_C_ITEtam_esp_largura_2: TFloatField
+      FieldName = 'tam_esp_largura_2'
+    end
+    object BUS_CD_C_ITEtam_esp_largura_3: TFloatField
+      FieldName = 'tam_esp_largura_3'
+    end
+    object BUS_CD_C_ITEcubagem_esp_1: TFloatField
+      FieldName = 'cubagem_esp_1'
+    end
+    object BUS_CD_C_ITEcubagem_esp_2: TFloatField
+      FieldName = 'cubagem_esp_2'
+    end
+    object BUS_CD_C_ITEcubagem_esp_3: TFloatField
+      FieldName = 'cubagem_esp_3'
+    end
+    object BUS_CD_C_ITEtipo_produto: TIntegerField
+      FieldName = 'tipo_produto'
+    end
+    object BUS_CD_C_ITEint_nome_item_caixa_itt: TWideStringField
+      FieldName = 'int_nome_item_caixa_itt'
+      ProviderFlags = []
+      Size = 100
+    end
+    object BUS_CD_C_ITEid_item_caixa: TIntegerField
+      FieldName = 'id_item_caixa'
     end
   end
 end

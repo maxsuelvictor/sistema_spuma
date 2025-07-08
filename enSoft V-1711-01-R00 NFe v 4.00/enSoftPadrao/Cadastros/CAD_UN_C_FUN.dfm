@@ -1,17 +1,16 @@
 inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   Caption = 'Cadastro'
   ClientHeight = 564
-  ExplicitLeft = -14
   ExplicitWidth = 1156
   ExplicitHeight = 593
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlEsquerda: TPanel
     Height = 534
-    ExplicitHeight = 514
+    ExplicitHeight = 534
     inherited pnlFiltro: TPanel
       Top = 484
-      ExplicitTop = 464
+      ExplicitTop = 484
       inherited gbxFiltro: TGroupBox
         inherited cbbPesquisa: TComboBox
           Left = 3
@@ -35,7 +34,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
     end
     inherited pnlDatagrid: TPanel
       Height = 430
-      ExplicitHeight = 410
+      ExplicitHeight = 430
       inherited dbGrid: TwwDBGrid
         Height = 430
         Selected.Strings = (
@@ -47,7 +46,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited pnlDireita: TPanel
     Height = 534
-    ExplicitHeight = 514
+    ExplicitHeight = 534
     inherited pnlDados: TPanel
       Left = 7
       Top = 19
@@ -444,12 +443,8 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
           ActivePage = tsGeral
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 725
-          ExplicitHeight = 270
           object tsGeral: TTabSheet
             Caption = 'Geral'
-            ExplicitWidth = 717
-            ExplicitHeight = 242
             object ScrollBox1: TScrollBox
               Left = 0
               Top = 0
@@ -460,8 +455,6 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
               Color = clWhite
               ParentColor = False
               TabOrder = 0
-              ExplicitWidth = 717
-              ExplicitHeight = 242
               object Label1: TLabel
                 Left = 61
                 Top = 4
@@ -916,23 +909,12 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
                 TabOrder = 34
                 WordWrap = True
               end
-              object DBCheckBox19: TDBCheckBox
-                Left = 560
-                Top = 172
-                Width = 149
-                Height = 26
-                Caption = 'Permite adicionar itens na O.P para produzir'
-                DataField = 'sgq_perm_inserir_itens_op'
-                DataSource = dso
-                TabOrder = 35
-                WordWrap = True
-              end
             end
           end
           object tsGestaoQualid: TTabSheet
             Caption = 'Gest'#227'o de Qualidade'
             ImageIndex = 1
-            ExplicitWidth = 717
+            ExplicitLeft = 0
             object Label5: TLabel
               Left = 2
               Top = 134
@@ -1132,11 +1114,22 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
               TabOrder = 8
               OnClick = BitBtn2Click
             end
+            object DBCheckBox19: TDBCheckBox
+              Left = 224
+              Top = 90
+              Width = 105
+              Height = 39
+              Caption = 'Permite adicionar itens na O.P para produzir'
+              DataField = 'sgq_perm_inserir_itens_op'
+              DataSource = dso
+              TabOrder = 9
+              Visible = False
+              WordWrap = True
+            end
           end
           object tsProdutorMobile: TTabSheet
             Caption = 'Aplicativo Produtor Mobile'
             ImageIndex = 2
-            ExplicitWidth = 717
             object chkAltPrecPedApp: TDBCheckBox
               Left = 14
               Top = 29
@@ -1348,7 +1341,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited imgBotoesAtivo: TImageList
     Bitmap = {
-      494C010108002001200218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108002001240218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2248,7 +2241,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C010108007401740218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108007401780218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3148,7 +3141,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200700170020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200700174020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3664,7 +3657,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C010108001801180218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080018011C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4564,7 +4557,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C01010600680168020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101060068016C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4776,7 +4769,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C010108002801280218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080028012C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5676,7 +5669,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C01010600780178020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101060078017C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5896,7 +5889,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00D40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00D80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6798,7 +6791,7 @@ inherited CAD_FM_C_FUN: TCAD_FM_C_FUN
     Left = 1099
     Top = 459
     Bitmap = {
-      494C0101060000010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000110020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF

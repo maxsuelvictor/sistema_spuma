@@ -1013,15 +1013,18 @@ begin
   PageControl2.ActivePageIndex := 5;
   MemoDados.Lines.Add('');
   MemoDados.Lines.Add('Status Serviço');
-  MemoDados.Lines.Add('tpAmb: '    +TpAmbToStr(MDFE.WebServices.StatusServico.tpAmb));
-  MemoDados.Lines.Add('verAplic: ' +MDFE.WebServices.StatusServico.verAplic);
-  MemoDados.Lines.Add('cStat: '    +IntToStr(MDFE.WebServices.StatusServico.cStat));
-  MemoDados.Lines.Add('xMotivo: '  +MDFE.WebServices.StatusServico.xMotivo);
-  MemoDados.Lines.Add('cUF: '      +IntToStr(MDFE.WebServices.StatusServico.cUF));
-  MemoDados.Lines.Add('dhRecbto: ' +DateTimeToStr(MDFE.WebServices.StatusServico.dhRecbto));
-  MemoDados.Lines.Add('tMed: '     +IntToStr(MDFE.WebServices.StatusServico.TMed));
-  MemoDados.Lines.Add('dhRetorno: '+DateTimeToStr(MDFE.WebServices.StatusServico.dhRetorno));
-  MemoDados.Lines.Add('xObs: '     +MDFE.WebServices.StatusServico.xObs);
+
+  // Comentado em 30/06/2025, Maxsuel Victor, devido atualização do ACBr e utilização do ACBrXMLDocument
+     // MemoDados.Lines.Add('tpAmb: '    + TpAmbToStr(MDFE.WebServices.StatusServico.tpAmb));
+  MemoDados.Lines.Add('tpAmb: '    + TipoAmbienteToStr(MDFE.WebServices.StatusServico.tpAmb));
+  MemoDados.Lines.Add('verAplic: ' + MDFE.WebServices.StatusServico.verAplic);
+  MemoDados.Lines.Add('cStat: '    + IntToStr(MDFE.WebServices.StatusServico.cStat));
+  MemoDados.Lines.Add('xMotivo: '  + MDFE.WebServices.StatusServico.xMotivo);
+  MemoDados.Lines.Add('cUF: '      + IntToStr(MDFE.WebServices.StatusServico.cUF));
+  MemoDados.Lines.Add('dhRecbto: ' + DateTimeToStr(MDFE.WebServices.StatusServico.dhRecbto));
+  MemoDados.Lines.Add('tMed: '     + IntToStr(MDFE.WebServices.StatusServico.TMed));
+  MemoDados.Lines.Add('dhRetorno: '+ DateTimeToStr(MDFE.WebServices.StatusServico.dhRetorno));
+  MemoDados.Lines.Add('xObs: '     + MDFE.WebServices.StatusServico.xObs);
 end;
 
 procedure TFAT_FM_M_MDF.Button1Click(Sender: TObject);

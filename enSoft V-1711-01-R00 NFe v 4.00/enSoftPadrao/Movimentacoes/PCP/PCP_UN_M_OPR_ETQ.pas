@@ -370,6 +370,144 @@ type
     txtLinha6: TEdit;
     PCP_CD_M_ETQint_nome_selo_inmetro_etq: TWideStringField;
     BUS_CD_M_ETQint_nome_selo_inmetro_etq: TWideStringField;
+    BUS_CD_C_ITT: TClientDataSet;
+    BUS_CD_C_ITEid_item: TIntegerField;
+    BUS_CD_C_ITEativo: TBooleanField;
+    BUS_CD_C_ITEcardapio: TBooleanField;
+    BUS_CD_C_ITEdescricao: TWideStringField;
+    BUS_CD_C_ITEfantasia: TWideStringField;
+    BUS_CD_C_ITEreferencia: TWideStringField;
+    BUS_CD_C_ITEaplicacao: TWideStringField;
+    BUS_CD_C_ITEid_fornecedor: TIntegerField;
+    BUS_CD_C_ITEid_grupo: TWideStringField;
+    BUS_CD_C_ITEid_und_compra: TWideStringField;
+    BUS_CD_C_ITEid_und_venda: TWideStringField;
+    BUS_CD_C_ITEemb_compra: TFloatField;
+    BUS_CD_C_ITEemb_venda: TFloatField;
+    WideStringField1: TWideStringField;
+    BUS_CD_C_ITEcod_fabrica: TWideStringField;
+    BUS_CD_C_ITEpes_liquido: TFloatField;
+    BUS_CD_C_ITEpes_bruto: TFloatField;
+    BUS_CD_C_ITEest_minimo: TFloatField;
+    BUS_CD_C_ITEloca_rua: TWideStringField;
+    BUS_CD_C_ITEloca_prateleira: TWideStringField;
+    BUS_CD_C_ITEloca_escaninho: TWideStringField;
+    BUS_CD_C_ITEtam_largura: TFloatField;
+    BUS_CD_C_ITEtam_comprimento: TFloatField;
+    BUS_CD_C_ITEtam_espessura: TFloatField;
+    BUS_CD_C_ITEdensidade: TIntegerField;
+    BUS_CD_C_ITEdensidade_2: TIntegerField;
+    BUS_CD_C_ITEdensidade_3: TIntegerField;
+    BUS_CD_C_ITEtipo: TIntegerField;
+    BUS_CD_C_ITEgeracao_lote_interno: TIntegerField;
+    BUS_CD_C_ITEdestino_reclamado: TIntegerField;
+    BUS_CD_C_ITEetiq_classificacao_pro: TIntegerField;
+    BUS_CD_C_ITEetiq_medidas: TWideStringField;
+    BUS_CD_C_ITEetiq_recomendacoes_1: TWideStringField;
+    BUS_CD_C_ITEetiq_recomendacoes_2: TWideStringField;
+    BUS_CD_C_ITElote_fabric_obrigatorio: TIntegerField;
+    BUS_CD_C_ITEid_ncm: TWideStringField;
+    BUS_CD_C_ITEint_nomencm: TWideStringField;
+    BUS_CD_C_ITEint_desc_grupo: TWideStringField;
+    BUS_CD_C_ITEint_tipo_item: TWideStringField;
+    BUS_CD_C_ITEint_origem: TWideStringField;
+    BUS_CD_C_ITEint_tributo: TIntegerField;
+    BUS_CD_C_ITEint_nomefor: TWideStringField;
+    BUS_CD_C_ITECAD_SQ_C_ITE_ESP: TDataSetField;
+    BUS_CD_C_ITECAD_SQ_C_ITE_COM: TDataSetField;
+    BUS_CD_C_ITEPRECO_AVISTA: TFMTBCDField;
+    BUS_CD_C_ITEPRECO_APRAZO: TFMTBCDField;
+    BUS_CD_C_ITEdta_cadastro: TDateField;
+    BUS_CD_C_ITEetiq_modelo: TWideStringField;
+    BUS_CD_C_ITEcod_lme: TWideStringField;
+    BUS_CD_C_ITErev_lme: TWideStringField;
+    BUS_CD_C_ITEint_mva: TFloatField;
+    BUS_CD_C_ITEint_fteetq: TIntegerField;
+    BUS_CD_C_ITEint_impselo: TBooleanField;
+    BUS_CD_C_ITEint_pis_entrada: TWideStringField;
+    BUS_CD_C_ITEint_pis_saida: TWideStringField;
+    BUS_CD_C_ITEint_cof_entrada: TWideStringField;
+    BUS_CD_C_ITEint_cof_saida: TWideStringField;
+    BUS_CD_C_ITEid_familia: TIntegerField;
+    BUS_CD_C_ITEdes_completa: TWideStringField;
+    BUS_CD_C_ITErt_pricipio_ativo: TWideStringField;
+    BUS_CD_C_ITErt_composicao: TWideStringField;
+    BUS_CD_C_ITEcod_onu: TWideStringField;
+    BUS_CD_C_ITEret_emb_nao_lavavel: TIntegerField;
+    BUS_CD_C_ITEret_emb_lavaveis: TIntegerField;
+    BUS_CD_C_ITEtam_observacoes: TWideStringField;
+    BUS_CD_C_ITEint_perimpostoncm: TFloatField;
+    BUS_CD_C_ITEret_emb_capacidade: TWideStringField;
+    BUS_CD_C_ITEsgq_critica_laudo_fab: TBooleanField;
+    BUS_CD_C_ITECAD_SQ_C_ITE_XML: TDataSetField;
+    BUS_CD_C_ITECAD_SQ_C_ITE_APL: TDataSetField;
+    BUS_CD_C_ITECAD_SQ_C_ITE_TPR: TDataSetField;
+    BUS_CD_C_ITEint_ipi_entrada: TWideStringField;
+    BUS_CD_C_ITEint_ipi_saida: TWideStringField;
+    BUS_CD_C_ITEint_serterceiro: TBooleanField;
+    BUS_CD_C_ITEetiq_id_cue: TIntegerField;
+    BUS_CD_C_ITEint_msg_etq1: TWideStringField;
+    BUS_CD_C_ITEint_msg_etq2: TWideStringField;
+    BUS_CD_C_ITEint_msg_etq3: TWideStringField;
+    BUS_CD_C_ITEint_msg_etq4: TWideStringField;
+    BUS_CD_C_ITEint_msg_etq5: TWideStringField;
+    BUS_CD_C_ITEint_impmsgetq: TBooleanField;
+    BUS_CD_C_ITEint_msg_etq6: TWideStringField;
+    BUS_CD_C_ITEint_msg_etq7: TWideStringField;
+    BUS_CD_C_ITEcubagem: TFMTBCDField;
+    BUS_CD_C_ITEpreco_avista_ant_reajuste: TFMTBCDField;
+    BUS_CD_C_ITEpreco_aprazo_ant_reajuste: TFMTBCDField;
+    BUS_CD_C_ITEdta_ult_reajuste: TDateField;
+    BUS_CD_C_ITEint_ctcepi: TBooleanField;
+    BUS_CD_C_ITEint_dre_perc_ircs: TFloatField;
+    BUS_CD_C_ITEint_dre_perc_out_ded_ven: TFloatField;
+    BUS_CD_C_ITErt_registro: TWideStringField;
+    BUS_CD_C_ITEint_ctr_lot_entr: TBooleanField;
+    BUS_CD_C_ITEcusto_servico: TFMTBCDField;
+    BUS_CD_C_ITEint_impetqsimples: TBooleanField;
+    BUS_CD_C_ITEint_pathetqsimples: TWideStringField;
+    BUS_CD_C_ITEint_inf_tempo_ite_coj: TBooleanField;
+    BUS_CD_C_ITEint_ctc_epi: TBooleanField;
+    BUS_CD_C_ITEper_cmv_interno: TFMTBCDField;
+    BUS_CD_C_ITEper_cmv_externo: TFMTBCDField;
+    BUS_CD_C_ITECAD_SQ_C_ITE_LOC: TDataSetField;
+    BUS_CD_C_ITEetiq_marca: TWideStringField;
+    BUS_CD_C_ITEint_lote_gru: TBooleanField;
+    BUS_CD_C_ITEsgq_personalizado: TBooleanField;
+    BUS_CD_C_ITEint_verif_cod_barra_ped: TBooleanField;
+    BUS_CD_C_ITEetiq_madeira: TWideStringField;
+    BUS_CD_C_ITEetiq_espuma1: TWideStringField;
+    BUS_CD_C_ITEetiq_espuma2: TWideStringField;
+    BUS_CD_C_ITEetiq_espuma3: TWideStringField;
+    BUS_CD_C_ITEetiq_revestimento1: TWideStringField;
+    BUS_CD_C_ITEetiq_revestimento2: TWideStringField;
+    BUS_CD_C_ITEetiq_revestimento3: TWideStringField;
+    BUS_CD_C_ITEetiq_espuma4: TWideStringField;
+    BUS_CD_C_ITEetiq_espuma5: TWideStringField;
+    BUS_CD_C_ITEetiq_espuma6: TWideStringField;
+    BUS_CD_C_ITEetiq_revestimento4: TWideStringField;
+    BUS_CD_C_ITEetiq_revestimento5: TWideStringField;
+    BUS_CD_C_ITEetiq_revestimento6: TWideStringField;
+    BUS_CD_C_ITEint_sgqblocoespuma: TBooleanField;
+    BUS_CD_C_ITEint_sgqcalcbloco: TBooleanField;
+    BUS_CD_C_ITEcod_item_prod: TIntegerField;
+    BUS_CD_C_ITEetiq_tipo_produto: TIntegerField;
+    BUS_CD_C_ITEint_etiq_tipo_produto: TWideStringField;
+    BUS_CD_C_ITEtam_esp_espessura_1: TFloatField;
+    BUS_CD_C_ITEtam_esp_espessura_2: TFloatField;
+    BUS_CD_C_ITEtam_esp_espessura_3: TFloatField;
+    BUS_CD_C_ITEtam_esp_comprimento_1: TFloatField;
+    BUS_CD_C_ITEtam_esp_comprimento_2: TFloatField;
+    BUS_CD_C_ITEtam_esp_comprimento_3: TFloatField;
+    BUS_CD_C_ITEtam_esp_largura_1: TFloatField;
+    BUS_CD_C_ITEtam_esp_largura_2: TFloatField;
+    BUS_CD_C_ITEtam_esp_largura_3: TFloatField;
+    BUS_CD_C_ITEcubagem_esp_1: TFloatField;
+    BUS_CD_C_ITEcubagem_esp_2: TFloatField;
+    BUS_CD_C_ITEcubagem_esp_3: TFloatField;
+    BUS_CD_C_ITEtipo_produto: TIntegerField;
+    BUS_CD_C_ITEint_nome_item_caixa_itt: TWideStringField;
+    BUS_CD_C_ITEid_item_caixa: TIntegerField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure wwDBGrid1RowChanged(Sender: TObject);
@@ -562,6 +700,12 @@ begin
   dmGeral.BUS_CD_C_ITE.Data :=
             dmGeral.BUS_CD_C_ITE.DataRequest(VarArrayOf([0, txtItemOri.Text]));
 
+
+  BUS_CD_C_ITT.close;
+  BUS_CD_C_ITT.Data :=
+            BUS_CD_C_ITT.DataRequest(VarArrayOf([0, BUS_CD_M_OPR_ETQ.FieldByName('ID_ITEM').Text]));
+
+
   dmSgq.BusClassEtiquetaCol(0,dmgeral.BUS_CD_C_ITE.FieldByName('ETIQ_CLASSIFICACAO_PRO').Text);
   dmSgq.BusUsoEtiquetaCol(0,dmgeral.BUS_CD_C_ITE.FieldByName('etiq_id_cue').Text);
 
@@ -577,7 +721,14 @@ begin
         PCP_CD_M_ETQ.FieldByName('int_etiq_marca').AsString := dmGeral.BUS_CD_C_ITE.FieldByName('etiq_marca').Text;
         PCP_CD_M_ETQ.FieldByName('int_nomeite').AsString    := dmGeral.BUS_CD_C_ITE.FieldByName('descricao').Text;
         PCP_CD_M_ETQ.FieldByName('int_und_venda').AsString  := dmGeral.BUS_CD_C_ITE.FieldByName('id_und_venda').Text;
-        PCP_CD_M_ETQ.FieldByName('int_cod_barra_gtin').AsString := dmGeral.BUS_CD_C_ITE.FieldByName('cod_barra').Text;
+
+        // Comentado por Maxsuel Victor, em 19/06/2025
+           // O código de barra GTIN, deve ser o do item personalizado original
+               // PCP_CD_M_ETQ.FieldByName('int_cod_barra_gtin').AsString := dmGeral.BUS_CD_C_ITE.FieldByName('cod_barra').Text;
+
+        PCP_CD_M_ETQ.FieldByName('int_cod_barra_gtin').AsString := BUS_CD_C_ITT.FieldByName('cod_barra').Text;
+
+
 
         //PCP_CD_M_ETQ.FieldByName('int_nomeseloetq').Text    := dmGeral.BUS_CD_C_GRU.FieldByName('NOME_SELO_ETQ').Text;
 
@@ -678,6 +829,8 @@ begin
                   dmSgq.BUS_CD_M_FTE_ETQinf_sac.AsString;
         PCP_CD_M_ETQ.Next;
       end;
+
+  BUS_CD_C_ITT.close;
 
   dmGeral.BUS_CD_C_GRU.close;
   dmSgq.BUS_CD_C_CLE.close;

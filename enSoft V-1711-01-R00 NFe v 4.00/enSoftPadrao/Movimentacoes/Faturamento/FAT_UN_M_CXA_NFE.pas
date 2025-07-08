@@ -9,7 +9,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
   vcl.wwdatsrc, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, Vcl.Mask, Vcl.DBCtrls,
   ACBrNFe,pcnConversao,pnfsConversao, pcnConversaoNFe, ACBrNFeDANFEClass, ACBrUtil,
-  pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil, Math,
+  ACBRNFe.XmlWriter,
+  //pcnNFeW,
+  pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil, Math,
   XMLIntf, XMLDoc, ACBrNFeDANFEFR,
 
   Vcl.OleCtrls, SHDocVw, Vcl.ComCtrls, Vcl.Menus, frxExportXLS, frxClass,
@@ -5468,6 +5470,8 @@ Var iSeq: Integer;
 
     NroAutorizCartao: String;
     NumParcela: Integer;
+
+    vTotalAvistaVenctos: Currency;
 begin
 
   with NFe.NotasFiscais.Add.NFe do
@@ -6397,14 +6401,28 @@ begin
               begin
                  if Ide.indPag = ipPrazo then    // Nota técnica: NT_2016_002_v1.42
                     begin
+                       vTotalAvistaVenctos := 0;
+
+                       // 03/07/2025, Maxsuel Victor  - Verifica se tem alguma forma de pagamento em DINHEIRO ou PIX ,
+                          // para abater do bloco cobr.fat, conforme mais abaixo :
+
+                       dmGeral.BUS_CD_M_NFE_TIT_CXA.First;
+                       while not dmGeral.BUS_CD_M_NFE_TIT_CXA.Eof do
+                           begin
+                             if dmGeral.BUS_CD_M_NFE_TIT_CXA.FieldByName('int_docimpresso').AsInteger in [5,8] then // Dinheiro e Pix
+                                begin
+                                  vTotalAvistaVenctos  := vTotalAvistaVenctos + dmGeral.BUS_CD_M_NFE_TIT_CXA.FieldByName('vlr_titulo').AsCurrency;
+                                end;
+                             dmGeral.BUS_CD_M_NFE_TIT_CXA.Next;
+                           end;
+
                        // Adicionado por Maxsuel Victor em 03/07/2018
                        cobr.Fat.nFat  :=  dmGeral.BUS_CD_M_NFE_CXA.FieldByName('NUMERO').AsString;
                        // por Maxsuel Victor, em 24/07/2020, foi adicionado a linha do valor do IPI_VALOR
-                       cobr.Fat.vOrig :=  dmGeral.BUS_CD_M_NFE_CXA.FieldByName('vlr_mercadoria').AsCurrency +
-                                          dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ipi_valor').AsCurrency;
+                       cobr.Fat.vOrig :=  (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('vlr_mercadoria').AsCurrency +
+                                           dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ipi_valor').AsCurrency ) - vTotalAvistaVenctos;
                        cobr.Fat.vDesc :=  dmGeral.BUS_CD_M_NFE_CXA.FieldByName('vlr_desconto').AsCurrency;
-                       cobr.Fat.vLiq  :=  dmGeral.BUS_CD_M_NFE_CXA.FieldByName('vlr_liquido').AsCurrency;
-                       // -------------------------------------------
+                       cobr.Fat.vLiq  :=  dmGeral.BUS_CD_M_NFE_CXA.FieldByName('vlr_liquido').AsCurrency - vTotalAvistaVenctos;
 
 
                        dmGeral.BUS_CD_M_NFE_TIT_CXA.First;
@@ -6428,7 +6446,6 @@ begin
                                 end;
                              dmGeral.BUS_CD_M_NFE_TIT_CXA.Next;
                            end;
-
                     end;
               end
            else

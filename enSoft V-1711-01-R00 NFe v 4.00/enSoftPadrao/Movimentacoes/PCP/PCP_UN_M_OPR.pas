@@ -343,11 +343,12 @@ begin
        exit;
      end;
 
-  if not dmGeral.BUS_CD_C_FU2.FieldByName('sgq_perm_inserir_itens_op').Asboolean then
+  // 07-07-2025 Maxsuel Victor, Ficou redundante com o parâmetro do funcionário >> sgq_perm_botao_ger_prod
+  {if not dmGeral.BUS_CD_C_FU2.FieldByName('sgq_perm_inserir_itens_op').Asboolean then
      begin
        ShowMessage('Você não tem permissão para inserir produtos na O.P .');
        exit;
-     end;
+     end;}
 
 
   dmGeral.PCP_CD_M_OPR.Edit;
