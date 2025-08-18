@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.1.9" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Argox OS-214 plus series PPLA" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="42592,7010611921" ReportOptions.Description.Text="" ReportOptions.LastChange="45345,4169378588" ScriptLanguage="PascalScript" ScriptText.Text="procedure MasterData1OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;    &#13;&#10;end;&#13;&#10;&#13;&#10;procedure Page1OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;//  Page1.PaperHeight := MasterData1.Height*&#60;ft_qtde&#62;;&#13;&#10; //   Page1.PaperHeight := Page1.PaperHeight*&#60;ft_qtde&#62;;      &#13;&#10;end;&#13;&#10;&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="PCP_DB_C_ETQ_1_C_MSG" DataSetName="PCP_DB_C_ETQ_1_C_MSG"/>
+  </Datasets>
+  <Variables>
+    <item Name=" Externo"/>
+    <item Name="ft_qtde"/>
+  </Variables>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="99" PaperHeight="30" PaperSize="256" LeftMargin="4" RightMargin="4" TopMargin="1,5" BottomMargin="2" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="" OnBeforePrint="Page1OnBeforePrint">
+    <TfrxLineView Name="Line1" Left="7,55906" Top="97,60637" Width="332,59864" Height="0" Color="0" Frame.Style="fsDot" Frame.Typ="4"/>
+    <TfrxBarCodeView Name="BarCode1" Left="139,84261" Top="7,55906" Width="46" Height="72,45671" BarType="bcCode128" Expression="0" Rotation="0" Text="0" WideBarRatio="2" Zoom="1" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0"/>
+  </TfrxReportPage>
+</TfrxReport>

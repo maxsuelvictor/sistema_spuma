@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.1.9" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Argox OS-214 plus series PPLA" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="42592,7010611921" ReportOptions.Description.Text="" ReportOptions.LastChange="42751,4898993403" ScriptLanguage="PascalScript" ScriptText.Text="procedure MasterData1OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;    &#13;&#10;end;&#13;&#10;&#13;&#10;procedure Page1OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;//  Page1.PaperHeight := MasterData1.Height*&#60;ft_qtde&#62;;&#13;&#10; //   Page1.PaperHeight := Page1.PaperHeight*&#60;ft_qtde&#62;;      &#13;&#10;end;&#13;&#10;&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="PCP_DB_C_ETQ_1_C_MSG" DataSetName="PCP_DB_C_ETQ_1_C_MSG"/>
+  </Datasets>
+  <Variables>
+    <item Name=" Externo"/>
+    <item Name="ft_qtde"/>
+  </Variables>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="99" PaperHeight="33" PaperSize="256" LeftMargin="4" RightMargin="4" TopMargin="0" BottomMargin="2" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="" OnBeforePrint="Page1OnBeforePrint">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="112,11430927" Left="0" Top="18,89765" Width="343,93723" OnBeforePrint="MasterData1OnBeforePrint" ColumnWidth="0" ColumnGap="0" DataSet="PCP_DB_C_ETQ_1_C_MSG" DataSetName="PCP_DB_C_ETQ_1_C_MSG" RowCount="0">
+      <TfrxMemoView Name="Memo10" Left="5,08458741" Top="74,07110182" Width="269,23617132" Height="31,9452176" DataSet="PCP_DB_C_ETQ_1_C_MSG" DataSetName="PCP_DB_C_ETQ_1_C_MSG" Font.Charset="1" Font.Color="0" Font.Height="-27" Font.Name="Arial Narrow" Font.Style="1" ParentFont="False" Text="[PCP_DB_C_ETQ_1_C_MSG.&#34;medidas&#34;]"/>
+      <TfrxMemoView Name="Memo14" Left="5,08458741" Top="43,87311889" Width="270,4424862" Height="29,68446099" DataSet="PCP_DB_C_ETQ_1_C_MSG" DataSetName="PCP_DB_C_ETQ_1_C_MSG" Font.Charset="1" Font.Color="0" Font.Height="-27" Font.Name="Arial Narrow" Font.Style="1" ParentFont="False" Text="[PCP_DB_C_ETQ_1_C_MSG.&#34;etiq_modelo&#34;]"/>
+      <TfrxBarCodeView Name="BarCode1" Left="290,56933296" Top="12,22046998" Width="46" Height="46" BarType="bcCode128" Expression="&#60;PCP_DB_C_ETQ_1_C_MSG.&#34;CODIGO_BARRA&#34;&#62;" Rotation="270" Text="0" WideBarRatio="2" Zoom="1" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0"/>
+      <TfrxMemoView Name="Memo1" Left="2,3721226" Top="4,14113926" Width="112,66470842" Height="22,12540099" DataSet="PCP_DB_C_ETQ_1_C_MSG" DataSetName="PCP_DB_C_ETQ_1_C_MSG" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial Narrow" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="Colchões Globo"/>
+      <TfrxMemoView Name="PCP_DB_C_ETQ_1_C_MSGdata_fabricacao" Left="6,89765" Top="25,45671" Width="245,66945" Height="18,89765" DataSet="PCP_DB_C_ETQ_1_C_MSG" DataSetName="PCP_DB_C_ETQ_1_C_MSG" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Fabricação: [PCP_DB_C_ETQ_1_C_MSG.&#34;data_fabricacao&#34;]"/>
+    </TfrxMasterData>
+  </TfrxReportPage>
+</TfrxReport>
