@@ -346,6 +346,7 @@ end;
 procedure TPCP_FM_C_REG.txtBuscaItemExit(Sender: TObject);
 var
   id_item, desc, und, id_busca_item : string;
+  tipo, int_nomeite, id_grupo, int_nomegru: string;
 begin
   inherited;
 
@@ -409,6 +410,30 @@ begin
   dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_undvenda').Text :=
        dmGeral.BUS_CD_C_ITE.FieldByName('id_und_venda').AsString;
 
+
+  tipo         := dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').AsString;
+  id_item      := dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString;
+  int_nomeite  := dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString;
+
+  dmSgq.PCP_CD_C_REG_ITE.cancel;
+
+  if ( dmSgq.PCP_CD_C_REG_ITE.Locate('tipo;id_item',VarArrayOf([tipo,id_item]),[]) ) then
+      begin
+        ShowMessage('Esse registro já foi lançado!');
+        dmSgq.PCP_CD_C_REG_ITE.insert;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').AsString     := tipo;
+        txtBuscaItem.Text := '';
+        pnItens.Enabled  := true;
+        txtBuscaItem.SetFocus;
+      end
+  else
+      begin
+        pnItens.Enabled  := true;
+        dmSgq.PCP_CD_C_REG_ITE.insert;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').AsString     := tipo;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString  := id_item;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString := int_nomeite;
+      end;
   {try
    pnItens.onExit := nil;
 
@@ -436,6 +461,7 @@ end;
 procedure TPCP_FM_C_REG.txtCodGrupoExit(Sender: TObject);
 var
   id_item, desc, und, id_busca_item : string;
+  tipo, int_nomeite, id_grupo, int_nomegru: string;
 begin
   inherited;
 
@@ -491,14 +517,48 @@ begin
   dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomegru').Text  :=
        dmGeral.BUS_CD_C_GRU.FieldByName('DESCRICAO').AsString;
 
+  tipo     := dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').AsString;
+  id_item  := dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString;
+  int_nomeite  := dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString;
+  id_grupo := dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_grupo').AsString;
+  int_nomegru := dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomegru').AsString;
+
+  dmSgq.PCP_CD_C_REG_ITE.cancel;
+
+  if ( dmSgq.PCP_CD_C_REG_ITE.Locate('tipo;id_grupo',VarArrayOf([tipo,id_grupo]),[]) ) then
+      begin
+        ShowMessage('Esse registro já foi lançado!');
+        dmSgq.PCP_CD_C_REG_ITE.insert;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').AsString     := tipo;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString  := id_item;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString := int_nomeite;
+        txtCodGrupo.Text := '';
+        pnItens.Enabled  := true;
+        txtCodGrupo.SetFocus;
+      end
+  else
+      begin
+        pnItens.Enabled  := true;
+        dmSgq.PCP_CD_C_REG_ITE.insert;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').AsString     := tipo;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString  := id_item;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString := int_nomeite;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_grupo').AsString := id_grupo;
+        dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomegru').AsString := int_nomegru;
+      end;
+
 end;
 
 procedure TPCP_FM_C_REG.txtPerDescontoExit(Sender: TObject);
 var
   tipo, id_item, int_nomeite, id_grupo, int_nomegru: string;
   per_desconto: Currency;
+  regExiste: boolean;
 begin
   inherited;
+
+  regExiste := false;
+
   if btnCancelar.Focused or
      btnGrava.Focused  then
      begin
@@ -535,27 +595,34 @@ begin
   per_desconto := dmSgq.PCP_CD_C_REG_ITE.FieldByName('per_desconto').AsCurrency;
 
   dmSgq.PCP_CD_C_REG_ITE.cancel;
+
   if tipo = '0' then
      begin
         if ( dmSgq.PCP_CD_C_REG_ITE.Locate('tipo;id_grupo',VarArrayOf([tipo,id_grupo]),[]) ) then
             begin
-              ShowMessage('Operação cancelada pois esse registro já foi lançado!');
-              btn_Add_Itens.SetFocus;
-              exit;
-            end
+              regExiste := true;
+              //ShowMessage('Operação cancelada pois esse registro já foi lançado!');
+              //btn_Add_Itens.SetFocus;
+              //exit;
+            end;
      end;
 
-  if tipo = '1' then
+   if tipo = '1' then
      begin
        if ( dmSgq.PCP_CD_C_REG_ITE.Locate('tipo;id_item',VarArrayOf([tipo,id_item]),[]) ) then
           begin
-            ShowMessage('Operação cancelada pois esse registro já foi lançado!');
-            btn_Add_Itens.SetFocus;
-            exit;
+            regExiste := true;
+            //ShowMessage('Operação cancelada pois esse registro já foi lançado!');
+            //btn_Add_Itens.SetFocus;
+            //exit;
           end
      end;
 
-  dmSgq.PCP_CD_C_REG_ITE.Insert;
+  if regExiste then
+     dmSgq.PCP_CD_C_REG_ITE.edit
+  else
+     dmSgq.PCP_CD_C_REG_ITE.Insert;
+
   dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').AsString     := tipo;
   dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString  := id_item;
   dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString := int_nomeite;
