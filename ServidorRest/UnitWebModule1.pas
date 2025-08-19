@@ -98,8 +98,20 @@ end;
 procedure TWebModule1.WebModuleBeforeDispatch(Sender: TObject;
   Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
 begin
+  // Maxsuel Victor, 19/08/2025 - Para atender solicitação da IA da Hostinger Horizons
+  Response.SetCustomHeader('Access-Control-Allow-Origin', '*');
+  Response.SetCustomHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  Response.SetCustomHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // ---------------------------------------------------------------------------
+
+  if Request.Method = 'OPTIONS' then
+     begin
+       Response.StatusCode := 200;
+       Handled := True;
+     end;
+
   if FServerFunctionInvokerAction <> nil then
-    FServerFunctionInvokerAction.Enabled := AllowServerFunctionInvoker;
+     FServerFunctionInvokerAction.Enabled := AllowServerFunctionInvoker;
 end;
 
 function TWebModule1.AllowServerFunctionInvoker: Boolean;
@@ -127,6 +139,13 @@ end;
 procedure TWebModule1.WebModuleCreate(Sender: TObject);
 begin
   FServerFunctionInvokerAction := ActionByName('ServerFunctionInvokerAction');
+
+   if DSServer1.Started then
+  begin
+    DSHTTPWebDispatcher1.DbxContext := DSServer1.DbxContext;
+    DSHTTPWebDispatcher1.Start;
+  end;
+
 end;
 
 initialization
