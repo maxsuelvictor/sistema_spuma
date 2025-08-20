@@ -42,10 +42,10 @@ object Form1: TForm1
   object EditPort: TEdit
     Left = 24
     Top = 67
-    Width = 121
+    Width = 57
     Height = 21
     TabOrder = 2
-    Text = '8080'
+    Text = '214'
   end
   object ButtonOpenBrowser: TButton
     Left = 24

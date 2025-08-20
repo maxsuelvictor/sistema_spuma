@@ -13,6 +13,8 @@ type
     ConexaoNW: TSQLConnection;
     CAD_SQ_C_COR: TSQLDataSet;
     CAD_DP_C_COR: TDataSetProvider;
+    PCP_SQ_C_REG_E_ITE: TSQLDataSet;
+    PCP_DP_C_REG_E_ITE: TDataSetProvider;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -24,6 +26,13 @@ type
 
     function updateEnviarCores(const Dados: TJSONArray): TJSONObject;
     function BuscarCores: TStream;
+
+
+    function updateEnviarRegioes(const Dados: TJSONArray): TJSONObject;
+    function BuscarRegioes: TStream;
+
+
+
   end;
 {$METHODINFO OFF}
 
@@ -77,9 +86,9 @@ var
   Lista:  TJsonArray;
 begin
 
-  { Get da Tabela: CAD_TB_C_CUL - Cultura
+  { Get da Tabela: CAD_TB_C_COR - Cores
     Criado por: Maxsuel Victor
-    Data: 13/01/2017
+    Data: 20/08/2017
   }
   try
     CAD_CD_C_COR := TClientDataSet.Create(nil);
@@ -90,7 +99,7 @@ begin
     CAD_SQ_C_COR.CommandText := ' SELECT * FROM CAD_TB_C_COR ';
     CAD_CD_C_COR.Open;
 
-    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores inicio sincronizada!');
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores iniciada!');
 
     jsObj := TJsonObject.Create();
     Lista := TJsonArray.Create();
@@ -103,20 +112,105 @@ begin
           jso.AddPair(TJsonPair.Create('descricao',CAD_CD_C_COR.FieldByName('descricao').AsString));
           Lista.AddElement(jso);
           CAD_CD_C_COR.Next;
-          unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores inicio sincronizada pegando dados!');
+          //unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores inicio sincronizada pegando dados!');
        end;
 
     GetInvocationMetadata().ResponseCode := 200;
     GetInvocationMetadata().ResponseContentType :=  'application/json; charset=utf-8';
     result :=  TStringStream.Create( utf8encode(Lista.ToString));
 
-    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores sincronizada!');
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores finalizada!');
   finally
     FreeAndNil(Lista);
     CAD_CD_C_COR.close;
     FreeAndNil(CAD_CD_C_COR);
   end;
 end;
+
+
+function TServidorMetodos.BuscarRegioes: TStream;
+var
+  cds: TClientDataSet;
+  ListaRegioes, ListaFilhos: TJsonArray;
+  ObjRegiao, ObjFilho: TJsonObject;
+  id_regiao_atual, id_regiao_anterior: string;
+begin
+  try
+    cds := TClientDataSet.Create(nil);
+    cds.SetProvider(PCP_DP_C_REG_E_ITE);
+
+    // Consulta com JOIN
+    PCP_SQ_C_REG_E_ITE.Close;
+    PCP_SQ_C_REG_E_ITE.CommandText :=
+      'SELECT R.id_regiao, R.descricao, R.id_rota, R.desc_perc, R.unifica_desc_reg, ' +
+      'I.tipo, I.id_grupo, I.id_item, I.per_desconto ' +
+      'FROM PCP_TB_C_REG R ' +
+      'LEFT JOIN PCP_TB_C_REG_ITE I ON R.id_regiao = I.id_regiao ' +
+      'ORDER BY R.id_regiao';
+    cds.Open;
+
+    ListaRegioes := TJsonArray.Create;
+    id_regiao_anterior := '';
+
+    while not cds.Eof do
+    begin
+      id_regiao_atual := cds.FieldByName('id_regiao').AsString;
+
+      // Se mudou de região, cria novo objeto pai
+      if id_regiao_atual <> id_regiao_anterior then
+      begin
+        if Assigned(ObjRegiao) then
+        begin
+          ObjRegiao.AddPair('itens', ListaFilhos);
+          ListaRegioes.AddElement(ObjRegiao);
+        end;
+
+        ObjRegiao := TJsonObject.Create;
+        ListaFilhos := TJsonArray.Create;
+
+        ObjRegiao.AddPair('id_regiao', id_regiao_atual);
+        ObjRegiao.AddPair('descricao', cds.FieldByName('descricao').AsString);
+        ObjRegiao.AddPair('id_rota', cds.FieldByName('id_rota').AsString);
+        ObjRegiao.AddPair('desc_perc', cds.FieldByName('desc_perc').AsString);
+        ObjRegiao.AddPair('unifica_desc_reg', cds.FieldByName('unifica_desc_reg').AsString);
+
+        id_regiao_anterior := id_regiao_atual;
+      end;
+
+      // Adiciona filho se existir
+      if not cds.FieldByName('id_item').IsNull then
+      begin
+        ObjFilho := TJsonObject.Create;
+        ObjFilho.AddPair('tipo', cds.FieldByName('tipo').AsString);
+        ObjFilho.AddPair('id_grupo', cds.FieldByName('id_grupo').AsString);
+        ObjFilho.AddPair('id_item', cds.FieldByName('id_item').AsString);
+        ObjFilho.AddPair('per_desconto', cds.FieldByName('per_desconto').AsString);
+        ListaFilhos.AddElement(ObjFilho);
+      end;
+
+      cds.Next;
+    end;
+
+    // Adiciona o último grupo
+    if Assigned(ObjRegiao) then
+    begin
+      ObjRegiao.AddPair('itens', ListaFilhos);
+      ListaRegioes.AddElement(ObjRegiao);
+    end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+    Result := TStringStream.Create(UTF8Encode(ListaRegioes.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das regiões com JOIN finalizada!');
+  finally
+    FreeAndNil(ListaRegioes);
+    cds.Close;
+    FreeAndNil(cds);
+  end;
+end;
+
+
 
 
 
@@ -224,6 +318,12 @@ begin
   end;
 
   Result.AddPair('resultado', ListaResultado);
+end;
+
+function TServidorMetodos.updateEnviarRegioes(
+  const Dados: TJSONArray): TJSONObject;
+begin
+
 end;
 
 end.

@@ -47,4 +47,21 @@ object ServidorMetodos: TServidorMetodos
     Left = 176
     Top = 96
   end
+  object PCP_SQ_C_REG_E_ITE: TSQLDataSet
+    CommandText = 
+      'SELECT R.id_regiao, R.descricao, R.id_rota, R.desc_perc, R.unifi' +
+      'ca_desc_reg, '#13#10'   I.tipo, I.id_grupo, I.id_item, I.per_desconto ' +
+      #13#10'FROM PCP_TB_C_REG R '#13#10'      LEFT JOIN PCP_TB_C_REG_ITE I ON R.' +
+      'id_regiao = I.id_regiao '#13#10'      ORDER BY R.id_regiao'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConexaoNW
+    Left = 64
+    Top = 160
+  end
+  object PCP_DP_C_REG_E_ITE: TDataSetProvider
+    DataSet = PCP_SQ_C_REG_E_ITE
+    Left = 176
+    Top = 160
+  end
 end
