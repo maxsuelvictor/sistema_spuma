@@ -19,6 +19,12 @@ type
     CAD_DP_C_GRU: TDataSetProvider;
     CAD_SQ_C_GRU_COR: TSQLDataSet;
     CAD_DP_C_GRU_COR: TDataSetProvider;
+    CAD_SQ_C_CID: TSQLDataSet;
+    CAD_DP_C_CID: TDataSetProvider;
+    CAD_SQ_C_CLI: TSQLDataSet;
+    CAD_DP_C_CLI: TDataSetProvider;
+    CAD_DP_C_ITE: TDataSetProvider;
+    CAD_SQ_C_ITE: TSQLDataSet;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -38,8 +44,17 @@ type
     function BuscarGrupoEstoque: TStream;
 
     function BuscarGrupoEstoqueCor: TStream;
+
+    function BuscarCidades: TStream;
+
+    function BuscarClientesPorVendedor: TStream;
+
+    function BuscarItens: TStream;
     // casa
     //http://177.71.92.68:214/datasnap/rest/TServidorMetodos/BuscarRegioes
+
+    // Fábrica
+    //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarRegioes
 
   end;
 {$METHODINFO OFF}
@@ -51,6 +66,188 @@ implementation
 
 
 uses System.StrUtils, UnitFormPrincipal;
+
+
+function TServidorMetodos.BuscarCidades: TStream;
+var
+  jsobj, jso : TJsonObject;
+  jsa : TJsonArray;
+  jsp : TJsonPair;
+  texto: String;
+
+  CAD_CD_C_CID: TClientDataSet;
+
+  Lista:  TJsonArray;
+begin
+
+  { Get da Tabela: CAD_TB_C_CID - Cidades
+    Criado por: Maxsuel Victor
+    Data: 21/08/2025
+  }
+  try
+    CAD_CD_C_CID := TClientDataSet.Create(nil);
+    CAD_CD_C_CID.SetProvider(CAD_DP_C_CID);
+
+    CAD_SQ_C_CID.close;
+    CAD_SQ_C_CID.CommandText := '';
+    CAD_SQ_C_CID.CommandText := ' SELECT * FROM CAD_TB_C_CID ';
+    CAD_CD_C_CID.Open;
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cidades iniciada!');
+
+    jsObj := TJsonObject.Create();
+    Lista := TJsonArray.Create();
+
+    while not CAD_CD_C_CID.Eof  do
+       begin
+          jso := TJsonObject.Create();
+
+          jso.AddPair(TJsonPair.Create('id_cidade',CAD_CD_C_CID.FieldByName('id_cidade').AsString));
+          jso.AddPair(TJsonPair.Create('nome',CAD_CD_C_CID.FieldByName('nome').AsString));
+          jso.AddPair(TJsonPair.Create('uf',CAD_CD_C_CID.FieldByName('uf').AsString));
+          jso.AddPair(TJsonPair.Create('cep',CAD_CD_C_CID.FieldByName('cep').AsString));
+          Lista.AddElement(jso);
+          CAD_CD_C_CID.Next;
+          //unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores inicio sincronizada pegando dados!');
+       end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType :=  'application/json; charset=utf-8';
+    result :=  TStringStream.Create( utf8encode(Lista.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cidades finalizada!');
+  finally
+    FreeAndNil(Lista);
+    CAD_CD_C_CID.close;
+    FreeAndNil(CAD_CD_C_CID);
+  end;
+end;
+
+function TServidorMetodos.BuscarClientesPorVendedor: TStream;
+var
+  jsobj, jso: TJsonObject;
+  jsa: TJsonArray;
+  jsp: TJsonPair;
+  texto: String;
+  id_vendedor: string;
+  CAD_CD_C_CLI: TClientDataSet;
+  Lista: TJsonArray;
+  erroJson: TJSONObject;
+begin
+
+  //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarClientes?id_vendedor=
+
+  { Get da Tabela: CAD_TB_C_CLI - Clientes
+    Criado por: Maxsuel Victor
+    Data: 21/08/2025
+  }
+
+
+  Result := nil;
+  Lista := nil;
+  CAD_CD_C_CLI := nil;
+
+  try
+    // Verifica se o parâmetro existe
+    if GetInvocationMetadata().QueryParams.IndexOfName('id_vendedor') = -1 then
+      id_vendedor := ''
+    else
+      id_vendedor := Trim(GetInvocationMetadata().QueryParams.Values['id_vendedor']);
+
+    // Validação do parâmetro
+    if id_vendedor = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro id_vendedor está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
+    // Inicializa componentes
+    CAD_CD_C_CLI := TClientDataSet.Create(nil);
+    CAD_CD_C_CLI.SetProvider(CAD_DP_C_CID);
+
+    CAD_SQ_C_CID.Close;
+    CAD_SQ_C_CID.CommandText := Format(
+      'SELECT id_cliente, nome, id_vendedor, doc_cnpj_cpf, doc_ie_identidade, ativo, sexo, endereco, end_complemento, ' +
+      'cep, numero, tel_fixo, tel_movel, doc_ip, bairro, id_cidade, dta_cadastro, dta_nascimento, id_regiao, apelido, ' +
+      'contribuinte, tipo_cliente, doc_rg_orgao FROM CAD_TB_C_CLI WHERE id_vendedor = %s',
+      [QuotedStr(id_vendedor)]
+    );
+    CAD_CD_C_CLI.Open;
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das clientes iniciada!');
+
+    Lista := TJsonArray.Create;
+
+    while not CAD_CD_C_CLI.Eof do
+    begin
+      jso := TJsonObject.Create;
+      jso.AddPair('id_cliente', CAD_CD_C_CLI.FieldByName('id_cliente').AsString);
+      jso.AddPair('nome', CAD_CD_C_CLI.FieldByName('nome').AsString);
+      jso.AddPair('apelido', CAD_CD_C_CLI.FieldByName('apelido').AsString);
+      jso.AddPair('id_vendedor', CAD_CD_C_CLI.FieldByName('id_vendedor').AsString);
+      jso.AddPair('doc_cnpj_cpf', CAD_CD_C_CLI.FieldByName('doc_cnpj_cpf').AsString);
+      jso.AddPair('doc_ie_identidade', CAD_CD_C_CLI.FieldByName('doc_ie_identidade').AsString);
+      jso.AddPair('ativo', CAD_CD_C_CLI.FieldByName('ativo').AsString);
+      jso.AddPair('sexo', CAD_CD_C_CLI.FieldByName('sexo').AsString);
+      jso.AddPair('endereco', CAD_CD_C_CLI.FieldByName('endereco').AsString);
+      jso.AddPair('end_complemento', CAD_CD_C_CLI.FieldByName('end_complemento').AsString);
+      jso.AddPair('cep', CAD_CD_C_CLI.FieldByName('cep').AsString);
+      jso.AddPair('numero', CAD_CD_C_CLI.FieldByName('numero').AsString);
+      jso.AddPair('tel_fixo', CAD_CD_C_CLI.FieldByName('tel_fixo').AsString);
+      jso.AddPair('tel_movel', CAD_CD_C_CLI.FieldByName('tel_movel').AsString);
+      jso.AddPair('doc_ip', CAD_CD_C_CLI.FieldByName('doc_ip').AsString);
+      jso.AddPair('bairro', CAD_CD_C_CLI.FieldByName('bairro').AsString);
+      jso.AddPair('id_cidade', CAD_CD_C_CLI.FieldByName('id_cidade').AsString);
+      jso.AddPair('dta_cadastro', CAD_CD_C_CLI.FieldByName('dta_cadastro').AsString);
+      jso.AddPair('dta_nascimento', CAD_CD_C_CLI.FieldByName('dta_nascimento').AsString);
+      jso.AddPair('id_regiao', CAD_CD_C_CLI.FieldByName('id_regiao').AsString);
+      jso.AddPair('contribuinte', CAD_CD_C_CLI.FieldByName('contribuinte').AsString);
+      jso.AddPair('tipo_cliente', CAD_CD_C_CLI.FieldByName('tipo_cliente').AsString);
+      jso.AddPair('doc_rg_orgao', CAD_CD_C_CLI.FieldByName('doc_rg_orgao').AsString);
+
+      Lista.AddElement(jso);
+      CAD_CD_C_CLI.Next;
+    end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+    Result := TStringStream.Create(UTF8Encode(Lista.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das clientes finalizada!');
+  except
+    on E: Exception do
+    begin
+      GetInvocationMetadata().ResponseCode := 500;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+    end;
+  end;
+
+  // Liberação de recursos
+  FreeAndNil(Lista);
+  if Assigned(CAD_CD_C_CLI) then
+  begin
+    CAD_CD_C_CLI.Close;
+    FreeAndNil(CAD_CD_C_CLI);
+  end;
+end;
 
 
 function TServidorMetodos.BuscarCores: TStream;
@@ -67,7 +264,7 @@ begin
 
   { Get da Tabela: CAD_TB_C_COR - Cores
     Criado por: Maxsuel Victor
-    Data: 20/08/2017
+    Data: 20/08/2025
   }
   try
     CAD_CD_C_COR := TClientDataSet.Create(nil);
@@ -299,88 +496,86 @@ begin
   end;
 end;
 
-{function TServidorMetodos.BuscarGrupoEstoqueComCores: TStream;
+function TServidorMetodos.BuscarItens: TStream;
 var
-  cds: TClientDataSet;
-  ListaGrupos, ListaFilhos: TJsonArray;
-  ObjGrupo, ObjFilho: TJsonObject;
-  id_grupo_atual, id_grupo_anterior: string;
+  jsobj, jso: TJsonObject;
+  jsa: TJsonArray;
+  jsp: TJsonPair;
+  texto: String;
+  CAD_CD_C_ITE: TClientDataSet;
+  Lista: TJsonArray;
+  erroJson: TJSONObject;
 begin
+
+  { Get da Tabela: CAD_TB_C_ITE - Itens
+    Criado por: Maxsuel Victor
+    Data: 21/08/2025
+  }
+
   try
-    cds := TClientDataSet.Create(nil);
-    cds.SetProvider(CAD_DP_C_GRU_E_GRU_COR);
+    // Inicializa componentes
+    CAD_CD_C_ITE := TClientDataSet.Create(nil);
+    CAD_CD_C_ITE.SetProvider(CAD_DP_C_ITE);
 
-    // Consulta com JOIN
-    CAD_SQ_C_GRU_E_GRU_COR.Close;
-    CAD_SQ_C_GRU_E_GRU_COR.CommandText :=
-     ' SELECT G.id_grupo, G.descricao,   COALESCE(C.id_cor,0) as id_cor ' +
-     ' FROM CAD_TB_C_GRU G                        ' +
-     ' LEFT OUTER JOIN CAD_TB_C_GRU_COR C ON G.id_grupo = C.id_grupo ' +
-     ' ORDER BY G.id_grupo';
-    cds.Open;
+    CAD_SQ_C_ITE.Close;
+    CAD_SQ_C_ITE.CommandText := 'select ' +
+           ' id_item ,  descricao , fantasia,  id_grupo ,  ativo ,  preco_avista ,  preco_aprazo ,  id_ncm ,  sgq_personalizado ,  tipo_produto , ' +
+           ' id_und_venda  ' +
+           ' from cad_tb_c_ite where ativo = true ';
+    CAD_CD_C_ITE.Open;
 
-    ListaGrupos := TJsonArray.Create;
-    ListaFilhos := TJsonArray.Create;
-    id_grupo_anterior := '';
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos Itens iniciada!');
 
-    while not cds.Eof do
+    jsObj := TJsonObject.Create();
+    Lista := TJsonArray.Create;
+
+    while not CAD_CD_C_ITE.Eof do
     begin
-      id_grupo_atual := cds.FieldByName('id_grupo').AsString;
+      jso := TJsonObject.Create;
+      jso.AddPair('id_item', CAD_CD_C_ITE.FieldByName('id_item').AsString);
+      jso.AddPair('descricao', CAD_CD_C_ITE.FieldByName('descricao').AsString);
+      jso.AddPair('fantasia', CAD_CD_C_ITE.FieldByName('fantasia').AsString);
+      jso.AddPair('ativo', CAD_CD_C_ITE.FieldByName('ativo').AsString);
+      jso.AddPair('preco_avista', CAD_CD_C_ITE.FieldByName('preco_avista').AsString);
+      jso.AddPair('preco_aprazo', CAD_CD_C_ITE.FieldByName('preco_aprazo').AsString);
+      jso.AddPair('id_ncm', CAD_CD_C_ITE.FieldByName('id_ncm').AsString);
+      jso.AddPair('sgq_personalizado', CAD_CD_C_ITE.FieldByName('sgq_personalizado').AsString);
+      jso.AddPair('tipo_produto', CAD_CD_C_ITE.FieldByName('tipo_produto').AsString);
+      jso.AddPair('id_und_venda', CAD_CD_C_ITE.FieldByName('id_und_venda').AsString);
 
-      // Se mudou de grupo, cria novo objeto pai
-      if id_grupo_atual <> id_grupo_anterior then
-      begin
-        if Assigned(ObjGrupo) then
-        begin
-          unitformPrincipal.Form1.mmTexto.Lines.Add('Get das grupo parte 1');
-          ObjGrupo.AddPair('cores', ListaFilhos);
-
-         unitformPrincipal.Form1.mmTexto.Lines.Add('Get das grupo parte 2');
-          ListaGrupos.AddElement(ObjGrupo);
-        end;
-        unitformPrincipal.Form1.mmTexto.Lines.Add('Get das grupo parte 0');
-        ObjGrupo := TJsonObject.Create;
-        ListaFilhos := TJsonArray.Create;
-
-        ObjGrupo.AddPair('id_grupo', id_grupo_atual);
-        ObjGrupo.AddPair('descricao', cds.FieldByName('descricao').AsString);
-        id_grupo_anterior := id_grupo_atual;
-      end;
-
-      // Adiciona filho se existir
-      if not cds.FieldByName('id_item').IsNull then
-      begin
-        ObjFilho := TJsonObject.Create;
-        ObjFilho.AddPair('id_grupo', cds.FieldByName('id_grupo').AsString);
-        ObjFilho.AddPair('id_cor', cds.FieldByName('id_cor').AsString);
-        ListaFilhos.AddElement(ObjFilho);
-      end;
-
-      cds.Next;
-    end;
-
-    // Adiciona o último grupo
-    if Assigned(ObjGrupo) then
-    begin
-      ObjGrupo.AddPair('cores', ListaFilhos);
-      ListaGrupos.AddElement(ObjGrupo);
+      Lista.AddElement(jso);
+      CAD_CD_C_ITE.Next;
     end;
 
     GetInvocationMetadata().ResponseCode := 200;
     GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
-    Result := TStringStream.Create(UTF8Encode(ListaGrupos.ToString));
+    Result := TStringStream.Create(UTF8Encode(Lista.ToString));
 
-    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos grupos com cores finalizada!');
-  finally
-    FreeAndNil(ListaGrupos);
-    cds.Close;
-    FreeAndNil(cds);
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos Itens finalizada!');
+  except
+    on E: Exception do
+    begin
+      GetInvocationMetadata().ResponseCode := 500;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+    end;
   end;
-end; }
 
-
-
-
+  // Liberação de recursos
+  if Assigned(CAD_CD_C_ITE) then
+  begin
+    FreeAndNil(Lista);
+    CAD_CD_C_ITE.Close;
+    FreeAndNil(CAD_CD_C_ITE);
+  end;
+end;
 
 procedure TServidorMetodos.DataModuleCreate(Sender: TObject);
 var
