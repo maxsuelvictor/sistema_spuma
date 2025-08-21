@@ -25,9 +25,9 @@ object ServidorMetodos: TServidorMetodos
       'UseUnicode=True'
       'VendorLib=dbexppgsql40.dll'
       'BlobSize=-1'
-      'HostName=192.168.254.10'
+      'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftData'
+      'Database=enSoftGloboP300725'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
@@ -44,7 +44,7 @@ object ServidorMetodos: TServidorMetodos
   end
   object CAD_DP_C_COR: TDataSetProvider
     DataSet = CAD_SQ_C_COR
-    Left = 176
+    Left = 248
     Top = 96
   end
   object PCP_SQ_C_REG_E_ITE: TSQLDataSet
@@ -61,7 +61,33 @@ object ServidorMetodos: TServidorMetodos
   end
   object PCP_DP_C_REG_E_ITE: TDataSetProvider
     DataSet = PCP_SQ_C_REG_E_ITE
-    Left = 176
+    Left = 248
     Top = 160
+  end
+  object CAD_SQ_C_GRU: TSQLDataSet
+    CommandText = 'SELECT * FROM CAD_TB_C_GRU'#13#10'WHERE  1= 2'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConexaoNW
+    Left = 64
+    Top = 232
+  end
+  object CAD_DP_C_GRU: TDataSetProvider
+    DataSet = CAD_SQ_C_GRU
+    Left = 248
+    Top = 232
+  end
+  object CAD_SQ_C_GRU_COR: TSQLDataSet
+    CommandText = 'SELECT * FROM CAD_TB_C_GRU_COR'#13#10'WHERE  1= 2'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConexaoNW
+    Left = 64
+    Top = 304
+  end
+  object CAD_DP_C_GRU_COR: TDataSetProvider
+    DataSet = CAD_SQ_C_GRU_COR
+    Left = 248
+    Top = 304
   end
 end

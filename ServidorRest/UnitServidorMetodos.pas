@@ -15,6 +15,10 @@ type
     CAD_DP_C_COR: TDataSetProvider;
     PCP_SQ_C_REG_E_ITE: TSQLDataSet;
     PCP_DP_C_REG_E_ITE: TDataSetProvider;
+    CAD_SQ_C_GRU: TSQLDataSet;
+    CAD_DP_C_GRU: TDataSetProvider;
+    CAD_SQ_C_GRU_COR: TSQLDataSet;
+    CAD_DP_C_GRU_COR: TDataSetProvider;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -31,7 +35,11 @@ type
     function updateEnviarRegioes(const Dados: TJSONArray): TJSONObject;
     function BuscarRegioes: TStream;
 
+    function BuscarGrupoEstoque: TStream;
 
+    function BuscarGrupoEstoqueCor: TStream;
+    // casa
+    //http://177.71.92.68:214/datasnap/rest/TServidorMetodos/BuscarRegioes
 
   end;
 {$METHODINFO OFF}
@@ -44,35 +52,6 @@ implementation
 
 uses System.StrUtils, UnitFormPrincipal;
 
-{function TServidorMetodos.BuscarFrutas: TJSONObject;
-var
-  Resultado: TJSONObject;
-  ListaFrutas: TJSONArray;
-  Fruta1, Fruta2: TJSONObject;
-begin
-  Resultado := TJSONObject.Create;
-  ListaFrutas := TJSONArray.Create;
-
-  // Fruta 1
-  Fruta1 := TJSONObject.Create;
-  Fruta1.AddPair('nome', 'Maçã');
-  Fruta1.AddPair('cor', 'Vermelha');
-  Fruta1.AddPair('quantidade', TJSONNumber.Create(10));
-  Fruta1.AddPair('preco', TJSONNumber.Create(2.5));
-  ListaFrutas.AddElement(Fruta1);
-
-  // Fruta 2
-  Fruta2 := TJSONObject.Create;
-  Fruta2.AddPair('nome', 'Banana');
-  Fruta2.AddPair('cor', 'Amarela');
-  Fruta2.AddPair('quantidade', TJSONNumber.Create(6));
-  Fruta2.AddPair('preco', TJSONNumber.Create(1.8));
-  ListaFrutas.AddElement(Fruta2);
-
-  // Adiciona a lista ao resultado final
-  Resultado.AddPair('frutas', ListaFrutas);
-  Result := Resultado;
-end;                                                }
 
 function TServidorMetodos.BuscarCores: TStream;
 var
@@ -211,8 +190,193 @@ begin
 end;
 
 
+function TServidorMetodos.BuscarGrupoEstoque: TStream;
+var
+  jsobj, jso : TJsonObject;
+  jsa : TJsonArray;
+  jsp : TJsonPair;
+  texto: String;
+
+  CAD_CD_C_GRU: TClientDataSet;
+
+  Lista:  TJsonArray;
+begin
+
+  { Get da Tabela: CAD_TB_C_GRU - Grupos
+    Criado por: Maxsuel Victor
+    Data: 20/08/2017
+  }
+  try
+    CAD_CD_C_GRU := TClientDataSet.Create(nil);
+    CAD_CD_C_GRU.SetProvider(CAD_DP_C_GRU);
+
+    CAD_SQ_C_GRU.close;
+    CAD_SQ_C_GRU.CommandText := '';
+    CAD_SQ_C_GRU.CommandText := ' SELECT * FROM CAD_TB_C_GRU ';
+    CAD_CD_C_GRU.Open;
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos Grupos iniciado!');
+
+    jsObj := TJsonObject.Create();
+    Lista := TJsonArray.Create();
+
+    while not CAD_CD_C_GRU.Eof  do
+       begin
+          jso := TJsonObject.Create();
+
+          jso.AddPair(TJsonPair.Create('id_grupo',CAD_CD_C_GRU.FieldByName('id_grupo').AsString));
+          jso.AddPair(TJsonPair.Create('descricao',CAD_CD_C_GRU.FieldByName('descricao').AsString));
+          Lista.AddElement(jso);
+          CAD_CD_C_GRU.Next;
+          //unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores inicio sincronizada pegando dados!');
+       end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType :=  'application/json; charset=utf-8';
+    result :=  TStringStream.Create( utf8encode(Lista.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos Grupos finalizada!');
+  finally
+    FreeAndNil(Lista);
+    CAD_CD_C_GRU.close;
+    FreeAndNil(CAD_CD_C_GRU);
+  end;
+end;
 
 
+
+
+function TServidorMetodos.BuscarGrupoEstoqueCor: TStream;
+var
+  jsobj, jso : TJsonObject;
+  jsa : TJsonArray;
+  jsp : TJsonPair;
+  texto: String;
+
+  CAD_CD_C_GRU_COR: TClientDataSet;
+
+  Lista:  TJsonArray;
+begin
+
+  { Get da Tabela: CAD_TB_C_GRU - Grupos
+    Criado por: Maxsuel Victor
+    Data: 20/08/2017
+  }
+  try
+    CAD_CD_C_GRU_COR := TClientDataSet.Create(nil);
+    CAD_CD_C_GRU_COR.SetProvider(CAD_DP_C_GRU_COR);
+
+    CAD_SQ_C_GRU_COR.close;
+    CAD_SQ_C_GRU_COR.CommandText := '';
+    CAD_SQ_C_GRU_COR.CommandText := ' SELECT * FROM CAD_TB_C_GRU_COR ';
+    CAD_CD_C_GRU_COR.Open;
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos Cores dos Grupos iniciado!');
+
+    jsObj := TJsonObject.Create();
+    Lista := TJsonArray.Create();
+
+    while not CAD_CD_C_GRU_COR.Eof  do
+       begin
+          jso := TJsonObject.Create();
+
+          jso.AddPair(TJsonPair.Create('id_grupo',CAD_CD_C_GRU_COR.FieldByName('id_grupo').AsString));
+          jso.AddPair(TJsonPair.Create('id_cor',CAD_CD_C_GRU_COR.FieldByName('id_cor').AsString));
+          Lista.AddElement(jso);
+          CAD_CD_C_GRU_COR.Next;
+          //unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores inicio sincronizada pegando dados!');
+       end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType :=  'application/json; charset=utf-8';
+    result :=  TStringStream.Create( utf8encode(Lista.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos Cores dos Grupos finalizada!');
+  finally
+    FreeAndNil(Lista);
+    CAD_CD_C_GRU_COR.close;
+    FreeAndNil(CAD_CD_C_GRU_COR);
+  end;
+end;
+
+{function TServidorMetodos.BuscarGrupoEstoqueComCores: TStream;
+var
+  cds: TClientDataSet;
+  ListaGrupos, ListaFilhos: TJsonArray;
+  ObjGrupo, ObjFilho: TJsonObject;
+  id_grupo_atual, id_grupo_anterior: string;
+begin
+  try
+    cds := TClientDataSet.Create(nil);
+    cds.SetProvider(CAD_DP_C_GRU_E_GRU_COR);
+
+    // Consulta com JOIN
+    CAD_SQ_C_GRU_E_GRU_COR.Close;
+    CAD_SQ_C_GRU_E_GRU_COR.CommandText :=
+     ' SELECT G.id_grupo, G.descricao,   COALESCE(C.id_cor,0) as id_cor ' +
+     ' FROM CAD_TB_C_GRU G                        ' +
+     ' LEFT OUTER JOIN CAD_TB_C_GRU_COR C ON G.id_grupo = C.id_grupo ' +
+     ' ORDER BY G.id_grupo';
+    cds.Open;
+
+    ListaGrupos := TJsonArray.Create;
+    ListaFilhos := TJsonArray.Create;
+    id_grupo_anterior := '';
+
+    while not cds.Eof do
+    begin
+      id_grupo_atual := cds.FieldByName('id_grupo').AsString;
+
+      // Se mudou de grupo, cria novo objeto pai
+      if id_grupo_atual <> id_grupo_anterior then
+      begin
+        if Assigned(ObjGrupo) then
+        begin
+          unitformPrincipal.Form1.mmTexto.Lines.Add('Get das grupo parte 1');
+          ObjGrupo.AddPair('cores', ListaFilhos);
+
+         unitformPrincipal.Form1.mmTexto.Lines.Add('Get das grupo parte 2');
+          ListaGrupos.AddElement(ObjGrupo);
+        end;
+        unitformPrincipal.Form1.mmTexto.Lines.Add('Get das grupo parte 0');
+        ObjGrupo := TJsonObject.Create;
+        ListaFilhos := TJsonArray.Create;
+
+        ObjGrupo.AddPair('id_grupo', id_grupo_atual);
+        ObjGrupo.AddPair('descricao', cds.FieldByName('descricao').AsString);
+        id_grupo_anterior := id_grupo_atual;
+      end;
+
+      // Adiciona filho se existir
+      if not cds.FieldByName('id_item').IsNull then
+      begin
+        ObjFilho := TJsonObject.Create;
+        ObjFilho.AddPair('id_grupo', cds.FieldByName('id_grupo').AsString);
+        ObjFilho.AddPair('id_cor', cds.FieldByName('id_cor').AsString);
+        ListaFilhos.AddElement(ObjFilho);
+      end;
+
+      cds.Next;
+    end;
+
+    // Adiciona o último grupo
+    if Assigned(ObjGrupo) then
+    begin
+      ObjGrupo.AddPair('cores', ListaFilhos);
+      ListaGrupos.AddElement(ObjGrupo);
+    end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+    Result := TStringStream.Create(UTF8Encode(ListaGrupos.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos grupos com cores finalizada!');
+  finally
+    FreeAndNil(ListaGrupos);
+    cds.Close;
+    FreeAndNil(cds);
+  end;
+end; }
 
 
 
