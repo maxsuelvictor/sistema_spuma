@@ -1,7 +1,7 @@
 object ServidorMetodos: TServidorMetodos
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 680
+  Height = 707
   Width = 504
   object ConexaoNW: TSQLConnection
     DriverName = 'DevartPostgreSQL'
@@ -25,14 +25,14 @@ object ServidorMetodos: TServidorMetodos
       'UseUnicode=True'
       'VendorLib=dbexppgsql40.dll'
       'BlobSize=-1'
-      'HostName=192.168.254.10'
+      'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftData'
+      'Database=enSoftGloboP300725'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
-    Left = 63
-    Top = 23
+    Left = 31
+    Top = 7
   end
   object CAD_SQ_C_COR: TSQLDataSet
     CommandText = 'SELECT * FROM CAD_TB_C_COR'#13#10'WHERE  1 =2'
@@ -131,5 +131,447 @@ object ServidorMetodos: TServidorMetodos
     SQLConnection = ConexaoNW
     Left = 64
     Top = 417
+  end
+  object FAT_DP_M_PED: TDataSetProvider
+    DataSet = FAT_SQ_M_PED
+    Left = 248
+    Top = 523
+  end
+  object FAT_SQ_M_PED: TSQLDataSet
+    CommandText = 'select * from fat_tb_m_ped'#13#10'where 1 = 2'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConexaoNW
+    Left = 64
+    Top = 523
+  end
+  object FAT_DS_M_PED: TDataSource
+    DataSet = FAT_SQ_M_PED
+    Left = 248
+    Top = 582
+  end
+  object FAT_SQ_M_PED_TIT: TSQLDataSet
+    CommandText = 'select * from fat_tb_m_ped_tit'#13#10'where id_pedido=:id_pedido'
+    DataSource = FAT_DS_M_PED
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id_pedido'
+        ParamType = ptInput
+      end>
+    SQLConnection = ConexaoNW
+    Left = 64
+    Top = 635
+  end
+  object FAT_SQ_M_PED_ITE: TSQLDataSet
+    CommandText = 'select * from fat_tb_m_ped_ite '#13#10'where id_pedido=:id_pedido'
+    DataSource = FAT_DS_M_PED
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id_pedido'
+        ParamType = ptInput
+      end>
+    SQLConnection = ConexaoNW
+    Left = 64
+    Top = 578
+  end
+  object CAD_SQ_C_SEQ: TSQLDataSet
+    CommandText = 'SELECT * FROM CAD_TB_C_SEQ'#13#10'where 1 = 2'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConexaoNW
+    Left = 64
+    Top = 470
+  end
+  object CAD_DP_C_SEQ: TDataSetProvider
+    DataSet = CAD_SQ_C_SEQ
+    Left = 248
+    Top = 470
+  end
+  object FAT_CD_M_PED: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'FAT_DP_M_PED'
+    Left = 392
+    Top = 528
+    object FAT_CD_M_PEDid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object FAT_CD_M_PEDid_empresa: TIntegerField
+      FieldName = 'id_empresa'
+    end
+    object FAT_CD_M_PEDdta_pedido: TDateField
+      FieldName = 'dta_pedido'
+    end
+    object FAT_CD_M_PEDid_tipo_mov_estoque: TIntegerField
+      FieldName = 'id_tipo_mov_estoque'
+    end
+    object FAT_CD_M_PEDid_vendedor: TIntegerField
+      FieldName = 'id_vendedor'
+    end
+    object FAT_CD_M_PEDobs: TWideStringField
+      FieldName = 'obs'
+      Size = 255
+    end
+    object FAT_CD_M_PEDvlr_bruto: TFMTBCDField
+      FieldName = 'vlr_bruto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_desconto: TFMTBCDField
+      FieldName = 'vlr_desconto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDper_desconto: TFloatField
+      FieldName = 'per_desconto'
+    end
+    object FAT_CD_M_PEDvlr_liquido: TFMTBCDField
+      FieldName = 'vlr_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDhor_pedido: TSQLTimeStampField
+      FieldName = 'hor_pedido'
+    end
+    object FAT_CD_M_PEDid_condicao_pag: TIntegerField
+      FieldName = 'id_condicao_pag'
+    end
+    object FAT_CD_M_PEDpcp_obs: TWideStringField
+      FieldName = 'pcp_obs'
+      Size = 200
+    end
+    object FAT_CD_M_PEDpcp_id_opr: TIntegerField
+      FieldName = 'pcp_id_opr'
+    end
+    object FAT_CD_M_PEDsituacao: TIntegerField
+      FieldName = 'situacao'
+    end
+    object FAT_CD_M_PEDsituacao_aprovacao: TIntegerField
+      FieldName = 'situacao_aprovacao'
+    end
+    object FAT_CD_M_PEDid_atendente: TIntegerField
+      FieldName = 'id_atendente'
+    end
+    object FAT_CD_M_PEDid_responsavel: TIntegerField
+      FieldName = 'id_responsavel'
+    end
+    object FAT_CD_M_PEDid_cliente: TIntegerField
+      FieldName = 'id_cliente'
+    end
+    object FAT_CD_M_PEDtipo_restricao: TWideStringField
+      FieldName = 'tipo_restricao'
+      Size = 100
+    end
+    object FAT_CD_M_PEDid_almoxarifado: TIntegerField
+      FieldName = 'id_almoxarifado'
+    end
+    object FAT_CD_M_PEDjustificativa: TWideStringField
+      FieldName = 'justificativa'
+      Size = 100
+    end
+    object FAT_CD_M_PEDid_usuario_lib: TIntegerField
+      FieldName = 'id_usuario_lib'
+    end
+    object FAT_CD_M_PEDcod_lme: TWideStringField
+      FieldName = 'cod_lme'
+    end
+    object FAT_CD_M_PEDrev_lme: TWideStringField
+      FieldName = 'rev_lme'
+      Size = 5
+    end
+    object FAT_CD_M_PEDorigem: TIntegerField
+      FieldName = 'origem'
+    end
+    object FAT_CD_M_PEDdispositivo: TWideStringField
+      FieldName = 'dispositivo'
+      Size = 50
+    end
+    object FAT_CD_M_PEDgps_latitude: TFloatField
+      FieldName = 'gps_latitude'
+    end
+    object FAT_CD_M_PEDgps_longitude: TFloatField
+      FieldName = 'gps_longitude'
+    end
+    object FAT_CD_M_PEDcubagem: TFloatField
+      FieldName = 'cubagem'
+    end
+    object FAT_CD_M_PEDid_orcamento: TIntegerField
+      FieldName = 'id_orcamento'
+    end
+    object FAT_CD_M_PEDenvia_carga: TBooleanField
+      FieldName = 'envia_carga'
+    end
+    object FAT_CD_M_PEDdta_prev_entrega: TDateField
+      FieldName = 'dta_prev_entrega'
+    end
+    object FAT_CD_M_PEDid_abertura: TIntegerField
+      FieldName = 'id_abertura'
+    end
+    object FAT_CD_M_PEDdias_cpg_prazo: TIntegerField
+      FieldName = 'dias_cpg_prazo'
+    end
+    object FAT_CD_M_PEDoffline: TBooleanField
+      FieldName = 'offline'
+    end
+    object FAT_CD_M_PEDconferido: TBooleanField
+      FieldName = 'conferido'
+    end
+    object FAT_CD_M_PEDid_conf: TIntegerField
+      FieldName = 'id_conf'
+    end
+    object FAT_CD_M_PEDdta_conf: TDateField
+      FieldName = 'dta_conf'
+    end
+    object FAT_CD_M_PEDhor_conf: TTimeField
+      FieldName = 'hor_conf'
+    end
+    object FAT_CD_M_PEDresultado_conf: TIntegerField
+      FieldName = 'resultado_conf'
+    end
+    object FAT_CD_M_PEDid_resp_conf: TIntegerField
+      FieldName = 'id_resp_conf'
+    end
+    object FAT_CD_M_PEDid_propriedade: TIntegerField
+      FieldName = 'id_propriedade'
+    end
+    object FAT_CD_M_PEDid_mkt: TIntegerField
+      FieldName = 'id_mkt'
+    end
+    object FAT_CD_M_PEDvlr_frete: TFMTBCDField
+      FieldName = 'vlr_frete'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDmod_frete: TIntegerField
+      FieldName = 'mod_frete'
+    end
+    object FAT_CD_M_PEDcan_usuario: TIntegerField
+      FieldName = 'can_usuario'
+    end
+    object FAT_CD_M_PEDcan_data: TDateField
+      FieldName = 'can_data'
+    end
+    object FAT_CD_M_PEDcan_motivo: TWideStringField
+      FieldName = 'can_motivo'
+      Size = 100
+    end
+    object FAT_CD_M_PEDcan_hora: TTimeField
+      FieldName = 'can_hora'
+    end
+    object FAT_CD_M_PEDsemana: TIntegerField
+      FieldName = 'semana'
+    end
+    object FAT_CD_M_PEDid_pedido_mob: TIntegerField
+      FieldName = 'id_pedido_mob'
+    end
+    object FAT_CD_M_PEDid_motorista: TIntegerField
+      FieldName = 'id_motorista'
+    end
+    object FAT_CD_M_PEDid_placa: TWideStringField
+      FieldName = 'id_placa'
+      Size = 8
+    end
+    object FAT_CD_M_PEDvlr_credito: TFMTBCDField
+      FieldName = 'vlr_credito'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDid_pedido_temp_mob: TIntegerField
+      FieldName = 'id_pedido_temp_mob'
+    end
+    object FAT_CD_M_PEDvlr_desc_especial: TFMTBCDField
+      FieldName = 'vlr_desc_especial'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_desc_basico: TFMTBCDField
+      FieldName = 'vlr_desc_basico'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDsgq_per_comissao: TFloatField
+      FieldName = 'sgq_per_comissao'
+    end
+    object FAT_CD_M_PEDqtde_volume: TFloatField
+      FieldName = 'qtde_volume'
+    end
+    object FAT_CD_M_PEDvlr_icm_desn: TFMTBCDField
+      FieldName = 'vlr_icm_desn'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_desc_produtos: TFMTBCDField
+      FieldName = 'vlr_desc_produtos'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDper_desc_produtos: TFloatField
+      FieldName = 'per_desc_produtos'
+    end
+    object FAT_CD_M_PEDvlr_produtos: TFMTBCDField
+      FieldName = 'vlr_produtos'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_serv_bruto: TFMTBCDField
+      FieldName = 'vlr_serv_bruto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_desc_servicos: TFMTBCDField
+      FieldName = 'vlr_desc_servicos'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDper_desc_servicos: TFloatField
+      FieldName = 'per_desc_servicos'
+    end
+    object FAT_CD_M_PEDvlr_ser_liquido: TFMTBCDField
+      FieldName = 'vlr_ser_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_terceiro: TFMTBCDField
+      FieldName = 'vlr_terceiro'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_desc_terceiro: TFMTBCDField
+      FieldName = 'vlr_desc_terceiro'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDper_desc_terceiro: TFloatField
+      FieldName = 'per_desc_terceiro'
+    end
+    object FAT_CD_M_PEDvlr_terc_liquido: TFMTBCDField
+      FieldName = 'vlr_terc_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDped_gera_fin_separado: TBooleanField
+      FieldName = 'ped_gera_fin_separado'
+    end
+    object FAT_CD_M_PEDvlr_prod_liquido: TFMTBCDField
+      FieldName = 'vlr_prod_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDsepara_prod_serv: TBooleanField
+      FieldName = 'separa_prod_serv'
+    end
+    object FAT_CD_M_PEDvlr_cred_produtos: TFMTBCDField
+      FieldName = 'vlr_cred_produtos'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDvlr_cred_servicos: TFMTBCDField
+      FieldName = 'vlr_cred_servicos'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDid_pedido_orig: TIntegerField
+      FieldName = 'id_pedido_orig'
+    end
+    object FAT_CD_M_PEDid_mecanico: TIntegerField
+      FieldName = 'id_mecanico'
+    end
+    object FAT_CD_M_PEDvlr_desc_pos_fat: TFMTBCDField
+      FieldName = 'vlr_desc_pos_fat'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PEDsgq_texto_cond_pgto: TWideStringField
+      FieldName = 'sgq_texto_cond_pgto'
+      Size = 80
+    end
+    object FAT_CD_M_PEDper_desc_basico: TFloatField
+      FieldName = 'per_desc_basico'
+    end
+    object FAT_CD_M_PEDper_desc_especial: TFloatField
+      FieldName = 'per_desc_especial'
+    end
+    object FAT_CD_M_PEDdta_liberacao: TDateField
+      FieldName = 'dta_liberacao'
+    end
+    object FAT_CD_M_PEDpedido_automatico: TBooleanField
+      FieldName = 'pedido_automatico'
+    end
+    object FAT_CD_M_PEDpedido_origem_aut: TIntegerField
+      FieldName = 'pedido_origem_aut'
+    end
+    object FAT_CD_M_PEDgerar_pedido_diferenca: TBooleanField
+      FieldName = 'gerar_pedido_diferenca'
+    end
+    object FAT_CD_M_PEDid_pedido_gerado: TIntegerField
+      FieldName = 'id_pedido_gerado'
+    end
+    object FAT_CD_M_PEDper_desconto_fat: TFloatField
+      FieldName = 'per_desconto_fat'
+    end
+    object FAT_CD_M_PEDtexto_diversos_temp: TWideStringField
+      FieldName = 'texto_diversos_temp'
+      Size = 255
+    end
+    object FAT_CD_M_PEDid_func_pri_impressao: TIntegerField
+      FieldName = 'id_func_pri_impressao'
+    end
+    object FAT_CD_M_PEDdta_pri_impressao: TDateField
+      FieldName = 'dta_pri_impressao'
+    end
+    object FAT_CD_M_PEDhor_pri_impressao: TTimeField
+      FieldName = 'hor_pri_impressao'
+    end
+    object FAT_CD_M_PEDid_func_seg_impressao: TIntegerField
+      FieldName = 'id_func_seg_impressao'
+    end
+    object FAT_CD_M_PEDdta_seg_impressao: TDateField
+      FieldName = 'dta_seg_impressao'
+    end
+    object FAT_CD_M_PEDhor_seg_impressao: TTimeField
+      FieldName = 'hor_seg_impressao'
+    end
+    object FAT_CD_M_PEDid_func_ter_impressao: TIntegerField
+      FieldName = 'id_func_ter_impressao'
+    end
+    object FAT_CD_M_PEDdta_ter_impressao: TDateField
+      FieldName = 'dta_ter_impressao'
+    end
+    object FAT_CD_M_PEDhor_ter_impressao: TTimeField
+      FieldName = 'hor_ter_impressao'
+    end
+    object FAT_CD_M_PEDmotivo_seg_impressao: TWideStringField
+      FieldName = 'motivo_seg_impressao'
+      Size = 100
+    end
+    object FAT_CD_M_PEDmotivo_ter_impressao: TWideStringField
+      FieldName = 'motivo_ter_impressao'
+      Size = 100
+    end
+    object FAT_CD_M_PEDFAT_SQ_M_PED_ITE: TDataSetField
+      FieldName = 'FAT_SQ_M_PED_ITE'
+    end
+    object FAT_CD_M_PEDFAT_SQ_M_PED_TIT: TDataSetField
+      FieldName = 'FAT_SQ_M_PED_TIT'
+    end
+  end
+  object FAT_CD_M_PED_ITE: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_ITE
+    Params = <>
+    Left = 392
+    Top = 584
+  end
+  object FAT_CD_M_PED_TIT: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_M_PEDFAT_SQ_M_PED_TIT
+    Params = <>
+    Left = 392
+    Top = 640
   end
 end

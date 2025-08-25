@@ -5,7 +5,8 @@ interface
 uses System.SysUtils, System.Classes, System.Json,
     Datasnap.DSServer, Datasnap.DSAuth, DataSnap.DSProviderDataModuleAdapter,
     System.IniFiles,Datasnap.DBClient, DbxDevartPostgreSQL, Data.FMTBcd,
-  Datasnap.Provider, Data.DB, Data.SqlExpr, Vcl.Forms, Data.DBXPlatform;
+  Datasnap.Provider, Data.DB, Data.SqlExpr, Vcl.Forms, Data.DBXPlatform,
+  Data.DBXCommon,Vcl.Dialogs;
 
 type
 {$METHODINFO ON}
@@ -25,20 +26,142 @@ type
     CAD_DP_C_CLI: TDataSetProvider;
     CAD_DP_C_ITE: TDataSetProvider;
     CAD_SQ_C_ITE: TSQLDataSet;
+    FAT_DP_M_PED: TDataSetProvider;
+    FAT_SQ_M_PED: TSQLDataSet;
+    FAT_DS_M_PED: TDataSource;
+    FAT_SQ_M_PED_TIT: TSQLDataSet;
+    FAT_SQ_M_PED_ITE: TSQLDataSet;
+    CAD_SQ_C_SEQ: TSQLDataSet;
+    CAD_DP_C_SEQ: TDataSetProvider;
+    FAT_CD_M_PED: TClientDataSet;
+    FAT_CD_M_PEDid_pedido: TIntegerField;
+    FAT_CD_M_PEDid_empresa: TIntegerField;
+    FAT_CD_M_PEDdta_pedido: TDateField;
+    FAT_CD_M_PEDid_tipo_mov_estoque: TIntegerField;
+    FAT_CD_M_PEDid_vendedor: TIntegerField;
+    FAT_CD_M_PEDobs: TWideStringField;
+    FAT_CD_M_PEDvlr_bruto: TFMTBCDField;
+    FAT_CD_M_PEDvlr_desconto: TFMTBCDField;
+    FAT_CD_M_PEDper_desconto: TFloatField;
+    FAT_CD_M_PEDvlr_liquido: TFMTBCDField;
+    FAT_CD_M_PEDhor_pedido: TSQLTimeStampField;
+    FAT_CD_M_PEDid_condicao_pag: TIntegerField;
+    FAT_CD_M_PEDpcp_obs: TWideStringField;
+    FAT_CD_M_PEDpcp_id_opr: TIntegerField;
+    FAT_CD_M_PEDsituacao: TIntegerField;
+    FAT_CD_M_PEDsituacao_aprovacao: TIntegerField;
+    FAT_CD_M_PEDid_atendente: TIntegerField;
+    FAT_CD_M_PEDid_responsavel: TIntegerField;
+    FAT_CD_M_PEDid_cliente: TIntegerField;
+    FAT_CD_M_PEDtipo_restricao: TWideStringField;
+    FAT_CD_M_PEDid_almoxarifado: TIntegerField;
+    FAT_CD_M_PEDjustificativa: TWideStringField;
+    FAT_CD_M_PEDid_usuario_lib: TIntegerField;
+    FAT_CD_M_PEDcod_lme: TWideStringField;
+    FAT_CD_M_PEDrev_lme: TWideStringField;
+    FAT_CD_M_PEDorigem: TIntegerField;
+    FAT_CD_M_PEDdispositivo: TWideStringField;
+    FAT_CD_M_PEDgps_latitude: TFloatField;
+    FAT_CD_M_PEDgps_longitude: TFloatField;
+    FAT_CD_M_PEDcubagem: TFloatField;
+    FAT_CD_M_PEDid_orcamento: TIntegerField;
+    FAT_CD_M_PEDenvia_carga: TBooleanField;
+    FAT_CD_M_PEDdta_prev_entrega: TDateField;
+    FAT_CD_M_PEDid_abertura: TIntegerField;
+    FAT_CD_M_PEDdias_cpg_prazo: TIntegerField;
+    FAT_CD_M_PEDoffline: TBooleanField;
+    FAT_CD_M_PEDconferido: TBooleanField;
+    FAT_CD_M_PEDid_conf: TIntegerField;
+    FAT_CD_M_PEDdta_conf: TDateField;
+    FAT_CD_M_PEDhor_conf: TTimeField;
+    FAT_CD_M_PEDresultado_conf: TIntegerField;
+    FAT_CD_M_PEDid_resp_conf: TIntegerField;
+    FAT_CD_M_PEDid_propriedade: TIntegerField;
+    FAT_CD_M_PEDid_mkt: TIntegerField;
+    FAT_CD_M_PEDvlr_frete: TFMTBCDField;
+    FAT_CD_M_PEDmod_frete: TIntegerField;
+    FAT_CD_M_PEDcan_usuario: TIntegerField;
+    FAT_CD_M_PEDcan_data: TDateField;
+    FAT_CD_M_PEDcan_motivo: TWideStringField;
+    FAT_CD_M_PEDcan_hora: TTimeField;
+    FAT_CD_M_PEDsemana: TIntegerField;
+    FAT_CD_M_PEDid_pedido_mob: TIntegerField;
+    FAT_CD_M_PEDid_motorista: TIntegerField;
+    FAT_CD_M_PEDid_placa: TWideStringField;
+    FAT_CD_M_PEDvlr_credito: TFMTBCDField;
+    FAT_CD_M_PEDid_pedido_temp_mob: TIntegerField;
+    FAT_CD_M_PEDvlr_desc_especial: TFMTBCDField;
+    FAT_CD_M_PEDvlr_desc_basico: TFMTBCDField;
+    FAT_CD_M_PEDsgq_per_comissao: TFloatField;
+    FAT_CD_M_PEDqtde_volume: TFloatField;
+    FAT_CD_M_PEDvlr_icm_desn: TFMTBCDField;
+    FAT_CD_M_PEDvlr_desc_produtos: TFMTBCDField;
+    FAT_CD_M_PEDper_desc_produtos: TFloatField;
+    FAT_CD_M_PEDvlr_produtos: TFMTBCDField;
+    FAT_CD_M_PEDvlr_serv_bruto: TFMTBCDField;
+    FAT_CD_M_PEDvlr_desc_servicos: TFMTBCDField;
+    FAT_CD_M_PEDper_desc_servicos: TFloatField;
+    FAT_CD_M_PEDvlr_ser_liquido: TFMTBCDField;
+    FAT_CD_M_PEDvlr_terceiro: TFMTBCDField;
+    FAT_CD_M_PEDvlr_desc_terceiro: TFMTBCDField;
+    FAT_CD_M_PEDper_desc_terceiro: TFloatField;
+    FAT_CD_M_PEDvlr_terc_liquido: TFMTBCDField;
+    FAT_CD_M_PEDped_gera_fin_separado: TBooleanField;
+    FAT_CD_M_PEDvlr_prod_liquido: TFMTBCDField;
+    FAT_CD_M_PEDsepara_prod_serv: TBooleanField;
+    FAT_CD_M_PEDvlr_cred_produtos: TFMTBCDField;
+    FAT_CD_M_PEDvlr_cred_servicos: TFMTBCDField;
+    FAT_CD_M_PEDid_pedido_orig: TIntegerField;
+    FAT_CD_M_PEDid_mecanico: TIntegerField;
+    FAT_CD_M_PEDvlr_desc_pos_fat: TFMTBCDField;
+    FAT_CD_M_PEDsgq_texto_cond_pgto: TWideStringField;
+    FAT_CD_M_PEDper_desc_basico: TFloatField;
+    FAT_CD_M_PEDper_desc_especial: TFloatField;
+    FAT_CD_M_PEDdta_liberacao: TDateField;
+    FAT_CD_M_PEDpedido_automatico: TBooleanField;
+    FAT_CD_M_PEDpedido_origem_aut: TIntegerField;
+    FAT_CD_M_PEDgerar_pedido_diferenca: TBooleanField;
+    FAT_CD_M_PEDid_pedido_gerado: TIntegerField;
+    FAT_CD_M_PEDper_desconto_fat: TFloatField;
+    FAT_CD_M_PEDtexto_diversos_temp: TWideStringField;
+    FAT_CD_M_PEDid_func_pri_impressao: TIntegerField;
+    FAT_CD_M_PEDdta_pri_impressao: TDateField;
+    FAT_CD_M_PEDhor_pri_impressao: TTimeField;
+    FAT_CD_M_PEDid_func_seg_impressao: TIntegerField;
+    FAT_CD_M_PEDdta_seg_impressao: TDateField;
+    FAT_CD_M_PEDhor_seg_impressao: TTimeField;
+    FAT_CD_M_PEDid_func_ter_impressao: TIntegerField;
+    FAT_CD_M_PEDdta_ter_impressao: TDateField;
+    FAT_CD_M_PEDhor_ter_impressao: TTimeField;
+    FAT_CD_M_PEDmotivo_seg_impressao: TWideStringField;
+    FAT_CD_M_PEDmotivo_ter_impressao: TWideStringField;
+    FAT_CD_M_PEDFAT_SQ_M_PED_ITE: TDataSetField;
+    FAT_CD_M_PEDFAT_SQ_M_PED_TIT: TDataSetField;
+    FAT_CD_M_PED_ITE: TClientDataSet;
+    FAT_CD_M_PED_TIT: TClientDataSet;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
+    function ConexaoAberta: string;
     { Private declarations }
   public
     { Public declarations }
     function EchoString(Value: string): string;
     function ReverseString(Value: string): string;
 
-    function updateEnviarCores(const Dados: TJSONArray): TJSONObject;
+    var
+       xMsg: String;
+
+    procedure GerarSqlTxt(texto: String);
+
+    procedure enReconcileError(DataSet: TCustomClientDataSet;
+      E: EReconcileError; UpdateKind: TUpdateKind;
+      var Action: TReconcileAction);
+
+    function ConexaoOK: string;
+
     function BuscarCores: TStream;
 
-
-    function updateEnviarRegioes(const Dados: TJSONArray): TJSONObject;
     function BuscarRegioes: TStream;
 
     function BuscarGrupoEstoque: TStream;
@@ -50,6 +173,13 @@ type
     function BuscarClientesPorVendedor: TStream;
 
     function BuscarItens: TStream;
+
+    // Posts
+    function updateEnviarCores(const Dados: TJSONArray): TJSONObject;
+    function updateEnviarRegioes(const Dados: TJSONArray): TJSONObject;
+    //function updateReceberPedidos(const AJSON: string): string;
+    function updateReceberPedidos(const AJSON: TJSONValue): string;
+
     // casa
     //http://177.71.92.68:214/datasnap/rest/TServidorMetodos/BuscarRegioes
 
@@ -387,6 +517,20 @@ begin
 end;
 
 
+function TServidorMetodos.ConexaoAberta: string;
+begin
+
+end;
+
+function TServidorMetodos.ConexaoOK: string;
+begin
+
+  result := 'false';
+  if ConexaoNW.Connected = true then
+     result := 'true';
+
+end;
+
 function TServidorMetodos.BuscarGrupoEstoque: TStream;
 var
   jsobj, jso : TJsonObject;
@@ -678,6 +822,353 @@ begin
 
   Result.AddPair('resultado', ListaResultado);
 end;
+
+procedure TServidorMetodos.enReconcileError(DataSet: TCustomClientDataSet;
+  E: EReconcileError; UpdateKind: TUpdateKind; var Action: TReconcileAction);
+begin
+  xMsg := '';
+
+  GerarSqlTxt(' Erro no ' + DataSet.Name + ', ' + #13 +
+              ' msg: ' + e.Message);
+
+  xMsg := ' Erro no ' + DataSet.Name + ', ' + #13 +
+          ' msg: ' + e.Message;
+
+end;
+
+
+procedure TServidorMetodos.GerarSqlTxt(texto: String);
+var
+  Arquivo: TextFile;
+  txt,tempo,data: String;
+begin
+
+   { TODO -oMaxsuel -cCriação :
+     Criado por Maxsuel Victor - Em 17/03/2017
+     Para gerar o txt do select de SQLDataSet }
+
+ // Quando for utilizar o código abaixo basta descomentar
+ // por Maxsuel Victor, 21/03/2017
+
+   tempo := FormatDateTime('HH:MM:SS',time);
+   tempo := StringReplace(tempo,':','-',[rfReplaceAll]);
+
+   data := FormatDateTime('DD/MM/YYYY',date);
+   data := StringReplace(data,'/','_',[rfReplaceAll]);
+
+
+   if not (DirectoryExists(ExtractFilePath(Application.ExeName)+'logsServerMobile')) then
+      ForceDirectories(ExtractFilePath(Application.ExeName)+'logsServerMobile');
+
+   txt := ExtractFilePath(Application.ExeName)+'logsServerMobile\ServerMobile_'+data+'.txt';
+
+   AssignFile(Arquivo,txt);
+
+   if not (FileExists(txt)) then
+      Rewrite(Arquivo) //abre o arquivo para escrita
+   else
+      append(Arquivo);
+   Writeln(Arquivo,texto);
+   Closefile(Arquivo); //fecha o handle de arquivo
+end;
+
+
+//function TServidorMetodos.updateReceberPedidos(const AJSON: string): string;
+function TServidorMetodos.updateReceberPedidos(const AJSON: TJSONValue): string;
+var
+  JSONArray, ItensArray, TitulosArray, RetornoArray: TJSONArray;
+  PedidoObj, ItemObj, TituloObj,erroJson, RetornoObj, RetornoFinal : TJSONObject;
+  i, j: Integer;
+
+  CAD_CD_C_SEQ: TClientDataSet;
+  Vtran: TDBXTransaction;
+  Val: TJSONValue;
+begin
+
+
+  JSONArray := nil;
+  try
+    // Parse do JSON recebido
+    {JSONArray := TJSONObject.ParseJSONValue(AJSON) as TJSONArray;
+    if JSONArray = nil then
+      Exit('400 - JSON inválido');}
+    if not (AJSON is TJSONArray) then
+       Exit('400 - JSON inválido: esperado um array');
+
+        JSONArray := TJSONArray(AJSON);
+        RetornoArray := TJSONArray.Create;
+        RetornoObj := TJSONObject.Create;
+
+        CAD_CD_C_SEQ := TClientDataSet.Create(nil);
+        CAD_CD_C_SEQ.SetProvider(CAD_DP_C_SEQ);
+
+        CAD_SQ_C_SEQ.close;
+        CAD_SQ_C_SEQ.CommandText := '';
+        CAD_SQ_C_SEQ.CommandText := ' SELECT * FROM CAD_TB_C_SEQ ' +
+                                    ' WHERE ID_TABELA in (''FAT_TB_M_PED'',''FAT_TB_M_NFE_ITE'',''FAT_TB_M_NFE_TIT'')';
+        CAD_CD_C_SEQ.Open;
+
+        if not (cad_cd_c_seq.locate('id_tabela','FAT_TB_M_PED',[])) then
+          begin
+             CAD_CD_C_SEQ.Insert;
+             CAD_CD_C_SEQ.FieldByName('ID_TABELA').AsString := 'FAT_TB_M_PED';
+             CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString := '0';
+             CAD_CD_C_SEQ.Post;
+          end;
+       if not (cad_cd_c_seq.locate('id_tabela','FAT_TB_M_NFE_ITE',[])) then
+          begin
+             CAD_CD_C_SEQ.Insert;
+             CAD_CD_C_SEQ.FieldByName('ID_TABELA').AsString := 'FAT_TB_M_NFE_ITE';
+             CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString := '0';
+             CAD_CD_C_SEQ.Post;
+          end;
+       if not (cad_cd_c_seq.locate('id_tabela','FAT_TB_M_NFE_TIT',[])) then
+          begin
+             CAD_CD_C_SEQ.Insert;
+             CAD_CD_C_SEQ.FieldByName('ID_TABELA').AsString := 'FAT_TB_M_NFE_TIT';
+             CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString := '0';
+             CAD_CD_C_SEQ.Post;
+          end;
+
+
+        // Abre os datasets
+        FAT_CD_M_PED.Close;
+        FAT_CD_M_PED_ITE.Close;
+        FAT_CD_M_PED_TIT.Close;
+
+        FAT_CD_M_PED.Open;
+        FAT_CD_M_PED_ITE.Open;
+        FAT_CD_M_PED_TIT.Open;
+
+        // Loop pelos pedidos
+        for i := 0 to JSONArray.Count - 1 do
+        begin
+          PedidoObj := JSONArray.Items[i] as TJSONObject;
+
+          FAT_CD_M_PED.Append;
+          FAT_CD_M_PED.FieldByName('id_empresa').AsInteger := PedidoObj.GetValue<Integer>('id_empresa');
+
+          cad_cd_c_seq.locate('id_tabela','FAT_TB_M_PED',[]);
+
+          CAD_CD_C_SEQ.edit;
+          CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger :=
+              CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger + 1;
+          CAD_CD_C_SEQ.Post;
+
+          FAT_CD_M_PED.FieldByName('id_pedido').AsString :=
+                CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString;
+
+          FAT_CD_M_PED.FieldByName('id_pedido_mob').AsInteger := PedidoObj.GetValue<Integer>('id_pedido');
+          FAT_CD_M_PED.FieldByName('dta_pedido').AsString  := PedidoObj.GetValue<string>('dta_pedido');
+          FAT_CD_M_PED.FieldByName('hor_pedido').AsString  := PedidoObj.GetValue<string>('hora_pedido');
+          FAT_CD_M_PED.FieldByName('id_cliente').AsInteger := PedidoObj.GetValue<Integer>('id_cliente');
+          FAT_CD_M_PED.FieldByName('vlr_liquido').AsFloat  := PedidoObj.GetValue<Double>('vlr_liquido');
+
+          FAT_CD_M_PED.FieldByName('id_tipo_mov_estoque').AsString := PedidoObj.GetValue<string>('id_tipo_mov_estoque');
+          FAT_CD_M_PED.FieldByName('dta_prev_entrega').AsDateTime  := FAT_CD_M_PED.FieldByName('dta_pedido').AsDateTime + 30;
+          FAT_CD_M_PED.FieldByName('sgq_per_comissao').AsString    := PedidoObj.GetValue<string>('sgq_per_comissao');
+
+
+          FAT_CD_M_PED.FieldByName('id_condicao_pag').AsInteger    := 1; // À vista //PedidoObj.GetValue<Integer>('id_cnd_pagto');
+          FAT_CD_M_PED.FieldByName('sgq_texto_cond_pgto').AsString := PedidoObj.GetValue<string>('dta_pedido');
+          FAT_CD_M_PED.FieldByName('obs').AsString                 := PedidoObj.GetValue<string>('obs_geral');
+          FAT_CD_M_PED.FieldByName('pcp_obs').AsString             := PedidoObj.GetValue<string>('obs_producao');
+          FAT_CD_M_PED.FieldByName('vlr_desconto').AsString        := PedidoObj.GetValue<string>('vlr_desconto');
+          FAT_CD_M_PED.FieldByName('vlr_desc_especial').AsString   := PedidoObj.GetValue<string>('vlr_desc_especial');
+          FAT_CD_M_PED.FieldByName('vlr_bruto').AsString           := PedidoObj.GetValue<string>('vlr_bruto');
+          FAT_CD_M_PED.FieldByName('vlr_liquido').AsString         := PedidoObj.GetValue<string>('vlr_liquido');
+          FAT_CD_M_PED.FieldByName('id_vendedor').AsString         := PedidoObj.GetValue<string>('id_funcionario');
+          FAT_CD_M_PED.FieldByName('id_atendente').AsString        := PedidoObj.GetValue<string>('id_funcionario');
+          FAT_CD_M_PED.FieldByName('id_responsavel').AsString      := PedidoObj.GetValue<string>('id_funcionario');
+          FAT_CD_M_PED.FieldByName('per_desc_basico').AsString     := PedidoObj.GetValue<string>('per_desc_basico');
+          FAT_CD_M_PED.FieldByName('per_desc_especial').AsString   := PedidoObj.GetValue<string>('per_desc_especial');
+          FAT_CD_M_PED.FieldByName('per_desconto').AsString        := PedidoObj.GetValue<string>('per_desconto');
+          FAT_CD_M_PED.FieldByName('vlr_desc_basico').AsString     := PedidoObj.GetValue<string>('vlr_desc_basico');
+
+          // Deve calcular a cubagem
+          FAT_CD_M_PED.FieldByName('cubagem').AsString := '0';
+
+          // verificar no enSoftSpuma como é alimentado esse campo id_almoxarifado
+          FAT_CD_M_PED.FieldByName('id_almoxarifado').AsString := '1';
+
+          // 1 - Dispositivo móvel
+          FAT_CD_M_PED.FieldByName('origem').AsString := '1';
+
+          FAT_CD_M_PED.FieldByName('situacao').AsString               := '0';
+          FAT_CD_M_PED.FieldByName('situacao_aprovacao').AsString     := '0';
+
+          FAT_CD_M_PED.FieldByName('pedido_automatico').AsString      := 'false';
+          FAT_CD_M_PED.FieldByName('gerar_pedido_diferenca').AsString := 'false';
+          FAT_CD_M_PED.FieldByName('dias_cpg_prazo').AsString         := '0';
+          FAT_CD_M_PED.FieldByName('conferido').AsString              := 'false';
+          FAT_CD_M_PED.FieldByName('vlr_frete').AsString              := '0';
+          FAT_CD_M_PED.FieldByName('mod_frete').AsString              := '0';
+          FAT_CD_M_PED.FieldByName('vlr_icm_desn').AsString           := '0';
+          FAT_CD_M_PED.FieldByName('vlr_desc_produtos').AsString      := '0';
+          FAT_CD_M_PED.FieldByName('per_desc_produtos').AsString      := '0';
+          FAT_CD_M_PED.FieldByName('vlr_produtos').AsString           := '0';
+          FAT_CD_M_PED.FieldByName('vlr_serv_bruto').AsString         := '0';
+          FAT_CD_M_PED.FieldByName('vlr_desc_servicos').AsString      := '0';
+          FAT_CD_M_PED.FieldByName('per_desc_servicos').AsString      := '0';
+          FAT_CD_M_PED.FieldByName('vlr_ser_liquido').AsString        := '0';
+          FAT_CD_M_PED.FieldByName('vlr_terceiro').AsString           := '0';
+          FAT_CD_M_PED.FieldByName('vlr_desc_terceiro').AsString      := '0';
+          FAT_CD_M_PED.FieldByName('per_desc_terceiro').AsString      := '0';
+          FAT_CD_M_PED.FieldByName('vlr_terc_liquido').AsString       := '0';
+          FAT_CD_M_PED.FieldByName('ped_gera_fin_separado').AsString  := 'false';
+          FAT_CD_M_PED.FieldByName('vlr_prod_liquido').AsString       := '0';
+          FAT_CD_M_PED.FieldByName('separa_prod_serv').AsString       := 'false';
+          FAT_CD_M_PED.FieldByName('vlr_cred_produtos').AsString      := '0';
+          FAT_CD_M_PED.FieldByName('vlr_cred_servicos').AsString      := '0';
+
+          // Monta o objeto de retorno
+          RetornoObj.AddPair('id_pedido', FAT_CD_M_PED.FieldByName('id_pedido_mob').AsString);
+          RetornoObj.AddPair('id_pedido_servidor', FAT_CD_M_PED.FieldByName('id_pedido').AsString);
+          //RetornoArray.AddElement(RetornoObj);
+
+          FAT_CD_M_PED.Post;
+
+          // Itens
+          ItensArray := PedidoObj.GetValue<TJSONArray>('itens');
+          for j := 0 to ItensArray.Count - 1 do
+          begin
+            ItemObj := ItensArray.Items[j] as TJSONObject;
+            FAT_CD_M_PED_ITE.Append;
+            FAT_CD_M_PED_ITE.FieldByName('id_item').AsInteger := ItemObj.GetValue<Integer>('id_item');
+            FAT_CD_M_PED_ITE.FieldByName('id_pedido').AsInteger := FAT_CD_M_PED.FieldByName('id_pedido').AsInteger;
+
+            cad_cd_c_seq.locate('id_tabela','FAT_TB_M_NFE_ITE',[]);
+
+            CAD_CD_C_SEQ.edit;
+            CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger :=
+                CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger + 1;
+            CAD_CD_C_SEQ.Post;
+
+            FAT_CD_M_PED_ITE.FieldByName('id_sequencia').AsString :=
+                  CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString;
+
+
+            FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := ItemObj.GetValue<Double>('vlr_liquido');
+            FAT_CD_M_PED_ITE.FieldByName('vlr_bruto').AsCurrency         := ItemObj.GetValue<Double>('vlr_bruto');
+            FAT_CD_M_PED_ITE.FieldByName('qtde').AsCurrency              := ItemObj.GetValue<Double>('qtde');
+            FAT_CD_M_PED_ITE.FieldByName('id_cor').AsInteger             := ItemObj.GetValue<Integer>('id_cor');
+            FAT_CD_M_PED_ITE.FieldByName('id_tamanho').AsInteger         := 0;
+            FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := ItemObj.GetValue<Double>('vlr_liquido');
+            FAT_CD_M_PED_ITE.FieldByName('per_desconto').AsCurrency      := ItemObj.GetValue<Double>('per_desconto');
+            FAT_CD_M_PED_ITE.FieldByName('vlr_desconto').AsCurrency      := ItemObj.GetValue<Double>('vlr_desconto');
+            FAT_CD_M_PED_ITE.FieldByName('vlr_unitario').AsCurrency      := ItemObj.GetValue<Double>('vlr_unitario');
+            FAT_CD_M_PED_ITE.FieldByName('vlr_desc_basico').AsCurrency   := ItemObj.GetValue<Double>('vlr_desc_basico');
+            FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency := ItemObj.GetValue<Double>('vlr_desc_especial');
+            FAT_CD_M_PED_ITE.FieldByName('pcp_obs_item').AsString        := ItemObj.GetValue<string>('desc_personalizado');
+            FAT_CD_M_PED_ITE.Post;
+          end;
+
+          // Títulos
+          TitulosArray := PedidoObj.GetValue<TJSONArray>('titulos');
+          for j := 0 to TitulosArray.Count - 1 do
+          begin
+            TituloObj := TitulosArray.Items[j] as TJSONObject;
+            FAT_CD_M_PED_TIT.Append;
+            FAT_CD_M_PED_TIT.FieldByName('id_pedido').AsInteger := FAT_CD_M_PED.FieldByName('id_pedido').AsInteger;
+
+            cad_cd_c_seq.locate('id_tabela','FAT_TB_M_NFE_TIT',[]);
+            CAD_CD_C_SEQ.edit;
+            CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger :=
+                CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger + 1;
+            CAD_CD_C_SEQ.Post;
+
+            FAT_CD_M_PED_TIT.FieldByName('id_titulo').AsString     := CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString;
+            FAT_CD_M_PED_TIT.FieldByName('dta_vencimento').AsString := TituloObj.GetValue<string>('dta_vencimento');
+            FAT_CD_M_PED_TIT.FieldByName('dias').AsString           := TituloObj.GetValue<string>('dias');
+
+            // 23/08/25 - No appVendas
+            { Condição de Pagamento (id_cnd_pagto):
+               opções “A vista”=0, “Cheque”=1, “Boleto”=2 }
+            // Para o sistema enSoftSpuma será assim:
+            // 0 -> 16 A vista D
+            // 1 -> 12 Cheque D
+            // 2 -> 3 Boleto
+
+            // esse código depois tem que ser alterado para forma correta de programação;
+            case TituloObj.GetValue<integer>('id_forma_pag') of
+              0: FAT_CD_M_PED_TIT.FieldByName('id_forma_pag').AsInteger := 16;
+              1: FAT_CD_M_PED_TIT.FieldByName('id_forma_pag').AsInteger := 12;
+              2: FAT_CD_M_PED_TIT.FieldByName('id_forma_pag').AsInteger := 3;
+            end;
+
+            FAT_CD_M_PED_TIT.FieldByName('vlr_titulo').AsFloat := TituloObj.GetValue<Double>('vlr_titulo');
+
+            FAT_CD_M_PED_TIT.Post;
+          end;
+        end;
+    try
+       try
+          Vtran := ConexaoNW.BeginTransaction;
+
+          // Aplica atualizações
+
+          CAD_CD_C_SEQ.OnReconcileError := enReconcileError;
+          if CAD_CD_C_SEQ <> nil then
+             if (CAD_CD_C_SEQ.ChangeCount > 0) then
+                 CAD_CD_C_SEQ.ApplyUpdates(0);
+
+          FAT_CD_M_PED.OnReconcileError := enReconcileError;
+          if FAT_CD_M_PED <> nil then
+             if (FAT_CD_M_PED.ChangeCount > 0) then
+                 FAT_CD_M_PED.ApplyUpdates(0);
+
+          //FAT_CD_M_PED_ITE.ApplyUpdates(0);
+          //FAT_CD_M_PED_TIT.ApplyUpdates(0);
+
+          // Commit da transação
+          ConexaoNW.CommitFreeAndNil(Vtran);
+          unitformPrincipal.Form1.mmTexto.Lines.Add('Post do pedido de venda foi sincronizado!');
+
+       finally
+          ConexaoNW.RollbackIncompleteFreeAndNil(Vtran);
+       end;
+      GetInvocationMetadata().ResponseCode := 200;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+      //Result := 'Retorno 200';
+
+      // Retorna o JSON como string
+
+          // Agora você monta o JSON final corretamente
+         { RetornoFinal := TJSONObject.Create;
+          RetornoFinal.AddPair('result', RetornoArray);
+
+          Result := RetornoFinal.ToJSON;}
+
+      Result := RetornoObj.ToString;
+
+
+     // Result := RetornoArray.ToJSON; // Resposta com os id_pedido criado no servidor
+    except
+    on E: Exception do
+    begin
+      GetInvocationMetadata().ResponseCode := 500;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
+        Result := 'Erro 500 - Intero';
+      finally
+        erroJson.Free;
+      end;
+    end;
+  end;
+
+  finally
+    if CAD_CD_C_SEQ <> nil then
+       FreeAndNil(CAD_CD_C_SEQ);
+    RetornoArray.Free;
+    //JSONArray.Free;
+  end;
+end;
+
+
+
 
 function TServidorMetodos.updateEnviarRegioes(
   const Dados: TJSONArray): TJSONObject;
