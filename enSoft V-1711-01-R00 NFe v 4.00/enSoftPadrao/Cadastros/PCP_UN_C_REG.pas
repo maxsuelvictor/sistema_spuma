@@ -214,12 +214,22 @@ begin
        exit;
      end;
 
+  if btn_Add_Itens.Focused then
+     exit;
+
+  if grdItens.Focused then
+     exit;
+
+  if not grdItensIButton.Enabled then
+     exit;
+
   if (dmSgq.PCP_CD_C_REG_ITE.FieldByName('tipo').Text) = '' then
      begin
        ShowMessage('O campo "Tipo" deve ser preenchido.');
        cbbAplicar.SetFocus;
        exit;
      end;
+
 end;
 
 procedure TPCP_FM_C_REG.cbbPesquisaChange(Sender: TObject);
@@ -295,7 +305,13 @@ end;
 procedure TPCP_FM_C_REG.pnItensExit(Sender: TObject);
 begin
   inherited;
-   if (btn_Add_Itens.Focused) or (grdItens.Focused) or
+ // ShowMessage('Componente com TAG = ' + IntToStr(TControl(Sender).Tag) +
+ //              '  Componente com TAG = ' + (TControl(Sender).Name)  );
+
+  try
+    dmSgq.PCP_CD_C_REG_ITE.BeforePost := nil;
+
+  if (btn_Add_Itens.Focused) or (grdItens.Focused) or
      (not grdItensIButton.Enabled) then
       begin
         //
@@ -322,6 +338,9 @@ begin
            pnItens.Enabled := false;
         end;
       end;
+  finally
+      dmSgq.PCP_CD_C_REG_ITE.BeforePost := dmSgq.PCP_CD_C_REG_ITEBeforePost;
+  end;
 end;
 
 procedure TPCP_FM_C_REG.txtBuscaItemButtonClick(Sender: TObject);
@@ -415,6 +434,9 @@ begin
   id_item      := dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString;
   int_nomeite  := dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString;
 
+  try
+  pnItens.onExit := nil;
+
   dmSgq.PCP_CD_C_REG_ITE.cancel;
 
   if ( dmSgq.PCP_CD_C_REG_ITE.Locate('tipo;id_item',VarArrayOf([tipo,id_item]),[]) ) then
@@ -434,6 +456,13 @@ begin
         dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_item').AsString  := id_item;
         dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomeite').AsString := int_nomeite;
       end;
+  finally
+    ActiveControl := nil;
+    PostMessage(txtPerDesconto.Handle, WM_SETFOCUS, 0, 0);
+    txtPerDesconto.SetFocus;
+
+    pnItens.onExit := pnItensExit;
+  end;
   {try
    pnItens.onExit := nil;
 
@@ -523,6 +552,9 @@ begin
   id_grupo := dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_grupo').AsString;
   int_nomegru := dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomegru').AsString;
 
+  try
+  pnItens.onExit := nil;
+
   dmSgq.PCP_CD_C_REG_ITE.cancel;
 
   if ( dmSgq.PCP_CD_C_REG_ITE.Locate('tipo;id_grupo',VarArrayOf([tipo,id_grupo]),[]) ) then
@@ -546,7 +578,13 @@ begin
         dmSgq.PCP_CD_C_REG_ITE.FieldByName('id_grupo').AsString := id_grupo;
         dmSgq.PCP_CD_C_REG_ITE.FieldByName('int_nomegru').AsString := int_nomegru;
       end;
+  finally
+    ActiveControl := nil;
+    PostMessage(txtPerDesconto.Handle, WM_SETFOCUS, 0, 0);
+    txtPerDesconto.SetFocus;
 
+    pnItens.onExit := pnItensExit;
+  end;
 end;
 
 procedure TPCP_FM_C_REG.txtPerDescontoExit(Sender: TObject);
