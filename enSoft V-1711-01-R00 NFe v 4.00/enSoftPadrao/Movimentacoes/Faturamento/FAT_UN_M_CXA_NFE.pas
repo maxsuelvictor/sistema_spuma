@@ -3173,7 +3173,7 @@ Var
   SMPrincipal: TSMClient;
   retorno: String;
   Ambiente, Versao, Status, Estado, Motivo,
-  cMsg, xMsg, Recibo, Protocolo, chave: String;
+  cMsg, xMsg, Recibo, Protocolo, chave, tpAmb: String;
   id_fiscal, ReabrePed: String;
   vlrTotalTit:currency;
   PathImg,msg: string;
@@ -3413,21 +3413,69 @@ begin
 
             NFe.NotasFiscais.GerarNFe;
             //try  esse try estava gerando a msg Arguments out of range, escondendo para o cliente a msg detelhada.
-            NFe.Enviar(numLote,True,false);
+            NFe.Enviar(numLote,True,true);
 
             showmessage(NFE.NotasFiscais.Items[0].NFe.infNFe.ID);
             showmessage(inttostr(NFE.NotasFiscais.Items[0].NFe.procNFe.cStat));
             //except
-               MemoResp.Lines.Text   := UTF8Encode(NFe.WebServices.Retorno.RetWS);
-               memoRespWS.Lines.Text := UTF8Encode(NFe.WebServices.Retorno.RetornoWS);
-               // v antigo
-               // LoadXML(MemoResp, WBResposta);
-               LoadXML(Nfe.WebServices.Retorno.RetornoWS, WBResposta);
+            // 01/09/2025, Maxsuel Victor comentado devido a nova forma ser SÍNCRONO.
+                 // MemoResp.Lines.Text   := UTF8Encode(NFe.WebServices.Retorno.RetWS);
+                 // memoRespWS.Lines.Text := UTF8Encode(NFe.WebServices.Retorno.RetornoWS);
+
+                 // v antigo
+                 // LoadXML(MemoResp, WBResposta);
+               MemoResp.Lines.Text   := NFe.WebServices.Enviar.RetWS;
+               memoRespWS.Lines.Text := NFe.WebServices.Enviar.RetornoWS;
+               LoadXML(NFe.WebServices.Enviar.RetWS, WBResposta);
+
+                 //LoadXML(Nfe.WebServices.Retorno.RetornoWS, WBResposta);
             //end;
 
             MemoDados.Lines.Clear;
 
-            Ambiente   := TpAmbToStr(NFe.WebServices.Retorno.TpAmb);
+            MemoDados.Lines.Add('');
+
+            MemoDados.Lines.Add('Envio NFe');
+            tpAmb      := TpAmbToStr(NFe.WebServices.Enviar.TpAmb);
+            Versao     := NFe.WebServices.Enviar.verAplic;
+            Status     := IntToStr(NFe.WebServices.Enviar.cStat);
+            Estado     := IntToStr(NFe.WebServices.Enviar.cUF);
+            Motivo     := NFe.WebServices.Enviar.xMotivo;
+            Recibo     := NFe.WebServices.Enviar.Recibo;
+            Protocolo  := NFe.WebServices.Enviar.Protocolo;
+
+            chave      := NFe.NotasFiscais[0].NFe.procNFe.chNFe;
+
+            // 02/09/2025 Maxsuel Victor... esse if é pra testar se
+               // realmente o nro do RECIBO está retornando da sefaz.
+               // depois será retirado.
+            if trim(Recibo) <> '' then
+               begin
+                 ShowMessage('O nro do recibo não retornou da sefaz.');
+                 Recibo := '0';
+               end;
+
+                  //Informações de retorno específicas a NFe...
+                   {ACBrNFe.NotasFiscais[0].NFe.procNFe.tpAmb
+                   ACBrNFe.NotasFiscais[0].NFe.procNFe.verAplic
+                   ACBrNFe.NotasFiscais[0].NFe.procNFe.chNFe
+                   ACBrNFe.NotasFiscais[0].NFe.procNFe.dhRecbto
+                   ACBrNFe.NotasFiscais[0].NFe.procNFe.nProt
+                   ACBrNFe.NotasFiscais[0].NFe.procNFe.cStat
+                   ACBrNFe.NotasFiscais[0].NFe.procNFe.xMotivo}
+
+            MemoDados.Lines.Add('Envio NFe');
+            MemoDados.Lines.Add('tpAmb: ' + tpAmb);
+            MemoDados.Lines.Add('verAplic: ' + Versao);
+            MemoDados.Lines.Add('cStat: ' + Status);
+            MemoDados.Lines.Add('cUF: ' + Estado);
+            MemoDados.Lines.Add('xMotivo: ' + Motivo);
+            MemoDados.Lines.Add('Recibo: '+ Recibo);
+            MemoDados.Lines.Add('Protocolo: ' + Protocolo);
+
+            // 01/09/25 , Maxsuel Victor : comentado devido modo sincrono
+
+            {Ambiente   := TpAmbToStr(NFe.WebServices.Retorno.TpAmb);
             Versao     := NFe.WebServices.Retorno.verAplic;
             Status     := IntToStr(NFe.WebServices.retorno.cStat);
             Estado     := IntToStr(NFe.WebServices.retorno.cUF);
@@ -3447,7 +3495,7 @@ begin
             MemoDados.Lines.Add('cMsg: '     + cMsg);
             MemoDados.Lines.Add('xMsg: '     + xMsg);
             MemoDados.Lines.Add('Nº Recibo: '+ Recibo);
-            MemoDados.Lines.Add('Nº Protocolo: '+ Protocolo);
+            MemoDados.Lines.Add('Nº Protocolo: '+ Protocolo); }
 
             dmGeral.BUS_CD_M_NFE_CXA.Edit;
             //dmGeral.BUS_CD_M_NFE_CXA.FieldByName('NFE_RECIBO').AsString    := 'Testes';
@@ -4921,12 +4969,18 @@ begin
       NFe.NotasFiscais.LoadFromFile(odNFe.FileName);
       NFe.Consultar;
       ShowMessage(NFe.WebServices.Consulta.Protocolo);
-      MemoResp.Lines.Text := UTF8Encode(NFe.WebServices.Consulta.RetWS);
-      memoRespWS.Lines.Text := UTF8Encode(NFe.WebServices.Consulta.RetornoWS);
+
+      MemoResp.Lines.Text   := NFe.WebServices.Consulta.RetWS;
+      memoRespWS.Lines.Text := NFe.WebServices.Consulta.RetornoWS;
+
+        //MemoResp.Lines.Text := UTF8Encode(NFe.WebServices.Consulta.RetWS);
+        //memoRespWS.Lines.Text := UTF8Encode(NFe.WebServices.Consulta.RetornoWS);
       //v antigo
       //LoadXML(MemoResp, WBResposta);
       LoadXML(NFe.WebServices.Consulta.RetornoWS, WBResposta);
-      LoadConsulta201(NFe.WebServices.Consulta.RetWS);
+
+      // 02/09/2025 Maxsuel Victor, a linha abaixo foi comentada por que no acbrExemplo não exite essa linha.
+      //LoadConsulta201(NFe.WebServices.Consulta.RetWS);
     end;
 end;
 

@@ -75,6 +75,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure AlterarEstadoDosComponentes;
   end;
 
 var
@@ -133,6 +134,25 @@ begin
    dmSgq.PCP_CD_C_REG.Data :=
    dmSgq.PCP_CD_C_REG.DataRequest(
            VarArrayOf([0, codigo]));
+end;
+
+procedure TPCP_FM_C_REG.AlterarEstadoDosComponentes;
+begin
+  if cbbAplicar.ItemIndex = 0 then
+     begin
+       txtBuscaItem.enabled := false;
+       txtBuscaItem.color := $00DADADA;
+       txtCodGrupo.enabled := true;
+       txtCodGrupo.color := clwindow;
+     end;
+
+  if cbbAplicar.ItemIndex = 1 then
+     begin
+       txtCodGrupo.enabled := false;
+       txtCodGrupo.color := $00DADADA;
+       txtBuscaItem.enabled := true;
+       txtBuscaItem.color := clwindow;
+     end;
 end;
 
 procedure TPCP_FM_C_REG.btnFiltroClick(Sender: TObject);
@@ -292,12 +312,15 @@ begin
      begin
        dmSgq.PCP_CD_C_REG_ITE.Append;
        pnItens.Enabled := true;
-       txtBuscaItem.SetFocus;
+       cbbAplicar.SetFocus;
+       cbbAplicar.ItemIndex := 0;
+       //txtBuscaItem.SetFocus;
      end
   else
      begin
        dmSgq.PCP_CD_C_REG_ITE.Edit;
        pnItens.Enabled := true;
+       AlterarEstadoDosComponentes;
        txtPerDesconto.SetFocus;
      end;
 end;

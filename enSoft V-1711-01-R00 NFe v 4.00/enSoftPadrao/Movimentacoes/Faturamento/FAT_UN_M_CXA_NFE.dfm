@@ -486,10 +486,6 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
       TabPosition = tpBottom
       object tsItens: TTabSheet
         Caption = 'Itens'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dgItens: TwwDBGrid
           AlignWithMargins = True
           Left = 2
@@ -608,10 +604,6 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
         Caption = 'Informa'#231#227'o fiscal'
         ImageIndex = 2
         OnExit = tsInfFiscalExit
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object txtNfeObs: TDBMemo
           Left = 0
           Top = 0
@@ -699,10 +691,6 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
         Caption = 'Pedidos da produ'#231#227'o'
         ImageIndex = 3
         OnShow = tsPedidosProdShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label14: TLabel
           Left = 8
           Top = 8
@@ -3299,7 +3287,7 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
     Left = 548
     Top = 112
     Bitmap = {
-      494C0101010008006C0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101010008007C0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       000000000000000000000000000000000000EAD999FFEAD999FFEAD999FFEAD9
       99FFEAD999FFEAD999FFEAD999FFEAD999FFEAD999FFEAD999FFEAD999FFEAD9
