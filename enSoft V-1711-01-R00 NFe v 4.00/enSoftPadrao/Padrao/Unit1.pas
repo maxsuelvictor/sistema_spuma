@@ -3668,7 +3668,7 @@ begin
      exit;
 
   ACBrNFe1.EventoNFe.Evento.Clear;
-//  ACBrNFe1.EvnvEvento.EnvEventoNFe.idLote := StrToInt(idLote) ;
+  //  ACBrNFe1.EvnvEvento.EnvEventoNFe.idLote := StrToInt(idLote) ;
   with ACBrNFe1.EventoNFe.Evento.Add do
    begin
      infEvento.chNFe := Chave;
