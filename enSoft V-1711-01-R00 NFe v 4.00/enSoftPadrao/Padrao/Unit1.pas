@@ -892,7 +892,7 @@ begin
 
     ACBrNFe1.EventoNFe.Evento.Clear;
     ACBrNFe1.EventoNFe.idLote := StrToInt(idLote) ;
-    with ACBrNFe1.EventoNFe.Evento.Add do
+    with ACBrNFe1.EventoNFe.Evento.New do
     begin
      infEvento.dhEvento := now;
      infEvento.tpEvento := teCancelamento;
@@ -902,19 +902,26 @@ begin
 
     MemoResp.Lines.Text := ACBrNFe1.WebServices.EnvEvento.RetWS;
     memoRespWS.Lines.Text := ACBrNFe1.WebServices.EnvEvento.RetornoWS;
-    LoadXML(ACBrNFe1.WebServices.EnvEvento.RetornoWS, WBResposta);
-    ShowMessage(IntToStr(ACBrNFe1.WebServices.EnvEvento.cStat));
-    ShowMessage(ACBrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.nProt);
 
+    LoadXML(ACBrNFe1.WebServices.EnvEvento.RetornoWS, WBResposta);
+
+    // Comentado por Maxsuel Victor, 28/09/25
+      // ShowMessage(IntToStr(ACBrNFe1.WebServices.EnvEvento.cStat));
+      // ShowMessage(ACBrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.nProt);
+
+    ShowMessage(IntToStr(ACBrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento[0].RetInfEvento.cStat));
+    ShowMessage(ACBrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento[0].RetInfEvento.nProt);
 
     ACBrNFe1.WebServices.Consulta.NFeChave := Trim(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('NFE_CHAVE').AsString);
     ACBrNFe1.WebServices.Consulta.Executar;
+
     CanStatus    := IntToStr(ACBrNFe1.WebServices.Consulta.cStat);
     CanProtocolo := ACBrNFe1.WebServices.Consulta.Protocolo;
 
+    showmessage('Status:' + CanStatus + ' - Protocolo: ' + CanProtocolo);
+
     if (trim(CanStatus) = '101') or (trim(CanStatus) = '135') then
        begin
-
          ReabrePed := '';
          if dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ID_PEDIDO_VENDA').AsInteger > 0 then
             begin
@@ -4244,13 +4251,23 @@ begin
                 memoRespWS.Lines.Text := ACBrNFe1.WebServices.Enviar.RetornoWS;
                 LoadXML(ACBrNFe1.WebServices.Enviar.RetWS, WBResposta);
 
-                Ambiente   := TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb);
+                // Comentado por Maxsuel Victor, 28/09/2025
+
+                    {Ambiente   := TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb);
+                    Versao     := ACBrNFe1.WebServices.Enviar.verAplic;
+                    Status     := IntToStr(ACBrNFe1.WebServices.Enviar.cStat);
+                    Estado     := IntToStr(ACBrNFe1.WebServices.Enviar.cUF);
+                    Motivo     := ACBrNFe1.WebServices.Enviar.xMotivo;
+                    //cMsg       := IntToStr(ACBrNFe1.WebServices.Retorno.cMsg);
+                    //xMsg       := ACBrNFe1.WebServices.Retorno.xMsg;
+                    Recibo     := ACBrNFe1.WebServices.Enviar.Recibo;
+                    Protocolo  := ACBrNFe1.WebServices.Enviar.Protocolo;  }
+
+                Ambiente   := TpAmbToStr(ACBrNFe1.WebServices.Enviar.TpAmb);
                 Versao     := ACBrNFe1.WebServices.Enviar.verAplic;
                 Status     := IntToStr(ACBrNFe1.WebServices.Enviar.cStat);
                 Estado     := IntToStr(ACBrNFe1.WebServices.Enviar.cUF);
                 Motivo     := ACBrNFe1.WebServices.Enviar.xMotivo;
-                //cMsg       := IntToStr(ACBrNFe1.WebServices.Retorno.cMsg);
-                //xMsg       := ACBrNFe1.WebServices.Retorno.xMsg;
                 Recibo     := ACBrNFe1.WebServices.Enviar.Recibo;
                 Protocolo  := ACBrNFe1.WebServices.Enviar.Protocolo;
 
@@ -4263,12 +4280,16 @@ begin
 
                 MemoDados.Lines.Add('');
                 MemoDados.Lines.Add('Envio NFCe');
+                MemoDados.Lines.Add('Chave: ' + ACBrNFe1.NotasFiscais[0].NFe.procNFe.chNFe);
                 MemoDados.Lines.Add('tpAmb: ' + TpAmbToStr(ACBrNFe1.WebServices.Enviar.TpAmb));
                 MemoDados.Lines.Add('verAplic: ' + ACBrNFe1.WebServices.Enviar.verAplic);
                 MemoDados.Lines.Add('cStat: ' + IntToStr(ACBrNFe1.WebServices.Enviar.cStat));
                 MemoDados.Lines.Add('cUF: ' + IntToStr(ACBrNFe1.WebServices.Enviar.cUF));
                 MemoDados.Lines.Add('xMotivo: ' + ACBrNFe1.WebServices.Enviar.xMotivo);
                 MemoDados.Lines.Add('Recibo: '+ ACBrNFe1.WebServices.Enviar.Recibo);
+                MemoDados.Lines.Add('Protocolo: ' + ACBrNFe1.WebServices.Enviar.Protocolo);
+
+
 
              end;
 

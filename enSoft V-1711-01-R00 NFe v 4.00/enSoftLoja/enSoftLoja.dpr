@@ -528,7 +528,8 @@ uses
   CSU_UN_M_PED in 'Estatistica\CSU_UN_M_PED.pas' {CSU_FM_M_PED},
   PCP_RN_M_OPR in 'Movimentacoes\PCP_Loja\PCP_RN_M_OPR.pas',
   PCP_RN_M_OPB in 'Movimentacoes\PCP_Loja\PCP_RN_M_OPB.pas',
-  CSU_UN_M_VPR in '..\enSoftPadrao\Estatistica\CSU_UN_M_VPR.pas' {CSU_FM_M_VPR};
+  CSU_UN_M_VPR in '..\enSoftPadrao\Estatistica\CSU_UN_M_VPR.pas' {CSU_FM_M_VPR},
+  FAT_UN_M_PED_SQA in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_SQA.pas' {FAT_FM_M_PED_SQA};
 
 {$R *.res}
 

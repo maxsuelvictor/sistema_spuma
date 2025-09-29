@@ -112,10 +112,6 @@ object frmNFCe: TfrmNFCe
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'Configura'#231#245'es'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object PageControl4: TPageControl
           Left = 0
           Top = 0
@@ -127,10 +123,6 @@ object frmNFCe: TfrmNFCe
           TabOrder = 0
           object TabSheet3: TTabSheet
             Caption = 'Certificado'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label43: TLabel
               Left = 9
               Top = 8
@@ -254,10 +246,6 @@ object frmNFCe: TfrmNFCe
           object TabSheet4: TTabSheet
             Caption = 'Geral'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object GroupBox3: TGroupBox
               Left = 0
               Top = 4
@@ -455,10 +443,6 @@ object frmNFCe: TfrmNFCe
           object TabSheet7: TTabSheet
             Caption = 'WebService'
             ImageIndex = 2
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object GroupBox4: TGroupBox
               Left = 0
               Top = 4
@@ -692,10 +676,6 @@ object frmNFCe: TfrmNFCe
           object TabSheet12: TTabSheet
             Caption = 'Emitente'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label12: TLabel
               Left = 8
               Top = 4
@@ -882,10 +862,6 @@ object frmNFCe: TfrmNFCe
           object TabSheet13: TTabSheet
             Caption = 'Arquivos'
             ImageIndex = 4
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object sbPathNFe: TSpeedButton
               Left = 240
               Top = 130
@@ -1158,10 +1134,6 @@ object frmNFCe: TfrmNFCe
       object TabSheet2: TTabSheet
         Caption = 'DANFe'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label7: TLabel
           Left = 8
           Top = 8
@@ -1214,10 +1186,6 @@ object frmNFCe: TfrmNFCe
       object TabSheet14: TTabSheet
         Caption = 'Email'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label3: TLabel
           Left = 8
           Top = 8
@@ -1335,14 +1303,9 @@ object frmNFCe: TfrmNFCe
         ActivePage = tsNFCe
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 348
         object tsNFe: TTabSheet
           Caption = 'NF-e'
           Enabled = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 320
           object btnImprimir: TButton
             Left = 192
             Top = 156
@@ -1572,10 +1535,6 @@ object frmNFCe: TfrmNFCe
         object tsNFCe: TTabSheet
           Caption = 'NFC-e'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 23
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object lblChave: TLabel
             Left = 10
             Top = 234
@@ -1672,10 +1631,6 @@ object frmNFCe: TfrmNFCe
             TabPosition = tpBottom
             object tsItens: TTabSheet
               Caption = 'Itens'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object dgItens: TwwDBGrid
                 AlignWithMargins = True
                 Left = 2
@@ -1724,10 +1679,6 @@ object frmNFCe: TfrmNFCe
             object tsTitulos: TTabSheet
               Caption = 'T'#237'tulos'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object grdTitulos: TwwDBGrid
                 AlignWithMargins = True
                 Left = 2
@@ -1777,10 +1728,6 @@ object frmNFCe: TfrmNFCe
             object tsInfFiscal: TTabSheet
               Caption = 'Informa'#231#227'o fiscal'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object txtNfeObs: TDBMemo
                 Left = 0
                 Top = 0
@@ -1974,10 +1921,6 @@ object frmNFCe: TfrmNFCe
       TabOrder = 1
       object TabSheet5: TTabSheet
         Caption = 'Respostas'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 229
         object MemoResp: TMemo
           Left = 0
           Top = 0
@@ -1986,16 +1929,11 @@ object frmNFCe: TfrmNFCe
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 0
-          ExplicitHeight = 229
         end
       end
       object TabSheet6: TTabSheet
         Caption = 'XML Resposta'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object WBResposta: TWebBrowser
           Left = 0
           Top = 0
@@ -2015,10 +1953,6 @@ object frmNFCe: TfrmNFCe
       object TabSheet8: TTabSheet
         Caption = 'Log'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object memoLog: TMemo
           Left = 0
           Top = 0
@@ -2032,10 +1966,6 @@ object frmNFCe: TfrmNFCe
       object TabSheet9: TTabSheet
         Caption = 'NFe'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object trvwNFe: TTreeView
           Left = 0
           Top = 0
@@ -2049,10 +1979,6 @@ object frmNFCe: TfrmNFCe
       object TabSheet10: TTabSheet
         Caption = 'Retorno Completo WS'
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object memoRespWS: TMemo
           Left = 0
           Top = 0
@@ -2066,10 +1992,6 @@ object frmNFCe: TfrmNFCe
       object Dados: TTabSheet
         Caption = 'Dados'
         ImageIndex = 5
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object MemoDados: TMemo
           Left = 0
           Top = 0
@@ -2083,10 +2005,6 @@ object frmNFCe: TfrmNFCe
       object TabSheet11: TTabSheet
         Caption = 'RetornoConsulta NFe 2.01'
         ImageIndex = 6
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object TreeViewRetornoConsulta: TTreeView
           Left = 0
           Top = 0

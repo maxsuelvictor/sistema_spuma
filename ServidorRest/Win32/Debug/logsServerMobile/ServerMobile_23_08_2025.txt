@@ -1,0 +1,1 @@
+ Erro no FAT_CD_M_PED,  msg: inserção ou atualização em tabela "fat_tb_m_ped" viola restrição de chave estrangeira "fk_fat_m_ped__cad_c_cpg"

@@ -1791,6 +1791,10 @@
             <Form>CSU_FM_M_VPR</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_SQA.pas">
+            <Form>FAT_FM_M_PED_SQA</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -1855,9 +1859,9 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\dclcxPivotGridOLAPRS21.bpl">ExpressPivotGrid OLAP by Developer Express Inc.</Excluded_Packages>
                     <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\dclcxSchedulerTreeBrowserRS21.bpl">ExpressScheduler tree browser by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k210.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k210.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp210.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k210.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfsbde21.bpl">File C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfsbde21.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfrxbde21.bpl">File C:\Program Files (x86)\FastReports\FastReport 5\LibD21\dclfrxbde21.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
