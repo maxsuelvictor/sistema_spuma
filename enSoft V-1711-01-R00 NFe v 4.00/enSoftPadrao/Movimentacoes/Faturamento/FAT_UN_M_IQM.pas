@@ -707,7 +707,7 @@ begin
      end;
 
 
-  if (cbbPesquisa.ItemIndex in [1,2,3,4,6,7]) then
+  if (cbbPesquisa.ItemIndex in [1,2,3,4,6,7,8]) then
     begin
      dmGeral.FAT_CD_M_IQM.Close;
      dmGeral.FAT_CD_M_IQM.Data :=

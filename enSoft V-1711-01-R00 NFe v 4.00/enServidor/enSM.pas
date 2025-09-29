@@ -56722,6 +56722,17 @@ begin
                ' where  mite.id_iqm=iqm.id_iqm and '+
                Format(' upper(ite.descricao) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))])+')';
       end
+   else if Input[0] = 8 then
+      begin
+        if Trim(VarToStr(Input[1])) = '' then
+           FAT_SQ_M_IQM.CommandText := enSqlFatIqm + ' WHERE 1=2 '
+        else
+           FAT_SQ_M_IQM.CommandText := enSqlFatIqm +
+               ' WHERE exists (select mite.* from fat_tb_m_iqm_ite mite ' +
+               ' left outer join cad_tb_c_ite ite on ite.id_item=mite.id_item '+
+               ' where  mite.id_iqm=iqm.id_iqm  '+
+               '   and mite.num_lote = ''' + VarToStr(Input[1]) +''' )';
+      end
    else if Input[0] = 90 then
       begin
         FAT_SQ_M_IQM.CommandText := enSqlFatIqm +
