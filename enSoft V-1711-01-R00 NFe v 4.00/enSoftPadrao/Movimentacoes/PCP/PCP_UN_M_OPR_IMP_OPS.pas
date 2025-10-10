@@ -30,6 +30,7 @@ type
     PCP_FR_M_OPR_ITE: TfrxReport;
     PCP_FR_M_OPR_ITE_BOR: TfrxReport;
     PCP_FR_M_OPR_ITE_MTB: TfrxReport;
+    frxReport1: TfrxReport;
     procedure FormShow(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -234,12 +235,12 @@ begin
             if rgSetor.ItemIndex = 1 then
                begin
                  TfrxReportPage(PCP_FR_M_OPR_ITE_COL.FindObject('Page1')).Visible := false;
-                 TfrxReportPage(PCP_FR_M_OPR_ITE_COL.FindObject('Page2')).Visible := true;
+                 TfrxReportPage(PCP_FR_M_OPR_ITE_COL.FindObject('Page3')).Visible := true;
                end;
             if rgSetor.ItemIndex = 2 then
                begin
                   TfrxReportPage(PCP_FR_M_OPR_ITE_COL.FindObject('Page1')).Visible := true;
-                  TfrxReportPage(PCP_FR_M_OPR_ITE_COL.FindObject('Page2')).Visible := false;
+                  TfrxReportPage(PCP_FR_M_OPR_ITE_COL.FindObject('Page3')).Visible := false;
                end;
 
             PCP_FR_M_OPR_ITE_COL.Variables['xCor'] := QuotedStr(dmgeral.CAD_CD_C_PAR_CTR.FieldByName('ativa_cor').AsString);

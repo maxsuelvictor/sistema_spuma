@@ -3449,7 +3449,7 @@ begin
             // 02/09/2025 Maxsuel Victor... esse if é pra testar se
                // realmente o nro do RECIBO está retornando da sefaz.
                // depois será retirado.
-            if trim(Recibo) <> '' then
+            if trim(Recibo) = '' then
                begin
                  ShowMessage('O nro do recibo não retornou da sefaz.');
                  Recibo := '0';
@@ -3473,29 +3473,29 @@ begin
             MemoDados.Lines.Add('Recibo: '+ Recibo);
             MemoDados.Lines.Add('Protocolo: ' + Protocolo);
 
-            // 01/09/25 , Maxsuel Victor : comentado devido modo sincrono
+                        // 01/09/25 , Maxsuel Victor : comentado devido modo sincrono
 
-            {Ambiente   := TpAmbToStr(NFe.WebServices.Retorno.TpAmb);
-            Versao     := NFe.WebServices.Retorno.verAplic;
-            Status     := IntToStr(NFe.WebServices.retorno.cStat);
-            Estado     := IntToStr(NFe.WebServices.retorno.cUF);
-            Motivo     := NFe.WebServices.Retorno.xMotivo;
-            cMsg       := IntToStr(NFe.WebServices.Retorno.cMsg);
-            xMsg       := NFe.WebServices.Retorno.xMsg;
-            Recibo     := NFe.WebServices.Retorno.Recibo;
-            Protocolo  := NFe.WebServices.Retorno.Protocolo;
-            chave      := NFe.WebServices.Retorno.ChaveNFe;
+                        {Ambiente   := TpAmbToStr(NFe.WebServices.Retorno.TpAmb);
+                        Versao     := NFe.WebServices.Retorno.verAplic;
+                        Status     := IntToStr(NFe.WebServices.retorno.cStat);
+                        Estado     := IntToStr(NFe.WebServices.retorno.cUF);
+                        Motivo     := NFe.WebServices.Retorno.xMotivo;
+                        cMsg       := IntToStr(NFe.WebServices.Retorno.cMsg);
+                        xMsg       := NFe.WebServices.Retorno.xMsg;
+                        Recibo     := NFe.WebServices.Retorno.Recibo;
+                        Protocolo  := NFe.WebServices.Retorno.Protocolo;
+                        chave      := NFe.WebServices.Retorno.ChaveNFe;
 
-            MemoDados.Lines.Add('Envio NFe');
-            MemoDados.Lines.Add('Ambiente: ' + Ambiente );
-            MemoDados.Lines.Add('Versão: '   + Versao);
-            MemoDados.Lines.Add('Status: '   + Status);
-            MemoDados.Lines.Add('Estado: '   + Estado);
-            MemoDados.Lines.Add('Motivo: '   + Motivo);
-            MemoDados.Lines.Add('cMsg: '     + cMsg);
-            MemoDados.Lines.Add('xMsg: '     + xMsg);
-            MemoDados.Lines.Add('Nº Recibo: '+ Recibo);
-            MemoDados.Lines.Add('Nº Protocolo: '+ Protocolo); }
+                        MemoDados.Lines.Add('Envio NFe');
+                        MemoDados.Lines.Add('Ambiente: ' + Ambiente );
+                        MemoDados.Lines.Add('Versão: '   + Versao);
+                        MemoDados.Lines.Add('Status: '   + Status);
+                        MemoDados.Lines.Add('Estado: '   + Estado);
+                        MemoDados.Lines.Add('Motivo: '   + Motivo);
+                        MemoDados.Lines.Add('cMsg: '     + cMsg);
+                        MemoDados.Lines.Add('xMsg: '     + xMsg);
+                        MemoDados.Lines.Add('Nº Recibo: '+ Recibo);
+                        MemoDados.Lines.Add('Nº Protocolo: '+ Protocolo); }
 
             dmGeral.BUS_CD_M_NFE_CXA.Edit;
             //dmGeral.BUS_CD_M_NFE_CXA.FieldByName('NFE_RECIBO').AsString    := 'Testes';
