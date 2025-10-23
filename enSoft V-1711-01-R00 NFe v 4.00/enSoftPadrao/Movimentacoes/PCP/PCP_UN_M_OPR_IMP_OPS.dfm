@@ -2,8 +2,8 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
-  ClientHeight = 188
-  ClientWidth = 436
+  ClientHeight = 205
+  ClientWidth = 447
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 436
+    Width = 447
     Height = 30
     Align = alTop
     Color = 3355443
@@ -28,7 +28,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
     object Label1: TLabel
       Left = 1
       Top = 1
-      Width = 434
+      Width = 445
       Height = 28
       Align = alClient
       Alignment = taCenter
@@ -48,13 +48,12 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   object pnlPrincipal: TPanel
     Left = 0
     Top = 30
-    Width = 436
-    Height = 158
+    Width = 447
+    Height = 175
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
     ExplicitWidth = 432
-    ExplicitHeight = 175
     object pnlDados: TPanel
       Left = 1
       Top = 16
