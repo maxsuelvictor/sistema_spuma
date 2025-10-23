@@ -2,8 +2,8 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
-  ClientHeight = 205
-  ClientWidth = 432
+  ClientHeight = 188
+  ClientWidth = 436
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,17 +18,17 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 432
+    Width = 436
     Height = 30
     Align = alTop
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 690
+    ExplicitWidth = 432
     object Label1: TLabel
       Left = 1
       Top = 1
-      Width = 430
+      Width = 434
       Height = 28
       Align = alClient
       Alignment = taCenter
@@ -48,13 +48,13 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   object pnlPrincipal: TPanel
     Left = 0
     Top = 30
-    Width = 432
-    Height = 175
+    Width = 436
+    Height = 158
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 690
-    ExplicitHeight = 215
+    ExplicitWidth = 432
+    ExplicitHeight = 175
     object pnlDados: TPanel
       Left = 1
       Top = 16
@@ -4948,7 +4948,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       '     '
       'procedure Page1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
-      '  if (<xCor> = '#39'False'#39') and (<xTamanho> = '#39'False'#39') then'
+      '  {if (<xCor> = '#39'False'#39') and (<xTamanho> = '#39'False'#39') then'
       '     begin'
       '       MemoC.visible := false;'
       '       MemoT.visible := false;'
@@ -4991,7 +4991,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       
         '       MasterC.Left := MasterC.Left + MasterT.width;            ' +
         '                                            '
-      '     end;              '
+      '     end;  }                '
       'end;'
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
@@ -5031,6 +5031,13 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       'procedure PageHeader1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       '  //corCinza := false;  '
+      'end;'
+      ''
+      
+        'procedure Memo14OnPreviewClick(Sender: TfrxView; Button: TMouseB' +
+        'utton; Shift: Integer; var Modified: Boolean);'
+      'begin'
+      ''
       'end;'
       ''
       'begin'
@@ -5487,6 +5494,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           Top = 24.692950000000000000
           Width = 15.118058980000000000
           Height = 18.897650000000000000
+          Visible = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -5498,7 +5506,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           ParentFont = False
         end
         object MemoQP: TfrxMemoView
-          Left = 459.161292100000000000
+          Left = 466.161292100000000000
           Top = 33.141775000000000000
           Width = 59.040816360000000000
           Height = 18.897650000000000000
@@ -5575,7 +5583,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           ParentFont = False
         end
         object Memo9: TfrxMemoView
-          Left = 535.905875510000000000
+          Left = 537.905875510000000000
           Top = 26.897650000000000000
           Width = 45.354298980000000000
           Height = 34.015770000000000000
@@ -5591,7 +5599,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           ParentFont = False
         end
         object Memo16: TfrxMemoView
-          Left = 595.047650510000000000
+          Left = 597.047650510000000000
           Top = 26.897650000000000000
           Width = 45.354298980000000000
           Height = 34.015770000000000000
@@ -5657,6 +5665,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           Top = 33.472486100000000000
           Width = 43.922696360000000000
           Height = 18.897637800000000000
+          OnPreviewClick = 'Memo14OnPreviewClick'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -5797,14 +5806,15 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
         object MasterC: TfrxMemoView
           Left = 391.663004620000000000
           Top = 2.779530000000000000
-          Width = 82.077565380000000000
+          Width = 89.636625380000000000
           Height = 15.118120000000000000
+          StretchMode = smMaxHeight
           DataField = 'int_nomecor'
           DataSet = PCP_DB_M_OPR_OPP
           DataSetName = 'PCP_DB_M_OPR_OPP'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -11
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
@@ -5820,7 +5830,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           DataSetName = 'PCP_DB_M_OPR_OPP'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -11
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -5846,7 +5856,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           ParentFont = False
         end
         object MasterQP: TfrxMemoView
-          Left = 478.401980000000000000
+          Left = 485.401980000000000000
           Top = 2.779530000000000000
           Width = 39.800128460000000000
           Height = 15.118120000000000000
@@ -5854,7 +5864,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           DataSetName = 'PCP_DB_M_OPR_OPP'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -11
           Font.Name = 'Arial Narrow'
           Font.Style = []
           HAlign = haRight
@@ -5879,7 +5889,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           DataSetName = 'PCP_DB_M_OPR_OPP'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -11
           Font.Name = 'Arial Narrow'
           Font.Style = []
           Memo.UTF8W = (
@@ -5887,13 +5897,13 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           ParentFont = False
         end
         object Shape2: TfrxShapeView
-          Left = 530.236550000000000000
+          Left = 532.236550000000000000
           Top = 1.000000000000000000
           Width = 56.692950000000000000
           Height = 22.677180000000000000
         end
         object Shape3: TfrxShapeView
-          Left = 587.488560000000000000
+          Left = 589.488560000000000000
           Top = 1.000000000000000000
           Width = 60.472480000000000000
           Height = 22.677180000000000000
