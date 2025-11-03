@@ -1057,11 +1057,11 @@ begin
             FAT_CD_M_PED_ITE.FieldByName('per_desconto').AsCurrency      := ItemObj.GetValue<Double>('per_desconto');
             FAT_CD_M_PED_ITE.FieldByName('vlr_desconto').AsCurrency      := ItemObj.GetValue<Double>('vlr_desconto');
             FAT_CD_M_PED_ITE.FieldByName('vlr_unitario').AsCurrency      := ItemObj.GetValue<Double>('vlr_unitario');
-            FAT_CD_M_PED_ITE.FieldByName('per_desc_basico').AsString     := ItemObj.GetValue<string>('per_desc_basico');
-            FAT_CD_M_PED_ITE.FieldByName('vlr_desc_basico').AsCurrency   := ItemObj.GetValue<Double>('vlr_desc_basico');
-            FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency := ItemObj.GetValue<Double>('vlr_desc_especial');
-            FAT_CD_M_PED_ITE.FieldByName('per_desc_especial').AsString   := ItemObj.GetValue<string>('per_desc_especial');
-            FAT_CD_M_PED_ITE.FieldByName('pcp_obs_item').AsString        := ItemObj.GetValue<string>('desc_personalizado');
+            FAT_CD_M_PED_ITE.FieldByName('per_desc_basico').AsCurrency     := ItemObj.GetValue<Double>('per_desc_basico');
+            FAT_CD_M_PED_ITE.FieldByName('vlr_desc_basico').AsCurrency     := ItemObj.GetValue<Double>('vlr_desc_basico');
+            FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency   := ItemObj.GetValue<Double>('vlr_desc_especial');
+            FAT_CD_M_PED_ITE.FieldByName('per_desc_especial').AsCurrency   := ItemObj.GetValue<Double>('per_desc_especial');
+            FAT_CD_M_PED_ITE.FieldByName('pcp_obs_item').AsString          := ItemObj.GetValue<string>('desc_personalizado');
             FAT_CD_M_PED_ITE.Post;
           end;
 
