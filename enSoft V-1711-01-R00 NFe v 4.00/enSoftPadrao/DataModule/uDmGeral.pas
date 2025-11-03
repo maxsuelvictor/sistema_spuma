@@ -9,7 +9,10 @@ uses
   vcl.wwdbigrd,  vcl.wwdbgrid,Vcl.Graphics,IdHTTP,System.Json,
   frxClass, frxDBSet, frxExportPDF, frxExportXLS,System.IniFiles,
   Data.DbxHTTPLayer,uProxy, ACBrBoleto, ACBrBoletoFCFR, ACBrBase,pcnConversao,
-  ACBrMail;
+  ACBrMail, IdServerIOHandler, IdSSL, IdSSLOpenSSL, IdMessage, IdIOHandler,
+  IdIOHandlerSocket, IdIOHandlerStack, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase, IdMessageClient,
+  IdSMTPBase, IdSMTP, IdSSLOpenSSLHeaders;
 
 type
    TRGBTripleArray = array[0..32767] of TRGBTriple;
@@ -11892,6 +11895,10 @@ type
     FAT_CD_M_PED_SQAid_usu_liberacao: TIntegerField;
     FAT_CD_M_PED_SQAid_registro: TIntegerField;
     BUS_CD_M_PED_SAQ: TClientDataSet;
+    IdSMTP: TIdSMTP;
+    IdSSLIOHandlerSocketOpenSSL: TIdSSLIOHandlerSocketOpenSSL;
+    IdMessage: TIdMessage;
+    IdServerIOHandlerSSLOpenSSL1: TIdServerIOHandlerSSLOpenSSL;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);
@@ -13280,7 +13287,7 @@ type
     procedure RedimensionarImagem(Imagen:TBitmap; Ancho, Alto: Integer);
     function  VerificarLicenca:Integer;
     function  BuscarLicensa:Integer;
-
+    procedure EnviarEmail(Assunto, corpo: String; msgOk:boolean);
   end;
 
 var
@@ -25717,6 +25724,92 @@ begin
                 cds_itens_ant.next;
               end;
           end;
+end;
+
+procedure TdmGeral.EnviarEmail(Assunto, corpo: String; msgOk:boolean);
+var
+  SMTP: TIdSMTP;
+  SSL: TIdSSLIOHandlerSocketOpenSSL;
+  Msg: TIdMessage;
+begin
+  SMTP := TIdSMTP.Create(nil);
+  SSL  := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  Msg  := TIdMessage.Create(nil);
+
+  if not IdSSLOpenSSLHeaders.Load() then
+     begin
+       ShowMessage('Falha ao carregar OpenSSL');
+       exit;
+     end;
+
+  try
+    // Configura SSL/TLS
+   {    SSL.Destination := 'smtp.hostinger.com:465';
+    SSL.Host := 'smtp.hostinger.com';
+    SSL.Port := 465;
+    SSL.SSLOptions.Method := sslvTLSv1_2; // TLS moderno
+    SSL.SSLOptions.Mode := sslmClient;
+
+    // Configura SMTP
+    SMTP.IOHandler := SSL;
+    SMTP.Host := 'smtp.hostinger.com';
+    SMTP.Port := 465;
+
+    //SMTP.Username := 'admin@cgloboapp.com.br';  // <-- coloque seu e-mail completo aqui
+    //SMTP.Password := '@Amm707#';         // <-- coloque sua senha correta
+    }
+
+     // Configura SSL/TLS
+    SSL.Destination := 'smtps.uhserver.com:465';
+    SSL.Host := 'smtps.uhserver.com';
+    SSL.Port := 465;
+    SSL.SSLOptions.Method := sslvTLSv1_2; // TLS moderno
+    SSL.SSLOptions.Mode := sslmClient;
+
+    // Configura SMTP
+    SMTP.IOHandler := SSL;
+    SMTP.Host := 'smtps.uhserver.com';
+    SMTP.Port := 465;
+
+
+    SMTP.Username := 'qualidade@colchoesglobo.com.br';  // <-- coloque seu e-mail completo aqui
+    SMTP.Password := '@cGlobo!';         // <-- coloque sua senha correta@cGlobo!
+
+    SMTP.UseTLS := utUseImplicitTLS;            // SSL implícito (porta 465)
+    SMTP.ConnectTimeout := 10000;
+
+    // Monta mensagem de teste
+    //Msg.From.Address := 'admin@cgloboapp.com.br';   // remetente
+    Msg.From.Address := 'qualidade@colchoesglobo.com.br';   // remetente
+    Msg.Recipients.EMailAddresses := 'maxsuelvictor@hotmail.com'; // destinatário de teste
+
+    Msg.Subject   := Assunto;
+    Msg.Body.Text := Corpo;
+
+    // Msg.Subject := 'Teste SMTP Delphi XE7 - Hostinger';
+    // Msg.Body.Text := 'Este é um teste de envio SMTP feito em Delphi XE7 via smtp.hostinger.com.';
+
+    try
+      SMTP.Connect;
+      if SMTP.Connected then
+      begin
+        SMTP.Send(Msg);
+        if msgOk = true then
+           ShowMessage('E-mail enviado com sucesso!');
+      end
+      else
+        ShowMessage('Falha ao conectar no servidor SMTP.');
+    except
+      on E: Exception do
+        ShowMessage('Erro ao enviar e-mail: ' + E.Message);
+    end;
+
+  finally
+    SMTP.Disconnect;
+    Msg.Free;
+    SSL.Free;
+    SMTP.Free;
+  end;
 end;
 
 function TdmGeral.EST_CD_C_ITE_PRE_TesValObrigatorio(

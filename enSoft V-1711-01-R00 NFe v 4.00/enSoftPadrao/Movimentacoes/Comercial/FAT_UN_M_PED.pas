@@ -7866,6 +7866,7 @@ end;
 procedure TFAT_FM_M_PED.txtBuscaItemExit(Sender: TObject);
 var
   id_item, desc, und, id_busca_item : string;
+  assunto, corpo: String;
 begin
   inherited;
   dmGeral.BUS_CD_C_ITE.Close;
@@ -8008,6 +8009,30 @@ begin
              dmGeral.FAT_CD_M_PED_ITE.FieldByName('INT_SERTERCEIRO').text := '';
              exit;
           end;
+     end
+  else
+     begin
+       // 31/10/2025 - Maxsuel Victor
+         // Esse método utiliza as DLL - libeay32 e ssleay32 ( de 2021 ).
+
+       {if dmGeral.BUS_CD_C_ITE.FieldByName('sgq_personalizado').AsBoolean then
+          begin
+            if dmGeral.FAT_CD_M_PED.FieldByName('id_vendedor').AsInteger <> xFuncionario then
+               begin
+                 dmGeral.BusFuncionario4(0,IntToStr(xFuncionario));
+                 assunto:=  'Pedido com item personalizado não permitido';
+                 corpo  :=  'Pedido: ' + dmGeral.FAT_CD_M_PED.FieldByName('id_vendedor').Text + #13 +
+                            'Representante do pedido: ' + dmGeral.FAT_CD_M_PED.FieldByName('id_vendedor').Text + ' - ' +
+                                                     dmGeral.FAT_CD_M_PED.FieldByName('int_nomefun').Text + #13 +
+                            'Usuário responsável pela violação: ' + dmGeral.FAT_CD_M_PED.FieldByName('id_vendedor').Text + ' - ' +
+                                                                    dmGeral.BUS_CD_C_FU4.FieldByName('nome').text + #13 +
+                            'Data e Hora: ' + DateToStr(date) + ' - ' + TimeToStr(time) + #13 + #13+
+                            'Atenção: VERIFIQUE SE REALMENTE FOI EFETIVADO NO PEDIDO';
+                 dmGeral.EnviarEmail(Assunto, corpo,  false);
+                 assunto := '';
+                 corpo := '';
+               end;
+          end; }
      end;
 
 
