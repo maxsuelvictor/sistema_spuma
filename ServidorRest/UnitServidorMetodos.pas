@@ -1062,6 +1062,15 @@ begin
             FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency   := ItemObj.GetValue<Double>('vlr_desc_especial');
             FAT_CD_M_PED_ITE.FieldByName('per_desc_especial').AsCurrency   := ItemObj.GetValue<Double>('per_desc_especial');
             FAT_CD_M_PED_ITE.FieldByName('pcp_obs_item').AsString          := ItemObj.GetValue<string>('desc_personalizado');
+
+            // Maxsuel Victor , 04/11/2025
+            // Esse if é devido o app de vendas, deixar o vlr liquido do pedido sem a soma do vlr_desc_especial,
+               // pois no pedido do enSoftSpuma isso já é somado.
+            if FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency > 0 then
+               begin
+                 FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency +
+                                                                                 FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency;
+               end;
             FAT_CD_M_PED_ITE.Post;
           end;
 
