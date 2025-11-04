@@ -567,6 +567,7 @@ begin
 
           jso.AddPair(TJsonPair.Create('id_grupo',CAD_CD_C_GRU.FieldByName('id_grupo').AsString));
           jso.AddPair(TJsonPair.Create('descricao',CAD_CD_C_GRU.FieldByName('descricao').AsString));
+          jso.AddPair(TJsonPair.Create('tipo_item',CAD_CD_C_GRU.FieldByName('tipo_item').AsString));
           Lista.AddElement(jso);
           CAD_CD_C_GRU.Next;
           //unitformPrincipal.Form1.mmTexto.Lines.Add('Get das cores inicio sincronizada pegando dados!');
@@ -678,6 +679,7 @@ begin
       jso := TJsonObject.Create;
       jso.AddPair('id_item', CAD_CD_C_ITE.FieldByName('id_item').AsString);
       jso.AddPair('descricao', CAD_CD_C_ITE.FieldByName('descricao').AsString);
+      jso.AddPair('id_grupo', CAD_CD_C_ITE.FieldByName('id_grupo').AsString);
       jso.AddPair('fantasia', CAD_CD_C_ITE.FieldByName('fantasia').AsString);
       jso.AddPair('ativo', CAD_CD_C_ITE.FieldByName('ativo').AsString);
       jso.AddPair('preco_avista', CAD_CD_C_ITE.FieldByName('preco_avista').AsString);
