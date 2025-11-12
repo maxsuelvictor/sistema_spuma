@@ -616,7 +616,11 @@ begin
         //Ambiente := TpAmbToStr(MDFE.WebServices.Enviar.tpAmb);
 
             // Maxsuel Victor, 08-05-25 - Agora é utilizado TipoAmbienteToStr da Unit: ACBrXmlBase
-            Ambiente := TipoAmbienteToStr(MDFE.WebServices.Enviar.tpAmb);
+               // Maxsuel Victor, 10-11-25 - foi comentado devido a erro, tive que voltar o TpAmbToStr.
+               // Ambiente := TipoAmbienteToStr(MDFE.WebServices.Enviar.tpAmb);
+
+            Ambiente := TpAmbToStr(MDFE.WebServices.Enviar.tpAmb);
+
             //chave     := MDFE.Manifestos[0].MDFe.procMDFe.chDFe;
             //Protocolo := MDFE.Manifestos[0].MDFe.procMDFe.nProt;
             //----------------------------------------------------------
@@ -1016,7 +1020,10 @@ begin
 
   // Comentado em 30/06/2025, Maxsuel Victor, devido atualização do ACBr e utilização do ACBrXMLDocument
      // MemoDados.Lines.Add('tpAmb: '    + TpAmbToStr(MDFE.WebServices.StatusServico.tpAmb));
-  MemoDados.Lines.Add('tpAmb: '    + TipoAmbienteToStr(MDFE.WebServices.StatusServico.tpAmb));
+        // Comentado em 10/11/2025, Maxsuel Victor, tive que retornar o TpAmbToStr
+        // MemoDados.Lines.Add('tpAmb: '    + TipoAmbienteToStr(MDFE.WebServices.StatusServico.tpAmb));
+
+  MemoDados.Lines.Add('tpAmb: '    + TpAmbToStr(MDFE.WebServices.StatusServico.tpAmb));
   MemoDados.Lines.Add('verAplic: ' + MDFE.WebServices.StatusServico.verAplic);
   MemoDados.Lines.Add('cStat: '    + IntToStr(MDFE.WebServices.StatusServico.cStat));
   MemoDados.Lines.Add('xMotivo: '  + MDFE.WebServices.StatusServico.xMotivo);
