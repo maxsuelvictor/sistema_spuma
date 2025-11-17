@@ -1037,6 +1037,7 @@ begin
             ItemObj := ItensArray.Items[j] as TJSONObject;
             FAT_CD_M_PED_ITE.Append;
             FAT_CD_M_PED_ITE.FieldByName('id_item').AsInteger := ItemObj.GetValue<Integer>('id_item');
+            FAT_CD_M_PED_ITE.FieldByName('id_busca_item').AsString := FAT_CD_M_PED_ITE.FieldByName('id_item').AsString;
             FAT_CD_M_PED_ITE.FieldByName('id_pedido').AsInteger := FAT_CD_M_PED.FieldByName('id_pedido').AsInteger;
 
             cad_cd_c_seq.locate('id_tabela','FAT_TB_M_NFE_ITE',[]);
