@@ -1527,6 +1527,9 @@ begin
   dmGeral.FAT_CD_M_PED.FieldByName('PER_DESC_SERVICOS').AsCurrency := 0;
   dmGeral.FAT_CD_M_PED.FieldByName('PER_DESC_TERCEIRO').AsCurrency := 0;
 
+  // Peso dos itens
+  dmGeral.FAT_CD_M_PED.FieldByName('pes_liquido_itens').AsCurrency := 0;
+
 
   try
 
@@ -1572,6 +1575,9 @@ begin
             begin
               dmGeral.BusItens(0,dmGeral.FAT_CD_M_PED_ITE.FieldByName('ID_ITEM').AsString);
 
+              dmGeral.FAT_CD_M_PED.FieldByName('pes_liquido_itens').AsCurrency :=
+                     dmGeral.FAT_CD_M_PED.FieldByName('pes_liquido_itens').AsCurrency +
+                     dmGeral.FAT_CD_M_PED_ITE.FieldByName('peso_total_item').AsCurrency;
 
                dmGeral.FAT_CD_M_PED.FieldByName('VLR_LIQUIDO').AsCurrency :=
 

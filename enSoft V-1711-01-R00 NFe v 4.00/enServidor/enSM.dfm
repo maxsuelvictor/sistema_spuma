@@ -6462,30 +6462,30 @@
       '     end  as int_sitOrd, '#13#10#13#10#13#10'cli.doc_ie_identidade as int_ie_r' +
       'g_cli,'#13#10#13#10'reg.descricao as int_nomereg,OPR.num_lote as int_numlo' +
       'teopr,'#13#10'mta.nome as int_nomemta,'#13#10'fun.tel_movel as  int_telmovel' +
-      '_ven, fun.tel_fixo as int_telfixo_ven'#13#10'     '#13#10#13#10' --            (' +
-      'lpad(CAST(EXTRACT(HOUR FROM PED.HOR_PEDIDO) as varchar(2)),2,'#39'0'#39 +
-      ')||'#39':'#39'||'#13#10' --             lpad(CAST(EXTRACT(MINUTE FROM PED.HOR_' +
-      'PEDIDO) as varchar(2)),2,'#39'0'#39'))  AS INT_HORA '#13#10'FROM FAT_TB_M_PED ' +
-      'PED'#13#10'LEFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIENTE = PED.ID' +
-      '_CLIENTE'#13#10'LEFT OUTER JOIN CAD_TB_C_TME TME ON TME.ID_TIPO_MOV_ES' +
-      'TOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FU' +
-      'N ON FUN.ID_FUNCIONARIO=PED.ID_VENDEDOR'#13#10'LEFT OUTER JOIN CAD_TB_' +
-      'C_CPG CPG ON CPG.ID_CONDICAO_PAG=PED.ID_CONDICAO_PAG'#13#10'LEFT OUTER' +
-      ' JOIN CAD_TB_C_FUN ATE ON ATE.ID_FUNCIONARIO=PED.ID_ATENDENTE'#13#10'L' +
-      'EFT OUTER JOIN CAD_TB_C_FUN RES ON RES.ID_FUNCIONARIO=PED.ID_RES' +
-      'PONSAVEL'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FNC ON FNC.ID_FUNCIONARIO' +
-      '=PED.ID_RESP_CONF'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FNL ON FNL.ID_FU' +
-      'NCIONARIO=PED.ID_USUARIO_LIB'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FPI O' +
-      'N FPI.ID_FUNCIONARIO=PED.id_func_pri_impressao'#13#10'LEFT OUTER JOIN ' +
-      'CAD_TB_C_FUN FSI ON FSI.ID_FUNCIONARIO=PED.id_func_seg_impressao' +
-      #13#10'LEFT OUTER JOIN CAD_TB_C_FUN FTI ON FTI.ID_FUNCIONARIO=PED.id_' +
-      'func_ter_impressao'#13#10'LEFT OUTER JOIN CAD_TB_C_CID CID ON CID.ID_C' +
-      'IDADE=CLI.ID_CIDADE'#13#10'LEFT OUTER JOIN PCP_TB_M_ORS ORS ON ORS.ID_' +
-      'PEDIDO=PED.ID_PEDIDO'#13#10'LEFT OUTER JOIN PCP_TB_C_REG REG ON REG.ID' +
-      '_REGIAO = CLI.ID_REGIAO'#13#10'LEFT OUTER JOIN PCP_TB_M_OPR OPR ON '#13#10' ' +
-      '       (OPR.ID_EMPRESA = PED.id_empresa AND OPR.ID_OPR = PED.PCP' +
-      '_ID_OPR) '#13#10'LEFT OUTER JOIN PCP_TB_C_MTA MTA ON  MTA.ID_MOTORISTA' +
-      ' = PED.ID_MOTORISTA '#13#10#13#10'where 1 = 2'
+      '_ven, fun.tel_fixo as int_telfixo_ven'#13#10#13#10'     '#13#10#13#10' --           ' +
+      ' (lpad(CAST(EXTRACT(HOUR FROM PED.HOR_PEDIDO) as varchar(2)),2,'#39 +
+      '0'#39')||'#39':'#39'||'#13#10' --             lpad(CAST(EXTRACT(MINUTE FROM PED.HO' +
+      'R_PEDIDO) as varchar(2)),2,'#39'0'#39'))  AS INT_HORA '#13#10'FROM FAT_TB_M_PE' +
+      'D PED'#13#10'LEFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIENTE = PED.' +
+      'ID_CLIENTE'#13#10'LEFT OUTER JOIN CAD_TB_C_TME TME ON TME.ID_TIPO_MOV_' +
+      'ESTOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN ' +
+      'FUN ON FUN.ID_FUNCIONARIO=PED.ID_VENDEDOR'#13#10'LEFT OUTER JOIN CAD_T' +
+      'B_C_CPG CPG ON CPG.ID_CONDICAO_PAG=PED.ID_CONDICAO_PAG'#13#10'LEFT OUT' +
+      'ER JOIN CAD_TB_C_FUN ATE ON ATE.ID_FUNCIONARIO=PED.ID_ATENDENTE'#13 +
+      #10'LEFT OUTER JOIN CAD_TB_C_FUN RES ON RES.ID_FUNCIONARIO=PED.ID_R' +
+      'ESPONSAVEL'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FNC ON FNC.ID_FUNCIONAR' +
+      'IO=PED.ID_RESP_CONF'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FNL ON FNL.ID_' +
+      'FUNCIONARIO=PED.ID_USUARIO_LIB'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FPI' +
+      ' ON FPI.ID_FUNCIONARIO=PED.id_func_pri_impressao'#13#10'LEFT OUTER JOI' +
+      'N CAD_TB_C_FUN FSI ON FSI.ID_FUNCIONARIO=PED.id_func_seg_impress' +
+      'ao'#13#10'LEFT OUTER JOIN CAD_TB_C_FUN FTI ON FTI.ID_FUNCIONARIO=PED.i' +
+      'd_func_ter_impressao'#13#10'LEFT OUTER JOIN CAD_TB_C_CID CID ON CID.ID' +
+      '_CIDADE=CLI.ID_CIDADE'#13#10'LEFT OUTER JOIN PCP_TB_M_ORS ORS ON ORS.I' +
+      'D_PEDIDO=PED.ID_PEDIDO'#13#10'LEFT OUTER JOIN PCP_TB_C_REG REG ON REG.' +
+      'ID_REGIAO = CLI.ID_REGIAO'#13#10'LEFT OUTER JOIN PCP_TB_M_OPR OPR ON '#13 +
+      #10'        (OPR.ID_EMPRESA = PED.id_empresa AND OPR.ID_OPR = PED.P' +
+      'CP_ID_OPR) '#13#10'LEFT OUTER JOIN PCP_TB_C_MTA MTA ON  MTA.ID_MOTORIS' +
+      'TA = PED.ID_MOTORISTA '#13#10#13#10'where 1 = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
@@ -6956,6 +6956,14 @@
       ProviderFlags = []
       Size = 14
     end
+    object FAT_SQ_M_PEDid_pedido_mob: TIntegerField
+      FieldName = 'id_pedido_mob'
+    end
+    object FAT_SQ_M_PEDpes_liquido_itens: TFMTBCDField
+      FieldName = 'pes_liquido_itens'
+      Precision = 18
+      Size = 4
+    end
   end
   object FAT_SQ_M_PED_ITE: TSQLDataSet
     SchemaName = 'sa'
@@ -7169,6 +7177,11 @@
     end
     object FAT_SQ_M_PED_ITEvlr_desc_especial: TFMTBCDField
       FieldName = 'vlr_desc_especial'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_SQ_M_PED_ITEpeso_total_item: TFMTBCDField
+      FieldName = 'peso_total_item'
       Precision = 18
       Size = 4
     end
@@ -30534,7 +30547,7 @@
       'BlobSize=-1'
       'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftGloboP090425'
+      'Database=enSoftGloboP081025'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')

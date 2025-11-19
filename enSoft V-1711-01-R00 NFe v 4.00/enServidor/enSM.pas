@@ -11635,6 +11635,9 @@ type
     BUS_SQ_M_PED_SQA_GERint_nomeite: TWideStringField;
     BUS_SQ_M_PED_SQA_GERint_nomecor: TWideStringField;
     BUS_SQ_M_PED_SQA_GERint_nometam: TWideStringField;
+    FAT_SQ_M_PEDid_pedido_mob: TIntegerField;
+    FAT_SQ_M_PEDpes_liquido_itens: TFMTBCDField;
+    FAT_SQ_M_PED_ITEpeso_total_item: TFMTBCDField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -15638,6 +15641,8 @@ begin
           Conn.RollbackIncompleteFreeAndNil(Vtran);
        end;
 end;
+
+
 
 function TSM.enSgqEstatisticaAcr(tipo: integer; Input: OleVariant): OleVariant;
 var

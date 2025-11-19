@@ -11899,6 +11899,9 @@ type
     IdSSLIOHandlerSocketOpenSSL: TIdSSLIOHandlerSocketOpenSSL;
     IdMessage: TIdMessage;
     IdServerIOHandlerSSLOpenSSL1: TIdServerIOHandlerSSLOpenSSL;
+    FAT_CD_M_PEDid_pedido_mob: TIntegerField;
+    FAT_CD_M_PED_ITEpeso_total_item: TFMTBCDField;
+    FAT_CD_M_PEDpes_liquido_itens: TFMTBCDField;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);

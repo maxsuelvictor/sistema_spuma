@@ -1,0 +1,12 @@
+/**** 19/11/2025 *****/
+
+ALTER TABLE "public"."fat_tb_m_ped"
+ADD COLUMN "pes_liquido_itens" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped"."pes_liquido_itens" IS 'Soma do peso liquido dos itens do pedido de venda.';
+
+
+ALTER TABLE "public"."fat_tb_m_ped_ite"
+ADD COLUMN "peso_total_item" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_ped_ite"."peso_total_item" IS 'Peso do item * qtde do item do pedido.';

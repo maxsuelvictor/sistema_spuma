@@ -311,6 +311,8 @@ type
     PCP_CD_M_ROM_PED: TClientDataSet;
     N1: TMenuItem;
     Solicitaralteraonaqtdedoitem1: TMenuItem;
+    shapeStatusWeb: TShape;
+    lblStatusWeb: TLabel;
     procedure txtClienteButtonClick(Sender: TObject);
     procedure txtClienteExit(Sender: TObject);
     procedure btn_Add_ItensClick(Sender: TObject);
@@ -1075,8 +1077,6 @@ begin
 
 
   FAT_RN_M_PED.FatRatearDescBasico_Especial;
-
-
 
   if FAT_CD_M_PED_TesCampos then
      begin
@@ -3456,6 +3456,9 @@ begin
     begin
        aFont.Color := clMaroon;
      end;
+
+   
+
 end;
 
 procedure TFAT_FM_M_PED.dbGridRowChanged(Sender: TObject);
@@ -3463,6 +3466,9 @@ begin
   inherited;
 
   lblGeracaoPedido.Caption := '';
+
+  shapeStatusWeb.Visible := false;
+  lblStatusWeb.Visible   := false;
 
   if not dmgeral.FAT_CD_M_PED.IsEmpty then
     begin
@@ -3490,6 +3496,12 @@ begin
       if dmGeral.FAT_CD_M_PED.FieldByName('pedido_automatico').AsBoolean then
          lblGeracaoPedido.Caption := 'Pedido gerado automaticamente. Pedido origem: ' +
                   dmGeral.FAT_CD_M_PED.FieldByName('pedido_origem_aut').AsString;
+
+      if dmgeral.FAT_CD_M_PEDid_pedido_mob.AsInteger > 0 then
+         begin
+           shapeStatusWeb.Visible := true;
+           lblStatusWeb.Visible := true;
+         end;
     end;
 end;
 
@@ -8873,6 +8885,12 @@ begin
             txtQtde.Text := '99.95';
           end; }
 
+      if dmGeral.BUS_CD_C_ITE.FieldByName('pes_liquido').AsCurrency > 0 then
+         begin
+           dmGeral.FAT_CD_M_PED_ITE.FieldByName('peso_total_item').AsCurrency :=
+              dmGeral.BUS_CD_C_ITE.FieldByName('pes_liquido').AsCurrency *
+              dmGeral.FAT_CD_M_PED_ITE.FieldByName('qtde').AsCurrency;
+         end;
 
 
        if (dmGeral.CAD_CD_C_PAR_CTR.FieldByName('ATIVA_ITE_CONJ').AsBoolean = true) and

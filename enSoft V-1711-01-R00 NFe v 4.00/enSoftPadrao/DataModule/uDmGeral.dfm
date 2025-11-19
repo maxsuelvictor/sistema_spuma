@@ -3964,6 +3964,14 @@
     object FAT_CD_M_PEDFAT_SQ_M_PED_SQA: TDataSetField
       FieldName = 'FAT_SQ_M_PED_SQA'
     end
+    object FAT_CD_M_PEDid_pedido_mob: TIntegerField
+      FieldName = 'id_pedido_mob'
+    end
+    object FAT_CD_M_PEDpes_liquido_itens: TFMTBCDField
+      FieldName = 'pes_liquido_itens'
+      Precision = 18
+      Size = 4
+    end
   end
   object FAT_CD_M_POS: TClientDataSet
     Aggregates = <>
@@ -5235,6 +5243,11 @@
     end
     object FAT_CD_M_PED_ITEvlr_desc_especial: TFMTBCDField
       FieldName = 'vlr_desc_especial'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_PED_ITEpeso_total_item: TFMTBCDField
+      FieldName = 'peso_total_item'
       Precision = 18
       Size = 4
     end
