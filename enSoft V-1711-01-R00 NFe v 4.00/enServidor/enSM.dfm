@@ -47699,20 +47699,22 @@
       ' int_nometam,'#13#10'    etq.id_opr_origem as int_oprorigem , etq.id_o' +
       'pr as int_opr,'#13#10'    opr.num_lote as int_numlote_opr,      '#13#10'    ' +
       'GRU.TIPO_ITEM  AS  INT_TIPO_ITEM,'#13#10'    ite.sgq_personalizado as ' +
-      'int_ite_sgq_personalizado, '#13#10'    fun.nome as int_nomefunc_colc'#13#10 +
-      ' from pcp_tb_m_epp_ite pit'#13#10'         left outer join cad_tb_c_it' +
-      'e ite on (ite.id_item = pit.id_item)       '#13#10'         left outer' +
-      ' join cad_tb_c_gru gru on (gru.id_grupo = ite.id_grupo)       '#13#10 +
-      '         left outer join cad_tb_c_cor cor on (cor.id_cor = pit.i' +
-      'd_cor)       '#13#10'         left outer join cad_tb_c_tam tam on (tam' +
-      '.id_tamanho = pit.id_tamanho)       '#13#10'         left outer join p' +
-      'cp_tb_m_epp epp on (epp.id_epp = pit.id_epp) '#13#10'         left out' +
-      'er join pcp_tb_m_etq etq on (etq.id_empresa = epp.id_empresa and' +
-      #13#10'                                                              ' +
-      '      etq.cod_barra   = pit.cod_barra )      '#13#10'         left out' +
-      'er join pcp_tb_m_opr opr on opr.id_opr = etq.id_opr_origem  '#13#10'  ' +
-      '       left outer join cad_tb_c_fun fun on fun.id_funcionario = ' +
-      'pit.id_func_colchoaria '#13#10'         '#13#10'where pit.id_epp=:id_epp'
+      'int_ite_sgq_personalizado, '#13#10'    fun.nome as int_nomefunc_colc,'#13 +
+      #10'    fum.nome as int_nomefunc_montagem'#13#10' from pcp_tb_m_epp_ite p' +
+      'it'#13#10'         left outer join cad_tb_c_ite ite on (ite.id_item = ' +
+      'pit.id_item)       '#13#10'         left outer join cad_tb_c_gru gru o' +
+      'n (gru.id_grupo = ite.id_grupo)       '#13#10'         left outer join' +
+      ' cad_tb_c_cor cor on (cor.id_cor = pit.id_cor)       '#13#10'         ' +
+      'left outer join cad_tb_c_tam tam on (tam.id_tamanho = pit.id_tam' +
+      'anho)       '#13#10'         left outer join pcp_tb_m_epp epp on (epp.' +
+      'id_epp = pit.id_epp) '#13#10'         left outer join pcp_tb_m_etq etq' +
+      ' on (etq.id_empresa = epp.id_empresa and'#13#10'                      ' +
+      '                                              etq.cod_barra   = ' +
+      'pit.cod_barra )      '#13#10'         left outer join pcp_tb_m_opr opr' +
+      ' on opr.id_opr = etq.id_opr_origem  '#13#10'         left outer join c' +
+      'ad_tb_c_fun fun on fun.id_funcionario = pit.id_func_colchoaria '#13 +
+      #10'         left outer join cad_tb_c_fun fum on fum.id_funcionario' +
+      ' = pit.id_func_montagem '#13#10'         '#13#10'where pit.id_epp=:id_epp'
     DataSource = PCP_DS_M_EPP
     MaxBlobSize = -1
     Params = <
@@ -47802,6 +47804,17 @@
     end
     object PCP_SQ_M_EPP_ITElancto_func_colch_manual: TBooleanField
       FieldName = 'lancto_func_colch_manual'
+    end
+    object PCP_SQ_M_EPP_ITEid_func_montagem: TIntegerField
+      FieldName = 'id_func_montagem'
+    end
+    object PCP_SQ_M_EPP_ITElancto_func_montagem_manual: TBooleanField
+      FieldName = 'lancto_func_montagem_manual'
+    end
+    object PCP_SQ_M_EPP_ITEint_nomefunc_montagem: TWideStringField
+      FieldName = 'int_nomefunc_montagem'
+      ProviderFlags = []
+      Size = 50
     end
   end
   object BUS_SQ_M_EPP_ITE_INT: TSQLDataSet

@@ -159,6 +159,11 @@ type
     txtIdCostureiro: TwwDBEdit;
     PCP_CD_M_EPP_ITEint_nomefunc_colc: TWideStringField;
     PCP_CD_M_EPP_ITElancto_func_colch_manual: TBooleanField;
+    txtIdMontagemCaixa: TwwDBEdit;
+    Label6: TLabel;
+    PCP_CD_M_EPP_ITEid_func_montagem: TIntegerField;
+    PCP_CD_M_EPP_ITElancto_func_montagem_manual: TBooleanField;
+    PCP_CD_M_EPP_ITEint_nomefunc_montagem: TWideStringField;
     procedure acAdicionaExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure txtBuscaItemKeyDown(Sender: TObject; var Key: Word;
@@ -189,6 +194,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure grdItensMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure txtIdMontagemCaixaExit(Sender: TObject);
   private
     { Private declarations }
      procedure AcoesIniciais;
@@ -688,9 +694,10 @@ var
   int_ite_sgq_personalizado: Boolean;
   tipo_item: integer;
   qtdeInserir, contador, restante: integer;
-  codigo, cor, tamanho, pcp_obs_item, id_func_colchoaria, nome_func_colc: String;
+  codigo, cor, tamanho, pcp_obs_item, id_func_colchoaria, id_func_montagem,
+  nome_func_colc, nome_func_montagem: String;
   filtroEtq: String;
-  func_colch_manual: Boolean;
+  func_colch_manual, func_montagem_manual : Boolean;
 begin
   inherited;
 
@@ -838,6 +845,10 @@ begin
 
             id_func_colchoaria := PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString;
             nome_func_colc     := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString;
+
+            id_func_montagem   := PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString;
+            nome_func_montagem := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString;
+
 
 
 
@@ -1010,11 +1021,13 @@ begin
                               PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString := cod_barra;
 
                               PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := id_func_colchoaria;
-
                               PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString := nome_func_colc;
-
-
                               PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsBoolean := func_colch_manual;
+
+
+                              PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString       := id_func_montagem;
+                              PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString  := nome_func_montagem;
+                              PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := func_montagem_manual;
 
                               PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text       :=
                                     PCP_CD_M_ETQ.FieldByName('id_item').Text;
@@ -1085,11 +1098,12 @@ begin
                   PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString := cod_barra;
 
                   PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := id_func_colchoaria;
-
                   PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString  := nome_func_colc;
-
                   PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsBoolean := func_colch_manual;
 
+                  PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString       := id_func_montagem;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString  := nome_func_montagem;
+                  PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := func_montagem_manual;
 
                   PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text       :=
                         PCP_CD_M_ETQ.FieldByName('id_item').Text;
@@ -1160,8 +1174,11 @@ begin
 
                id_func_colchoaria := PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString;
                nome_func_colc     := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString;
+               func_colch_manual  := PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsBoolean;
 
-               func_colch_manual :=   PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsBoolean;
+               id_func_montagem     := PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString;
+               nome_func_montagem   := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString;
+               func_montagem_manual := PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean;
 
                PCP_CD_M_EPP_ITE.Cancel;
 
@@ -1184,6 +1201,10 @@ begin
                PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := id_func_colchoaria;
                PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString  := nome_func_colc;
                PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsBoolean := func_colch_manual;
+
+               PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString       := id_func_montagem;
+               PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString  := nome_func_montagem;
+               PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := func_montagem_manual;
 
                PCP_CD_M_EPP_ITE.FieldByName('int_tipo_item').Text     := int_tipo_item;
                PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString     := cod_barra;
@@ -1306,6 +1327,85 @@ begin
                   if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_costureiro.wav') then
                      begin
                        sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_costureiro.wav'),SND_LOOP);
+                     end;
+                  ShowMessage('Este funcionário não é costureiro.');
+                  txtIdCostureiro.SetFocus;
+                  PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := '';
+                  exit;
+                end;
+           end;
+        PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString :=
+           dmGeral.BUS_CD_C_FU4.FieldByName('nome').AsString;
+      end;
+
+
+
+  pnlFuncionario.Visible := false;
+  txtBuscaItemExit(self);
+end;
+
+procedure TPCP_FM_M_EPP.txtIdMontagemCaixaExit(Sender: TObject);
+var
+  IdMontador: String;
+begin
+  inherited;
+
+  if (trim(txtIdCostureiro.Text) = '') then
+      begin
+        if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_montador_nao_informado.wav') then
+           begin
+             sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_montador_nao_informado.wav'),SND_LOOP);
+           end;
+        ShowMessage('Nenhum valor foi informado.');
+        txtIdMontagemCaixa.SetFocus;
+        exit;
+      end;
+
+   if (trim(txtIdCostureiro.Text) = '0') then
+       begin
+         {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
+            0, mrNo, true, false,'', nil) = 7 then
+            begin
+             exit;
+            end
+         else
+            begin
+
+            end; }
+         PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsInteger := 0;
+         PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString := '';
+       end
+   else
+      begin
+        IdMontador := PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString;
+
+        if strtoint(copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString,1,2)) = 99 then
+           begin
+             IdMontador :=
+                 copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString,3,
+                          length(PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString));
+           end;
+
+        if not (dmGeral.BUS_CD_C_FU3.Locate('id_funcionario',IdMontador,[])) then
+           begin
+
+             if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_sem_cadastro.wav') then
+                begin
+                  sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_sem_cadastro.wav'),SND_LOOP);
+                end;
+
+             ShowMessage('Funcionário não cadastrado.');
+             txtIdMontagemCaixa.SetFocus;
+             PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString := '';
+             exit;
+           end
+        else
+           begin
+             if not (dmGeral.BUS_CD_C_FU4.Locate('id_funcionario',IdMontador,[])) then
+                begin
+                  if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_montador.wav') then
+                     begin
+                       sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_montador.wav'),SND_LOOP);
                      end;
                   ShowMessage('Este funcionário não é costureiro.');
                   txtIdCostureiro.SetFocus;

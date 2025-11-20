@@ -11638,6 +11638,9 @@ type
     FAT_SQ_M_PEDid_pedido_mob: TIntegerField;
     FAT_SQ_M_PEDpes_liquido_itens: TFMTBCDField;
     FAT_SQ_M_PED_ITEpeso_total_item: TFMTBCDField;
+    PCP_SQ_M_EPP_ITEid_func_montagem: TIntegerField;
+    PCP_SQ_M_EPP_ITElancto_func_montagem_manual: TBooleanField;
+    PCP_SQ_M_EPP_ITEint_nomefunc_montagem: TWideStringField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -30052,7 +30055,7 @@ begin
              ' where fuc.ativo=true and exists (select * from cad_tb_c_fun_crg fcg '+
              '   left outer join pcp_tb_c_crg crg on crg.id_cargo=fcg.id_cargo '+
              '   left outer join cad_tb_c_set stt on stt.id_setor = crg.id_setor ' +
-             ' where stt.tipo =8 and fcg.id_funcionario=fuc.id_funcionario) ';
+             ' where stt.tipo in (8,9) and fcg.id_funcionario=fuc.id_funcionario) ';
       end
 
    else if Input[0] = 12 then
@@ -30062,7 +30065,7 @@ begin
              '       exists (select * from cad_tb_c_fun_crg fcg ' +
              '   left outer join pcp_tb_c_crg crg on crg.id_cargo=fcg.id_cargo '+
              '   left outer join cad_tb_c_set stt on stt.id_setor = crg.id_setor ' +
-             ' where stt.tipo =8 and fcg.id_funcionario=fuc.id_funcionario) ';
+             ' where stt.tipo in (8,9) and fcg.id_funcionario=fuc.id_funcionario) ';
       end;
 
    CAD_SQ_C_FUN.CommandText := CAD_SQ_C_FUN.CommandText +

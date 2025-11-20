@@ -23542,6 +23542,10 @@ begin
   BUS_CD_X_SE1CODIGO.Text    := '8';
   BUS_CD_X_SE1DESCRICAO.Text := 'Colchoaria';
 
+  BUS_CD_X_SE1.Insert;
+  BUS_CD_X_SE1CODIGO.Text    := '9';
+  BUS_CD_X_SE1DESCRICAO.Text := 'Montagem de caixa box';
+
 
   BUS_CD_X_SE1.Post;
   BUS_CD_X_SE1.IndexFieldNames := 'CODIGO';

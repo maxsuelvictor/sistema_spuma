@@ -1,10 +1,9 @@
 inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   Caption = 'PCP_FM_M_EPP'
   ClientHeight = 692
-  ClientWidth = 1018
-  ExplicitTop = -133
-  ExplicitWidth = 1024
-  ExplicitHeight = 720
+  ClientWidth = 1056
+  ExplicitWidth = 1062
+  ExplicitHeight = 721
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlEsquerda: TPanel
@@ -117,12 +116,13 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited pnlDireita: TPanel
     Left = 209
-    Width = 809
+    Width = 847
     Height = 662
     ExplicitLeft = 209
     ExplicitWidth = 809
     ExplicitHeight = 662
     inherited pnlDados: TPanel
+      Left = 22
       Width = 795
       Height = 656
       ExplicitWidth = 795
@@ -560,7 +560,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
             object pnlFuncionario: TPanel
               Left = 318
               Top = 2
-              Width = 131
+              Width = 259
               Height = 54
               TabOrder = 4
               Visible = False
@@ -573,6 +573,21 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 Color = clBtnFace
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
+                Font.Height = -15
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentColor = False
+                ParentFont = False
+              end
+              object Label6: TLabel
+                Left = 144
+                Top = 3
+                Width = 82
+                Height = 18
+                Caption = '- Montador -'
+                Color = clBtnFace
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlue
                 Font.Height = -15
                 Font.Name = 'Tahoma'
                 Font.Style = []
@@ -597,6 +612,25 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 WantReturns = False
                 WordWrap = False
                 OnExit = txtIdCostureiroExit
+              end
+              object txtIdMontagemCaixa: TwwDBEdit
+                Left = 140
+                Top = 22
+                Width = 97
+                Height = 28
+                DataField = 'id_func_montagem'
+                DataSource = dsEppIte
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -15
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 1
+                UnboundDataType = wwDefault
+                WantReturns = False
+                WordWrap = False
+                OnExit = txtIdMontagemCaixaExit
               end
             end
           end
@@ -827,22 +861,22 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     end
   end
   inherited pnlTop: TJvPanel
-    Width = 1018
+    Width = 1056
     ExplicitWidth = 1018
     inherited pnlCima: TJvPanel
-      Width = 1018
+      Width = 1056
       ExplicitWidth = 1018
       inherited lblCodificacaoLMestre: TLabel
-        Width = 1013
+        Width = 1051
         ExplicitWidth = 1013
       end
       inherited lblTitulo: TLabel
-        Width = 1018
+        Width = 1056
         Caption = 'Entrada de Produtos da Produ'#231#227'o'
         ExplicitWidth = 1018
       end
       inherited pnlBaixo: TPanel
-        Width = 1018
+        Width = 1056
         ExplicitWidth = 1018
       end
     end
@@ -854,7 +888,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     Left = 995
     Top = 51
     Bitmap = {
-      494C01010800A800C40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800C80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1754,7 +1788,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C010108003001180218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080030011C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2654,7 +2688,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200000114020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200000118020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3170,7 +3204,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00BC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00C00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4070,7 +4104,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C0101060000010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000110020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4282,7 +4316,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00CC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00D00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5182,7 +5216,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C0101060000011C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000120020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5394,7 +5428,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00C80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00CC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6294,7 +6328,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C01010600000100020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000104020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -6646,6 +6680,17 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     end
     object PCP_CD_M_EPP_ITElancto_func_colch_manual: TBooleanField
       FieldName = 'lancto_func_colch_manual'
+    end
+    object PCP_CD_M_EPP_ITEid_func_montagem: TIntegerField
+      FieldName = 'id_func_montagem'
+    end
+    object PCP_CD_M_EPP_ITElancto_func_montagem_manual: TBooleanField
+      FieldName = 'lancto_func_montagem_manual'
+    end
+    object PCP_CD_M_EPP_ITEint_nomefunc_montagem: TWideStringField
+      FieldName = 'int_nomefunc_montagem'
+      ProviderFlags = []
+      Size = 50
     end
   end
   object PCP_CD_M_ETQ: TClientDataSet
