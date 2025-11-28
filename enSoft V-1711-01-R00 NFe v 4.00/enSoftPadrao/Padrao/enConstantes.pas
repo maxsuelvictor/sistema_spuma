@@ -15,9 +15,9 @@ const
   CFormatoData         = 'dd/mm/yyyy';
   CFormatoData_v2      = 'yyyy-mm-dd';
 
-  CVersaoSistema       = 'V-2507-01-R00'; // em 01/07/2025
+  CVersaoSistema       = 'V-2511-01-R00'; // em 25/11/2025
 
-  CVersaoSistemaLoja   = '2015-01 R01';
+  CVersaoSistemaLoja   = '2011-01 R01';
   CMascaraData         = '!99/99/0000;1;_';
   CMascaraHora         = 'HH:MM';
   CMascaraValor        = '###,###,##0.00';

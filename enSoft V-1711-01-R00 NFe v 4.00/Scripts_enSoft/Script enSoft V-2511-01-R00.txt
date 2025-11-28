@@ -26,3 +26,12 @@ ALTER TABLE "public"."pcp_tb_m_epp_ite"
 ADD COLUMN "id_func_montagem" int4,
 ADD COLUMN "lancto_func_montagem_manual" bool;
 
+
+/**** 25/11/2025 *****/
+
+ALTER TABLE "public"."pcp_tb_m_epp_ite"
+ADD COLUMN "id_func_colagem" int4,
+ADD COLUMN "lancto_func_colagem_manual" bool;
+
+
+

@@ -164,6 +164,121 @@ type
     PCP_CD_M_EPP_ITEid_func_montagem: TIntegerField;
     PCP_CD_M_EPP_ITElancto_func_montagem_manual: TBooleanField;
     PCP_CD_M_EPP_ITEint_nomefunc_montagem: TWideStringField;
+    BUS_CD_C_FU5: TClientDataSet;
+    IntegerField13: TIntegerField;
+    BooleanField14: TBooleanField;
+    WideStringField37: TWideStringField;
+    WideStringField48: TWideStringField;
+    WideStringField49: TWideStringField;
+    WideStringField50: TWideStringField;
+    WideStringField51: TWideStringField;
+    WideStringField52: TWideStringField;
+    WideStringField53: TWideStringField;
+    WideStringField54: TWideStringField;
+    WideStringField55: TWideStringField;
+    WideStringField56: TWideStringField;
+    WideStringField57: TWideStringField;
+    WideStringField58: TWideStringField;
+    IntegerField16: TIntegerField;
+    DateField7: TDateField;
+    DateField8: TDateField;
+    WideStringField59: TWideStringField;
+    WideStringField60: TWideStringField;
+    DateField9: TDateField;
+    IntegerField17: TIntegerField;
+    BooleanField15: TBooleanField;
+    BooleanField16: TBooleanField;
+    BooleanField17: TBooleanField;
+    BooleanField18: TBooleanField;
+    WideStringField61: TWideStringField;
+    WideStringField62: TWideStringField;
+    WideStringField63: TWideStringField;
+    DataSetField2: TDataSetField;
+    BUS_CD_C_FU5seg_vis_ult_cmp_ite: TBooleanField;
+    BUS_CD_C_FU5seg_vis_msg_sol_cmp: TBooleanField;
+    BUS_CD_C_FU5seg_apr_rep_cmp_ped: TBooleanField;
+    BUS_CD_C_FU5seg_per_canc_orv: TBooleanField;
+    BUS_CD_C_FU5seg_habilitar_seg: TBooleanField;
+    BUS_CD_C_FU5seg_redef_senha: TBooleanField;
+    BUS_CD_C_FU5seg_hab_bot_alt_fun: TBooleanField;
+    BUS_CD_C_FU5seq_vis_msg_ped_exp_fat: TBooleanField;
+    BUS_CD_C_FU5seg_ctc_apg: TBooleanField;
+    BUS_CD_C_FU5seg_alt_vend_ped: TBooleanField;
+    BUS_CD_C_FU5seq_vis_alert_est_min: TBooleanField;
+    BUS_CD_C_FU5excluir_caixa: TBooleanField;
+    BUS_CD_C_FU5seg_hab_lib_brd: TBooleanField;
+    BUS_CD_C_FU5seg_vis_custo_csu_ite: TBooleanField;
+    BUS_CD_C_FU5seg_zerar_est: TBooleanField;
+    BUS_CD_C_FU5seg_vis_nota_csu_ite: TBooleanField;
+    BUS_CD_C_FU5id_empresa_mob: TIntegerField;
+    BUS_CD_C_FU5vnd_interno_externo: TIntegerField;
+    BUS_CD_C_FU5tipo: TIntegerField;
+    BUS_CD_C_FU5sgq_per_comissao: TFloatField;
+    BUS_CD_C_FU5sgq_perm_alt_comissao_ped: TBooleanField;
+    BUS_CD_C_FU5per_alterar_repres: TBooleanField;
+    BUS_CD_C_FU5bus_som_ped_sem_pagtos: TBooleanField;
+    wwDBEdit1: TwwDBEdit;
+    Label7: TLabel;
+    Label8: TLabel;
+    txtIdColagem: TwwDBEdit;
+    PCP_CD_M_EPP_ITEid_func_colagem: TIntegerField;
+    PCP_CD_M_EPP_ITElancto_func_colagem_manual: TBooleanField;
+    PCP_CD_M_EPP_ITEint_nomefunc_colagem: TWideStringField;
+    Label11: TLabel;
+    wwDBEdit2: TwwDBEdit;
+    BUS_CD_C_FU6: TClientDataSet;
+    IntegerField1: TIntegerField;
+    BooleanField1: TBooleanField;
+    WideStringField1: TWideStringField;
+    WideStringField2: TWideStringField;
+    WideStringField3: TWideStringField;
+    WideStringField4: TWideStringField;
+    WideStringField5: TWideStringField;
+    WideStringField6: TWideStringField;
+    WideStringField7: TWideStringField;
+    WideStringField8: TWideStringField;
+    WideStringField9: TWideStringField;
+    WideStringField10: TWideStringField;
+    WideStringField11: TWideStringField;
+    WideStringField12: TWideStringField;
+    IntegerField2: TIntegerField;
+    DateField1: TDateField;
+    DateField2: TDateField;
+    WideStringField13: TWideStringField;
+    WideStringField14: TWideStringField;
+    DateField3: TDateField;
+    IntegerField3: TIntegerField;
+    BooleanField2: TBooleanField;
+    BooleanField3: TBooleanField;
+    BooleanField4: TBooleanField;
+    BooleanField5: TBooleanField;
+    WideStringField15: TWideStringField;
+    WideStringField16: TWideStringField;
+    WideStringField17: TWideStringField;
+    DataSetField1: TDataSetField;
+    BooleanField6: TBooleanField;
+    BooleanField7: TBooleanField;
+    BooleanField8: TBooleanField;
+    BooleanField9: TBooleanField;
+    BooleanField10: TBooleanField;
+    BooleanField11: TBooleanField;
+    BooleanField12: TBooleanField;
+    BooleanField13: TBooleanField;
+    BooleanField19: TBooleanField;
+    BooleanField20: TBooleanField;
+    BooleanField21: TBooleanField;
+    BooleanField22: TBooleanField;
+    BooleanField23: TBooleanField;
+    BooleanField24: TBooleanField;
+    BooleanField25: TBooleanField;
+    BooleanField26: TBooleanField;
+    IntegerField4: TIntegerField;
+    IntegerField5: TIntegerField;
+    IntegerField6: TIntegerField;
+    FloatField1: TFloatField;
+    BooleanField27: TBooleanField;
+    BooleanField28: TBooleanField;
+    BooleanField29: TBooleanField;
     procedure acAdicionaExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure txtBuscaItemKeyDown(Sender: TObject; var Key: Word;
@@ -195,6 +310,7 @@ type
     procedure grdItensMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure txtIdMontagemCaixaExit(Sender: TObject);
+    procedure txtIdColagemExit(Sender: TObject);
   private
     { Private declarations }
      procedure AcoesIniciais;
@@ -202,6 +318,8 @@ type
      procedure Atualizar_xBusca;
      procedure ChamaCorTamanho;
      procedure GravarInsercaoNoBanco;
+     procedure BusFuncionario5(index: integer; filtro: string);
+     procedure BusFuncionario6(index: integer; filtro: string);
      var
        xbusca_item: String;
        xSeqIte: integer;
@@ -231,6 +349,8 @@ begin
   dmGeral.BUS_CD_C_FU3.DataRequest(VarArrayOf([8, 1, '']));
 
   dmGeral.BusFuncionario4(11,'');
+  BusFuncionario5(13,'');
+  BusFuncionario6(15,'');
 end;
 
 procedure TPCP_FM_M_EPP.acAdicionaExecute(Sender: TObject);
@@ -615,7 +735,8 @@ begin
   inherited;
   inc(xSeqIte);
   PCP_CD_M_EPP_ITE.FieldByName('id_epp_ite').AsInteger := xSeqIte;
-  PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsBoolean := false;
+  PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsBoolean    := false;
+  PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := false;
 
 end;
 
@@ -694,10 +815,10 @@ var
   int_ite_sgq_personalizado: Boolean;
   tipo_item: integer;
   qtdeInserir, contador, restante: integer;
-  codigo, cor, tamanho, pcp_obs_item, id_func_colchoaria, id_func_montagem,
-  nome_func_colc, nome_func_montagem: String;
+  codigo, cor, tamanho, pcp_obs_item, id_func_colchoaria, id_func_montagem,id_func_colagem,
+  nome_func_colc, nome_func_montagem, nome_func_colagem: String;
   filtroEtq: String;
-  func_colch_manual, func_montagem_manual : Boolean;
+  func_colch_manual, func_montagem_manual, func_colagem_manual : Boolean;
 begin
   inherited;
 
@@ -820,15 +941,20 @@ begin
                  exit;
                end;
 
-            if PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString = '' then
+            if (PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString = '') or
+               (PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString = '') or
+               (PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString = '') then
                begin
                  pnlFuncionario.visible := true;
                  txtIdCostureiro.setfocus;
                  exit;
                end;
 
-            func_colch_manual := false; // refere-se se o usuário lançou manualmente.
+            func_colch_manual    := false; // refere-se se o usuário lançou manualmente.
+            func_montagem_manual := false; // refere-se se o usuário lançou manualmente.
+            func_colagem_manual  := false; // refere-se se o usuário lançou manualmente.
 
+            // Na criação da etiqueta , o 99 vem dentro do código de barras.
             if strtoint(copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString,1,2)) = 99 then
                begin
                  PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString :=
@@ -843,12 +969,46 @@ begin
                  func_colch_manual := true;
                end;
 
+            // Na criação da etiqueta , o 99 vem dentro do código de barras.
+            if strtoint(copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString,1,2)) = 99 then
+               begin
+                 PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString :=
+                     copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString,3,
+                              length(PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString));
+
+
+               end
+            else
+               begin
+                 PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := true;
+                 func_montagem_manual := true;
+               end;
+
+
+            // Na criação da etiqueta , o 99 vem dentro do código de barras.
+            if strtoint(copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString,1,2)) = 99 then
+               begin
+                 PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString :=
+                     copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString,3,
+                              length(PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString));
+
+
+               end
+            else
+               begin
+                 PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colagem_manual').AsBoolean := true;
+                 func_colagem_manual := true;
+               end;
+
+
             id_func_colchoaria := PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString;
             nome_func_colc     := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString;
 
             id_func_montagem   := PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString;
             nome_func_montagem := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString;
 
+            id_func_colagem    := PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString;
+            nome_func_colagem  := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString;
 
 
 
@@ -1029,6 +1189,12 @@ begin
                               PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString  := nome_func_montagem;
                               PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := func_montagem_manual;
 
+
+                              PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString       := id_func_colagem;
+                              PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString  := nome_func_colagem;
+                              PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colagem_manual').AsBoolean := func_colagem_manual;
+
+
                               PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text       :=
                                     PCP_CD_M_ETQ.FieldByName('id_item').Text;
 
@@ -1105,6 +1271,11 @@ begin
                   PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString  := nome_func_montagem;
                   PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := func_montagem_manual;
 
+                  PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString       := id_func_colagem;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString  := nome_func_colagem;
+                  PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colagem_manual').AsBoolean := func_colagem_manual;
+
+
                   PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text       :=
                         PCP_CD_M_ETQ.FieldByName('id_item').Text;
 
@@ -1180,6 +1351,10 @@ begin
                nome_func_montagem   := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString;
                func_montagem_manual := PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean;
 
+               id_func_colagem     := PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString;
+               nome_func_colagem   := PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString;
+               func_colagem_manual := PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colagem_manual').AsBoolean;
+
                PCP_CD_M_EPP_ITE.Cancel;
 
                if xbusca_item = 'COD_BARRA' then
@@ -1205,6 +1380,11 @@ begin
                PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString       := id_func_montagem;
                PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString  := nome_func_montagem;
                PCP_CD_M_EPP_ITE.FieldByName('lancto_func_montagem_manual').AsBoolean := func_montagem_manual;
+
+               PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString       := id_func_colagem;
+               PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString  := nome_func_colagem;
+               PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colagem_manual').AsBoolean := func_colagem_manual;
+
 
                PCP_CD_M_EPP_ITE.FieldByName('int_tipo_item').Text     := int_tipo_item;
                PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString     := cod_barra;
@@ -1265,6 +1445,100 @@ begin
     // Atualizar_xBusca;
 end;
 
+procedure TPCP_FM_M_EPP.txtIdColagemExit(Sender: TObject);
+var
+  IdColagem: String;
+begin
+  inherited;
+
+
+  if txtIdCostureiro.Focused then
+     begin
+       exit;
+     end;
+
+  if txtIdMontagemCaixa.Focused then
+     begin
+       exit;
+     end;
+
+
+  if (trim(txtIdColagem.Text) = '') then
+      begin
+        if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_informado.wav') then
+           begin
+             sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_informado.wav'),SND_LOOP);
+           end;
+        ShowMessage('Nenhum valor foi informado.');
+        txtIdColagem.SetFocus;
+        exit;
+      end;
+
+   if txtBuscaItem.Focused then
+     begin
+       exit;
+     end;
+
+   if (trim(txtIdColagem.Text) = '0') then
+       begin
+         {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
+            0, mrNo, true, false,'', nil) = 7 then
+            begin
+             exit;
+            end
+         else
+            begin
+
+            end; }
+         PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsInteger := 0;
+         PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString := '';
+       end
+   else
+      begin
+        IdColagem := PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString;
+
+        if strtoint(copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString,1,2)) = 99 then
+           begin
+             IdColagem :=
+                 copy(PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString,3,
+                          length(PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString));
+           end;
+
+        if not (dmGeral.BUS_CD_C_FU3.Locate('id_funcionario',IdColagem,[])) then
+           begin
+
+             if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_sem_cadastro.wav') then
+                begin
+                  sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_sem_cadastro.wav'),SND_LOOP);
+                end;
+
+             ShowMessage('Funcionário não cadastrado.');
+             txtIdColagem.SetFocus;
+             PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString := '';
+             exit;
+           end
+        else
+           begin
+             if not (BUS_CD_C_FU6.Locate('id_funcionario',IdColagem,[])) then
+                begin
+                  if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_colador.wav') then
+                     begin
+                       sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_colador.wav'),SND_LOOP);
+                     end;
+                  ShowMessage('Este funcionário não é colador.');
+                  txtIdColagem.SetFocus;
+                  PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString := '';
+                  exit;
+                end;
+           end;
+        PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString :=
+           BUS_CD_C_FU6.FieldByName('nome').AsString;
+      end;
+
+  pnlFuncionario.Visible := false;
+  txtBuscaItemExit(self);
+end;
+
 procedure TPCP_FM_M_EPP.txtIdCostureiroExit(Sender: TObject);
 var
   IdCostureiro: String;
@@ -1281,6 +1555,11 @@ begin
         txtIdCostureiro.SetFocus;
         exit;
       end;
+
+  if txtBuscaItem.Focused then
+     begin
+       exit;
+     end;
 
    if (trim(txtIdCostureiro.Text) = '0') then
        begin
@@ -1339,9 +1618,10 @@ begin
       end;
 
 
-
-  pnlFuncionario.Visible := false;
-  txtBuscaItemExit(self);
+  // Por Maxsuel Victor , em 24/11/2025
+     // comentado devido o campo novo de Montador, logo após o campo do Costureiro.
+     //pnlFuncionario.Visible := false;
+     //txtBuscaItemExit(self);
 end;
 
 procedure TPCP_FM_M_EPP.txtIdMontagemCaixaExit(Sender: TObject);
@@ -1350,7 +1630,14 @@ var
 begin
   inherited;
 
-  if (trim(txtIdCostureiro.Text) = '') then
+
+  if txtIdCostureiro.Focused then
+     begin
+       exit;
+     end;
+
+
+  if (trim(txtIdMontagemCaixa.Text) = '') then
       begin
         if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_montador_nao_informado.wav') then
            begin
@@ -1361,7 +1648,12 @@ begin
         exit;
       end;
 
-   if (trim(txtIdCostureiro.Text) = '0') then
+   if txtBuscaItem.Focused then
+     begin
+       exit;
+     end;
+
+   if (trim(txtIdMontagemCaixa.Text) = '0') then
        begin
          {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
             0, mrNo, true, false,'', nil) = 7 then
@@ -1401,26 +1693,25 @@ begin
            end
         else
            begin
-             if not (dmGeral.BUS_CD_C_FU4.Locate('id_funcionario',IdMontador,[])) then
+             if not (BUS_CD_C_FU5.Locate('id_funcionario',IdMontador,[])) then
                 begin
                   if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_montador.wav') then
                      begin
                        sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_montador.wav'),SND_LOOP);
                      end;
-                  ShowMessage('Este funcionário não é costureiro.');
-                  txtIdCostureiro.SetFocus;
-                  PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := '';
+                  ShowMessage('Este funcionário não é montador.');
+                  txtIdMontagemCaixa.SetFocus;
+                  PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString := '';
                   exit;
                 end;
            end;
-        PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString :=
-           dmGeral.BUS_CD_C_FU4.FieldByName('nome').AsString;
+        PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString :=
+           BUS_CD_C_FU5.FieldByName('nome').AsString;
       end;
 
 
-
-  pnlFuncionario.Visible := false;
-  txtBuscaItemExit(self);
+  //pnlFuncionario.Visible := false;
+  //txtBuscaItemExit(self);
 end;
 
 procedure TPCP_FM_M_EPP.txtQtdeInfExit(Sender: TObject);
@@ -1452,6 +1743,21 @@ begin
            end;
         txtBuscaItemExit(self);
       end;
+end;
+
+procedure TPCP_FM_M_EPP.BusFuncionario5(index: integer; filtro: string);
+begin
+  BUS_CD_C_FU5.Close;
+  BUS_CD_C_FU5.Data :=
+  BUS_CD_C_FU5.DataRequest(VarArrayOf([index, filtro]));
+end;
+
+
+procedure TPCP_FM_M_EPP.BusFuncionario6(index: integer; filtro: string);
+begin
+  BUS_CD_C_FU6.Close;
+  BUS_CD_C_FU6.Data :=
+  BUS_CD_C_FU6.DataRequest(VarArrayOf([index, filtro]));
 end;
 
 end.

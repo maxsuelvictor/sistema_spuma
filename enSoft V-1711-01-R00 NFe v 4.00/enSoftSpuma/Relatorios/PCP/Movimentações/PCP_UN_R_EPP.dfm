@@ -1,11 +1,11 @@
 inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   OnClose = FormClose
-  ExplicitLeft = -90
   ExplicitWidth = 1156
-  ExplicitHeight = 538
+  ExplicitHeight = 539
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlDireita: TPanel
+    ExplicitTop = 32
     inherited pnlDados: TPanel
       Left = 23
       Top = 6
@@ -25,7 +25,9 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Items.Strings = (
             '0 - Entrada de Produto Acabado'
             '1 - Entrada de Produto Acabado por Grupo'
-            '2 - Entrada de Produto Acabado por Costureiro')
+            '2 - Entrada de Produto Acabado por Costureiro'
+            '3 - Entrada de Produto Acabado por Montador'
+            '4 - Entrada de Produto Acabado por Colador')
           ExplicitWidth = 543
         end
       end
@@ -51,7 +53,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         object Label6: TLabel
           Left = 22
           Top = 65
-          Width = 87
+          Width = 88
           Height = 13
           Caption = 'Tipo de entrada :'
         end
@@ -216,10 +218,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         end
       end
       inherited btnImprimir: TButton
-        Left = 0
+        Left = 3
         Top = 412
         OnClick = btnImprimirClick
-        ExplicitLeft = 0
+        ExplicitLeft = 3
         ExplicitTop = 412
       end
       inherited btnSair: TButton
@@ -239,7 +241,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoes: TImageList
     Bitmap = {
-      494C010103000800500116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800580116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       00170F0F0F8C2F2F2FF8323232FF323232FF323232FF323232FF323232FF3232
@@ -498,7 +500,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesAz: TImageList
     Bitmap = {
-      494C010103000800600116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800680116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000100
       00172716028C7C4807F8844C07FF844C07FF844C07FF844C07FF844C07FF844C
@@ -757,7 +759,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesVe: TImageList
     Bitmap = {
-      494C010103000800640116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101030008006C0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       0017001E018C005D04F8006204FF006204FF006204FF006204FF006204FF0062
@@ -1076,8 +1078,8 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     end
   end
   object pmSelTme: TPopupMenu
-    Left = 968
-    Top = 414
+    Left = 912
+    Top = 398
     object btnSelTme: TMenuItem
       Caption = 'Todos os Tipos de Movimenta'#231#227'o de Estoque'
     end
@@ -2594,6 +2596,11 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       ''
       'end;'
       ''
+      'procedure Memo1OnAfterPrint(Sender: TfrxComponent);'
+      'begin'
+      ''
+      'end;'
+      ''
       'begin'
       ''
       'end.')
@@ -2659,7 +2666,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         end
         object ft_codlme: TfrxMemoView
           Left = 468.000000000000000000
-          Top = 14.661410000000000000
+          Top = 13.661410000000000000
           Width = 110.370130000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -2686,6 +2693,13 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Memo.UTF8W = (
             'Entrada de Produto Acabado por Costureiro')
           ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 34.015770000000000000
+          Width = 578.268090000000000000
+          Color = clBlack
+          Diagonal = True
         end
       end
       object Header1: TfrxHeader
@@ -2977,6 +2991,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Top = 3.000000000000000000
           Width = 226.771800000000000000
           Height = 18.897650000000000000
+          OnAfterPrint = 'Memo1OnAfterPrint'
           DataSet = PCP_DB_R_EPP_GRU
           DataSetName = 'PCP_DB_R_EPP_GRU'
           Font.Charset = DEFAULT_CHARSET
@@ -3259,7 +3274,11 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       'int_nomefun=int_nomefun'
       'id_grupo=id_grupo'
       'descricao=descricao'
-      'qtde=qtde')
+      'qtde=qtde'
+      'id_func_montagem=id_func_montagem'
+      'int_nomefun_montagem=int_nomefun_montagem'
+      'id_func_colagem=id_func_colagem'
+      'int_nomefun_colagem=int_nomefun_colagem')
     DataSet = PCP_CD_R_EPP_FUN
     BCDToCurrency = False
     Left = 752
@@ -3308,6 +3327,24 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Name = 'descricao'
         DataType = ftWideString
         Size = 30
+      end
+      item
+        Name = 'id_func_montagem'
+        DataType = ftInteger
+      end
+      item
+        Name = 'int_nomefun_montagem'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'id_func_colagem'
+        DataType = ftInteger
+      end
+      item
+        Name = 'int_nomefun_colagem'
+        DataType = ftWideString
+        Size = 50
       end>
     IndexDefs = <>
     Params = <>
@@ -3348,6 +3385,20 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     object PCP_CD_R_EPP_FUNqtde: TFloatField
       FieldName = 'qtde'
     end
+    object PCP_CD_R_EPP_FUNid_func_montagem: TIntegerField
+      FieldName = 'id_func_montagem'
+    end
+    object PCP_CD_R_EPP_FUNint_nomefun_montagem: TWideStringField
+      FieldName = 'int_nomefun_montagem'
+      Size = 50
+    end
+    object PCP_CD_R_EPP_FUNid_func_colagem: TIntegerField
+      FieldName = 'id_func_colagem'
+    end
+    object PCP_CD_R_EPP_FUNint_nomefun_colagem: TWideStringField
+      FieldName = 'int_nomefun_colagem'
+      Size = 50
+    end
   end
   object PCP_DB_R_EPP_FUN_DET: TfrxDBDataset
     UserName = 'PCP_DB_R_EPP_FUN_DET'
@@ -3363,7 +3414,11 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       'descricao=descricao'
       'id_item=id_item'
       'int_nomeite=int_nomeite'
-      'qtde=qtde')
+      'qtde=qtde'
+      'id_func_montagem=id_func_montagem'
+      'int_nomefun_montagem=int_nomefun_montagem'
+      'id_func_colagem=id_func_colagem'
+      'int_nomefun_colagem=int_nomefun_colagem')
     DataSet = PCP_CD_R_EPP_FUN_DET
     BCDToCurrency = False
     Left = 752
@@ -3414,6 +3469,1442 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     end
     object PCP_CD_R_EPP_FUN_DETqtde: TFloatField
       FieldName = 'qtde'
+    end
+    object PCP_CD_R_EPP_FUN_DETid_func_montagem: TIntegerField
+      FieldName = 'id_func_montagem'
+    end
+    object PCP_CD_R_EPP_FUN_DETint_nomefun_montagem: TWideStringField
+      FieldName = 'int_nomefun_montagem'
+      Size = 50
+    end
+    object PCP_CD_R_EPP_FUN_DETid_func_colagem: TIntegerField
+      FieldName = 'id_func_colagem'
+    end
+    object PCP_CD_R_EPP_FUN_DETint_nomefun_colagem: TWideStringField
+      FieldName = 'int_nomefun_colagem'
+      Size = 50
+    end
+  end
+  object PCP_FR_R_EPP_FUN_MOT: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44533.442265752300000000
+    ReportOptions.LastChange = 44533.442265752300000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'procedure GroupHeader2OnBeforePrint(Sender: TfrxComponent);'
+      'begin'
+      '  Memo14.Text := '#39#39';    '
+      
+        '  if (inttostr( <PCP_DB_R_EPP_FUN."id_func_montagem"> )= '#39#39') or ' +
+        '(<PCP_DB_R_EPP_FUN."id_func_montagem"> = '#39'0'#39') then'
+      '    begin'
+      '      Memo14.Text := '#39'SEM MONTADOR'#39';  '
+      '    end;         '
+      'end;'
+      ''
+      'procedure Page1OnBeforePrint(Sender: TfrxComponent);'
+      'begin'
+      ''
+      'end;'
+      ''
+      
+        'procedure Memo14OnMouseEnter(Sender: TfrxView; var Modified: Boo' +
+        'lean);'
+      'begin'
+      ''
+      'end;'
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 1040
+    Top = 350
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = PCP_DB_R_EPP_FUN
+        DataSetName = 'PCP_DB_R_EPP_FUN'
+      end
+      item
+        DataSet = PCP_DB_R_EPP_FUN_DET
+        DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+      end>
+    Variables = <
+      item
+        Name = ' externo'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = ''
+      end
+      item
+        Name = 'ft_codlme'
+        Value = ''
+      end
+      item
+        Name = 'Opcoes'
+        Value = ''
+      end
+      item
+        Name = 'ft_periodo'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      OnBeforePrint = 'Page1OnBeforePrint'
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 68.031540000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object imgEmpresa1: TfrxPictureView
+          Left = 585.827150000000000000
+          Top = 11.338590000000000000
+          Width = 128.504020000000000000
+          Height = 52.913420000000000000
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 34.236240000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataSet = dmGeral.CAD_DB_R_PAR
+          DataSetName = 'CAD_DB_C_PAR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+        object ft_codlme: TfrxMemoView
+          Left = 468.000000000000000000
+          Top = 13.661410000000000000
+          Width = 110.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[ft_codlme]')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo10: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 461.512060000000000000
+          Height = 26.456710000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Entrada de Produto Acabado por Montador')
+          ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Left = 4.000000000000000000
+          Top = 34.236240000000000000
+          Width = 578.268090000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 35.015770000000000000
+        Top = 147.401670000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Memo12: TfrxMemoView
+          Left = 18.897650000000000000
+          Top = 12.338590000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Per'#237'odo :')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 11.338590000000000000
+          Width = 226.771800000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[ft_periodo]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 64.252010000000000000
+        Top = 204.094620000000000000
+        Width = 718.110700000000000000
+        Condition = 'PCP_DB_R_EPP_FUN."id_empresa"'
+        KeepTogether = True
+        ReprintOnNewPage = True
+        object PCP_DB_R_EPP_GRUid_empresa: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 11.338590000000000000
+          Width = 226.771800000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              '[PCP_DB_R_EPP_FUN."id_empresa"] - [PCP_DB_R_EPP_FUN."emp_fantasi' +
+              'a"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo6: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 11.338590000000000000
+          Width = 83.149660000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Empresa :')
+          ParentFont = False
+        end
+        object Shape1: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 33.015770000000000000
+          Width = 714.331170000000000000
+          Height = 22.677180000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo2: TfrxMemoView
+          Left = 18.897650000000000000
+          Top = 35.574830000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 35.574830000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Funcion'#225'rio')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 427.086890000000000000
+          Top = 35.574830000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 343.937230000000000000
+        Width = 718.110700000000000000
+        DataSet = PCP_DB_R_EPP_FUN
+        DataSetName = 'PCP_DB_R_EPP_FUN'
+        RowCount = 0
+        Stretched = True
+        object Memo5: TfrxMemoView
+          Left = 94.488250000000000000
+          Top = 2.779530000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsItalic]
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."id_grupo"]')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 175.858380000000000000
+          Top = 2.779530000000000000
+          Width = 143.622140000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsItalic]
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."descricao"]')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 434.645950000000000000
+          Top = 2.779530000000000000
+          Width = 52.913420000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsItalic]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."qtde"]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 517.795610000000000000
+        Width = 718.110700000000000000
+        object Subreport1: TfrxSubreport
+          Left = 7.559060000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Page = PCP_FR_R_EPP_FUN_MOT.Page2
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 612.283860000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 260.787570000000000000
+          Top = 7.559060000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 600.945270000000000000
+          Top = 7.559060000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 393.071120000000000000
+        Width = 718.110700000000000000
+        object Memo11: TfrxMemoView
+          Left = 325.039580000000000000
+          Top = 10.559060000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            
+              'Qtde total do funcion'#225'rio: [SUM(<PCP_DB_R_EPP_FUN."qtde">,Master' +
+              'Data1)]')
+          ParentFont = False
+        end
+        object Line2: TfrxLineView
+          Left = 321.260050000000000000
+          Top = 8.559060000000000000
+          Width = 166.299320000000000000
+          Color = clBlack
+          Frame.BottomLine.Style = fsDot
+          Diagonal = True
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 291.023810000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader2OnBeforePrint'
+        Condition = 'PCP_DB_R_EPP_FUN."id_func_montagem"'
+        KeepTogether = True
+        object Line1: TfrxLineView
+          Left = 94.488250000000000000
+          Top = 26.456710000000000000
+          Width = 396.850650000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+        object Memo1: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 3.000000000000000000
+          Width = 226.771800000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."int_nomefun_montagem"]')
+          ParentFont = False
+        end
+        object Memo14: TfrxMemoView
+          Left = 105.826840000000000000
+          Top = 3.779530000000000000
+          Width = 317.480520000000000000
+          Height = 18.897650000000000000
+          OnMouseEnter = 'Memo14OnMouseEnter'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 45.354360000000000000
+        Top = 449.764070000000000000
+        Width = 718.110700000000000000
+        object Memo7: TfrxMemoView
+          Left = 204.094620000000000000
+          Top = 12.338590000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            
+              'Qtde total da empresa: [SUM(<PCP_DB_R_EPP_FUN."qtde">,MasterData' +
+              '1)]')
+          ParentFont = False
+        end
+      end
+    end
+    object Page2: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object MasterData2: TfrxMasterData
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 98.267780000000000000
+        Width = 718.110700000000000000
+        DataSet = PCP_DB_R_EPP_FUN_DET
+        DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+        RowCount = 0
+        object PCP_DB_R_EPP_FUN_DETid_item: TfrxMemoView
+          Left = 245.669450000000000000
+          Top = 3.779530000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          DataField = 'id_item'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."id_item"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETint_nomeite: TfrxMemoView
+          Left = 319.260050000000000000
+          Top = 3.779530000000000000
+          Width = 260.787570000000000000
+          Height = 18.897650000000000000
+          DataField = 'int_nomeite'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."int_nomeite"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETqtde: TfrxMemoView
+          Left = 591.386210000000000000
+          Top = 3.779530000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'qtde'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."qtde"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETid_grupo: TfrxMemoView
+          Left = 7.338590000000000000
+          Top = 3.779530000000000000
+          Width = 71.811070000000000000
+          Height = 18.897650000000000000
+          DataField = 'id_grupo'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."id_grupo"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETdescricao: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 3.779530000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          DataField = 'descricao'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."descricao"]')
+          ParentFont = False
+        end
+      end
+      object Header2: TfrxHeader
+        FillType = ftBrush
+        Height = 57.370130000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Shape2: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 33.133890000000000000
+          Width = 714.331170000000000000
+          Height = 22.677180000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo15: TfrxMemoView
+          Left = 272.126160000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 319.260050000000000000
+          Top = 35.133890000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 591.386210000000000000
+          Top = 35.133890000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+        object Shape3: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 3.779530000000000000
+          Width = 714.331170000000000000
+          Height = 30.236240000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo18: TfrxMemoView
+          Left = 260.677335000000000000
+          Top = 9.559060000000000000
+          Width = 196.535560000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'ITENS QUE N'#195'O TEVE MONTADOR INFORMADO')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 37.574830000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Grupo')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 35.133890000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object PCP_FR_R_EPP_FUN_COL: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44533.442265752300000000
+    ReportOptions.LastChange = 44533.442265752300000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'procedure GroupHeader2OnBeforePrint(Sender: TfrxComponent);'
+      'begin'
+      '  Memo14.Text := '#39#39';    '
+      
+        '  if (inttostr( <PCP_DB_R_EPP_FUN."id_func_colagem"> )= '#39#39') or (' +
+        '<PCP_DB_R_EPP_FUN."id_func_colagem"> = '#39'0'#39') then'
+      '    begin'
+      '      Memo14.Text := '#39'SEM COLADOR'#39';  '
+      '    end;         '
+      'end;'
+      ''
+      'procedure Page1OnBeforePrint(Sender: TfrxComponent);'
+      'begin'
+      ''
+      'end;'
+      ''
+      
+        'procedure Memo14OnMouseEnter(Sender: TfrxView; var Modified: Boo' +
+        'lean);'
+      'begin'
+      ''
+      'end;'
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 1040
+    Top = 422
+    Datasets = <
+      item
+        DataSet = dmGeral.CAD_DB_R_PAR
+        DataSetName = 'CAD_DB_C_PAR'
+      end
+      item
+        DataSet = PCP_DB_R_EPP_FUN
+        DataSetName = 'PCP_DB_R_EPP_FUN'
+      end
+      item
+        DataSet = PCP_DB_R_EPP_FUN_DET
+        DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+      end>
+    Variables = <
+      item
+        Name = ' externo'
+        Value = Null
+      end
+      item
+        Name = 'Assin_enorth'
+        Value = ''
+      end
+      item
+        Name = 'ft_codlme'
+        Value = ''
+      end
+      item
+        Name = 'Opcoes'
+        Value = ''
+      end
+      item
+        Name = 'ft_periodo'
+        Value = ''
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      OnBeforePrint = 'Page1OnBeforePrint'
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 68.031540000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object imgEmpresa1: TfrxPictureView
+          Left = 585.827150000000000000
+          Top = 11.338590000000000000
+          Width = 128.504020000000000000
+          Height = 52.913420000000000000
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
+        object CAD_DB_C_PARemp_fantasia: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 34.236240000000000000
+          Width = 385.512060000000000000
+          Height = 26.456710000000000000
+          DataSet = dmGeral.CAD_DB_R_PAR
+          DataSetName = 'CAD_DB_C_PAR'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CAD_DB_C_PAR."emp_fantasia"]')
+          ParentFont = False
+        end
+        object ft_codlme: TfrxMemoView
+          Left = 468.000000000000000000
+          Top = 13.661410000000000000
+          Width = 110.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[ft_codlme]')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo10: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 461.512060000000000000
+          Height = 26.456710000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Entrada de Produto Acabado por Colador')
+          ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Left = 4.000000000000000000
+          Top = 34.236240000000000000
+          Width = 578.268090000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 35.015770000000000000
+        Top = 147.401670000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Memo12: TfrxMemoView
+          Left = 18.897650000000000000
+          Top = 12.338590000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Per'#237'odo :')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 11.338590000000000000
+          Width = 226.771800000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[ft_periodo]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 64.252010000000000000
+        Top = 204.094620000000000000
+        Width = 718.110700000000000000
+        Condition = 'PCP_DB_R_EPP_FUN."id_empresa"'
+        KeepTogether = True
+        ReprintOnNewPage = True
+        object PCP_DB_R_EPP_GRUid_empresa: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 11.338590000000000000
+          Width = 226.771800000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            
+              '[PCP_DB_R_EPP_FUN."id_empresa"] - [PCP_DB_R_EPP_FUN."emp_fantasi' +
+              'a"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo6: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 11.338590000000000000
+          Width = 83.149660000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Empresa :')
+          ParentFont = False
+        end
+        object Shape1: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 33.015770000000000000
+          Width = 714.331170000000000000
+          Height = 22.677180000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo2: TfrxMemoView
+          Left = 18.897650000000000000
+          Top = 35.574830000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 35.574830000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Funcion'#225'rio')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 427.086890000000000000
+          Top = 35.574830000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 343.937230000000000000
+        Width = 718.110700000000000000
+        DataSet = PCP_DB_R_EPP_FUN
+        DataSetName = 'PCP_DB_R_EPP_FUN'
+        RowCount = 0
+        Stretched = True
+        object Memo5: TfrxMemoView
+          Left = 94.488250000000000000
+          Top = 2.779530000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsItalic]
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."id_grupo"]')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 175.858380000000000000
+          Top = 2.779530000000000000
+          Width = 143.622140000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsItalic]
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."descricao"]')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 434.645950000000000000
+          Top = 2.779530000000000000
+          Width = 52.913420000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsItalic]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."qtde"]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 517.795610000000000000
+        Width = 718.110700000000000000
+        object Subreport1: TfrxSubreport
+          Left = 3.779530000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Page = PCP_FR_R_EPP_FUN_COL.Page2
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 612.283860000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          Left = 260.787570000000000000
+          Top = 7.559060000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Page#] de [TotalPages#]')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 600.945270000000000000
+          Top = 7.559060000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 393.071120000000000000
+        Width = 718.110700000000000000
+        object Memo11: TfrxMemoView
+          Left = 325.039580000000000000
+          Top = 10.559060000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            
+              'Qtde total do funcion'#225'rio: [SUM(<PCP_DB_R_EPP_FUN."qtde">,Master' +
+              'Data1)]')
+          ParentFont = False
+        end
+        object Line2: TfrxLineView
+          Left = 321.260050000000000000
+          Top = 8.559060000000000000
+          Width = 166.299320000000000000
+          Color = clBlack
+          Frame.BottomLine.Style = fsDot
+          Diagonal = True
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 291.023810000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader2OnBeforePrint'
+        Condition = 'PCP_DB_R_EPP_FUN."id_func_colagem"'
+        KeepTogether = True
+        object Line1: TfrxLineView
+          Left = 94.488250000000000000
+          Top = 26.456710000000000000
+          Width = 396.850650000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+        object Memo1: TfrxMemoView
+          Left = 95.267780000000000000
+          Top = 3.000000000000000000
+          Width = 226.771800000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN."int_nomefun_colagem"]')
+          ParentFont = False
+        end
+        object Memo14: TfrxMemoView
+          Left = 105.826840000000000000
+          Top = 3.779530000000000000
+          Width = 317.480520000000000000
+          Height = 18.897650000000000000
+          OnMouseEnter = 'Memo14OnMouseEnter'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+      end
+      object GroupFooter2: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 45.354360000000000000
+        Top = 449.764070000000000000
+        Width = 718.110700000000000000
+        object Memo7: TfrxMemoView
+          Left = 204.094620000000000000
+          Top = 12.338590000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          DataSet = PCP_DB_R_EPP_GRU
+          DataSetName = 'PCP_DB_R_EPP_GRU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            
+              'Qtde total da empresa: [SUM(<PCP_DB_R_EPP_FUN."qtde">,MasterData' +
+              '1)]')
+          ParentFont = False
+        end
+      end
+    end
+    object Page2: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object MasterData2: TfrxMasterData
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 98.267780000000000000
+        Width = 718.110700000000000000
+        DataSet = PCP_DB_R_EPP_FUN_DET
+        DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+        RowCount = 0
+        object PCP_DB_R_EPP_FUN_DETid_item: TfrxMemoView
+          Left = 245.669450000000000000
+          Top = 3.779530000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          DataField = 'id_item'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."id_item"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETint_nomeite: TfrxMemoView
+          Left = 319.260050000000000000
+          Top = 3.779530000000000000
+          Width = 260.787570000000000000
+          Height = 18.897650000000000000
+          DataField = 'int_nomeite'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."int_nomeite"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETqtde: TfrxMemoView
+          Left = 591.386210000000000000
+          Top = 3.779530000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'qtde'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."qtde"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETid_grupo: TfrxMemoView
+          Left = 7.338590000000000000
+          Top = 3.779530000000000000
+          Width = 71.811070000000000000
+          Height = 18.897650000000000000
+          DataField = 'id_grupo'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."id_grupo"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_DETdescricao: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 3.779530000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          DataField = 'descricao'
+          DataSet = PCP_DB_R_EPP_FUN_DET
+          DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_DET."descricao"]')
+          ParentFont = False
+        end
+      end
+      object Header2: TfrxHeader
+        FillType = ftBrush
+        Height = 57.370130000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Shape2: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 33.133890000000000000
+          Width = 714.331170000000000000
+          Height = 22.677180000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo15: TfrxMemoView
+          Left = 272.126160000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 319.260050000000000000
+          Top = 35.133890000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 591.386210000000000000
+          Top = 35.133890000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+        object Shape3: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 3.779530000000000000
+          Width = 714.331170000000000000
+          Height = 30.236240000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo18: TfrxMemoView
+          Left = 260.677335000000000000
+          Top = 9.559060000000000000
+          Width = 196.535560000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'ITENS QUE N'#195'O TEVE COLADOR INFORMADO')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 37.574830000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Grupo')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 35.133890000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
+      end
     end
   end
 end

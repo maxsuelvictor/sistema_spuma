@@ -103,6 +103,16 @@ type
     PCP_CD_R_EPP_FUN_DETid_item: TIntegerField;
     PCP_CD_R_EPP_FUN_DETint_nomeite: TWideStringField;
     PCP_CD_R_EPP_FUN_DETqtde: TFloatField;
+    PCP_FR_R_EPP_FUN_MOT: TfrxReport;
+    PCP_CD_R_EPP_FUN_DETid_func_montagem: TIntegerField;
+    PCP_CD_R_EPP_FUN_DETint_nomefun_montagem: TWideStringField;
+    PCP_CD_R_EPP_FUNid_func_montagem: TIntegerField;
+    PCP_CD_R_EPP_FUNint_nomefun_montagem: TWideStringField;
+    PCP_CD_R_EPP_FUNid_func_colagem: TIntegerField;
+    PCP_CD_R_EPP_FUNint_nomefun_colagem: TWideStringField;
+    PCP_CD_R_EPP_FUN_DETid_func_colagem: TIntegerField;
+    PCP_CD_R_EPP_FUN_DETint_nomefun_colagem: TWideStringField;
+    PCP_FR_R_EPP_FUN_COL: TfrxReport;
     procedure lboxEmpDispDblClick(Sender: TObject);
     procedure lboxEmpSelDblClick(Sender: TObject);
     procedure lboxAlmDispDblClick(Sender: TObject);
@@ -409,6 +419,100 @@ begin
               PCP_FR_R_EPP_FUN.Variables['ft_periodo'] := QuotedStr(deInicial.Text + ' à ' + deFinal.Text);
               PCP_FR_R_EPP_FUN.PrepareReport();
               PCP_FR_R_EPP_FUN.ShowReport();
+
+            end
+          else
+            begin
+               ShowMessage('Nenhum registro foi encontrado.');
+            end;
+      end;
+
+   if lbxRelatorios.Items[lbxRelatorios.ItemIndex] = '3 - Entrada de Produto Acabado por Montador' then
+      begin
+         PCP_CD_R_EPP_FUN.Close;
+         PCP_CD_R_EPP_FUN.Data :=
+             PCP_CD_R_EPP_FUN.DataRequest(
+                          VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                          xCondAlmoxarifado, xCondResp,
+                          xCondGru,rTipoEntrada]));
+
+         PCP_CD_R_EPP_FUN_DET.Close;
+         PCP_CD_R_EPP_FUN_DET.Data :=
+             PCP_CD_R_EPP_FUN_DET.DataRequest(
+                          VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                          xCondAlmoxarifado, xCondResp,
+                          xCondGru,rTipoEntrada]));
+
+
+         PCP_CD_R_EPP_FUN.IndexFieldNames := 'id_empresa;id_func_montagem;id_grupo';
+
+
+         if not PCP_CD_R_EPP_FUN.IsEmpty then
+            begin
+              PathImg := ExtractFilePath(Application.ExeName)+'emp'+dmGeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').Text+'\LogoEmpresa.jpg';
+
+              if FileExists(PathImg) then
+                 begin
+                    LogoEmpresa := TfrxPictureView(PCP_FR_R_EPP_FUN_MOT.FindObject('imgEmpresa1'));
+                    if Assigned(LogoEmpresa) then
+                       LogoEmpresa.Picture.LoadFromFile(PathImg);
+                 end;
+              dmGeral.BusCodigoRevListMestre(true,false,PCP_FR_R_EPP_FUN_MOT.Name,xCodLme,xRevLme,nil);
+
+
+              PCP_FR_R_EPP_FUN_MOT.Variables['Assin_enorth'] := QuotedStr(enConstantes.CAssin_Enorth);
+              PCP_FR_R_EPP_FUN_MOT.Variables['ft_codlme']    := QuotedStr(dmGeral.MontarCodRevLme(xCodLme,xRevLme));
+              PCP_FR_R_EPP_FUN_MOT.Variables['Opcoes']       := QuotedStr(xOpcoes);
+              PCP_FR_R_EPP_FUN_MOT.Variables['ft_periodo']   := QuotedStr(deInicial.Text + ' à ' + deFinal.Text);
+              PCP_FR_R_EPP_FUN_MOT.PrepareReport();
+              PCP_FR_R_EPP_FUN_MOT.ShowReport();
+
+            end
+          else
+            begin
+               ShowMessage('Nenhum registro foi encontrado.');
+            end;
+      end;
+
+   if lbxRelatorios.Items[lbxRelatorios.ItemIndex] = '4 - Entrada de Produto Acabado por Colador' then
+      begin
+         PCP_CD_R_EPP_FUN.Close;
+         PCP_CD_R_EPP_FUN.Data :=
+             PCP_CD_R_EPP_FUN.DataRequest(
+                          VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                          xCondAlmoxarifado, xCondResp,
+                          xCondGru,rTipoEntrada]));
+
+         PCP_CD_R_EPP_FUN_DET.Close;
+         PCP_CD_R_EPP_FUN_DET.Data :=
+             PCP_CD_R_EPP_FUN_DET.DataRequest(
+                          VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                          xCondAlmoxarifado, xCondResp,
+                          xCondGru,rTipoEntrada]));
+
+
+         PCP_CD_R_EPP_FUN.IndexFieldNames := 'id_empresa;id_func_colagem;id_grupo';
+
+
+         if not PCP_CD_R_EPP_FUN.IsEmpty then
+            begin
+              PathImg := ExtractFilePath(Application.ExeName)+'emp'+dmGeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').Text+'\LogoEmpresa.jpg';
+
+              if FileExists(PathImg) then
+                 begin
+                    LogoEmpresa := TfrxPictureView(PCP_FR_R_EPP_FUN_COL.FindObject('imgEmpresa1'));
+                    if Assigned(LogoEmpresa) then
+                       LogoEmpresa.Picture.LoadFromFile(PathImg);
+                 end;
+              dmGeral.BusCodigoRevListMestre(true,false,PCP_FR_R_EPP_FUN_COL.Name,xCodLme,xRevLme,nil);
+
+
+              PCP_FR_R_EPP_FUN_COL.Variables['Assin_enorth'] := QuotedStr(enConstantes.CAssin_Enorth);
+              PCP_FR_R_EPP_FUN_COL.Variables['ft_codlme']    := QuotedStr(dmGeral.MontarCodRevLme(xCodLme,xRevLme));
+              PCP_FR_R_EPP_FUN_COL.Variables['Opcoes']       := QuotedStr(xOpcoes);
+              PCP_FR_R_EPP_FUN_COL.Variables['ft_periodo']   := QuotedStr(deInicial.Text + ' à ' + deFinal.Text);
+              PCP_FR_R_EPP_FUN_COL.PrepareReport();
+              PCP_FR_R_EPP_FUN_COL.ShowReport();
 
             end
           else

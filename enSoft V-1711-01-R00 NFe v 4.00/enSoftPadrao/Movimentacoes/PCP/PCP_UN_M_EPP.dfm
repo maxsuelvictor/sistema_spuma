@@ -119,12 +119,13 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     Width = 847
     Height = 662
     ExplicitLeft = 209
-    ExplicitWidth = 809
+    ExplicitWidth = 847
     ExplicitHeight = 662
     inherited pnlDados: TPanel
       Left = 22
       Width = 795
       Height = 656
+      ExplicitLeft = 22
       ExplicitWidth = 795
       ExplicitHeight = 656
       object lblDtaEntrega: TLabel
@@ -212,7 +213,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
         Left = 0
         Top = 153
         Width = 793
-        Height = 371
+        Height = 384
         Caption = ' '
         TabOrder = 5
         object Label9: TLabel
@@ -241,11 +242,37 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
           Height = 13
           Caption = 'hor_entrada'
         end
+        object Label7: TLabel
+          Left = 7
+          Top = 355
+          Width = 78
+          Height = 19
+          Caption = 'Montador: '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label11: TLabel
+          Left = 430
+          Top = 355
+          Width = 61
+          Height = 19
+          Caption = 'Colador:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
         object grdItens: TwwDBGrid
-          Left = 2
+          Left = 3
           Top = 93
           Width = 789
-          Height = 276
+          Height = 256
           Selected.Strings = (
             'id_item'#9'8'#9'C'#243'digo'#9'T'
             'cod_barra'#9'12'#9'Cod. Barra'#9'T'
@@ -259,7 +286,6 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
           TitleColor = clBtnFace
           FixedCols = 0
           ShowHorzScrollBar = True
-          Align = alClient
           DataSource = dsEppIte
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -560,7 +586,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
             object pnlFuncionario: TPanel
               Left = 318
               Top = 2
-              Width = 259
+              Width = 355
               Height = 54
               TabOrder = 4
               Visible = False
@@ -588,6 +614,21 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 Color = clBtnFace
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlue
+                Font.Height = -15
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentColor = False
+                ParentFont = False
+              end
+              object Label8: TLabel
+                Left = 258
+                Top = 3
+                Width = 68
+                Height = 18
+                Caption = '- Colador -'
+                Color = clBtnFace
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 18655
                 Font.Height = -15
                 Font.Name = 'Tahoma'
                 Font.Style = []
@@ -632,6 +673,25 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 WordWrap = False
                 OnExit = txtIdMontagemCaixaExit
               end
+              object txtIdColagem: TwwDBEdit
+                Left = 251
+                Top = 22
+                Width = 97
+                Height = 28
+                DataField = 'id_func_colagem'
+                DataSource = dsEppIte
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -15
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 2
+                UnboundDataType = wwDefault
+                WantReturns = False
+                WordWrap = False
+                OnExit = txtIdColagemExit
+              end
             end
           end
           object btn_Add_Itens: TBitBtn
@@ -665,6 +725,50 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
             TabOrder = 1
             OnClick = btn_Add_ItensClick
           end
+        end
+        object wwDBEdit1: TwwDBEdit
+          Left = 84
+          Top = 352
+          Width = 281
+          Height = 25
+          TabStop = False
+          BorderStyle = bsNone
+          Color = 14342874
+          DataField = 'int_nomefunc_montagem'
+          DataSource = dsEppIte
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 3
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
+        end
+        object wwDBEdit2: TwwDBEdit
+          Left = 494
+          Top = 352
+          Width = 281
+          Height = 25
+          TabStop = False
+          BorderStyle = bsNone
+          Color = 14342874
+          DataField = 'int_nomefunc_colagem'
+          DataSource = dsEppIte
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 4
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
         end
       end
       object txtDtaEntrega: TJvDBDateEdit
@@ -789,7 +893,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
       end
       object pnInfo: TPanel
         Left = 0
-        Top = 528
+        Top = 541
         Width = 793
         Height = 61
         BevelOuter = bvNone
@@ -844,8 +948,8 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
           ParentFont = False
         end
         object txtQtdeInserido: TEdit
-          Left = 152
-          Top = 3
+          Left = 153
+          Top = 0
           Width = 121
           Height = 31
           Alignment = taCenter
@@ -862,10 +966,10 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited pnlTop: TJvPanel
     Width = 1056
-    ExplicitWidth = 1018
+    ExplicitWidth = 1056
     inherited pnlCima: TJvPanel
       Width = 1056
-      ExplicitWidth = 1018
+      ExplicitWidth = 1056
       inherited lblCodificacaoLMestre: TLabel
         Width = 1051
         ExplicitWidth = 1013
@@ -877,7 +981,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
       end
       inherited pnlBaixo: TPanel
         Width = 1056
-        ExplicitWidth = 1018
+        ExplicitWidth = 1056
       end
     end
   end
@@ -888,7 +992,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     Left = 995
     Top = 51
     Bitmap = {
-      494C01010800A800C80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800D00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1788,7 +1892,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C0101080030011C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108003001240218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2688,7 +2792,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200000118020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200000120020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3204,7 +3308,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00C00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00C80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4104,7 +4208,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C01010600000110020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000118020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4316,7 +4420,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00D00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00D80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5216,7 +5320,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C01010600000120020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000128020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5428,7 +5532,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00CC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00D40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6328,7 +6432,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C01010600000104020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101060000010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -6692,6 +6796,17 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
       ProviderFlags = []
       Size = 50
     end
+    object PCP_CD_M_EPP_ITEid_func_colagem: TIntegerField
+      FieldName = 'id_func_colagem'
+    end
+    object PCP_CD_M_EPP_ITElancto_func_colagem_manual: TBooleanField
+      FieldName = 'lancto_func_colagem_manual'
+    end
+    object PCP_CD_M_EPP_ITEint_nomefunc_colagem: TWideStringField
+      FieldName = 'int_nomefunc_colagem'
+      ProviderFlags = []
+      Size = 50
+    end
   end
   object PCP_CD_M_ETQ: TClientDataSet
     Aggregates = <>
@@ -6933,6 +7048,366 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     object PCP_CD_M_ETQpcp_obs_item: TWideStringField
       FieldName = 'pcp_obs_item'
       Size = 150
+    end
+  end
+  object BUS_CD_C_FU5: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'CAD_DP_C_FUN'
+    RemoteServer = dmGeral.pcConecao
+    Left = 712
+    Top = 344
+    object IntegerField13: TIntegerField
+      FieldName = 'id_funcionario'
+    end
+    object BooleanField14: TBooleanField
+      FieldName = 'ativo'
+    end
+    object WideStringField37: TWideStringField
+      FieldName = 'nome'
+      Size = 50
+    end
+    object WideStringField48: TWideStringField
+      FieldName = 'endereco'
+      Size = 50
+    end
+    object WideStringField49: TWideStringField
+      FieldName = 'cep'
+      Size = 9
+    end
+    object WideStringField50: TWideStringField
+      FieldName = 'numero'
+      Size = 10
+    end
+    object WideStringField51: TWideStringField
+      FieldName = 'tel_fixo'
+      Size = 14
+    end
+    object WideStringField52: TWideStringField
+      FieldName = 'tel_movel'
+      Size = 14
+    end
+    object WideStringField53: TWideStringField
+      FieldName = 'doc_cpf'
+      Size = 11
+    end
+    object WideStringField54: TWideStringField
+      FieldName = 'doc_identidade'
+      Size = 11
+    end
+    object WideStringField55: TWideStringField
+      FieldName = 'bairro'
+      Size = 40
+    end
+    object WideStringField56: TWideStringField
+      FieldName = 'id_cidade'
+      Size = 10
+    end
+    object WideStringField57: TWideStringField
+      FieldName = 'estado'
+      Size = 2
+    end
+    object WideStringField58: TWideStringField
+      FieldName = 'email'
+      Size = 60
+    end
+    object IntegerField16: TIntegerField
+      FieldName = 'sexo'
+    end
+    object DateField7: TDateField
+      FieldName = 'dta_nascimento'
+    end
+    object DateField8: TDateField
+      FieldName = 'dta_cadastro'
+    end
+    object WideStringField59: TWideStringField
+      FieldName = 'login'
+      Size = 30
+    end
+    object WideStringField60: TWideStringField
+      FieldName = 'senha'
+      Size = 100
+    end
+    object DateField9: TDateField
+      FieldName = 'dta_senha_expira'
+    end
+    object IntegerField17: TIntegerField
+      FieldName = 'id_perfil_seg'
+    end
+    object BooleanField15: TBooleanField
+      FieldName = 'seg_alt_lim_cli'
+    end
+    object BooleanField16: TBooleanField
+      FieldName = 'seg_alt_sit_cli'
+    end
+    object BooleanField17: TBooleanField
+      FieldName = 'seg_alt_pre_pro'
+    end
+    object BooleanField18: TBooleanField
+      FieldName = 'seg_hab_bot_exc'
+    end
+    object WideStringField61: TWideStringField
+      FieldName = 'int_nomecid'
+      Size = 60
+    end
+    object WideStringField62: TWideStringField
+      FieldName = 'cod_lme'
+    end
+    object WideStringField63: TWideStringField
+      FieldName = 'rev_lme'
+      Size = 5
+    end
+    object DataSetField2: TDataSetField
+      FieldName = 'CAD_SQ_C_FUN_CRG'
+    end
+    object BUS_CD_C_FU5seg_vis_ult_cmp_ite: TBooleanField
+      FieldName = 'seg_vis_ult_cmp_ite'
+    end
+    object BUS_CD_C_FU5seg_vis_msg_sol_cmp: TBooleanField
+      FieldName = 'seg_vis_msg_sol_cmp'
+    end
+    object BUS_CD_C_FU5seg_apr_rep_cmp_ped: TBooleanField
+      FieldName = 'seg_apr_rep_cmp_ped'
+    end
+    object BUS_CD_C_FU5seg_per_canc_orv: TBooleanField
+      FieldName = 'seg_per_canc_orv'
+    end
+    object BUS_CD_C_FU5seg_habilitar_seg: TBooleanField
+      FieldName = 'seg_habilitar_seg'
+    end
+    object BUS_CD_C_FU5seg_redef_senha: TBooleanField
+      FieldName = 'seg_redef_senha'
+    end
+    object BUS_CD_C_FU5seg_hab_bot_alt_fun: TBooleanField
+      FieldName = 'seg_hab_bot_alt_fun'
+    end
+    object BUS_CD_C_FU5seq_vis_msg_ped_exp_fat: TBooleanField
+      FieldName = 'seq_vis_msg_ped_exp_fat'
+    end
+    object BUS_CD_C_FU5seg_ctc_apg: TBooleanField
+      FieldName = 'seg_ctc_apg'
+    end
+    object BUS_CD_C_FU5seg_alt_vend_ped: TBooleanField
+      FieldName = 'seg_alt_vend_ped'
+    end
+    object BUS_CD_C_FU5seq_vis_alert_est_min: TBooleanField
+      FieldName = 'seq_vis_alert_est_min'
+    end
+    object BUS_CD_C_FU5excluir_caixa: TBooleanField
+      FieldName = 'excluir_caixa'
+    end
+    object BUS_CD_C_FU5seg_hab_lib_brd: TBooleanField
+      FieldName = 'seg_hab_lib_brd'
+    end
+    object BUS_CD_C_FU5seg_vis_custo_csu_ite: TBooleanField
+      FieldName = 'seg_vis_custo_csu_ite'
+    end
+    object BUS_CD_C_FU5seg_zerar_est: TBooleanField
+      FieldName = 'seg_zerar_est'
+    end
+    object BUS_CD_C_FU5seg_vis_nota_csu_ite: TBooleanField
+      FieldName = 'seg_vis_nota_csu_ite'
+    end
+    object BUS_CD_C_FU5id_empresa_mob: TIntegerField
+      FieldName = 'id_empresa_mob'
+    end
+    object BUS_CD_C_FU5vnd_interno_externo: TIntegerField
+      FieldName = 'vnd_interno_externo'
+    end
+    object BUS_CD_C_FU5tipo: TIntegerField
+      FieldName = 'tipo'
+    end
+    object BUS_CD_C_FU5sgq_per_comissao: TFloatField
+      FieldName = 'sgq_per_comissao'
+    end
+    object BUS_CD_C_FU5sgq_perm_alt_comissao_ped: TBooleanField
+      FieldName = 'sgq_perm_alt_comissao_ped'
+    end
+    object BUS_CD_C_FU5per_alterar_repres: TBooleanField
+      FieldName = 'per_alterar_repres'
+    end
+    object BUS_CD_C_FU5bus_som_ped_sem_pagtos: TBooleanField
+      FieldName = 'bus_som_ped_sem_pagtos'
+    end
+  end
+  object BUS_CD_C_FU6: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'CAD_DP_C_FUN'
+    RemoteServer = dmGeral.pcConecao
+    Left = 816
+    Top = 344
+    object IntegerField1: TIntegerField
+      FieldName = 'id_funcionario'
+    end
+    object BooleanField1: TBooleanField
+      FieldName = 'ativo'
+    end
+    object WideStringField1: TWideStringField
+      FieldName = 'nome'
+      Size = 50
+    end
+    object WideStringField2: TWideStringField
+      FieldName = 'endereco'
+      Size = 50
+    end
+    object WideStringField3: TWideStringField
+      FieldName = 'cep'
+      Size = 9
+    end
+    object WideStringField4: TWideStringField
+      FieldName = 'numero'
+      Size = 10
+    end
+    object WideStringField5: TWideStringField
+      FieldName = 'tel_fixo'
+      Size = 14
+    end
+    object WideStringField6: TWideStringField
+      FieldName = 'tel_movel'
+      Size = 14
+    end
+    object WideStringField7: TWideStringField
+      FieldName = 'doc_cpf'
+      Size = 11
+    end
+    object WideStringField8: TWideStringField
+      FieldName = 'doc_identidade'
+      Size = 11
+    end
+    object WideStringField9: TWideStringField
+      FieldName = 'bairro'
+      Size = 40
+    end
+    object WideStringField10: TWideStringField
+      FieldName = 'id_cidade'
+      Size = 10
+    end
+    object WideStringField11: TWideStringField
+      FieldName = 'estado'
+      Size = 2
+    end
+    object WideStringField12: TWideStringField
+      FieldName = 'email'
+      Size = 60
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'sexo'
+    end
+    object DateField1: TDateField
+      FieldName = 'dta_nascimento'
+    end
+    object DateField2: TDateField
+      FieldName = 'dta_cadastro'
+    end
+    object WideStringField13: TWideStringField
+      FieldName = 'login'
+      Size = 30
+    end
+    object WideStringField14: TWideStringField
+      FieldName = 'senha'
+      Size = 100
+    end
+    object DateField3: TDateField
+      FieldName = 'dta_senha_expira'
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'id_perfil_seg'
+    end
+    object BooleanField2: TBooleanField
+      FieldName = 'seg_alt_lim_cli'
+    end
+    object BooleanField3: TBooleanField
+      FieldName = 'seg_alt_sit_cli'
+    end
+    object BooleanField4: TBooleanField
+      FieldName = 'seg_alt_pre_pro'
+    end
+    object BooleanField5: TBooleanField
+      FieldName = 'seg_hab_bot_exc'
+    end
+    object WideStringField15: TWideStringField
+      FieldName = 'int_nomecid'
+      Size = 60
+    end
+    object WideStringField16: TWideStringField
+      FieldName = 'cod_lme'
+    end
+    object WideStringField17: TWideStringField
+      FieldName = 'rev_lme'
+      Size = 5
+    end
+    object DataSetField1: TDataSetField
+      FieldName = 'CAD_SQ_C_FUN_CRG'
+    end
+    object BooleanField6: TBooleanField
+      FieldName = 'seg_vis_ult_cmp_ite'
+    end
+    object BooleanField7: TBooleanField
+      FieldName = 'seg_vis_msg_sol_cmp'
+    end
+    object BooleanField8: TBooleanField
+      FieldName = 'seg_apr_rep_cmp_ped'
+    end
+    object BooleanField9: TBooleanField
+      FieldName = 'seg_per_canc_orv'
+    end
+    object BooleanField10: TBooleanField
+      FieldName = 'seg_habilitar_seg'
+    end
+    object BooleanField11: TBooleanField
+      FieldName = 'seg_redef_senha'
+    end
+    object BooleanField12: TBooleanField
+      FieldName = 'seg_hab_bot_alt_fun'
+    end
+    object BooleanField13: TBooleanField
+      FieldName = 'seq_vis_msg_ped_exp_fat'
+    end
+    object BooleanField19: TBooleanField
+      FieldName = 'seg_ctc_apg'
+    end
+    object BooleanField20: TBooleanField
+      FieldName = 'seg_alt_vend_ped'
+    end
+    object BooleanField21: TBooleanField
+      FieldName = 'seq_vis_alert_est_min'
+    end
+    object BooleanField22: TBooleanField
+      FieldName = 'excluir_caixa'
+    end
+    object BooleanField23: TBooleanField
+      FieldName = 'seg_hab_lib_brd'
+    end
+    object BooleanField24: TBooleanField
+      FieldName = 'seg_vis_custo_csu_ite'
+    end
+    object BooleanField25: TBooleanField
+      FieldName = 'seg_zerar_est'
+    end
+    object BooleanField26: TBooleanField
+      FieldName = 'seg_vis_nota_csu_ite'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'id_empresa_mob'
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'vnd_interno_externo'
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'tipo'
+    end
+    object FloatField1: TFloatField
+      FieldName = 'sgq_per_comissao'
+    end
+    object BooleanField27: TBooleanField
+      FieldName = 'sgq_perm_alt_comissao_ped'
+    end
+    object BooleanField28: TBooleanField
+      FieldName = 'per_alterar_repres'
+    end
+    object BooleanField29: TBooleanField
+      FieldName = 'bus_som_ped_sem_pagtos'
     end
   end
 end

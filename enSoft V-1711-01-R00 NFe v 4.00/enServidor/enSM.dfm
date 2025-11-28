@@ -20676,9 +20676,11 @@
   end
   object CAD_SQ_C_FUN_CRG: TSQLDataSet
     CommandText = 
-      'select fca.* , crg.descricao as int_nomecrg'#13#10'from cad_tb_c_fun_c' +
-      'rg fca'#13#10'left outer join pcp_tb_c_crg crg on crg.id_cargo=fca.id_' +
-      'cargo'#13#10'WHERE fca.ID_FUNCIONARIO=:ID_FUNCIONARIO'
+      'select fca.* , crg.descricao as int_nomecrg, '#13#10'stt.descricao as ' +
+      'int_desc_setor, stt.tipo as int_tipo_setor'#13#10'from cad_tb_c_fun_cr' +
+      'g fca'#13#10'left outer join pcp_tb_c_crg crg on crg.id_cargo=fca.id_c' +
+      'argo'#13#10'left outer join cad_tb_c_set stt on stt.id_setor=crg.id_se' +
+      'tor'#13#10'WHERE fca.ID_FUNCIONARIO=:ID_FUNCIONARIO'
     DataSource = CAD_DS_C_FUN
     MaxBlobSize = -1
     Params = <
@@ -20700,6 +20702,15 @@
       FieldName = 'int_nomecrg'
       ProviderFlags = []
       Size = 70
+    end
+    object CAD_SQ_C_FUN_CRGint_desc_setor: TWideStringField
+      FieldName = 'int_desc_setor'
+      ProviderFlags = []
+      Size = 50
+    end
+    object CAD_SQ_C_FUN_CRGint_tipo_setor: TIntegerField
+      FieldName = 'int_tipo_setor'
+      ProviderFlags = []
     end
   end
   object CAD_DS_C_FUN: TDataSource
@@ -47700,21 +47711,23 @@
       'pr as int_opr,'#13#10'    opr.num_lote as int_numlote_opr,      '#13#10'    ' +
       'GRU.TIPO_ITEM  AS  INT_TIPO_ITEM,'#13#10'    ite.sgq_personalizado as ' +
       'int_ite_sgq_personalizado, '#13#10'    fun.nome as int_nomefunc_colc,'#13 +
-      #10'    fum.nome as int_nomefunc_montagem'#13#10' from pcp_tb_m_epp_ite p' +
-      'it'#13#10'         left outer join cad_tb_c_ite ite on (ite.id_item = ' +
-      'pit.id_item)       '#13#10'         left outer join cad_tb_c_gru gru o' +
-      'n (gru.id_grupo = ite.id_grupo)       '#13#10'         left outer join' +
-      ' cad_tb_c_cor cor on (cor.id_cor = pit.id_cor)       '#13#10'         ' +
-      'left outer join cad_tb_c_tam tam on (tam.id_tamanho = pit.id_tam' +
-      'anho)       '#13#10'         left outer join pcp_tb_m_epp epp on (epp.' +
-      'id_epp = pit.id_epp) '#13#10'         left outer join pcp_tb_m_etq etq' +
-      ' on (etq.id_empresa = epp.id_empresa and'#13#10'                      ' +
-      '                                              etq.cod_barra   = ' +
-      'pit.cod_barra )      '#13#10'         left outer join pcp_tb_m_opr opr' +
-      ' on opr.id_opr = etq.id_opr_origem  '#13#10'         left outer join c' +
-      'ad_tb_c_fun fun on fun.id_funcionario = pit.id_func_colchoaria '#13 +
-      #10'         left outer join cad_tb_c_fun fum on fum.id_funcionario' +
-      ' = pit.id_func_montagem '#13#10'         '#13#10'where pit.id_epp=:id_epp'
+      #10'    fum.nome as int_nomefunc_montagem,'#13#10'    fuc.nome as int_nom' +
+      'efunc_colagem'#13#10' from pcp_tb_m_epp_ite pit'#13#10'         left outer j' +
+      'oin cad_tb_c_ite ite on (ite.id_item = pit.id_item)       '#13#10'    ' +
+      '     left outer join cad_tb_c_gru gru on (gru.id_grupo = ite.id_' +
+      'grupo)       '#13#10'         left outer join cad_tb_c_cor cor on (cor' +
+      '.id_cor = pit.id_cor)       '#13#10'         left outer join cad_tb_c_' +
+      'tam tam on (tam.id_tamanho = pit.id_tamanho)       '#13#10'         le' +
+      'ft outer join pcp_tb_m_epp epp on (epp.id_epp = pit.id_epp) '#13#10'  ' +
+      '       left outer join pcp_tb_m_etq etq on (etq.id_empresa = epp' +
+      '.id_empresa and'#13#10'                                               ' +
+      '                     etq.cod_barra   = pit.cod_barra )      '#13#10'  ' +
+      '       left outer join pcp_tb_m_opr opr on opr.id_opr = etq.id_o' +
+      'pr_origem  '#13#10'         left outer join cad_tb_c_fun fun on fun.id' +
+      '_funcionario  = pit.id_func_colchoaria '#13#10'         left outer joi' +
+      'n cad_tb_c_fun fum on fum.id_funcionario = pit.id_func_montagem ' +
+      #13#10'         left outer join cad_tb_c_fun fuc on fuc.id_funcionari' +
+      'o   = pit.id_func_colagem        '#13#10'where pit.id_epp=:id_epp'
     DataSource = PCP_DS_M_EPP
     MaxBlobSize = -1
     Params = <
@@ -47813,6 +47826,17 @@
     end
     object PCP_SQ_M_EPP_ITEint_nomefunc_montagem: TWideStringField
       FieldName = 'int_nomefunc_montagem'
+      ProviderFlags = []
+      Size = 50
+    end
+    object PCP_SQ_M_EPP_ITEid_func_colagem: TIntegerField
+      FieldName = 'id_func_colagem'
+    end
+    object PCP_SQ_M_EPP_ITElancto_func_colagem_manual: TBooleanField
+      FieldName = 'lancto_func_colagem_manual'
+    end
+    object PCP_SQ_M_EPP_ITEint_nomefunc_colagem: TWideStringField
+      FieldName = 'int_nomefunc_colagem'
       ProviderFlags = []
       Size = 50
     end
@@ -48861,6 +48885,14 @@
       FieldName = 'int_nometer_impres'
       ProviderFlags = []
       Size = 50
+    end
+    object BUS_SQ_M_PEDid_pedido_mob: TIntegerField
+      FieldName = 'id_pedido_mob'
+    end
+    object BUS_SQ_M_PEDpes_liquido_itens: TFMTBCDField
+      FieldName = 'pes_liquido_itens'
+      Precision = 18
+      Size = 4
     end
   end
   object BUS_SQ_M_PED_ITE: TSQLDataSet
@@ -62042,6 +62074,14 @@
       ProviderFlags = []
       Size = 14
     end
+    object BUS_SQ_M_PED_GERid_pedido_mob: TIntegerField
+      FieldName = 'id_pedido_mob'
+    end
+    object BUS_SQ_M_PED_GERpes_liquido_itens: TFMTBCDField
+      FieldName = 'pes_liquido_itens'
+      Precision = 18
+      Size = 4
+    end
   end
   object BUS_SQ_M_PED_ITE_GER: TSQLDataSet
     SchemaName = 'sa'
@@ -62255,6 +62295,11 @@
     end
     object FMTBCDField150: TFMTBCDField
       FieldName = 'vlr_desc_especial'
+      Precision = 18
+      Size = 4
+    end
+    object BUS_SQ_M_PED_ITE_GERpeso_total_item: TFMTBCDField
+      FieldName = 'peso_total_item'
       Precision = 18
       Size = 4
     end
@@ -63196,19 +63241,24 @@
   end
   object PCP_SQ_R_EPP_FUN: TSQLDataSet
     CommandText = 
-      'select epp.id_empresa, par.emp_fantasia, '#13#10'       epp.id_almoxar' +
-      'ifado, alm.descricao as int_nomealm,'#13#10'      coalesce(epi.id_func' +
-      '_colchoaria,0) id_func_colchoaria, fun.nome as int_nomefun,     ' +
-      '   '#13#10'       ite.id_grupo,gru.descricao,  sum(coalesce(epi.qtde,0' +
-      ')) as qtde'#13#10#13#10'from pcp_tb_m_epp_ite epi  '#13#10'   left outer join pc' +
-      'p_tb_m_epp epp on epp.id_epp = epi.id_epp'#13#10'   left outer join ca' +
-      'd_tb_c_ite ite on ite.id_item = epi.id_item'#13#10'   left outer join ' +
-      'cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo'#13#10'   left outer j' +
-      'oin cad_tb_c_par par on par.id_empresa = epp.id_empresa   '#13#10'   l' +
-      'eft outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_' +
-      'almoxarifado'#13#10'   left outer join cad_tb_c_fun fun on fun.id_func' +
-      'ionario = epi.id_func_colchoaria'#13#10'where 1 = 2'#13#10'group by 1,2,3,4,' +
-      '5,6,7,8'
+      'select epp.id_empresa, par.emp_fantasia, '#13#10'        epp.id_almoxa' +
+      'rifado, alm.descricao as int_nomealm,'#13#10'        coalesce(epi.id_f' +
+      'unc_colchoaria,0) id_func_colchoaria, fun.nome as int_nomefun,  ' +
+      '      '#13#10'        coalesce(epi.id_func_montagem,0) id_func_montage' +
+      'm, fmt.nome as int_nomefun_montagem, '#13#10'        coalesce(epi.id_f' +
+      'unc_colagem,0) id_func_colagem, fcc.nome as int_nomefun_colagem,' +
+      ' '#13#10'        ite.id_grupo,gru.descricao,  sum(coalesce(epi.qtde,0)' +
+      ') as qtde'#13#10#13#10'from pcp_tb_m_epp_ite epi  '#13#10'   left outer join pcp' +
+      '_tb_m_epp epp on epp.id_epp = epi.id_epp'#13#10'   left outer join cad' +
+      '_tb_c_ite ite on ite.id_item = epi.id_item'#13#10'   left outer join c' +
+      'ad_tb_c_gru gru on gru.id_grupo = ite.id_grupo'#13#10'   left outer jo' +
+      'in cad_tb_c_par par on par.id_empresa = epp.id_empresa   '#13#10'   le' +
+      'ft outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_a' +
+      'lmoxarifado'#13#10'   left outer join cad_tb_c_fun fun on fun.id_funci' +
+      'onario = epi.id_func_colchoaria'#13#10'   left outer join cad_tb_c_fun' +
+      ' fmt on fmt.id_funcionario = epi.id_func_montagem'#13#10'   left outer' +
+      ' join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func_colag' +
+      'em'#13#10#13#10'where 1 = 2'#13#10'group by 1,2,3,4,5,6,7,8,9,10,11,12'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
@@ -63246,6 +63296,20 @@
       FieldName = 'descricao'
       Size = 30
     end
+    object PCP_SQ_R_EPP_FUNid_func_montagem: TIntegerField
+      FieldName = 'id_func_montagem'
+    end
+    object PCP_SQ_R_EPP_FUNint_nomefun_montagem: TWideStringField
+      FieldName = 'int_nomefun_montagem'
+      Size = 50
+    end
+    object PCP_SQ_R_EPP_FUNid_func_colagem: TIntegerField
+      FieldName = 'id_func_colagem'
+    end
+    object PCP_SQ_R_EPP_FUNint_nomefun_colagem: TWideStringField
+      FieldName = 'int_nomefun_colagem'
+      Size = 50
+    end
   end
   object PCP_DP_R_EPP_FUN: TDataSetProvider
     DataSet = PCP_SQ_R_EPP_FUN
@@ -63258,21 +63322,26 @@
       'select epp.id_empresa, par.emp_fantasia, '#13#10'       epp.id_almoxar' +
       'ifado, alm.descricao as int_nomealm,'#13#10'       coalesce(epi.id_fun' +
       'c_colchoaria,0) id_func_colchoaria, fun.nome as int_nomefun,    ' +
-      '    '#13#10'       ite.id_grupo,gru.descricao, '#13#10'       ite.id_item, '#13 +
-      #10'       cast('#13#10'       case '#13#10'          when rtrim(etq.pcp_obs_it' +
-      'em) <> '#39#39' then pcp_obs_item'#13#10'       else ite.descricao end as va' +
-      'rchar(50)) as int_nomeite, '#13#10'       '#13#10'       sum(coalesce(epi.qt' +
-      'de,0)) as qtde'#13#10#13#10'from pcp_tb_m_epp_ite epi  '#13#10'   left outer joi' +
-      'n pcp_tb_m_epp epp on epp.id_epp = epi.id_epp'#13#10'   left outer joi' +
-      'n pcp_tb_m_etq etq on etq.cod_barra = epi.cod_barra'#13#10'   left out' +
-      'er join cad_tb_c_ite ite on ite.id_item = epi.id_item'#13#10'   left o' +
-      'uter join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo'#13#10'   le' +
-      'ft outer join cad_tb_c_par par on par.id_empresa = epp.id_empres' +
-      'a   '#13#10'   left outer join cad_tb_c_alm alm on alm.id_almoxarifado' +
-      ' = epp.id_almoxarifado'#13#10'   left outer join cad_tb_c_fun fun on f' +
-      'un.id_funcionario = epi.id_func_colchoaria'#13#10'where coalesce(epi.i' +
-      'd_func_colchoaria,0) = 0'#13#10'and 1 = 2'#13#10'group by 1,2,3,4,5,6,7,8,9,' +
-      '10'#13#10'order by 1,5,6,7'
+      '    '#13#10'       coalesce(epi.id_func_montagem,0) id_func_montagem, ' +
+      'fmt.nome as int_nomefun_montagem,  '#13#10'       coalesce(epi.id_func' +
+      '_colagem,0) id_func_colagem, fcc.nome as int_nomefun_colagem,  '#13 +
+      #10'       ite.id_grupo,gru.descricao, '#13#10'       ite.id_item, '#13#10'    ' +
+      '   cast('#13#10'       case '#13#10'          when rtrim(etq.pcp_obs_item) <' +
+      '> '#39#39' then pcp_obs_item'#13#10'       else ite.descricao end as varchar' +
+      '(50)) as int_nomeite, '#13#10'       '#13#10'       sum(coalesce(epi.qtde,0)' +
+      ') as qtde'#13#10#13#10'from pcp_tb_m_epp_ite epi  '#13#10'   left outer join pcp' +
+      '_tb_m_epp epp on epp.id_epp = epi.id_epp'#13#10'   left outer join pcp' +
+      '_tb_m_etq etq on etq.cod_barra = epi.cod_barra'#13#10'   left outer jo' +
+      'in cad_tb_c_ite ite on ite.id_item = epi.id_item'#13#10'   left outer ' +
+      'join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo'#13#10'   left ou' +
+      'ter join cad_tb_c_par par on par.id_empresa = epp.id_empresa   '#13 +
+      #10'   left outer join cad_tb_c_alm alm on alm.id_almoxarifado = ep' +
+      'p.id_almoxarifado'#13#10'   left outer join cad_tb_c_fun fun on fun.id' +
+      '_funcionario = epi.id_func_colchoaria'#13#10'   left outer join cad_tb' +
+      '_c_fun fmt on fmt.id_funcionario = epi.id_func_montagem'#13#10'   left' +
+      ' outer join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func' +
+      '_colagem'#13#10'where coalesce(epi.id_func_colchoaria,0) = 0'#13#10'and 1 = ' +
+      '2'#13#10'group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14'#13#10'order by 1,5,6,7'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
@@ -63316,6 +63385,20 @@
     end
     object PCP_SQ_R_EPP_FUN_DETqtde: TFloatField
       FieldName = 'qtde'
+    end
+    object PCP_SQ_R_EPP_FUN_DETid_func_montagem: TIntegerField
+      FieldName = 'id_func_montagem'
+    end
+    object PCP_SQ_R_EPP_FUN_DETint_nomefun_montagem: TWideStringField
+      FieldName = 'int_nomefun_montagem'
+      Size = 50
+    end
+    object PCP_SQ_R_EPP_FUN_DETid_func_colagem: TIntegerField
+      FieldName = 'id_func_colagem'
+    end
+    object PCP_SQ_R_EPP_FUN_DETint_nomefun_colagem: TWideStringField
+      FieldName = 'int_nomefun_colagem'
+      Size = 50
     end
   end
   object PCP_DP_R_EPP_FUN_DET: TDataSetProvider
