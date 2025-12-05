@@ -11324,15 +11324,6 @@ type
     PCP_SQ_R_EPP_FUN: TSQLDataSet;
     PCP_DP_R_EPP_FUN: TDataSetProvider;
     PCP_SQ_R_EPP_FUN_DET: TSQLDataSet;
-    PCP_SQ_R_EPP_FUNid_empresa: TIntegerField;
-    PCP_SQ_R_EPP_FUNemp_fantasia: TWideStringField;
-    PCP_SQ_R_EPP_FUNid_almoxarifado: TIntegerField;
-    PCP_SQ_R_EPP_FUNint_nomealm: TWideStringField;
-    PCP_SQ_R_EPP_FUNid_func_colchoaria: TIntegerField;
-    PCP_SQ_R_EPP_FUNint_nomefun: TWideStringField;
-    PCP_SQ_R_EPP_FUNqtde: TFloatField;
-    PCP_SQ_R_EPP_FUNid_grupo: TWideStringField;
-    PCP_SQ_R_EPP_FUNdescricao: TWideStringField;
     PCP_DP_R_EPP_FUN_DET: TDataSetProvider;
     PCP_SQ_R_EPP_FUN_DETid_empresa: TIntegerField;
     PCP_SQ_R_EPP_FUN_DETemp_fantasia: TWideStringField;
@@ -11643,15 +11634,11 @@ type
     PCP_SQ_M_EPP_ITEint_nomefunc_montagem: TWideStringField;
     PCP_SQ_R_EPP_FUN_DETid_func_montagem: TIntegerField;
     PCP_SQ_R_EPP_FUN_DETint_nomefun_montagem: TWideStringField;
-    PCP_SQ_R_EPP_FUNid_func_montagem: TIntegerField;
-    PCP_SQ_R_EPP_FUNint_nomefun_montagem: TWideStringField;
     PCP_SQ_M_EPP_ITEid_func_colagem: TIntegerField;
     PCP_SQ_M_EPP_ITElancto_func_colagem_manual: TBooleanField;
     PCP_SQ_M_EPP_ITEint_nomefunc_colagem: TWideStringField;
     PCP_SQ_R_EPP_FUN_DETid_func_colagem: TIntegerField;
     PCP_SQ_R_EPP_FUN_DETint_nomefun_colagem: TWideStringField;
-    PCP_SQ_R_EPP_FUNid_func_colagem: TIntegerField;
-    PCP_SQ_R_EPP_FUNint_nomefun_colagem: TWideStringField;
     CAD_SQ_C_FUN_CRGint_desc_setor: TWideStringField;
     CAD_SQ_C_FUN_CRGint_tipo_setor: TIntegerField;
     BUS_SQ_M_PED_GERid_pedido_mob: TIntegerField;
@@ -11659,6 +11646,23 @@ type
     BUS_SQ_M_PED_ITE_GERpeso_total_item: TFMTBCDField;
     BUS_SQ_M_PEDid_pedido_mob: TIntegerField;
     BUS_SQ_M_PEDpes_liquido_itens: TFMTBCDField;
+    PCP_SQ_R_EPP_FUNid_empresa: TIntegerField;
+    PCP_SQ_R_EPP_FUNemp_fantasia: TWideStringField;
+    PCP_SQ_R_EPP_FUNid_almoxarifado: TIntegerField;
+    PCP_SQ_R_EPP_FUNint_nomealm: TWideStringField;
+    PCP_SQ_R_EPP_FUNid_func_colchoaria: TIntegerField;
+    PCP_SQ_R_EPP_FUNint_nomefun: TWideStringField;
+    PCP_SQ_R_EPP_FUNid_func_montagem: TIntegerField;
+    PCP_SQ_R_EPP_FUNint_nomefun_montagem: TWideStringField;
+    PCP_SQ_R_EPP_FUNid_func_colagem: TIntegerField;
+    PCP_SQ_R_EPP_FUNint_nomefun_colagem: TWideStringField;
+    PCP_SQ_R_EPP_FUNid_grupo: TWideStringField;
+    PCP_SQ_R_EPP_FUNdescricao: TWideStringField;
+    PCP_SQ_R_EPP_FUNqtde: TFloatField;
+    CAD_DP_C_IBC: TDataSetProvider;
+    CAD_SQ_C_IBC: TSQLDataSet;
+    CAD_SQ_C_CTR: TSQLDataSet;
+    CAD_DP_C_CTR: TDataSetProvider;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -13049,6 +13053,10 @@ type
     function BUS_DP_M_ETQDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function BUS_DP_M_PED_SQADataRequest(Sender: TObject;
+      Input: OleVariant): OleVariant;
+    function CAD_DP_C_IBCDataRequest(Sender: TObject;
+      Input: OleVariant): OleVariant;
+    function CAD_DP_C_CTRDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
 
 
@@ -29588,6 +29596,51 @@ begin
   enAudGravar(Sender,DataSet);
 end;
 
+function TSM.CAD_DP_C_CTRDataRequest(Sender: TObject;
+  Input: OleVariant): OleVariant;
+  function enSqlCtr: String;
+  begin
+    Result :=
+        ' select ctr.*, ibc.descricao as int_nome_ibs_cbs_ibc ' +
+        ' from cad_tb_c_ctr ctr ' +
+        '      left outer join cad_tb_c_ibc ibc on ibc.id_cst_ibs_cbs = ctr.id_cst_ibs_cbs ';
+  end;
+begin
+   CAD_SQ_C_CTR.Close;
+   if Input[0] = 0 then
+      begin
+        if Trim(VarToStr(Input[1])) = '' then
+           CAD_SQ_C_CTR.CommandText := enSqlCtr + ' WHERE 1=1 '
+        else
+           CAD_SQ_C_CTR.CommandText := enSqlCtr +
+             ' WHERE id_ctr = ''' + VarToStr(Input[1]) +''' ';
+      end
+   else if Input[0] = 1 then
+      begin
+        CAD_SQ_C_CTR.CommandText := enSqlCtr +
+          Format('WHERE upper(descricao_cst_ibs_cbs) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
+      end
+   else if Input[0] = 2 then
+      begin
+        CAD_SQ_C_CTR.CommandText := enSqlCtr +
+            ' WHERE id_cst_ibs_cbs = ''' + VarToStr(Input[1]) +''' ';
+      end
+   else if Input[0] = 3 then
+      begin
+        CAD_SQ_C_CTR.CommandText := enSqlCtr +
+            Format('WHERE upper(cclasstrib) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
+      end
+   else if Input[0] = 4 then
+      begin
+        CAD_SQ_C_CTR.CommandText := enSqlCtr +
+             Format('WHERE upper(nome_cclasstrib) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
+      end;
+
+   Result := CAD_DP_C_CTR.Data;
+
+   CAD_SQ_C_CTR.Close;
+end;
+
 function TSM.CAD_DP_C_CULDataRequest(Sender: TObject;
   Input: OleVariant): OleVariant;
 function enSqlCul: String;
@@ -30371,6 +30424,35 @@ begin
    Result := CAD_DP_C_HFG.Data;
 
 end;
+
+function TSM.CAD_DP_C_IBCDataRequest(Sender: TObject;
+  Input: OleVariant): OleVariant;
+  function enSqlIbc: String;
+  begin
+    Result :=
+        ' select * from cad_tb_c_ibc ';
+
+  end;
+begin
+   CAD_SQ_C_IBC.Close;
+   if Input[0] = 0 then
+      begin
+        if Trim(VarToStr(Input[1])) = '' then
+           CAD_SQ_C_IBC.CommandText := enSqlIbc + ' WHERE 1=1 '
+        else
+           CAD_SQ_C_IBC.CommandText := enSqlIbc +
+             ' WHERE id_cst_ibs_cbs = ''' + VarToStr(Input[1]) +''' ';
+      end
+   else if Input[0] = 1 then
+      begin
+        CAD_SQ_C_IBC.CommandText := enSqlIbc +
+          Format('WHERE upper(descricao) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
+      end;
+
+   Result := CAD_DP_C_IBC.Data;
+   CAD_SQ_C_IBC.Close;
+end;
+
 
 function TSM.CAD_DP_C_INFDataRequest(Sender: TObject;
   Input: OleVariant): OleVariant;
@@ -72035,28 +72117,148 @@ function TSM.PCP_DP_R_EPP_FUNDataRequest(Sender: TObject;
   Input: OleVariant): OleVariant;
 function enSqlRelPcpEppFun: String;
   begin
-    Result :=
-       { ' select epp.id_empresa, par.emp_fantasia,   ' + #13#10 +
-        '       epp.id_almoxarifado, alm.descricao as int_nomealm,' + #13#10 +
-        '       epp.dta_entrada, ite.id_grupo,' +
-        '       epi.id_func_colchoaria, fun.nome as int_nomefun,   ' + #13#10 +
-        ' sum(coalesce(epi.qtde,0)) as qtde' + #13#10 +   }
-
+    result :=
         ' select epp.id_empresa, par.emp_fantasia, ' + #13#10 +
         '       epp.id_almoxarifado, alm.descricao as int_nomealm,' + #13#10 +
-        '       coalesce(epi.id_func_colchoaria,0) id_func_colchoaria, fun.nome as int_nomefun, ' + #13#10 +
-        '       coalesce(epi.id_func_montagem,0) id_func_montagem, fmt.nome as int_nomefun_montagem, ' + #13#10 +
-        '       coalesce(epi.id_func_colagem,0) id_func_colagem, fcc.nome as int_nomefun_colagem, ' + #13#10 +
-        '       ite.id_grupo, gru.descricao, sum(coalesce(epi.qtde,0)) as qtde' +
-        ' from pcp_tb_m_epp_ite epi  ' + #13#10 +
-        '   left outer join pcp_tb_m_epp epp on epp.id_epp = epi.id_epp' + #13#10 +
-        '   left outer join cad_tb_c_ite ite on ite.id_item = epi.id_item' + #13#10 +
-        '   left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo' + #13#10 +
-        '   left outer join cad_tb_c_par par on par.id_empresa = epp.id_empresa   ' + #13#10 +
-        '   left outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_almoxarifado' + #13#10 +
-        '   left outer join cad_tb_c_fun fun on fun.id_funcionario = epi.id_func_colchoaria' + #13#10 +
-        '   left outer join cad_tb_c_fun fmt on fmt.id_funcionario = epi.id_func_montagem' + #13#10 +
-        '   left outer join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func_colagem ';
+        '       case ' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + '  = 2 then coalesce(id_func_colchoaria,0)' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' <> 2 then 0' + #13#10 +
+        '       end as id_func_colchoaria,' + #13#10 +
+        '				' + #13#10 +
+        '			  cast( case ' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' =  2 then fun.nome' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' <> 2 then ''''' + #13#10 +
+        '       end as varchar(40)) as int_nomefun,' + #13#10 +
+        '       case ' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' = 3 then coalesce(id_func_montagem,0)' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' <> 3 then 0' + #13#10 +
+        '       end as id_func_montagem,' + #13#10 +
+        '				' + #13#10 +
+        '			  cast(case ' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' = 3 then fmt.nome' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' <> 3 then ''''' + #13#10 +
+        '       end as varchar(40)) as int_nomefun_montagem,' + #13#10 +
+        '       case ' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' = 4 then coalesce(id_func_colagem,0)' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' <> 4 then 0' + #13#10 +
+        '       end as id_func_colagem,' + #13#10 +
+        '				' + #13#10 +
+        '			  cast(case ' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' = 4 then fcc.nome' + #13#10 +
+        '          when ' +  VarToStr(Input[0]) + ' <> 4 then ''''' + #13#10 +
+        '       end as varchar(40)) as int_nomefun_colagem,      ' + #13#10 +
+        '        ' + #13#10 +
+        '      ite.id_grupo, gru.descricao, epi.qtde' + #13#10 +
+        '     from pcp_tb_m_epp_ite epi  ' + #13#10 +
+        '           left outer join pcp_tb_m_epp epp on epp.id_epp = epi.id_epp' + #13#10 +
+        '           left outer join cad_tb_c_ite ite on ite.id_item = epi.id_item' + #13#10 +
+        '           left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo' + #13#10 +
+        '           left outer join cad_tb_c_par par on par.id_empresa = epp.id_empresa   ' + #13#10 +
+        '           left outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_almoxarifado' + #13#10 +
+        '           left outer join cad_tb_c_fun fun on fun.id_funcionario = epi.id_func_colchoaria' + #13#10 +
+        '           left outer join cad_tb_c_fun fmt on fmt.id_funcionario = epi.id_func_montagem' + #13#10 +
+        '           left outer join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func_colagem' + #13#10 +
+        ' where epp.dta_entrada >= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[1])) ) +''' and '+
+        '       epp.dta_entrada <= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[2])) ) +''' and ' +
+        '       epp.tipo_entrada = ' + VarToStr(Input[7]);
+     if Input[3] <> '' then
+        begin
+          result := result +
+              ' and EPP.ID_EMPRESA in (' + VarToStr(Input[3]) +') ';
+        end;
+
+     if Input[4] <> '' then
+        begin
+          result := result +
+              ' and EPP.ID_ALMOXARIFADO in (' + VarToStr(Input[4]) +') ';
+        end;
+
+     if Input[5] <> '' then
+        begin
+          result := result +
+              ' and EPP.ID_RESPONSAVEL in (' + VarToStr(Input[5]) +') ';
+        end;
+
+     if Input[8] = '0' then
+        begin
+           if Input[0] = '2' then //Colchoaria
+               begin
+                 result := result +
+                          ' and  coalesce(epi.id_func_colchoaria,0) <> 0 ' ;
+               end;
+           if Input[0] = '3' then //Montagem
+               begin
+                 result := result +
+                          ' and  coalesce(epi.id_func_montagem,0) <> 0 ' ;
+               end;
+           if Input[0] = '4' then //Colagem
+              begin
+                result := result +
+                          ' and  coalesce(epi.id_func_colagem,0) <> 0 ' ;
+              end;
+           {result := result +
+                ' and ( coalesce(epi.id_func_colchoaria,0) <> 0 or ' +
+                '       coalesce(epi.id_func_montagem,0) <> 0 or ' +
+                '       coalesce(epi.id_func_colagem,0) <> 0 ) ' ;}
+        end;
+
+
+
+    { if Input[0] = '2' then
+        Result :=
+            ' select epp.id_empresa, par.emp_fantasia, ' + #13#10 +
+            '       epp.id_almoxarifado, alm.descricao as int_nomealm,' + #13#10 +
+            '       coalesce(epi.id_func_colchoaria,0) id_func_colchoaria, fun.nome as int_nomefun, ' + #13#10 +
+            '       0 as id_func_montagem, '''' as int_nomefun_montagem, ' + #13#10 +
+            '       0 as id_func_colagem,  '''' as int_nomefun_colagem, ' + #13#10 +
+            '       ite.id_grupo, gru.descricao, sum(coalesce(epi.qtde,0)) as qtde' +
+            ' from pcp_tb_m_epp_ite epi  ' + #13#10 +
+            '   left outer join pcp_tb_m_epp epp on epp.id_epp = epi.id_epp' + #13#10 +
+            '   left outer join cad_tb_c_ite ite on ite.id_item = epi.id_item' + #13#10 +
+            '   left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo' + #13#10 +
+            '   left outer join cad_tb_c_par par on par.id_empresa = epp.id_empresa   ' + #13#10 +
+            '   left outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_almoxarifado' + #13#10 +
+            '   left outer join cad_tb_c_fun fun on fun.id_funcionario = epi.id_func_colchoaria' + #13#10 +
+            '   left outer join cad_tb_c_fun fmt on fmt.id_funcionario = epi.id_func_montagem' + #13#10 +
+            '   left outer join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func_colagem ';
+
+     if Input[0] = '3' then
+        Result :=
+
+            ' select epp.id_empresa, par.emp_fantasia, ' + #13#10 +
+            '       epp.id_almoxarifado, alm.descricao as int_nomealm,' + #13#10 +
+            '       0 as id_func_colchoaria, '''' as int_nomefun, ' + #13#10 +
+            '       coalesce(epi.id_func_montagem,0) id_func_montagem, fmt.nome as int_nomefun_montagem, ' + #13#10 +
+            '       0 id_func_colagem,  '''' int_nomefun_colagem, ' + #13#10 +
+            '       ite.id_grupo, gru.descricao, sum(coalesce(epi.qtde,0)) as qtde' +
+            ' from pcp_tb_m_epp_ite epi  ' + #13#10 +
+            '   left outer join pcp_tb_m_epp epp on epp.id_epp = epi.id_epp' + #13#10 +
+            '   left outer join cad_tb_c_ite ite on ite.id_item = epi.id_item' + #13#10 +
+            '   left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo' + #13#10 +
+            '   left outer join cad_tb_c_par par on par.id_empresa = epp.id_empresa   ' + #13#10 +
+            '   left outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_almoxarifado' + #13#10 +
+            '   left outer join cad_tb_c_fun fun on fun.id_funcionario = epi.id_func_colchoaria' + #13#10 +
+            '   left outer join cad_tb_c_fun fmt on fmt.id_funcionario = epi.id_func_montagem' + #13#10 +
+            '   left outer join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func_colagem ';
+
+     if Input[0] = '4' then
+        Result :=
+
+            ' select epp.id_empresa, par.emp_fantasia, ' + #13#10 +
+            '       epp.id_almoxarifado, alm.descricao as int_nomealm,' + #13#10 +
+            '       0 as id_func_colchoaria, '''' as int_nomefun, ' + #13#10 +
+            '       0 as id_func_montagem,   '''' as int_nomefun_montagem, ' + #13#10 +
+            '       coalesce(epi.id_func_colagem,0) id_func_colagem, fcc.nome as int_nomefun_colagem, ' + #13#10 +
+            '       ite.id_grupo, gru.descricao, sum(coalesce(epi.qtde,0)) as qtde' +
+            ' from pcp_tb_m_epp_ite epi  ' + #13#10 +
+            '   left outer join pcp_tb_m_epp epp on epp.id_epp = epi.id_epp' + #13#10 +
+            '   left outer join cad_tb_c_ite ite on ite.id_item = epi.id_item' + #13#10 +
+            '   left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo' + #13#10 +
+            '   left outer join cad_tb_c_par par on par.id_empresa = epp.id_empresa   ' + #13#10 +
+            '   left outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_almoxarifado' + #13#10 +
+            '   left outer join cad_tb_c_fun fun on fun.id_funcionario = epi.id_func_colchoaria' + #13#10 +
+            '   left outer join cad_tb_c_fun fmt on fmt.id_funcionario = epi.id_func_montagem' + #13#10 +
+            '   left outer join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func_colagem ';   }
   end;
 var
   ListaCodGrupo:TStrings;
@@ -72066,44 +72268,17 @@ begin
 
 
    PCP_SQ_R_EPP_FUN.Close;
-   PCP_SQ_R_EPP_FUN.CommandText := enSqlRelPcpEppFun ;
-
-   PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText  +
-              ' where epp.dta_entrada >= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[1])) ) +''' and '+
-              '       epp.dta_entrada <= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[2])) ) +''' and ' +
-              '       epp.tipo_entrada = ' + VarToStr(Input[7]);
-             // '       coalesce(epi.id_func_colchoaria,0) > 0 ';
-              //'       epp.tipo_entrada = ' + VarToStr(Input[7]) +' ';;
-
-   if Input[3] <> '' then
-      begin
-        PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText +
-            ' and EPP.ID_EMPRESA in (' + VarToStr(Input[3]) +') ';
-      end;
-
-   if Input[4] <> '' then
-      begin
-        PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText +
-            ' and EPP.ID_ALMOXARIFADO in (' + VarToStr(Input[4]) +') ';
-      end;
-
-   {if Input[5] <> '' then
-        begin
-          PCP_SQ_R_EPP.CommandText := PCP_SQ_R_EPP.CommandText +
-               ' and EPP.id_tipo_mov_estoque in (' + VarToStr(Input[5]) +') ';
-        end;}
-
-   if Input[5] <> '' then
-      begin
-        PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText +
-            ' and EPP.ID_RESPONSAVEL in (' + VarToStr(Input[5]) +') ';
-      end;
-
+   PCP_SQ_R_EPP_FUN.CommandText :=
+        ' select ttt.id_empresa,ttt.emp_fantasia, ttt.id_almoxarifado, ttt.int_nomealm,  ttt.id_func_colchoaria, ttt.int_nomefun,ttt.id_func_montagem, ' +
+        '        ttt.int_nomefun_montagem, ' + #13#10 +
+        '        ttt.id_func_colagem, ttt.int_nomefun_colagem,' + #13#10 +
+        '        ttt.id_grupo, ttt.descricao, sum(coalesce(ttt.qtde,0)) as qtde from ( ' +
+        enSqlRelPcpEppFun + ') ttt';
 
    if Input[6] <> '' then
         begin
            PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText  +
-              ' AND ( ';
+              ' where ( ';
 
             ListaCodGrupo := TStringList.Create;
             LIstaCodGrupo.Delimiter:=',';
@@ -72115,19 +72290,19 @@ begin
                 if (copy(ListaCodGrupo[i],2,7)='') or (copy(ListaCodGrupo[i],2,7)='.00.000') then
                   begin
                       PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText  +
-                        ' (ite.id_grupo > '''+copy(ListaCodGrupo[i],1,1)+'.00.000'' and '+
-                        '  ite.id_grupo <='''+copy(ListaCodGrupo[i],1,1)+'.99.999'' ) ';
+                        ' (ttt.id_grupo > '''+copy(ListaCodGrupo[i],1,1)+'.00.000'' and '+
+                        '  ttt.id_grupo <='''+copy(ListaCodGrupo[i],1,1)+'.99.999'' ) ';
                   end
                 else if (copy(ListaCodGrupo[i],5,4)='') or (copy(ListaCodGrupo[i],5,4)='.000') then
                   begin
                       PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText  +
-                        ' (ite.id_grupo > '''+copy(ListaCodGrupo[i],1,4)+'.000'' and '+
-                        '  ite.id_grupo <='''+copy(ListaCodGrupo[i],1,4)+'.999'' ) ';
+                        ' (ttt.id_grupo > '''+copy(ListaCodGrupo[i],1,4)+'.000'' and '+
+                        '  ttt.id_grupo <='''+copy(ListaCodGrupo[i],1,4)+'.999'' ) ';
                   end
                 else
                   begin
                      PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText  +
-                        ' (ite.id_grupo = '''+ListaCodGrupo[i]+''' ) ';
+                        ' (ttt.id_grupo = '''+ListaCodGrupo[i]+''' ) ';
                   end;
 
                 if i < (ListaCodGrupo.Count-1) then
@@ -72143,18 +72318,18 @@ begin
 
    if Input[0] = '2' then
       PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText +
-                                ' group by 1,2,3,4,5,6,7,8,9,10,11,12 ' +
-                                ' order by 1,5,6,11 ';
+                                ' group by 1,2,3,4,5,6,7,8,9,10,11,12' +
+                                ' order by 1,5,6,11,12 ';
 
    if Input[0] = '3' then
       PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText +
-                                      ' group by 1,2,3,4,8,9,5,6,7,10,11,12 ' +
-                                      ' order by 1,7,8,11 ';
+                                      ' group by 1,2,3,4,5,6,7,8,9,10,11,12 ' +
+                                      ' order by 1,7,8,11,12 ';
 
    if Input[0] = '4' then
       PCP_SQ_R_EPP_FUN.CommandText := PCP_SQ_R_EPP_FUN.CommandText +
-                                      ' group by 1,2,3,4,8,9,5,6,7,10,11,12 ' +
-                                      ' order by 1,9,10,11 ';
+                                      ' group by 1,2,3,4,5,6,7,8,9,10,11,12 ' +
+                                      ' order by 1,9,10,11,12';
 
 
    Result := PCP_DP_R_EPP_FUN.Data;

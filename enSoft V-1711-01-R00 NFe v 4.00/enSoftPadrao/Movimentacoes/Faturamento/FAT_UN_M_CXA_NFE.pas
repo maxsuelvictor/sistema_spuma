@@ -385,6 +385,7 @@ type
     Button1: TButton;
     cbTimeServices: TComboBox;
     Label24: TLabel;
+    chkReformaTributaria: TCheckBox;
     procedure btnImprimeNFEClick(Sender: TObject);
     procedure btnNotaFiscalClick(Sender: TObject);
     procedure btnVerificaServicoClick(Sender: TObject);
@@ -5613,6 +5614,37 @@ begin
 
 
 
+     // Por Maxsuel Victor, 05/12/2025 - Inserido mas sem haver com Reforma Tributária.
+     // Indicador de intermediador/marketplace
+        // [iiSemOperacao, iiOperacaoSemIntermediador, iiOperacaoComIntermediador]);
+     Ide.indIntermed := iiSemOperacao;
+
+
+     // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+     if chkReformaTributaria.Checked then
+        begin
+          Ide.dPrevEntrega := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_EMISSAO').AsDateTime + 3;
+
+
+          //Ide.cMunFGIBS := StrToInt(edtEmitCodCidade.Text);
+
+          Ide.tpNFDebito  := tdNenhum;
+          Ide.tpNFCredito := tcNenhum;
+
+          //Ide.gCompraGov.tpEnteGov := tcgEstados;
+          //Ide.gCompraGov.pRedutor := 5;
+          //Ide.gCompraGov.tpOperGov := togFornecimento;
+
+          //    Informado para abater as parcelas de antecipação de pagamento, conforme Art. 10. § 4º
+          //    refNFe: Referência uma NF-e (modelo 55) emitida anteriormente, referente a pagamento antecipado
+          with Ide.gPagAntecipado.New do
+               refNFe := '12345678901234567890123456789012345678901234';
+
+          with Ide.gPagAntecipado.New do
+               refNFe := '12345678901234567890123456789012345678904567';
+         end;
+
+
      if ((dmGeral.BUS_CD_M_NFE_CXA.FieldByName('NFE_FINALIDADE').AsInteger = 2) or
         (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('NFE_FINALIDADE').AsInteger = 4))  then// -> Nota complementar
         begin
@@ -5958,6 +5990,15 @@ begin
 
              Prod.xProd    := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_desc_item').AsString;
              Prod.NCM      := Trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_id_ncm').AsString);
+
+             // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                  // TTpCredPresIBSZFM = (tcpNenhum, tcpSemCredito, tcpBensConsumoFinal, tcpBensCapital,
+                  //                      tcpBensIntermediarios, tcpBensInformaticaOutros);
+                  // Ver com o contador.
+             if chkReformaTributaria.Checked then
+                Prod.tpCredPresIBSZFM := tcpSemCredito;
+
+
              if trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_cest_ncm').AsString) <> '' then
                 Prod.CEST     := trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_cest_ncm').AsString);
 

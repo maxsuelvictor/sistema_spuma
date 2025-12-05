@@ -5,7 +5,6 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlDireita: TPanel
-    ExplicitTop = 32
     inherited pnlDados: TPanel
       Left = 23
       Top = 6
@@ -16,9 +15,9 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       ExplicitWidth = 585
       ExplicitHeight = 459
       inherited gbRelatorios: TGroupBox
-        Left = 7
+        Left = 0
         Width = 575
-        ExplicitLeft = 7
+        ExplicitLeft = 0
         ExplicitWidth = 575
         inherited lbxRelatorios: TListBox
           Width = 543
@@ -28,6 +27,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
             '2 - Entrada de Produto Acabado por Costureiro'
             '3 - Entrada de Produto Acabado por Montador'
             '4 - Entrada de Produto Acabado por Colador')
+          OnClick = lbxRelatoriosClick
           ExplicitWidth = 543
         end
       end
@@ -37,21 +37,21 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         ExplicitWidth = 575
         ExplicitHeight = 290
         object Label1: TLabel
-          Left = 63
+          Left = 49
           Top = 33
           Width = 46
           Height = 13
           Caption = 'Per'#237'odo :'
         end
         object Label2: TLabel
-          Left = 224
+          Left = 210
           Top = 33
           Width = 6
           Height = 13
           Caption = #224
         end
         object Label6: TLabel
-          Left = 22
+          Left = 8
           Top = 65
           Width = 88
           Height = 13
@@ -187,7 +187,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           end
         end
         object deFinal: TJvDateEdit
-          Left = 247
+          Left = 233
           Top = 29
           Width = 103
           Height = 21
@@ -195,7 +195,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           TabOrder = 1
         end
         object deInicial: TJvDateEdit
-          Left = 115
+          Left = 101
           Top = 29
           Width = 88
           Height = 21
@@ -203,7 +203,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           TabOrder = 0
         end
         object cbTipoEntrada: TComboBox
-          Left = 115
+          Left = 101
           Top = 62
           Width = 235
           Height = 21
@@ -215,6 +215,15 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
             '0-Entrada de Produto Acabado'
             '1-Contagem de Produto Acabado'
             '')
+        end
+        object chkSemColador: TCheckBox
+          Left = 368
+          Top = 52
+          Width = 155
+          Height = 41
+          Caption = 'Exibir lan'#231'amentos do SEM OPERADOR (Cost., Mont., Colador)'
+          TabOrder = 4
+          WordWrap = True
         end
       end
       inherited btnImprimir: TButton
@@ -241,7 +250,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoes: TImageList
     Bitmap = {
-      494C010103000800580116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101030008005C0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       00170F0F0F8C2F2F2FF8323232FF323232FF323232FF323232FF323232FF3232
@@ -500,7 +509,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesAz: TImageList
     Bitmap = {
-      494C010103000800680116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101030008006C0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000100
       00172716028C7C4807F8844C07FF844C07FF844C07FF844C07FF844C07FF844C
@@ -759,7 +768,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesVe: TImageList
     Bitmap = {
-      494C0101030008006C0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800700116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       0017001E018C005D04F8006204FF006204FF006204FF006204FF006204FF0062
@@ -2944,9 +2953,9 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Top = 393.071120000000000000
         Width = 718.110700000000000000
         object Memo11: TfrxMemoView
-          Left = 325.039580000000000000
+          Left = 260.787570000000000000
           Top = 10.559060000000000000
-          Width = 162.519790000000000000
+          Width = 226.771800000000000000
           Height = 18.897650000000000000
           DataSet = PCP_DB_R_EPP_GRU
           DataSetName = 'PCP_DB_R_EPP_GRU'
@@ -3000,13 +3009,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           Memo.UTF8W = (
-            '[PCP_DB_R_EPP_FUN."int_nomefun"]')
+            
+              '[PCP_DB_R_EPP_FUN."id_func_colchoaria"] - [PCP_DB_R_EPP_FUN."int' +
+              '_nomefun"]')
           ParentFont = False
-          Formats = <
-            item
-            end
-            item
-            end>
         end
         object Memo14: TfrxMemoView
           Left = 105.826840000000000000
@@ -3029,7 +3035,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         object Memo7: TfrxMemoView
           Left = 204.094620000000000000
           Top = 12.338590000000000000
-          Width = 162.519790000000000000
+          Width = 181.417440000000000000
           Height = 18.897650000000000000
           DataSet = PCP_DB_R_EPP_GRU
           DataSetName = 'PCP_DB_R_EPP_GRU'
@@ -3157,6 +3163,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Height = 57.370130000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
+        ReprintOnNewPage = True
         object Shape2: TfrxShapeView
           Left = 1.779530000000000000
           Top = 33.133890000000000000
@@ -3272,13 +3279,13 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       'int_nomealm=int_nomealm'
       'id_func_colchoaria=id_func_colchoaria'
       'int_nomefun=int_nomefun'
-      'id_grupo=id_grupo'
-      'descricao=descricao'
-      'qtde=qtde'
       'id_func_montagem=id_func_montagem'
       'int_nomefun_montagem=int_nomefun_montagem'
       'id_func_colagem=id_func_colagem'
-      'int_nomefun_colagem=int_nomefun_colagem')
+      'int_nomefun_colagem=int_nomefun_colagem'
+      'id_grupo=id_grupo'
+      'descricao=descricao'
+      'qtde=qtde')
     DataSet = PCP_CD_R_EPP_FUN
     BCDToCurrency = False
     Left = 752
@@ -3312,11 +3319,25 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       item
         Name = 'int_nomefun'
         DataType = ftWideString
-        Size = 50
+        Size = 40
       end
       item
-        Name = 'qtde'
-        DataType = ftFloat
+        Name = 'id_func_montagem'
+        DataType = ftInteger
+      end
+      item
+        Name = 'int_nomefun_montagem'
+        DataType = ftWideString
+        Size = 40
+      end
+      item
+        Name = 'id_func_colagem'
+        DataType = ftInteger
+      end
+      item
+        Name = 'int_nomefun_colagem'
+        DataType = ftWideString
+        Size = 40
       end
       item
         Name = 'id_grupo'
@@ -3329,22 +3350,8 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Size = 30
       end
       item
-        Name = 'id_func_montagem'
-        DataType = ftInteger
-      end
-      item
-        Name = 'int_nomefun_montagem'
-        DataType = ftWideString
-        Size = 50
-      end
-      item
-        Name = 'id_func_colagem'
-        DataType = ftInteger
-      end
-      item
-        Name = 'int_nomefun_colagem'
-        DataType = ftWideString
-        Size = 50
+        Name = 'qtde'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     Params = <>
@@ -3372,7 +3379,21 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     end
     object PCP_CD_R_EPP_FUNint_nomefun: TWideStringField
       FieldName = 'int_nomefun'
-      Size = 50
+      Size = 40
+    end
+    object PCP_CD_R_EPP_FUNid_func_montagem: TIntegerField
+      FieldName = 'id_func_montagem'
+    end
+    object PCP_CD_R_EPP_FUNint_nomefun_montagem: TWideStringField
+      FieldName = 'int_nomefun_montagem'
+      Size = 40
+    end
+    object PCP_CD_R_EPP_FUNid_func_colagem: TIntegerField
+      FieldName = 'id_func_colagem'
+    end
+    object PCP_CD_R_EPP_FUNint_nomefun_colagem: TWideStringField
+      FieldName = 'int_nomefun_colagem'
+      Size = 40
     end
     object PCP_CD_R_EPP_FUNid_grupo: TWideStringField
       FieldName = 'id_grupo'
@@ -3384,20 +3405,6 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     end
     object PCP_CD_R_EPP_FUNqtde: TFloatField
       FieldName = 'qtde'
-    end
-    object PCP_CD_R_EPP_FUNid_func_montagem: TIntegerField
-      FieldName = 'id_func_montagem'
-    end
-    object PCP_CD_R_EPP_FUNint_nomefun_montagem: TWideStringField
-      FieldName = 'int_nomefun_montagem'
-      Size = 50
-    end
-    object PCP_CD_R_EPP_FUNid_func_colagem: TIntegerField
-      FieldName = 'id_func_colagem'
-    end
-    object PCP_CD_R_EPP_FUNint_nomefun_colagem: TWideStringField
-      FieldName = 'int_nomefun_colagem'
-      Size = 50
     end
   end
   object PCP_DB_R_EPP_FUN_DET: TfrxDBDataset
@@ -3430,7 +3437,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     ProviderName = 'PCP_DP_R_EPP_FUN_DET'
     RemoteServer = dmGeral.pcConecao
     Left = 904
-    Top = 270
+    Top = 278
     object PCP_CD_R_EPP_FUN_DETid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -3883,9 +3890,9 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Top = 393.071120000000000000
         Width = 718.110700000000000000
         object Memo11: TfrxMemoView
-          Left = 325.039580000000000000
+          Left = 275.905690000000000000
           Top = 10.559060000000000000
-          Width = 162.519790000000000000
+          Width = 211.653680000000000000
           Height = 18.897650000000000000
           DataSet = PCP_DB_R_EPP_GRU
           DataSetName = 'PCP_DB_R_EPP_GRU'
@@ -3938,7 +3945,9 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           Memo.UTF8W = (
-            '[PCP_DB_R_EPP_FUN."int_nomefun_montagem"]')
+            
+              '[PCP_DB_R_EPP_FUN."id_func_montagem"] - [PCP_DB_R_EPP_FUN."int_n' +
+              'omefun_montagem"]')
           ParentFont = False
         end
         object Memo14: TfrxMemoView
@@ -4091,6 +4100,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Height = 57.370130000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
+        ReprintOnNewPage = True
         object Shape2: TfrxShapeView
           Left = 1.779530000000000000
           Top = 33.133890000000000000
@@ -4594,9 +4604,9 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Top = 393.071120000000000000
         Width = 718.110700000000000000
         object Memo11: TfrxMemoView
-          Left = 325.039580000000000000
+          Left = 268.346630000000000000
           Top = 10.559060000000000000
-          Width = 162.519790000000000000
+          Width = 219.212740000000000000
           Height = 18.897650000000000000
           DataSet = PCP_DB_R_EPP_GRU
           DataSetName = 'PCP_DB_R_EPP_GRU'
@@ -4649,7 +4659,9 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           Memo.UTF8W = (
-            '[PCP_DB_R_EPP_FUN."int_nomefun_colagem"]')
+            
+              '[PCP_DB_R_EPP_FUN."id_func_colagem"] - [PCP_DB_R_EPP_FUN."int_no' +
+              'mefun_colagem"]')
           ParentFont = False
         end
         object Memo14: TfrxMemoView
@@ -4802,6 +4814,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         Height = 57.370130000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
+        ReprintOnNewPage = True
         object Shape2: TfrxShapeView
           Left = 1.779530000000000000
           Top = 33.133890000000000000

@@ -1,0 +1,80 @@
+/***** 05/12/2025 *****/
+
+CREATE TABLE "public"."cad_tb_c_ibc" (
+"id_cst_ibs_cbs" varchar(10) COLLATE "default" NOT NULL,
+"descricao" varchar(255) COLLATE "default" NOT NULL,
+"ind_gibscbs" int2 NOT NULL,
+"ind_gibscbsmono" int2 NOT NULL,
+"ind_gred" int2 NOT NULL,
+"ind_gdif" int2 NOT NULL,
+"ind_gtransfcred" int2 NOT NULL,
+"ind_gcredpresibszfm" int2 NOT NULL,
+"ind_gajustecompet" int2 NOT NULL,
+"ind_redutorbc" int2 NOT NULL,
+CONSTRAINT "PK_dbo.cad_tb_c_ibc" PRIMARY KEY ("id_cst_ibs_cbs")
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_ibc" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_ibc" IS 'Código de Situação Tributária - IBS e CBS';
+
+CREATE INDEX "ix_ibc_descricao" ON "public"."cad_tb_c_ibc" USING btree (descricao);
+
+
+
+CREATE TABLE "public"."cad_tb_c_ctr" (
+"id_ctr" int4 DEFAULT nextval('cad_tb_c_ctr_id_ctr_seq'::regclass) NOT NULL,
+"id_cst_ibs_cbs" varchar(10) COLLATE "default",
+"descricao_cst_ibs_cbs" text COLLATE "default",
+"cclasstrib" varchar(20) COLLATE "default",
+"nome_cclasstrib" text COLLATE "default",
+"descricao_cclasstrib" text COLLATE "default",
+"lc_redacao" text COLLATE "default",
+"lc_214_25" text COLLATE "default",
+"tipo_aliquota" varchar(50) COLLATE "default",
+"per_red_ibs" numeric(5,2),
+"per_red_cbs" numeric(5,2),
+"ind_redutor_bc" varchar(10) COLLATE "default",
+"ind_gtrib_regular" int2,
+"ind_gcred_pres_oper" int2,
+"ind_gmono_padrao" int2,
+"ind_gmono_reten" int2,
+"ind_gmono_ret" int2,
+"ind_gmono_dif" int2,
+"ind_gestorno_cred" int2,
+"dta_ini_vig" date,
+"dta_fim_vig" date,
+"dta_atualizacao" date,
+"ind_nfe_abi" int2,
+"ind_nfe" int2,
+"ind_nfce" int2,
+"ind_cte" int2,
+"ind_cte_os" int2,
+"ind_bpe" int2,
+"ind_bpe_ta" int2,
+"ind_bpe_tm" int2,
+"ind_nf3e" int2,
+"ind_nfse" int2,
+"ind_nfse_via" int2,
+"ind_nfcom" int2,
+"ind_nfag" int2,
+"ind_nfgas" int2,
+"ind_dere" int2,
+"anexo" text COLLATE "default",
+"link" text COLLATE "default",
+CONSTRAINT "PK_dbo.cad_tb_c_ctr" PRIMARY KEY ("id_ctr"),
+CONSTRAINT "fk_cad_c_ctr__cad_c_ibc" FOREIGN KEY ("id_cst_ibs_cbs") REFERENCES "public"."cad_tb_c_ibc" ("id_cst_ibs_cbs") ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+WITH (OIDS=FALSE)
+;
+
+ALTER TABLE "public"."cad_tb_c_ctr" OWNER TO "postgres";
+
+COMMENT ON TABLE "public"."cad_tb_c_ctr" IS 'Tabela de Código de Classificação Tributária - IBS e CBS.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctr"."per_red_ibs" IS 'nome origigina: predibs';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctr"."per_red_cbs" IS 'nome origigina: predcbs';
+

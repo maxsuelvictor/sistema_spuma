@@ -81,17 +81,8 @@ type
     PCP_FR_R_EPP_FUN: TfrxReport;
     PCP_DB_R_EPP_FUN: TfrxDBDataset;
     PCP_CD_R_EPP_FUN: TClientDataSet;
-    PCP_CD_R_EPP_FUNid_empresa: TIntegerField;
-    PCP_CD_R_EPP_FUNemp_fantasia: TWideStringField;
-    PCP_CD_R_EPP_FUNid_almoxarifado: TIntegerField;
-    PCP_CD_R_EPP_FUNint_nomealm: TWideStringField;
-    PCP_CD_R_EPP_FUNid_func_colchoaria: TIntegerField;
-    PCP_CD_R_EPP_FUNint_nomefun: TWideStringField;
-    PCP_CD_R_EPP_FUNqtde: TFloatField;
     PCP_DB_R_EPP_FUN_DET: TfrxDBDataset;
     PCP_CD_R_EPP_FUN_DET: TClientDataSet;
-    PCP_CD_R_EPP_FUNid_grupo: TWideStringField;
-    PCP_CD_R_EPP_FUNdescricao: TWideStringField;
     PCP_CD_R_EPP_FUN_DETid_empresa: TIntegerField;
     PCP_CD_R_EPP_FUN_DETemp_fantasia: TWideStringField;
     PCP_CD_R_EPP_FUN_DETid_almoxarifado: TIntegerField;
@@ -106,13 +97,23 @@ type
     PCP_FR_R_EPP_FUN_MOT: TfrxReport;
     PCP_CD_R_EPP_FUN_DETid_func_montagem: TIntegerField;
     PCP_CD_R_EPP_FUN_DETint_nomefun_montagem: TWideStringField;
+    PCP_CD_R_EPP_FUN_DETid_func_colagem: TIntegerField;
+    PCP_CD_R_EPP_FUN_DETint_nomefun_colagem: TWideStringField;
+    PCP_FR_R_EPP_FUN_COL: TfrxReport;
+    PCP_CD_R_EPP_FUNid_empresa: TIntegerField;
+    PCP_CD_R_EPP_FUNemp_fantasia: TWideStringField;
+    PCP_CD_R_EPP_FUNid_almoxarifado: TIntegerField;
+    PCP_CD_R_EPP_FUNint_nomealm: TWideStringField;
+    PCP_CD_R_EPP_FUNid_func_colchoaria: TIntegerField;
+    PCP_CD_R_EPP_FUNint_nomefun: TWideStringField;
     PCP_CD_R_EPP_FUNid_func_montagem: TIntegerField;
     PCP_CD_R_EPP_FUNint_nomefun_montagem: TWideStringField;
     PCP_CD_R_EPP_FUNid_func_colagem: TIntegerField;
     PCP_CD_R_EPP_FUNint_nomefun_colagem: TWideStringField;
-    PCP_CD_R_EPP_FUN_DETid_func_colagem: TIntegerField;
-    PCP_CD_R_EPP_FUN_DETint_nomefun_colagem: TWideStringField;
-    PCP_FR_R_EPP_FUN_COL: TfrxReport;
+    PCP_CD_R_EPP_FUNid_grupo: TWideStringField;
+    PCP_CD_R_EPP_FUNdescricao: TWideStringField;
+    PCP_CD_R_EPP_FUNqtde: TFloatField;
+    chkSemColador: TCheckBox;
     procedure lboxEmpDispDblClick(Sender: TObject);
     procedure lboxEmpSelDblClick(Sender: TObject);
     procedure lboxAlmDispDblClick(Sender: TObject);
@@ -130,6 +131,7 @@ type
     procedure Retirarregistro1Click(Sender: TObject);
     procedure lboxGruKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure lbxRelatoriosClick(Sender: TObject);
   private
     { Private declarations }
     procedure ExibirRel;
@@ -272,6 +274,7 @@ procedure TPCP_FM_R_EPP.ExibirRel;
 var
   rImprimirCodigo, rDtaIni, rDtaFin, rTipoEntrada, PathImg: String;
   LogoEmpresa: TfrxPictureView;
+  SemColador: String;
 begin
 
   if lbxRelatorios.ItemIndex = -1 then
@@ -385,19 +388,32 @@ begin
 
    if lbxRelatorios.Items[lbxRelatorios.ItemIndex] = '2 - Entrada de Produto Acabado por Costureiro' then
       begin
+         SemColador := '0';
+         if chkSemColador.Checked then
+            SemColador := '1';
+
+
          PCP_CD_R_EPP_FUN.Close;
          PCP_CD_R_EPP_FUN.Data :=
              PCP_CD_R_EPP_FUN.DataRequest(
                           VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
                           xCondAlmoxarifado, xCondResp,
-                          xCondGru,rTipoEntrada]));
+                          xCondGru,rTipoEntrada,SemColador]));
 
-         PCP_CD_R_EPP_FUN_DET.Close;
-         PCP_CD_R_EPP_FUN_DET.Data :=
-             PCP_CD_R_EPP_FUN_DET.DataRequest(
-                          VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
-                          xCondAlmoxarifado, xCondResp,
-                          xCondGru,rTipoEntrada]));
+         if not PCP_CD_R_EPP_FUN_DET.IsEmpty then
+                PCP_CD_R_EPP_FUN_DET.EmptyDataSet;
+
+         if chkSemColador.checked then
+            begin
+               PCP_CD_R_EPP_FUN_DET.Close;
+               PCP_CD_R_EPP_FUN_DET.Data :=
+                   PCP_CD_R_EPP_FUN_DET.DataRequest(
+                                VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada]));
+            end;
+
+         PCP_CD_R_EPP_FUN.IndexFieldNames := 'id_empresa;id_func_colchoaria;id_grupo';
 
 
          if not PCP_CD_R_EPP_FUN.IsEmpty then
@@ -429,19 +445,29 @@ begin
 
    if lbxRelatorios.Items[lbxRelatorios.ItemIndex] = '3 - Entrada de Produto Acabado por Montador' then
       begin
+         SemColador := '0';
+         if chkSemColador.Checked then
+            SemColador := '1';
+
          PCP_CD_R_EPP_FUN.Close;
          PCP_CD_R_EPP_FUN.Data :=
              PCP_CD_R_EPP_FUN.DataRequest(
                           VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
                           xCondAlmoxarifado, xCondResp,
-                          xCondGru,rTipoEntrada]));
+                          xCondGru,rTipoEntrada,SemColador]));
 
-         PCP_CD_R_EPP_FUN_DET.Close;
-         PCP_CD_R_EPP_FUN_DET.Data :=
-             PCP_CD_R_EPP_FUN_DET.DataRequest(
-                          VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
-                          xCondAlmoxarifado, xCondResp,
-                          xCondGru,rTipoEntrada]));
+         if not PCP_CD_R_EPP_FUN_DET.IsEmpty then
+                PCP_CD_R_EPP_FUN_DET.EmptyDataSet;
+
+         if chkSemColador.checked then
+            begin
+               PCP_CD_R_EPP_FUN_DET.Close;
+               PCP_CD_R_EPP_FUN_DET.Data :=
+                   PCP_CD_R_EPP_FUN_DET.DataRequest(
+                                VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada]));
+            end;
 
 
          PCP_CD_R_EPP_FUN.IndexFieldNames := 'id_empresa;id_func_montagem;id_grupo';
@@ -476,19 +502,29 @@ begin
 
    if lbxRelatorios.Items[lbxRelatorios.ItemIndex] = '4 - Entrada de Produto Acabado por Colador' then
       begin
+         SemColador := '0';
+         if chkSemColador.Checked then
+            SemColador := '1';
+
          PCP_CD_R_EPP_FUN.Close;
          PCP_CD_R_EPP_FUN.Data :=
              PCP_CD_R_EPP_FUN.DataRequest(
                           VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
                           xCondAlmoxarifado, xCondResp,
-                          xCondGru,rTipoEntrada]));
+                          xCondGru,rTipoEntrada,SemColador]));
 
-         PCP_CD_R_EPP_FUN_DET.Close;
-         PCP_CD_R_EPP_FUN_DET.Data :=
-             PCP_CD_R_EPP_FUN_DET.DataRequest(
-                          VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
-                          xCondAlmoxarifado, xCondResp,
-                          xCondGru,rTipoEntrada]));
+         if not PCP_CD_R_EPP_FUN_DET.IsEmpty then
+                PCP_CD_R_EPP_FUN_DET.EmptyDataSet;
+
+         if chkSemColador.checked then
+            begin
+               PCP_CD_R_EPP_FUN_DET.Close;
+               PCP_CD_R_EPP_FUN_DET.Data :=
+                   PCP_CD_R_EPP_FUN_DET.DataRequest(
+                                VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada]));
+            end;
 
 
          PCP_CD_R_EPP_FUN.IndexFieldNames := 'id_empresa;id_func_colagem;id_grupo';
@@ -668,6 +704,16 @@ if key = vk_f3 then
            end;
          PSQ_FM_X_FUN.Free;
      end;
+end;
+
+procedure TPCP_FM_R_EPP.lbxRelatoriosClick(Sender: TObject);
+begin
+  inherited;
+  chkSemColador.Enabled := true;
+  if (lbxRelatorios.Items[lbxRelatorios.ItemIndex] = '0 - Entrada de Produto Acabado') or
+     (lbxRelatorios.Items[lbxRelatorios.ItemIndex] = '1 - Entrada de Produto Acabado por Grupo') then
+     chkSemColador.Enabled := false;
+
 end;
 
 procedure TPCP_FM_R_EPP.PreencherCondicao;
