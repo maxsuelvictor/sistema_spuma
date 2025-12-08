@@ -488,7 +488,7 @@ uses FileCtrl, ufrmStatus, ACBrNFeNotasFiscais, DateUtils,uDmGeral,enFunc,
   FIN_RN_M_BOL, CAD_UN_C_CTC, PSQ_UN_X_CTC, CAD_UN_R_E01, FAT_UN_M_CXA_NFE_FPG,
   FAT_RN_M_NFE, FAT_UN_M_CXA_NFE_MAQ, Unit1,ACBrDFeSSL, FAT_UN_M_CXA_NFE_NCF,
   FAT_UN_M_LIB, FAT_UN_M_CXA_NFE_IMP, FAT_UN_M_CXA_NFE_CAN,
-  FAT_UN_M_CXA_NFE_CRT, uNfse, ACBrNFe.Classes;
+  FAT_UN_M_CXA_NFE_CRT, uNfse, ACBrNFe.Classes,   ACBrDFe.Conversao;
   //pcnNFe
 
 const
@@ -6127,11 +6127,22 @@ begin
                 end;
 
 
+            // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+            if chkReformaTributaria.Checked = 0 then
+               begin
+                 // Indicador de fornecimento de bem móvel usado
+                 Prod.indBemMovelUsado := tieNenhum;
+
+                 // Valor total do Item, correspondente à sua participação no total da nota.
+                 // A soma dos itens deverá corresponder ao total da nota.
+                 vItem := 100;
+                 // Referenciamento de item de outro Documento Fiscal Eletrônico - DF-e
+                 DFeReferenciado.chaveAcesso := '';
+                 DFeReferenciado.nItem := 1;
+               end;
 
 
-
-
-             with Imposto do
+            with Imposto do
               begin
                 // lei da transparencia nos impostos
                 vTotTrib := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('tri_valor').AsCurrency;
@@ -6411,6 +6422,154 @@ begin
                         COFINS.vAliqProd := 0;
                       end;
                  end;
+
+                 // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                 // Reforma Tributária
+                 if chkReformaTributaria.Checked then
+                    begin
+                      //  Informações do tributo: Imposto Seletivo só para 2027 e para os
+                      //  os produtos nocivos ao meio ambiente e a saúde.
+                      {
+                      ISel.CSTIS := cstis000;
+                      ISel.cClassTribIS := '000001';
+
+                      ISel.vBCIS := 100;
+                      ISel.pIS := 5;
+                      ISel.pISEspec := 5;
+                      ISel.uTrib := 'UNIDAD';
+                      ISel.qTrib := 10;
+                      ISel.vIS := 100;
+                      }
+
+                      {
+                        Utilize os CST (cst000, cst200, cst220, cst510 e cst550) e os cClassTrib
+                        correspondentes para gerar o grupo IBSCBS
+                        Utilize o CST cst620 e os cClassTrib correspondentes para gerar o grupo
+                        IBSCBSMono
+                        Utilize o CST cst800 e os cClassTrib correspondentes para gerar o grupo
+                        gTransfCred
+                        Utilize o CST cst810 e os cClassTrib correspondentes para gerar o grupo
+                        gCredPresIBSZFM
+                      }
+
+                      //  Informações do tributo: IBS / CBS
+                      IBSCBS.CST := cst000;
+                      IBSCBS.cClassTrib := '000001';
+                      IBSCBS.indDoacao := tieNenhum;
+
+                      IBSCBS.gIBSCBS.vBC := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency;
+
+                      IBSCBS.gIBSCBS.gIBSUF.pIBSUF := 0.1;
+                      IBSCBS.gIBSCBS.gIBSUF.vIBSUF := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.1)/100,-2);
+
+                      IBSCBS.gIBSCBS.gIBSUF.gDif.pDif := 0;
+                      IBSCBS.gIBSCBS.gIBSUF.gDif.vDif := 0;
+
+                      IBSCBS.gIBSCBS.gIBSUF.gDevTrib.vDevTrib := 0;
+
+                      IBSCBS.gIBSCBS.gIBSUF.gRed.pRedAliq := 0;
+                      IBSCBS.gIBSCBS.gIBSUF.gRed.pAliqEfet := 0;
+
+                      IBSCBS.gIBSCBS.gIBSMun.pIBSMun := 0;
+                      IBSCBS.gIBSCBS.gIBSMun.vIBSMun := 0;
+
+                      IBSCBS.gIBSCBS.gIBSMun.gDif.pDif := 0;
+                      IBSCBS.gIBSCBS.gIBSMun.gDif.vDif := 0;
+
+                      IBSCBS.gIBSCBS.gIBSMun.gDevTrib.vDevTrib := 0;
+
+                      IBSCBS.gIBSCBS.gIBSMun.gRed.pRedAliq := 0;
+                      IBSCBS.gIBSCBS.gIBSMun.gRed.pAliqEfet := 0;
+
+                      // vIBS = vIBSUF + vIBSMun
+                      IBSCBS.gIBSCBS.vIBS := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.1)/100,-2) +
+                                             IBSCBS.gIBSCBS.gIBSMun.vIBSMun;
+
+                      IBSCBS.gIBSCBS.gCBS.pCBS := 5;
+                      IBSCBS.gIBSCBS.gCBS.vCBS := 100;
+
+                      IBSCBS.gIBSCBS.gCBS.gDif.pDif := 5;
+                      IBSCBS.gIBSCBS.gCBS.gDif.vDif := 100;
+
+                      IBSCBS.gIBSCBS.gCBS.gDevTrib.vDevTrib := 100;
+
+                      IBSCBS.gIBSCBS.gCBS.gRed.pRedAliq := 5;
+                      IBSCBS.gIBSCBS.gCBS.gRed.pAliqEfet := 5;
+
+                      IBSCBS.gIBSCBS.gTribRegular.CSTReg := cst000;
+                      IBSCBS.gIBSCBS.gTribRegular.cClassTribReg := '000001';
+                      IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSUF := 5;
+                      IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSUF := 50;
+                      IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSMun := 5;
+                      IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSMun := 50;
+                      IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegCBS := 5;
+                      IBSCBS.gIBSCBS.gTribRegular.vTribRegCBS := 50;
+
+                      // Tipo Tributação Compra Governamental
+                      IBSCBS.gIBSCBS.gTribCompraGov.pAliqIBSUF := 5;
+                      IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSUF := 50;
+                      IBSCBS.gIBSCBS.gTribCompraGov.pAliqIBSMun := 5;
+                      IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSMun := 50;
+                      IBSCBS.gIBSCBS.gTribCompraGov.pAliqCBS := 5;
+                      IBSCBS.gIBSCBS.gTribCompraGov.vTribCBS := 50;
+
+                      //  Informações do tributo: IBS / CBS em operações com imposto monofásico
+                      IBSCBS.gIBSCBSMono.gMonoPadrao.qBCMono := 1;
+                      IBSCBS.gIBSCBSMono.gMonoPadrao.adRemIBS := 5;
+                      IBSCBS.gIBSCBSMono.gMonoPadrao.adRemCBS := 5;
+                      IBSCBS.gIBSCBSMono.gMonoPadrao.vIBSMono := 100;
+                      IBSCBS.gIBSCBSMono.gMonoPadrao.vCBSMono := 100;
+
+                      IBSCBS.gIBSCBSMono.gMonoReten.qBCMonoReten := 1;
+                      IBSCBS.gIBSCBSMono.gMonoReten.adRemIBSReten := 5;
+                      IBSCBS.gIBSCBSMono.gMonoReten.vIBSMonoReten := 100;
+                      IBSCBS.gIBSCBSMono.gMonoReten.vCBSMonoReten := 100;
+
+                      IBSCBS.gIBSCBSMono.gMonoRet.qBCMonoRet := 1;
+                      IBSCBS.gIBSCBSMono.gMonoRet.adRemIBSRet := 5;
+                      IBSCBS.gIBSCBSMono.gMonoRet.vIBSMonoRet := 100;
+                      IBSCBS.gIBSCBSMono.gMonoRet.vCBSMonoRet := 100;
+
+                      IBSCBS.gIBSCBSMono.gMonoDif.pDifIBS := 5;
+                      IBSCBS.gIBSCBSMono.gMonoDif.vIBSMonoDif := 100;
+                      IBSCBS.gIBSCBSMono.gMonoDif.pDifCBS := 5;
+                      IBSCBS.gIBSCBSMono.gMonoDif.vCBSMonoDif := 100;
+
+                      IBSCBS.gIBSCBSMono.vTotIBSMonoItem := 100;
+                      IBSCBS.gIBSCBSMono.vTotCBSMonoItem := 100;
+
+                      //  Informações da Transferencia de Crédito
+                      IBSCBS.gTransfCred.vIBS := 100;
+                      IBSCBS.gTransfCred.vCBS := 100;
+
+                      //  Informações Ajuste de Competência
+                      IBSCBS.gAjusteCompet.competApur := Date;
+                      IBSCBS.gAjusteCompet.vIBS := 100;
+                      IBSCBS.gAjusteCompet.vCBS := 100;
+
+                      //  Informações Estorno de Crédito
+                      IBSCBS.gEstornoCred.vIBSEstCred := 100;
+                      IBSCBS.gEstornoCred.vCBSEstCred := 100;
+
+                      //  Informações do Crédito Presumido Operacional
+                      IBSCBS.gCredPresOper.cCredPres := cpNenhum;
+                      IBSCBS.gCredPresOper.vBCCredPres := 100;
+                      IBSCBS.gCredPresOper.gIBSCredPres.pCredPres := 5;
+                      IBSCBS.gCredPresOper.gIBSCredPres.vCredPres := 100;
+                      IBSCBS.gCredPresOper.gIBSCredPres.vCredPresCondSus := 0;
+                      IBSCBS.gCredPresOper.gCBSCredPres.pCredPres := 5;
+                      IBSCBS.gCredPresOper.gCBSCredPres.vCredPres := 100;
+                      IBSCBS.gCredPresOper.gCBSCredPres.vCredPresCondSus := 0;
+
+                      //  Informações do Crédito Presumido IBS ZFM
+                      // tcpNenhum, tcpSemCredito, tcpBensConsumoFinal, tcpBensCapital,
+                      // tcpBensIntermediarios, tcpBensInformaticaOutros
+                      IBSCBS.gCredPresIBSZFM.competApur := Date;
+                      IBSCBS.gCredPresIBSZFM.tpCredPresIBSZFM := tcpBensInformaticaOutros;
+                      IBSCBS.gCredPresIBSZFM.vCredPresIBSZFM := 100;
+                    end;
+                  end;
+
 
               end;
            end ;
