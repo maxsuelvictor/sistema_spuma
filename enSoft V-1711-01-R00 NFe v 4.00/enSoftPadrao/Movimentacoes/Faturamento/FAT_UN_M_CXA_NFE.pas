@@ -5564,7 +5564,16 @@ begin
         Ide.dEmi      := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_EMISSAO').AsDateTime;
      Ide.dSaiEnt   := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_DOCUMENTO').AsDateTime;
      Ide.hSaiEnt   := Now;
-     Ide.tpNF      := StrToTpNF(iRet,InttoStr(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_operacao').asInteger));
+
+     // Maxsuel Victor,
+        //Ide.tpNF      := StrToTpNF(iRet,InttoStr(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_operacao').asInteger));
+
+     case dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_operacao').asInteger of
+        0: Ide.tpNF := tnEntrada;
+        1: Ide.tpNF := tnSaida;
+     end;
+
+
      Ide.tpEmis    := StrToTpEmis(iRet, inttoStr(dmGeral.CAD_CD_C_PAR_NFE.FieldByName('danf_tipo_emissao').AsInteger+1));
      Ide.tpAmb     := StrToTpAmb(iRet,inttoStr(dmGeral.CAD_CD_C_PAR_NFE.FieldByName('situacao_emissor').AsInteger));
      Ide.verProc   := CVersaoSistema;
@@ -6128,7 +6137,7 @@ begin
 
 
             // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
-            if chkReformaTributaria.Checked = 0 then
+            if chkReformaTributaria.Checked then
                begin
                  // Indicador de fornecimento de bem móvel usado
                  Prod.indBemMovelUsado := tieNenhum;
@@ -6148,23 +6157,32 @@ begin
                 vTotTrib := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('tri_valor').AsCurrency;
                 with ICMS do
                  begin
+                   // Por Maxsuel Victor, 09/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                      // A função de busca do ICMS ou CSOSN foi atualizada pelo acbr
                    if Emit.CRT=crtRegimeNormal then
-                     CST   :=StrToCSTICMS(iRet, dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_icm').AsString)
+                      //CST   :=StrToCSTICMS(iRet, dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_icm').AsString)
+                      CST   := StrToCSTICMS(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_icm').AsString)
                    else
-                     CSOSN :=StrToCSOSNIcms(iRet, dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_icm').AsString);
+                     //CSOSN :=StrToCSOSNIcms(iRet, dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_icm').AsString);
+                      CSOSN := StrToCSOSNIcms(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_icm').AsString);
 
                      //Foi conversado com sangia paraque origem pega qualquer tipo de nota. Responsavel:Luan. Data:12/08/2016
-                  // if dmGeral.BUS_CD_M_NFE_CXA.FieldByName('id_pedido_venda').AsInteger >0 then
+                     // if dmGeral.BUS_CD_M_NFE_CXA.FieldByName('id_pedido_venda').AsInteger >0 then
                      // begin
                          // Esta linha foi alterada para pegar o INT_ORIGEM , feito por Maxsuel Victor em 17/10/2023
                          //ICMS.orig := StrToOrig(iRet,trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('origem_mercadoria').AsString));
-                         ICMS.orig := StrToOrig(iRet,trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_origem').AsString));
+
+                         // Por Maxsuel Victor, 09/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                         // A função de busca do ICMS ou CSOSN foi atualizada pelo acbr
+                            //ICMS.orig := StrToOrig(iRet,trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_origem').AsString));
+
+                       ICMS.orig := StrToOrig(trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_origem').AsString));
 
                      // end
-                  // else
-                     // begin
-                       //  ICMS.orig    := oeNacional;
-                     // end;
+                     // else
+                        // begin
+                           //  ICMS.orig    := oeNacional;
+                        // end;
 
                    ICMS.modBC   := dbiValorOperacao;
                    ICMS.vBC     := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency;
@@ -6359,7 +6377,7 @@ begin
                 end;
 
 
-               if (dmgeral.BUS_CD_M_NFE_CXA.FieldByName('TIPO_NF').AsString <> 'D') then
+                if (dmgeral.BUS_CD_M_NFE_CXA.FieldByName('TIPO_NF').AsString <> 'D') then
                   begin
                     with IPI do
                      begin
@@ -6375,7 +6393,7 @@ begin
                      end;
                   end;
 
-               if (dmgeral.BUS_CD_M_NFE_CXA.FieldByName('TIPO_NF').AsString = 'D') then
+                if (dmgeral.BUS_CD_M_NFE_CXA.FieldByName('TIPO_NF').AsString = 'D') then
                   begin
                      with IPI do
                        begin
@@ -6397,7 +6415,10 @@ begin
 
                 with PIS do
                  begin
-                   CST      :=StrToCSTPIS( iRet,dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_pis').AsString);
+                   // Por Maxsuel Victor, 09/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                      // A função de busca do ICMS ou CSOSN foi atualizada pelo acbr
+                         // CST      :=StrToCSTPIS( iRet,dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_pis').AsString);
+                   CST      := StrToCSTPIS(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_pis').AsString);
                    PIS.vBC  := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('pis_base').AsCurrency;
                    PIS.pPIS := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('pis_aliquota').AsFloat;
                    PIS.vPIS := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('pis_valor').AsCurrency;
@@ -6411,7 +6432,10 @@ begin
 
                 with COFINS do
                  begin
-                   CST            := StrToCSTCOFINS( iRet,dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_cof').AsString);;
+                   // Por Maxsuel Victor, 09/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                      // A função de busca do ICMS ou CSOSN foi atualizada pelo acbr
+                      // CST            := StrToCSTCOFINS( iRet,dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_cof').AsString);;
+                   CST            := StrToCSTCOFINS(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_st_cof').AsString);;
                    COFINS.vBC     := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('cof_base').AsCurrency;
                    COFINS.pCOFINS := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('cof_aliquota').AsFloat;
                    COFINS.vCOFINS := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('cof_valor').AsCurrency;
@@ -6470,6 +6494,9 @@ begin
                       IBSCBS.gIBSCBS.gIBSUF.gRed.pRedAliq := 0;
                       IBSCBS.gIBSCBS.gIBSUF.gRed.pAliqEfet := 0;
 
+
+                      // 324.36 UB36 gIBSMun Grupo de Informações do IBS para o município
+
                       IBSCBS.gIBSCBS.gIBSMun.pIBSMun := 0;
                       IBSCBS.gIBSCBS.gIBSMun.vIBSMun := 0;
 
@@ -6485,92 +6512,107 @@ begin
                       IBSCBS.gIBSCBS.vIBS := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.1)/100,-2) +
                                              IBSCBS.gIBSCBS.gIBSMun.vIBSMun;
 
-                      IBSCBS.gIBSCBS.gCBS.pCBS := 5;
-                      IBSCBS.gIBSCBS.gCBS.vCBS := 100;
+                      // Maxsuel Victor, 09/12/2025
+                        // Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                        // Página 18
+                        //if IndDeduzCredPres=1 then // Da tabela de credito presumido cCredPres_2025-10-06_Public_verde.xls
+                             //IBSCBS.gIBSCBS.vIBS := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.1)/100,-2)
+                             //                       - IBSCBS.gIBSCBS.gIBSMun.vIBSMun;
 
-                      IBSCBS.gIBSCBS.gCBS.gDif.pDif := 5;
-                      IBSCBS.gIBSCBS.gCBS.gDif.vDif := 100;
+                      IBSCBS.gIBSCBS.gCBS.pCBS := 0.9;
+                      IBSCBS.gIBSCBS.gCBS.vCBS := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.9)/100,-2);
 
-                      IBSCBS.gIBSCBS.gCBS.gDevTrib.vDevTrib := 100;
+                      IBSCBS.gIBSCBS.gCBS.gDif.pDif := 0;
+                      IBSCBS.gIBSCBS.gCBS.gDif.vDif := 0;
 
-                      IBSCBS.gIBSCBS.gCBS.gRed.pRedAliq := 5;
-                      IBSCBS.gIBSCBS.gCBS.gRed.pAliqEfet := 5;
+                      IBSCBS.gIBSCBS.gCBS.gDevTrib.vDevTrib := 0;
 
-                      IBSCBS.gIBSCBS.gTribRegular.CSTReg := cst000;
-                      IBSCBS.gIBSCBS.gTribRegular.cClassTribReg := '000001';
-                      IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSUF := 5;
-                      IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSUF := 50;
-                      IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSMun := 5;
-                      IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSMun := 50;
-                      IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegCBS := 5;
-                      IBSCBS.gIBSCBS.gTribRegular.vTribRegCBS := 50;
+                      IBSCBS.gIBSCBS.gCBS.gRed.pRedAliq := 0;
+                      IBSCBS.gIBSCBS.gCBS.gRed.pAliqEfet := 0;
 
-                      // Tipo Tributação Compra Governamental
-                      IBSCBS.gIBSCBS.gTribCompraGov.pAliqIBSUF := 5;
-                      IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSUF := 50;
-                      IBSCBS.gIBSCBS.gTribCompraGov.pAliqIBSMun := 5;
-                      IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSMun := 50;
-                      IBSCBS.gIBSCBS.gTribCompraGov.pAliqCBS := 5;
-                      IBSCBS.gIBSCBS.gTribCompraGov.vTribCBS := 50;
+                      // Maxsuel Victor, 09/12/2025
+                      // Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+                        {Grupo de informações da Tributação Regular. Informar como seria a tributação caso não cumprida
+                        a condição resolutória/suspensiva.
+                        Exemplo 1: Art. 445, §4 da LC 214/2025.
+                        Operações com ZFM e ALC.
+                        Exemplo 2: Operações com suspensão do tributo.
+                        Observação: a obrigatoriedade ou vedação do preenchimento deste grupo está condicionada ao
+                        indicador “ind_gTribRegular”}
 
-                      //  Informações do tributo: IBS / CBS em operações com imposto monofásico
-                      IBSCBS.gIBSCBSMono.gMonoPadrao.qBCMono := 1;
-                      IBSCBS.gIBSCBSMono.gMonoPadrao.adRemIBS := 5;
-                      IBSCBS.gIBSCBSMono.gMonoPadrao.adRemCBS := 5;
-                      IBSCBS.gIBSCBSMono.gMonoPadrao.vIBSMono := 100;
-                      IBSCBS.gIBSCBSMono.gMonoPadrao.vCBSMono := 100;
 
-                      IBSCBS.gIBSCBSMono.gMonoReten.qBCMonoReten := 1;
-                      IBSCBS.gIBSCBSMono.gMonoReten.adRemIBSReten := 5;
-                      IBSCBS.gIBSCBSMono.gMonoReten.vIBSMonoReten := 100;
-                      IBSCBS.gIBSCBSMono.gMonoReten.vCBSMonoReten := 100;
+                        {IBSCBS.gIBSCBS.gTribRegular.CSTReg := cst000;
+                        IBSCBS.gIBSCBS.gTribRegular.cClassTribReg := '000001';
+                        IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSUF := 5;
+                        IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSUF := 50;
+                        IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSMun := 5;
+                        IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSMun := 50;
+                        IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegCBS := 5;
+                        IBSCBS.gIBSCBS.gTribRegular.vTribRegCBS := 50; }
 
-                      IBSCBS.gIBSCBSMono.gMonoRet.qBCMonoRet := 1;
-                      IBSCBS.gIBSCBSMono.gMonoRet.adRemIBSRet := 5;
-                      IBSCBS.gIBSCBSMono.gMonoRet.vIBSMonoRet := 100;
-                      IBSCBS.gIBSCBSMono.gMonoRet.vCBSMonoRet := 100;
+                        // Tipo Tributação Compra Governamental
+                        {IBSCBS.gIBSCBS.gTribCompraGov.pAliqIBSUF := 5;
+                        IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSUF := 50;
+                        IBSCBS.gIBSCBS.gTribCompraGov.pAliqIBSMun := 5;
+                        IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSMun := 50;
+                        IBSCBS.gIBSCBS.gTribCompraGov.pAliqCBS := 5;
+                        IBSCBS.gIBSCBS.gTribCompraGov.vTribCBS := 50;}
 
-                      IBSCBS.gIBSCBSMono.gMonoDif.pDifIBS := 5;
-                      IBSCBS.gIBSCBSMono.gMonoDif.vIBSMonoDif := 100;
-                      IBSCBS.gIBSCBSMono.gMonoDif.pDifCBS := 5;
-                      IBSCBS.gIBSCBSMono.gMonoDif.vCBSMonoDif := 100;
+                        //  Informações do tributo: IBS / CBS em operações com imposto monofásico
+                        {IBSCBS.gIBSCBSMono.gMonoPadrao.qBCMono := 1;
+                        IBSCBS.gIBSCBSMono.gMonoPadrao.adRemIBS := 5;
+                        IBSCBS.gIBSCBSMono.gMonoPadrao.adRemCBS := 5;
+                        IBSCBS.gIBSCBSMono.gMonoPadrao.vIBSMono := 100;
+                        IBSCBS.gIBSCBSMono.gMonoPadrao.vCBSMono := 100;}
 
-                      IBSCBS.gIBSCBSMono.vTotIBSMonoItem := 100;
-                      IBSCBS.gIBSCBSMono.vTotCBSMonoItem := 100;
+                        {IBSCBS.gIBSCBSMono.gMonoReten.qBCMonoReten := 1;
+                        IBSCBS.gIBSCBSMono.gMonoReten.adRemIBSReten := 5;
+                        IBSCBS.gIBSCBSMono.gMonoReten.vIBSMonoReten := 100;
+                        IBSCBS.gIBSCBSMono.gMonoReten.vCBSMonoReten := 100;}
 
-                      //  Informações da Transferencia de Crédito
-                      IBSCBS.gTransfCred.vIBS := 100;
-                      IBSCBS.gTransfCred.vCBS := 100;
+                        {IBSCBS.gIBSCBSMono.gMonoRet.qBCMonoRet := 1;
+                        IBSCBS.gIBSCBSMono.gMonoRet.adRemIBSRet := 5;
+                        IBSCBS.gIBSCBSMono.gMonoRet.vIBSMonoRet := 100;
+                        IBSCBS.gIBSCBSMono.gMonoRet.vCBSMonoRet := 100;}
 
-                      //  Informações Ajuste de Competência
-                      IBSCBS.gAjusteCompet.competApur := Date;
-                      IBSCBS.gAjusteCompet.vIBS := 100;
-                      IBSCBS.gAjusteCompet.vCBS := 100;
+                        {IBSCBS.gIBSCBSMono.gMonoDif.pDifIBS := 5;
+                        IBSCBS.gIBSCBSMono.gMonoDif.vIBSMonoDif := 100;
+                        IBSCBS.gIBSCBSMono.gMonoDif.pDifCBS := 5;
+                        IBSCBS.gIBSCBSMono.gMonoDif.vCBSMonoDif := 100;
 
-                      //  Informações Estorno de Crédito
-                      IBSCBS.gEstornoCred.vIBSEstCred := 100;
-                      IBSCBS.gEstornoCred.vCBSEstCred := 100;
+                        IBSCBS.gIBSCBSMono.vTotIBSMonoItem := 100;
+                        IBSCBS.gIBSCBSMono.vTotCBSMonoItem := 100;
 
-                      //  Informações do Crédito Presumido Operacional
-                      IBSCBS.gCredPresOper.cCredPres := cpNenhum;
-                      IBSCBS.gCredPresOper.vBCCredPres := 100;
-                      IBSCBS.gCredPresOper.gIBSCredPres.pCredPres := 5;
-                      IBSCBS.gCredPresOper.gIBSCredPres.vCredPres := 100;
-                      IBSCBS.gCredPresOper.gIBSCredPres.vCredPresCondSus := 0;
-                      IBSCBS.gCredPresOper.gCBSCredPres.pCredPres := 5;
-                      IBSCBS.gCredPresOper.gCBSCredPres.vCredPres := 100;
-                      IBSCBS.gCredPresOper.gCBSCredPres.vCredPresCondSus := 0;
+                        //  Informações da Transferencia de Crédito
+                        IBSCBS.gTransfCred.vIBS := 100;
+                        IBSCBS.gTransfCred.vCBS := 100;
 
-                      //  Informações do Crédito Presumido IBS ZFM
-                      // tcpNenhum, tcpSemCredito, tcpBensConsumoFinal, tcpBensCapital,
-                      // tcpBensIntermediarios, tcpBensInformaticaOutros
-                      IBSCBS.gCredPresIBSZFM.competApur := Date;
-                      IBSCBS.gCredPresIBSZFM.tpCredPresIBSZFM := tcpBensInformaticaOutros;
-                      IBSCBS.gCredPresIBSZFM.vCredPresIBSZFM := 100;
+                        //  Informações Ajuste de Competência
+                        IBSCBS.gAjusteCompet.competApur := Date;
+                        IBSCBS.gAjusteCompet.vIBS := 100;
+                        IBSCBS.gAjusteCompet.vCBS := 100;
+
+                        //  Informações Estorno de Crédito
+                        IBSCBS.gEstornoCred.vIBSEstCred := 100;
+                        IBSCBS.gEstornoCred.vCBSEstCred := 100;
+
+                        //  Informações do Crédito Presumido Operacional
+                        IBSCBS.gCredPresOper.cCredPres := cpNenhum;
+                        IBSCBS.gCredPresOper.vBCCredPres := 100;
+                        IBSCBS.gCredPresOper.gIBSCredPres.pCredPres := 5;
+                        IBSCBS.gCredPresOper.gIBSCredPres.vCredPres := 100;
+                        IBSCBS.gCredPresOper.gIBSCredPres.vCredPresCondSus := 0;
+                        IBSCBS.gCredPresOper.gCBSCredPres.pCredPres := 5;
+                        IBSCBS.gCredPresOper.gCBSCredPres.vCredPres := 100;
+                        IBSCBS.gCredPresOper.gCBSCredPres.vCredPresCondSus := 0;
+
+                        //  Informações do Crédito Presumido IBS ZFM
+                        // tcpNenhum, tcpSemCredito, tcpBensConsumoFinal, tcpBensCapital,
+                        // tcpBensIntermediarios, tcpBensInformaticaOutros
+                        IBSCBS.gCredPresIBSZFM.competApur := Date;
+                        IBSCBS.gCredPresIBSZFM.tpCredPresIBSZFM := tcpBensInformaticaOutros;
+                        IBSCBS.gCredPresIBSZFM.vCredPresIBSZFM := 100;   }
                     end;
-                  end;
-
-
               end;
            end ;
            dmGeral.BUS_CD_M_NFE_ITE_CXA.Next;
@@ -6621,6 +6663,49 @@ begin
 
       // lei da transparencia de impostos
       Total.ICMSTot.vTotTrib := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tri_valor').AsCurrency;
+
+
+
+      // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+      // Reforma Tributária
+
+      if  chkReformaTributaria.Checked then
+          begin
+            Total.ISTot.vIS := 100;
+
+            Total.IBSCBSTot.vBCIBSCBS := 100;
+
+            Total.IBSCBSTot.gIBS.vIBS := 100;
+            Total.IBSCBSTot.gIBS.vCredPres := 100;
+            Total.IBSCBSTot.gIBS.vCredPresCondSus := 100;
+
+            Total.IBSCBSTot.gIBS.gIBSUFTot.vDif := 100;
+            Total.IBSCBSTot.gIBS.gIBSUFTot.vDevTrib := 100;
+            Total.IBSCBSTot.gIBS.gIBSUFTot.vIBSUF := 100;
+
+            Total.IBSCBSTot.gIBS.gIBSMunTot.vDif := 100;
+            Total.IBSCBSTot.gIBS.gIBSMunTot.vDevTrib := 100;
+            Total.IBSCBSTot.gIBS.gIBSMunTot.vIBSMun := 100;
+
+            Total.IBSCBSTot.gCBS.vDif := 100;
+            Total.IBSCBSTot.gCBS.vDevTrib := 100;
+            Total.IBSCBSTot.gCBS.vCBS := 100;
+            Total.IBSCBSTot.gCBS.vCredPres := 100;
+            Total.IBSCBSTot.gCBS.vCredPresCondSus := 100;
+
+            Total.IBSCBSTot.gMono.vIBSMono := 100;
+            Total.IBSCBSTot.gMono.vCBSMono := 100;
+            Total.IBSCBSTot.gMono.vIBSMonoReten := 100;
+            Total.IBSCBSTot.gMono.vCBSMonoReten := 100;
+            Total.IBSCBSTot.gMono.vIBSMonoRet := 100;
+            Total.IBSCBSTot.gMono.vCBSMonoRet := 100;
+
+            Total.IBSCBSTot.gEstornoCred.vIBSEstCred := 100;
+            Total.IBSCBSTot.gEstornoCred.vCBSEstCred := 100;
+
+            // Valor total da NF-e com IBS / CBS / IS
+            Total.vNFTot := 100;
+          end;
 
       Transp.modFrete :=StrTomodFrete(iRet, inttoStr(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger));
       Transp.Transporta.CNPJCPF  := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('int_cnptra').AsString;
@@ -8513,7 +8598,9 @@ begin
 
   if NFe.DANFE <> nil then
      begin
-       NFe.DANFE.TipoDANFE  := StrToTpImp(OK,IntToStr(dmGeral.CAD_CD_C_PAR_NFE.FieldByName('danf_tipo_impressao').AsInteger+1));
+       // Maxsuel Victor, 09/12/2025 devido atualização da reforma tributária
+       //NFe.DANFE.TipoDANFE  := StrToTpImp(OK,IntToStr(dmGeral.CAD_CD_C_PAR_NFE.FieldByName('danf_tipo_impressao').AsInteger+1));
+       NFe.DANFE.TipoDANFE  := StrToTpImp(IntToStr(dmGeral.CAD_CD_C_PAR_NFE.FieldByName('danf_tipo_impressao').AsInteger+1));
        NFe.DANFE.Logo       := ExtractFilePath(Application.ExeName)+dmGeral.CAD_CD_C_PAR_NFE.FieldByName('path_logo').AsString;
      end;
 

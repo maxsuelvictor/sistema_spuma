@@ -78,3 +78,64 @@ COMMENT ON COLUMN "public"."cad_tb_c_ctr"."per_red_ibs" IS 'nome origigina: pred
 
 COMMENT ON COLUMN "public"."cad_tb_c_ctr"."per_red_cbs" IS 'nome origigina: predcbs';
 
+
+/***** 09/12/2025 *****/
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "vlr_v_ibs" numeric(18,4),
+ADD COLUMN "vlr_v_ibs_credpres" numeric(18,4),
+ADD COLUMN "vlr_v_ibs_credpres_condsus" numeric(18,4),
+ADD COLUMN "vlr_v_ibsuf_dif" numeric(18,4),
+ADD COLUMN "vlr_v_ibsuf_devtrib" numeric(18,4),
+ADD COLUMN "vlr_v_ibsuf" numeric(18,4),
+ADD COLUMN "vlr_v_ibsmun_dif" numeric(18,4),
+ADD COLUMN "vlr_v_ibsmun_devtrib" numeric(18,4),
+ADD COLUMN "vlr_v_ibsmun" numeric(18,4),
+ADD COLUMN "vlr_v_cbs" numeric(18,4),
+ADD COLUMN "vlr_v_cbs_dif" numeric(18,4),
+ADD COLUMN "vlr_v_cbs_devtrib" numeric(18,4),
+ADD COLUMN "vlr_v_cbs_credpres" numeric(18,4),
+ADD COLUMN "vlr_v_cbs_credpres_condsus" numeric(18,4),
+ADD COLUMN "vlr_v_mono_ibsmono" numeric(18,4),
+ADD COLUMN "vlr_v_mono_cbsmono" numeric(18,4),
+ADD COLUMN "vlr_v_mono_ibsmonoreten" numeric(18,4),
+ADD COLUMN "vlr_v_mono_cbsmonoreten" numeric(18,4),
+ADD COLUMN "vlr_v_mono_ibsmonoret" numeric(18,4),
+ADD COLUMN "vlr_v_mono_cbsmonoret" numeric(18,4),
+ADD COLUMN "vlr_v_estorncred_ibsestcred" numeric(18,4),
+ADD COLUMN "vlr_v_estorncred_cbsestcred" numeric(18,4);
+
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "cclasstrib" varchar(20),
+ADD COLUMN "id_cst_ibs_cbs" varchar(10),
+ADD COLUMN "ibscbs_inddoacao" int4,
+ADD COLUMN "ibscbs_v_bc" numeric(18,4),
+ADD COLUMN "ibscbs_p_ibsuf" numeric(18,4),
+ADD COLUMN "ibscbs_v_ibsuf" numeric(18,4),
+ADD COLUMN "ibscbs_ibsuf_p_dif" numeric(18,4),
+ADD COLUMN "ibscbs_ibsuf_v_dif" numeric(18,4),
+ADD COLUMN "ibscbs_ibsuf_v_devtrib" numeric(18,4),
+ADD COLUMN "ibscbs_ibsuf_p_redaliq" numeric(18,4),
+ADD COLUMN "ibscbs_ibsuf_p_aliqefet" numeric(18,4),
+ADD COLUMN "ibscbs_p_ibsmun" numeric(18,4),
+ADD COLUMN "ibscbs_v_ibsmun" numeric(18,4),
+ADD COLUMN "ibscbs_ibsmun_p_dif" numeric(18,4),
+ADD COLUMN "ibscbs_ibsmun_v_dif" numeric(18,4),
+ADD COLUMN "ibscbs_ibsmun_v_devtrib" numeric(18,4),
+ADD COLUMN "ibscbs_ibsmun_p_redaliq" numeric(18,4),
+ADD COLUMN "ibscbs_ibsmun_p_aliqefet" numeric(18,4),
+ADD COLUMN "ibscbs_v_ibs" numeric(18,4),
+ADD COLUMN "ibscbs_p_cbs" numeric(18,4),
+ADD COLUMN "ibscbs_v_cbs" numeric(18,4),
+ADD COLUMN "ibscbs_p_cbs_dif" numeric(18,4),
+ADD COLUMN "ibscbs_v_cbs_dif" numeric(18,4),
+ADD COLUMN "ibscbs_cbs_v_devtrib" numeric(18,4),
+ADD COLUMN "ibscbs_cbs_p_redaliq" numeric(18,4),
+ADD COLUMN "ibscbs_cbs_p_aliqefet" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."cclasstrib" IS 'Reforma tributária';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."id_cst_ibs_cbs" IS 'Reforma tributária';
+
