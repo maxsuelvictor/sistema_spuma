@@ -1,5 +1,6 @@
 /***** 05/12/2025 *****/
 
+
 CREATE TABLE "public"."cad_tb_c_ibc" (
 "id_cst_ibs_cbs" varchar(10) COLLATE "default" NOT NULL,
 "descricao" varchar(255) COLLATE "default" NOT NULL,
@@ -20,15 +21,16 @@ ALTER TABLE "public"."cad_tb_c_ibc" OWNER TO "postgres";
 
 COMMENT ON TABLE "public"."cad_tb_c_ibc" IS 'Código de Situação Tributária - IBS e CBS';
 
-CREATE INDEX "ix_ibc_descricao" ON "public"."cad_tb_c_ibc" USING btree (descricao);
 
+
+CREATE INDEX "ix_ibc_descricao" ON "public"."cad_tb_c_ibc" USING btree (descricao);
 
 
 CREATE TABLE "public"."cad_tb_c_ctr" (
 "id_ctr" int4 DEFAULT nextval('cad_tb_c_ctr_id_ctr_seq'::regclass) NOT NULL,
-"id_cst_ibs_cbs" varchar(10) COLLATE "default",
+"id_cst_ibs_cbs" varchar(10) COLLATE "default" NOT NULL,
 "descricao_cst_ibs_cbs" text COLLATE "default",
-"cclasstrib" varchar(20) COLLATE "default",
+"cclasstrib" varchar(10) COLLATE "default" NOT NULL,
 "nome_cclasstrib" text COLLATE "default",
 "descricao_cclasstrib" text COLLATE "default",
 "lc_redacao" text COLLATE "default",
@@ -73,6 +75,8 @@ WITH (OIDS=FALSE)
 ALTER TABLE "public"."cad_tb_c_ctr" OWNER TO "postgres";
 
 COMMENT ON TABLE "public"."cad_tb_c_ctr" IS 'Tabela de Código de Classificação Tributária - IBS e CBS.';
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctr"."cclasstrib" IS 'Código de Classificação Tributária';
 
 COMMENT ON COLUMN "public"."cad_tb_c_ctr"."per_red_ibs" IS 'nome origigina: predibs';
 
@@ -138,4 +142,13 @@ ADD COLUMN "ibscbs_cbs_p_aliqefet" numeric(18,4);
 COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."cclasstrib" IS 'Reforma tributária';
 
 COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."id_cst_ibs_cbs" IS 'Reforma tributária';
+
+
+
+/******* 10/12/25 *******/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "cclasstrib" varchar(10);
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."cclasstrib" IS 'Codigo de Classificação Tributária';
 

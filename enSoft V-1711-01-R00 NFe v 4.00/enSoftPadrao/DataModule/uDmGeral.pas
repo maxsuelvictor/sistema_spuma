@@ -13715,6 +13715,10 @@ var
   lRegimeSimples: Boolean;
 begin
 
+  // Maxsuel Victor, comentado em 10/12/2025, apenas para informar que as tabelas jã eram
+     // lidas no método: FAT_RN_M_NFE.VerifTribItem;
+
+  // Dentro desse método , ele lê as tabelas: Tipo de estoque,  de Itens, e de Grupos.
   FAT_RN_M_NFE.VerifTribItem(CdsNfe.FieldByName('TIPO_NF').Text,CdsNfe.FieldByName('ID_EMPRESA').Text,
                              CdsNfe.FieldByName('ID_EMITENTE').Text,
                              CdsNfeIte.FieldByName('ID_ITEM').Text,

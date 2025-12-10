@@ -38,6 +38,7 @@ function  VerifTribItem(lTipoNf,IdEmpresa,IdEmitente,IdItem,IdTipoEstoque,TipoAc
 
 procedure CalculaPercIcm;
 function  CalculaICMS(CdsNfe,CdsNfeIte: TClientDataSet; TipoEmitente: String;var lRegimeSimples:Boolean): Boolean;
+function  Calcula_IBSCBS(CdsNfe,CdsNfeIte: TClientDataSet): Boolean;
 function  CalculaISS(CdsNfeIte: TClientDataSet): Currency;
 function  CalculaISSRetido(CdsNfe,CdsNfeIte: TClientDataSet): Currency;
 function  CalculaICMSNFE(CdsNfe,CdsNfeIte: TClientDataSet): Boolean;
@@ -4168,6 +4169,60 @@ begin
                        end;
                  end;
             end;
+     end;
+end;
+
+
+function  Calcula_IBSCBS(CdsNfe,CdsNfeIte: TClientDataSet): Boolean;
+begin
+  // Por Maxsuel Victor, 10/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+
+
+  CdsNfeIte.FieldByName('cclasstrib').AsString                 :=
+            dmGeral.BUS_CD_C_GRU.FieldByName('int_cclasstrib').AsString;
+  CdsNfeIte.FieldByName('id_cst_ibs_cbs').AsString             :=
+            dmGeral.BUS_CD_C_GRU.FieldByName('int_id_cst_ibs_cbs').AsString;
+
+  CdsNfeIte.FieldByName('ibscbs_inddoacao').AsInteger          := 0;  //'Informar “1” quando doação';
+  CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency              := 0;
+  CdsNfeIte.FieldByName('ibscbs_p_ibsuf').AsCurrency           := 0;
+  CdsNfeIte.FieldByName('ibscbs_v_ibsuf').AsCurrency           := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsuf_p_dif').AsCurrency       := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsuf_v_dif').AsCurrency       := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsuf_v_devtrib').AsCurrency   := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsuf_p_redaliq').AsCurrency   := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsuf_p_aliqefet').AsCurrency  := 0;
+  CdsNfeIte.FieldByName('ibscbs_p_ibsmun').AsCurrency          := 0;
+  CdsNfeIte.FieldByName('ibscbs_v_ibsmun').AsCurrency          := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsmun_p_dif').AsCurrency      := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsmun_v_dif').AsCurrency      := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsmun_v_devtrib').AsCurrency  := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsmun_p_redaliq').AsCurrency  := 0;
+  CdsNfeIte.FieldByName('ibscbs_ibsmun_p_aliqefet').AsCurrency := 0;
+  CdsNfeIte.FieldByName('ibscbs_v_ibs').AsCurrency             := 0;
+  CdsNfeIte.FieldByName('ibscbs_p_cbs').AsCurrency             := 0;
+  CdsNfeIte.FieldByName('ibscbs_v_cbs').AsCurrency             := 0;
+  CdsNfeIte.FieldByName('ibscbs_p_cbs_dif').AsCurrency         := 0;
+  CdsNfeIte.FieldByName('ibscbs_v_cbs_dif').AsCurrency         := 0;
+  CdsNfeIte.FieldByName('ibscbs_cbs_v_devtrib').AsCurrency     := 0;
+  CdsNfeIte.FieldByName('ibscbs_cbs_p_redaliq').AsCurrency     := 0;
+  CdsNfeIte.FieldByName('ibscbs_cbs_p_aliqefet').AsCurrency    := 0;
+
+
+  if CdsNfeIte.FieldByName('id_cst_ibs_cbs').AsString = '000' then
+     begin
+       // combinação cst_ibs_cbs = 000 e cclasstrib = '000001' - Situações tributadas integralmente pelo IBS e CBS
+       if CdsNfeIte.FieldByName('cclasstrib').AsString = '000001' then
+          begin
+             // Valor da Base de cálculo do IBS e CBS (gIBSCBS/vBC) deve ser igual ao somatório de:
+               // (+) vProd (+) vServ (+) vFrete (+) vSeg (+) vOutro  (+) vII
+            CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency    :=
+                        cdsNfeIte.FieldByName('VLR_MERCADORIA').AsCurrency  +
+                        cdsNfeIte.FieldByName('FRE_VALOR').AsCurrency       +
+                        cdsNfeIte.FieldByName('VLR_SEGURO').AsCurrency      +
+                        cdsNfeIte.FieldByName('VLR_OUTRAS_DESP').AsCurrency;
+                        //+ cdsNfeIte.FieldByName('IPI_VALOR').AsCurrency; }
+          end;
      end;
 end;
 
