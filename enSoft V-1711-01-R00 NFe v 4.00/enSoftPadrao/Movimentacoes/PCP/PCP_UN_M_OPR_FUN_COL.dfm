@@ -24,7 +24,6 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 534
     object Label1: TLabel
       Left = 1
       Top = 1
@@ -53,11 +52,9 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 534
-    ExplicitHeight = 338
     object pnlDados: TPanel
-      Left = 1
-      Top = 5
+      Left = 0
+      Top = 0
       Width = 432
       Height = 516
       BevelOuter = bvNone
@@ -115,7 +112,7 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
         ParentFont = False
       end
       object btnSair: TcxButton
-        Left = 215
+        Left = 209
         Top = 476
         Width = 90
         Height = 30
@@ -124,7 +121,7 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
         OnClick = btnSairClick
       end
       object btnImprimir: TcxButton
-        Left = 124
+        Left = 116
         Top = 476
         Width = 90
         Height = 30
@@ -279,8 +276,7 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
       BottomMargin = 1.000000000000000000
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 37.039370078740160000
-        Top = 18.897650000000000000
+        Height = 37.039370080000000000
         Width = 381.732530000000000000
         Columns = 3
         ColumnWidth = 125.858267716535400000
@@ -288,28 +284,28 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
         DataSetName = 'DBEtiquetas'
         RowCount = 0
         object BarCode1: TfrxBarCodeView
-          Left = 22.338590000000000000
-          Top = 5.779530000000000000
-          Width = 79.000000000000000000
-          Height = 18.897635350000000000
-          BarType = bcCodeEAN128
+          Left = 42.338590000000000000
+          Top = 2.779530000000000000
+          Width = 68.000000000000000000
+          Height = 30.236225350000000000
+          BarType = bcCode128
           Expression = '<DBEtiquetas."codigo">'
           Rotation = 0
           ShowText = False
           Text = '150'
           WideBarRatio = 2.000000000000000000
           Zoom = 1.000000000000000000
-          Font.Charset = DEFAULT_CHARSET
+          Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -8
-          Font.Name = 'Arial'
+          Font.Name = 'Californian FB'
           Font.Style = []
         end
         object Memo1: TfrxMemoView
-          Left = 46.236240000000000000
-          Top = 21.897650000000000000
-          Width = 34.015770000000000000
-          Height = 15.118120000000000000
+          Left = 2.881880000000000000
+          Top = 24.897650000000000000
+          Width = 30.236240000000000000
+          Height = 11.338590000000000000
           DataField = 'codigo_limpo'
           DataSet = DBEtiquetas
           DataSetName = 'DBEtiquetas'
@@ -519,7 +515,6 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
     end
   end
   object BUS_CD_C_FUN: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'CAD_DP_C_FUN'
@@ -755,7 +750,6 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
     end
   end
   object BUS_CD_C_FUN_CRG: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = BUS_CD_C_FUNCAD_SQ_C_FUN_CRG
     Params = <>
@@ -780,6 +774,91 @@ object PCP_FM_M_OPR_FUN_COL: TPCP_FM_M_OPR_FUN_COL
     object BUS_CD_C_FUN_CRGint_tipo_setor: TIntegerField
       FieldName = 'int_tipo_setor'
       ProviderFlags = []
+    end
+  end
+  object Backup_FrxEtiquetas_original: TfrxReport
+    Version = '5.1.9'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44536.660498344900000000
+    ReportOptions.LastChange = 44536.660498344900000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 345
+    Top = 428
+    Datasets = <
+      item
+        DataSet = DBEtiquetas
+        DataSetName = 'DBEtiquetas'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 105.000000000000000000
+      PaperHeight = 13.000000000000000000
+      PaperSize = 256
+      LeftMargin = 2.000000000000000000
+      RightMargin = 2.000000000000000000
+      TopMargin = 2.000000000000000000
+      BottomMargin = 1.000000000000000000
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 37.039370078740160000
+        Top = 18.897650000000000000
+        Width = 381.732530000000000000
+        Columns = 3
+        ColumnWidth = 125.858267716535400000
+        DataSet = DBEtiquetas
+        DataSetName = 'DBEtiquetas'
+        RowCount = 0
+        object BarCode1: TfrxBarCodeView
+          Left = 22.338590000000000000
+          Top = 5.779530000000000000
+          Width = 79.000000000000000000
+          Height = 18.897635350000000000
+          BarType = bcCodeEAN128
+          Expression = '<DBEtiquetas."codigo">'
+          Rotation = 0
+          ShowText = False
+          Text = '150'
+          WideBarRatio = 2.000000000000000000
+          Zoom = 1.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+        end
+        object Memo1: TfrxMemoView
+          Left = 46.236240000000000000
+          Top = 21.897650000000000000
+          Width = 34.015770000000000000
+          Height = 15.118120000000000000
+          DataField = 'codigo_limpo'
+          DataSet = DBEtiquetas
+          DataSetName = 'DBEtiquetas'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[DBEtiquetas."codigo_limpo"]')
+          ParentFont = False
+        end
+      end
     end
   end
 end

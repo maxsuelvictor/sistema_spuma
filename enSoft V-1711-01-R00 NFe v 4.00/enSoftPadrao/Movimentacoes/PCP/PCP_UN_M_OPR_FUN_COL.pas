@@ -109,6 +109,7 @@ type
     BUS_CD_C_FUN_CRGint_nomecrg: TWideStringField;
     BUS_CD_C_FUN_CRGint_desc_setor: TWideStringField;
     BUS_CD_C_FUN_CRGint_tipo_setor: TIntegerField;
+    Backup_FrxEtiquetas_original: TfrxReport;
     procedure FormShow(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -142,7 +143,7 @@ var
   txtGeracao: string;
 
 begin
-  inherited;  
+  inherited;
 
   if (ckFuncionario.Items.Count = 0) and 
      (ckColagem.Items.Count = 0 )    and

@@ -4222,6 +4222,50 @@ begin
                         cdsNfeIte.FieldByName('VLR_SEGURO').AsCurrency      +
                         cdsNfeIte.FieldByName('VLR_OUTRAS_DESP').AsCurrency;
                         //+ cdsNfeIte.FieldByName('IPI_VALOR').AsCurrency; }
+
+            // Pág. 34, da Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+            {- Valor do IBS Estadual (vIBSUF) deverá ser resultante de:
+                      vIBSUF = (gIBSCBS/vBC x (pIBSUF / 100)) - vDif - vDevTrib
+               Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos
+               Observação 2: Em caso de preenchimento do grupo de redução (gIBSUF/gRed) a alíquota utilizada deverá ser a tag Alíquota Efetiva (gIBSUF/gRed/pAliqEfet):
+               vIBSUF = (gIBSCBS/vBC x (pAliqEfet / 100)) - vDif - vDevTrib }
+
+            CdsNfeIte.FieldByName('ibscbs_p_ibsuf').AsCurrency  := 0.1;
+            CdsNfeIte.FieldByName('ibscbs_v_ibsuf').AsCurrency  :=
+                      (
+                          CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency *
+                        ( CdsNfeIte.FieldByName('ibscbs_p_ibsuf').AsCurrency / 100)
+                      ) -
+                          CdsNfeIte.FieldByName('ibscbs_ibsuf_v_dif').AsCurrency -
+                          CdsNfeIte.FieldByName('ibscbs_ibsuf_v_devtrib').AsCurrency;
+
+            // Pág. 18, da Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+            {Valor do IBS (soma de vIBSUF e vIBSMun).
+              Quando houver crédito presumido com
+              indicador “IndDeduzCredPres=1”, o vCredPres
+              deve ser abatido desse valor.}
+            CdsNfeIte.FieldByName('ibscbs_v_ibs').AsCurrency :=
+                CdsNfeIte.FieldByName('ibscbs_v_ibsuf').AsCurrency +
+                CdsNfeIte.FieldByName('ibscbs_v_ibsmun').AsCurrency;
+
+
+            CdsNfeIte.FieldByName('ibscbs_p_cbs').AsCurrency := 0.9;
+
+            {Se informado grupo CBS (gCBS):
+              - Valor da CBS (vCBS) deverá ser resultante de:
+              vCBS = (gIBSCBS/vBC x (pCBS / 100)) - vDif – vDevTrib
+              Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos.
+              Observação 2: Se informado grupo de redução (gCBS/gRed) a
+              alíquota utilizada deverá ser a tag Alíquota Efetiva (gCBS/gRed/pAliqEfet):}
+
+             // Pág. 38, da Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+             CdsNfeIte.FieldByName('ibscbs_v_cbs').AsCurrency  :=
+               (
+                          CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency *
+                        ( CdsNfeIte.FieldByName('ibscbs_p_cbs').AsCurrency / 100)
+                      ) -
+                          CdsNfeIte.FieldByName('ibscbs_v_cbs_dif').AsCurrency -
+                          CdsNfeIte.FieldByName('ibscbs_cbs_v_devtrib').AsCurrency;
           end;
      end;
 end;
