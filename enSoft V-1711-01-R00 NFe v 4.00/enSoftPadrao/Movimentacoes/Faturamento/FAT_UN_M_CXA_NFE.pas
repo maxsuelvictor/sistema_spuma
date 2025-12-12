@@ -5632,13 +5632,17 @@ begin
      // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
      if chkReformaTributaria.Checked then
         begin
-          Ide.dPrevEntrega := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_EMISSAO').AsDateTime + 3;
+          Ide.dPrevEntrega := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('dta_prev_entrega').AsDateTime;
 
 
           //Ide.cMunFGIBS := StrToInt(edtEmitCodCidade.Text);
 
-          Ide.tpNFDebito  := tdNenhum;
-          Ide.tpNFCredito := tcNenhum;
+              //Ide.tpNFDebito  := tdNenhum;
+              //Ide.tpNFCredito := tcNenhum;
+
+          Ide.tpNFDebito  := StrTotpNFDebito(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_debito').AsString);
+          Ide.tpNFCredito := StrTotpNFCredito(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_credito').AsString);
+
 
           //Ide.gCompraGov.tpEnteGov := tcgEstados;
           //Ide.gCompraGov.pRedutor := 5;
@@ -5646,11 +5650,13 @@ begin
 
           //    Informado para abater as parcelas de antecipação de pagamento, conforme Art. 10. § 4º
           //    refNFe: Referência uma NF-e (modelo 55) emitida anteriormente, referente a pagamento antecipado
-          with Ide.gPagAntecipado.New do
+
+          {with Ide.gPagAntecipado.New do
                refNFe := '12345678901234567890123456789012345678901234';
 
           with Ide.gPagAntecipado.New do
-               refNFe := '12345678901234567890123456789012345678904567';
+               refNFe := '12345678901234567890123456789012345678904567';}
+
          end;
 
 
@@ -6005,7 +6011,8 @@ begin
                   //                      tcpBensIntermediarios, tcpBensInformaticaOutros);
                   // Ver com o contador.
              if chkReformaTributaria.Checked then
-                Prod.tpCredPresIBSZFM := tcpSemCredito;
+                Prod.tpCredPresIBSZFM := StrToTpCredPresIBSZFM(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('tpCredPresIBSZFM').AsString);
+                //Prod.tpCredPresIBSZFM := tcpSemCredito;
 
 
              if trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_cest_ncm').AsString) <> '' then
@@ -6144,10 +6151,12 @@ begin
 
                  // Valor total do Item, correspondente à sua participação no total da nota.
                  // A soma dos itens deverá corresponder ao total da nota.
-                 vItem := 100;
+
+                       // vItem := 100;
+
                  // Referenciamento de item de outro Documento Fiscal Eletrônico - DF-e
-                 DFeReferenciado.chaveAcesso := '';
-                 DFeReferenciado.nItem := 1;
+                    //DFeReferenciado.chaveAcesso := '';
+                    //DFeReferenciado.nItem := 1;
                end;
 
 
@@ -6477,40 +6486,41 @@ begin
                       }
 
                       //  Informações do tributo: IBS / CBS
-                      IBSCBS.CST := cst000;
-                      IBSCBS.cClassTrib := '000001';
-                      IBSCBS.indDoacao := tieNenhum;
+                      IBSCBS.CST := StrToCSTIBSCBS(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_cst_ibs_cbs').AsString);
+                      IBSCBS.cClassTrib := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('cclasstrib').AsString;
+                      // tieNenhum
+                      IBSCBS.indDoacao                := StrToTIndicadorEx(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('indDoacao').AsString);
 
-                      IBSCBS.gIBSCBS.vBC := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency;
+                      IBSCBS.gIBSCBS.vBC              := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_v_bc').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gIBSUF.pIBSUF := 0.1;
-                      IBSCBS.gIBSCBS.gIBSUF.vIBSUF := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.1)/100,-2);
+                      IBSCBS.gIBSCBS.gIBSUF.pIBSUF    := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_p_ibsuf').AsCurrency;
+                      IBSCBS.gIBSCBS.gIBSUF.vIBSUF    := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_v_ibsuf').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gIBSUF.gDif.pDif := 0;
-                      IBSCBS.gIBSCBS.gIBSUF.gDif.vDif := 0;
+                      IBSCBS.gIBSCBS.gIBSUF.gDif.pDif := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsuf_p_dif').AsCurrency;
+                      IBSCBS.gIBSCBS.gIBSUF.gDif.vDif := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsuf_v_dif').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gIBSUF.gDevTrib.vDevTrib := 0;
+                      IBSCBS.gIBSCBS.gIBSUF.gDevTrib.vDevTrib :=
+                                          dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsuf_v_devtrib').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gIBSUF.gRed.pRedAliq := 0;
-                      IBSCBS.gIBSCBS.gIBSUF.gRed.pAliqEfet := 0;
+                      IBSCBS.gIBSCBS.gIBSUF.gRed.pRedAliq  := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsuf_p_redaliq').AsCurrency;
+                      IBSCBS.gIBSCBS.gIBSUF.gRed.pAliqEfet := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsuf_p_aliqefet').AsCurrency;
 
 
                       // 324.36 UB36 gIBSMun Grupo de Informações do IBS para o município
 
-                      IBSCBS.gIBSCBS.gIBSMun.pIBSMun := 0;
-                      IBSCBS.gIBSCBS.gIBSMun.vIBSMun := 0;
+                      IBSCBS.gIBSCBS.gIBSMun.pIBSMun   := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_p_ibsmun').AsCurrency;
+                      IBSCBS.gIBSCBS.gIBSMun.vIBSMun   := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_v_ibsmun').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gIBSMun.gDif.pDif := 0;
-                      IBSCBS.gIBSCBS.gIBSMun.gDif.vDif := 0;
+                      IBSCBS.gIBSCBS.gIBSMun.gDif.pDif := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsmun_p_dif').AsCurrency;
+                      IBSCBS.gIBSCBS.gIBSMun.gDif.vDif := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsmun_v_dif').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gIBSMun.gDevTrib.vDevTrib := 0;
+                      IBSCBS.gIBSCBS.gIBSMun.gDevTrib.vDevTrib := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsmun_v_devtrib').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gIBSMun.gRed.pRedAliq := 0;
-                      IBSCBS.gIBSCBS.gIBSMun.gRed.pAliqEfet := 0;
+                      IBSCBS.gIBSCBS.gIBSMun.gRed.pRedAliq  := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsmun_p_redaliq').AsCurrency;
+                      IBSCBS.gIBSCBS.gIBSMun.gRed.pAliqEfet := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_ibsmun_p_aliqefet').AsCurrency;
 
                       // vIBS = vIBSUF + vIBSMun
-                      IBSCBS.gIBSCBS.vIBS := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.1)/100,-2) +
-                                             IBSCBS.gIBSCBS.gIBSMun.vIBSMun;
+                      IBSCBS.gIBSCBS.vIBS := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_v_ibs').AsCurrency;
 
                       // Maxsuel Victor, 09/12/2025
                         // Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
@@ -6519,16 +6529,16 @@ begin
                              //IBSCBS.gIBSCBS.vIBS := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.1)/100,-2)
                              //                       - IBSCBS.gIBSCBS.gIBSMun.vIBSMun;
 
-                      IBSCBS.gIBSCBS.gCBS.pCBS := 0.9;
-                      IBSCBS.gIBSCBS.gCBS.vCBS := RoundTo((dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('icm_n_base').AsCurrency * 0.9)/100,-2);
+                      IBSCBS.gIBSCBS.gCBS.pCBS := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_p_cbs').AsCurrency;
+                      IBSCBS.gIBSCBS.gCBS.vCBS := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_v_cbs').AsCurrency;;
 
-                      IBSCBS.gIBSCBS.gCBS.gDif.pDif := 0;
-                      IBSCBS.gIBSCBS.gCBS.gDif.vDif := 0;
+                      IBSCBS.gIBSCBS.gCBS.gDif.pDif         := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_p_cbs_dif').AsCurrency;
+                      IBSCBS.gIBSCBS.gCBS.gDif.vDif         := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_v_cbs_dif').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gCBS.gDevTrib.vDevTrib := 0;
+                      IBSCBS.gIBSCBS.gCBS.gDevTrib.vDevTrib := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_cbs_v_devtrib').AsCurrency;
 
-                      IBSCBS.gIBSCBS.gCBS.gRed.pRedAliq := 0;
-                      IBSCBS.gIBSCBS.gCBS.gRed.pAliqEfet := 0;
+                      IBSCBS.gIBSCBS.gCBS.gRed.pRedAliq     := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_cbs_p_redaliq').AsCurrency;
+                      IBSCBS.gIBSCBS.gCBS.gRed.pAliqEfet    := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_cbs_p_aliqefet').AsCurrency;
 
                       // Maxsuel Victor, 09/12/2025
                       // Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
@@ -6671,27 +6681,27 @@ begin
 
       if  chkReformaTributaria.Checked then
           begin
-            Total.ISTot.vIS := 100;
+            Total.ISTot.vIS := 0;
 
-            Total.IBSCBSTot.vBCIBSCBS := 100;
+            Total.IBSCBSTot.vBCIBSCBS := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_bc_ibscbs').asCurrency;
 
-            Total.IBSCBSTot.gIBS.vIBS := 100;
-            Total.IBSCBSTot.gIBS.vCredPres := 100;
-            Total.IBSCBSTot.gIBS.vCredPresCondSus := 100;
+            Total.IBSCBSTot.gIBS.vIBS             := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibs').asCurrency;
+            Total.IBSCBSTot.gIBS.vCredPres        := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibs_credpres').asCurrency;
+            Total.IBSCBSTot.gIBS.vCredPresCondSus := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibs_credpres_condsus').asCurrency;
 
-            Total.IBSCBSTot.gIBS.gIBSUFTot.vDif := 100;
-            Total.IBSCBSTot.gIBS.gIBSUFTot.vDevTrib := 100;
-            Total.IBSCBSTot.gIBS.gIBSUFTot.vIBSUF := 100;
+            Total.IBSCBSTot.gIBS.gIBSUFTot.vDif     := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibsuf_dif').asCurrency;
+            Total.IBSCBSTot.gIBS.gIBSUFTot.vDevTrib := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibsuf_devtrib').asCurrency;
+            Total.IBSCBSTot.gIBS.gIBSUFTot.vIBSUF   := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibsuf').asCurrency;
 
-            Total.IBSCBSTot.gIBS.gIBSMunTot.vDif := 100;
-            Total.IBSCBSTot.gIBS.gIBSMunTot.vDevTrib := 100;
-            Total.IBSCBSTot.gIBS.gIBSMunTot.vIBSMun := 100;
+            Total.IBSCBSTot.gIBS.gIBSMunTot.vDif     := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibsmun_dif').asCurrency;
+            Total.IBSCBSTot.gIBS.gIBSMunTot.vDevTrib := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibsmun_devtrib').asCurrency;
+            Total.IBSCBSTot.gIBS.gIBSMunTot.vIBSMun  := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_ibsmun').asCurrency;
 
-            Total.IBSCBSTot.gCBS.vDif := 100;
-            Total.IBSCBSTot.gCBS.vDevTrib := 100;
-            Total.IBSCBSTot.gCBS.vCBS := 100;
-            Total.IBSCBSTot.gCBS.vCredPres := 100;
-            Total.IBSCBSTot.gCBS.vCredPresCondSus := 100;
+            Total.IBSCBSTot.gCBS.vDif             := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_cbs_dif').asCurrency;
+            Total.IBSCBSTot.gCBS.vDevTrib         := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_cbs_devtrib').asCurrency;
+            Total.IBSCBSTot.gCBS.vCBS             := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_cbs').asCurrency;
+            Total.IBSCBSTot.gCBS.vCredPres        := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_cbs_credpres').asCurrency;
+            Total.IBSCBSTot.gCBS.vCredPresCondSus := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_cbs_credpres_condsus').asCurrency;
 
             Total.IBSCBSTot.gMono.vIBSMono := 100;
             Total.IBSCBSTot.gMono.vCBSMono := 100;

@@ -11902,6 +11902,65 @@ type
     FAT_CD_M_PEDid_pedido_mob: TIntegerField;
     FAT_CD_M_PED_ITEpeso_total_item: TFMTBCDField;
     FAT_CD_M_PEDpes_liquido_itens: TFMTBCDField;
+    CAD_CD_C_GRUcclasstrib: TWideStringField;
+    CAD_CD_C_GRUint_id_cst_ibs_cbs: TWideStringField;
+    BUS_CD_C_GRUcclasstrib: TWideStringField;
+    BUS_CD_C_GRUint_id_cst_ibs_cbs: TWideStringField;
+    FAT_CD_M_NFEvlr_v_ibs: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibs_credpres: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibs_credpres_condsus: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibsuf_dif: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibsuf_devtrib: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibsuf: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibsmun_dif: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibsmun_devtrib: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_ibsmun: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_cbs: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_cbs_dif: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_cbs_devtrib: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_cbs_credpres: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_cbs_credpres_condsus: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_mono_ibsmono: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_mono_cbsmono: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_mono_ibsmonoreten: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_mono_cbsmonoreten: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_mono_ibsmonoret: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_mono_cbsmonoret: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_estorncred_ibsestcred: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_estorncred_cbsestcred: TFMTBCDField;
+    FAT_CD_M_NFEvlr_v_bc_ibscbs: TFMTBCDField;
+    FAT_CD_M_NFEdta_prev_entrega: TDateField;
+    FAT_CD_M_NFEtp_nf_debito: TIntegerField;
+    FAT_CD_M_NFEtp_nf_credito: TIntegerField;
+    FAT_CD_M_NFEvlr_v_tot_ibs_cbs_is: TFMTBCDField;
+    FAT_CD_M_NFE_ITEid_cst_ibs_cbs: TWideStringField;
+    FAT_CD_M_NFE_ITEibscbs_inddoacao: TIntegerField;
+    FAT_CD_M_NFE_ITEibscbs_v_bc: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_p_ibsuf: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_v_ibsuf: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsuf_p_dif: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsuf_v_dif: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsuf_v_devtrib: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsuf_p_redaliq: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsuf_p_aliqefet: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_p_ibsmun: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_v_ibsmun: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsmun_p_dif: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsmun_v_dif: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsmun_v_devtrib: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsmun_p_redaliq: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_ibsmun_p_aliqefet: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_v_ibs: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_p_cbs: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_v_cbs: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_p_cbs_dif: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_v_cbs_dif: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_cbs_v_devtrib: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_cbs_p_redaliq: TFMTBCDField;
+    FAT_CD_M_NFE_ITEibscbs_cbs_p_aliqefet: TFMTBCDField;
+    FAT_CD_M_NFE_ITEtpCredPresIBSZFM: TIntegerField;
+    FAT_CD_M_NFE_ITEindBemMovelUsado: TIntegerField;
+    FAT_CD_M_NFE_ITEcclasstrib: TWideStringField;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);
@@ -13771,6 +13830,9 @@ begin
 
             CalculaICMS(CdsNfe,CdsNfeIte,'C',lRegimeSimples);
             CalculaIPI(CdsNfe,CdsNfeIte);
+
+            // Maxsuel Victor, 12/12/2025 - Reforma tributária.
+            Calcula_IBSCBS(CdsNfe,CdsNfeIte);
           end
        else
           begin

@@ -48,6 +48,7 @@ function  CalculaCofins(CdsNfe,CdsNfeIte: TClientDataSet; tipo: String): Boolean
 function  CalculaTriValor(CdsNfeIte: TClientDataSet): Boolean;
 procedure CalcPesoItem(cdsItens: TClientDataSet);
 procedure fatNfeCalcTotal(cdsNfe,cdsNfeIte: TClientDataSet);
+procedure fatNfeCalcTotal_IBSCBS(cdsNfe,cdsNfeIte: TClientDataSet);
 procedure nfeCalcTotalItem;
 function  CalcVlrCustoIteEntrada(cdsNfeIte: TClientDataSet):Currency;
 
@@ -3331,6 +3332,139 @@ begin
   end;
 end;
 
+procedure fatNfeCalcTotal_IBSCBS(cdsNfe,cdsNfeIte: TClientDataSet);
+begin
+
+  // Maxsuel Victor, 12/12/2025
+
+  cdsNfe.FieldByName('vlr_v_bc_ibscbs').AsCurrency             := 0;
+  cdsNfe.FieldByName('vlr_v_ibs').AsCurrency                   := 0;
+  cdsNfe.FieldByName('vlr_v_ibs_credpres').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_ibs_credpres_condsus').AsCurrency  := 0;
+  cdsNfe.FieldByName('vlr_v_ibsuf_dif').AsCurrency             := 0;
+  cdsNfe.FieldByName('vlr_v_ibsuf_devtrib').AsCurrency         := 0;
+  cdsNfe.FieldByName('vlr_v_ibsuf').AsCurrency                 := 0;
+  cdsNfe.FieldByName('vlr_v_ibsmun_dif').AsCurrency            := 0;
+  cdsNfe.FieldByName('vlr_v_ibsmun_devtrib').AsCurrency        := 0;
+  cdsNfe.FieldByName('vlr_v_ibsmun').AsCurrency                := 0;
+  cdsNfe.FieldByName('vlr_v_cbs').AsCurrency                   := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_dif').AsCurrency               := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_devtrib').AsCurrency           := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_credpres').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_credpres_condsus').AsCurrency  := 0;
+  cdsNfe.FieldByName('vlr_v_mono_ibsmono').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_mono_cbsmono').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_mono_ibsmonoreten').AsCurrency     := 0;
+  cdsNfe.FieldByName('vlr_v_mono_cbsmonoreten').AsCurrency     := 0;
+  cdsNfe.FieldByName('vlr_v_mono_ibsmonoret').AsCurrency       := 0;
+  cdsNfe.FieldByName('vlr_v_mono_cbsmonoret').AsCurrency       := 0;
+  cdsNfe.FieldByName('vlr_v_estorncred_ibsestcred').AsCurrency := 0;
+  cdsNfe.FieldByName('vlr_v_estorncred_cbsestcred').AsCurrency := 0;
+
+
+
+  //----------------------------------------------------------------
+
+             {  CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency              := 0;
+                CdsNfeIte.FieldByName('ibscbs_p_ibsuf').AsCurrency           := 0;
+                CdsNfeIte.FieldByName('ibscbs_v_ibsuf').AsCurrency           := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsuf_p_dif').AsCurrency       := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsuf_v_dif').AsCurrency       := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsuf_v_devtrib').AsCurrency   := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsuf_p_redaliq').AsCurrency   := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsuf_p_aliqefet').AsCurrency  := 0;
+                CdsNfeIte.FieldByName('ibscbs_p_ibsmun').AsCurrency          := 0;
+                CdsNfeIte.FieldByName('ibscbs_v_ibsmun').AsCurrency          := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsmun_p_dif').AsCurrency      := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsmun_v_dif').AsCurrency      := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsmun_v_devtrib').AsCurrency  := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsmun_p_redaliq').AsCurrency  := 0;
+                CdsNfeIte.FieldByName('ibscbs_ibsmun_p_aliqefet').AsCurrency := 0;
+                CdsNfeIte.FieldByName('ibscbs_v_ibs').AsCurrency             := 0;
+                CdsNfeIte.FieldByName('ibscbs_p_cbs').AsCurrency             := 0;
+                CdsNfeIte.FieldByName('ibscbs_v_cbs').AsCurrency             := 0;
+                CdsNfeIte.FieldByName('ibscbs_p_cbs_dif').AsCurrency         := 0;
+                CdsNfeIte.FieldByName('ibscbs_v_cbs_dif').AsCurrency         := 0;
+                CdsNfeIte.FieldByName('ibscbs_cbs_v_devtrib').AsCurrency     := 0;
+                CdsNfeIte.FieldByName('ibscbs_cbs_p_redaliq').AsCurrency     := 0;
+                CdsNfeIte.FieldByName('ibscbs_cbs_p_aliqefet').AsCurrency    := 0;
+             }
+
+
+  //----------------------------------------------------------------
+
+
+  cdsNfeIte.First;
+  if not cdsNfeIte.IsEmpty then
+     begin
+       while not cdsNfeIte.eof do
+          begin
+
+            // Soma dos valores das bases do IBSCBS
+            cdsNfe.FieldByName('vlr_v_bc_ibscbs').AsCurrency  :=
+                  cdsNfe.FieldByName('vlr_v_bc_ibscbs').AsCurrency +
+                        cdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency;
+
+            cdsNfe.FieldByName('vlr_v_ibs').AsCurrency        :=
+                cdsNfe.FieldByName('vlr_v_ibs').AsCurrency    +
+                cdsNfeIte.FieldByName('ibscbs_v_ibs').AsCurrency;
+            // -----------------------------------------------------------
+
+
+            // Soma dos valores IBSUF ( DIF, DEVTRIB, UF)
+            cdsNfe.FieldByName('vlr_v_ibsuf_dif').AsCurrency  :=
+                cdsNfe.FieldByName('vlr_v_ibsuf_dif').AsCurrency   +
+                    cdsNfeIte.FieldByName('ibscbs_ibsuf_v_dif').AsCurrency;
+
+            cdsNfe.FieldByName('vlr_v_ibsuf_devtrib').AsCurrency  :=
+                cdsNfe.FieldByName('vlr_v_ibsuf_devtrib').AsCurrency +
+                    cdsNfeIte.FieldByName('ibscbs_ibsuf_v_devtrib').AsCurrency;
+
+            cdsNfe.FieldByName('vlr_v_ibsuf').AsCurrency :=
+                 cdsNfe.FieldByName('vlr_v_ibsuf').AsCurrency +
+                      cdsNfeIte.FieldByName('ibscbs_v_ibsuf').AsCurrency;
+            // -----------------------------------------------------------
+
+
+            // Soma dos valores IBSMun ( DIF, DEVTRIB, UF)
+            // -----------------------------------------------------------
+
+            cdsNfe.FieldByName('vlr_v_ibsmun_dif').AsCurrency      :=
+                cdsNfe.FieldByName('vlr_v_ibsmun_dif').AsCurrency  +
+                   CdsNfeIte.FieldByName('ibscbs_ibsmun_v_dif').AsCurrency;
+
+            cdsNfe.FieldByName('vlr_v_ibsmun_devtrib').AsCurrency  :=
+                cdsNfe.FieldByName('vlr_v_ibsmun_devtrib').AsCurrency +
+                   CdsNfeIte.FieldByName('ibscbs_ibsmun_v_devtrib').AsCurrency;
+
+            cdsNfe.FieldByName('vlr_v_ibsmun').AsCurrency          :=
+                 cdsNfe.FieldByName('vlr_v_ibsmun').AsCurrency +
+                     CdsNfeIte.FieldByName('ibscbs_v_ibsmun').AsCurrency;
+
+
+            // Soma dos valores CBS
+            // ------------------------------------------------------------
+
+
+            cdsNfe.FieldByName('vlr_v_cbs').AsCurrency                :=
+                cdsNfe.FieldByName('vlr_v_cbs').AsCurrency     +
+                    CdsNfeIte.FieldByName('ibscbs_v_cbs').AsCurrency;
+
+
+            cdsNfe.FieldByName('vlr_v_cbs_dif').AsCurrency            :=
+                cdsNfe.FieldByName('vlr_v_cbs_dif').AsCurrency  +
+                    CdsNfeIte.FieldByName('ibscbs_v_cbs_dif').AsCurrency;
+
+            cdsNfe.FieldByName('vlr_v_cbs_devtrib').AsCurrency      := 0;
+            cdsNfe.FieldByName('vlr_v_cbs_credpres').AsCurrency     := 0;
+
+
+            cdsNfeIte.Next;
+          end;
+        cdsNfeIte.First;
+     end;
+end;
+
 procedure FatAtualizarTotalLiqNfe(cdsNfe: TClientDataSet);
 begin
 
@@ -4179,7 +4313,7 @@ begin
 
 
   CdsNfeIte.FieldByName('cclasstrib').AsString                 :=
-            dmGeral.BUS_CD_C_GRU.FieldByName('int_cclasstrib').AsString;
+            dmGeral.BUS_CD_C_GRU.FieldByName('cclasstrib').AsString;
   CdsNfeIte.FieldByName('id_cst_ibs_cbs').AsString             :=
             dmGeral.BUS_CD_C_GRU.FieldByName('int_id_cst_ibs_cbs').AsString;
 

@@ -2914,6 +2914,15 @@
       FieldName = 'nome_selo_inmetro_etq'
       Size = 100
     end
+    object CAD_CD_C_GRUcclasstrib: TWideStringField
+      FieldName = 'cclasstrib'
+      Size = 10
+    end
+    object CAD_CD_C_GRUint_id_cst_ibs_cbs: TWideStringField
+      FieldName = 'int_id_cst_ibs_cbs'
+      ProviderFlags = []
+      Size = 10
+    end
   end
   object CAD_CD_C_INF: TClientDataSet
     Aggregates = <>
@@ -4770,6 +4779,135 @@
       Precision = 18
       Size = 4
     end
+    object FAT_CD_M_NFEvlr_v_ibs: TFMTBCDField
+      FieldName = 'vlr_v_ibs'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibs_credpres: TFMTBCDField
+      FieldName = 'vlr_v_ibs_credpres'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibs_credpres_condsus: TFMTBCDField
+      FieldName = 'vlr_v_ibs_credpres_condsus'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibsuf_dif: TFMTBCDField
+      FieldName = 'vlr_v_ibsuf_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibsuf_devtrib: TFMTBCDField
+      FieldName = 'vlr_v_ibsuf_devtrib'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibsuf: TFMTBCDField
+      FieldName = 'vlr_v_ibsuf'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibsmun_dif: TFMTBCDField
+      FieldName = 'vlr_v_ibsmun_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibsmun_devtrib: TFMTBCDField
+      FieldName = 'vlr_v_ibsmun_devtrib'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_ibsmun: TFMTBCDField
+      FieldName = 'vlr_v_ibsmun'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_cbs: TFMTBCDField
+      FieldName = 'vlr_v_cbs'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_cbs_dif: TFMTBCDField
+      FieldName = 'vlr_v_cbs_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_cbs_devtrib: TFMTBCDField
+      FieldName = 'vlr_v_cbs_devtrib'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_cbs_credpres: TFMTBCDField
+      FieldName = 'vlr_v_cbs_credpres'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_cbs_credpres_condsus: TFMTBCDField
+      FieldName = 'vlr_v_cbs_credpres_condsus'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_mono_ibsmono: TFMTBCDField
+      FieldName = 'vlr_v_mono_ibsmono'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_mono_cbsmono: TFMTBCDField
+      FieldName = 'vlr_v_mono_cbsmono'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_mono_ibsmonoreten: TFMTBCDField
+      FieldName = 'vlr_v_mono_ibsmonoreten'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_mono_cbsmonoreten: TFMTBCDField
+      FieldName = 'vlr_v_mono_cbsmonoreten'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_mono_ibsmonoret: TFMTBCDField
+      FieldName = 'vlr_v_mono_ibsmonoret'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_mono_cbsmonoret: TFMTBCDField
+      FieldName = 'vlr_v_mono_cbsmonoret'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_estorncred_ibsestcred: TFMTBCDField
+      FieldName = 'vlr_v_estorncred_ibsestcred'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_estorncred_cbsestcred: TFMTBCDField
+      FieldName = 'vlr_v_estorncred_cbsestcred'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEvlr_v_bc_ibscbs: TFMTBCDField
+      FieldName = 'vlr_v_bc_ibscbs'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFEdta_prev_entrega: TDateField
+      FieldName = 'dta_prev_entrega'
+    end
+    object FAT_CD_M_NFEtp_nf_debito: TIntegerField
+      FieldName = 'tp_nf_debito'
+    end
+    object FAT_CD_M_NFEtp_nf_credito: TIntegerField
+      FieldName = 'tp_nf_credito'
+    end
+    object FAT_CD_M_NFEvlr_v_tot_ibs_cbs_is: TFMTBCDField
+      FieldName = 'vlr_v_tot_ibs_cbs_is'
+      Precision = 18
+      Size = 4
+    end
   end
   object CMP_CD_M_COT: TClientDataSet
     Aggregates = <>
@@ -5972,6 +6110,138 @@
     object FAT_CD_M_NFE_ITEpcp_obs_item: TWideStringField
       FieldName = 'pcp_obs_item'
       Size = 200
+    end
+    object FAT_CD_M_NFE_ITEid_cst_ibs_cbs: TWideStringField
+      FieldName = 'id_cst_ibs_cbs'
+      Size = 10
+    end
+    object FAT_CD_M_NFE_ITEibscbs_inddoacao: TIntegerField
+      FieldName = 'ibscbs_inddoacao'
+    end
+    object FAT_CD_M_NFE_ITEibscbs_v_bc: TFMTBCDField
+      FieldName = 'ibscbs_v_bc'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_p_ibsuf: TFMTBCDField
+      FieldName = 'ibscbs_p_ibsuf'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_v_ibsuf: TFMTBCDField
+      FieldName = 'ibscbs_v_ibsuf'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsuf_p_dif: TFMTBCDField
+      FieldName = 'ibscbs_ibsuf_p_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsuf_v_dif: TFMTBCDField
+      FieldName = 'ibscbs_ibsuf_v_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsuf_v_devtrib: TFMTBCDField
+      FieldName = 'ibscbs_ibsuf_v_devtrib'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsuf_p_redaliq: TFMTBCDField
+      FieldName = 'ibscbs_ibsuf_p_redaliq'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsuf_p_aliqefet: TFMTBCDField
+      FieldName = 'ibscbs_ibsuf_p_aliqefet'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_p_ibsmun: TFMTBCDField
+      FieldName = 'ibscbs_p_ibsmun'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_v_ibsmun: TFMTBCDField
+      FieldName = 'ibscbs_v_ibsmun'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsmun_p_dif: TFMTBCDField
+      FieldName = 'ibscbs_ibsmun_p_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsmun_v_dif: TFMTBCDField
+      FieldName = 'ibscbs_ibsmun_v_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsmun_v_devtrib: TFMTBCDField
+      FieldName = 'ibscbs_ibsmun_v_devtrib'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsmun_p_redaliq: TFMTBCDField
+      FieldName = 'ibscbs_ibsmun_p_redaliq'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_ibsmun_p_aliqefet: TFMTBCDField
+      FieldName = 'ibscbs_ibsmun_p_aliqefet'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_v_ibs: TFMTBCDField
+      FieldName = 'ibscbs_v_ibs'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_p_cbs: TFMTBCDField
+      FieldName = 'ibscbs_p_cbs'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_v_cbs: TFMTBCDField
+      FieldName = 'ibscbs_v_cbs'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_p_cbs_dif: TFMTBCDField
+      FieldName = 'ibscbs_p_cbs_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_v_cbs_dif: TFMTBCDField
+      FieldName = 'ibscbs_v_cbs_dif'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_cbs_v_devtrib: TFMTBCDField
+      FieldName = 'ibscbs_cbs_v_devtrib'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_cbs_p_redaliq: TFMTBCDField
+      FieldName = 'ibscbs_cbs_p_redaliq'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEibscbs_cbs_p_aliqefet: TFMTBCDField
+      FieldName = 'ibscbs_cbs_p_aliqefet'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_M_NFE_ITEtpCredPresIBSZFM: TIntegerField
+      FieldName = 'tpCredPresIBSZFM'
+    end
+    object FAT_CD_M_NFE_ITEindBemMovelUsado: TIntegerField
+      FieldName = 'indBemMovelUsado'
+    end
+    object FAT_CD_M_NFE_ITEcclasstrib: TWideStringField
+      FieldName = 'cclasstrib'
+      Size = 10
     end
   end
   object FAT_CD_M_NFE_TIT: TClientDataSet
@@ -17878,6 +18148,15 @@
     object BUS_CD_C_GRUnome_selo_inmetro_etq: TWideStringField
       FieldName = 'nome_selo_inmetro_etq'
       Size = 100
+    end
+    object BUS_CD_C_GRUcclasstrib: TWideStringField
+      FieldName = 'cclasstrib'
+      Size = 10
+    end
+    object BUS_CD_C_GRUint_id_cst_ibs_cbs: TWideStringField
+      FieldName = 'int_id_cst_ibs_cbs'
+      ProviderFlags = []
+      Size = 10
     end
   end
   object CAD_CD_C_PES_MOD: TClientDataSet

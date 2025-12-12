@@ -86,6 +86,7 @@ COMMENT ON COLUMN "public"."cad_tb_c_ctr"."per_red_cbs" IS 'nome origigina: pred
 /***** 09/12/2025 *****/
 
 ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "vlr_v_bc_ibscbs" numeric(18,4),
 ADD COLUMN "vlr_v_ibs" numeric(18,4),
 ADD COLUMN "vlr_v_ibs_credpres" numeric(18,4),
 ADD COLUMN "vlr_v_ibs_credpres_condsus" numeric(18,4),
@@ -151,4 +152,38 @@ ALTER TABLE "public"."cad_tb_c_gru"
 ADD COLUMN "cclasstrib" varchar(10);
 
 COMMENT ON COLUMN "public"."cad_tb_c_gru"."cclasstrib" IS 'Codigo de Classificação Tributária';
+
+
+/****** 12/12/2025 *******/
+
+ALTER TABLE "public"."fat_tb_m_nfe"
+ADD COLUMN "dta_prev_entrega" date,
+ADD COLUMN "tp_nf_debito" int4,
+ADD COLUMN "tp_nf_credito" int4,
+ADD COLUMN "vlr_v_tot_ibs_cbs_is" numeric(18,4);
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."dta_prev_entrega" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."tp_nf_debito" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."tp_nf_credito" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe"."vlr_v_tot_ibs_cbs_is" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+
+
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ADD COLUMN "tpCredPresIBSZFM" int4,
+ADD COLUMN "indBemMovelUsado" int4;
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."tpCredPresIBSZFM" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."indBemMovelUsado" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+
+
+
+
+ALTER TABLE "public"."fat_tb_m_nfe_ite"
+ALTER COLUMN "cclasstrib" TYPE varchar(10) COLLATE "default";
 
