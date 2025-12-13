@@ -11720,6 +11720,8 @@ type
     FAT_SQ_M_NFE_ITEtpCredPresIBSZFM: TIntegerField;
     FAT_SQ_M_NFE_ITEindBemMovelUsado: TIntegerField;
     FAT_SQ_M_NFE_ITEcclasstrib: TWideStringField;
+    CAD_SQ_C_PAR_CTRusa_reforma_tributaria: TBooleanField;
+    BUS_SQ_C_PAR_CTRusa_reforma_tributaria: TBooleanField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;

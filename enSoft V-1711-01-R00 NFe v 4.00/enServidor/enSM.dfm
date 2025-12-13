@@ -5699,6 +5699,9 @@
     object CAD_SQ_C_PAR_CTRfat_qtde_dias_canc_ped_autom: TIntegerField
       FieldName = 'fat_qtde_dias_canc_ped_autom'
     end
+    object CAD_SQ_C_PAR_CTRusa_reforma_tributaria: TBooleanField
+      FieldName = 'usa_reforma_tributaria'
+    end
   end
   object CAD_SQ_C_PAR_MOD: TSQLDataSet
     SchemaName = 'sa'
@@ -26317,6 +26320,9 @@
     end
     object BUS_SQ_C_PAR_CTRpcp_opb_id_tipo_mov_estoque: TIntegerField
       FieldName = 'pcp_opb_id_tipo_mov_estoque'
+    end
+    object BUS_SQ_C_PAR_CTRusa_reforma_tributaria: TBooleanField
+      FieldName = 'usa_reforma_tributaria'
     end
   end
   object BUS_DP_C_PAR_CTR: TDataSetProvider

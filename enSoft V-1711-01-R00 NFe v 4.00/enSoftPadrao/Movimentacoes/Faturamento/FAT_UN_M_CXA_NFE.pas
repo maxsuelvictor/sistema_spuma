@@ -3386,6 +3386,17 @@ begin
             dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_DOCUMENTO').AsDateTime :=
                     dmGeral.FIN_CD_M_CXA.FieldByName('DTA_ABERTURA').AsDateTime;
 
+            // Maxsuel Victor, 13/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+            if dmGeral.CAD_CD_C_PAR_CTR.FieldByName('usa_reforma_tributaria').AsBoolean then
+               begin
+                 dmGeral.BUS_CD_M_NFE_CXA.FieldByName('dta_prev_entrega').AsDateTime :=
+                     dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_EMISSAO').AsDateTime + 3;
+
+                 dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_debito').Asinteger := 0; //Nenhum;
+                 dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_credito').Asinteger := 0; //Nenhum;
+               end;
+            // -----------------------------------------------------------------------------------------
+
             dmGeral.BUS_CD_M_NFE_CXA.ApplyUpdates(0);
 
             numNfe  := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('NUMERO').AsString;
@@ -6011,8 +6022,8 @@ begin
                   //                      tcpBensIntermediarios, tcpBensInformaticaOutros);
                   // Ver com o contador.
              if chkReformaTributaria.Checked then
-                Prod.tpCredPresIBSZFM := StrToTpCredPresIBSZFM(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('tpCredPresIBSZFM').AsString);
-                //Prod.tpCredPresIBSZFM := tcpSemCredito;
+                 //Prod.tpCredPresIBSZFM := StrToTpCredPresIBSZFM(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('tpCredPresIBSZFM').AsString);
+                Prod.tpCredPresIBSZFM := tcpSemCredito;
 
 
              if trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_cest_ncm').AsString) <> '' then
@@ -6703,18 +6714,18 @@ begin
             Total.IBSCBSTot.gCBS.vCredPres        := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_cbs_credpres').asCurrency;
             Total.IBSCBSTot.gCBS.vCredPresCondSus := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_cbs_credpres_condsus').asCurrency;
 
-            Total.IBSCBSTot.gMono.vIBSMono := 100;
-            Total.IBSCBSTot.gMono.vCBSMono := 100;
-            Total.IBSCBSTot.gMono.vIBSMonoReten := 100;
-            Total.IBSCBSTot.gMono.vCBSMonoReten := 100;
-            Total.IBSCBSTot.gMono.vIBSMonoRet := 100;
-            Total.IBSCBSTot.gMono.vCBSMonoRet := 100;
+            Total.IBSCBSTot.gMono.vIBSMono      := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_mono_ibsmono').asCurrency;
+            Total.IBSCBSTot.gMono.vCBSMono      := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_mono_cbsmono').asCurrency;
+            Total.IBSCBSTot.gMono.vIBSMonoReten := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_mono_ibsmonoreten').asCurrency;
+            Total.IBSCBSTot.gMono.vCBSMonoReten := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_mono_cbsmonoreten').asCurrency;
+            Total.IBSCBSTot.gMono.vIBSMonoRet   := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_mono_ibsmonoret').asCurrency;
+            Total.IBSCBSTot.gMono.vCBSMonoRet   := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_mono_cbsmonoret').asCurrency;
 
-            Total.IBSCBSTot.gEstornoCred.vIBSEstCred := 100;
-            Total.IBSCBSTot.gEstornoCred.vCBSEstCred := 100;
+            Total.IBSCBSTot.gEstornoCred.vIBSEstCred := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_estorncred_ibsestcred').asCurrency;
+            Total.IBSCBSTot.gEstornoCred.vCBSEstCred := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_estorncred_cbsestcred').asCurrency;
 
             // Valor total da NF-e com IBS / CBS / IS
-            Total.vNFTot := 100;
+            Total.vNFTot := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_tot_ibs_cbs_is').asCurrency;
           end;
 
       Transp.modFrete :=StrTomodFrete(iRet, inttoStr(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger));

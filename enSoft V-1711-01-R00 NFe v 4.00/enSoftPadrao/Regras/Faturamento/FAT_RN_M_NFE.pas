@@ -3360,6 +3360,8 @@ begin
   cdsNfe.FieldByName('vlr_v_mono_cbsmonoret').AsCurrency       := 0;
   cdsNfe.FieldByName('vlr_v_estorncred_ibsestcred').AsCurrency := 0;
   cdsNfe.FieldByName('vlr_v_estorncred_cbsestcred').AsCurrency := 0;
+  cdsNfe.FieldByName('vlr_v_tot_ibs_cbs_is').AsCurrency        := 0;
+
 
 
 
@@ -3458,6 +3460,13 @@ begin
             cdsNfe.FieldByName('vlr_v_cbs_devtrib').AsCurrency      := 0;
             cdsNfe.FieldByName('vlr_v_cbs_credpres').AsCurrency     := 0;
 
+            // -------------------------------------------------------------
+
+            // Valor total da NF-e com IBS / CBS / IS
+            cdsNfe.FieldByName('vlr_v_tot_ibs_cbs_is').AsCurrency        :=
+                 cdsNfe.FieldByName('vlr_v_ibs').AsCurrency +
+                 cdsNfe.FieldByName('vlr_v_cbs').AsCurrency;
+            // -------------------------------------------------------------
 
             cdsNfeIte.Next;
           end;

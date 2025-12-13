@@ -27,7 +27,7 @@ CREATE INDEX "ix_ibc_descricao" ON "public"."cad_tb_c_ibc" USING btree (descrica
 
 
 CREATE TABLE "public"."cad_tb_c_ctr" (
-"id_ctr" int4 DEFAULT nextval('cad_tb_c_ctr_id_ctr_seq'::regclass) NOT NULL,
+"id_ctr" SERIAL NOT NULL,
 "id_cst_ibs_cbs" varchar(10) COLLATE "default" NOT NULL,
 "descricao_cst_ibs_cbs" text COLLATE "default",
 "cclasstrib" varchar(10) COLLATE "default" NOT NULL,
@@ -186,4 +186,12 @@ COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."indBemMovelUsado" IS 'Reforma Tri
 
 ALTER TABLE "public"."fat_tb_m_nfe_ite"
 ALTER COLUMN "cclasstrib" TYPE varchar(10) COLLATE "default";
+
+
+/***** 13/12/2025 *****/
+
+ALTER TABLE "public"."cad_tb_c_par_ctr"
+ADD COLUMN "usa_reforma_tributaria" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."usa_reforma_tributaria" IS 'Se for TRUE irá aplicar as informações ref. a reforma tributaria para IBS/CBS/IS.';
 

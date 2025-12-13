@@ -11961,6 +11961,7 @@ type
     FAT_CD_M_NFE_ITEtpCredPresIBSZFM: TIntegerField;
     FAT_CD_M_NFE_ITEindBemMovelUsado: TIntegerField;
     FAT_CD_M_NFE_ITEcclasstrib: TWideStringField;
+    CAD_CD_C_PAR_CTRusa_reforma_tributaria: TBooleanField;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);
