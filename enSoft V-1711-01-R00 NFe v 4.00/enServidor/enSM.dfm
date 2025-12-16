@@ -9047,15 +9047,15 @@
       Precision = 18
       Size = 4
     end
-    object FAT_SQ_M_NFE_ITEtpCredPresIBSZFM: TIntegerField
-      FieldName = 'tpCredPresIBSZFM'
-    end
-    object FAT_SQ_M_NFE_ITEindBemMovelUsado: TIntegerField
-      FieldName = 'indBemMovelUsado'
-    end
     object FAT_SQ_M_NFE_ITEcclasstrib: TWideStringField
       FieldName = 'cclasstrib'
       Size = 10
+    end
+    object FAT_SQ_M_NFE_ITEtpcredpresibszfm: TIntegerField
+      FieldName = 'tpcredpresibszfm'
+    end
+    object FAT_SQ_M_NFE_ITEindbemmovelusado: TIntegerField
+      FieldName = 'indbemmovelusado'
     end
   end
   object FAT_SQ_M_NFE_TIT: TSQLDataSet

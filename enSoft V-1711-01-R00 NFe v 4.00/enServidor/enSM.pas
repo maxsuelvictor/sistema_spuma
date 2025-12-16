@@ -11717,11 +11717,11 @@ type
     FAT_SQ_M_NFE_ITEibscbs_cbs_v_devtrib: TFMTBCDField;
     FAT_SQ_M_NFE_ITEibscbs_cbs_p_redaliq: TFMTBCDField;
     FAT_SQ_M_NFE_ITEibscbs_cbs_p_aliqefet: TFMTBCDField;
-    FAT_SQ_M_NFE_ITEtpCredPresIBSZFM: TIntegerField;
-    FAT_SQ_M_NFE_ITEindBemMovelUsado: TIntegerField;
     FAT_SQ_M_NFE_ITEcclasstrib: TWideStringField;
     CAD_SQ_C_PAR_CTRusa_reforma_tributaria: TBooleanField;
     BUS_SQ_C_PAR_CTRusa_reforma_tributaria: TBooleanField;
+    FAT_SQ_M_NFE_ITEtpcredpresibszfm: TIntegerField;
+    FAT_SQ_M_NFE_ITEindbemmovelusado: TIntegerField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -30293,10 +30293,11 @@ function TSM.CAD_DP_C_GRUDataRequest(Sender: TObject;
     Result :=
       ' SELECT GRU.* ,cast(null as bytea) as foto_temp, TRI.DESCRICAO AS INT_NOMETRI,' +
       '   ETQ.DESCRICAO AS INT_NOMEETQ,  ite.descricao as int_nomeite_espuma, '+
-      '   itt.descricao as int_nomeite_espuma_2, ' +
+      '   itt.descricao as int_nomeite_espuma_2,  ' +
       '   itr.descricao as int_nomeite_espuma_3,  ' +
       '   itp.descricao as int_nomeite_espuma_revest_1, ' +
-      '   its.descricao as int_nomeite_espuma_revest_2  ' +
+      '   its.descricao as int_nomeite_espuma_revest_2, ' +
+      '   ctr.id_cst_ibs_cbs as  int_id_cst_ibs_cbs  ' +
       ' FROM CAD_TB_C_GRU GRU '+
       '  LEFT OUTER JOIN CAD_TB_C_TRI TRI ON TRI.ID_TRIBUTO=GRU.ID_TRIBUTO ' +
       '  left outer join cad_tb_c_ite ite on ite.id_item = gru.id_item_bloco_espuma ' +
@@ -30304,7 +30305,8 @@ function TSM.CAD_DP_C_GRUDataRequest(Sender: TObject;
       '  left outer join cad_tb_c_ite itr on itr.id_item = gru.id_item_bloco_espuma_3 ' +
       '  left outer join cad_tb_c_ite itp on itp.id_item = gru.id_item_bloco_espuma_revest_1 ' +
       '  left outer join cad_tb_c_ite its on its.id_item = gru.id_item_bloco_espuma_revest_2 ' +
-      '  LEFT OUTER JOIN PCP_TB_C_FTE_ETQ ETQ ON ETQ.ID_FTE_ETQ = GRU.ID_FTE_ETQ ';
+      '  LEFT OUTER JOIN PCP_TB_C_FTE_ETQ ETQ ON ETQ.ID_FTE_ETQ = GRU.ID_FTE_ETQ ' +
+      '  left outer join cad_tb_c_ctr ctr on ctr.cclasstrib = gru.cclasstrib ';
   end;
 begin
    CAD_SQ_C_GRU.Close;

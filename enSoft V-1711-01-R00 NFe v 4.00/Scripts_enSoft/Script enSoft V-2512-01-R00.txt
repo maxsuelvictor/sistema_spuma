@@ -174,12 +174,12 @@ COMMENT ON COLUMN "public"."fat_tb_m_nfe"."vlr_v_tot_ibs_cbs_is" IS 'Reforma Tri
 
 
 ALTER TABLE "public"."fat_tb_m_nfe_ite"
-ADD COLUMN "tpCredPresIBSZFM" int4,
-ADD COLUMN "indBemMovelUsado" int4;
+ADD COLUMN "tpcredpresibszfm" int4,
+ADD COLUMN "indbemmovelusado" int4;
 
-COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."tpCredPresIBSZFM" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."tpcredpresibszfm"  IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
 
-COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."indBemMovelUsado" IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
+COMMENT ON COLUMN "public"."fat_tb_m_nfe_ite"."indbemmovelusado"  IS 'Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS';
 
 
 

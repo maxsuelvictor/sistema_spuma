@@ -2823,6 +2823,35 @@ Var
 
   lCalcularTrib: Boolean;
 begin
+
+  // Campos referente a reforma tributária ---------------------------
+  cdsNfe.FieldByName('vlr_v_bc_ibscbs').AsCurrency             := 0;
+  cdsNfe.FieldByName('vlr_v_ibs').AsCurrency                   := 0;
+  cdsNfe.FieldByName('vlr_v_ibs_credpres').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_ibs_credpres_condsus').AsCurrency  := 0;
+  cdsNfe.FieldByName('vlr_v_ibsuf_dif').AsCurrency             := 0;
+  cdsNfe.FieldByName('vlr_v_ibsuf_devtrib').AsCurrency         := 0;
+  cdsNfe.FieldByName('vlr_v_ibsuf').AsCurrency                 := 0;
+  cdsNfe.FieldByName('vlr_v_ibsmun_dif').AsCurrency            := 0;
+  cdsNfe.FieldByName('vlr_v_ibsmun_devtrib').AsCurrency        := 0;
+  cdsNfe.FieldByName('vlr_v_ibsmun').AsCurrency                := 0;
+  cdsNfe.FieldByName('vlr_v_cbs').AsCurrency                   := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_dif').AsCurrency               := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_devtrib').AsCurrency           := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_credpres').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_cbs_credpres_condsus').AsCurrency  := 0;
+  cdsNfe.FieldByName('vlr_v_mono_ibsmono').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_mono_cbsmono').AsCurrency          := 0;
+  cdsNfe.FieldByName('vlr_v_mono_ibsmonoreten').AsCurrency     := 0;
+  cdsNfe.FieldByName('vlr_v_mono_cbsmonoreten').AsCurrency     := 0;
+  cdsNfe.FieldByName('vlr_v_mono_ibsmonoret').AsCurrency       := 0;
+  cdsNfe.FieldByName('vlr_v_mono_cbsmonoret').AsCurrency       := 0;
+  cdsNfe.FieldByName('vlr_v_estorncred_ibsestcred').AsCurrency := 0;
+  cdsNfe.FieldByName('vlr_v_estorncred_cbsestcred').AsCurrency := 0;
+  cdsNfe.FieldByName('vlr_v_tot_ibs_cbs_is').AsCurrency        := 0;
+
+  // ------------------------------------------------------------------
+
   // Este campo é digitado pelo próprio usuário
   // FAT_CD_M_NFE.FieldByName('FRE_VALOR').AsCurrency   := 0;
 
@@ -3318,6 +3347,74 @@ begin
                      cdsNfeIte.FieldByName('VLR_DESCONTO').AsCurrency;
               end;
 
+          // Maxsuel Victor, 16/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
+          if dmgeral.CAD_CD_C_PAR_CTR.FieldByName('usa_reforma_tributaria').AsBoolean then
+             begin
+                // Soma dos valores das bases do IBSCBS
+                cdsNfe.FieldByName('vlr_v_bc_ibscbs').AsCurrency  :=
+                      cdsNfe.FieldByName('vlr_v_bc_ibscbs').AsCurrency +
+                            cdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency;
+
+                cdsNfe.FieldByName('vlr_v_ibs').AsCurrency        :=
+                    cdsNfe.FieldByName('vlr_v_ibs').AsCurrency    +
+                    cdsNfeIte.FieldByName('ibscbs_v_ibs').AsCurrency;
+                // -----------------------------------------------------------
+
+
+                // Soma dos valores IBSUF ( DIF, DEVTRIB, UF)
+                cdsNfe.FieldByName('vlr_v_ibsuf_dif').AsCurrency  :=
+                    cdsNfe.FieldByName('vlr_v_ibsuf_dif').AsCurrency   +
+                        cdsNfeIte.FieldByName('ibscbs_ibsuf_v_dif').AsCurrency;
+
+                cdsNfe.FieldByName('vlr_v_ibsuf_devtrib').AsCurrency  :=
+                    cdsNfe.FieldByName('vlr_v_ibsuf_devtrib').AsCurrency +
+                        cdsNfeIte.FieldByName('ibscbs_ibsuf_v_devtrib').AsCurrency;
+
+                cdsNfe.FieldByName('vlr_v_ibsuf').AsCurrency :=
+                     cdsNfe.FieldByName('vlr_v_ibsuf').AsCurrency +
+                          cdsNfeIte.FieldByName('ibscbs_v_ibsuf').AsCurrency;
+                // -----------------------------------------------------------
+
+
+                // Soma dos valores IBSMun ( DIF, DEVTRIB, UF)
+                // -----------------------------------------------------------
+
+                cdsNfe.FieldByName('vlr_v_ibsmun_dif').AsCurrency      :=
+                    cdsNfe.FieldByName('vlr_v_ibsmun_dif').AsCurrency  +
+                       CdsNfeIte.FieldByName('ibscbs_ibsmun_v_dif').AsCurrency;
+
+                cdsNfe.FieldByName('vlr_v_ibsmun_devtrib').AsCurrency  :=
+                    cdsNfe.FieldByName('vlr_v_ibsmun_devtrib').AsCurrency +
+                       CdsNfeIte.FieldByName('ibscbs_ibsmun_v_devtrib').AsCurrency;
+
+                cdsNfe.FieldByName('vlr_v_ibsmun').AsCurrency          :=
+                     cdsNfe.FieldByName('vlr_v_ibsmun').AsCurrency +
+                         CdsNfeIte.FieldByName('ibscbs_v_ibsmun').AsCurrency;
+
+
+                // Soma dos valores CBS
+                // ------------------------------------------------------------
+
+                cdsNfe.FieldByName('vlr_v_cbs').AsCurrency                :=
+                    cdsNfe.FieldByName('vlr_v_cbs').AsCurrency     +
+                        CdsNfeIte.FieldByName('ibscbs_v_cbs').AsCurrency;
+
+
+                cdsNfe.FieldByName('vlr_v_cbs_dif').AsCurrency            :=
+                    cdsNfe.FieldByName('vlr_v_cbs_dif').AsCurrency  +
+                        CdsNfeIte.FieldByName('ibscbs_v_cbs_dif').AsCurrency;
+
+                cdsNfe.FieldByName('vlr_v_cbs_devtrib').AsCurrency      := 0;
+                cdsNfe.FieldByName('vlr_v_cbs_credpres').AsCurrency     := 0;
+
+                // -------------------------------------------------------------
+
+                // Valor total da NF-e com IBS / CBS / IS
+                cdsNfe.FieldByName('vlr_v_tot_ibs_cbs_is').AsCurrency        :=
+                     cdsNfe.FieldByName('vlr_v_ibs').AsCurrency +
+                     cdsNfe.FieldByName('vlr_v_cbs').AsCurrency;
+                // -------------------------------------------------------------
+             end;
            cdsNfeIte.Next;
           end;
         FatAtualizarTotalLiqNfe(cdsNfe);
@@ -3336,7 +3433,6 @@ procedure fatNfeCalcTotal_IBSCBS(cdsNfe,cdsNfeIte: TClientDataSet);
 begin
 
   // Maxsuel Victor, 12/12/2025
-
   cdsNfe.FieldByName('vlr_v_bc_ibscbs').AsCurrency             := 0;
   cdsNfe.FieldByName('vlr_v_ibs').AsCurrency                   := 0;
   cdsNfe.FieldByName('vlr_v_ibs_credpres').AsCurrency          := 0;

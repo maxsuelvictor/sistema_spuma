@@ -5651,8 +5651,11 @@ begin
               //Ide.tpNFDebito  := tdNenhum;
               //Ide.tpNFCredito := tcNenhum;
 
-          Ide.tpNFDebito  := StrTotpNFDebito(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_debito').AsString);
-          Ide.tpNFCredito := StrTotpNFCredito(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_credito').AsString);
+          Ide.tpNFDebito  := StrTotpNFDebito('');
+          Ide.tpNFCredito := StrTotpNFCredito('');
+
+          //Ide.tpNFDebito  := StrTotpNFDebito(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_debito').AsString);
+          //Ide.tpNFCredito := StrTotpNFCredito(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_credito').AsString);
 
 
           //Ide.gCompraGov.tpEnteGov := tcgEstados;
@@ -6500,7 +6503,7 @@ begin
                       IBSCBS.CST := StrToCSTIBSCBS(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('id_cst_ibs_cbs').AsString);
                       IBSCBS.cClassTrib := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('cclasstrib').AsString;
                       // tieNenhum
-                      IBSCBS.indDoacao                := StrToTIndicadorEx(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('indDoacao').AsString);
+                      IBSCBS.indDoacao                := StrToTIndicadorEx(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_inddoacao').AsString);
 
                       IBSCBS.gIBSCBS.vBC              := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ibscbs_v_bc').AsCurrency;
 
@@ -8497,6 +8500,10 @@ begin
           end;
      end;
 
+  if dmgeral.CAD_CD_C_PAR_CTR.FieldByName('usa_reforma_tributaria').AsBoolean then
+     begin
+       chkReformaTributaria.Checked := true;
+     end;
 end;
 
 
