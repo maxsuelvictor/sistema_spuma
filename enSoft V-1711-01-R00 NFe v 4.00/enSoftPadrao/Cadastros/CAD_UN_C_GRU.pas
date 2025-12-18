@@ -163,6 +163,11 @@ type
     btn_Add_Itens: TBitBtn;
     cbbCor: TwwDBLookupCombo;
     dsoGruCor: TwwDataSource;
+    TabSheet1: TTabSheet;
+    ScrollBox2: TScrollBox;
+    Label14: TLabel;
+    txtCodClassTrib: TJvDBComboEdit;
+    txtDescClassTribut: TDBText;
     procedure acAdicionaExecute(Sender: TObject);
     procedure acAlterarExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);

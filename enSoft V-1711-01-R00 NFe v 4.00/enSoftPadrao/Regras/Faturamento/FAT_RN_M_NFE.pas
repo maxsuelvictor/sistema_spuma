@@ -4455,12 +4455,26 @@ begin
           begin
              // Valor da Base de cálculo do IBS e CBS (gIBSCBS/vBC) deve ser igual ao somatório de:
                // (+) vProd (+) vServ (+) vFrete (+) vSeg (+) vOutro  (+) vII
+               //   (-) vDesc, (-) vPIS,(-) vCOFINS,(-) vICMS,(-) vICMSUFDest,(-) vFCP,(-) vFCPUFDest,
+               //   (-) vICMSMono,(-) vISSQN,(+) vIS
+               {Exceção 1: Não subtrair o valor do PIS por Substituição Tributária (PIST/vPIS) quando compor o valor total da NF-e (se indSomaPISST=1);
+               Exceção 2: Não subtrair o valor do COFINS por Substituição Tributária (COFINSST/vCOFINS) quando compor o valor total da NF-e (se indSomaCOFINSST=1).
+               Nota: Implementação Futura, aguardando orientação normativa.}
+
             CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency    :=
                         cdsNfeIte.FieldByName('VLR_MERCADORIA').AsCurrency  +
                         cdsNfeIte.FieldByName('FRE_VALOR').AsCurrency       +
                         cdsNfeIte.FieldByName('VLR_SEGURO').AsCurrency      +
-                        cdsNfeIte.FieldByName('VLR_OUTRAS_DESP').AsCurrency;
-                        //+ cdsNfeIte.FieldByName('IPI_VALOR').AsCurrency; }
+                        cdsNfeIte.FieldByName('VLR_OUTRAS_DESP').AsCurrency -
+                        //+ cdsNfeIte.FieldByName('IPI_VALOR').AsCurrency;
+
+                        cdsNfeIte.FieldByName('VLR_DESCONTO').AsCurrency  -
+                        cdsNfeIte.FieldByName('PIS_VALOR').AsCurrency     -
+                        CdsNfeIte.FieldByName('COF_VALOR').AsCurrency     -
+                        CdsNfeIte.FieldByName('ICM_N_VALOR').AsCurrency   -
+                        CdsNfeIte.FieldByName('vlr_part_dest').AsCurrency   -
+                        CdsNfeIte.FieldByName('vlr_fcp_ope_int').AsCurrency -
+                        CdsNfeIte.FieldByName('vlr_fcp').AsCurrency;
 
             // Pág. 34, da Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
             {- Valor do IBS Estadual (vIBSUF) deverá ser resultante de:

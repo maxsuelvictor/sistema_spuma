@@ -1029,20 +1029,19 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             Top = 0
             Width = 654
             Height = 366
-            VertScrollBar.Position = 248
             Align = alClient
             BorderStyle = bsNone
             TabOrder = 0
             object lblCidade: TLabel
               Left = 56
-              Top = -12
+              Top = 236
               Width = 88
               Height = 13
               Caption = 'Etiqueta t'#233'cnica :'
             end
             object txtCidadeDescricao: TDBText
               Left = 238
-              Top = -16
+              Top = 232
               Width = 150
               Height = 21
               Color = 14342874
@@ -1053,7 +1052,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object lblSeloEtq: TLabel
               Left = 4
-              Top = 44
+              Top = 292
               Width = 130
               Height = 13
               Caption = 'Nome do Selo INMETRO :'
@@ -1061,7 +1060,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtSeloEtqPers: TLabel
               Left = 262
-              Top = 67
+              Top = 315
               Width = 98
               Height = 13
               Caption = 'Nome da etiqueta :'
@@ -1069,7 +1068,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label11: TLabel
               Left = 4
-              Top = 92
+              Top = 340
               Width = 289
               Height = 16
               Alignment = taCenter
@@ -1081,7 +1080,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label12: TLabel
               Left = 4
-              Top = -38
+              Top = 210
               Width = 558
               Height = 16
               Alignment = taCenter
@@ -1093,7 +1092,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label13: TLabel
               Left = 4
-              Top = 148
+              Top = 396
               Width = 270
               Height = 16
               Alignment = taCenter
@@ -1105,7 +1104,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label15: TLabel
               Left = 4
-              Top = -244
+              Top = 4
               Width = 558
               Height = 16
               Alignment = taCenter
@@ -1117,7 +1116,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label16: TLabel
               Left = 4
-              Top = -158
+              Top = 90
               Width = 72
               Height = 26
               Caption = 'Item Bloco de Espuma 1:'
@@ -1125,7 +1124,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtDescBlcEspuma1: TDBText
               Left = 142
-              Top = -155
+              Top = 93
               Width = 150
               Height = 21
               Color = 14342874
@@ -1136,7 +1135,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label17: TLabel
               Left = 315
-              Top = -160
+              Top = 88
               Width = 72
               Height = 26
               Caption = 'Item Bloco de Espuma 2:'
@@ -1144,7 +1143,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtDescBlcEspuma2: TDBText
               Left = 453
-              Top = -157
+              Top = 91
               Width = 150
               Height = 21
               Color = 14342874
@@ -1155,7 +1154,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label18: TLabel
               Left = 5
-              Top = -120
+              Top = 128
               Width = 72
               Height = 26
               Caption = 'Item Bloco de Espuma 3:'
@@ -1163,7 +1162,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtDescBlcEspuma3: TDBText
               Left = 143
-              Top = -117
+              Top = 131
               Width = 150
               Height = 21
               Color = 14342874
@@ -1174,7 +1173,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label19: TLabel
               Left = 5
-              Top = -80
+              Top = 168
               Width = 115
               Height = 26
               Caption = 'Item Bloco de Espuma Revest. 1:'
@@ -1182,7 +1181,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtDescBlcEspumaRevest1: TDBText
               Left = 189
-              Top = -75
+              Top = 173
               Width = 104
               Height = 21
               Color = 14342874
@@ -1193,7 +1192,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label20: TLabel
               Left = 315
-              Top = -80
+              Top = 168
               Width = 115
               Height = 26
               Caption = 'Item Bloco de Espuma Revest. 2:'
@@ -1201,7 +1200,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtDescBlcEspumaRevest2: TDBText
               Left = 499
-              Top = -75
+              Top = 173
               Width = 104
               Height = 21
               Color = 14342874
@@ -1212,7 +1211,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label21: TLabel
               Left = 316
-              Top = 148
+              Top = 396
               Width = 270
               Height = 16
               Alignment = taCenter
@@ -1224,7 +1223,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object Label22: TLabel
               Left = 3
-              Top = 262
+              Top = 510
               Width = 285
               Height = 18
               Alignment = taCenter
@@ -1236,7 +1235,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtEtqtec: TJvDBComboEdit
               Left = 147
-              Top = -16
+              Top = 232
               Width = 89
               Height = 21
               ClickKey = 114
@@ -1275,7 +1274,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chk_ImpSelo: TDBCheckBox
               Left = 62
-              Top = 14
+              Top = 262
               Width = 100
               Height = 17
               Alignment = taLeftJustify
@@ -1287,7 +1286,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chk_ImpEtqPers: TDBCheckBox
               Left = 27
-              Top = 68
+              Top = 316
               Width = 136
               Height = 17
               Alignment = taLeftJustify
@@ -1299,7 +1298,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chbUtilizaLote: TDBCheckBox
               Left = 480
-              Top = 14
+              Top = 262
               Width = 81
               Height = 17
               Alignment = taLeftJustify
@@ -1310,7 +1309,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtSeloEtq: TDBEdit
               Left = 146
-              Top = 40
+              Top = 288
               Width = 199
               Height = 21
               Color = clWhite
@@ -1320,7 +1319,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtNomeEtqPers: TDBEdit
               Left = 363
-              Top = 63
+              Top = 311
               Width = 198
               Height = 21
               Color = clWhite
@@ -1330,7 +1329,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object DBCheckBox1: TDBCheckBox
               Left = 4
-              Top = 113
+              Top = 361
               Width = 205
               Height = 17
               Caption = 'Informar qtde na conf. da carga :'
@@ -1341,7 +1340,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object DBCheckBox3: TDBCheckBox
               Left = 4
-              Top = 178
+              Top = 426
               Width = 298
               Height = 17
               Caption = 'Descartar verifica'#231#227'o de saldo das etiquetas por O.P'
@@ -1352,7 +1351,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object cbBlocoEspuma: TDBCheckBox
               Left = 4
-              Top = -221
+              Top = 27
               Width = 232
               Height = 17
               Caption = 'Este grupo '#233' do tipo bloco de espuma'
@@ -1363,7 +1362,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object cbCalcBloco: TDBCheckBox
               Left = 4
-              Top = -196
+              Top = 52
               Width = 213
               Height = 26
               Caption = 'Calcula qtde de bloco de espuma para gerar  a O.P para produzir'
@@ -1375,7 +1374,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtBlcEspuma1: TJvDBComboEdit
               Left = 79
-              Top = -155
+              Top = 93
               Width = 63
               Height = 21
               ClickKey = 114
@@ -1416,7 +1415,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtBlcEspuma2: TJvDBComboEdit
               Left = 390
-              Top = -157
+              Top = 91
               Width = 63
               Height = 21
               ClickKey = 114
@@ -1457,7 +1456,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtBlcEspuma3: TJvDBComboEdit
               Left = 79
-              Top = -117
+              Top = 131
               Width = 63
               Height = 21
               ClickKey = 114
@@ -1498,7 +1497,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtBlcEspumaRevest1: TJvDBComboEdit
               Left = 125
-              Top = -75
+              Top = 173
               Width = 63
               Height = 21
               ClickKey = 114
@@ -1539,7 +1538,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object txtBlcEspumaRevest2: TJvDBComboEdit
               Left = 435
-              Top = -75
+              Top = 173
               Width = 63
               Height = 21
               ClickKey = 114
@@ -1580,7 +1579,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkRastEspumacao: TDBCheckBox
               Left = 317
-              Top = 174
+              Top = 422
               Width = 84
               Height = 17
               Caption = 'Espuma'#231#227'o'
@@ -1590,7 +1589,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkRastLaminacao: TDBCheckBox
               Left = 429
-              Top = 174
+              Top = 422
               Width = 84
               Height = 17
               Caption = 'Lamina'#231#227'o'
@@ -1600,7 +1599,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkBordadeira: TDBCheckBox
               Left = 519
-              Top = 174
+              Top = 422
               Width = 84
               Height = 17
               Caption = 'Bordadeira'
@@ -1610,7 +1609,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkCorteCostura: TDBCheckBox
               Left = 317
-              Top = 197
+              Top = 445
               Width = 106
               Height = 17
               Caption = 'Corte e Costura'
@@ -1620,7 +1619,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkColagemTampAlfin: TDBCheckBox
               Left = 429
-              Top = 197
+              Top = 445
               Width = 178
               Height = 17
               Caption = 'Colagem Tampo - Afinetagem'
@@ -1630,7 +1629,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkColagemMolas: TDBCheckBox
               Left = 317
-              Top = 221
+              Top = 469
               Width = 178
               Height = 17
               Caption = 'Colagem Tampo - Afinetagem'
@@ -1640,7 +1639,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkMontagemCxaBox: TDBCheckBox
               Left = 317
-              Top = 244
+              Top = 492
               Width = 178
               Height = 17
               Caption = 'Montagem de Caixa Box'
@@ -1650,7 +1649,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object chkExibeImprDaOP: TDBCheckBox
               Left = 317
-              Top = 124
+              Top = 372
               Width = 178
               Height = 17
               Caption = 'Exibe na impress'#227'o da O.P'
@@ -1660,7 +1659,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
             object gbItens: TGroupBox
               Left = 3
-              Top = 277
+              Top = 525
               Width = 285
               Height = 150
               Caption = ' '
@@ -1798,6 +1797,80 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
             end
           end
         end
+        object TabSheet1: TTabSheet
+          Caption = 'Dados para IBS/CBS/IS'
+          ImageIndex = 2
+          ExplicitLeft = 0
+          object ScrollBox2: TScrollBox
+            Left = 0
+            Top = 0
+            Width = 654
+            Height = 366
+            Align = alClient
+            BorderStyle = bsNone
+            TabOrder = 0
+            object Label14: TLabel
+              Left = 12
+              Top = 23
+              Width = 177
+              Height = 26
+              Caption = 'C'#243'digo de Classifica'#231#227'o Tribut'#225'ria :'
+              WordWrap = True
+            end
+            object txtDescClassTribut: TDBText
+              Left = 149
+              Top = 39
+              Width = 316
+              Height = 21
+              Color = 14342874
+              DataField = 'int_nomeite_espuma'
+              DataSource = dso
+              ParentColor = False
+              Transparent = False
+            end
+            object txtCodClassTrib: TJvDBComboEdit
+              Left = 12
+              Top = 39
+              Width = 134
+              Height = 21
+              ClickKey = 114
+              Color = 14342874
+              DataField = 'cclasstrib'
+              DataSource = dso
+              Enabled = False
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                1800000000000003000000000000000000000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0066B6DB903AFFFFFFFFFFFFFFFFFFFF
+                FFFFDBFFFF003A900000000000003A0000FFDB90FFFFFFFFFFFFFFFFFFFFFFFF
+                0066B6DB903AFFFFFFFFFFFFFFFFFFFFFFFF90DBFFB6663AFFFFFFFFFFFF3A90
+                DB660000FFFFB6FFFFFFFFFFFFFFFFFF0066B6DB903AFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFF90DBFF3A003AFFDB90FFFFFFFFFFFFFFFFFF
+                0066B6DB903AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3A90
+                DB660000FFFFB6FFFFFFFFFFFFFFFFFF0066B6000000000000000000660000FF
+                FFB6FFFFFF66B6FF000000000000B66600FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                0066B6DB903AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB6FFFF0000
+                66DB903AFFFFFFFFFFFFFFFFFFFFFFFF0066B6DB903AFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFF3A90DB903A00FFFFDBFFFFFFFFFFFFFFFFFF
+                0066B6DB903AFFFFFFFFFFFFFFFFFFFFFFFFB6FFFF903A66FFFFDBFFFFFF0066
+                B6B66600FFFFFFFFFFFFFFFFFFFFFFFF0066B6000000000000000000000000FF
+                B666FFFFFF3A90DB000000000000660000FFFFB6FFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+              TabOrder = 0
+              OnButtonClick = txtBlcEspuma1ButtonClick
+              OnExit = txtBlcEspuma1Exit
+            end
+          end
+        end
       end
     end
   end
@@ -1813,7 +1886,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited imgBotoesAtivo: TImageList
     Bitmap = {
-      494C01010800A800F80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800FC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2713,7 +2786,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C0101080030014C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108003001500218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3613,7 +3686,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200000148020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101120000014C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -4129,7 +4202,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00F00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00F40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5029,7 +5102,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C01010600000140020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000144020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -5241,7 +5314,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00000218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00040218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6141,7 +6214,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C01010600000150020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000154020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -6353,7 +6426,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00D80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00DC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7253,7 +7326,7 @@ inherited CAD_FM_C_GRU: TCAD_FM_C_GRU
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C01010600000110020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000114020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
