@@ -4485,10 +4485,10 @@ begin
 
             CdsNfeIte.FieldByName('ibscbs_p_ibsuf').AsCurrency  := 0.1;
             CdsNfeIte.FieldByName('ibscbs_v_ibsuf').AsCurrency  :=
-                      (
+                      roundTo((
                           CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency *
                         ( CdsNfeIte.FieldByName('ibscbs_p_ibsuf').AsCurrency / 100)
-                      ) -
+                      ),-2) -
                           CdsNfeIte.FieldByName('ibscbs_ibsuf_v_dif').AsCurrency -
                           CdsNfeIte.FieldByName('ibscbs_ibsuf_v_devtrib').AsCurrency;
 
@@ -4513,10 +4513,10 @@ begin
 
              // Pág. 38, da Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
              CdsNfeIte.FieldByName('ibscbs_v_cbs').AsCurrency  :=
-               (
+                     roundTo( (
                           CdsNfeIte.FieldByName('ibscbs_v_bc').AsCurrency *
                         ( CdsNfeIte.FieldByName('ibscbs_p_cbs').AsCurrency / 100)
-                      ) -
+                      ),-2) -
                           CdsNfeIte.FieldByName('ibscbs_v_cbs_dif').AsCurrency -
                           CdsNfeIte.FieldByName('ibscbs_cbs_v_devtrib').AsCurrency;
           end;
