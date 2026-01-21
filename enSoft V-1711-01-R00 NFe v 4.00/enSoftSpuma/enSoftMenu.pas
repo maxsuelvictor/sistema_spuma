@@ -396,6 +396,7 @@ type
     FAT_MN_M_GAM: TdxBarButton;
     CAD_MN_C_LSE: TdxBarButton;
     FAT_MN_R_RFV: TdxBarButton;
+    CAD_MN_C_IBC: TdxBarButton;
     procedure FormShow(Sender: TObject);
     procedure CAD_MN_C_CCUClick(Sender: TObject);
     procedure CAD_MN_C_CNEClick(Sender: TObject);
@@ -650,6 +651,7 @@ type
     procedure FAT_MN_M_GAMClick(Sender: TObject);
     procedure CAD_MN_C_LSEClick(Sender: TObject);
     procedure FAT_MN_R_RFVClick(Sender: TObject);
+    procedure CAD_MN_C_IBCClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -715,7 +717,7 @@ uses uProxy, uDmGeral, CAD_UN_C_CNE, CMP_UN_M_SOL, CMP_UN_M_PED, CAD_UN_C_CCU,
   FIN_UN_R_LMF, PCP_UN_M_ORS_CAN, CAD_UN_C_DTS, CAD_UN_C_AUS, EST_UN_R_MAL, FAT_UN_R_PED,
   CSU_UN_M_AUD, PCP_UN_R_EPP, uChat, FIN_UN_M_DCT, PCP_UN_M_CPA, PCP_UN_R_POP,
   FAT_UN_M_CHM, CSU_UN_M_ETQ, FIN_UN_M_REC_RET, CAD_UN_C_HFG, CSU_UN_C_ILC,
-  FAT_UN_M_GAM, uLibReimpSgqEtq, FAT_UN_R_RFV;
+  FAT_UN_M_GAM, uLibReimpSgqEtq, FAT_UN_R_RFV, CAD_UN_C_IBC;
 
 {$R *.dfm}
 
@@ -1173,6 +1175,11 @@ end;
 procedure TfrmSoftMenu.CAD_MN_C_CINClick(Sender: TObject);
 begin
  OpenForm(TCAD_FM_C_CIN, CAD_FM_C_CIN);
+end;
+
+procedure TfrmSoftMenu.CAD_MN_C_IBCClick(Sender: TObject);
+begin
+  OpenForm(TCAD_FM_C_IBC, CAD_FM_C_IBC);
 end;
 
 procedure TfrmSoftMenu.CAD_MN_C_INFClick(Sender: TObject);

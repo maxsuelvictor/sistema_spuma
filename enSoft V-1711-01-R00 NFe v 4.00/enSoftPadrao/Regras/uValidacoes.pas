@@ -59,6 +59,7 @@ procedure ValidaCAD_CD_C_ALM(DataSet: TDataSet);
 procedure ValidaCAD_CD_C_PRG(DataSet: TDataSet);
 procedure ValidaCAD_CD_C_MCT(DataSet: TDataSet);
 procedure ValidaCAD_CD_C_CCR(DataSet: TDataSet);
+procedure ValidaCAD_CD_C_IBC(DataSet: TDataSet);
 
 procedure ValidaOFI_CD_C_TIO(DataSet: TDataSet);
 
@@ -1332,6 +1333,26 @@ end;
 procedure ValidaCAD_CD_C_COR(DataSet: TDataSet);
 begin
 //Falta
+end;
+
+
+procedure ValidaCAD_CD_C_IBC(DataSet: TDataSet);
+begin
+
+  xMensErro:='';
+
+  if (DataSet.FieldByName('id_cst_ibs_cbs').AsString='') then
+     begin
+       xMensErro:= xMensErro + '.Código deve ser informado'+ #13;
+     end;
+
+  if (DataSet.FieldByName('descricao').AsString='') then
+     begin
+       xMensErro:= xMensErro + '.Descrição deve ser informada'+ #13;
+     end;
+
+  if xMensErro<>'' then
+     raise Exception.Create(enConstantes.MensErro + #13 + xMensErro);
 end;
 
 procedure ValidaCAD_CD_C_TAM(DataSet: TDataSet);

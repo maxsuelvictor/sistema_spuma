@@ -1767,6 +1767,10 @@
             <Form>FAT_FM_M_PED_IPE</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\CAD_UN_C_IBC.pas">
+            <Form>CAD_FM_C_IBC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -195,3 +195,10 @@ ADD COLUMN "usa_reforma_tributaria" bool;
 
 COMMENT ON COLUMN "public"."cad_tb_c_par_ctr"."usa_reforma_tributaria" IS 'Se for TRUE irá aplicar as informações ref. a reforma tributaria para IBS/CBS/IS.';
 
+
+/***** 20/01/2026 ******/
+
+ALTER TABLE "public"."cad_tb_c_ibc"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
