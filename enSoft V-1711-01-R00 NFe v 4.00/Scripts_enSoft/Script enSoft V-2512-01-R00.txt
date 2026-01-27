@@ -202,3 +202,43 @@ ALTER TABLE "public"."cad_tb_c_ibc"
 ADD COLUMN "cod_lme" varchar(20),
 ADD COLUMN "rev_lme" varchar(5);
 
+
+/***** 22/01/2026 ******/
+
+ALTER TABLE "public"."cad_tb_c_ctr"
+ADD COLUMN "cod_lme" varchar(20),
+ADD COLUMN "rev_lme" varchar(5);
+
+
+/***** 23/01/2026 *****/
+
+ALTER TABLE "public"."cad_tb_c_ctr"
+ALTER COLUMN "id_cst_ibs_cbs" SET DEFAULT '',
+ADD COLUMN "idx_tipo_aliquota" int2;
+
+COMMENT ON COLUMN "public"."cad_tb_c_ctr"."idx_tipo_aliquota" IS '0 - Padrão
+1 - Fixa
+2 - Sem alíquota
+3 - Uniforme setorial
+4 - Uniforme nacional (referência)
+';
+
+
+
+/**** 26/01/2026 ****/
+
+
+update cad_tb_c_ctr 
+  set idx_tipo_aliquota = ttt.new_idx_tipo_aliquota
+from (
+select tipo_aliquota,
+    case tipo_aliquota 
+       when 'Padrão' then 0 
+       when 'Fixa' then 1 
+       when 'Sem alíquota' then 2 
+			 when 'Uniforme setorial' then 3
+       when 'Uniforme nacional (referência)' then 4
+    end as new_idx_tipo_aliquota          
+from cad_tb_c_ctr ) ttt
+where cad_tb_c_ctr.tipo_aliquota = ttt.tipo_aliquota
+

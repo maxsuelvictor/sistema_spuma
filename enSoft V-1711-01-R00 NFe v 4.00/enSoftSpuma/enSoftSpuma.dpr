@@ -540,7 +540,8 @@ uses
   uChat in '..\enSoftPadrao\Padrao\uChat.pas' {frmChat},
   FAT_UN_R_RFV in '..\enSoftPadrao\Relatorios\Movimentações\FAT_UN_R_RFV.pas' {FAT_FM_R_RFV},
   FAT_UN_M_PED_IPE in '..\enSoftPadrao\Movimentacoes\Comercial\FAT_UN_M_PED_IPE.pas' {FAT_FM_M_PED_IPE},
-  CAD_UN_C_IBC in '..\enSoftPadrao\Cadastros\CAD_UN_C_IBC.pas' {CAD_FM_C_IBC};
+  CAD_UN_C_IBC in '..\enSoftPadrao\Cadastros\CAD_UN_C_IBC.pas' {CAD_FM_C_IBC},
+  CAD_UN_C_CTR in '..\enSoftPadrao\Cadastros\CAD_UN_C_CTR.pas' {CAD_FM_C_CTR};
 
 {$R *.res}
 

@@ -115,7 +115,6 @@ end;
 
 procedure TCAD_FM_C_IBC.btnFiltroClick(Sender: TObject);
 begin
-  inherited;
   Screen.Cursor := crHourGlass;
   try
     inherited;
