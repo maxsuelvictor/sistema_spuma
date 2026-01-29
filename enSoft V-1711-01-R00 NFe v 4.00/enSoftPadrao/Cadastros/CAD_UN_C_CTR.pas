@@ -60,7 +60,7 @@ type
     Label53: TLabel;
     txtCodRev: TDBEdit;
     Label2: TLabel;
-    PageControl1: TPageControl;
+    pgInformacoes: TPageControl;
     tbDados: TTabSheet;
     tbComplemento: TTabSheet;
     lblCodigo: TLabel;
@@ -70,12 +70,9 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    txtNomeCClassTrib: TDBEdit;
     txtCodIBS_CBS: TJvDBComboEdit;
-    txtDescricaoIBS_CBS: TDBEdit;
     txtDescricaoCClassTrib: TDBMemo;
     txtLcRedacao: TDBMemo;
-    txtLc214_25: TDBEdit;
     CAD_CD_C_CTRidx_tipo_aliquota: TSmallintField;
     ind_gTribRegular: TDBCheckBox;
     txtTipoAliquotaa: TwwDBComboBox;
@@ -108,7 +105,10 @@ type
     DBCheckBox20: TDBCheckBox;
     DBCheckBox21: TDBCheckBox;
     Label11: TLabel;
-    txtCClassTrib: TDBEdit;
+    txtCClassTrib: TDBMemo;
+    txtDescricaoIBS_CBS: TDBMemo;
+    txtNomeCClassTrib: TDBMemo;
+    txtLc214_25: TDBMemo;
     procedure cbbPesquisaChange(Sender: TObject);
     procedure btnFiltroClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -119,6 +119,7 @@ type
     procedure acGravarExecute(Sender: TObject);
     procedure acExcluirExecute(Sender: TObject);
     procedure CAD_CD_C_CTRNewRecord(DataSet: TDataSet);
+    procedure CAD_CD_C_CTRBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -132,12 +133,13 @@ implementation
 
 {$R *.dfm}
 
-uses uDmGeral;
+uses uDmGeral, uProxy,uValidacoes;
 
 procedure TCAD_FM_C_CTR.acAdicionaExecute(Sender: TObject);
 begin
   inherited;
   Botoes(dso.DataSet, TAction(Sender).Tag,CAD_CD_C_CTR);
+  pgInformacoes.ActivePage := tbDados;
   txtCClassTrib.SetFocus;
 end;
 
@@ -145,6 +147,7 @@ procedure TCAD_FM_C_CTR.acAlterarExecute(Sender: TObject);
 begin
   inherited;
   Botoes(dso.DataSet, TAction(Sender).Tag,CAD_CD_C_CTR);
+  pgInformacoes.ActivePage := tbDados;
   txtCClassTrib.SetFocus;
 end;
 
@@ -153,6 +156,7 @@ begin
   if Botoes(dso.DataSet, TAction(Sender).Tag,CAD_CD_C_CTR) then
      begin
        inherited;
+       pgInformacoes.TabIndex := 0;
        dbGrid.SetFocus;
      end
 
@@ -168,7 +172,8 @@ procedure TCAD_FM_C_CTR.acGravarExecute(Sender: TObject);
 begin
   if MessageDlg('Confirma a Gravação?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
      begin
-       DmGeral.Grava(CAD_CD_C_ctr);
+       DmGeral.Grava(CAD_CD_C_CTR);
+       pgInformacoes.TabIndex := 0;
        inherited;
      end
   else
@@ -198,9 +203,27 @@ begin
   end;
 end;
 
-procedure TCAD_FM_C_CTR.CAD_CD_C_CTRNewRecord(DataSet: TDataSet);
+procedure TCAD_FM_C_CTR.CAD_CD_C_CTRBeforePost(DataSet: TDataSet);
 begin
+  ValidaCAD_CD_C_CTR(DataSet);
   inherited;
+end;
+
+procedure TCAD_FM_C_CTR.CAD_CD_C_CTRNewRecord(DataSet: TDataSet);
+var
+  SMPrincipal : TSMClient;
+begin
+  //Busca sequencia no servidor
+  SMPrincipal := TSMClient.Create(dmGeral.Conexao.DBXConnection);
+  try
+    CAD_CD_C_CTR.FieldByName('id_ctr').AsInteger :=
+         SMPrincipal.enValorChave('CAD_TB_C_CTR');
+  finally
+    FreeAndNil(SMPrincipal);
+  end;
+
+  dmGeral.BusCodigoRevListMestre(true,false,'CAD_FM_C_CTR',xCodLme,xRevLme,CAD_CD_C_CTR);
+
   {
   "id_ctr" int4 DEFAULT nextval('cad_tb_c_ctr_id_ctr_seq'::regclass) NOT NULL,
   "id_cst_ibs_cbs" varchar(10) COLLATE "default" DEFAULT ''::character varying NOT NULL,
@@ -210,7 +233,6 @@ begin
   "descricao_cclasstrib" text COLLATE "default",
   "lc_redacao" text COLLATE "default",
   "lc_214_25" text COLLATE "default",}
-  CAD_CD_C_CTR.FieldByName('ind_gibscbs').AsInteger         := 0;
   CAD_CD_C_CTR.FieldByName('tipo_aliquota').AsString        := '';
   CAD_CD_C_CTR.FieldByName('per_red_ibs').AsInteger         := 0;
   CAD_CD_C_CTR.FieldByName('per_red_cbs').AsCurrency        := 0;

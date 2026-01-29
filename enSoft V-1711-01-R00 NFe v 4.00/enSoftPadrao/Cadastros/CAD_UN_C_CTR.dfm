@@ -48,6 +48,12 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
         ExplicitHeight = 410
       end
     end
+    inherited pnlBotoes: TPanel
+      inherited btnAlterar: TcxButton
+        Top = 1
+        ExplicitTop = 1
+      end
+    end
   end
   inherited pnlDireita: TPanel
     Height = 514
@@ -112,7 +118,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
         ReadOnly = True
         TabOrder = 1
       end
-      object PageControl1: TPageControl
+      object pgInformacoes: TPageControl
         Left = 21
         Top = 71
         Width = 636
@@ -137,12 +143,12 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
             ParentFont = False
           end
           object txtFornNome: TDBText
-            Left = 224
+            Left = 229
             Top = 20
             Width = 299
             Height = 21
             Color = 14342874
-            DataField = 'int_nomefor'
+            DataField = 'int_nome_ibs_cbs_ibc'
             DataSource = dso
             ParentColor = False
             Transparent = False
@@ -205,7 +211,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
           end
           object Label6: TLabel
             Left = 76
-            Top = 310
+            Top = 311
             Width = 53
             Height = 13
             Caption = 'Lc 214/25:'
@@ -230,16 +236,6 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-          end
-          object txtNomeCClassTrib: TDBEdit
-            Left = 133
-            Top = 103
-            Width = 390
-            Height = 21
-            Color = clWhite
-            DataField = 'nome_cclasstrib'
-            DataSource = dso
-            TabOrder = 3
           end
           object txtCodIBS_CBS: TJvDBComboEdit
             Left = 133
@@ -278,17 +274,6 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
               FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
             TabOrder = 0
           end
-          object txtDescricaoIBS_CBS: TDBEdit
-            Left = 133
-            Top = 76
-            Width = 390
-            Height = 21
-            Color = clWhite
-            DataField = 'descricao_cst_ibs_cbs'
-            DataSource = dso
-            MaxLength = 3
-            TabOrder = 2
-          end
           object txtDescricaoCClassTrib: TDBMemo
             Left = 133
             Top = 130
@@ -307,26 +292,41 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
             DataSource = dso
             TabOrder = 5
           end
-          object txtLc214_25: TDBEdit
+          object txtCClassTrib: TDBMemo
+            Left = 133
+            Top = 47
+            Width = 390
+            Height = 23
+            DataField = 'cclasstrib'
+            DataSource = dso
+            TabOrder = 1
+          end
+          object txtDescricaoIBS_CBS: TDBMemo
+            Left = 133
+            Top = 75
+            Width = 390
+            Height = 22
+            DataField = 'descricao_cst_ibs_cbs'
+            DataSource = dso
+            TabOrder = 2
+          end
+          object txtNomeCClassTrib: TDBMemo
+            Left = 133
+            Top = 102
+            Width = 390
+            Height = 22
+            DataField = 'nome_cclasstrib'
+            DataSource = dso
+            TabOrder = 3
+          end
+          object txtLc214_25: TDBMemo
             Left = 133
             Top = 306
             Width = 390
-            Height = 21
-            Color = clWhite
+            Height = 22
             DataField = 'lc_214_25'
             DataSource = dso
             TabOrder = 6
-          end
-          object txtCClassTrib: TDBEdit
-            Left = 133
-            Top = 48
-            Width = 390
-            Height = 21
-            Color = clWhite
-            DataField = 'cclasstrib'
-            DataSource = dso
-            MaxLength = 3
-            TabOrder = 1
           end
         end
         object tbComplemento: TTabSheet
@@ -708,7 +708,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited imgBotoesAtivo: TImageList
     Bitmap = {
-      494C01010800A800680118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A8006C0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1608,7 +1608,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C010108003001BC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108003001C00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2508,7 +2508,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C010112000001B8010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010112000001BC010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3024,7 +3024,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00600118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00640118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3924,7 +3924,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C010106000001B0010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106000001B4010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4136,7 +4136,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00700118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00740118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5036,7 +5036,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C010106000001C0010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106000001C4010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5248,7 +5248,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00980118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC009C0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6148,7 +6148,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C010106000001D0010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106000001D4010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -6363,6 +6363,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
     Params = <>
     ProviderName = 'CAD_DP_C_CTR'
     RemoteServer = dmGeral.pcConecao
+    BeforePost = CAD_CD_C_CTRBeforePost
     OnNewRecord = CAD_CD_C_CTRNewRecord
     Left = 1009
     Top = 464
@@ -6507,6 +6508,7 @@ inherited CAD_FM_C_CTR: TCAD_FM_C_CTR
     end
     object CAD_CD_C_CTRint_nome_ibs_cbs_ibc: TWideStringField
       FieldName = 'int_nome_ibs_cbs_ibc'
+      ProviderFlags = []
       Size = 255
     end
     object CAD_CD_C_CTRidx_tipo_aliquota: TSmallintField

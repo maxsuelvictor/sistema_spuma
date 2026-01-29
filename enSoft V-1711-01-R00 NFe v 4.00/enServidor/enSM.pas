@@ -11722,6 +11722,49 @@ type
     BUS_SQ_C_PAR_CTRusa_reforma_tributaria: TBooleanField;
     FAT_SQ_M_NFE_ITEtpcredpresibszfm: TIntegerField;
     FAT_SQ_M_NFE_ITEindbemmovelusado: TIntegerField;
+    CAD_SQ_C_CTRid_ctr: TIntegerField;
+    CAD_SQ_C_CTRid_cst_ibs_cbs: TWideStringField;
+    CAD_SQ_C_CTRdescricao_cst_ibs_cbs: TWideMemoField;
+    CAD_SQ_C_CTRcclasstrib: TWideStringField;
+    CAD_SQ_C_CTRnome_cclasstrib: TWideMemoField;
+    CAD_SQ_C_CTRdescricao_cclasstrib: TWideMemoField;
+    CAD_SQ_C_CTRlc_redacao: TWideMemoField;
+    CAD_SQ_C_CTRlc_214_25: TWideMemoField;
+    CAD_SQ_C_CTRtipo_aliquota: TWideStringField;
+    CAD_SQ_C_CTRper_red_ibs: TFMTBCDField;
+    CAD_SQ_C_CTRper_red_cbs: TFMTBCDField;
+    CAD_SQ_C_CTRind_redutor_bc: TWideStringField;
+    CAD_SQ_C_CTRind_gtrib_regular: TSmallintField;
+    CAD_SQ_C_CTRind_gcred_pres_oper: TSmallintField;
+    CAD_SQ_C_CTRind_gmono_padrao: TSmallintField;
+    CAD_SQ_C_CTRind_gmono_reten: TSmallintField;
+    CAD_SQ_C_CTRind_gmono_ret: TSmallintField;
+    CAD_SQ_C_CTRind_gmono_dif: TSmallintField;
+    CAD_SQ_C_CTRind_gestorno_cred: TSmallintField;
+    CAD_SQ_C_CTRdta_ini_vig: TDateField;
+    CAD_SQ_C_CTRdta_fim_vig: TDateField;
+    CAD_SQ_C_CTRdta_atualizacao: TDateField;
+    CAD_SQ_C_CTRind_nfe_abi: TSmallintField;
+    CAD_SQ_C_CTRind_nfe: TSmallintField;
+    CAD_SQ_C_CTRind_nfce: TSmallintField;
+    CAD_SQ_C_CTRind_cte: TSmallintField;
+    CAD_SQ_C_CTRind_cte_os: TSmallintField;
+    CAD_SQ_C_CTRind_bpe: TSmallintField;
+    CAD_SQ_C_CTRind_bpe_ta: TSmallintField;
+    CAD_SQ_C_CTRind_bpe_tm: TSmallintField;
+    CAD_SQ_C_CTRind_nf3e: TSmallintField;
+    CAD_SQ_C_CTRind_nfse: TSmallintField;
+    CAD_SQ_C_CTRind_nfse_via: TSmallintField;
+    CAD_SQ_C_CTRind_nfcom: TSmallintField;
+    CAD_SQ_C_CTRind_nfag: TSmallintField;
+    CAD_SQ_C_CTRind_nfgas: TSmallintField;
+    CAD_SQ_C_CTRind_dere: TSmallintField;
+    CAD_SQ_C_CTRanexo: TWideMemoField;
+    CAD_SQ_C_CTRlink: TWideMemoField;
+    CAD_SQ_C_CTRcod_lme: TWideStringField;
+    CAD_SQ_C_CTRrev_lme: TWideStringField;
+    CAD_SQ_C_CTRidx_tipo_aliquota: TSmallintField;
+    CAD_SQ_C_CTRint_nome_ibs_cbs_ibc: TWideStringField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -29694,6 +29737,8 @@ begin
         CAD_SQ_C_CTR.CommandText := enSqlCtr +
              Format('WHERE upper(nome_cclasstrib) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
       end;
+
+   CAD_SQ_C_CTR.CommandText := CAD_SQ_C_CTR.CommandText + ' order by id_cst_ibs_cbs,cclasstrib ';
 
    Result := CAD_DP_C_CTR.Data;
 

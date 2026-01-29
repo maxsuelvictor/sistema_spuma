@@ -60,6 +60,7 @@ procedure ValidaCAD_CD_C_PRG(DataSet: TDataSet);
 procedure ValidaCAD_CD_C_MCT(DataSet: TDataSet);
 procedure ValidaCAD_CD_C_CCR(DataSet: TDataSet);
 procedure ValidaCAD_CD_C_IBC(DataSet: TDataSet);
+procedure ValidaCAD_CD_C_CTR(DataSet: TDataSet);
 
 procedure ValidaOFI_CD_C_TIO(DataSet: TDataSet);
 
@@ -1343,7 +1344,7 @@ begin
 
   if (DataSet.FieldByName('id_cst_ibs_cbs').AsString='') then
      begin
-       xMensErro:= xMensErro + '.Código deve ser informado'+ #13;
+       xMensErro:= xMensErro + '.Código IBS/CBS deve ser informado'+ #13;
      end;
 
   if (DataSet.FieldByName('descricao').AsString='') then
@@ -1353,6 +1354,35 @@ begin
 
   if xMensErro<>'' then
      raise Exception.Create(enConstantes.MensErro + #13 + xMensErro);
+end;
+
+
+procedure ValidaCAD_CD_C_CTR(DataSet: TDataSet);
+begin
+
+  if (DataSet.FieldByName('id_cst_ibs_cbs').AsString='') then
+      begin
+        xMensErro:= xMensErro + '.Código IBS/CBS deve ser informado'+ #13;
+      end;
+
+  if (DataSet.FieldByName('cclasstrib').AsString='') then
+      begin
+        xMensErro:= xMensErro + '.CClasstrib deve ser informado'+ #13;
+      end;
+
+  if (DataSet.FieldByName('descricao_cst_ibs_cbs').AsString='') then
+      begin
+        xMensErro:= xMensErro + '.Descrição do IBS/CBS deve ser informado'+ #13;
+      end;
+
+  if (DataSet.FieldByName('nome_cclasstrib').AsString='') then
+      begin
+        xMensErro:= xMensErro + '.Nome CClasstrib deve ser informado'+ #13;
+      end;
+
+  if xMensErro<>'' then
+      raise Exception.Create(enConstantes.MensErro + #13 + xMensErro);
+
 end;
 
 procedure ValidaCAD_CD_C_TAM(DataSet: TDataSet);

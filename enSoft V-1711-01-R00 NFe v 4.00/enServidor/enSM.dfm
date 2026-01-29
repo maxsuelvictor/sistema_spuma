@@ -64499,6 +64499,160 @@
     SQLConnection = Conexao
     Left = 304
     Top = 4760
+    object CAD_SQ_C_CTRid_ctr: TIntegerField
+      FieldName = 'id_ctr'
+    end
+    object CAD_SQ_C_CTRid_cst_ibs_cbs: TWideStringField
+      FieldName = 'id_cst_ibs_cbs'
+      Size = 10
+    end
+    object CAD_SQ_C_CTRdescricao_cst_ibs_cbs: TWideMemoField
+      FieldName = 'descricao_cst_ibs_cbs'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object CAD_SQ_C_CTRcclasstrib: TWideStringField
+      FieldName = 'cclasstrib'
+      Size = 10
+    end
+    object CAD_SQ_C_CTRnome_cclasstrib: TWideMemoField
+      FieldName = 'nome_cclasstrib'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object CAD_SQ_C_CTRdescricao_cclasstrib: TWideMemoField
+      FieldName = 'descricao_cclasstrib'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object CAD_SQ_C_CTRlc_redacao: TWideMemoField
+      FieldName = 'lc_redacao'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object CAD_SQ_C_CTRlc_214_25: TWideMemoField
+      FieldName = 'lc_214_25'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object CAD_SQ_C_CTRtipo_aliquota: TWideStringField
+      FieldName = 'tipo_aliquota'
+      Size = 50
+    end
+    object CAD_SQ_C_CTRper_red_ibs: TFMTBCDField
+      FieldName = 'per_red_ibs'
+      Precision = 5
+      Size = 2
+    end
+    object CAD_SQ_C_CTRper_red_cbs: TFMTBCDField
+      FieldName = 'per_red_cbs'
+      Precision = 5
+      Size = 2
+    end
+    object CAD_SQ_C_CTRind_redutor_bc: TWideStringField
+      FieldName = 'ind_redutor_bc'
+      Size = 10
+    end
+    object CAD_SQ_C_CTRind_gtrib_regular: TSmallintField
+      FieldName = 'ind_gtrib_regular'
+    end
+    object CAD_SQ_C_CTRind_gcred_pres_oper: TSmallintField
+      FieldName = 'ind_gcred_pres_oper'
+    end
+    object CAD_SQ_C_CTRind_gmono_padrao: TSmallintField
+      FieldName = 'ind_gmono_padrao'
+    end
+    object CAD_SQ_C_CTRind_gmono_reten: TSmallintField
+      FieldName = 'ind_gmono_reten'
+    end
+    object CAD_SQ_C_CTRind_gmono_ret: TSmallintField
+      FieldName = 'ind_gmono_ret'
+    end
+    object CAD_SQ_C_CTRind_gmono_dif: TSmallintField
+      FieldName = 'ind_gmono_dif'
+    end
+    object CAD_SQ_C_CTRind_gestorno_cred: TSmallintField
+      FieldName = 'ind_gestorno_cred'
+    end
+    object CAD_SQ_C_CTRdta_ini_vig: TDateField
+      FieldName = 'dta_ini_vig'
+    end
+    object CAD_SQ_C_CTRdta_fim_vig: TDateField
+      FieldName = 'dta_fim_vig'
+    end
+    object CAD_SQ_C_CTRdta_atualizacao: TDateField
+      FieldName = 'dta_atualizacao'
+    end
+    object CAD_SQ_C_CTRind_nfe_abi: TSmallintField
+      FieldName = 'ind_nfe_abi'
+    end
+    object CAD_SQ_C_CTRind_nfe: TSmallintField
+      FieldName = 'ind_nfe'
+    end
+    object CAD_SQ_C_CTRind_nfce: TSmallintField
+      FieldName = 'ind_nfce'
+    end
+    object CAD_SQ_C_CTRind_cte: TSmallintField
+      FieldName = 'ind_cte'
+    end
+    object CAD_SQ_C_CTRind_cte_os: TSmallintField
+      FieldName = 'ind_cte_os'
+    end
+    object CAD_SQ_C_CTRind_bpe: TSmallintField
+      FieldName = 'ind_bpe'
+    end
+    object CAD_SQ_C_CTRind_bpe_ta: TSmallintField
+      FieldName = 'ind_bpe_ta'
+    end
+    object CAD_SQ_C_CTRind_bpe_tm: TSmallintField
+      FieldName = 'ind_bpe_tm'
+    end
+    object CAD_SQ_C_CTRind_nf3e: TSmallintField
+      FieldName = 'ind_nf3e'
+    end
+    object CAD_SQ_C_CTRind_nfse: TSmallintField
+      FieldName = 'ind_nfse'
+    end
+    object CAD_SQ_C_CTRind_nfse_via: TSmallintField
+      FieldName = 'ind_nfse_via'
+    end
+    object CAD_SQ_C_CTRind_nfcom: TSmallintField
+      FieldName = 'ind_nfcom'
+    end
+    object CAD_SQ_C_CTRind_nfag: TSmallintField
+      FieldName = 'ind_nfag'
+    end
+    object CAD_SQ_C_CTRind_nfgas: TSmallintField
+      FieldName = 'ind_nfgas'
+    end
+    object CAD_SQ_C_CTRind_dere: TSmallintField
+      FieldName = 'ind_dere'
+    end
+    object CAD_SQ_C_CTRanexo: TWideMemoField
+      FieldName = 'anexo'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object CAD_SQ_C_CTRlink: TWideMemoField
+      FieldName = 'link'
+      BlobType = ftWideMemo
+      Size = -1
+    end
+    object CAD_SQ_C_CTRcod_lme: TWideStringField
+      FieldName = 'cod_lme'
+    end
+    object CAD_SQ_C_CTRrev_lme: TWideStringField
+      FieldName = 'rev_lme'
+      Size = 5
+    end
+    object CAD_SQ_C_CTRidx_tipo_aliquota: TSmallintField
+      FieldName = 'idx_tipo_aliquota'
+    end
+    object CAD_SQ_C_CTRint_nome_ibs_cbs_ibc: TWideStringField
+      FieldName = 'int_nome_ibs_cbs_ibc'
+      ProviderFlags = []
+      Size = 255
+    end
   end
   object CAD_DP_C_CTR: TDataSetProvider
     DataSet = CAD_SQ_C_CTR

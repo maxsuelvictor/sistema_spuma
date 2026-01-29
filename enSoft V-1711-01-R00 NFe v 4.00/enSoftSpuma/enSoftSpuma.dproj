@@ -1775,6 +1775,10 @@
             <Form>CAD_FM_C_CTR</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\enSoftPadrao\Cadastros\Consultas\PSQ_UN_X_IBC.pas">
+            <Form>PSQ_FM_X_IBC</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
