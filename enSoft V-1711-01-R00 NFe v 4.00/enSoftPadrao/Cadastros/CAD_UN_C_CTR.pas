@@ -109,6 +109,7 @@ type
     txtDescricaoIBS_CBS: TDBMemo;
     txtNomeCClassTrib: TDBMemo;
     txtLc214_25: TDBMemo;
+    BUS_CD_C_IBC: TClientDataSet;
     procedure cbbPesquisaChange(Sender: TObject);
     procedure btnFiltroClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -120,6 +121,8 @@ type
     procedure acExcluirExecute(Sender: TObject);
     procedure CAD_CD_C_CTRNewRecord(DataSet: TDataSet);
     procedure CAD_CD_C_CTRBeforePost(DataSet: TDataSet);
+    procedure txtCodIBS_CBSButtonClick(Sender: TObject);
+    procedure txtCodIBS_CBSExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -133,7 +136,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmGeral, uProxy,uValidacoes;
+uses uDmGeral, uProxy,uValidacoes, PSQ_UN_X_IBC;
 
 procedure TCAD_FM_C_CTR.acAdicionaExecute(Sender: TObject);
 begin
@@ -269,7 +272,7 @@ begin
   inherited;
   txtPesquisa.Text := '';
 
-  if cbbPesquisa.ItemIndex in [0,1] then
+  if cbbPesquisa.ItemIndex in [0,2,3] then
      begin
        txtPesquisa.NumbersOnly := True;
      end
@@ -293,6 +296,49 @@ begin
   CAD_CD_C_CTR.Data :=
      CAD_CD_C_CTR.DataRequest(VarArrayOf([0,'']));
   CAD_CD_C_CTR.Open;
+end;
+
+procedure TCAD_FM_C_CTR.txtCodIBS_CBSButtonClick(Sender: TObject);
+begin
+  inherited;
+   PSQ_FM_X_IBC := TPSQ_FM_X_IBC.Create(Self);
+   PSQ_FM_X_IBC.ShowModal;
+      if not PSQ_FM_X_IBC.BUS_CD_C_IBC.IsEmpty then
+         begin
+           dmGeral.FAT_CD_M_ORC.FieldByName('int_nome_ibs_cbs_ibc').Text :=
+                PSQ_FM_X_IBC.BUS_CD_C_IBC.FieldByName('descricao').AsString;
+           dmGeral.FAT_CD_M_ORC.FieldByName('id_cst_ibs_cbs').AsInteger :=
+                PSQ_FM_X_IBC.BUS_CD_C_IBC.FieldByName('int_nome_ibs_cbs_ibc').AsInteger;
+         end;
+   PSQ_FM_X_IBC.Free;
+end;
+
+procedure TCAD_FM_C_CTR.txtCodIBS_CBSExit(Sender: TObject);
+begin
+  inherited;
+
+  if btnCancelar.Focused or
+     btnGrava.Focused  then
+     begin
+       exit;
+     end;
+
+  CAD_CD_C_CTR.FieldByName('int_nome_ibs_cbs_ibc').Text := '';
+
+  BUS_CD_C_IBC.Close;
+  BUS_CD_C_IBC.Data :=
+      BUS_CD_C_IBC.DataRequest(VarArrayOf([0, txtCodIBS_CBS.Text]));
+
+  if not BUS_CD_C_IBC.IsEmpty then
+     begin
+       CAD_CD_C_CTR.FieldByName('int_nome_ibs_cbs_ibc').Text :=
+               BUS_CD_C_IBC.FieldByName('DESCRICAO').AsString;
+     end
+  else
+     begin
+       showMessage('Código de situação tributária IBS/CBS.');
+       CAD_CD_C_CTR.FieldByName('id_cst_ibs_cbs').Text := '';
+     end;
 end;
 
 end.

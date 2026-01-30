@@ -32,8 +32,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         end
       end
       inherited gbFiltros: TGroupBox
+        Left = 0
         Width = 575
         Height = 290
+        ExplicitLeft = 0
         ExplicitWidth = 575
         ExplicitHeight = 290
         object Label1: TLabel
@@ -217,12 +219,21 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
             '')
         end
         object chkSemColador: TCheckBox
-          Left = 368
-          Top = 52
+          Left = 352
+          Top = 37
           Width = 155
           Height = 41
           Caption = 'Exibir lan'#231'amentos do SEM OPERADOR (Cost., Mont., Colador)'
           TabOrder = 4
+          WordWrap = True
+        end
+        object chkClassificacaoOperadores: TCheckBox
+          Left = 352
+          Top = 79
+          Width = 204
+          Height = 28
+          Caption = 'Exibir o ranking dos operadores'
+          TabOrder = 5
           WordWrap = True
         end
       end
@@ -250,7 +261,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoes: TImageList
     Bitmap = {
-      494C0101030008005C0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800600116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       00170F0F0F8C2F2F2FF8323232FF323232FF323232FF323232FF323232FF3232
@@ -509,7 +520,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesAz: TImageList
     Bitmap = {
-      494C0101030008006C0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800700116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000100
       00172716028C7C4807F8844C07FF844C07FF844C07FF844C07FF844C07FF844C
@@ -768,7 +779,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesVe: TImageList
     Bitmap = {
-      494C010103000800700116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800740116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       0017001E018C005D04F8006204FF006204FF006204FF006204FF006204FF0062
@@ -1071,16 +1082,16 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     end
   end
   object pmSelAlm: TPopupMenu
-    Left = 872
-    Top = 334
+    Left = 816
+    Top = 414
     object btnSelAlm: TMenuItem
       Caption = 'Todos Almoxarifados'
       OnClick = btnSelAlmClick
     end
   end
   object pmSelEmp: TPopupMenu
-    Left = 880
-    Top = 454
+    Left = 816
+    Top = 350
     object btnSelEmp: TMenuItem
       Caption = 'Todas as Empresas'
       OnClick = btnSelEmpClick
@@ -4919,5 +4930,11 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         end
       end
     end
+  end
+  object PCP_CD_R_EPP_FUN_RNK: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 904
+    Top = 342
   end
 end

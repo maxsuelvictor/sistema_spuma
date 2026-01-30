@@ -11765,6 +11765,15 @@ type
     CAD_SQ_C_CTRrev_lme: TWideStringField;
     CAD_SQ_C_CTRidx_tipo_aliquota: TSmallintField;
     CAD_SQ_C_CTRint_nome_ibs_cbs_ibc: TWideStringField;
+    PCP_SQ_R_EPP_FUN_RNK: TSQLDataSet;
+    PCP_DP_R_EPP_FUN_RNK: TDataSetProvider;
+    PCP_SQ_R_EPP_FUN_RNKid_empresa: TIntegerField;
+    PCP_SQ_R_EPP_FUN_RNKemp_fantasia: TWideStringField;
+    PCP_SQ_R_EPP_FUN_RNKid_almoxarifado: TIntegerField;
+    PCP_SQ_R_EPP_FUN_RNKint_nomealm: TWideStringField;
+    PCP_SQ_R_EPP_FUN_RNKid_funcionario: TIntegerField;
+    PCP_SQ_R_EPP_FUN_RNKint_nomefun: TWideStringField;
+    PCP_SQ_R_EPP_FUN_RNKqtde_total: TFMTBCDField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -13159,6 +13168,8 @@ type
     function CAD_DP_C_IBCDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CAD_DP_C_CTRDataRequest(Sender: TObject;
+      Input: OleVariant): OleVariant;
+    function PCP_DP_R_EPP_FUN_RNKDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
 
 
@@ -29725,20 +29736,20 @@ begin
    else if Input[0] = 2 then
       begin
         CAD_SQ_C_CTR.CommandText := enSqlCtr +
-            ' WHERE id_cst_ibs_cbs = ''' + VarToStr(Input[1]) +''' ';
+            ' WHERE ctr.id_cst_ibs_cbs = ''' + VarToStr(Input[1]) +''' ';
       end
    else if Input[0] = 3 then
       begin
         CAD_SQ_C_CTR.CommandText := enSqlCtr +
-            Format('WHERE upper(cclasstrib) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
+            Format('WHERE upper(ctr.cclasstrib) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
       end
    else if Input[0] = 4 then
       begin
         CAD_SQ_C_CTR.CommandText := enSqlCtr +
-             Format('WHERE upper(nome_cclasstrib) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
+             Format('WHERE upper(ctr.nome_cclasstrib) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[1]))]);
       end;
 
-   CAD_SQ_C_CTR.CommandText := CAD_SQ_C_CTR.CommandText + ' order by id_cst_ibs_cbs,cclasstrib ';
+   CAD_SQ_C_CTR.CommandText := CAD_SQ_C_CTR.CommandText + ' order by ctr.id_cst_ibs_cbs,ctr.cclasstrib ';
 
    Result := CAD_DP_C_CTR.Data;
 
@@ -72583,6 +72594,142 @@ begin
                                 ' order by 1,9,10,11 ';
 
    Result := PCP_DP_R_EPP_FUN_DET.Data;
+end;
+
+function TSM.PCP_DP_R_EPP_FUN_RNKDataRequest(Sender: TObject;
+  Input: OleVariant): OleVariant;
+function enSqlRelPcpEppFunRnk: String;
+  begin
+    Result :=
+      'select epp.id_empresa, par.emp_fantasia, ' + #13#10 +
+      '       epp.id_almoxarifado, alm.descricao as int_nomealm,' + #13#10 +
+      '       coalesce(epi.id_func_colchoaria,0) id_func_colchoaria, fun.nome as int_nomefun,        ' + #13#10 +
+      '       count(*) as qtde_total' + #13#10 +
+      'from pcp_tb_m_epp_ite epi  ' + #13#10 +
+      '   left outer join pcp_tb_m_epp epp on epp.id_epp = epi.id_epp' + #13#10 +
+      '   left outer join pcp_tb_m_etq etq on etq.cod_barra = epi.cod_barra' + #13#10 +
+      '   left outer join cad_tb_c_ite ite on ite.id_item = epi.id_item' + #13#10 +
+      '   left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo' + #13#10 +
+      '   left outer join cad_tb_c_par par on par.id_empresa = epp.id_empresa   ' + #13#10 +
+      '   left outer join cad_tb_c_alm alm on alm.id_almoxarifado = epp.id_almoxarifado' + #13#10 +
+      '   left outer join cad_tb_c_fun fun on fun.id_funcionario = epi.id_func_colchoaria' + #13#10 +
+      '   left outer join cad_tb_c_fun fmt on fmt.id_funcionario = epi.id_func_montagem' + #13#10 +
+      '   left outer join cad_tb_c_fun fcc on fcc.id_funcionario = epi.id_func_colagem' + #13#10 +
+      'where coalesce(epi.id_func_colchoaria,0) > 0' + #13#10 +
+      'and 1 = 2' + #13#10 +
+      'group by 1,2,3,4,5,6' + #13#10 +
+      'order by count(*) desc';
+  end;
+var
+  ListaCodGrupo:TStrings;
+  i:Integer;
+begin
+   { TODO -oMaxsuel -cCriação : Método criado por Maxsuel Victor em 15/12/2021. }
+   {
+
+   PCP_SQ_R_EPP_FUN_DET.Close;
+   PCP_SQ_R_EPP_FUN_DET.CommandText := enSqlRelPcpEppFunDet ;
+
+    if Input[0] = '2' then // Costureiro
+      begin
+        PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText  +
+              ' where epp.dta_entrada >= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[1])) ) +''' and '+
+              '       epp.dta_entrada <= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[2])) ) +''' and ' +
+              '       epp.tipo_entrada = ''' + VarToStr(Input[7]) +''' and ' +
+              '       coalesce(epi.id_func_colchoaria,0) = 0 ';
+      end;
+
+    if Input[0] = '3' then // Montador de caixa
+      begin
+        PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText  +
+              ' where epp.dta_entrada >= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[1])) ) +''' and '+
+              '       epp.dta_entrada <= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[2])) ) +''' and ' +
+              '       epp.tipo_entrada = ''' + VarToStr(Input[7]) +''' and ' +
+              '       coalesce(epi.id_func_montagem,0) = 0 ';
+      end;
+
+    if Input[0] = '4' then // Colador
+      begin
+        PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText  +
+              ' where epp.dta_entrada >= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[1])) ) +''' and '+
+              '       epp.dta_entrada <= ''' + FormatDateTime(CFormatoData, StrToDate(VarToStr(Input[2])) ) +''' and ' +
+              '       epp.tipo_entrada = ''' + VarToStr(Input[7]) +''' and ' +
+              '       coalesce(epi.id_func_colagem,0) = 0 ';
+      end;
+
+
+   if Input[3] <> '' then
+      begin
+        PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText +
+            ' and EPP.ID_EMPRESA in (' + VarToStr(Input[3]) +') ';
+      end;
+
+   if Input[4] <> '' then
+      begin
+        PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText +
+            ' and EPP.ID_ALMOXARIFADO in (' + VarToStr(Input[4]) +') ';
+      end;
+
+   if Input[5] <> '' then
+      begin
+        PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText +
+            ' and EPP.ID_RESPONSAVEL in (' + VarToStr(Input[5]) +') ';
+      end;
+
+
+   if Input[6] <> '' then
+        begin
+           PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText  +
+              ' AND ( ';
+
+            ListaCodGrupo := TStringList.Create;
+            LIstaCodGrupo.Delimiter:=',';
+            LIstaCodGrupo.StrictDelimiter:=True;
+            ListaCodGrupo.DelimitedText :=  VarToStr(Input[6]);
+
+            for i := 0 to ListaCodGrupo.Count-1 do
+              begin
+                if (copy(ListaCodGrupo[i],2,7)='') or (copy(ListaCodGrupo[i],2,7)='.00.000') then
+                  begin
+                      PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText  +
+                        ' (ite.id_grupo > '''+copy(ListaCodGrupo[i],1,1)+'.00.000'' and '+
+                        '  ite.id_grupo <='''+copy(ListaCodGrupo[i],1,1)+'.99.999'' ) ';
+                  end
+                else if (copy(ListaCodGrupo[i],5,4)='') or (copy(ListaCodGrupo[i],5,4)='.000') then
+                  begin
+                      PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText  +
+                        ' (ite.id_grupo > '''+copy(ListaCodGrupo[i],1,4)+'.000'' and '+
+                        '  ite.id_grupo <='''+copy(ListaCodGrupo[i],1,4)+'.999'' ) ';
+                  end
+                else
+                  begin
+                     PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText  +
+                        ' (ite.id_grupo = '''+ListaCodGrupo[i]+''' ) ';
+                  end;
+
+                if i < (ListaCodGrupo.Count-1) then
+                  PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText + ' OR ';
+              end;
+
+           PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText + ' ) ';
+
+        end;
+
+   PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText +
+                                ' group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14';
+
+
+   if Input[0] = '2' then
+      PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText +
+                                ' order by 1,5,6,11 ';
+   if Input[0] = '3' then
+      PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText +
+                                ' order by 1,7,8,11 ';
+   if Input[0] = '4' then
+      PCP_SQ_R_EPP_FUN_DET.CommandText := PCP_SQ_R_EPP_FUN_DET.CommandText +
+                                ' order by 1,9,10,11 ';
+
+   Result := PCP_DP_R_EPP_FUN_DET.Data;  }
 end;
 
 function TSM.PCP_DP_R_EPP_GRUDataRequest(Sender: TObject;

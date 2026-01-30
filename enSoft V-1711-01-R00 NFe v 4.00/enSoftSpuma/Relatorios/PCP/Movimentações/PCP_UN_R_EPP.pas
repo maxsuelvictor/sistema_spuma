@@ -114,6 +114,8 @@ type
     PCP_CD_R_EPP_FUNdescricao: TWideStringField;
     PCP_CD_R_EPP_FUNqtde: TFloatField;
     chkSemColador: TCheckBox;
+    chkClassificacaoOperadores: TCheckBox;
+    PCP_CD_R_EPP_FUN_RNK: TClientDataSet;
     procedure lboxEmpDispDblClick(Sender: TObject);
     procedure lboxEmpSelDblClick(Sender: TObject);
     procedure lboxAlmDispDblClick(Sender: TObject);

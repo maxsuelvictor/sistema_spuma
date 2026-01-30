@@ -64660,4 +64660,61 @@
     Left = 400
     Top = 4760
   end
+  object PCP_SQ_R_EPP_FUN_RNK: TSQLDataSet
+    CommandText = 
+      'select epp.id_empresa, par.emp_fantasia, '#13#10'       epp.id_almoxar' +
+      'ifado, alm.descricao as int_nomealm,'#13#10'       coalesce(epi.id_fun' +
+      'c_colchoaria,0) id_funcionario, fun.nome as int_nomefun,        ' +
+      #13#10'       count(*) as qtde_total'#13#10#13#10'from pcp_tb_m_epp_ite epi  '#13#10 +
+      '   left outer join pcp_tb_m_epp epp on epp.id_epp = epi.id_epp'#13#10 +
+      '   left outer join pcp_tb_m_etq etq on etq.cod_barra = epi.cod_b' +
+      'arra'#13#10'   left outer join cad_tb_c_ite ite on ite.id_item = epi.i' +
+      'd_item'#13#10'   left outer join cad_tb_c_gru gru on gru.id_grupo = it' +
+      'e.id_grupo'#13#10'   left outer join cad_tb_c_par par on par.id_empres' +
+      'a = epp.id_empresa   '#13#10'   left outer join cad_tb_c_alm alm on al' +
+      'm.id_almoxarifado = epp.id_almoxarifado'#13#10'   left outer join cad_' +
+      'tb_c_fun fun on fun.id_funcionario = epi.id_func_colchoaria'#13#10'   ' +
+      'left outer join cad_tb_c_fun fmt on fmt.id_funcionario = epi.id_' +
+      'func_montagem'#13#10'   left outer join cad_tb_c_fun fcc on fcc.id_fun' +
+      'cionario = epi.id_func_colagem'#13#10'where coalesce(epi.id_func_colch' +
+      'oaria,0) > 0'#13#10'and 1 = 2'#13#10'group by 1,2,3,4,5,6'#13#10'order by count(*)' +
+      ' desc'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = Conexao
+    Left = 3192
+    Top = 3328
+    object PCP_SQ_R_EPP_FUN_RNKid_empresa: TIntegerField
+      FieldName = 'id_empresa'
+    end
+    object PCP_SQ_R_EPP_FUN_RNKemp_fantasia: TWideStringField
+      FieldName = 'emp_fantasia'
+      Size = 50
+    end
+    object PCP_SQ_R_EPP_FUN_RNKid_almoxarifado: TIntegerField
+      FieldName = 'id_almoxarifado'
+    end
+    object PCP_SQ_R_EPP_FUN_RNKint_nomealm: TWideStringField
+      FieldName = 'int_nomealm'
+      Size = 50
+    end
+    object PCP_SQ_R_EPP_FUN_RNKid_funcionario: TIntegerField
+      FieldName = 'id_funcionario'
+    end
+    object PCP_SQ_R_EPP_FUN_RNKint_nomefun: TWideStringField
+      FieldName = 'int_nomefun'
+      Size = 50
+    end
+    object PCP_SQ_R_EPP_FUN_RNKqtde_total: TFMTBCDField
+      FieldName = 'qtde_total'
+      Precision = 19
+      Size = 0
+    end
+  end
+  object PCP_DP_R_EPP_FUN_RNK: TDataSetProvider
+    DataSet = PCP_SQ_R_EPP_FUN_RNK
+    OnDataRequest = PCP_DP_R_EPP_FUN_RNKDataRequest
+    Left = 3344
+    Top = 3328
+  end
 end
