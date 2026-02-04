@@ -116,6 +116,14 @@ type
     chkSemColador: TCheckBox;
     chkClassificacaoOperadores: TCheckBox;
     PCP_CD_R_EPP_FUN_RNK: TClientDataSet;
+    PCP_DB_R_EPP_FUN_RNK: TfrxDBDataset;
+    PCP_CD_R_EPP_FUN_RNKid_empresa: TIntegerField;
+    PCP_CD_R_EPP_FUN_RNKemp_fantasia: TWideStringField;
+    PCP_CD_R_EPP_FUN_RNKid_almoxarifado: TIntegerField;
+    PCP_CD_R_EPP_FUN_RNKint_nomealm: TWideStringField;
+    PCP_CD_R_EPP_FUN_RNKid_funcionario: TIntegerField;
+    PCP_CD_R_EPP_FUN_RNKint_nomefun: TWideStringField;
+    PCP_CD_R_EPP_FUN_RNKqtde_total: TFMTBCDField;
     procedure lboxEmpDispDblClick(Sender: TObject);
     procedure lboxEmpSelDblClick(Sender: TObject);
     procedure lboxAlmDispDblClick(Sender: TObject);
@@ -415,6 +423,30 @@ begin
                                 xCondGru,rTipoEntrada]));
             end;
 
+         if not PCP_CD_R_EPP_FUN_RNK.IsEmpty then
+            begin
+              PCP_CD_R_EPP_FUN_RNK.EmptyDataSet;
+
+              {PCP_CD_R_EPP_FUN_RNK.Close;
+                   PCP_CD_R_EPP_FUN_RNK.Data :=
+                       PCP_CD_R_EPP_FUN_RNK.DataRequest(
+                                VarArrayOf([0, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada]));}
+            end;
+
+
+         if chkClassificacaoOperadores.Checked then
+            begin
+               PCP_CD_R_EPP_FUN_RNK.Close;
+                   PCP_CD_R_EPP_FUN_RNK.Data :=
+                       PCP_CD_R_EPP_FUN_RNK.DataRequest(
+                                VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada]));
+            end;
+
+
          PCP_CD_R_EPP_FUN.IndexFieldNames := 'id_empresa;id_func_colchoaria;id_grupo';
 
 
@@ -466,6 +498,27 @@ begin
                PCP_CD_R_EPP_FUN_DET.Close;
                PCP_CD_R_EPP_FUN_DET.Data :=
                    PCP_CD_R_EPP_FUN_DET.DataRequest(
+                                VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada]));
+            end;
+
+         if not PCP_CD_R_EPP_FUN_RNK.IsEmpty then
+            begin
+              PCP_CD_R_EPP_FUN_RNK.EmptyDataSet;
+              {PCP_CD_R_EPP_FUN_RNK.Close;
+                   PCP_CD_R_EPP_FUN_RNK.Data :=
+                       PCP_CD_R_EPP_FUN_RNK.DataRequest(
+                                VarArrayOf([0, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada])); }
+            end;
+
+         if chkClassificacaoOperadores.Checked then
+            begin
+               PCP_CD_R_EPP_FUN_RNK.Close;
+                   PCP_CD_R_EPP_FUN_RNK.Data :=
+                       PCP_CD_R_EPP_FUN_RNK.DataRequest(
                                 VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
                                 xCondAlmoxarifado, xCondResp,
                                 xCondGru,rTipoEntrada]));
@@ -523,6 +576,27 @@ begin
                PCP_CD_R_EPP_FUN_DET.Close;
                PCP_CD_R_EPP_FUN_DET.Data :=
                    PCP_CD_R_EPP_FUN_DET.DataRequest(
+                                VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada]));
+            end;
+
+         if not PCP_CD_R_EPP_FUN_RNK.IsEmpty then
+            begin
+              PCP_CD_R_EPP_FUN_RNK.EmptyDataSet;
+              {PCP_CD_R_EPP_FUN_RNK.Close;
+                   PCP_CD_R_EPP_FUN_RNK.Data :=
+                       PCP_CD_R_EPP_FUN_RNK.DataRequest(
+                                VarArrayOf([0, rDtaIni, rDtaFin,xCondEmp,
+                                xCondAlmoxarifado, xCondResp,
+                                xCondGru,rTipoEntrada])); }
+            end;
+
+         if chkClassificacaoOperadores.Checked then
+            begin
+               PCP_CD_R_EPP_FUN_RNK.Close;
+                   PCP_CD_R_EPP_FUN_RNK.Data :=
+                       PCP_CD_R_EPP_FUN_RNK.DataRequest(
                                 VarArrayOf([lbxRelatorios.ItemIndex, rDtaIni, rDtaFin,xCondEmp,
                                 xCondAlmoxarifado, xCondResp,
                                 xCondGru,rTipoEntrada]));

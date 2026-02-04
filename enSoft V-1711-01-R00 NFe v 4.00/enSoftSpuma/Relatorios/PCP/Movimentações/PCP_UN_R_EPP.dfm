@@ -106,6 +106,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           end
           object tsAlmoxarifado: TTabSheet
             Caption = 'Almoxarifado'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label3: TLabel
               Left = 70
               Top = 12
@@ -144,6 +148,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           object tsGrupo: TTabSheet
             Caption = 'Grupo'
             ImageIndex = 7
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label5: TLabel
               Left = 77
               Top = 8
@@ -167,6 +175,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           object tsResponsavel: TTabSheet
             Caption = 'Respons'#225'vel'
             ImageIndex = 3
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label12: TLabel
               Left = 68
               Top = 15
@@ -233,6 +245,8 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Width = 204
           Height = 28
           Caption = 'Exibir o ranking dos operadores'
+          Checked = True
+          State = cbChecked
           TabOrder = 5
           WordWrap = True
         end
@@ -261,7 +275,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoes: TImageList
     Bitmap = {
-      494C010103000800600116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800680116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       00170F0F0F8C2F2F2FF8323232FF323232FF323232FF323232FF323232FF3232
@@ -520,7 +534,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesAz: TImageList
     Bitmap = {
-      494C010103000800700116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800780116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000100
       00172716028C7C4807F8844C07FF844C07FF844C07FF844C07FF844C07FF844C
@@ -779,7 +793,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
   end
   inherited imgBotoesVe: TImageList
     Bitmap = {
-      494C010103000800740116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101030008007C0116001600FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000058000000160000000100200000000000401E
       0000000000000000000000000000000000000000000000000000000000000000
       0017001E018C005D04F8006204FF006204FF006204FF006204FF006204FF0062
@@ -1082,16 +1096,16 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
     end
   end
   object pmSelAlm: TPopupMenu
-    Left = 816
-    Top = 414
+    Left = 808
+    Top = 398
     object btnSelAlm: TMenuItem
       Caption = 'Todos Almoxarifados'
       OnClick = btnSelAlmClick
     end
   end
   object pmSelEmp: TPopupMenu
-    Left = 816
-    Top = 350
+    Left = 808
+    Top = 342
     object btnSelEmp: TMenuItem
       Caption = 'Todas as Empresas'
       OnClick = btnSelEmpClick
@@ -2638,6 +2652,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       item
         DataSet = PCP_DB_R_EPP_FUN_DET
         DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+      end
+      item
+        DataSet = PCP_DB_R_EPP_FUN_RNK
+        DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
       end>
     Variables = <>
     Style = <>
@@ -2657,7 +2675,6 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 68.031540000000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         object imgEmpresa1: TfrxPictureView
           Left = 585.827150000000000000
@@ -2725,7 +2742,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 35.015770000000000000
-        Top = 147.401670000000000000
+        Top = 109.606370000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
         object Memo12: TfrxMemoView
@@ -2761,7 +2778,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupHeader1: TfrxGroupHeader
         FillType = ftBrush
         Height = 64.252010000000000000
-        Top = 204.094620000000000000
+        Top = 147.401670000000000000
         Width = 718.110700000000000000
         Condition = 'PCP_DB_R_EPP_FUN."id_empresa"'
         KeepTogether = True
@@ -2859,7 +2876,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 26.456710000000000000
-        Top = 343.937230000000000000
+        Top = 249.448980000000000000
         Width = 718.110700000000000000
         DataSet = PCP_DB_R_EPP_FUN
         DataSetName = 'PCP_DB_R_EPP_FUN'
@@ -2911,21 +2928,28 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       end
       object Footer1: TfrxFooter
         FillType = ftBrush
-        Height = 34.015770000000000000
-        Top = 517.795610000000000000
+        Height = 60.472480000000000000
+        Top = 366.614410000000000000
         Width = 718.110700000000000000
         object Subreport1: TfrxSubreport
           Left = 3.779530000000000000
-          Top = 7.559060000000000000
+          Top = 34.015770000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Page = PCP_FR_R_EPP_FUN.Page2
+        end
+        object Subreport2: TfrxSubreport
+          Left = 3.779530000000000000
+          Top = 11.338590000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Page = PCP_FR_R_EPP_FUN.Page3
         end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 612.283860000000000000
+        Top = 468.661720000000000000
         Width = 718.110700000000000000
         object Memo25: TfrxMemoView
           Left = 260.787570000000000000
@@ -2961,7 +2985,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 34.015770000000000000
-        Top = 393.071120000000000000
+        Top = 279.685220000000000000
         Width = 718.110700000000000000
         object Memo11: TfrxMemoView
           Left = 260.787570000000000000
@@ -2994,7 +3018,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 291.023810000000000000
+        Top = 215.433210000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_R_EPP_FUN."id_func_colchoaria"'
@@ -3041,7 +3065,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupFooter2: TfrxGroupFooter
         FillType = ftBrush
         Height = 45.354360000000000000
-        Top = 449.764070000000000000
+        Top = 317.480520000000000000
         Width = 718.110700000000000000
         object Memo7: TfrxMemoView
           Left = 204.094620000000000000
@@ -3075,7 +3099,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object MasterData2: TfrxMasterData
         FillType = ftBrush
         Height = 26.456710000000000000
-        Top = 98.267780000000000000
+        Top = 60.472480000000000000
         Width = 718.110700000000000000
         DataSet = PCP_DB_R_EPP_FUN_DET
         DataSetName = 'PCP_DB_R_EPP_FUN_DET'
@@ -3172,7 +3196,6 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object Header2: TfrxHeader
         FillType = ftBrush
         Height = 57.370130000000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
         object Shape2: TfrxShapeView
@@ -3275,6 +3298,157 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
           Font.Style = []
           Memo.UTF8W = (
             'Descri'#231#227'o')
+          ParentFont = False
+        end
+      end
+    end
+    object Page3: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object Header3: TfrxHeader
+        FillType = ftBrush
+        Height = 57.370130000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Shape4: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 33.133890000000000000
+          Width = 714.331170000000000000
+          Height = 22.677180000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo21: TfrxMemoView
+          Left = 317.480520000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+        object Shape5: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 3.779530000000000000
+          Width = 714.331170000000000000
+          Height = 30.236240000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo24: TfrxMemoView
+          Left = 260.677335000000000000
+          Top = 9.559060000000000000
+          Width = 196.535560000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'RANKING DOS FUNCION'#193'RIOS')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          Left = 41.574830000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo28: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 35.133890000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Funcion'#225'rio')
+          ParentFont = False
+        end
+      end
+      object MasterData3: TfrxMasterData
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 60.472480000000000000
+        Width = 718.110700000000000000
+        DataSet = PCP_DB_R_EPP_FUN_RNK
+        DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+        RowCount = 0
+        Stretched = True
+        object PCP_DB_R_EPP_FUN_RNKid_funcionario: TfrxMemoView
+          Left = 15.118120000000000000
+          Top = 2.118120000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          DataField = 'id_funcionario'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."id_funcionario"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_RNKint_nomefun: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 2.118120000000000000
+          Width = 177.637910000000000000
+          Height = 18.897650000000000000
+          DataField = 'int_nomefun'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."int_nomefun"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_RNKqtde_total: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 2.118120000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'qtde_total'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."qtde_total"]')
           ParentFont = False
         end
       end
@@ -3555,6 +3729,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       item
         DataSet = PCP_DB_R_EPP_FUN_DET
         DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+      end
+      item
+        DataSet = PCP_DB_R_EPP_FUN_RNK
+        DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
       end>
     Variables = <
       item
@@ -3594,7 +3772,6 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 68.031540000000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         object imgEmpresa1: TfrxPictureView
           Left = 585.827150000000000000
@@ -3662,7 +3839,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 35.015770000000000000
-        Top = 147.401670000000000000
+        Top = 109.606370000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
         object Memo12: TfrxMemoView
@@ -3698,7 +3875,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupHeader1: TfrxGroupHeader
         FillType = ftBrush
         Height = 64.252010000000000000
-        Top = 204.094620000000000000
+        Top = 147.401670000000000000
         Width = 718.110700000000000000
         Condition = 'PCP_DB_R_EPP_FUN."id_empresa"'
         KeepTogether = True
@@ -3796,7 +3973,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 26.456710000000000000
-        Top = 343.937230000000000000
+        Top = 249.448980000000000000
         Width = 718.110700000000000000
         DataSet = PCP_DB_R_EPP_FUN
         DataSetName = 'PCP_DB_R_EPP_FUN'
@@ -3848,21 +4025,28 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       end
       object Footer1: TfrxFooter
         FillType = ftBrush
-        Height = 34.015770000000000000
-        Top = 517.795610000000000000
+        Height = 60.472480000000000000
+        Top = 366.614410000000000000
         Width = 718.110700000000000000
         object Subreport1: TfrxSubreport
-          Left = 7.559060000000000000
-          Top = 3.779530000000000000
+          Left = 3.779530000000000000
+          Top = 34.015770000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Page = PCP_FR_R_EPP_FUN_MOT.Page2
+        end
+        object Subreport2: TfrxSubreport
+          Left = 3.779530000000000000
+          Top = 11.338590000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Page = PCP_FR_R_EPP_FUN_MOT.Page3
         end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 612.283860000000000000
+        Top = 468.661720000000000000
         Width = 718.110700000000000000
         object Memo25: TfrxMemoView
           Left = 260.787570000000000000
@@ -3898,7 +4082,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 34.015770000000000000
-        Top = 393.071120000000000000
+        Top = 279.685220000000000000
         Width = 718.110700000000000000
         object Memo11: TfrxMemoView
           Left = 275.905690000000000000
@@ -3931,7 +4115,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 291.023810000000000000
+        Top = 215.433210000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_R_EPP_FUN."id_func_montagem"'
@@ -3978,7 +4162,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupFooter2: TfrxGroupFooter
         FillType = ftBrush
         Height = 45.354360000000000000
-        Top = 449.764070000000000000
+        Top = 317.480520000000000000
         Width = 718.110700000000000000
         object Memo7: TfrxMemoView
           Left = 204.094620000000000000
@@ -4012,7 +4196,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object MasterData2: TfrxMasterData
         FillType = ftBrush
         Height = 26.456710000000000000
-        Top = 98.267780000000000000
+        Top = 60.472480000000000000
         Width = 718.110700000000000000
         DataSet = PCP_DB_R_EPP_FUN_DET
         DataSetName = 'PCP_DB_R_EPP_FUN_DET'
@@ -4109,7 +4293,6 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object Header2: TfrxHeader
         FillType = ftBrush
         Height = 57.370130000000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
         object Shape2: TfrxShapeView
@@ -4216,6 +4399,157 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         end
       end
     end
+    object Page3: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object Header3: TfrxHeader
+        FillType = ftBrush
+        Height = 57.370130000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Shape4: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 33.133890000000000000
+          Width = 714.331170000000000000
+          Height = 22.677180000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo21: TfrxMemoView
+          Left = 317.480520000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+        object Shape5: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 3.779530000000000000
+          Width = 714.331170000000000000
+          Height = 30.236240000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo24: TfrxMemoView
+          Left = 260.677335000000000000
+          Top = 9.559060000000000000
+          Width = 196.535560000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'RANKING DOS FUNCION'#193'RIOS')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          Left = 41.574830000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo28: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 35.133890000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Funcion'#225'rio')
+          ParentFont = False
+        end
+      end
+      object MasterData3: TfrxMasterData
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 60.472480000000000000
+        Width = 718.110700000000000000
+        DataSet = PCP_DB_R_EPP_FUN_RNK
+        DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+        RowCount = 0
+        Stretched = True
+        object PCP_DB_R_EPP_FUN_RNKid_funcionario: TfrxMemoView
+          Left = 15.118120000000000000
+          Top = 2.118120000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          DataField = 'id_funcionario'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."id_funcionario"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_RNKint_nomefun: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 2.118120000000000000
+          Width = 177.637910000000000000
+          Height = 18.897650000000000000
+          DataField = 'int_nomefun'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."int_nomefun"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_RNKqtde_total: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 2.118120000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'qtde_total'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."qtde_total"]')
+          ParentFont = False
+        end
+      end
+    end
   end
   object PCP_FR_R_EPP_FUN_COL: TfrxReport
     Version = '5.1.9'
@@ -4269,6 +4603,10 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       item
         DataSet = PCP_DB_R_EPP_FUN_DET
         DataSetName = 'PCP_DB_R_EPP_FUN_DET'
+      end
+      item
+        DataSet = PCP_DB_R_EPP_FUN_RNK
+        DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
       end>
     Variables = <
       item
@@ -4308,7 +4646,6 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 68.031540000000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         object imgEmpresa1: TfrxPictureView
           Left = 585.827150000000000000
@@ -4376,7 +4713,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 35.015770000000000000
-        Top = 147.401670000000000000
+        Top = 109.606370000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
         object Memo12: TfrxMemoView
@@ -4412,7 +4749,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupHeader1: TfrxGroupHeader
         FillType = ftBrush
         Height = 64.252010000000000000
-        Top = 204.094620000000000000
+        Top = 147.401670000000000000
         Width = 718.110700000000000000
         Condition = 'PCP_DB_R_EPP_FUN."id_empresa"'
         KeepTogether = True
@@ -4510,7 +4847,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 26.456710000000000000
-        Top = 343.937230000000000000
+        Top = 249.448980000000000000
         Width = 718.110700000000000000
         DataSet = PCP_DB_R_EPP_FUN
         DataSetName = 'PCP_DB_R_EPP_FUN'
@@ -4562,21 +4899,28 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       end
       object Footer1: TfrxFooter
         FillType = ftBrush
-        Height = 34.015770000000000000
-        Top = 517.795610000000000000
+        Height = 56.692950000000000000
+        Top = 366.614410000000000000
         Width = 718.110700000000000000
         object Subreport1: TfrxSubreport
           Left = 3.779530000000000000
-          Top = 7.559060000000000000
+          Top = 34.015770000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Page = PCP_FR_R_EPP_FUN_COL.Page2
+        end
+        object Subreport2: TfrxSubreport
+          Left = 3.779530000000000000
+          Top = 11.338590000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Page = PCP_FR_R_EPP_FUN_COL.Page3
         end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 612.283860000000000000
+        Top = 464.882190000000000000
         Width = 718.110700000000000000
         object Memo25: TfrxMemoView
           Left = 260.787570000000000000
@@ -4612,7 +4956,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 34.015770000000000000
-        Top = 393.071120000000000000
+        Top = 279.685220000000000000
         Width = 718.110700000000000000
         object Memo11: TfrxMemoView
           Left = 268.346630000000000000
@@ -4645,7 +4989,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 291.023810000000000000
+        Top = 215.433210000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_R_EPP_FUN."id_func_colagem"'
@@ -4692,7 +5036,7 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
       object GroupFooter2: TfrxGroupFooter
         FillType = ftBrush
         Height = 45.354360000000000000
-        Top = 449.764070000000000000
+        Top = 317.480520000000000000
         Width = 718.110700000000000000
         object Memo7: TfrxMemoView
           Left = 204.094620000000000000
@@ -4930,11 +5274,198 @@ inherited PCP_FM_R_EPP: TPCP_FM_R_EPP
         end
       end
     end
+    object Page3: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object Header3: TfrxHeader
+        FillType = ftBrush
+        Height = 57.370130000000000000
+        Width = 718.110700000000000000
+        ReprintOnNewPage = True
+        object Shape4: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 33.133890000000000000
+          Width = 714.331170000000000000
+          Height = 22.677180000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo21: TfrxMemoView
+          Left = 317.480520000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Qtde')
+          ParentFont = False
+        end
+        object Shape5: TfrxShapeView
+          Left = 1.779530000000000000
+          Top = 3.779530000000000000
+          Width = 714.331170000000000000
+          Height = 30.236240000000000000
+          Fill.BackColor = 15395562
+        end
+        object Memo24: TfrxMemoView
+          Left = 260.677335000000000000
+          Top = 9.559060000000000000
+          Width = 196.535560000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'RANKING DOS FUNCION'#193'RIOS')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          Left = 41.574830000000000000
+          Top = 35.133890000000000000
+          Width = 41.574830000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo28: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 35.133890000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Funcion'#225'rio')
+          ParentFont = False
+        end
+      end
+      object MasterData3: TfrxMasterData
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 60.472480000000000000
+        Width = 718.110700000000000000
+        DataSet = PCP_DB_R_EPP_FUN_RNK
+        DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+        RowCount = 0
+        Stretched = True
+        object PCP_DB_R_EPP_FUN_RNKid_funcionario: TfrxMemoView
+          Left = 15.118120000000000000
+          Top = 2.118120000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          DataField = 'id_funcionario'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."id_funcionario"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_RNKint_nomefun: TfrxMemoView
+          Left = 90.708720000000000000
+          Top = 2.118120000000000000
+          Width = 177.637910000000000000
+          Height = 18.897650000000000000
+          DataField = 'int_nomefun'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."int_nomefun"]')
+          ParentFont = False
+        end
+        object PCP_DB_R_EPP_FUN_RNKqtde_total: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 2.118120000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'qtde_total'
+          DataSet = PCP_DB_R_EPP_FUN_RNK
+          DataSetName = 'PCP_DB_R_EPP_FUN_RNK'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[PCP_DB_R_EPP_FUN_RNK."qtde_total"]')
+          ParentFont = False
+        end
+      end
+    end
   end
   object PCP_CD_R_EPP_FUN_RNK: TClientDataSet
     Aggregates = <>
     Params = <>
+    ProviderName = 'PCP_DP_R_EPP_FUN_RNK'
+    RemoteServer = dmGeral.pcConecao
     Left = 904
     Top = 342
+    object PCP_CD_R_EPP_FUN_RNKid_empresa: TIntegerField
+      FieldName = 'id_empresa'
+    end
+    object PCP_CD_R_EPP_FUN_RNKemp_fantasia: TWideStringField
+      FieldName = 'emp_fantasia'
+      Size = 50
+    end
+    object PCP_CD_R_EPP_FUN_RNKid_almoxarifado: TIntegerField
+      FieldName = 'id_almoxarifado'
+    end
+    object PCP_CD_R_EPP_FUN_RNKint_nomealm: TWideStringField
+      FieldName = 'int_nomealm'
+      Size = 50
+    end
+    object PCP_CD_R_EPP_FUN_RNKid_funcionario: TIntegerField
+      FieldName = 'id_funcionario'
+    end
+    object PCP_CD_R_EPP_FUN_RNKint_nomefun: TWideStringField
+      FieldName = 'int_nomefun'
+      Size = 50
+    end
+    object PCP_CD_R_EPP_FUN_RNKqtde_total: TFMTBCDField
+      FieldName = 'qtde_total'
+      Precision = 19
+      Size = 0
+    end
+  end
+  object PCP_DB_R_EPP_FUN_RNK: TfrxDBDataset
+    UserName = 'PCP_DB_R_EPP_FUN_RNK'
+    CloseDataSource = False
+    DataSet = PCP_CD_R_EPP_FUN_RNK
+    BCDToCurrency = False
+    Left = 792
+    Top = 462
   end
 end

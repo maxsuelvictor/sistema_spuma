@@ -6024,9 +6024,11 @@ begin
                   // TTpCredPresIBSZFM = (tcpNenhum, tcpSemCredito, tcpBensConsumoFinal, tcpBensCapital,
                   //                      tcpBensIntermediarios, tcpBensInformaticaOutros);
                   // Ver com o contador.
-             if chkReformaTributaria.Checked then
-                 //Prod.tpCredPresIBSZFM := StrToTpCredPresIBSZFM(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('tpCredPresIBSZFM').AsString);
-                Prod.tpCredPresIBSZFM := tcpSemCredito;
+
+             //if chkReformaTributaria.Checked then
+                               //Prod.tpCredPresIBSZFM := StrToTpCredPresIBSZFM(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('tpCredPresIBSZFM').AsString);
+                 // Comentado em 02-02-2026, por Maxsuel Victor, devido ter dado Rejeição: Classificação para subapuração do IBS na ZFM informado
+                 // Prod.tpCredPresIBSZFM := tcpSemCredito;
 
 
              if trim(dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('int_cest_ncm').AsString) <> '' then
