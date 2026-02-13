@@ -5643,8 +5643,11 @@ begin
      // Por Maxsuel Victor, 05/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
      if chkReformaTributaria.Checked then
         begin
-          Ide.dPrevEntrega := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('dta_prev_entrega').AsDateTime;
 
+          // 12/02/2026 - Maxsuel Victor
+             // 9 - Sem Frete (Repassa no campo FRE_VALOR=0, e FRE_CUSTO)
+          if dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 9 then
+             Ide.dPrevEntrega := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('dta_prev_entrega').AsDateTime;
 
           //Ide.cMunFGIBS := StrToInt(edtEmitCodCidade.Text);
 

@@ -1439,8 +1439,13 @@ begin
              //if dmGeral.FAT_CD_M_PED_ITE.FieldByName('VLR_DESCONTO').AsCurrency > 0 then
              //   begin
 
-                  PercTemp := RoundTo((dmGeral.FAT_CD_M_PED.FieldByName('VLR_DESC_ESPECIAL').AsCurrency/
-                                       vlrBrutoComDescBasicTemp) * 100,-4);
+                  // 06/02/2026 por Maxsuel Victor, foi colcado esse if e else, devido ter dado erro quando
+                     // no pedido só tem item com desconto especial , sem nenhum desconto bruto informado.
+                  if vlrBrutoComDescBasicTemp > 0 then
+                      PercTemp := RoundTo((dmGeral.FAT_CD_M_PED.FieldByName('VLR_DESC_ESPECIAL').AsCurrency/
+                                       vlrBrutoComDescBasicTemp) * 100,-4)
+                  else
+                     PercTemp := dmGeral.FAT_CD_M_PED.FieldByName('PER_DESC_ESPECIAL').AsCurrency;
 
 
                   dmGeral.FAT_CD_M_PED_ITE.FieldByName('VLR_DESC_ESPECIAL').AsCurrency :=

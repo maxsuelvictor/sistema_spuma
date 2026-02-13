@@ -269,7 +269,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
           ParentFont = False
         end
         object grdItens: TwwDBGrid
-          Left = 3
+          Left = 2
           Top = 93
           Width = 789
           Height = 256
@@ -584,18 +584,18 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
               end
             end
             object pnlFuncionario: TPanel
-              Left = 318
+              Left = 326
               Top = 2
               Width = 355
               Height = 54
               TabOrder = 4
               Visible = False
               object Label5: TLabel
-                Left = 24
+                Left = 143
                 Top = 3
-                Width = 85
+                Width = 70
                 Height = 18
-                Caption = '- Costureiro -'
+                Caption = 'Costureiro '
                 Color = clBtnFace
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
@@ -606,11 +606,11 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 ParentFont = False
               end
               object Label6: TLabel
-                Left = 144
+                Left = 217
                 Top = 3
-                Width = 82
+                Width = 62
                 Height = 18
-                Caption = '- Montador -'
+                Caption = 'Montador'
                 Color = clBtnFace
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlue
@@ -621,11 +621,11 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 ParentFont = False
               end
               object Label8: TLabel
-                Left = 258
+                Left = 293
                 Top = 3
-                Width = 68
+                Width = 48
                 Height = 18
-                Caption = '- Colador -'
+                Caption = 'Colador'
                 Color = clBtnFace
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 18655
@@ -635,32 +635,31 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 ParentColor = False
                 ParentFont = False
               end
+              object Label12: TLabel
+                Left = 15
+                Top = 3
+                Width = 114
+                Height = 18
+                Caption = 'Leitor c'#243'd. barras'
+                Color = clBtnFace
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -15
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentColor = False
+                ParentFont = False
+              end
               object txtIdCostureiro: TwwDBEdit
-                Left = 24
+                Left = 154
                 Top = 22
-                Width = 97
+                Width = 57
                 Height = 28
+                TabStop = False
+                Color = clSilver
                 DataField = 'id_func_colchoaria'
                 DataSource = dsEppIte
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clBlack
-                Font.Height = -15
-                Font.Name = 'Segoe UI'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 0
-                UnboundDataType = wwDefault
-                WantReturns = False
-                WordWrap = False
-                OnExit = txtIdCostureiroExit
-              end
-              object txtIdMontagemCaixa: TwwDBEdit
-                Left = 140
-                Top = 22
-                Width = 97
-                Height = 28
-                DataField = 'id_func_montagem'
-                DataSource = dsEppIte
+                Enabled = False
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -15
@@ -671,15 +670,18 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 UnboundDataType = wwDefault
                 WantReturns = False
                 WordWrap = False
-                OnExit = txtIdMontagemCaixaExit
+                OnExit = txtIdCostureiroExit
               end
-              object txtIdColagem: TwwDBEdit
-                Left = 251
+              object txtIdMontagemCaixa: TwwDBEdit
+                Left = 220
                 Top = 22
-                Width = 97
+                Width = 57
                 Height = 28
-                DataField = 'id_func_colagem'
+                TabStop = False
+                Color = clSilver
+                DataField = 'id_func_montagem'
                 DataSource = dsEppIte
+                Enabled = False
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -15
@@ -690,7 +692,44 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 UnboundDataType = wwDefault
                 WantReturns = False
                 WordWrap = False
+                OnExit = txtIdMontagemCaixaExit
+              end
+              object txtIdColagem: TwwDBEdit
+                Left = 287
+                Top = 22
+                Width = 60
+                Height = 28
+                TabStop = False
+                Color = clSilver
+                DataField = 'id_func_colagem'
+                DataSource = dsEppIte
+                Enabled = False
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -15
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 3
+                UnboundDataType = wwDefault
+                WantReturns = False
+                WordWrap = False
                 OnExit = txtIdColagemExit
+              end
+              object txtLeitorCodBarras: TEdit
+                Left = 16
+                Top = 22
+                Width = 121
+                Height = 28
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -15
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                NumbersOnly = True
+                ParentFont = False
+                TabOrder = 0
+                OnExit = txtLeitorCodBarrasExit
               end
             end
           end
@@ -992,7 +1031,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     Left = 995
     Top = 51
     Bitmap = {
-      494C01010800A800D00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800D80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1892,7 +1931,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C010108003001240218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080030012C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2792,7 +2831,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200000120020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200000128020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3308,7 +3347,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00C80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00D00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4208,7 +4247,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C01010600000118020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000120020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4420,7 +4459,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00D80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00E00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5320,7 +5359,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C01010600000128020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000130020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5532,7 +5571,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00D40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00DC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6432,7 +6471,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C0101060000010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000114020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF

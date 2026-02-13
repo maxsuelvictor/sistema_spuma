@@ -279,6 +279,8 @@ type
     BooleanField27: TBooleanField;
     BooleanField28: TBooleanField;
     BooleanField29: TBooleanField;
+    Label12: TLabel;
+    txtLeitorCodBarras: TEdit;
     procedure acAdicionaExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure txtBuscaItemKeyDown(Sender: TObject; var Key: Word;
@@ -311,6 +313,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure txtIdMontagemCaixaExit(Sender: TObject);
     procedure txtIdColagemExit(Sender: TObject);
+    procedure txtLeitorCodBarrasExit(Sender: TObject);
   private
     { Private declarations }
      procedure AcoesIniciais;
@@ -1713,6 +1716,130 @@ begin
   //pnlFuncionario.Visible := false;
   //txtBuscaItemExit(self);
 end;
+
+procedure TPCP_FM_M_EPP.txtLeitorCodBarrasExit(Sender: TObject);
+var
+  IdBarras, IdFuncBarras: String;
+  achouColchoeiro, achouMontador, achouColador: Boolean;
+begin
+  inherited;
+
+  if (trim(txtLeitorCodBarras.Text) = '') then
+      begin
+        if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_informado.wav') then
+           begin
+             sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_informado.wav'),SND_LOOP);
+           end;
+        ShowMessage('Nenhum valor foi informado.');
+        txtIdColagem.SetFocus;
+        exit;
+      end;
+
+   if txtBuscaItem.Focused then
+     begin
+       exit;
+     end;
+
+   if (trim(txtIdColagem.Text) = '0') then
+       begin
+         {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
+            0, mrNo, true, false,'', nil) = 7 then
+            begin
+             exit;
+            end
+         else
+            begin
+
+            end; }
+         PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsInteger   := 0;
+         PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString     := '';
+
+         PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsInteger     := 0;
+         PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString := '';
+
+         PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsInteger      := 0;
+         PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString  := '';
+       end
+   else
+      begin
+        IdBarras := txtLeitorCodBarras.Text;
+
+        if strtoint(copy(IdBarras,1,2)) = 99 then
+           begin
+             IdFuncBarras :=
+                 copy(IdBarras,3,length(IdBarras));
+           end;
+
+        if not (dmGeral.BUS_CD_C_FU3.Locate('id_funcionario',IdFuncBarras,[])) then
+           begin
+
+             if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_sem_cadastro.wav') then
+                begin
+                  sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_sem_cadastro.wav'),SND_LOOP);
+                end;
+
+             ShowMessage('Funcionário não cadastrado.');
+             txtLeitorCodBarras.SetFocus;
+             txtLeitorCodBarras.text := '';
+             exit;
+           end
+        else
+           begin
+             achouColchoeiro := false;
+             achouMontador   := false;
+             achouColador    := false;
+
+             if not (dmGeral.BUS_CD_C_FU4.Locate('id_funcionario',IdFuncBarras,[])) then //Costureiro
+                begin
+                   if not (BUS_CD_C_FU5.Locate('id_funcionario',IdFuncBarras,[])) then  //Montador
+                      begin
+                          if not (BUS_CD_C_FU6.Locate('id_funcionario',IdFuncBarras,[])) then //Colagem
+                              begin
+                                if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_colador.wav') then
+                                   begin
+                                     sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_nao_colador.wav'),SND_LOOP);
+                                   end;
+                                ShowMessage('Este funcionário não é costureiro/colador/montador.');
+                                txtLeitorCodBarras.text := '';
+                                txtLeitorCodBarras.SetFocus;
+                                exit;
+                              end
+                          else
+                            achouColador := true;
+                      end
+                   else
+                      achouMontador := true;
+                end
+             else
+                achouColchoeiro := true;
+           end;
+
+        if achouColchoeiro = true then
+           begin
+             PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := IdFuncBarras;
+             PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString  :=
+                dmGeral.BUS_CD_C_FU4.FieldByName('nome').AsString;
+           end;
+
+        if achouMontador = True then
+           begin
+              PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString := IdFuncBarras;
+              PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString :=
+                  BUS_CD_C_FU5.FieldByName('nome').AsString;
+           end;
+
+        if achouColador = true then
+           begin
+             PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString := IdFuncBarras;
+             PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString :=
+                 BUS_CD_C_FU6.FieldByName('nome').AsString;
+           end;
+      end;
+
+  pnlFuncionario.Visible := false;
+  txtBuscaItemExit(self);
+end;
+
 
 procedure TPCP_FM_M_EPP.txtQtdeInfExit(Sender: TObject);
 var
