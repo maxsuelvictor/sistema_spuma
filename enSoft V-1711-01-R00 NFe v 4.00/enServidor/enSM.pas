@@ -6550,9 +6550,6 @@ type
     FAT_SQ_M_PCAid_responsavel: TIntegerField;
     FAT_SQ_M_PCAdta_carregamento: TDateField;
     FAT_SQ_M_PCAint_nomeres: TWideStringField;
-    FAT_SQ_M_PCA_PEDid_carregamento: TIntegerField;
-    FAT_SQ_M_PCA_PEDid_pedido: TIntegerField;
-    FAT_SQ_M_PCA_PEDint_sitaprov: TIntegerField;
     PCP_SQ_R_ORSid_ors: TIntegerField;
     PCP_SQ_R_ORSid_empresa: TIntegerField;
     PCP_SQ_R_ORSdta_emissao: TDateField;
@@ -6609,9 +6606,6 @@ type
     PCP_SQ_R_ORS_TITche_emitente: TWideStringField;
     PCP_SQ_R_ORS_TITvlr_titulo: TFMTBCDField;
     PCP_SQ_R_ORS_TITint_nomefpg: TWideStringField;
-    FAT_SQ_M_PCA_PEDint_nomecli: TWideStringField;
-    FAT_SQ_M_PCA_PEDint_telfixo: TWideStringField;
-    FAT_SQ_M_PCA_PEDint_nomecid: TWideStringField;
     FAT_SQ_M_NFE_ITEvlr_fcp: TFMTBCDField;
     FAT_SQ_M_NFE_ITEper_fcp: TFloatField;
     FAT_SQ_M_NFEvlr_fcp: TFMTBCDField;
@@ -6753,8 +6747,6 @@ type
     BUS_SQ_M_FAT_PCA_PED: TSQLDataSet;
     BUS_SQ_M_PCAstatus: TIntegerField;
     FAT_SQ_M_NFE_ITEpart_per_red_int_dest: TFloatField;
-    FAT_SQ_M_PCA_PEDint_desc_sitaprov: TWideStringField;
-    FAT_SQ_M_PCA_PEDint_codcliente: TIntegerField;
     FAT_SQ_M_XMLint_desctme: TWideStringField;
     FAT_SQ_M_XMLint_desccpg: TWideStringField;
     CAD_SQ_C_PAR_CTRfp_per_cust_ven_mens: TFloatField;
@@ -7233,8 +7225,6 @@ type
     FIN_SQ_R_BCO_SLD: TSQLDataSet;
     BUS_SQ_M_PCA_PEDint_id_fiscal: TIntegerField;
     BUS_SQ_M_PCA_PEDint_numeronf: TIntegerField;
-    FAT_SQ_M_PCA_PEDint_id_fiscal: TIntegerField;
-    FAT_SQ_M_PCA_PEDint_numeronf: TIntegerField;
     CAD_SQ_C_PAR_CTRped_cli_cns_vnd_max: TFMTBCDField;
     CAD_SQ_C_CLIprofissao: TWideStringField;
     CAD_SQ_C_CLIrenda: TFMTBCDField;
@@ -7313,10 +7303,6 @@ type
     BUS_DP_M_CSU_GER_XCB: TDataSetProvider;
     BUS_SQ_M_CSU_GER_XCB: TSQLDataSet;
     FAT_SQ_M_PED_TITint_docimpresso: TIntegerField;
-    FAT_SQ_M_PCA_PEDint_cnpjcpf: TWideStringField;
-    FAT_SQ_M_PCA_PEDint_obs: TWideStringField;
-    FAT_SQ_M_PCA_PEDint_vlr_liquido: TFMTBCDField;
-    FAT_SQ_M_PCA_PEDint_peso_liquido: TFloatField;
     CAD_SQ_C_PAR_MODcar: TBooleanField;
     ctc_sq_m_cep_epiint_nomeepi: TWideStringField;
     BUS_DP_M_CSU_GER_PFT_EMP: TDataSetProvider;
@@ -10656,7 +10642,6 @@ type
     FAT_SQ_M_PCA_PED_ITEqtde: TFloatField;
     FAT_SQ_M_PCA_PED_ITEid_cor: TIntegerField;
     FAT_SQ_M_PCA_PED_ITEid_tamanho: TIntegerField;
-    FAT_SQ_M_PCA_PEDint_cubagem: TFloatField;
     FAT_SQ_M_PCA_PED_ITEint_nomecor: TWideStringField;
     FAT_SQ_M_PCA_PED_ITEint_id_und_venda: TWideStringField;
     FAT_SQ_M_PCA_PED_ITEpcp_obs_item: TWideStringField;
@@ -10679,7 +10664,6 @@ type
     FAT_SQ_R_PCA_PED_ITEint_id_und_venda: TWideStringField;
     FAT_SQ_R_PCA_PED_ITEqtde: TFloatField;
     FAT_SQ_R_PCA_PED_ITEid_grupo: TWideStringField;
-    FAT_SQ_M_PCA_PEDint_num_lote_opr: TWideStringField;
     PCP_DP_R_EPP_GRU: TDataSetProvider;
     PCP_SQ_R_EPP_GRU: TSQLDataSet;
     BUS_SQ_M_NFE_ITE_INTpcp_obs_item: TWideStringField;
@@ -10746,7 +10730,6 @@ type
     PCP_SQ_M_ROM_PEDint_id_opr: TIntegerField;
     PCP_SQ_M_ROM_PEDint_horpedido: TSQLTimeStampField;
     PCP_SQ_M_ROMqtde_total_ite_conf: TFloatField;
-    FAT_SQ_M_PCA_PEDint_uf: TWideStringField;
     PCP_SQ_M_ROM_ICFid_pedido: TIntegerField;
     FAT_SQ_M_PEDpcp_obs: TWideStringField;
     FAT_SQ_M_PEDpedido_automatico: TBooleanField;
@@ -11774,6 +11757,50 @@ type
     PCP_SQ_R_EPP_FUN_RNKid_funcionario: TIntegerField;
     PCP_SQ_R_EPP_FUN_RNKint_nomefun: TWideStringField;
     PCP_SQ_R_EPP_FUN_RNKqtde_total: TFMTBCDField;
+    FAT_SQ_M_PCA_PEDid_carregamento: TIntegerField;
+    FAT_SQ_M_PCA_PEDid_pedido: TIntegerField;
+    FAT_SQ_M_PCA_PEDint_sitaprov: TIntegerField;
+    FAT_SQ_M_PCA_PEDint_desc_sitaprov: TWideStringField;
+    FAT_SQ_M_PCA_PEDint_codcliente: TIntegerField;
+    FAT_SQ_M_PCA_PEDint_nomecli: TWideStringField;
+    FAT_SQ_M_PCA_PEDint_telfixo: TWideStringField;
+    FAT_SQ_M_PCA_PEDint_nomecid: TWideStringField;
+    FAT_SQ_M_PCA_PEDint_uf: TWideStringField;
+    FAT_SQ_M_PCA_PEDint_id_fiscal: TIntegerField;
+    FAT_SQ_M_PCA_PEDint_numeronf: TIntegerField;
+    FAT_SQ_M_PCA_PEDint_cnpjcpf: TWideStringField;
+    FAT_SQ_M_PCA_PEDint_obs: TWideStringField;
+    FAT_SQ_M_PCA_PEDint_vlr_liquido: TFMTBCDField;
+    FAT_SQ_M_PCA_PEDint_peso_liquido: TFloatField;
+    FAT_SQ_M_PCA_PEDint_cubagem: TFloatField;
+    FAT_SQ_M_PCA_PEDint_num_lote_opr: TWideStringField;
+    CAD_SQ_C_GRUentrada_pcp_epp_informa_costureiro: TBooleanField;
+    CAD_SQ_C_GRUentrada_pcp_epp_informa_montador: TBooleanField;
+    CAD_SQ_C_GRUentrada_pcp_epp_informa_colador: TBooleanField;
+    CAD_SQ_C_ITEint_pcp_epp_informa_costureiro: TBooleanField;
+    CAD_SQ_C_ITEint_pcp_epp_informa_montador: TBooleanField;
+    CAD_SQ_C_ITEint_pcp_epp_informa_colador: TBooleanField;
+    BUS_SQ_M_TQA: TSQLDataSet;
+    BUS_DP_M_TQA: TDataSetProvider;
+    BUS_SQ_M_TQAid_item: TIntegerField;
+    BUS_SQ_M_TQAid_cor: TIntegerField;
+    BUS_SQ_M_TQAid_tamanho: TIntegerField;
+    BUS_SQ_M_TQAid_epp: TIntegerField;
+    BUS_SQ_M_TQAid_opr: TIntegerField;
+    BUS_SQ_M_TQAdta_saida: TDateField;
+    BUS_SQ_M_TQAdta_entrada_est: TDateField;
+    BUS_SQ_M_TQAid_ors_saida: TIntegerField;
+    BUS_SQ_M_TQAint_nomeite: TWideStringField;
+    BUS_SQ_M_TQAint_und_venda: TWideStringField;
+    BUS_SQ_M_TQAint_nomecor: TWideStringField;
+    BUS_SQ_M_TQAint_nometam: TWideStringField;
+    BUS_SQ_M_TQApcp_obs_item: TWideStringField;
+    BUS_SQ_M_TQAint_num_lote_opr: TWideStringField;
+    BUS_SQ_M_TQAint_pcp_epp_informa_costureiro: TBooleanField;
+    BUS_SQ_M_TQAint_pcp_epp_informa_montador: TBooleanField;
+    BUS_SQ_M_TQAint_pcp_epp_informa_colador: TBooleanField;
+    BUS_SQ_M_TQAcod_barra: TWideStringField;
+    BUS_SQ_M_TQAid_grupo: TWideStringField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;
@@ -13170,6 +13197,8 @@ type
     function CAD_DP_C_CTRDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function PCP_DP_R_EPP_FUN_RNKDataRequest(Sender: TObject;
+      Input: OleVariant): OleVariant;
+    function BUS_DP_M_TQADataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
 
 
@@ -27761,6 +27790,188 @@ begin
    BUS_SQ_M_TER_NFE.Close;
 end;
 
+function TSM.BUS_DP_M_TQADataRequest(Sender: TObject;
+  Input: OleVariant): OleVariant;
+function enSqlEtq: String;
+  begin
+    Result :=
+              'select etq.id_item, ' + #13#10 +
+              '       etq.id_cor, ' + #13#10 +
+              '       etq.cod_barra, ite.id_grupo, ' +
+              '       etq.id_tamanho,' + #13#10 +
+              '			 etq.id_epp,' + #13#10 +
+              '       etq.id_opr,' + #13#10 +
+              '			 etq.dta_saida, etq.dta_entrada_est, etq.id_ors_saida, ' + #13#10 +
+              '       cast( case                            ' + #13#10 +
+              '             when  coalesce(etq.pcp_obs_item,'''') <> '''' then etq.pcp_obs_item  ' + #13#10 +
+              '       else ite.descricao end as varchar(150)) as int_nomeite,' + #13#10 +
+              '       ite.id_und_venda as int_und_venda,' + #13#10 +
+              '       cor.descricao as int_nomecor,' + #13#10 +
+              '       tam.descricao as int_nometam,' + #13#10 +
+              '       etq.pcp_obs_item,    ' + #13#10 +
+              '       opr.num_lote as int_num_lote_opr,        ' + #13#10 +
+              '       gru.entrada_pcp_epp_informa_costureiro int_pcp_epp_informa_costureiro, '+
+              '       gru.entrada_pcp_epp_informa_montador int_pcp_epp_informa_montador,  '+
+              '       gru.entrada_pcp_epp_informa_colador int_pcp_epp_informa_colador '+
+              'from pcp_tb_m_etq etq' + #13#10 +
+              'left outer join cad_tb_c_ite ite on ite.id_item=etq.id_item' + #13#10 +
+              'left outer join cad_tb_c_gru gru on gru.id_grupo=ite.id_grupo' + #13#10 +
+              'left outer join cad_tb_c_cor cor on cor.id_cor=etq.id_cor' + #13#10 +
+              'left outer join cad_tb_c_tam tam on tam.id_tamanho=etq.id_tamanho' + #13#10 +
+              'left outer join pcp_tb_m_opr opr on opr.id_opr = etq.id_opr' + #13#10 +
+              ' ';
+
+  end;
+begin
+
+   BUS_SQ_M_TQA.Close;
+
+   if Input[0] = 0 then
+      begin
+        if Trim(VarToStr(Input[1])) = '' then
+           BUS_SQ_M_TQA.CommandText := enSqlEtq + ' WHERE 1 = 2 '
+        else
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+              ' WHERE etq.cod_barra = ''' + VarToStr(Input[1]) +''' ';
+      end
+   else if Input[0] = 1 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE etq.id_item = ''' + VarToStr(Input[1]) +''' '+
+             '   and etq.id_cor = '''+VarToStr(Input[2])+''' '+
+             '   and etq.id_tamanho = '''+VarToStr(Input[3])+''' ';
+      end
+   else if Input[0] = 2 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE etq.id_opr = ''' + VarToStr(Input[1]) +''' ';
+      end
+   else if Input[0] = 3 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE etq.cod_barra in (' + VarToStr(Input[1]) +') ' +
+             '   and etq.id_empresa = '''+VarToStr(Input[2])+''' ';
+      end
+   else if Input[0] = 4 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE etq.cod_barra  = '''+VarToStr(Input[1])+''' ' +
+             '   and etq.id_empresa = '''+VarToStr(Input[2])+''' ';
+      end
+  else if Input[0] = 5 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             ' and    etq.cod_barra  = '''+VarToStr(Input[2])+''' '+
+             ' and    coalesce(etq.id_ors_saida,0) = 0 and  etq.id_epp > 0 ' ;
+      end
+   else if Input[0] = 6 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             ' and    etq.id_item  = '''+VarToStr(Input[2])+''' ' +
+             ' and    coalesce(etq.id_ors_saida,0) = 0 and etq.id_epp > 0 ' ;
+      end
+   else if Input[0] = 7 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+           ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+           ' and    coalesce(etq.id_ors_saida,0) = 0 and etq.id_epp > 0 ' +
+             Format('and upper(ITE.DESCRICAO) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[2]))]);
+      end
+   else if Input[0] = 8 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             '  and   etq.id_item  = '''+VarToStr(Input[2])+''' ' +
+             '  and   coalesce(etq.id_ors_saida,0) = 0 ' +
+             '  and   dta_entrada_est is null ' +
+             ' order by etq.id_opr, etq.cod_barra ' ;
+      end
+   else if Input[0] = 9 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             ' and    etq.cod_barra  = '''+VarToStr(Input[2])+''' '+
+             ' and    coalesce(etq.id_ors_saida,0) = 0 ' ;
+             if Input[3] = '0' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est is null ';
+             if Input[3] = '1' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est not is null ';
+      end
+   else if Input[0] = 10 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             ' and    etq.id_item  = '''+VarToStr(Input[2])+''' ' +
+             ' and    coalesce(etq.id_ors_saida,0) = 0 ' ;
+             if Input[3] = '0' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est is null ';
+             if Input[3] = '1' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est not is null ';
+      end
+   else if Input[0] = 11 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+           ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+           ' and    coalesce(etq.id_ors_saida,0) = 0 ' +
+             Format('and upper(ITE.DESCRICAO) LIKE ''%s%%'' ', [uppercase(VarToStr(Input[2]))]);
+           if Input[3] = '0' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est is null ';
+           if Input[3] = '1' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est not is null ';
+      end
+   else if Input[0] = 12 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             '  and   etq.id_item  = '''+VarToStr(Input[2])+''' ' +
+             '  and   etq.id_cor   = '''+VarToStr(Input[3])+''' ' +
+             '  and   etq.id_tamanho  = '''+VarToStr(Input[4])+''' ' +
+             '  and   coalesce(etq.pcp_obs_item,'''') = '''+VarToStr(Input[5])+''' ' +
+             '  and   coalesce(etq.id_ors_saida,0) = 0 ' +
+             '  and   dta_entrada_est is null ' +
+             ' order by etq.id_opr, etq.cod_barra ' ;
+      end
+   else if Input[0] = 13 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             ' and    etq.id_item  = '''+VarToStr(Input[2])+''' ' +
+             ' and    etq.id_cor   = '''+VarToStr(Input[3])+''' ' +
+             ' and    etq.id_tamanho  = '''+VarToStr(Input[4])+''' ' +
+             ' and    coalesce(etq.pcp_obs_item,'''') = '''+VarToStr(Input[5])+''' ' +
+             ' and    etq.id_opr  = '''+VarToStr(Input[6])+''' ' +
+             ' and    coalesce(etq.id_ors_saida,0) = 0 and etq.id_epp > 0 ' ;
+      end
+   else if Input[0] = 14 then
+      begin
+           BUS_SQ_M_TQA.CommandText := enSqlEtq +
+             ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+             ' and    etq.cod_barra  = '''+VarToStr(Input[2])+''' '+
+             ' and    contagem = false ' +
+             ' and    coalesce(etq.id_ors_saida,0) = 0 and etq.id_epp > 0' ;
+             if Input[3] = '0' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est is null ';
+             if Input[3] = '1' then
+                BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' and   dta_entrada_est is not null ';
+      end;
+
+
+   if (Input[0] = 14) then
+      begin
+        BUS_SQ_M_TQA.CommandText := BUS_SQ_M_TQA.CommandText +  ' order by etq.cod_barra ';
+      end;
+
+   //CMServerForm.mm.Lines.Clear;
+   //CMServerForm.mm.Lines.Add(PCP_SQ_M_ETQ.CommandText);
+
+   Result := BUS_DP_M_TQA.Data;
+   BUS_SQ_M_TQA.Close;
+
+end;
+
+
 function TSM.BUS_DP_M_ULT_NFE_ITEDataRequest(Sender: TObject;
   Input: OleVariant): OleVariant;
 function enSqlUltNfeIte: String;
@@ -30634,7 +30845,10 @@ function TSM.CAD_DP_C_ITEDataRequest(Sender: TObject;
         '   GRP.descricao as int_nomegrp, '+
         '   gru.imp_etq_simples as int_impetqsimples, cast(gru.path_etq_simples as varchar(100)) as int_pathetqsimples, ' +
         '   gru.utiliza_lote as int_lote_gru,gru.ali_interna_icms as int_ali_interna_icms, ncm.cest as int_cest, '+
-        '   gru.tipo_produto as int_tipo_produto, '+
+        '   gru.tipo_produto as int_tipo_produto,   '+
+        '   gru.entrada_pcp_epp_informa_costureiro int_pcp_epp_informa_costureiro, '+
+        '   gru.entrada_pcp_epp_informa_montador int_pcp_epp_informa_montador,  '+
+        '   gru.entrada_pcp_epp_informa_colador int_pcp_epp_informa_colador , '+
         '   UND.INF_TEMPO_ITE_COJ AS INT_INF_TEMPO_ITE_COJ,  '+
         '   mar.descricao as int_nomemar,    gru.sgq_bloco_espuma as int_sgqblocoespuma,  ' +
         '   gru.sgq_calc_bloco_produzir as int_sgqcalcbloco,  '+

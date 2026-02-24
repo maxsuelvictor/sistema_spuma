@@ -12127,6 +12127,15 @@ type
     BUS_CD_M_NFE_ITE_2tpCredPresIBSZFM: TIntegerField;
     BUS_CD_M_NFE_ITE_2indBemMovelUsado: TIntegerField;
     BUS_CD_M_NFE_ITE_2cclasstrib: TWideStringField;
+    CAD_CD_C_GRUentrada_pcp_epp_informa_costureiro: TBooleanField;
+    CAD_CD_C_GRUentrada_pcp_epp_informa_montador: TBooleanField;
+    CAD_CD_C_GRUentrada_pcp_epp_informa_colador: TBooleanField;
+    CAD_CD_C_ITEint_pcp_epp_informa_costureiro: TBooleanField;
+    CAD_CD_C_ITEint_pcp_epp_informa_montador: TBooleanField;
+    CAD_CD_C_ITEint_pcp_epp_informa_colador: TBooleanField;
+    BUS_CD_C_ITEint_pcp_epp_informa_costureiro: TBooleanField;
+    BUS_CD_C_ITEint_pcp_epp_informa_montador: TBooleanField;
+    BUS_CD_C_ITEint_pcp_epp_informa_colador: TBooleanField;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);

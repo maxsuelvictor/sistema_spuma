@@ -1,0 +1,18 @@
+/***** 20-02-2026 ******/
+
+ALTER TABLE "public"."cad_tb_c_gru"
+ADD COLUMN "entrada_pcp_epp_informa_costureiro" bool,
+ADD COLUMN "entrada_pcp_epp_informa_montador" bool,
+ADD COLUMN "entrada_pcp_epp_informa_colador" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."entrada_pcp_epp_informa_costureiro" IS 'Usado na tela PCP_FM_M_EPP';
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."entrada_pcp_epp_informa_montador" IS 'Usado na tela PCP_FM_M_EPP';
+
+COMMENT ON COLUMN "public"."cad_tb_c_gru"."entrada_pcp_epp_informa_colador" IS 'Usado na tela PCP_FM_M_EPP';
+
+
+update cad_tb_c_gru
+   set entrada_pcp_epp_informa_costureiro = false,
+       entrada_pcp_epp_informa_montador = false,
+       entrada_pcp_epp_informa_colador = false;

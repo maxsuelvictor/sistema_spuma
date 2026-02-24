@@ -69,7 +69,6 @@ type
     txtControle: TDBEdit;
     lblResponsavel: TLabel;
     txtNomeResp: TDBEdit;
-    PCP_CD_M_ETQ: TClientDataSet;
     PCP_CD_M_EPP_ITEqtde: TFloatField;
     PCP_CD_M_EPP_ITEint_tipo_item: TWideStringField;
     Label2: TLabel;
@@ -81,76 +80,10 @@ type
     shpInfoInsercao: TShape;
     lblStatusInsercao: TLabel;
     lblUltimaInsercao: TLabel;
-    PCP_CD_M_ETQid_opr: TIntegerField;
-    PCP_CD_M_ETQid_item: TIntegerField;
-    PCP_CD_M_ETQid_cor: TIntegerField;
-    PCP_CD_M_ETQid_tamanho: TIntegerField;
-    PCP_CD_M_ETQcod_barra: TWideStringField;
-    PCP_CD_M_ETQsequencia: TIntegerField;
-    PCP_CD_M_ETQdta_criacao: TDateField;
-    PCP_CD_M_ETQhor_criacao: TTimeField;
-    PCP_CD_M_ETQimpressa: TBooleanField;
-    PCP_CD_M_ETQint_nomeite: TWideStringField;
-    PCP_CD_M_ETQint_und_venda: TWideStringField;
-    PCP_CD_M_ETQint_nomecor: TWideStringField;
-    PCP_CD_M_ETQint_nometam: TWideStringField;
-    PCP_CD_M_ETQid_etq: TIntegerField;
-    PCP_CD_M_ETQdta_entrada_est: TDateField;
-    PCP_CD_M_ETQhor_entrada_est: TTimeField;
-    PCP_CD_M_ETQid_funcionario_est: TIntegerField;
-    PCP_CD_M_ETQhor_impressa: TTimeField;
-    PCP_CD_M_ETQdta_impressa: TDateField;
-    PCP_CD_M_ETQid_func_impressa: TIntegerField;
-    PCP_CD_M_ETQid_opr_origem: TIntegerField;
-    PCP_CD_M_ETQint_selecao: TBooleanField;
-    PCP_CD_M_ETQint_medidaite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_espuma1ite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_espuma2ite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_espuma3ite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_madeiraite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_revestimento1ite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_revestimento2ite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_revestimento3ite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_recomendacoes1ite: TWideStringField;
-    PCP_CD_M_ETQint_etiq_recomendacoes2ite: TWideStringField;
-    PCP_CD_M_ETQint_nomecue: TWideStringField;
-    PCP_CD_M_ETQint_nomecle: TWideStringField;
-    PCP_CD_M_ETQint_nomeseloetq: TWideStringField;
-    PCP_CD_M_ETQint_etiq_modelo: TWideStringField;
-    PCP_CD_M_ETQint_fteetq: TIntegerField;
-    PCP_CD_M_ETQint_impselo: TBooleanField;
-    PCP_CD_M_ETQint_impmsgetq: TBooleanField;
-    PCP_CD_M_ETQint_modeloftq_etq: TIntegerField;
-    PCP_CD_M_ETQint_nome_layout_etq: TWideStringField;
-    PCP_CD_M_ETQcod_int_etq: TWideStringField;
-    PCP_CD_M_ETQcod_int_etq_rev: TWideStringField;
-    PCP_CD_M_ETQdescricao: TWideStringField;
-    PCP_CD_M_ETQetq_tecnica: TBooleanField;
-    PCP_CD_M_ETQespecificacoes: TWideStringField;
-    PCP_CD_M_ETQtexto_livre1: TWideStringField;
-    PCP_CD_M_ETQtexto_livre2: TWideStringField;
-    PCP_CD_M_ETQid_fte_etq: TIntegerField;
-    PCP_CD_M_ETQmodelo_etq: TIntegerField;
-    PCP_CD_M_ETQid_fte: TIntegerField;
-    PCP_CD_M_ETQcod_lme: TWideStringField;
-    PCP_CD_M_ETQrev_lme: TWideStringField;
-    PCP_CD_M_ETQrequisitos: TWideStringField;
-    PCP_CD_M_ETQinf_contato: TWideStringField;
-    PCP_CD_M_ETQinf_remocao: TWideStringField;
-    PCP_CD_M_ETQinf_sac: TWideStringField;
-    PCP_CD_M_ETQid_empresa: TIntegerField;
-    PCP_CD_M_ETQdta_saida: TDateField;
-    PCP_CD_M_ETQhor_saida: TTimeField;
-    PCP_CD_M_ETQid_ors_saida: TIntegerField;
-    PCP_CD_M_ETQid_rom_saida: TIntegerField;
-    PCP_CD_M_ETQid_funcionario_sai: TWideStringField;
     pnlQtde: TPanel;
     Label19: TLabel;
     txtQtdeInf: TEdit;
-    PCP_CD_M_ETQid_epp: TIntegerField;
     PCP_CD_M_EPP_ITEint_numlote_opr: TWideStringField;
-    PCP_CD_M_ETQint_num_lote_opr: TWideStringField;
-    PCP_CD_M_ETQpcp_obs_item: TWideStringField;
     PCP_CD_M_EPPtipo_entrada: TIntegerField;
     PCP_CD_M_EPP_ITEint_ite_sgq_personalizado: TBooleanField;
     PCP_CD_M_EPP_ITEid_func_colchoaria: TIntegerField;
@@ -281,6 +214,26 @@ type
     BooleanField29: TBooleanField;
     Label12: TLabel;
     txtLeitorCodBarras: TEdit;
+    BUS_CD_M_TQA: TClientDataSet;
+    BUS_CD_M_TQAid_item: TIntegerField;
+    BUS_CD_M_TQAid_cor: TIntegerField;
+    BUS_CD_M_TQAid_tamanho: TIntegerField;
+    BUS_CD_M_TQAid_epp: TIntegerField;
+    BUS_CD_M_TQAid_opr: TIntegerField;
+    BUS_CD_M_TQAdta_saida: TDateField;
+    BUS_CD_M_TQAdta_entrada_est: TDateField;
+    BUS_CD_M_TQAid_ors_saida: TIntegerField;
+    BUS_CD_M_TQAint_nomeite: TWideStringField;
+    BUS_CD_M_TQAint_und_venda: TWideStringField;
+    BUS_CD_M_TQAint_nomecor: TWideStringField;
+    BUS_CD_M_TQAint_nometam: TWideStringField;
+    BUS_CD_M_TQApcp_obs_item: TWideStringField;
+    BUS_CD_M_TQAint_num_lote_opr: TWideStringField;
+    BUS_CD_M_TQAint_pcp_epp_informa_costureiro: TBooleanField;
+    BUS_CD_M_TQAint_pcp_epp_informa_montador: TBooleanField;
+    BUS_CD_M_TQAint_pcp_epp_informa_colador: TBooleanField;
+    BUS_CD_M_TQAcod_barra: TWideStringField;
+    BUS_CD_M_TQAid_grupo: TWideStringField;
     procedure acAdicionaExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure txtBuscaItemKeyDown(Sender: TObject; var Key: Word;
@@ -314,6 +267,11 @@ type
     procedure txtIdMontagemCaixaExit(Sender: TObject);
     procedure txtIdColagemExit(Sender: TObject);
     procedure txtLeitorCodBarrasExit(Sender: TObject);
+    procedure txtIdCostureiroEnter(Sender: TObject);
+    procedure BUS_CD_M_TQAReconcileError(DataSet: TCustomClientDataSet;
+      E: EReconcileError; UpdateKind: TUpdateKind;
+      var Action: TReconcileAction);
+    procedure txtBuscaItemEnter(Sender: TObject);
   private
     { Private declarations }
      procedure AcoesIniciais;
@@ -683,10 +641,17 @@ procedure TPCP_FM_M_EPP.grdItensMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   inherited;
+
+ // if pnItens.Enabled = false then
+  //   pnItens.Enabled := true;
+
+  //PCP_CD_M_EPP_ITE.cancel;
+
   grdItens.Hint := '';
   if PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString <> '' then
      grdItens.Hint := 'Cod. barra: ' + PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString + '  ' +
                       'Lancto manual?: ' + PCP_CD_M_EPP_ITE.FieldByName('lancto_func_colch_manual').AsString;
+
 end;
 
 procedure TPCP_FM_M_EPP.PCP_CD_M_EPPNewRecord(DataSet: TDataSet);
@@ -811,6 +776,14 @@ begin
   PSQ_FM_X_ROM_ETQ.Free; }
 end;
 
+procedure TPCP_FM_M_EPP.txtBuscaItemEnter(Sender: TObject);
+begin
+  inherited;
+  txtIdCostureiro.Color    := $00DADADA;
+  txtIdMontagemCaixa.Color := $00DADADA;
+  txtIdColagem.Color       := $00DADADA;
+end;
+
 procedure TPCP_FM_M_EPP.txtBuscaItemExit(Sender: TObject);
 var
   id_item, desc, und, id_busca_item, cod_barra, cod_barra_primeiro, id_cor,
@@ -822,6 +795,7 @@ var
   nome_func_colc, nome_func_montagem, nome_func_colagem: String;
   filtroEtq: String;
   func_colch_manual, func_montagem_manual, func_colagem_manual : Boolean;
+  informa_costureiro, informa_montador, informa_colador: Boolean;
 begin
   inherited;
 
@@ -871,9 +845,9 @@ begin
      end;
   if xbusca_item = 'COD_BARRA'  then
      begin
-       PCP_CD_M_ETQ.Data :=
-            PCP_CD_M_ETQ.DataRequest(VarArrayOf([4, txtBuscaItem.Text, dmGeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').Text ]));
-       if PCP_CD_M_ETQ.IsEmpty then
+       BUS_CD_M_TQA.Data :=
+            BUS_CD_M_TQA.DataRequest(VarArrayOf([4, txtBuscaItem.Text, dmGeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').Text ]));
+       if BUS_CD_M_TQA.IsEmpty then
           begin
             shpInfoInsercao.Brush.Color := clRed;
             lblStatusInsercao.Caption := 'Produto com etiqueta não encontrado!';
@@ -885,7 +859,7 @@ begin
                end;
 
             ShowMessage('Etiqueta não encontrada.');
-            PCP_CD_M_ETQ.close;
+            BUS_CD_M_TQA.close;
             txtBuscaItem.SetFocus;
             txtBuscaItem.Text := '';
             lblStatusInsercao.Caption := 'Aguadando inserir!';
@@ -897,7 +871,7 @@ begin
           end
        else
           begin
-            if PCP_CD_M_ETQ.FieldByName('dta_entrada_est').Text <> '' then
+            if BUS_CD_M_TQA.FieldByName('dta_entrada_est').Text <> '' then
                begin
                  shpInfoInsercao.Brush.Color := clYellow;
                  lblStatusInsercao.Caption := 'Já dado entrada no estoque!';
@@ -909,9 +883,9 @@ begin
                     end;
 
                  ShowMessage('Já houve entrada no estoque para este produto com essa etiqueta.' + #13 +
-                             'Código da entrada: ' + PCP_CD_M_ETQ.FieldByName('id_epp').Text + ' - '
-                               + ' Entrada em : ' + PCP_CD_M_ETQ.FieldByName('dta_entrada_est').Text);
-                 PCP_CD_M_ETQ.close;
+                             'Código da entrada: ' + BUS_CD_M_TQA.FieldByName('id_epp').Text + ' - '
+                               + ' Entrada em : ' + BUS_CD_M_TQA.FieldByName('dta_entrada_est').Text);
+                 BUS_CD_M_TQA.close;
                  txtBuscaItem.SetFocus;
                  txtBuscaItem.Text := '';
                  lblStatusInsercao.Caption := 'Aguadando inserir!';
@@ -920,7 +894,7 @@ begin
                  PCP_CD_M_EPP_ITE.insert;
                  exit;
                end;
-            if PCP_CD_M_ETQ.FieldByName('dta_saida').Text <> '' then
+            if BUS_CD_M_TQA.FieldByName('dta_saida').Text <> '' then
                begin
                  shpInfoInsercao.Brush.Color := clYellow;
                  lblStatusInsercao.Caption := 'Já teve saída do estoque!';
@@ -932,9 +906,9 @@ begin
                     end;
 
                  ShowMessage('Este produto com esta etiqueta já teve saída de estoque!' + #13 +
-                             'Ordem de faturamento: ' + PCP_CD_M_ETQ.FieldByName('id_ors_saida').Text + ' - Saída em: ' +
-                             PCP_CD_M_ETQ.FieldByName('dta_saida').Text);
-                 PCP_CD_M_ETQ.close;
+                             'Ordem de faturamento: ' + BUS_CD_M_TQA.FieldByName('id_ors_saida').Text + ' - Saída em: ' +
+                             BUS_CD_M_TQA.FieldByName('dta_saida').Text);
+                 BUS_CD_M_TQA.close;
                  txtBuscaItem.SetFocus;
                  txtBuscaItem.Text := '';
                  lblStatusInsercao.Caption := 'Aguadando inserir!';
@@ -944,12 +918,48 @@ begin
                  exit;
                end;
 
-            if (PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString = '') or
+            {if (PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString = '') or
                (PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString = '') or
-               (PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString = '') then
+               (PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString = '') then}
+
+            informa_costureiro := BUS_CD_M_TQA.FieldByName('int_pcp_epp_informa_costureiro').AsBoolean;
+            informa_montador   := BUS_CD_M_TQA.FieldByName('int_pcp_epp_informa_montador').AsBoolean;
+            informa_colador    := BUS_CD_M_TQA.FieldByName('int_pcp_epp_informa_colador').AsBoolean;
+
+            if informa_costureiro = false then
+               begin
+                 PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := '0';
+                 txtIdCostureiro.Color := clRed;
+               end;
+            if informa_montador = false then
+               begin
+                 PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString   := '0';
+                 txtIdMontagemCaixa.Color := clRed;
+               end;
+            if informa_colador  = false then
+               begin
+                 PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString    := '0';
+                 txtIdColagem.Color := clRed;
+               end;
+
+            PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text       :=
+                BUS_CD_M_TQA.FieldByName('id_item').Text;
+            PCP_CD_M_EPP_ITE.FieldByName('int_nomeite').Text   :=
+                BUS_CD_M_TQA.FieldByName('int_nomeite').AsString;
+            PCP_CD_M_EPP_ITE.FieldByName('int_nomecor').Text   :=
+                BUS_CD_M_TQA.FieldByName('int_nomecor').Text;
+            PCP_CD_M_EPP_ITE.FieldByName('int_nometam').Text   :=
+                BUS_CD_M_TQA.FieldByName('int_nometam').Text;
+
+
+            if ( (informa_costureiro) and (PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString = '') ) or
+               ( (informa_montador) and (PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString = '') ) or
+               ( (informa_colador) and (PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString = '') )  then
                begin
                  pnlFuncionario.visible := true;
-                 txtIdCostureiro.setfocus;
+                 txtLeitorCodBarras.text := '';
+                 txtLeitorCodBarras.SetFocus;
+                    //txtIdCostureiro.setfocus;
                  exit;
                end;
 
@@ -1020,12 +1030,12 @@ begin
             restante    := 0;
             qtdeInserir := 1;
 
-            codigo  := PCP_CD_M_ETQ.FieldByName('ID_ITEM').AsString;
-            cor     := PCP_CD_M_ETQ.FieldByName('ID_COR').AsString;
-            tamanho := PCP_CD_M_ETQ.FieldByName('ID_TAMANHO').AsString;
-            pcp_obs_item := PCP_CD_M_ETQ.FieldByName('pcp_obs_item').AsString;
+            codigo  := BUS_CD_M_TQA.FieldByName('ID_ITEM').AsString;
+            cor     := BUS_CD_M_TQA.FieldByName('ID_COR').AsString;
+            tamanho := BUS_CD_M_TQA.FieldByName('ID_TAMANHO').AsString;
+            pcp_obs_item := BUS_CD_M_TQA.FieldByName('pcp_obs_item').AsString;
 
-            dmGeral.BusItens(0,PCP_CD_M_ETQ.FieldByName('ID_ITEM').AsString);
+            dmGeral.BusItens(0,BUS_CD_M_TQA.FieldByName('ID_ITEM').AsString);
             dmGeral.BusGrupoEst(0,dmGeral.BUS_CD_C_ITE.FieldByName('ID_GRUPO').AsString);
 
             if dmGeral.BUS_CD_C_GRU.FieldByName('sgq_inf_qtde_ite_carg').AsBoolean then
@@ -1046,11 +1056,11 @@ begin
                       qtdeInserir := strtoint(txtQtdeInf.Text);
                       txtQtdeInf.Text := '0';
 
-                      PCP_CD_M_ETQ.Close;
-                      PCP_CD_M_ETQ.Data :=
-                              PCP_CD_M_ETQ.DataRequest(VarArrayOf([12,dmgeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').AsString,
+                      BUS_CD_M_TQA.Close;
+                      BUS_CD_M_TQA.Data :=
+                              BUS_CD_M_TQA.DataRequest(VarArrayOf([12,dmgeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').AsString,
                               codigo,cor,tamanho,pcp_obs_item]));
-                      PCP_CD_M_ETQ.First;
+                      BUS_CD_M_TQA.First;
 
 
                       cod_barra := PCP_CD_M_EPP_ITE.FieldByName('ID_BUSCA_ITEM').Text;
@@ -1072,17 +1082,17 @@ begin
                                 filtroEtq :=  ' cod_barra like('+filtroEtq+')';
                               end;
 
-                           PCP_CD_M_ETQ.Filtered := true;
-                           PCP_CD_M_ETQ.Filter := filtroEtq;
+                           BUS_CD_M_TQA.Filtered := true;
+                           BUS_CD_M_TQA.Filter := filtroEtq;
 
                          end;
 
                       // --------------------------------------------------
 
-                      if qtdeInserir > PCP_CD_M_ETQ.RecordCount then
+                      if qtdeInserir > BUS_CD_M_TQA.RecordCount then
                          begin
                            ShowMessage('Não há etiqueta(produto) suficiente para atender a quantidade informada.');
-                           PCP_CD_M_ETQ.close;
+                           BUS_CD_M_TQA.close;
                            txtBuscaItem.SetFocus;
                            txtBuscaItem.Text := '';
                            pnlQtde.Visible := false;
@@ -1118,11 +1128,11 @@ begin
 
 
 
-                      while ((qtdeInserir <> restante) and (PCP_CD_M_ETQ.eof = false )) do
+                      while ((qtdeInserir <> restante) and (BUS_CD_M_TQA.eof = false )) do
                            begin
                               if xbusca_item = 'COD_BARRA' then
                                  begin
-                                    if not (PCP_CD_M_EPP_ITE.Locate('cod_barra',PCP_CD_M_ETQ.FieldByName('cod_barra').AsString,[])) then
+                                    if not (PCP_CD_M_EPP_ITE.Locate('cod_barra',BUS_CD_M_TQA.FieldByName('cod_barra').AsString,[])) then
                                       begin
                                         inc(restante)
                                         {shpInfoInsercao.Brush.Color := clYellow;
@@ -1135,7 +1145,7 @@ begin
                                         dmGeral.BUS_CD_C_GRU.close;
                                         exit;}
                                       end;
-                                    PCP_CD_M_ETQ.Next;
+                                    BUS_CD_M_TQA.Next;
                                  end;
                               //inc(contador);
                            end;
@@ -1161,24 +1171,24 @@ begin
 
 
                       contador := 0;
-                      PCP_CD_M_ETQ.First;
+                      BUS_CD_M_TQA.First;
 
                       while not (qtdeInserir = contador) do
                            begin
                               // Este IF é para poder pegar o código de barra digitado pelo usuário
                               if cod_barra_primeiro <> '' then
                                  begin
-                                   PCP_CD_M_ETQ.Locate('cod_barra',cod_barra_primeiro,[]);
+                                   BUS_CD_M_TQA.Locate('cod_barra',cod_barra_primeiro,[]);
                                  end
                               else
                                  begin
-                                    while (PCP_CD_M_EPP_ITE.Locate('cod_barra',PCP_CD_M_ETQ.FieldByName('cod_barra').AsString,[])) do
+                                    while (PCP_CD_M_EPP_ITE.Locate('cod_barra',BUS_CD_M_TQA.FieldByName('cod_barra').AsString,[])) do
                                         begin
-                                          PCP_CD_M_ETQ.Next;
+                                          BUS_CD_M_TQA.Next;
                                         end;
                                  end;
 
-                              cod_barra := PCP_CD_M_ETQ.FieldByName('cod_barra').Text;
+                              cod_barra := BUS_CD_M_TQA.FieldByName('cod_barra').Text;
 
                               PCP_CD_M_EPP_ITE.Append;
                               PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString := cod_barra;
@@ -1199,21 +1209,21 @@ begin
 
 
                               PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text       :=
-                                    PCP_CD_M_ETQ.FieldByName('id_item').Text;
+                                    BUS_CD_M_TQA.FieldByName('id_item').Text;
 
                               PCP_CD_M_EPP_ITE.FieldByName('qtde').AsCurrency      := 1;
 
-                              PCP_CD_M_EPP_ITE.FieldByName('int_opr').Text  := PCP_CD_M_ETQ.FieldByName('id_opr').Text;
-                              PCP_CD_M_EPP_ITE.FieldByName('int_numlote_opr').Text  := PCP_CD_M_ETQ.FieldByName('int_num_lote_opr').Text;
+                              PCP_CD_M_EPP_ITE.FieldByName('int_opr').Text  := BUS_CD_M_TQA.FieldByName('id_opr').Text;
+                              PCP_CD_M_EPP_ITE.FieldByName('int_numlote_opr').Text  := BUS_CD_M_TQA.FieldByName('int_num_lote_opr').Text;
 
                               PCP_CD_M_EPP_ITE.FieldByName('int_nomeite').Text   :=
-                                   PCP_CD_M_ETQ.FieldByName('int_nomeite').AsString;
+                                   BUS_CD_M_TQA.FieldByName('int_nomeite').AsString;
                               PCP_CD_M_EPP_ITE.FieldByName('int_undvenda').Text :=
-                                   PCP_CD_M_ETQ.FieldByName('int_und_venda').AsString;
-                              PCP_CD_M_EPP_ITE.FieldByName('id_cor').Text       := PCP_CD_M_ETQ.FieldByName('id_cor').Text;
-                              PCP_CD_M_EPP_ITE.FieldByName('int_nomecor').Text  := PCP_CD_M_ETQ.FieldByName('int_nomecor').Text;
-                              PCP_CD_M_EPP_ITE.FieldByName('id_tamanho').Text   := PCP_CD_M_ETQ.FieldByName('id_tamanho').Text;
-                              PCP_CD_M_EPP_ITE.FieldByName('int_nometam').Text  := PCP_CD_M_ETQ.FieldByName('int_nometam').Text;
+                                   BUS_CD_M_TQA.FieldByName('int_und_venda').AsString;
+                              PCP_CD_M_EPP_ITE.FieldByName('id_cor').Text       := BUS_CD_M_TQA.FieldByName('id_cor').Text;
+                              PCP_CD_M_EPP_ITE.FieldByName('int_nomecor').Text  := BUS_CD_M_TQA.FieldByName('int_nomecor').Text;
+                              PCP_CD_M_EPP_ITE.FieldByName('id_tamanho').Text   := BUS_CD_M_TQA.FieldByName('id_tamanho').Text;
+                              PCP_CD_M_EPP_ITE.FieldByName('int_nometam').Text  := BUS_CD_M_TQA.FieldByName('int_nometam').Text;
 
                               dmGeral.BUS_CD_C_ITE.Data :=
                                       dmGeral.BUS_CD_C_ITE.DataRequest(VarArrayOf([0, PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text]));
@@ -1225,11 +1235,11 @@ begin
 
 
                               inc(contador);
-                              PCP_CD_M_ETQ.Next;
+                              BUS_CD_M_TQA.Next;
                               if cod_barra_primeiro <> '' then
                                  begin
                                    cod_barra_primeiro := '';
-                                   PCP_CD_M_ETQ.First;
+                                   BUS_CD_M_TQA.First;
                                  end;
                            end;
 
@@ -1242,7 +1252,7 @@ begin
                       //Sleep(1000);
 
                       finally
-                        PCP_CD_M_ETQ.Filtered := false;
+                        BUS_CD_M_TQA.Filtered := false;
                       end;
 
                       try
@@ -1262,7 +1272,7 @@ begin
                begin
                   //PCP_CD_M_EPP_ITE.Append;
 
-                  cod_barra := PCP_CD_M_ETQ.FieldByName('cod_barra').Text;
+                  cod_barra := BUS_CD_M_TQA.FieldByName('cod_barra').Text;
 
                   PCP_CD_M_EPP_ITE.FieldByName('cod_barra').AsString := cod_barra;
 
@@ -1280,19 +1290,19 @@ begin
 
 
                   PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text       :=
-                        PCP_CD_M_ETQ.FieldByName('id_item').Text;
+                        BUS_CD_M_TQA.FieldByName('id_item').Text;
 
-                  PCP_CD_M_EPP_ITE.FieldByName('int_opr').Text  := PCP_CD_M_ETQ.FieldByName('id_opr').Text;
-                  PCP_CD_M_EPP_ITE.FieldByName('int_numlote_opr').Text  := PCP_CD_M_ETQ.FieldByName('int_num_lote_opr').Text;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_opr').Text  := BUS_CD_M_TQA.FieldByName('id_opr').Text;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_numlote_opr').Text  := BUS_CD_M_TQA.FieldByName('int_num_lote_opr').Text;
 
                   PCP_CD_M_EPP_ITE.FieldByName('int_nomeite').Text   :=
-                       PCP_CD_M_ETQ.FieldByName('int_nomeite').AsString;
+                       BUS_CD_M_TQA.FieldByName('int_nomeite').AsString;
                   PCP_CD_M_EPP_ITE.FieldByName('int_undvenda').Text :=
-                       PCP_CD_M_ETQ.FieldByName('int_und_venda').AsString;
-                  PCP_CD_M_EPP_ITE.FieldByName('id_cor').Text       := PCP_CD_M_ETQ.FieldByName('id_cor').Text;
-                  PCP_CD_M_EPP_ITE.FieldByName('int_nomecor').Text  := PCP_CD_M_ETQ.FieldByName('int_nomecor').Text;
-                  PCP_CD_M_EPP_ITE.FieldByName('id_tamanho').Text   := PCP_CD_M_ETQ.FieldByName('id_tamanho').Text;
-                  PCP_CD_M_EPP_ITE.FieldByName('int_nometam').Text  := PCP_CD_M_ETQ.FieldByName('int_nometam').Text;
+                       BUS_CD_M_TQA.FieldByName('int_und_venda').AsString;
+                  PCP_CD_M_EPP_ITE.FieldByName('id_cor').Text       := BUS_CD_M_TQA.FieldByName('id_cor').Text;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_nomecor').Text  := BUS_CD_M_TQA.FieldByName('int_nomecor').Text;
+                  PCP_CD_M_EPP_ITE.FieldByName('id_tamanho').Text   := BUS_CD_M_TQA.FieldByName('id_tamanho').Text;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_nometam').Text  := BUS_CD_M_TQA.FieldByName('int_nometam').Text;
 
                   dmGeral.BUS_CD_C_ITE.Data :=
                           dmGeral.BUS_CD_C_ITE.DataRequest(VarArrayOf([0, PCP_CD_M_EPP_ITE.FieldByName('ID_ITEM').Text]));
@@ -1306,7 +1316,7 @@ begin
                   //PCP_CD_M_EPP_ITE.Post;
                end;
           end;
-       PCP_CD_M_ETQ.close;
+       BUS_CD_M_TQA.close;
      end;
   if xbusca_item = 'COD_FABRICA' then
      begin
@@ -1454,7 +1464,7 @@ var
 begin
   inherited;
 
-
+ {
   if txtIdCostureiro.Focused then
      begin
        exit;
@@ -1484,15 +1494,7 @@ begin
 
    if (trim(txtIdColagem.Text) = '0') then
        begin
-         {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
-            0, mrNo, true, false,'', nil) = 7 then
-            begin
-             exit;
-            end
-         else
-            begin
 
-            end; }
          PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsInteger := 0;
          PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString := '';
        end
@@ -1539,7 +1541,21 @@ begin
       end;
 
   pnlFuncionario.Visible := false;
-  txtBuscaItemExit(self);
+  txtBuscaItemExit(self);   }
+end;
+
+procedure TPCP_FM_M_EPP.txtIdCostureiroEnter(Sender: TObject);
+begin
+  inherited;
+  txtLeitorCodBarras.Text := '';
+
+   if (rtrim(PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString) = '') or
+      (rtrim(PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString) = '') or
+      (rtrim(PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString)  = '') then
+      begin
+       txtLeitorCodBarras.SetFocus;
+      end;
+
 end;
 
 procedure TPCP_FM_M_EPP.txtIdCostureiroExit(Sender: TObject);
@@ -1547,7 +1563,7 @@ var
   IdCostureiro: String;
 begin
   inherited;
-
+  {
   if (trim(txtIdCostureiro.Text) = '') then
       begin
         if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_costureiro_nao_informado.wav') then
@@ -1566,15 +1582,7 @@ begin
 
    if (trim(txtIdCostureiro.Text) = '0') then
        begin
-         {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
-            0, mrNo, true, false,'', nil) = 7 then
-            begin
-             exit;
-            end
-         else
-            begin
 
-            end; }
          PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsInteger := 0;
          PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString := '';
        end
@@ -1618,7 +1626,7 @@ begin
            end;
         PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString :=
            dmGeral.BUS_CD_C_FU4.FieldByName('nome').AsString;
-      end;
+      end; }
 
 
   // Por Maxsuel Victor , em 24/11/2025
@@ -1633,7 +1641,7 @@ var
 begin
   inherited;
 
-
+  {
   if txtIdCostureiro.Focused then
      begin
        exit;
@@ -1658,15 +1666,7 @@ begin
 
    if (trim(txtIdMontagemCaixa.Text) = '0') then
        begin
-         {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
-            0, mrNo, true, false,'', nil) = 7 then
-            begin
-             exit;
-            end
-         else
-            begin
 
-            end; }
          PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsInteger := 0;
          PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString := '';
        end
@@ -1710,7 +1710,7 @@ begin
            end;
         PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString :=
            BUS_CD_C_FU5.FieldByName('nome').AsString;
-      end;
+      end; }
 
 
   //pnlFuncionario.Visible := false;
@@ -1719,38 +1719,67 @@ end;
 
 procedure TPCP_FM_M_EPP.txtLeitorCodBarrasExit(Sender: TObject);
 var
-  IdBarras, IdFuncBarras: String;
+  //IdBarras
+  IdFuncBarras: String;
   achouColchoeiro, achouMontador, achouColador: Boolean;
+  informa_costureiro, informa_montador, informa_colador: Boolean;
 begin
   inherited;
 
   if (trim(txtLeitorCodBarras.Text) = '') then
       begin
+        if btnCancelar.Focused or
+          btnGrava.Focused or btnSair.Focused then
+          begin
+            exit;
+          end;
+
+       if txtBuscaItem.Focused then
+          begin
+            BUS_CD_M_TQA.close;
+            txtBuscaItem.SetFocus;
+            txtBuscaItem.Text := '';
+            lblStatusInsercao.Caption := 'Aguadando inserir!';
+            shpInfoInsercao.Brush.Color := $00DADADA;
+            PCP_CD_M_EPP_ITE.cancel;
+            PCP_CD_M_EPP_ITE.insert;
+
+            pnlFuncionario.Visible := false;
+
+            exit;
+          end;
+
+       if grdItens.Focused then
+          begin
+             BUS_CD_M_TQA.close;
+             txtBuscaItem.SetFocus;
+             txtBuscaItem.Text := '';
+             lblStatusInsercao.Caption := 'Aguadando inserir!';
+             shpInfoInsercao.Brush.Color := $00DADADA;
+             PCP_CD_M_EPP_ITE.cancel;
+             PCP_CD_M_EPP_ITE.insert;
+
+             pnlFuncionario.Visible := false;
+
+             exit;
+          end;
+
+       //pnItens.Enabled := false;
+       //exit;
+
+
         if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_informado.wav') then
            begin
              sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_informado.wav'),SND_LOOP);
            end;
         ShowMessage('Nenhum valor foi informado.');
-        txtIdColagem.SetFocus;
-        exit;
+        txtLeitorCodBarras.SetFocus;
+        Abort;
       end;
 
-   if txtBuscaItem.Focused then
-     begin
-       exit;
-     end;
-
-   if (trim(txtIdColagem.Text) = '0') then
+   {if (trim(txtIdColagem.Text) = '0') then
        begin
-         {if Dc_MessageDlgCheck('Confirma entrada sem ' + #13 + 'Deseja reimprimir?', mtConfirmation, [mbYes, mbNo],
-            0, mrNo, true, false,'', nil) = 7 then
-            begin
-             exit;
-            end
-         else
-            begin
 
-            end; }
          PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsInteger   := 0;
          PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString     := '';
 
@@ -1759,15 +1788,48 @@ begin
 
          PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsInteger      := 0;
          PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString  := '';
+
+         pnlFuncionario.Visible := false;
+         txtBuscaItemExit(self);
        end
    else
-      begin
-        IdBarras := txtLeitorCodBarras.Text;
+      begin}
+        if txtBuscaItem.Focused then
+           begin
+              BUS_CD_M_TQA.close;
+              txtBuscaItem.SetFocus;
+              txtBuscaItem.Text := '';
+              lblStatusInsercao.Caption := 'Aguadando inserir!';
+              shpInfoInsercao.Brush.Color := $00DADADA;
+              PCP_CD_M_EPP_ITE.cancel;
+              PCP_CD_M_EPP_ITE.insert;
 
-        if strtoint(copy(IdBarras,1,2)) = 99 then
+              pnlFuncionario.Visible := false;
+
+              exit;
+           end;
+
+        if grdItens.Focused then
+           begin
+             BUS_CD_M_TQA.close;
+             txtBuscaItem.SetFocus;
+             txtBuscaItem.Text := '';
+             lblStatusInsercao.Caption := 'Aguadando inserir!';
+             shpInfoInsercao.Brush.Color := $00DADADA;
+             PCP_CD_M_EPP_ITE.cancel;
+             PCP_CD_M_EPP_ITE.insert;
+
+             pnlFuncionario.Visible := false;
+
+             exit;
+           end;
+
+        IdFuncBarras := txtLeitorCodBarras.Text;
+
+        if strtoint(copy(IdFuncBarras,1,2)) = 99 then
            begin
              IdFuncBarras :=
-                 copy(IdBarras,3,length(IdBarras));
+                 copy(IdFuncBarras,3,length(IdFuncBarras));
            end;
 
         if not (dmGeral.BUS_CD_C_FU3.Locate('id_funcionario',IdFuncBarras,[])) then
@@ -1778,7 +1840,7 @@ begin
                   sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_funcionario_sem_cadastro.wav'),SND_LOOP);
                 end;
 
-             ShowMessage('Funcionário não cadastrado.');
+             //ShowMessage('Funcionário não cadastrado.');
              txtLeitorCodBarras.SetFocus;
              txtLeitorCodBarras.text := '';
              exit;
@@ -1788,6 +1850,13 @@ begin
              achouColchoeiro := false;
              achouMontador   := false;
              achouColador    := false;
+
+
+
+             informa_costureiro := BUS_CD_M_TQA.FieldByName('int_pcp_epp_informa_costureiro').AsBoolean;
+             informa_montador   := BUS_CD_M_TQA.FieldByName('int_pcp_epp_informa_montador').AsBoolean;
+             informa_colador    := BUS_CD_M_TQA.FieldByName('int_pcp_epp_informa_colador').AsBoolean;
+
 
              if not (dmGeral.BUS_CD_C_FU4.Locate('id_funcionario',IdFuncBarras,[])) then //Costureiro
                 begin
@@ -1816,28 +1885,68 @@ begin
 
         if achouColchoeiro = true then
            begin
-             PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := IdFuncBarras;
-             PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString  :=
-                dmGeral.BUS_CD_C_FU4.FieldByName('nome').AsString;
+             if informa_costureiro then
+                begin
+                  PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString := IdFuncBarras;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colc').AsString  :=
+                      dmGeral.BUS_CD_C_FU4.FieldByName('nome').AsString;
+                end
+             else
+                begin
+                  if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_costureiro_nao_permitido.wav') then
+                     begin
+                       sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_costureiro_nao_permitido.wav'),SND_LOOP);
+                     end;
+                end;
            end;
 
         if achouMontador = True then
            begin
-              PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString := IdFuncBarras;
-              PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString :=
-                  BUS_CD_C_FU5.FieldByName('nome').AsString;
+             if informa_montador then
+                begin
+                  PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString := IdFuncBarras;
+                  PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_montagem').AsString :=
+                      BUS_CD_C_FU5.FieldByName('nome').AsString;
+                end
+             else
+                begin
+                  if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_montador_nao_permitido.wav') then
+                     begin
+                       sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_montador_nao_permitido.wav'),SND_LOOP);
+                     end;
+                end;
            end;
 
         if achouColador = true then
            begin
-             PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString := IdFuncBarras;
-             PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString :=
-                 BUS_CD_C_FU6.FieldByName('nome').AsString;
+             if informa_colador then
+                begin
+                   PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString := IdFuncBarras;
+                   PCP_CD_M_EPP_ITE.FieldByName('int_nomefunc_colagem').AsString :=
+                       BUS_CD_C_FU6.FieldByName('nome').AsString;
+                end
+             else
+                begin
+                  if FileExists(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_permitido.wav') then
+                     begin
+                       sndPlaySound(pchar(ExtractFilePath(Application.ExeName)+'Audios\PCP_FM_M_EPP\epp_colador_nao_permitido.wav'),SND_LOOP);
+                     end;
+                end;
            end;
-      end;
 
-  pnlFuncionario.Visible := false;
-  txtBuscaItemExit(self);
+        if ( (PCP_CD_M_EPP_ITE.FieldByName('id_func_colchoaria').AsString <> '') or (informa_costureiro = false) ) and
+           ( (PCP_CD_M_EPP_ITE.FieldByName('id_func_montagem').AsString <> '')   or (informa_montador   = false) ) and
+           ( (PCP_CD_M_EPP_ITE.FieldByName('id_func_colagem').AsString  <> '')   or (achouColador       = false) ) then
+            begin
+              pnItens.OnExit := nil;
+
+              pnlFuncionario.Visible := false;
+
+              pnItens.OnExit := pnItensExit;
+
+              txtBuscaItemExit(self);
+            end;
+      //end;
 end;
 
 
@@ -1848,18 +1957,18 @@ begin
 
    if strtoint(txtQtdeInf.Text) > 0 then
       begin
-        codigo := PCP_CD_M_ETQ.FieldByName('ID_ITEM').AsString;
-        cor     := PCP_CD_M_ETQ.FieldByName('ID_COR').AsString;
-        tamanho := PCP_CD_M_ETQ.FieldByName('ID_TAMANHO').AsString;
-        pcp_obs_item := PCP_CD_M_ETQ.FieldByName('pcp_obs_item').AsString;
+        codigo := BUS_CD_M_TQA.FieldByName('ID_ITEM').AsString;
+        cor     := BUS_CD_M_TQA.FieldByName('ID_COR').AsString;
+        tamanho := BUS_CD_M_TQA.FieldByName('ID_TAMANHO').AsString;
+        pcp_obs_item := BUS_CD_M_TQA.FieldByName('pcp_obs_item').AsString;
 
 
-        PCP_CD_M_ETQ.Close;
-        PCP_CD_M_ETQ.Data :=
-                PCP_CD_M_ETQ.DataRequest(VarArrayOf([12,dmgeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').AsString,
+        BUS_CD_M_TQA.Close;
+        BUS_CD_M_TQA.Data :=
+                BUS_CD_M_TQA.DataRequest(VarArrayOf([12,dmgeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').AsString,
                 codigo,cor,tamanho,pcp_obs_item]));
 
-        if PCP_CD_M_ETQ.RecordCount < strtoint(txtQtdeInf.Text) then
+        if BUS_CD_M_TQA.RecordCount < strtoint(txtQtdeInf.Text) then
            begin
              ShowMessage('Não há saldo usuficiente para atender a quantidade digitada!');
              txtQtdeInf.text := '0';
@@ -1885,6 +1994,14 @@ begin
   BUS_CD_C_FU6.Close;
   BUS_CD_C_FU6.Data :=
   BUS_CD_C_FU6.DataRequest(VarArrayOf([index, filtro]));
+end;
+
+procedure TPCP_FM_M_EPP.BUS_CD_M_TQAReconcileError(
+  DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+  var Action: TReconcileAction);
+begin
+  inherited;
+  dmgeral.VerificarErrosAcoes(DataSet,E,UpdateKind,Action);
 end;
 
 end.

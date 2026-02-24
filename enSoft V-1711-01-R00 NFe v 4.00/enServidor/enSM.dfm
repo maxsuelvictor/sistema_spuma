@@ -2031,6 +2031,15 @@
       ProviderFlags = []
       Size = 10
     end
+    object CAD_SQ_C_GRUentrada_pcp_epp_informa_costureiro: TBooleanField
+      FieldName = 'entrada_pcp_epp_informa_costureiro'
+    end
+    object CAD_SQ_C_GRUentrada_pcp_epp_informa_montador: TBooleanField
+      FieldName = 'entrada_pcp_epp_informa_montador'
+    end
+    object CAD_SQ_C_GRUentrada_pcp_epp_informa_colador: TBooleanField
+      FieldName = 'entrada_pcp_epp_informa_colador'
+    end
   end
   object CAD_SQ_C_TRI: TSQLDataSet
     SchemaName = 'sa'
@@ -3680,23 +3689,27 @@
       'ples as int_impetqsimples, cast(gru.path_etq_simples as varchar(' +
       '100)) as int_pathetqsimples,'#13#10'   gru.utiliza_lote as int_lote_gr' +
       'u,gru.ali_interna_icms as int_ali_interna_icms, ncm.cest as int_' +
-      'cest,'#13#10'   UND.INF_TEMPO_ITE_COJ AS INT_INF_TEMPO_ITE_COJ,'#13#10'   gr' +
-      'u.tipo_produto as int_tipo_produto,'#13#10'   mar.descricao as int_nom' +
-      'emar,'#13#10'   gru.sgq_bloco_espuma as int_sgqblocoespuma,  gru.sgq_c' +
-      'alc_bloco_produzir as int_sgqcalcbloco,'#13#10#13#10'   cast ( case ite.et' +
-      'iq_tipo_produto'#13#10'       when 0 then '#39'COLCH'#195'O DE ESPUMA'#39#13#10'       ' +
-      'when 1 then '#39'COLCH'#195'O BOX CONJUGADO'#39#13#10'       when 2 then '#39'COLCH'#195'O' +
-      ' AUXILIAR'#39#13#10'       when 3 then '#39'COLCH'#195'O MISTO'#39#13#10'   else '#39'?????'#39' ' +
-      'end  as varchar(50) ) as int_etiq_tipo_produto,'#13#10'  '#13#10'   itt.desc' +
-      'ricao as int_nome_item_caixa_itt'#13#10'  '#13#10#13#10'FROM CAD_TB_C_ITE ITE'#13#10' ' +
-      'LEFT OUTER JOIN CAD_TB_C_GRU GRU ON GRU.ID_GRUPO=ITE.ID_GRUPO'#13#10' ' +
-      'LEFT OUTER JOIN CAD_TB_C_FOR FON ON FON.ID_FORNECEDOR=ITE.ID_FOR' +
-      'NECEDOR'#13#10' LEFT OUTER JOIN CAD_TB_C_NCM NCM ON NCM.ID_NCM = ITE.I' +
-      'D_NCM'#13#10' LEFT OUTER JOIN CAD_TB_C_GRP GRP ON GRP.ID_CODIGO = ITE.' +
-      'ID_GRUPO_PROD'#13#10' LEFT OUTER JOIN CAD_TB_C_UND UND ON UND.ID_UNIDA' +
-      'DE = ITE.ID_UND_VENDA'#13#10' LEFT OUTER JOIN CAD_TB_C_MAR MAR ON MAR.' +
-      'ID_MAR = ITE.ID_MARCA'#13#10' LEFT OUTER JOIN CAD_TB_C_ITE ITT ON ITT.' +
-      'ID_ITEM = ITE.ID_ITEM_CAIXA'#13#10#13#10'where 1 = 2'
+      'cest,'#13#10'   gru.entrada_pcp_epp_informa_costureiro int_pcp_epp_inf' +
+      'orma_costureiro,'#13#10'   gru.entrada_pcp_epp_informa_montador int_pc' +
+      'p_epp_informa_montador,  '#13#10'   gru.entrada_pcp_epp_informa_colado' +
+      'r int_pcp_epp_informa_colador , '#13#10'   UND.INF_TEMPO_ITE_COJ AS IN' +
+      'T_INF_TEMPO_ITE_COJ,'#13#10'   gru.tipo_produto as int_tipo_produto,'#13#10 +
+      '   mar.descricao as int_nomemar,'#13#10'   gru.sgq_bloco_espuma as int' +
+      '_sgqblocoespuma,  gru.sgq_calc_bloco_produzir as int_sgqcalcbloc' +
+      'o,'#13#10#13#10'   cast ( case ite.etiq_tipo_produto'#13#10'       when 0 then '#39 +
+      'COLCH'#195'O DE ESPUMA'#39#13#10'       when 1 then '#39'COLCH'#195'O BOX CONJUGADO'#39#13#10 +
+      '       when 2 then '#39'COLCH'#195'O AUXILIAR'#39#13#10'       when 3 then '#39'COLCH' +
+      #195'O MISTO'#39#13#10'   else '#39'?????'#39' end  as varchar(50) ) as int_etiq_tip' +
+      'o_produto,'#13#10'  '#13#10'   itt.descricao as int_nome_item_caixa_itt'#13#10'  '#13 +
+      #10#13#10'FROM CAD_TB_C_ITE ITE'#13#10' LEFT OUTER JOIN CAD_TB_C_GRU GRU ON G' +
+      'RU.ID_GRUPO=ITE.ID_GRUPO'#13#10' LEFT OUTER JOIN CAD_TB_C_FOR FON ON F' +
+      'ON.ID_FORNECEDOR=ITE.ID_FORNECEDOR'#13#10' LEFT OUTER JOIN CAD_TB_C_NC' +
+      'M NCM ON NCM.ID_NCM = ITE.ID_NCM'#13#10' LEFT OUTER JOIN CAD_TB_C_GRP ' +
+      'GRP ON GRP.ID_CODIGO = ITE.ID_GRUPO_PROD'#13#10' LEFT OUTER JOIN CAD_T' +
+      'B_C_UND UND ON UND.ID_UNIDADE = ITE.ID_UND_VENDA'#13#10' LEFT OUTER JO' +
+      'IN CAD_TB_C_MAR MAR ON MAR.ID_MAR = ITE.ID_MARCA'#13#10' LEFT OUTER JO' +
+      'IN CAD_TB_C_ITE ITT ON ITT.ID_ITEM = ITE.ID_ITEM_CAIXA'#13#10#13#10'where ' +
+      '1 = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
@@ -4298,6 +4311,18 @@
     end
     object CAD_SQ_C_ITEid_item_caixa: TIntegerField
       FieldName = 'id_item_caixa'
+    end
+    object CAD_SQ_C_ITEint_pcp_epp_informa_costureiro: TBooleanField
+      FieldName = 'int_pcp_epp_informa_costureiro'
+      ProviderFlags = []
+    end
+    object CAD_SQ_C_ITEint_pcp_epp_informa_montador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_montador'
+      ProviderFlags = []
+    end
+    object CAD_SQ_C_ITEint_pcp_epp_informa_colador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_colador'
+      ProviderFlags = []
     end
   end
   object CAD_SQ_C_ITE_COM: TSQLDataSet
@@ -30836,7 +30861,7 @@
       'BlobSize=-1'
       'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftGloboP161225'
+      'Database=enSoftGloboP170226'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
@@ -41046,6 +41071,15 @@
       FieldName = 'int_sitaprov'
       ProviderFlags = []
     end
+    object FAT_SQ_M_PCA_PEDint_desc_sitaprov: TWideStringField
+      FieldName = 'int_desc_sitaprov'
+      ProviderFlags = []
+      Size = 15
+    end
+    object FAT_SQ_M_PCA_PEDint_codcliente: TIntegerField
+      FieldName = 'int_codcliente'
+      ProviderFlags = []
+    end
     object FAT_SQ_M_PCA_PEDint_nomecli: TWideStringField
       FieldName = 'int_nomecli'
       ProviderFlags = []
@@ -41061,14 +41095,10 @@
       ProviderFlags = []
       Size = 60
     end
-    object FAT_SQ_M_PCA_PEDint_desc_sitaprov: TWideStringField
-      FieldName = 'int_desc_sitaprov'
+    object FAT_SQ_M_PCA_PEDint_uf: TWideStringField
+      FieldName = 'int_uf'
       ProviderFlags = []
-      Size = 15
-    end
-    object FAT_SQ_M_PCA_PEDint_codcliente: TIntegerField
-      FieldName = 'int_codcliente'
-      ProviderFlags = []
+      Size = 2
     end
     object FAT_SQ_M_PCA_PEDint_id_fiscal: TIntegerField
       FieldName = 'int_id_fiscal'
@@ -41086,7 +41116,7 @@
     object FAT_SQ_M_PCA_PEDint_obs: TWideStringField
       FieldName = 'int_obs'
       ProviderFlags = []
-      Size = 100
+      Size = 255
     end
     object FAT_SQ_M_PCA_PEDint_vlr_liquido: TFMTBCDField
       FieldName = 'int_vlr_liquido'
@@ -41106,11 +41136,6 @@
       FieldName = 'int_num_lote_opr'
       ProviderFlags = []
       Size = 15
-    end
-    object FAT_SQ_M_PCA_PEDint_uf: TWideStringField
-      FieldName = 'int_uf'
-      ProviderFlags = []
-      Size = 2
     end
   end
   object FAT_DS_M_PCA: TDataSource
@@ -64716,5 +64741,111 @@
     OnDataRequest = PCP_DP_R_EPP_FUN_RNKDataRequest
     Left = 3344
     Top = 3328
+  end
+  object BUS_SQ_M_TQA: TSQLDataSet
+    CommandText = 
+      'select etq.id_item, '#13#10'       etq.cod_barra,'#13#10'       ite.id_grupo' +
+      ','#13#10'       etq.id_cor, '#13#10'       etq.id_tamanho,'#13#10'       etq.id_ep' +
+      'p,'#13#10'       etq.id_opr,'#13#10'       etq.dta_saida, etq.dta_entrada_es' +
+      't, etq.id_ors_saida, '#13#10'       cast( case                        ' +
+      '    '#13#10'             when  coalesce(etq.pcp_obs_item,'#39#39') <> '#39#39' the' +
+      'n etq.pcp_obs_item  '#13#10'       else ite.descricao end as varchar(1' +
+      '50)) as int_nomeite,'#13#10'       ite.id_und_venda as int_und_venda,'#13 +
+      #10'       cor.descricao as int_nomecor,'#13#10'       tam.descricao as i' +
+      'nt_nometam,'#13#10'       etq.pcp_obs_item,    '#13#10'       opr.num_lote a' +
+      's int_num_lote_opr,'#13#10'       gru.entrada_pcp_epp_informa_costurei' +
+      'ro int_pcp_epp_informa_costureiro,'#13#10'       gru.entrada_pcp_epp_i' +
+      'nforma_montador int_pcp_epp_informa_montador, '#13#10'       gru.entra' +
+      'da_pcp_epp_informa_colador int_pcp_epp_informa_colador       '#13#10'f' +
+      'rom pcp_tb_m_etq etq'#13#10'left outer join cad_tb_c_ite ite on ite.id' +
+      '_item=etq.id_item'#13#10'left outer join cad_tb_c_gru gru on gru.id_gr' +
+      'upo = ite.id_grupo'#13#10'left outer join cad_tb_c_cor cor on cor.id_c' +
+      'or=etq.id_cor'#13#10'left outer join cad_tb_c_tam tam on tam.id_tamanh' +
+      'o=etq.id_tamanho'#13#10'left outer join pcp_tb_m_opr opr on opr.id_opr' +
+      ' = etq.id_opr'#13#10'where 1=2'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = Conexao
+    Left = 885
+    Top = 3456
+    object BUS_SQ_M_TQAid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object BUS_SQ_M_TQAid_cor: TIntegerField
+      FieldName = 'id_cor'
+    end
+    object BUS_SQ_M_TQAid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+    end
+    object BUS_SQ_M_TQAid_epp: TIntegerField
+      FieldName = 'id_epp'
+    end
+    object BUS_SQ_M_TQAid_opr: TIntegerField
+      FieldName = 'id_opr'
+    end
+    object BUS_SQ_M_TQAdta_saida: TDateField
+      FieldName = 'dta_saida'
+    end
+    object BUS_SQ_M_TQAdta_entrada_est: TDateField
+      FieldName = 'dta_entrada_est'
+    end
+    object BUS_SQ_M_TQAid_ors_saida: TIntegerField
+      FieldName = 'id_ors_saida'
+    end
+    object BUS_SQ_M_TQAint_nomeite: TWideStringField
+      FieldName = 'int_nomeite'
+      ProviderFlags = []
+      Size = 150
+    end
+    object BUS_SQ_M_TQAint_und_venda: TWideStringField
+      FieldName = 'int_und_venda'
+      ProviderFlags = []
+      Size = 3
+    end
+    object BUS_SQ_M_TQAint_nomecor: TWideStringField
+      FieldName = 'int_nomecor'
+      ProviderFlags = []
+      Size = 40
+    end
+    object BUS_SQ_M_TQAint_nometam: TWideStringField
+      FieldName = 'int_nometam'
+      ProviderFlags = []
+      Size = 40
+    end
+    object BUS_SQ_M_TQApcp_obs_item: TWideStringField
+      FieldName = 'pcp_obs_item'
+      Size = 150
+    end
+    object BUS_SQ_M_TQAint_num_lote_opr: TWideStringField
+      FieldName = 'int_num_lote_opr'
+      ProviderFlags = []
+      Size = 15
+    end
+    object BUS_SQ_M_TQAint_pcp_epp_informa_costureiro: TBooleanField
+      FieldName = 'int_pcp_epp_informa_costureiro'
+      ProviderFlags = []
+    end
+    object BUS_SQ_M_TQAint_pcp_epp_informa_montador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_montador'
+      ProviderFlags = []
+    end
+    object BUS_SQ_M_TQAint_pcp_epp_informa_colador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_colador'
+      ProviderFlags = []
+    end
+    object BUS_SQ_M_TQAcod_barra: TWideStringField
+      FieldName = 'cod_barra'
+      Size = 50
+    end
+    object BUS_SQ_M_TQAid_grupo: TWideStringField
+      FieldName = 'id_grupo'
+      Size = 11
+    end
+  end
+  object BUS_DP_M_TQA: TDataSetProvider
+    DataSet = BUS_SQ_M_TQA
+    OnDataRequest = BUS_DP_M_TQADataRequest
+    Left = 1016
+    Top = 3456
   end
 end

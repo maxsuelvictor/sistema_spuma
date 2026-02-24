@@ -168,6 +168,10 @@ type
     Label14: TLabel;
     txtCodClassTrib: TJvDBComboEdit;
     txtDescClassTribut: TDBText;
+    Label23: TLabel;
+    DBCheckBox4: TDBCheckBox;
+    DBCheckBox5: TDBCheckBox;
+    DBCheckBox6: TDBCheckBox;
     procedure acAdicionaExecute(Sender: TObject);
     procedure acAlterarExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);

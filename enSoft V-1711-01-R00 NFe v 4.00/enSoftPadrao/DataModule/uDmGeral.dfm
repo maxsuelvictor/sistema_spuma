@@ -1115,6 +1115,18 @@
     object CAD_CD_C_ITEid_item_caixa: TIntegerField
       FieldName = 'id_item_caixa'
     end
+    object CAD_CD_C_ITEint_pcp_epp_informa_costureiro: TBooleanField
+      FieldName = 'int_pcp_epp_informa_costureiro'
+      ProviderFlags = []
+    end
+    object CAD_CD_C_ITEint_pcp_epp_informa_montador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_montador'
+      ProviderFlags = []
+    end
+    object CAD_CD_C_ITEint_pcp_epp_informa_colador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_colador'
+      ProviderFlags = []
+    end
   end
   object EST_CD_M_FEA: TClientDataSet
     Aggregates = <>
@@ -2922,6 +2934,15 @@
       FieldName = 'int_id_cst_ibs_cbs'
       ProviderFlags = []
       Size = 10
+    end
+    object CAD_CD_C_GRUentrada_pcp_epp_informa_costureiro: TBooleanField
+      FieldName = 'entrada_pcp_epp_informa_costureiro'
+    end
+    object CAD_CD_C_GRUentrada_pcp_epp_informa_montador: TBooleanField
+      FieldName = 'entrada_pcp_epp_informa_montador'
+    end
+    object CAD_CD_C_GRUentrada_pcp_epp_informa_colador: TBooleanField
+      FieldName = 'entrada_pcp_epp_informa_colador'
     end
   end
   object CAD_CD_C_INF: TClientDataSet
@@ -10107,6 +10128,18 @@
     end
     object BUS_CD_C_ITEid_item_caixa: TIntegerField
       FieldName = 'id_item_caixa'
+    end
+    object BUS_CD_C_ITEint_pcp_epp_informa_costureiro: TBooleanField
+      FieldName = 'int_pcp_epp_informa_costureiro'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_pcp_epp_informa_montador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_montador'
+      ProviderFlags = []
+    end
+    object BUS_CD_C_ITEint_pcp_epp_informa_colador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_colador'
+      ProviderFlags = []
     end
   end
   object PCP_CD_M_ACR: TClientDataSet

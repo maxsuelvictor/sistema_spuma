@@ -483,8 +483,8 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
               ParentFont = False
             end
             object txtBuscaItem: TJvDBComboEdit
-              Left = 4
-              Top = 24
+              Left = 3
+              Top = 22
               Width = 228
               Height = 27
               ClickKey = 0
@@ -499,6 +499,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
               ParentFont = False
               TabOrder = 0
               OnButtonClick = txtBuscaItemButtonClick
+              OnEnter = txtBuscaItemEnter
               OnExit = txtBuscaItemExit
               OnKeyDown = txtBuscaItemKeyDown
             end
@@ -655,21 +656,21 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 Top = 22
                 Width = 57
                 Height = 28
-                TabStop = False
-                Color = clSilver
+                Color = 14342874
                 DataField = 'id_func_colchoaria'
                 DataSource = dsEppIte
-                Enabled = False
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -15
                 Font.Name = 'Segoe UI'
                 Font.Style = []
                 ParentFont = False
+                ReadOnly = True
                 TabOrder = 1
                 UnboundDataType = wwDefault
                 WantReturns = False
                 WordWrap = False
+                OnEnter = txtIdCostureiroEnter
                 OnExit = txtIdCostureiroExit
               end
               object txtIdMontagemCaixa: TwwDBEdit
@@ -677,8 +678,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 Top = 22
                 Width = 57
                 Height = 28
-                TabStop = False
-                Color = clSilver
+                Color = 14342874
                 DataField = 'id_func_montagem'
                 DataSource = dsEppIte
                 Enabled = False
@@ -688,6 +688,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 Font.Name = 'Segoe UI'
                 Font.Style = []
                 ParentFont = False
+                ReadOnly = True
                 TabOrder = 2
                 UnboundDataType = wwDefault
                 WantReturns = False
@@ -699,8 +700,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 Top = 22
                 Width = 60
                 Height = 28
-                TabStop = False
-                Color = clSilver
+                Color = 14342874
                 DataField = 'id_func_colagem'
                 DataSource = dsEppIte
                 Enabled = False
@@ -710,6 +710,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
                 Font.Name = 'Segoe UI'
                 Font.Style = []
                 ParentFont = False
+                ReadOnly = True
                 TabOrder = 3
                 UnboundDataType = wwDefault
                 WantReturns = False
@@ -1031,7 +1032,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     Left = 995
     Top = 51
     Bitmap = {
-      494C01010800A800D80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800E80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1931,7 +1932,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesInativo: TImageList
     Bitmap = {
-      494C0101080030012C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080030013C0218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2831,7 +2832,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200000128020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200000138020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3347,7 +3348,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoAz: TImageList
     Bitmap = {
-      494C01010800DC00D00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00E00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4247,7 +4248,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C01010600000120020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000130020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4459,7 +4460,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoVe: TImageList
     Bitmap = {
-      494C01010800DC00E00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00F00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5359,7 +5360,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C01010600000130020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000140020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5571,7 +5572,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00DC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00EC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6471,7 +6472,7 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C01010600000114020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010600000124020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -6847,248 +6848,6 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
       Size = 50
     end
   end
-  object PCP_CD_M_ETQ: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'PCP_DP_M_ETQ'
-    RemoteServer = dmGeral.pcConecao
-    OnReconcileError = PCP_CD_M_ETQReconcileError
-    Left = 615
-    Top = 412
-    object PCP_CD_M_ETQid_opr: TIntegerField
-      FieldName = 'id_opr'
-    end
-    object PCP_CD_M_ETQid_item: TIntegerField
-      FieldName = 'id_item'
-    end
-    object PCP_CD_M_ETQid_cor: TIntegerField
-      FieldName = 'id_cor'
-    end
-    object PCP_CD_M_ETQid_tamanho: TIntegerField
-      FieldName = 'id_tamanho'
-    end
-    object PCP_CD_M_ETQcod_barra: TWideStringField
-      FieldName = 'cod_barra'
-      Size = 50
-    end
-    object PCP_CD_M_ETQsequencia: TIntegerField
-      FieldName = 'sequencia'
-    end
-    object PCP_CD_M_ETQdta_criacao: TDateField
-      FieldName = 'dta_criacao'
-    end
-    object PCP_CD_M_ETQhor_criacao: TTimeField
-      FieldName = 'hor_criacao'
-    end
-    object PCP_CD_M_ETQimpressa: TBooleanField
-      FieldName = 'impressa'
-    end
-    object PCP_CD_M_ETQint_nomeite: TWideStringField
-      FieldName = 'int_nomeite'
-      Size = 100
-    end
-    object PCP_CD_M_ETQint_und_venda: TWideStringField
-      FieldName = 'int_und_venda'
-      Size = 3
-    end
-    object PCP_CD_M_ETQint_nomecor: TWideStringField
-      FieldName = 'int_nomecor'
-      Size = 40
-    end
-    object PCP_CD_M_ETQint_nometam: TWideStringField
-      FieldName = 'int_nometam'
-      Size = 40
-    end
-    object PCP_CD_M_ETQid_etq: TIntegerField
-      FieldName = 'id_etq'
-    end
-    object PCP_CD_M_ETQdta_entrada_est: TDateField
-      FieldName = 'dta_entrada_est'
-    end
-    object PCP_CD_M_ETQhor_entrada_est: TTimeField
-      FieldName = 'hor_entrada_est'
-    end
-    object PCP_CD_M_ETQid_funcionario_est: TIntegerField
-      FieldName = 'id_funcionario_est'
-    end
-    object PCP_CD_M_ETQhor_impressa: TTimeField
-      FieldName = 'hor_impressa'
-    end
-    object PCP_CD_M_ETQdta_impressa: TDateField
-      FieldName = 'dta_impressa'
-    end
-    object PCP_CD_M_ETQid_func_impressa: TIntegerField
-      FieldName = 'id_func_impressa'
-    end
-    object PCP_CD_M_ETQid_opr_origem: TIntegerField
-      FieldName = 'id_opr_origem'
-    end
-    object PCP_CD_M_ETQint_selecao: TBooleanField
-      FieldName = 'int_selecao'
-    end
-    object PCP_CD_M_ETQint_medidaite: TWideStringField
-      FieldName = 'int_medidaite'
-      Size = 60
-    end
-    object PCP_CD_M_ETQint_etiq_espuma1ite: TWideStringField
-      FieldName = 'int_etiq_espuma1ite'
-      Size = 70
-    end
-    object PCP_CD_M_ETQint_etiq_espuma2ite: TWideStringField
-      FieldName = 'int_etiq_espuma2ite'
-      Size = 70
-    end
-    object PCP_CD_M_ETQint_etiq_espuma3ite: TWideStringField
-      FieldName = 'int_etiq_espuma3ite'
-      Size = 70
-    end
-    object PCP_CD_M_ETQint_etiq_madeiraite: TWideStringField
-      FieldName = 'int_etiq_madeiraite'
-      Size = 60
-    end
-    object PCP_CD_M_ETQint_etiq_revestimento1ite: TWideStringField
-      FieldName = 'int_etiq_revestimento1ite'
-      Size = 70
-    end
-    object PCP_CD_M_ETQint_etiq_revestimento2ite: TWideStringField
-      FieldName = 'int_etiq_revestimento2ite'
-      Size = 70
-    end
-    object PCP_CD_M_ETQint_etiq_revestimento3ite: TWideStringField
-      FieldName = 'int_etiq_revestimento3ite'
-      Size = 70
-    end
-    object PCP_CD_M_ETQint_etiq_recomendacoes1ite: TWideStringField
-      FieldName = 'int_etiq_recomendacoes1ite'
-      Size = 80
-    end
-    object PCP_CD_M_ETQint_etiq_recomendacoes2ite: TWideStringField
-      FieldName = 'int_etiq_recomendacoes2ite'
-      Size = 80
-    end
-    object PCP_CD_M_ETQint_nomecue: TWideStringField
-      FieldName = 'int_nomecue'
-      Size = 40
-    end
-    object PCP_CD_M_ETQint_nomecle: TWideStringField
-      FieldName = 'int_nomecle'
-      Size = 40
-    end
-    object PCP_CD_M_ETQint_nomeseloetq: TWideStringField
-      FieldName = 'int_nomeseloetq'
-      Size = 100
-    end
-    object PCP_CD_M_ETQint_etiq_modelo: TWideStringField
-      FieldName = 'int_etiq_modelo'
-      Size = 70
-    end
-    object PCP_CD_M_ETQint_fteetq: TIntegerField
-      FieldName = 'int_fteetq'
-    end
-    object PCP_CD_M_ETQint_impselo: TBooleanField
-      FieldName = 'int_impselo'
-    end
-    object PCP_CD_M_ETQint_impmsgetq: TBooleanField
-      FieldName = 'int_impmsgetq'
-    end
-    object PCP_CD_M_ETQint_modeloftq_etq: TIntegerField
-      FieldName = 'int_modeloftq_etq'
-    end
-    object PCP_CD_M_ETQint_nome_layout_etq: TWideStringField
-      FieldName = 'int_nome_layout_etq'
-      Size = 50
-    end
-    object PCP_CD_M_ETQcod_int_etq: TWideStringField
-      FieldName = 'cod_int_etq'
-      Size = 10
-    end
-    object PCP_CD_M_ETQcod_int_etq_rev: TWideStringField
-      FieldName = 'cod_int_etq_rev'
-      Size = 5
-    end
-    object PCP_CD_M_ETQdescricao: TWideStringField
-      FieldName = 'descricao'
-      Size = 60
-    end
-    object PCP_CD_M_ETQetq_tecnica: TBooleanField
-      FieldName = 'etq_tecnica'
-    end
-    object PCP_CD_M_ETQespecificacoes: TWideStringField
-      FieldName = 'especificacoes'
-      Size = 200
-    end
-    object PCP_CD_M_ETQtexto_livre1: TWideStringField
-      FieldName = 'texto_livre1'
-      Size = 100
-    end
-    object PCP_CD_M_ETQtexto_livre2: TWideStringField
-      FieldName = 'texto_livre2'
-      Size = 100
-    end
-    object PCP_CD_M_ETQid_fte_etq: TIntegerField
-      FieldName = 'id_fte_etq'
-    end
-    object PCP_CD_M_ETQmodelo_etq: TIntegerField
-      FieldName = 'modelo_etq'
-    end
-    object PCP_CD_M_ETQid_fte: TIntegerField
-      FieldName = 'id_fte'
-    end
-    object PCP_CD_M_ETQcod_lme: TWideStringField
-      FieldName = 'cod_lme'
-    end
-    object PCP_CD_M_ETQrev_lme: TWideStringField
-      FieldName = 'rev_lme'
-      Size = 5
-    end
-    object PCP_CD_M_ETQrequisitos: TWideStringField
-      FieldName = 'requisitos'
-      Size = 300
-    end
-    object PCP_CD_M_ETQinf_contato: TWideStringField
-      FieldName = 'inf_contato'
-      Size = 80
-    end
-    object PCP_CD_M_ETQinf_remocao: TWideStringField
-      FieldName = 'inf_remocao'
-      Size = 80
-    end
-    object PCP_CD_M_ETQinf_sac: TWideStringField
-      FieldName = 'inf_sac'
-      Size = 80
-    end
-    object PCP_CD_M_ETQid_empresa: TIntegerField
-      FieldName = 'id_empresa'
-    end
-    object PCP_CD_M_ETQdta_saida: TDateField
-      FieldName = 'dta_saida'
-    end
-    object PCP_CD_M_ETQhor_saida: TTimeField
-      FieldName = 'hor_saida'
-    end
-    object PCP_CD_M_ETQid_ors_saida: TIntegerField
-      FieldName = 'id_ors_saida'
-    end
-    object PCP_CD_M_ETQid_rom_saida: TIntegerField
-      FieldName = 'id_rom_saida'
-    end
-    object PCP_CD_M_ETQid_funcionario_sai: TWideStringField
-      FieldName = 'id_funcionario_sai'
-      Size = 255
-    end
-    object PCP_CD_M_ETQid_epp: TIntegerField
-      FieldName = 'id_epp'
-    end
-    object PCP_CD_M_ETQint_num_lote_opr: TWideStringField
-      FieldName = 'int_num_lote_opr'
-      ProviderFlags = []
-      Size = 15
-    end
-    object PCP_CD_M_ETQpcp_obs_item: TWideStringField
-      FieldName = 'pcp_obs_item'
-      Size = 150
-    end
-  end
   object BUS_CD_C_FU5: TClientDataSet
     Aggregates = <>
     Params = <>
@@ -7447,6 +7206,88 @@ inherited PCP_FM_M_EPP: TPCP_FM_M_EPP
     end
     object BooleanField29: TBooleanField
       FieldName = 'bus_som_ped_sem_pagtos'
+    end
+  end
+  object BUS_CD_M_TQA: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'BUS_DP_M_TQA'
+    RemoteServer = dmGeral.pcConecao
+    OnReconcileError = BUS_CD_M_TQAReconcileError
+    Left = 663
+    Top = 433
+    object BUS_CD_M_TQAid_item: TIntegerField
+      FieldName = 'id_item'
+    end
+    object BUS_CD_M_TQAid_cor: TIntegerField
+      FieldName = 'id_cor'
+    end
+    object BUS_CD_M_TQAid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+    end
+    object BUS_CD_M_TQAid_epp: TIntegerField
+      FieldName = 'id_epp'
+    end
+    object BUS_CD_M_TQAid_opr: TIntegerField
+      FieldName = 'id_opr'
+    end
+    object BUS_CD_M_TQAdta_saida: TDateField
+      FieldName = 'dta_saida'
+    end
+    object BUS_CD_M_TQAdta_entrada_est: TDateField
+      FieldName = 'dta_entrada_est'
+    end
+    object BUS_CD_M_TQAid_ors_saida: TIntegerField
+      FieldName = 'id_ors_saida'
+    end
+    object BUS_CD_M_TQAint_nomeite: TWideStringField
+      FieldName = 'int_nomeite'
+      ProviderFlags = []
+      Size = 150
+    end
+    object BUS_CD_M_TQAint_und_venda: TWideStringField
+      FieldName = 'int_und_venda'
+      ProviderFlags = []
+      Size = 3
+    end
+    object BUS_CD_M_TQAint_nomecor: TWideStringField
+      FieldName = 'int_nomecor'
+      ProviderFlags = []
+      Size = 40
+    end
+    object BUS_CD_M_TQAint_nometam: TWideStringField
+      FieldName = 'int_nometam'
+      ProviderFlags = []
+      Size = 40
+    end
+    object BUS_CD_M_TQApcp_obs_item: TWideStringField
+      FieldName = 'pcp_obs_item'
+      Size = 150
+    end
+    object BUS_CD_M_TQAint_num_lote_opr: TWideStringField
+      FieldName = 'int_num_lote_opr'
+      ProviderFlags = []
+      Size = 15
+    end
+    object BUS_CD_M_TQAint_pcp_epp_informa_costureiro: TBooleanField
+      FieldName = 'int_pcp_epp_informa_costureiro'
+      ProviderFlags = []
+    end
+    object BUS_CD_M_TQAint_pcp_epp_informa_montador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_montador'
+      ProviderFlags = []
+    end
+    object BUS_CD_M_TQAint_pcp_epp_informa_colador: TBooleanField
+      FieldName = 'int_pcp_epp_informa_colador'
+      ProviderFlags = []
+    end
+    object BUS_CD_M_TQAcod_barra: TWideStringField
+      FieldName = 'cod_barra'
+      Size = 50
+    end
+    object BUS_CD_M_TQAid_grupo: TWideStringField
+      FieldName = 'id_grupo'
+      Size = 11
     end
   end
 end
