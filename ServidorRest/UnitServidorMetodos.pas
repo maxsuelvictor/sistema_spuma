@@ -139,6 +139,12 @@ type
     FAT_CD_M_PEDFAT_SQ_M_PED_TIT: TDataSetField;
     FAT_CD_M_PED_ITE: TClientDataSet;
     FAT_CD_M_PED_TIT: TClientDataSet;
+    FAT_SQ_R_PED: TSQLDataSet;
+    FAT_DP_R_PED: TDataSetProvider;
+    FAT_CD_R_PED: TClientDataSet;
+    FAT_SQ_R_PED_ITE: TSQLDataSet;
+    FAT_DS_R_PED: TDataSource;
+    FAT_SQ_R_PED_TIT: TSQLDataSet;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -173,6 +179,8 @@ type
     function BuscarClientesPorVendedor: TStream;
 
     function BuscarItens: TStream;
+
+    function BuscarPedidosRelatorio(const AJSON: TJSONValue): string;
 
     // Posts
     function updateEnviarCores(const Dados: TJSONArray): TJSONObject;
@@ -721,6 +729,34 @@ begin
     CAD_CD_C_ITE.Close;
     FreeAndNil(CAD_CD_C_ITE);
   end;
+end;
+
+function TServidorMetodos.BuscarPedidosRelatorio(
+  const AJSON: TJSONValue): string;
+begin
+  {       PED.id_pedido,
+       ped.dta_pedido,
+       ped.vlr_bruto,
+       ped.vlr_desconto,
+       ped.vlr_liquido,
+       INT_NOMECLI,
+       INT_NOMETME,
+       INT_NOMEFUN,
+       int_desc_cond_pag,
+       INT_NOMEATE,
+       INT_NOMERES,
+       INT_NOMECID,
+       INT_NOMEEST,
+       INT_CPFCNPJ,
+       int_pessoacli,
+       INT_ID_PERFIL,
+       int_sitaprov,
+       int_sitped,
+       int_sitped2,
+       int_ie_rg_cli,
+       INT_EMPFANTASIA,
+       DTA_EMISSAO_NFE,
+       ORDEM_FAT }
 end;
 
 procedure TServidorMetodos.DataModuleCreate(Sender: TObject);
