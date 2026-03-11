@@ -180,7 +180,7 @@ type
 
     function BuscarItens: TStream;
 
-    function BuscarPedidosRelatorio(const AJSON: TJSONValue): string;
+    function BuscarPedidosRelatorio: TStream;
 
     // Posts
     function updateEnviarCores(const Dados: TJSONArray): TJSONObject;
@@ -731,10 +731,17 @@ begin
   end;
 end;
 
-function TServidorMetodos.BuscarPedidosRelatorio(
-  const AJSON: TJSONValue): string;
+function TServidorMetodos.BuscarPedidosRelatorio: TStream;
+var
+  jsobj, jso: TJsonObject;
+  jsa: TJsonArray;
+  jsp: TJsonPair;
+  dta_inicio, dta_final, texto: String;
+  FAT_CD_M_PED, FAT_CD_M_PED_ITE, FAT_CD_M_PED_TIT: TClientDataSet;
+  Lista: TJsonArray;
+  erroJson: TJSONObject;
 begin
-  {       PED.id_pedido,
+  {    PED.id_pedido,
        ped.dta_pedido,
        ped.vlr_bruto,
        ped.vlr_desconto,
@@ -757,6 +764,180 @@ begin
        INT_EMPFANTASIA,
        DTA_EMISSAO_NFE,
        ORDEM_FAT }
+
+   //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarPedidosRelatorio?dta_inicio=
+
+   { Get da Tabela: FAT_TB_M_PED - FAT_TB_M_PED_ITE - FAT_TB_M_PED_TIT -
+    Criado por: Maxsuel Victor
+    Data: 11/03/2026
+   }
+
+  try
+
+    // Verifica se o parâmetro existe
+    if GetInvocationMetadata().QueryParams.IndexOfName('dta_inicio') = -1 then
+      dta_inicio :=   datetostr(date - 180)
+    else
+      dta_inicio := Trim(GetInvocationMetadata().QueryParams.Values['dta_inicio']);
+
+    // Validação do parâmetro
+    if  dta_inicio = '' then
+        begin
+          GetInvocationMetadata().ResponseCode := 400;
+          GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+          erroJson := TJSONObject.Create;
+          try
+            erroJson.AddPair('erro', 'Parâmetro data de inicio está vazio ou não informado');
+            Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+          finally
+            erroJson.Free;
+          end;
+
+          exit;
+        end;
+
+
+    // Verifica se o parâmetro existe
+    if GetInvocationMetadata().QueryParams.IndexOfName('dta_final') = -1 then
+       dta_final :=   datetostr(date)
+    else
+       dta_final := Trim(GetInvocationMetadata().QueryParams.Values['dta_final']);
+
+    // Validação do parâmetro
+    if  dta_final = '' then
+        begin
+          GetInvocationMetadata().ResponseCode := 400;
+          GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+          erroJson := TJSONObject.Create;
+          try
+            erroJson.AddPair('erro', 'Parâmetro data final está vazio ou não informado');
+            Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+          finally
+            erroJson.Free;
+          end;
+          exit;
+        end;
+
+    // Inicializa componentes
+    FAT_CD_M_PED := TClientDataSet.Create(nil);
+    FAT_CD_M_PED.SetProvider(FAT_DP_M_PED);
+
+    FAT_SQ_M_PED.Close;
+    FAT_SQ_M_PED.CommandText :=
+
+        ' SELECT ' +
+        '   ped.id_pedido, ped.dta_pedido, ped.vlr_bruto, ped.vlr_desconto, ped.vlr_liquido, ' +
+        '   cli.nome as int_nomecli, tme.descricao as int_nometme,  fun.nome as int_nomefun, ' +
+        '   case ' +
+        '     when sgq_texto_cond_pgto <> '''' then sgq_texto_cond_pgto ' +
+        '   else  CPG.DESCRICAO end as int_desc_cond_pag, ' +
+        '   ate.nome as int_nomeate, res.nome as int_nomeres, cid.nome as int_nomecid, '+
+        ' ' +
+        '   cid.uf as int_nomeest, cli.doc_cnpj_cpf as int_cpfcnpj, ' +
+        '   cli.pessoa as int_pessoacli, cli.id_perfil_cli as int_id_perfil, '+
+        '   cast( case situacao_aprovacao ' +
+        '   when 0 then ''Em espera'' '+
+        '   when 1 then ''Aprovado'' ' +
+        '   when 2 then ''Reprovado'' ' +
+        ' end as varchar(20) ) as int_sitaprov, ' +
+        ' cast( case ped.situacao     ' +
+        '   when 0 then ''Em aberto'' ' +
+        '   when 1 then ''Reprovado'' ' +
+        '   when 2 then ''Em produção'' ' +
+        '   when 3 then ''Faturado''  ' +
+        '   when 4 then ''Cancelado'' ' +
+        ' end as varchar(20) ) as int_sitped, '+
+        ' cast( case      ' + #13#10 +
+        '           when (ped.situacao = 0) and (ped.situacao_aprovacao = 0) then ''Digitado''' + #13#10 +
+        '           when (ped.situacao = 0) and (ped.situacao_aprovacao = 1) then ''Aprovado''' + #13#10 +
+        '           when (ped.situacao = 1) then ''Reprovado''' + #13#10 +
+        '           when (ped.situacao = 2) then ''Em produção''' + #13#10 +
+        '           when (ped.situacao = 3) then ''Faturado''' + #13#10 +
+        '           when (ped.situacao = 4) then ''Cancelado''' + #13#10 +
+        '         end as varchar(20) ) as int_sitped2, ' +
+        ' cli.doc_ie_identidade as int_ie_rg_cli, ' +
+        ' par.emp_fantasia as int_empfantasia, nfe.dta_emissao as dta_emissao_nfe, ors.id_ors as ordem_fat '+
+        ' ' +
+        ' from fat_tb_m_ped ped '+
+       '    left outer join cad_tb_c_cli cli on cli.id_cliente = ped.id_cliente '+
+        '    left outer join cad_tb_c_tme tme on tme.id_tipo_mov_estoque = ped.id_tipo_mov_estoque '+
+        '    left outer join cad_tb_c_fun fun on fun.id_funcionario=ped.id_vendedor '+
+        '    left outer join cad_tb_c_cpg cpg on cpg.id_condicao_pag=ped.id_condicao_pag '+
+        '    left outer join cad_tb_c_fun ate on ate.id_funcionario=ped.id_atendente '+
+        '    left outer join cad_tb_c_fun res on res.id_funcionario=ped.id_responsavel '+
+        '    left outer join cad_tb_c_cid cid on cid.id_cidade=cli.id_cidade '+
+        '    left outer join cad_tb_c_par par on par.id_empresa=ped.id_empresa ' +
+        '    left outer join pcp_tb_m_ors ors on ors.id_pedido=ped.id_pedido ' +
+        '    left outer join fat_tb_m_nfe nfe on nfe.id_ors=ors.id_ors ';
+    FAT_CD_M_PED.Open;
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get do relatório de pedido de venda iniciada!');
+
+    jsObj := TJsonObject.Create();
+    Lista := TJsonArray.Create;
+
+    while not FAT_CD_M_PED.Eof do
+        begin
+           jso := TJsonObject.Create;
+
+           jso.AddPair('id_pedido',         FAT_CD_M_PED.FieldByName('id_pedido').AsString);
+           jso.AddPair('dta_pedido',        FAT_CD_M_PED.FieldByName('dta_pedido').AsString);
+           jso.AddPair('vlr_bruto',         FAT_CD_M_PED.FieldByName('vlr_bruto').AsString);
+           jso.AddPair('vlr_desconto',      FAT_CD_M_PED.FieldByName('vlr_desconto').AsString);
+           jso.AddPair('vlr_liquido',       FAT_CD_M_PED.FieldByName('vlr_liquido').AsString);
+           jso.AddPair('int_nomecli',       FAT_CD_M_PED.FieldByName('int_nomecli').AsString);
+           jso.AddPair('int_nometme',       FAT_CD_M_PED.FieldByName('int_nometme').AsString);
+           jso.AddPair('int_nomefun',       FAT_CD_M_PED.FieldByName('int_nomefun').AsString);
+           jso.AddPair('int_desc_cond_pag', FAT_CD_M_PED.FieldByName('int_desc_cond_pag').AsString);
+           jso.AddPair('int_nomeate',       FAT_CD_M_PED.FieldByName('int_nomeate').AsString);
+           jso.AddPair('int_nomeres',       FAT_CD_M_PED.FieldByName('int_nomeres').AsString);
+           jso.AddPair('int_nomecid',       FAT_CD_M_PED.FieldByName('int_nomecid').AsString);
+           jso.AddPair('int_nomeest',       FAT_CD_M_PED.FieldByName('int_nomeest').AsString);
+           jso.AddPair('int_cpfcnpj',       FAT_CD_M_PED.FieldByName('int_cpfcnpj').AsString);
+           jso.AddPair('int_pessoacli',     FAT_CD_M_PED.FieldByName('int_pessoacli').AsString);
+           jso.AddPair('int_id_perfil',     FAT_CD_M_PED.FieldByName('int_id_perfil').AsString);
+           jso.AddPair('int_sitaprov',      FAT_CD_M_PED.FieldByName('int_sitaprov').AsString);
+           jso.AddPair('int_sitped',        FAT_CD_M_PED.FieldByName('int_sitped').AsString);
+           jso.AddPair('int_sitped2',       FAT_CD_M_PED.FieldByName('int_sitped2').AsString);
+           jso.AddPair('int_ie_rg_cli',     FAT_CD_M_PED.FieldByName('int_ie_rg_cli').AsString);
+           jso.AddPair('int_empfantasia',   FAT_CD_M_PED.FieldByName('int_empfantasia').AsString);
+           jso.AddPair('dta_emissao_nfe',   FAT_CD_M_PED.FieldByName('dta_emissao_nfe').AsString);
+           jso.AddPair('ordem_fat',         FAT_CD_M_PED.FieldByName('ordem_fat').AsString);
+
+           Lista.AddElement(jso);
+           FAT_CD_M_PED.Next;
+        end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+    Result := TStringStream.Create(UTF8Encode(Lista.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos pedidos para o relatório!');
+  except
+    on E: Exception do
+    begin
+      GetInvocationMetadata().ResponseCode := 500;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+    end;
+  end;
+
+  // Liberação de recursos
+  if Assigned(FAT_CD_M_PED) then
+  begin
+    FreeAndNil(Lista);
+    FAT_CD_M_PED.Close;
+    FreeAndNil(FAT_CD_M_PED);
+  end;
 end;
 
 procedure TServidorMetodos.DataModuleCreate(Sender: TObject);
