@@ -145,6 +145,54 @@ type
     FAT_SQ_R_PED_ITE: TSQLDataSet;
     FAT_DS_R_PED: TDataSource;
     FAT_SQ_R_PED_TIT: TSQLDataSet;
+    FAT_CD_R_PED_ITE: TClientDataSet;
+    FAT_CD_R_PED_TIT: TClientDataSet;
+    FAT_CD_R_PEDid_pedido: TIntegerField;
+    FAT_CD_R_PEDdta_pedido: TDateField;
+    FAT_CD_R_PEDvlr_bruto: TFMTBCDField;
+    FAT_CD_R_PEDvlr_desconto: TFMTBCDField;
+    FAT_CD_R_PEDvlr_liquido: TFMTBCDField;
+    FAT_CD_R_PEDint_nomecli: TWideStringField;
+    FAT_CD_R_PEDint_nometme: TWideStringField;
+    FAT_CD_R_PEDint_nomefun: TWideStringField;
+    FAT_CD_R_PEDint_desc_cond_pag: TWideMemoField;
+    FAT_CD_R_PEDint_nomeate: TWideStringField;
+    FAT_CD_R_PEDint_nomeres: TWideStringField;
+    FAT_CD_R_PEDint_nomecid: TWideStringField;
+    FAT_CD_R_PEDint_nomeest: TWideStringField;
+    FAT_CD_R_PEDint_cpfcnpj: TWideStringField;
+    FAT_CD_R_PEDint_pessoacli: TIntegerField;
+    FAT_CD_R_PEDint_id_perfil: TIntegerField;
+    FAT_CD_R_PEDint_sitaprov: TWideStringField;
+    FAT_CD_R_PEDint_sitped: TWideStringField;
+    FAT_CD_R_PEDint_sitped2: TWideStringField;
+    FAT_CD_R_PEDint_ie_rg_cli: TWideStringField;
+    FAT_CD_R_PEDint_empfantasia: TWideStringField;
+    FAT_CD_R_PEDdta_emissao_nfe: TDateField;
+    FAT_CD_R_PEDordem_fat: TIntegerField;
+    FAT_CD_R_PEDFAT_SQ_R_PED_TIT: TDataSetField;
+    FAT_CD_R_PEDFAT_SQ_R_PED_ITE: TDataSetField;
+    FAT_CD_R_PED_ITEid_pedido: TIntegerField;
+    FAT_CD_R_PED_ITEid_cor: TIntegerField;
+    FAT_CD_R_PED_ITEid_tamanho: TIntegerField;
+    FAT_CD_R_PED_ITEqtde: TFloatField;
+    FAT_CD_R_PED_ITEvlr_unitario: TFMTBCDField;
+    FAT_CD_R_PED_ITEvlr_desconto: TFMTBCDField;
+    FAT_CD_R_PED_ITEvlr_liquido: TFMTBCDField;
+    FAT_CD_R_PED_ITEint_nomeite: TWideStringField;
+    FAT_CD_R_PED_ITEint_nomecor: TWideStringField;
+    FAT_CD_R_PED_ITEint_id_und_venda: TWideStringField;
+    FAT_CD_R_PED_ITEint_tipo_item: TWideStringField;
+    FAT_CD_R_PED_ITEint_nometam: TWideStringField;
+    FAT_CD_R_PED_TITid_titulo: TIntegerField;
+    FAT_CD_R_PED_TITdta_vencimento: TDateField;
+    FAT_CD_R_PED_TITche_agencia: TWideStringField;
+    FAT_CD_R_PED_TITche_banco: TWideStringField;
+    FAT_CD_R_PED_TITche_conta: TIntegerField;
+    FAT_CD_R_PED_TITche_numero: TIntegerField;
+    FAT_CD_R_PED_TITche_emitente: TWideStringField;
+    FAT_CD_R_PED_TITvlr_titulo: TFMTBCDField;
+    FAT_CD_R_PED_TITint_nomefpg: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -733,8 +781,8 @@ end;
 
 function TServidorMetodos.BuscarPedidosRelatorio: TStream;
 var
-  jsobj, jso: TJsonObject;
-  jsa: TJsonArray;
+  jso, jsoItens, jsoTit: TJsonObject;
+  jsa, jsaItens, jsaTit: TJsonArray;
   jsp: TJsonPair;
   dta_inicio, dta_final, texto: String;
   FAT_CD_M_PED, FAT_CD_M_PED_ITE, FAT_CD_M_PED_TIT: TClientDataSet;
@@ -875,7 +923,7 @@ begin
 
     unitformPrincipal.Form1.mmTexto.Lines.Add('Get do relatório de pedido de venda iniciada!');
 
-    jsObj := TJsonObject.Create();
+    //jsObj := TJsonObject.Create();
     Lista := TJsonArray.Create;
 
     while not FAT_CD_M_PED.Eof do
@@ -905,6 +953,58 @@ begin
            jso.AddPair('int_empfantasia',   FAT_CD_M_PED.FieldByName('int_empfantasia').AsString);
            jso.AddPair('dta_emissao_nfe',   FAT_CD_M_PED.FieldByName('dta_emissao_nfe').AsString);
            jso.AddPair('ordem_fat',         FAT_CD_M_PED.FieldByName('ordem_fat').AsString);
+
+
+
+
+
+           id_pedido
+           id_cor
+           id_tamanho
+           pte.qtde,
+           vlr_unitario
+           vlr_desconto
+           vlr_liquido,
+           int_nomeite
+           int_nomecor
+           int_id_und_venda
+           int_tipo_item
+           int_nometam
+
+
+
+
+           while not FAT_CD_M_PED_ITE.Eof do
+              begin
+                 jso := TJsonObject.Create;
+
+                 jso.AddPair('id_pedido',         FAT_CD_M_PED.FieldByName('id_pedido').AsString);
+                 jso.AddPair('dta_pedido',        FAT_CD_M_PED.FieldByName('dta_pedido').AsString);
+                 jso.AddPair('vlr_bruto',         FAT_CD_M_PED.FieldByName('vlr_bruto').AsString);
+                 jso.AddPair('vlr_desconto',      FAT_CD_M_PED.FieldByName('vlr_desconto').AsString);
+                 jso.AddPair('vlr_liquido',       FAT_CD_M_PED.FieldByName('vlr_liquido').AsString);
+                 jso.AddPair('int_nomecli',       FAT_CD_M_PED.FieldByName('int_nomecli').AsString);
+                 jso.AddPair('int_nometme',       FAT_CD_M_PED.FieldByName('int_nometme').AsString);
+                 jso.AddPair('int_nomefun',       FAT_CD_M_PED.FieldByName('int_nomefun').AsString);
+                 jso.AddPair('int_desc_cond_pag', FAT_CD_M_PED.FieldByName('int_desc_cond_pag').AsString);
+                 jso.AddPair('int_nomeate',       FAT_CD_M_PED.FieldByName('int_nomeate').AsString);
+                 jso.AddPair('int_nomeres',       FAT_CD_M_PED.FieldByName('int_nomeres').AsString);
+                 jso.AddPair('int_nomecid',       FAT_CD_M_PED.FieldByName('int_nomecid').AsString);
+                 jso.AddPair('int_nomeest',       FAT_CD_M_PED.FieldByName('int_nomeest').AsString);
+                 jso.AddPair('int_cpfcnpj',       FAT_CD_M_PED.FieldByName('int_cpfcnpj').AsString);
+                 jso.AddPair('int_pessoacli',     FAT_CD_M_PED.FieldByName('int_pessoacli').AsString);
+                 jso.AddPair('int_id_perfil',     FAT_CD_M_PED.FieldByName('int_id_perfil').AsString);
+                 jso.AddPair('int_sitaprov',      FAT_CD_M_PED.FieldByName('int_sitaprov').AsString);
+                 jso.AddPair('int_sitped',        FAT_CD_M_PED.FieldByName('int_sitped').AsString);
+                 jso.AddPair('int_sitped2',       FAT_CD_M_PED.FieldByName('int_sitped2').AsString);
+                 jso.AddPair('int_ie_rg_cli',     FAT_CD_M_PED.FieldByName('int_ie_rg_cli').AsString);
+                 jso.AddPair('int_empfantasia',   FAT_CD_M_PED.FieldByName('int_empfantasia').AsString);
+                 jso.AddPair('dta_emissao_nfe',   FAT_CD_M_PED.FieldByName('dta_emissao_nfe').AsString);
+                 jso.AddPair('ordem_fat',         FAT_CD_M_PED.FieldByName('ordem_fat').AsString);
+
+                 Lista.AddElement(jso);
+                 FAT_CD_M_PED.Next;
+              end;
 
            Lista.AddElement(jso);
            FAT_CD_M_PED.Next;

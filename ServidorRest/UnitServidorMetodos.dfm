@@ -634,6 +634,97 @@ object ServidorMetodos: TServidorMetodos
     ProviderName = 'FAT_DP_R_PED'
     Left = 272
     Top = 712
+    object FAT_CD_R_PEDid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+    end
+    object FAT_CD_R_PEDdta_pedido: TDateField
+      FieldName = 'dta_pedido'
+    end
+    object FAT_CD_R_PEDvlr_bruto: TFMTBCDField
+      FieldName = 'vlr_bruto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PEDvlr_desconto: TFMTBCDField
+      FieldName = 'vlr_desconto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PEDvlr_liquido: TFMTBCDField
+      FieldName = 'vlr_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PEDint_nomecli: TWideStringField
+      FieldName = 'int_nomecli'
+      Size = 50
+    end
+    object FAT_CD_R_PEDint_nometme: TWideStringField
+      FieldName = 'int_nometme'
+      Size = 30
+    end
+    object FAT_CD_R_PEDint_nomefun: TWideStringField
+      FieldName = 'int_nomefun'
+      Size = 50
+    end
+    object FAT_CD_R_PEDint_desc_cond_pag: TWideMemoField
+      FieldName = 'int_desc_cond_pag'
+      BlobType = ftWideMemo
+    end
+    object FAT_CD_R_PEDint_nomeate: TWideStringField
+      FieldName = 'int_nomeate'
+      Size = 50
+    end
+    object FAT_CD_R_PEDint_nomeres: TWideStringField
+      FieldName = 'int_nomeres'
+      Size = 50
+    end
+    object FAT_CD_R_PEDint_nomecid: TWideStringField
+      FieldName = 'int_nomecid'
+      Size = 60
+    end
+    object FAT_CD_R_PEDint_nomeest: TWideStringField
+      FieldName = 'int_nomeest'
+      Size = 2
+    end
+    object FAT_CD_R_PEDint_cpfcnpj: TWideStringField
+      FieldName = 'int_cpfcnpj'
+      Size = 14
+    end
+    object FAT_CD_R_PEDint_pessoacli: TIntegerField
+      FieldName = 'int_pessoacli'
+    end
+    object FAT_CD_R_PEDint_id_perfil: TIntegerField
+      FieldName = 'int_id_perfil'
+    end
+    object FAT_CD_R_PEDint_sitaprov: TWideStringField
+      FieldName = 'int_sitaprov'
+    end
+    object FAT_CD_R_PEDint_sitped: TWideStringField
+      FieldName = 'int_sitped'
+    end
+    object FAT_CD_R_PEDint_sitped2: TWideStringField
+      FieldName = 'int_sitped2'
+    end
+    object FAT_CD_R_PEDint_ie_rg_cli: TWideStringField
+      FieldName = 'int_ie_rg_cli'
+    end
+    object FAT_CD_R_PEDint_empfantasia: TWideStringField
+      FieldName = 'int_empfantasia'
+      Size = 50
+    end
+    object FAT_CD_R_PEDdta_emissao_nfe: TDateField
+      FieldName = 'dta_emissao_nfe'
+    end
+    object FAT_CD_R_PEDordem_fat: TIntegerField
+      FieldName = 'ordem_fat'
+    end
+    object FAT_CD_R_PEDFAT_SQ_R_PED_TIT: TDataSetField
+      FieldName = 'FAT_SQ_R_PED_TIT'
+    end
+    object FAT_CD_R_PEDFAT_SQ_R_PED_ITE: TDataSetField
+      FieldName = 'FAT_SQ_R_PED_ITE'
+    end
   end
   object FAT_SQ_R_PED_ITE: TSQLDataSet
     CommandText = 
@@ -683,5 +774,99 @@ object ServidorMetodos: TServidorMetodos
     SQLConnection = ConexaoNW
     Left = 64
     Top = 816
+  end
+  object FAT_CD_R_PED_ITE: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_R_PEDFAT_SQ_R_PED_ITE
+    Params = <>
+    Left = 272
+    Top = 766
+    object FAT_CD_R_PED_ITEid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+    end
+    object FAT_CD_R_PED_ITEid_cor: TIntegerField
+      FieldName = 'id_cor'
+    end
+    object FAT_CD_R_PED_ITEid_tamanho: TIntegerField
+      FieldName = 'id_tamanho'
+    end
+    object FAT_CD_R_PED_ITEqtde: TFloatField
+      FieldName = 'qtde'
+    end
+    object FAT_CD_R_PED_ITEvlr_unitario: TFMTBCDField
+      FieldName = 'vlr_unitario'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PED_ITEvlr_desconto: TFMTBCDField
+      FieldName = 'vlr_desconto'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PED_ITEvlr_liquido: TFMTBCDField
+      FieldName = 'vlr_liquido'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PED_ITEint_nomeite: TWideStringField
+      FieldName = 'int_nomeite'
+      Size = 100
+    end
+    object FAT_CD_R_PED_ITEint_nomecor: TWideStringField
+      FieldName = 'int_nomecor'
+      Size = 40
+    end
+    object FAT_CD_R_PED_ITEint_id_und_venda: TWideStringField
+      FieldName = 'int_id_und_venda'
+      Size = 3
+    end
+    object FAT_CD_R_PED_ITEint_tipo_item: TWideStringField
+      FieldName = 'int_tipo_item'
+      Size = 2
+    end
+    object FAT_CD_R_PED_ITEint_nometam: TWideStringField
+      FieldName = 'int_nometam'
+      Size = 40
+    end
+  end
+  object FAT_CD_R_PED_TIT: TClientDataSet
+    Aggregates = <>
+    DataSetField = FAT_CD_R_PEDFAT_SQ_R_PED_TIT
+    Params = <>
+    Left = 272
+    Top = 816
+    object FAT_CD_R_PED_TITid_titulo: TIntegerField
+      FieldName = 'id_titulo'
+    end
+    object FAT_CD_R_PED_TITdta_vencimento: TDateField
+      FieldName = 'dta_vencimento'
+    end
+    object FAT_CD_R_PED_TITche_agencia: TWideStringField
+      FieldName = 'che_agencia'
+      Size = 10
+    end
+    object FAT_CD_R_PED_TITche_banco: TWideStringField
+      FieldName = 'che_banco'
+      Size = 10
+    end
+    object FAT_CD_R_PED_TITche_conta: TIntegerField
+      FieldName = 'che_conta'
+    end
+    object FAT_CD_R_PED_TITche_numero: TIntegerField
+      FieldName = 'che_numero'
+    end
+    object FAT_CD_R_PED_TITche_emitente: TWideStringField
+      FieldName = 'che_emitente'
+      Size = 50
+    end
+    object FAT_CD_R_PED_TITvlr_titulo: TFMTBCDField
+      FieldName = 'vlr_titulo'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PED_TITint_nomefpg: TWideStringField
+      FieldName = 'int_nomefpg'
+      Size = 30
+    end
   end
 end
