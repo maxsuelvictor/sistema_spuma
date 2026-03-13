@@ -728,16 +728,17 @@ object ServidorMetodos: TServidorMetodos
   end
   object FAT_SQ_R_PED_ITE: TSQLDataSet
     CommandText = 
-      'select pte.id_pedido, pte.id_cor, pte.id_tamanho, pte.qtde, '#13#10'  ' +
-      '     pte.vlr_unitario, pte.vlr_desconto, pte.vlr_liquido,'#13#10'     ' +
-      '  ite.descricao as int_nomeite, cor.descricao as int_nomecor,'#13#10' ' +
-      '      ite.id_und_venda int_id_und_venda ,'#13#10'       gru.tipo_item ' +
-      ' as  int_tipo_item ,'#13#10'       tam.descricao as int_nometam'#13#10'from ' +
-      'fat_tb_m_ped_ite pte'#13#10'left outer join cad_tb_c_ite ite on ite.id' +
-      '_item = pte.id_item'#13#10'left outer join cad_tb_c_gru gru on gru.id_' +
-      'grupo = ite.id_grupo'#13#10'left outer join cad_tb_c_cor cor on cor.id' +
-      '_cor = pte.id_cor'#13#10'left outer join cad_tb_c_tam tam on tam.id_ta' +
-      'manho = pte.id_tamanho'#13#10'where pte.id_pedido=:id_pedido'
+      'select pte.id_pedido, pte.id_item,  pte.id_cor, pte.id_tamanho,'#13 +
+      #10'       pte.qtde,  pte.vlr_unitario, pte.vlr_desconto, pte.vlr_l' +
+      'iquido,'#13#10'       ite.descricao as int_nomeite, cor.descricao as i' +
+      'nt_nomecor,'#13#10'       ite.id_und_venda int_id_und_venda ,'#13#10'       ' +
+      'gru.tipo_item  as  int_tipo_item ,'#13#10'       tam.descricao as int_' +
+      'nometam'#13#10'from fat_tb_m_ped_ite pte'#13#10'left outer join cad_tb_c_ite' +
+      ' ite on ite.id_item = pte.id_item'#13#10'left outer join cad_tb_c_gru ' +
+      'gru on gru.id_grupo = ite.id_grupo'#13#10'left outer join cad_tb_c_cor' +
+      ' cor on cor.id_cor = pte.id_cor'#13#10'left outer join cad_tb_c_tam ta' +
+      'm on tam.id_tamanho = pte.id_tamanho'#13#10'where pte.id_pedido=:id_pe' +
+      'dido'
     DataSource = FAT_DS_R_PED
     MaxBlobSize = -1
     Params = <
@@ -757,12 +758,12 @@ object ServidorMetodos: TServidorMetodos
   end
   object FAT_SQ_R_PED_TIT: TSQLDataSet
     CommandText = 
-      'select pti.id_titulo, pti.dta_vencimento, pti.che_agencia, pti.c' +
-      'he_banco,'#13#10'       pti.che_conta, pti.che_numero, pti.che_emitent' +
-      'e, pti.vlr_titulo,'#13#10'       fpg.descricao as int_nomefpg'#13#10'from fa' +
-      't_tb_m_ped_tit pti '#13#10'left outer join cad_tb_c_fpg fpg on fpg.id_' +
-      'forma_pag=pti.id_forma_pag'#13#10'where pti.id_pedido=:id_pedido'#13#10'orde' +
-      'r by pti.dta_vencimento'
+      'select pti.id_pedido,pti.id_titulo, pti.dta_vencimento, pti.che_' +
+      'agencia, pti.che_banco,'#13#10'       pti.che_conta, pti.che_numero, p' +
+      'ti.che_emitente, pti.vlr_titulo,'#13#10'       fpg.descricao as int_no' +
+      'mefpg'#13#10'from fat_tb_m_ped_tit pti '#13#10'left outer join cad_tb_c_fpg ' +
+      'fpg on fpg.id_forma_pag=pti.id_forma_pag'#13#10'where pti.id_pedido=:i' +
+      'd_pedido'#13#10'order by pti.dta_vencimento'
     DataSource = FAT_DS_R_PED
     MaxBlobSize = -1
     Params = <
@@ -783,6 +784,9 @@ object ServidorMetodos: TServidorMetodos
     Top = 766
     object FAT_CD_R_PED_ITEid_pedido: TIntegerField
       FieldName = 'id_pedido'
+    end
+    object FAT_CD_R_PED_ITEid_item: TIntegerField
+      FieldName = 'id_item'
     end
     object FAT_CD_R_PED_ITEid_cor: TIntegerField
       FieldName = 'id_cor'
@@ -867,6 +871,9 @@ object ServidorMetodos: TServidorMetodos
     object FAT_CD_R_PED_TITint_nomefpg: TWideStringField
       FieldName = 'int_nomefpg'
       Size = 30
+    end
+    object FAT_CD_R_PED_TITid_pedido: TIntegerField
+      FieldName = 'id_pedido'
     end
   end
 end
