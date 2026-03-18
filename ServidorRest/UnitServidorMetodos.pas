@@ -931,7 +931,7 @@ begin
         '           when (ped.situacao = 2) then ''Em produção''' + #13#10 +
         '           when (ped.situacao = 3) then ''Faturado''' + #13#10 +
         '           when (ped.situacao = 4) then ''Cancelado''' + #13#10 +
-        '         end as varchar(20) ) as int_sitped2, ' +
+        '         end as varchar(20) ) as int_sit_pedido_detalhado, ' +
         ' cli.doc_ie_identidade as int_ie_rg_cli, ' +
         ' par.emp_fantasia as int_empfantasia, nfe.dta_emissao as dta_emissao_nfe, ors.id_ors as ordem_fat '+
         ' ' +

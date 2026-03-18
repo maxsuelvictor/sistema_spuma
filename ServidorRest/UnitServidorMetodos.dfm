@@ -593,30 +593,30 @@ object ServidorMetodos: TServidorMetodos
       '   when 0 then '#39'Em aberto'#39#13#10'           when 1 then '#39'Reprovado'#39#13#10 +
       '           when 2 then '#39'Em produ'#231#227'o'#39#13#10'           when 3 then '#39'Fa' +
       'turado'#39#13#10'           when 4 then '#39'Cancelado'#39#13#10'         end as var' +
-      'char(20) ) as int_sitped,'#13#10'         cast( case      '#13#10'          ' +
-      ' when (ped.situacao = 0) and (ped.situacao_aprovacao = 0) then '#39 +
-      'Digitado'#39#13#10'           when (ped.situacao = 0) and (ped.situacao_' +
-      'aprovacao = 1) then '#39'Aprovado'#39#13#10'           when (ped.situacao = ' +
-      '1) then '#39'Reprovado'#39#13#10'           when (ped.situacao = 2) then '#39'Em' +
-      ' produ'#231#227'o'#39#13#10'           when (ped.situacao = 3) then '#39'Faturado'#39#13#10 +
-      '           when (ped.situacao = 4) then '#39'Cancelado'#39#13#10'         en' +
-      'd as varchar(20) ) as int_sitped2,    '#13#10'         cli.doc_ie_iden' +
-      'tidade as int_ie_rg_cli,'#13#10'         PAR.EMP_FANTASIA AS INT_EMPFA' +
-      'NTASIA,'#13#10'         NFE.DTA_EMISSAO AS DTA_EMISSAO_NFE, '#13#10'        ' +
-      ' ORS.ID_ORS AS ORDEM_FAT'#13#10'         FROM FAT_TB_M_PED PED'#13#10'      ' +
-      '   LEFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIENTE = PED.ID_C' +
-      'LIENTE'#13#10'         LEFT OUTER JOIN CAD_TB_C_TME TME ON TME.ID_TIPO' +
-      '_MOV_ESTOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10'         LEFT OUTER JOIN' +
-      ' CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=PED.ID_VENDEDOR'#13#10'       ' +
-      '  LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_CONDICAO_PAG=PED.ID' +
-      '_CONDICAO_PAG'#13#10'         LEFT OUTER JOIN CAD_TB_C_FUN ATE ON ATE.' +
-      'ID_FUNCIONARIO=PED.ID_ATENDENTE'#13#10'         LEFT OUTER JOIN CAD_TB' +
-      '_C_FUN RES ON RES.ID_FUNCIONARIO=PED.ID_RESPONSAVEL'#13#10'         LE' +
-      'FT OUTER JOIN CAD_TB_C_CID CID ON CID.ID_CIDADE=CLI.ID_CIDADE'#13#10' ' +
-      '        LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PAR.ID_EMPRESA=PED.I' +
-      'D_EMPRESA'#13#10'         LEFT OUTER JOIN PCP_TB_M_ORS ORS ON ORS.ID_P' +
-      'EDIDO=PED.ID_PEDIDO '#13#10'         LEFT OUTER JOIN FAT_TB_M_NFE NFE ' +
-      'ON NFE.ID_ORS=ORS.ID_ORS '#13#10#13#10'WHERE 1=2'
+      'char(20) ) as int_sit_pedido_detalhado,'#13#10'         cast( case    ' +
+      '  '#13#10'           when (ped.situacao = 0) and (ped.situacao_aprovac' +
+      'ao = 0) then '#39'Digitado'#39#13#10'           when (ped.situacao = 0) and ' +
+      '(ped.situacao_aprovacao = 1) then '#39'Aprovado'#39#13#10'           when (p' +
+      'ed.situacao = 1) then '#39'Reprovado'#39#13#10'           when (ped.situacao' +
+      ' = 2) then '#39'Em produ'#231#227'o'#39#13#10'           when (ped.situacao = 3) the' +
+      'n '#39'Faturado'#39#13#10'           when (ped.situacao = 4) then '#39'Cancelado' +
+      #39#13#10'         end as varchar(20) ) as int_sitped2,    '#13#10'         c' +
+      'li.doc_ie_identidade as int_ie_rg_cli,'#13#10'         PAR.EMP_FANTASI' +
+      'A AS INT_EMPFANTASIA,'#13#10'         NFE.DTA_EMISSAO AS DTA_EMISSAO_N' +
+      'FE, '#13#10'         ORS.ID_ORS AS ORDEM_FAT'#13#10'         FROM FAT_TB_M_P' +
+      'ED PED'#13#10'         LEFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIE' +
+      'NTE = PED.ID_CLIENTE'#13#10'         LEFT OUTER JOIN CAD_TB_C_TME TME ' +
+      'ON TME.ID_TIPO_MOV_ESTOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10'         L' +
+      'EFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=PED.ID_VEN' +
+      'DEDOR'#13#10'         LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_CONDI' +
+      'CAO_PAG=PED.ID_CONDICAO_PAG'#13#10'         LEFT OUTER JOIN CAD_TB_C_F' +
+      'UN ATE ON ATE.ID_FUNCIONARIO=PED.ID_ATENDENTE'#13#10'         LEFT OUT' +
+      'ER JOIN CAD_TB_C_FUN RES ON RES.ID_FUNCIONARIO=PED.ID_RESPONSAVE' +
+      'L'#13#10'         LEFT OUTER JOIN CAD_TB_C_CID CID ON CID.ID_CIDADE=CL' +
+      'I.ID_CIDADE'#13#10'         LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PAR.ID' +
+      '_EMPRESA=PED.ID_EMPRESA'#13#10'         LEFT OUTER JOIN PCP_TB_M_ORS O' +
+      'RS ON ORS.ID_PEDIDO=PED.ID_PEDIDO '#13#10'         LEFT OUTER JOIN FAT' +
+      '_TB_M_NFE NFE ON NFE.ID_ORS=ORS.ID_ORS '#13#10#13#10'WHERE 1=2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = ConexaoNW
