@@ -165,7 +165,6 @@ type
     FAT_CD_R_PEDint_id_perfil: TIntegerField;
     FAT_CD_R_PEDint_sitaprov: TWideStringField;
     FAT_CD_R_PEDint_sitped: TWideStringField;
-    FAT_CD_R_PEDint_sitped2: TWideStringField;
     FAT_CD_R_PEDint_ie_rg_cli: TWideStringField;
     FAT_CD_R_PEDint_empfantasia: TWideStringField;
     FAT_CD_R_PEDdta_emissao_nfe: TDateField;
@@ -195,6 +194,7 @@ type
     FAT_CD_R_PED_TITint_nomefpg: TWideStringField;
     FAT_CD_R_PED_ITEid_item: TIntegerField;
     FAT_CD_R_PED_TITid_pedido: TIntegerField;
+    FAT_CD_R_PEDint_sit_pedido_detalhado: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -985,7 +985,7 @@ begin
            jso.AddPair('int_id_perfil',     FAT_CD_R_PED.FieldByName('int_id_perfil').AsString);
            jso.AddPair('int_sitaprov',      FAT_CD_R_PED.FieldByName('int_sitaprov').AsString);
            jso.AddPair('int_sitped',        FAT_CD_R_PED.FieldByName('int_sitped').AsString);
-           jso.AddPair('int_sitped2',       FAT_CD_R_PED.FieldByName('int_sitped2').AsString);
+           jso.AddPair('int_sit_pedido_detalhado',       FAT_CD_R_PED.FieldByName('int_sit_pedido_detalhado').AsString);
            jso.AddPair('int_ie_rg_cli',     FAT_CD_R_PED.FieldByName('int_ie_rg_cli').AsString);
            jso.AddPair('int_empfantasia',   FAT_CD_R_PED.FieldByName('int_empfantasia').AsString);
            jso.AddPair('dta_emissao_nfe',   FAT_CD_R_PED.FieldByName('dta_emissao_nfe').AsString);
