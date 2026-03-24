@@ -195,6 +195,7 @@ type
     FAT_CD_R_PED_ITEid_item: TIntegerField;
     FAT_CD_R_PED_TITid_pedido: TIntegerField;
     FAT_CD_R_PEDint_sit_pedido_detalhado: TWideStringField;
+    FAT_CD_R_PEDint_codcli: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -904,7 +905,8 @@ begin
 
         ' SELECT ' +
         '   ped.id_pedido, ped.dta_pedido, ped.vlr_bruto, ped.vlr_desconto, ped.vlr_liquido, ' +
-        '   cli.nome as int_nomecli, tme.descricao as int_nometme,  fun.nome as int_nomefun, ' +
+        '   ped.id_cliente as int_codcli, cli.nome as int_nomecli, tme.descricao as int_nometme, ' +
+        '   fun.nome as int_nomefun, ' +
         '   case ' +
         '     when sgq_texto_cond_pgto <> '''' then sgq_texto_cond_pgto ' +
         '   else  CPG.DESCRICAO end as int_desc_cond_pag, ' +
@@ -954,6 +956,7 @@ begin
          FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' and ped.id_vendedor = ''' +
                                                                     id_vendedor + ''' ';
        end;
+    FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' order by ped.dta_pedido desc ';
 
     FAT_CD_R_PED.Open;
 
@@ -968,6 +971,7 @@ begin
            jso := TJsonObject.Create;
 
            jso.AddPair('id_pedido',         FAT_CD_R_PED.FieldByName('id_pedido').AsString);
+           jso.AddPair('int_codcli',        FAT_CD_R_PED.FieldByName('int_codcli').AsString);
            jso.AddPair('dta_pedido',        FAT_CD_R_PED.FieldByName('dta_pedido').AsString);
            jso.AddPair('vlr_bruto',         FAT_CD_R_PED.FieldByName('vlr_bruto').AsString);
            jso.AddPair('vlr_desconto',      FAT_CD_R_PED.FieldByName('vlr_desconto').AsString);
@@ -1016,7 +1020,7 @@ begin
 
                  FAT_CD_R_PED_ITE.Next;
               end;
-           jso.AddPair('itens', jsoItens);
+           jso.AddPair('itens', ListaPedItens);
 
 
            ListaPedTitulos := TJsonArray.Create;
@@ -1038,7 +1042,7 @@ begin
                  ListaPedTitulos.AddElement(jsoTit);
                  FAT_CD_R_PED_TIT.Next;
               end;
-           jso.AddPair('titulos', jsoTit);
+           jso.AddPair('titulos', ListaPedTitulos);
 
            ListaPedidos.AddElement(jso);
            FAT_CD_R_PED.Next;

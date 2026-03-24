@@ -577,46 +577,47 @@ object ServidorMetodos: TServidorMetodos
   object FAT_SQ_R_PED: TSQLDataSet
     CommandText = 
       'SELECT PED.id_pedido, ped.dta_pedido, ped.vlr_bruto, ped.vlr_des' +
-      'conto, ped.vlr_liquido,'#13#10'             CLI.NOME AS INT_NOMECLI,'#13#10 +
-      '             TME.DESCRICAO AS INT_NOMETME,'#13#10'             FUN.NOM' +
-      'E AS INT_NOMEFUN, '#13#10'            case '#13#10'               when sgq_t' +
-      'exto_cond_pgto <> '#39#39' then sgq_texto_cond_pgto '#13#10'            else' +
-      '  CPG.DESCRICAO end as int_desc_cond_pag, '#13#10'             ATE.NOM' +
-      'E AS INT_NOMEATE,'#13#10'             RES.NOME AS INT_NOMERES,'#13#10'      ' +
-      '       CID.NOME AS INT_NOMECID,'#13#10'             CID.UF AS INT_NOME' +
-      'EST,'#13#10'             CLI.doc_cnpj_cpf AS INT_CPFCNPJ, '#13#10'          ' +
-      '   CLI.pessoa as int_pessoacli,'#13#10'             CLI.ID_PERFIL_CLI ' +
-      'AS INT_ID_PERFIL,'#13#10'         cast( case situacao_aprovacao'#13#10'     ' +
-      '      when 0 then '#39'Em espera'#39#13#10'           when 1 then '#39'Aprovado'#39 +
-      #13#10'           when 2 then '#39'Reprovado'#39#13#10'         end as varchar(20' +
-      ') ) as int_sitaprov,'#13#10'         cast( case ped.situacao'#13#10'        ' +
-      '   when 0 then '#39'Em aberto'#39#13#10'           when 1 then '#39'Reprovado'#39#13#10 +
-      '           when 2 then '#39'Em produ'#231#227'o'#39#13#10'           when 3 then '#39'Fa' +
-      'turado'#39#13#10'           when 4 then '#39'Cancelado'#39#13#10'         end as var' +
-      'char(20) ) as int_sitped,'#13#10'         cast( case      '#13#10'          ' +
-      ' when (ped.situacao = 0) and (ped.situacao_aprovacao = 0) then '#39 +
-      'Digitado'#39#13#10'           when (ped.situacao = 0) and (ped.situacao_' +
-      'aprovacao = 1) then '#39'Aprovado'#39#13#10'           when (ped.situacao = ' +
-      '1) then '#39'Reprovado'#39#13#10'           when (ped.situacao = 2) then '#39'Em' +
-      ' produ'#231#227'o'#39#13#10'           when (ped.situacao = 3) then '#39'Faturado'#39#13#10 +
-      '           when (ped.situacao = 4) then '#39'Cancelado'#39#13#10'         en' +
-      'd as varchar(20) ) as int_sit_pedido_detalhado,    '#13#10'         cl' +
-      'i.doc_ie_identidade as int_ie_rg_cli,'#13#10'         PAR.EMP_FANTASIA' +
-      ' AS INT_EMPFANTASIA,'#13#10'         NFE.DTA_EMISSAO AS DTA_EMISSAO_NF' +
-      'E, '#13#10'         ORS.ID_ORS AS ORDEM_FAT'#13#10'         FROM FAT_TB_M_PE' +
-      'D PED'#13#10'         LEFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIEN' +
-      'TE = PED.ID_CLIENTE'#13#10'         LEFT OUTER JOIN CAD_TB_C_TME TME O' +
-      'N TME.ID_TIPO_MOV_ESTOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10'         LE' +
-      'FT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=PED.ID_VEND' +
-      'EDOR'#13#10'         LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_CONDIC' +
-      'AO_PAG=PED.ID_CONDICAO_PAG'#13#10'         LEFT OUTER JOIN CAD_TB_C_FU' +
-      'N ATE ON ATE.ID_FUNCIONARIO=PED.ID_ATENDENTE'#13#10'         LEFT OUTE' +
-      'R JOIN CAD_TB_C_FUN RES ON RES.ID_FUNCIONARIO=PED.ID_RESPONSAVEL' +
-      #13#10'         LEFT OUTER JOIN CAD_TB_C_CID CID ON CID.ID_CIDADE=CLI' +
-      '.ID_CIDADE'#13#10'         LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PAR.ID_' +
-      'EMPRESA=PED.ID_EMPRESA'#13#10'         LEFT OUTER JOIN PCP_TB_M_ORS OR' +
-      'S ON ORS.ID_PEDIDO=PED.ID_PEDIDO '#13#10'         LEFT OUTER JOIN FAT_' +
-      'TB_M_NFE NFE ON NFE.ID_ORS=ORS.ID_ORS '#13#10#13#10'WHERE 1=2'
+      'conto, ped.vlr_liquido,'#13#10'             ped.id_cliente as int_codc' +
+      'li,'#13#10'             CLI.NOME AS INT_NOMECLI,'#13#10'             TME.DES' +
+      'CRICAO AS INT_NOMETME,'#13#10'             FUN.NOME AS INT_NOMEFUN, '#13#10 +
+      '            case '#13#10'               when sgq_texto_cond_pgto <> '#39#39 +
+      ' then sgq_texto_cond_pgto '#13#10'            else  CPG.DESCRICAO end ' +
+      'as int_desc_cond_pag, '#13#10'             ATE.NOME AS INT_NOMEATE,'#13#10' ' +
+      '            RES.NOME AS INT_NOMERES,'#13#10'             CID.NOME AS I' +
+      'NT_NOMECID,'#13#10'             CID.UF AS INT_NOMEEST,'#13#10'             C' +
+      'LI.doc_cnpj_cpf AS INT_CPFCNPJ, '#13#10'             CLI.pessoa as int' +
+      '_pessoacli,'#13#10'             CLI.ID_PERFIL_CLI AS INT_ID_PERFIL,'#13#10' ' +
+      '        cast( case situacao_aprovacao'#13#10'           when 0 then '#39'E' +
+      'm espera'#39#13#10'           when 1 then '#39'Aprovado'#39#13#10'           when 2 ' +
+      'then '#39'Reprovado'#39#13#10'         end as varchar(20) ) as int_sitaprov,' +
+      #13#10'         cast( case ped.situacao'#13#10'           when 0 then '#39'Em a' +
+      'berto'#39#13#10'           when 1 then '#39'Reprovado'#39#13#10'           when 2 th' +
+      'en '#39'Em produ'#231#227'o'#39#13#10'           when 3 then '#39'Faturado'#39#13#10'           ' +
+      'when 4 then '#39'Cancelado'#39#13#10'         end as varchar(20) ) as int_si' +
+      'tped,'#13#10'         cast( case      '#13#10'           when (ped.situacao ' +
+      '= 0) and (ped.situacao_aprovacao = 0) then '#39'Digitado'#39#13#10'         ' +
+      '  when (ped.situacao = 0) and (ped.situacao_aprovacao = 1) then ' +
+      #39'Aprovado'#39#13#10'           when (ped.situacao = 1) then '#39'Reprovado'#39#13 +
+      #10'           when (ped.situacao = 2) then '#39'Em produ'#231#227'o'#39#13#10'        ' +
+      '   when (ped.situacao = 3) then '#39'Faturado'#39#13#10'           when (ped' +
+      '.situacao = 4) then '#39'Cancelado'#39#13#10'         end as varchar(20) ) a' +
+      's int_sit_pedido_detalhado,    '#13#10'         cli.doc_ie_identidade ' +
+      'as int_ie_rg_cli,'#13#10'         PAR.EMP_FANTASIA AS INT_EMPFANTASIA,' +
+      #13#10'         NFE.DTA_EMISSAO AS DTA_EMISSAO_NFE, '#13#10'         ORS.ID' +
+      '_ORS AS ORDEM_FAT'#13#10'         FROM FAT_TB_M_PED PED'#13#10'         LEFT' +
+      ' OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_CLIENTE = PED.ID_CLIENTE'#13 +
+      #10'         LEFT OUTER JOIN CAD_TB_C_TME TME ON TME.ID_TIPO_MOV_ES' +
+      'TOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10'         LEFT OUTER JOIN CAD_TB' +
+      '_C_FUN FUN ON FUN.ID_FUNCIONARIO=PED.ID_VENDEDOR'#13#10'         LEFT ' +
+      'OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_CONDICAO_PAG=PED.ID_CONDIC' +
+      'AO_PAG'#13#10'         LEFT OUTER JOIN CAD_TB_C_FUN ATE ON ATE.ID_FUNC' +
+      'IONARIO=PED.ID_ATENDENTE'#13#10'         LEFT OUTER JOIN CAD_TB_C_FUN ' +
+      'RES ON RES.ID_FUNCIONARIO=PED.ID_RESPONSAVEL'#13#10'         LEFT OUTE' +
+      'R JOIN CAD_TB_C_CID CID ON CID.ID_CIDADE=CLI.ID_CIDADE'#13#10'        ' +
+      ' LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PAR.ID_EMPRESA=PED.ID_EMPRE' +
+      'SA'#13#10'         LEFT OUTER JOIN PCP_TB_M_ORS ORS ON ORS.ID_PEDIDO=P' +
+      'ED.ID_PEDIDO '#13#10'         LEFT OUTER JOIN FAT_TB_M_NFE NFE ON NFE.' +
+      'ID_ORS=ORS.ID_ORS '#13#10#13#10'WHERE 1=2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = ConexaoNW
@@ -724,6 +725,9 @@ object ServidorMetodos: TServidorMetodos
     end
     object FAT_CD_R_PEDint_sit_pedido_detalhado: TWideStringField
       FieldName = 'int_sit_pedido_detalhado'
+    end
+    object FAT_CD_R_PEDint_codcli: TIntegerField
+      FieldName = 'int_codcli'
     end
   end
   object FAT_SQ_R_PED_ITE: TSQLDataSet
