@@ -723,9 +723,12 @@ begin
 
     CAD_SQ_C_ITE.Close;
     CAD_SQ_C_ITE.CommandText := 'select ' +
-           ' id_item ,  descricao , fantasia,  id_grupo ,  ativo ,  preco_avista ,  preco_aprazo ,  id_ncm ,  sgq_personalizado ,  tipo_produto , ' +
-           ' id_und_venda  ' +
-           ' from cad_tb_c_ite where ativo = true ';
+           ' ite.id_item ,  ite.descricao , ite.fantasia,  ite.id_grupo ,  ite.ativo ,  ' +
+           ' ite.preco_avista ,  ite.preco_aprazo ,  ite.id_ncm ,  ite.sgq_personalizado ,  ite.tipo_produto , ' +
+           ' ite.id_und_venda, gru.tipo_item as int_tipoitem  ' +
+           ' from cad_tb_c_ite ite ' +
+           '    left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo ' +
+           ' where ite.ativo = true ';
     CAD_CD_C_ITE.Open;
 
     unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos Itens iniciada!');
@@ -747,6 +750,7 @@ begin
       jso.AddPair('sgq_personalizado', CAD_CD_C_ITE.FieldByName('sgq_personalizado').AsString);
       jso.AddPair('tipo_produto', CAD_CD_C_ITE.FieldByName('tipo_produto').AsString);
       jso.AddPair('id_und_venda', CAD_CD_C_ITE.FieldByName('id_und_venda').AsString);
+      jso.AddPair('int_tipoitem', CAD_CD_C_ITE.FieldByName('int_tipoitem').AsString);
 
       Lista.AddElement(jso);
       CAD_CD_C_ITE.Next;
