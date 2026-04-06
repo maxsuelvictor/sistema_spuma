@@ -880,4 +880,11 @@ object ServidorMetodos: TServidorMetodos
       FieldName = 'id_pedido'
     end
   end
+  object CAD_CD_C_CLI: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'CAD_DP_C_CLI'
+    Left = 384
+    Top = 360
+  end
 end

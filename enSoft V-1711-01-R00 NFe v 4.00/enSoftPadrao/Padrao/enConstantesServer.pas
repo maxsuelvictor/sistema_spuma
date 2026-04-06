@@ -4,8 +4,8 @@ interface
 
 const
   // Versão do sistema
-  CenVersaoSis    = 'V-2602-02-R00';
-  CenVersaoServer = 'V-2602-02-R00';
+  CenVersaoSis    = 'V-2603-01-R00';
+  CenVersaoServer = 'V-2603-01-R00';
 
 implementation
 

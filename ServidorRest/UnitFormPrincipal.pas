@@ -78,6 +78,8 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   FServer := TIdHTTPWebBrokerBridge.Create(Self);
+
+
 end;
 
 procedure TForm1.StartServer;
@@ -88,6 +90,7 @@ begin
     FServer.DefaultPort := StrToInt(EditPort.Text);
     FServer.Active := True;
   end;
+
 end;
 
 end.

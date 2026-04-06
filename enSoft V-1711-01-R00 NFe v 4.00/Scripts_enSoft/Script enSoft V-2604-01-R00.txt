@@ -1,0 +1,6 @@
+/******** 02/04/2026 ********/
+
+ALTER TABLE "public"."cad_tb_c_cli"
+ADD COLUMN "gerado_por_app" bool;
+
+COMMENT ON COLUMN "public"."cad_tb_c_cli"."gerado_por_app" IS 'Utilizado pelo app da Colchoes Globo';

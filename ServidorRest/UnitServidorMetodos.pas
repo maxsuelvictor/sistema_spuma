@@ -2,7 +2,7 @@ unit UnitServidorMetodos;
 
 interface
 
-uses System.SysUtils, System.Classes, System.Json,
+uses System.SysUtils, System.Classes, System.Json, System.DateUtils,
     Datasnap.DSServer, Datasnap.DSAuth, DataSnap.DSProviderDataModuleAdapter,
     System.IniFiles,Datasnap.DBClient, DbxDevartPostgreSQL, Data.FMTBcd,
   Datasnap.Provider, Data.DB, Data.SqlExpr, Vcl.Forms, Data.DBXPlatform,
@@ -196,6 +196,7 @@ type
     FAT_CD_R_PED_TITid_pedido: TIntegerField;
     FAT_CD_R_PEDint_sit_pedido_detalhado: TWideStringField;
     FAT_CD_R_PEDint_codcli: TIntegerField;
+    CAD_CD_C_CLI: TClientDataSet;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -205,9 +206,11 @@ type
     { Public declarations }
     function EchoString(Value: string): string;
     function ReverseString(Value: string): string;
+    function GetInfoConexao: String;
 
     var
        xMsg: String;
+
 
     procedure GerarSqlTxt(texto: String);
 
@@ -237,6 +240,9 @@ type
     function updateEnviarCores(const Dados: TJSONArray): TJSONObject;
     function updateEnviarRegioes(const Dados: TJSONArray): TJSONObject;
     //function updateReceberPedidos(const AJSON: string): string;
+
+    function updateReceberClientesPorVendedor(const AJSON: TJSONValue): string;
+
     function updateReceberPedidos(const AJSON: TJSONValue): string;
 
     // casa
@@ -324,7 +330,8 @@ var
   erroJson: TJSONObject;
 begin
 
-  //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarClientes?id_vendedor=
+
+  //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarClientesPorVendedor?id_vendedor=
 
   { Get da Tabela: CAD_TB_C_CLI - Clientes
     Criado por: Maxsuel Victor
@@ -362,12 +369,12 @@ begin
 
     // Inicializa componentes
     CAD_CD_C_CLI := TClientDataSet.Create(nil);
-    CAD_CD_C_CLI.SetProvider(CAD_DP_C_CID);
+    CAD_CD_C_CLI.SetProvider(CAD_DP_C_CLI);
 
-    CAD_SQ_C_CID.Close;
-    CAD_SQ_C_CID.CommandText := Format(
-      'SELECT id_cliente, nome, id_vendedor, doc_cnpj_cpf, doc_ie_identidade, ativo, sexo, endereco, end_complemento, ' +
-      'cep, numero, tel_fixo, tel_movel, doc_ip, bairro, id_cidade, dta_cadastro, dta_nascimento, id_regiao, apelido, ' +
+    CAD_SQ_C_CLI.Close;
+    CAD_SQ_C_CLI.CommandText := Format(
+      'SELECT id_cliente, nome, pessoa, id_vendedor, doc_cnpj_cpf, doc_ie_identidade, ativo, sexo, endereco, end_complemento, ' +
+      'cep, numero, tel_fixo, tel_movel, doc_ip, doc_im, bairro, id_cidade, dta_cadastro, dta_nascimento, id_regiao, apelido, ' +
       'contribuinte, tipo_cliente, doc_rg_orgao FROM CAD_TB_C_CLI WHERE id_vendedor = %s',
       [QuotedStr(id_vendedor)]
     );
@@ -382,6 +389,7 @@ begin
       jso := TJsonObject.Create;
       jso.AddPair('id_cliente', CAD_CD_C_CLI.FieldByName('id_cliente').AsString);
       jso.AddPair('nome', CAD_CD_C_CLI.FieldByName('nome').AsString);
+      jso.AddPair('pessoa', CAD_CD_C_CLI.FieldByName('pessoa').AsString);
       jso.AddPair('apelido', CAD_CD_C_CLI.FieldByName('apelido').AsString);
       jso.AddPair('id_vendedor', CAD_CD_C_CLI.FieldByName('id_vendedor').AsString);
       jso.AddPair('doc_cnpj_cpf', CAD_CD_C_CLI.FieldByName('doc_cnpj_cpf').AsString);
@@ -395,6 +403,7 @@ begin
       jso.AddPair('tel_fixo', CAD_CD_C_CLI.FieldByName('tel_fixo').AsString);
       jso.AddPair('tel_movel', CAD_CD_C_CLI.FieldByName('tel_movel').AsString);
       jso.AddPair('doc_ip', CAD_CD_C_CLI.FieldByName('doc_ip').AsString);
+      jso.AddPair('doc_im', CAD_CD_C_CLI.FieldByName('doc_im').AsString);
       jso.AddPair('bairro', CAD_CD_C_CLI.FieldByName('bairro').AsString);
       jso.AddPair('id_cidade', CAD_CD_C_CLI.FieldByName('id_cidade').AsString);
       jso.AddPair('dta_cadastro', CAD_CD_C_CLI.FieldByName('dta_cadastro').AsString);
@@ -1129,6 +1138,7 @@ begin
   unitFormPrincipal.Form1.mmTexto.Lines.Add('Hora: '   + timetostr(time));
   unitFormPrincipal.Form1.mmTexto.Lines.Add('----------------');
 
+
 end;
 
 function TServidorMetodos.EchoString(Value: string): string;
@@ -1233,7 +1243,205 @@ begin
 end;
 
 
-//function TServidorMetodos.updateReceberPedidos(const AJSON: string): string;
+
+function TServidorMetodos.GetInfoConexao: String;
+begin
+  result := ConexaoNW.Params.Text;
+end;
+
+function TServidorMetodos.updateReceberClientesPorVendedor(
+  const AJSON: TJSONValue): string;
+var
+  JSONArray,RetornoArray: TJSONArray;
+  ClienteObj, erroJson, RetornoObj, RetornoFinal : TJSONObject;
+  i, j: Integer;
+
+  IdCliente_Json: String;
+
+  CAD_CD_C_SEQ: TClientDataSet;
+  Vtran: TDBXTransaction;
+  Val: TJSONValue;
+begin
+   // 170.78.21.225:214/datasnap/rest/TServidorMetodos/ReceberClientesPorVendedor
+
+  JSONArray := nil;
+  try
+    // Parse do JSON recebido
+    {JSONArray := TJSONObject.ParseJSONValue(AJSON) as TJSONArray;
+    if JSONArray = nil then
+      Exit('400 - JSON inválido');}
+    if not (AJSON is TJSONArray) then
+       Exit('400 - JSON inválido: esperado um array');
+
+        JSONArray := TJSONArray(AJSON);
+
+        RetornoObj := TJSONObject.Create;
+
+        CAD_CD_C_SEQ := TClientDataSet.Create(nil);
+        CAD_CD_C_SEQ.SetProvider(CAD_DP_C_SEQ);
+
+        CAD_SQ_C_SEQ.close;
+        CAD_SQ_C_SEQ.CommandText := '';
+        CAD_SQ_C_SEQ.CommandText := ' SELECT * FROM CAD_TB_C_SEQ ' +
+                                    ' WHERE ID_TABELA in (''CAD_TB_C_CLI'')';
+        CAD_CD_C_SEQ.Open;
+
+        if not (cad_cd_c_seq.locate('id_tabela','CAD_TB_C_CLI',[])) then
+          begin
+             CAD_CD_C_SEQ.Insert;
+             CAD_CD_C_SEQ.FieldByName('ID_TABELA').AsString := 'CAD_TB_C_CLI';
+             CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString := '0';
+             CAD_CD_C_SEQ.Post;
+          end;
+
+        // Inicializa componentes
+      //        CAD_CD_C_CLI := TClientDataSet.Create(nil);
+      //        CAD_CD_C_CLI.SetProvider(CAD_DP_C_CLI);
+
+
+
+        unitformPrincipal.Form1.mmTexto.Lines.Add('Post do cliente iniciado!');
+
+        // Loop para pegar os id_cliente
+        for i := 0 to JSONArray.Count - 1 do
+            begin
+               ClienteObj := JSONArray.Items[i] as TJSONObject;
+
+               IdCliente_Json := ClienteObj.GetValue<string>('id_cliente');
+               if IdCliente_Json = '' then // Se for cliente novo
+                  begin
+                    CAD_SQ_C_CLI.close;
+                    CAD_SQ_C_CLI.CommandText := '';
+                    CAD_SQ_C_CLI.CommandText := ' SELECT * FROM CAD_TB_C_CLI WHERE 1 = 2 ';
+
+                    CAD_CD_C_CLI.Open;
+
+                    CAD_CD_C_CLI.Insert;
+                  end
+               else
+                  begin
+                    CAD_SQ_C_CLI.close;
+                    CAD_SQ_C_CLI.CommandText := '';
+                    CAD_SQ_C_CLI.CommandText := ' SELECT * FROM CAD_TB_C_CLI ' +
+                                                 ' WHERE ID_CLIENTE = ' + IdCliente_Json;
+                    CAD_CD_C_CLI.Open;
+                    if not CAD_CD_C_CLI.IsEmpty then
+                       CAD_CD_C_CLI.edit;
+                  end;
+            end;
+
+
+        for i := 0 to JSONArray.Count - 1 do
+        begin
+          ClienteObj := JSONArray.Items[i] as TJSONObject;
+          IdCliente_Json := ClienteObj.GetValue<string>('id_cliente');
+
+          if IdCliente_Json = '' then
+             begin
+               CAD_CD_C_SEQ.edit;
+               CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger :=
+                   CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsInteger + 1;
+               CAD_CD_C_SEQ.Post;
+
+               CAD_CD_C_CLI.FieldByName('id_cliente').AsString :=
+                      CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString;
+             end;
+
+          CAD_CD_C_CLI.FieldByName('situacao').AsInteger         := 0; // Cliente normal
+          CAD_CD_C_CLI.FieldByName('id_perfil_cli').AsInteger    := 1; // Perfil A
+          CAD_CD_C_CLI.FieldByName('id_rota').AsInteger          := 1; // Rota 1
+
+          CAD_CD_C_CLI.FieldByName('nome').AsString               := ClienteObj.GetValue<string>('nome');
+          CAD_CD_C_CLI.FieldByName('id_vendedor').AsString        := ClienteObj.GetValue<string>('id_vendedor');
+          CAD_CD_C_CLI.FieldByName('doc_cnpj_cpf').AsString       := ClienteObj.GetValue<string>('doc_cnpj_cpf');
+          CAD_CD_C_CLI.FieldByName('doc_ie_identidade').AsString  := ClienteObj.GetValue<string>('doc_ie_identidade');
+          CAD_CD_C_CLI.FieldByName('ativo').AsString              := ClienteObj.GetValue<string>('ativo');
+          CAD_CD_C_CLI.FieldByName('sexo').AsString               := ClienteObj.GetValue<string>('sexo');
+          CAD_CD_C_CLI.FieldByName('endereco').AsString           := ClienteObj.GetValue<string>('endereco');
+          CAD_CD_C_CLI.FieldByName('end_complemento').AsString    := ClienteObj.GetValue<string>('end_complemento');
+          CAD_CD_C_CLI.FieldByName('cep').AsString                := ClienteObj.GetValue<string>('cep');
+          CAD_CD_C_CLI.FieldByName('numero').AsString             := ClienteObj.GetValue<string>('numero');
+          CAD_CD_C_CLI.FieldByName('tel_fixo').AsString           := ClienteObj.GetValue<string>('tel_fixo');
+          CAD_CD_C_CLI.FieldByName('tel_movel').AsString          := ClienteObj.GetValue<string>('tel_movel');
+          CAD_CD_C_CLI.FieldByName('fax').AsString                := ClienteObj.GetValue<string>('fone_whatsapp');
+          CAD_CD_C_CLI.FieldByName('doc_ip').AsString             := ClienteObj.GetValue<string>('doc_ip');
+          CAD_CD_C_CLI.FieldByName('doc_im').AsString             := ClienteObj.GetValue<string>('doc_im');
+          CAD_CD_C_CLI.FieldByName('bairro').AsString             := ClienteObj.GetValue<string>('bairro');
+          CAD_CD_C_CLI.FieldByName('id_cidade').AsString          := ClienteObj.GetValue<string>('id_cidade');
+          CAD_CD_C_CLI.FieldByName('dta_cadastro').AsDateTime     := ISO8601ToDate(ClienteObj.GetValue<string>('dta_cadastro'));
+          CAD_CD_C_CLI.FieldByName('dta_nascimento').AsDateTime   := ISO8601ToDate(ClienteObj.GetValue<string>('dta_nascimento'));
+          CAD_CD_C_CLI.FieldByName('id_regiao').AsString          := ClienteObj.GetValue<string>('id_regiao');
+          CAD_CD_C_CLI.FieldByName('apelido').AsString            := ClienteObj.GetValue<string>('apelido');
+          CAD_CD_C_CLI.FieldByName('contribuinte').AsString       := ClienteObj.GetValue<string>('contribuinte');
+          CAD_CD_C_CLI.FieldByName('tipo_cliente').AsString       := ClienteObj.GetValue<string>('tipo_cliente');
+          CAD_CD_C_CLI.FieldByName('doc_rg_orgao').AsString       := ClienteObj.GetValue<string>('doc_rg_orgao');
+          CAD_CD_C_CLI.FieldByName('pessoa').AsString             := ClienteObj.GetValue<string>('pessoa');
+          CAD_CD_C_CLI.FieldByName('gerado_por_app').AsString     := ClienteObj.GetValue<string>('gerado_por_app');
+          CAD_CD_C_CLI.FieldByName('id_cliente_app').AsString     := ClienteObj.GetValue<string>('id');
+          CAD_CD_C_CLI.FieldByName('nome_proprietario').AsString  := ClienteObj.GetValue<string>('nome_proprietario');
+          CAD_CD_C_CLI.FieldByName('doc_cnpj_cpf_proprietario').AsString := ClienteObj.GetValue<string>('doc_cnpj_cpf_proprietario');
+
+
+          // Monta o objeto de retorno
+          RetornoObj.AddPair('id_cliente', CAD_CD_C_CLI.FieldByName('id_cliente').AsString);
+
+          CAD_CD_C_CLI.Post;
+
+
+       end;
+    try
+       try
+          Vtran := ConexaoNW.BeginTransaction;
+
+          // Aplica atualizações
+
+          CAD_CD_C_SEQ.OnReconcileError := enReconcileError;
+          if CAD_CD_C_SEQ <> nil then
+             if (CAD_CD_C_SEQ.ChangeCount > 0) then
+                 CAD_CD_C_SEQ.ApplyUpdates(0);
+
+          CAD_CD_C_CLI.OnReconcileError := enReconcileError;
+          if CAD_CD_C_CLI <> nil then
+             if (CAD_CD_C_CLI.ChangeCount > 0) then
+                 CAD_CD_C_CLI.ApplyUpdates(0);
+
+
+          // Commit da transação
+          ConexaoNW.CommitFreeAndNil(Vtran);
+          unitformPrincipal.Form1.mmTexto.Lines.Add('Post do cliente por vendedor foi sincronizado!');
+
+       finally
+          ConexaoNW.RollbackIncompleteFreeAndNil(Vtran);
+       end;
+       GetInvocationMetadata().ResponseCode := 200;
+       GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+       Result := RetornoObj.ToString;
+
+
+
+    except
+    on E: Exception do
+    begin
+      GetInvocationMetadata().ResponseCode := 500;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
+        Result := 'Erro 500 - Intero';
+      finally
+        erroJson.Free;
+      end;
+    end;
+  end;
+
+  finally
+    if CAD_CD_C_SEQ <> nil then
+       FreeAndNil(CAD_CD_C_SEQ);
+  end;
+end;
+
 function TServidorMetodos.updateReceberPedidos(const AJSON: TJSONValue): string;
 var
   JSONArray, ItensArray, TitulosArray, RetornoArray: TJSONArray;
