@@ -241,7 +241,7 @@ type
     function updateEnviarRegioes(const Dados: TJSONArray): TJSONObject;
     //function updateReceberPedidos(const AJSON: string): string;
 
-    function updateReceberClientesPorVendedor(const AJSON: TJSONValue): string;
+    function updateReceberClientesPorVendedor(const AJSON: TJSONValue): TJSONObject;
 
     function updateReceberPedidos(const AJSON: TJSONValue): string;
 
@@ -1250,7 +1250,7 @@ begin
 end;
 
 function TServidorMetodos.updateReceberClientesPorVendedor(
-  const AJSON: TJSONValue): string;
+  const AJSON: TJSONValue): TJSONObject;
 var
   JSONArray,RetornoArray: TJSONArray;
   ClienteObj, erroJson, RetornoObj, RetornoFinal : TJSONObject;
@@ -1270,8 +1270,8 @@ begin
     {JSONArray := TJSONObject.ParseJSONValue(AJSON) as TJSONArray;
     if JSONArray = nil then
       Exit('400 - JSON inválido');}
-    if not (AJSON is TJSONArray) then
-       Exit('400 - JSON inválido: esperado um array');
+//    if not (AJSON is TJSONArray) then
+ //      Exit('400 - JSON inválido: esperado um array');
 
         JSONArray := TJSONArray(AJSON);
 
@@ -1300,11 +1300,12 @@ begin
 
 
 
-        unitformPrincipal.Form1.mmTexto.Lines.Add('Post do cliente iniciado!');
+        unitformPrincipal.Form1.mmTexto.Lines.Add('Post do cliente iniciado 1!');
 
         // Loop para pegar os id_cliente
         for i := 0 to JSONArray.Count - 1 do
             begin
+               unitformPrincipal.Form1.mmTexto.Lines.Add('Post do cliente iniciado 2!');
                ClienteObj := JSONArray.Items[i] as TJSONObject;
 
                IdCliente_Json := ClienteObj.GetValue<string>('id_cliente');
@@ -1330,7 +1331,7 @@ begin
                   end;
             end;
 
-
+        unitformPrincipal.Form1.mmTexto.Lines.Add('Post do cliente iniciado 3!');
         for i := 0 to JSONArray.Count - 1 do
         begin
           ClienteObj := JSONArray.Items[i] as TJSONObject;
@@ -1368,8 +1369,8 @@ begin
           CAD_CD_C_CLI.FieldByName('doc_im').AsString             := ClienteObj.GetValue<string>('doc_im');
           CAD_CD_C_CLI.FieldByName('bairro').AsString             := ClienteObj.GetValue<string>('bairro');
           CAD_CD_C_CLI.FieldByName('id_cidade').AsString          := ClienteObj.GetValue<string>('id_cidade');
-          CAD_CD_C_CLI.FieldByName('dta_cadastro').AsDateTime     := ISO8601ToDate(ClienteObj.GetValue<string>('dta_cadastro'));
-          CAD_CD_C_CLI.FieldByName('dta_nascimento').AsDateTime   := ISO8601ToDate(ClienteObj.GetValue<string>('dta_nascimento'));
+          CAD_CD_C_CLI.FieldByName('dta_cadastro').AsString       := ClienteObj.GetValue<string>('dta_cadastro');
+          CAD_CD_C_CLI.FieldByName('dta_nascimento').AsString     := ClienteObj.GetValue<string>('dta_nascimento');
           CAD_CD_C_CLI.FieldByName('id_regiao').AsString          := ClienteObj.GetValue<string>('id_regiao');
           CAD_CD_C_CLI.FieldByName('apelido').AsString            := ClienteObj.GetValue<string>('apelido');
           CAD_CD_C_CLI.FieldByName('contribuinte').AsString       := ClienteObj.GetValue<string>('contribuinte');
@@ -1383,11 +1384,11 @@ begin
 
 
           // Monta o objeto de retorno
+          RetornoObj.AddPair('id', CAD_CD_C_CLI.FieldByName('id_cliente_app').AsString);
           RetornoObj.AddPair('id_cliente', CAD_CD_C_CLI.FieldByName('id_cliente').AsString);
 
           CAD_CD_C_CLI.Post;
-
-
+          unitformPrincipal.Form1.mmTexto.Lines.Add('Post do cliente finalizado, faltando efitivar no banco!');
        end;
     try
        try
@@ -1416,8 +1417,8 @@ begin
        GetInvocationMetadata().ResponseCode := 200;
        GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
 
-       Result := RetornoObj.ToString;
-
+       //Result := RetornoObj.ToString;
+       Result := RetornoObj;
 
 
     except
@@ -1429,7 +1430,7 @@ begin
       erroJson := TJSONObject.Create;
       try
         erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
-        Result := 'Erro 500 - Intero';
+        //Result := 'Erro 500 - Intero';
       finally
         erroJson.Free;
       end;
