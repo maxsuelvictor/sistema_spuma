@@ -220,6 +220,8 @@ type
 
     function ConexaoOK: string;
 
+    function StatusConexaoServidor: TJSONObject;
+
     function BuscarCores: TStream;
 
     function BuscarRegioes: TStream;
@@ -1149,6 +1151,23 @@ end;
 function TServidorMetodos.ReverseString(Value: string): string;
 begin
   Result := System.StrUtils.ReverseString(Value);
+end;
+
+function TServidorMetodos.StatusConexaoServidor: TJSONObject;
+var
+  Status: string;
+begin
+   // Criado em 15/04/2026, por Maxsuel Victor.
+
+  //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/StatusConexaoServidor
+
+  if ConexaoNW.Connected then
+    Status := 'true'
+  else
+    Status := 'false';
+
+  Result := TJSONObject.Create;
+  Result.AddPair('conectado', Status);
 end;
 
 function TServidorMetodos.updateEnviarCores(
