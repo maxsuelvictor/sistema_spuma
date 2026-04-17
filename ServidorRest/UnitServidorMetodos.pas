@@ -1546,33 +1546,47 @@ begin
           FAT_CD_M_PED.FieldByName('id_pedido').AsString :=
                 CAD_CD_C_SEQ.FieldByName('SEQUENCIA').AsString;
 
+          FormatSettings.DecimalSeparator := '.';
+
           FAT_CD_M_PED.FieldByName('id_pedido_mob').AsInteger := PedidoObj.GetValue<Integer>('id_pedido');
-          FAT_CD_M_PED.FieldByName('dta_pedido').AsString  := PedidoObj.GetValue<string>('dta_pedido');
-          FAT_CD_M_PED.FieldByName('hor_pedido').AsString  := PedidoObj.GetValue<string>('hora_pedido');
-          FAT_CD_M_PED.FieldByName('id_cliente').AsInteger := PedidoObj.GetValue<Integer>('id_cliente');
-          FAT_CD_M_PED.FieldByName('vlr_liquido').AsFloat  := PedidoObj.GetValue<Double>('vlr_liquido');
+          FAT_CD_M_PED.FieldByName('dta_pedido').AsString     := PedidoObj.GetValue<string>('dta_pedido');
+          FAT_CD_M_PED.FieldByName('hor_pedido').AsString     := PedidoObj.GetValue<string>('hora_pedido');
+          FAT_CD_M_PED.FieldByName('id_cliente').AsInteger    := PedidoObj.GetValue<Integer>('id_cliente');
+          FAT_CD_M_PED.FieldByName('vlr_liquido').AsCurrency     := PedidoObj.GetValue<Double>('vlr_liquido');
 
           FAT_CD_M_PED.FieldByName('id_tipo_mov_estoque').AsString := PedidoObj.GetValue<string>('id_tipo_mov_estoque');
           FAT_CD_M_PED.FieldByName('dta_prev_entrega').AsDateTime  := FAT_CD_M_PED.FieldByName('dta_pedido').AsDateTime + 30;
-          FAT_CD_M_PED.FieldByName('sgq_per_comissao').AsString    := PedidoObj.GetValue<string>('sgq_per_comissao');
+          FAT_CD_M_PED.FieldByName('sgq_per_comissao').AsCurrency  := PedidoObj.GetValue<Double>('sgq_per_comissao');
 
 
           FAT_CD_M_PED.FieldByName('id_condicao_pag').AsInteger    := 1; // À vista //PedidoObj.GetValue<Integer>('id_cnd_pagto');
           FAT_CD_M_PED.FieldByName('sgq_texto_cond_pgto').AsString := PedidoObj.GetValue<string>('dta_pedido');
           FAT_CD_M_PED.FieldByName('obs').AsString                 := PedidoObj.GetValue<string>('obs_geral');
           FAT_CD_M_PED.FieldByName('pcp_obs').AsString             := PedidoObj.GetValue<string>('obs_producao');
-          FAT_CD_M_PED.FieldByName('vlr_desconto').AsString        := PedidoObj.GetValue<string>('vlr_desconto');
-          FAT_CD_M_PED.FieldByName('vlr_desc_especial').AsString   := PedidoObj.GetValue<string>('vlr_desc_especial');
-          FAT_CD_M_PED.FieldByName('vlr_bruto').AsString           := PedidoObj.GetValue<string>('vlr_bruto');
-          FAT_CD_M_PED.FieldByName('vlr_liquido').AsString         := PedidoObj.GetValue<string>('vlr_liquido');
+
           FAT_CD_M_PED.FieldByName('id_vendedor').AsString         := PedidoObj.GetValue<string>('id_funcionario');
           FAT_CD_M_PED.FieldByName('id_atendente').AsString        := PedidoObj.GetValue<string>('id_funcionario');
           FAT_CD_M_PED.FieldByName('id_responsavel').AsString      := PedidoObj.GetValue<string>('id_funcionario');
+
+
+          FAT_CD_M_PED.FieldByName('vlr_desconto').AsCurrency      := PedidoObj.GetValue<Double>('vlr_desconto');
+          FAT_CD_M_PED.FieldByName('vlr_desc_especial').AsCurrency := PedidoObj.GetValue<Double>('vlr_desc_especial');
+          FAT_CD_M_PED.FieldByName('vlr_bruto').AsCurrency         := PedidoObj.GetValue<Double>('vlr_bruto');
+          FAT_CD_M_PED.FieldByName('vlr_liquido').AsCurrency       := PedidoObj.GetValue<Double>('vlr_liquido');
+          FAT_CD_M_PED.FieldByName('per_desc_basico').AsCurrency   := PedidoObj.GetValue<Double>('per_desc_basico');
+          FAT_CD_M_PED.FieldByName('per_desc_especial').AsCurrency := PedidoObj.GetValue<Double>('per_desc_especial');
+          FAT_CD_M_PED.FieldByName('per_desconto').AsCurrency      := PedidoObj.GetValue<Double>('per_desconto');
+          FAT_CD_M_PED.FieldByName('vlr_desc_basico').AsCurrency   := PedidoObj.GetValue<Double>('vlr_desc_basico');
+
+          {FAT_CD_M_PED.FieldByName('vlr_desconto').AsString        := PedidoObj.GetValue<string>('vlr_desconto');
+          FAT_CD_M_PED.FieldByName('vlr_desc_especial').AsString   := PedidoObj.GetValue<string>('vlr_desc_especial');
+          FAT_CD_M_PED.FieldByName('vlr_bruto').AsString           := PedidoObj.GetValue<string>('vlr_bruto');
+          FAT_CD_M_PED.FieldByName('vlr_liquido').AsString         := PedidoObj.GetValue<string>('vlr_liquido');
           FAT_CD_M_PED.FieldByName('per_desc_basico').AsString     := PedidoObj.GetValue<string>('per_desc_basico');
           FAT_CD_M_PED.FieldByName('per_desc_especial').AsString   := PedidoObj.GetValue<string>('per_desc_especial');
           FAT_CD_M_PED.FieldByName('per_desconto').AsString        := PedidoObj.GetValue<string>('per_desconto');
           FAT_CD_M_PED.FieldByName('vlr_desc_basico').AsString     := PedidoObj.GetValue<string>('vlr_desc_basico');
-
+          }
           // Deve calcular a cubagem
           FAT_CD_M_PED.FieldByName('cubagem').AsString := '0';
 
