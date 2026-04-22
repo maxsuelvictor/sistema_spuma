@@ -755,8 +755,8 @@ begin
       jso.AddPair('id_grupo', CAD_CD_C_ITE.FieldByName('id_grupo').AsString);
       jso.AddPair('fantasia', CAD_CD_C_ITE.FieldByName('fantasia').AsString);
       jso.AddPair('ativo', CAD_CD_C_ITE.FieldByName('ativo').AsString);
-      jso.AddPair('preco_avista', CAD_CD_C_ITE.FieldByName('preco_avista').AsString);
-      jso.AddPair('preco_aprazo', CAD_CD_C_ITE.FieldByName('preco_aprazo').AsString);
+      jso.AddPair('preco_avista', TJSONNumber.Create(CAD_CD_C_ITE.FieldByName('preco_avista').AsCurrency));
+      jso.AddPair('preco_aprazo', TJSONNumber.Create(CAD_CD_C_ITE.FieldByName('preco_aprazo').AsCurrency));
       jso.AddPair('id_ncm', CAD_CD_C_ITE.FieldByName('id_ncm').AsString);
       jso.AddPair('sgq_personalizado', CAD_CD_C_ITE.FieldByName('sgq_personalizado').AsString);
       jso.AddPair('tipo_produto', CAD_CD_C_ITE.FieldByName('tipo_produto').AsString);
