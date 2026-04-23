@@ -887,4 +887,17 @@ object ServidorMetodos: TServidorMetodos
     Left = 384
     Top = 360
   end
+  object CAD_SQ_C_PAR: TSQLDataSet
+    CommandText = 'select * from cad_tb_c_par '#13#10'where  1 = 2'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = ConexaoNW
+    Left = 416
+    Top = 96
+  end
+  object CAD_DP_C_PAR: TDataSetProvider
+    DataSet = CAD_SQ_C_PAR
+    Left = 536
+    Top = 96
+  end
 end
