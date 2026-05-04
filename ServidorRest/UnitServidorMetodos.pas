@@ -507,7 +507,90 @@ begin
   end;
 end;
 
+function TServidorMetodos.BuscarEmpresa: TStream;
+var
+  jsObj, jso : TJsonObject;
+  Lista: TJsonArray;
+  id_empresa: String;
+  CAD_CD_C_PAR: TClientDataSet;
+  erroJson: TJSONObject;
+begin
+  try
+    // Verifica se o parâmetro existe
+    if GetInvocationMetadata().QueryParams.IndexOfName('id_empresa') = -1 then
+      id_empresa := ''
+    else
+      id_empresa := Trim(GetInvocationMetadata().QueryParams.Values['id_empresa']);
 
+    // Validação do parâmetro
+    if id_empresa = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro id_empresa está vazio ou não informado');
+        Result := TStringStream.Create(erroJson.ToJSON, TEncoding.UTF8);
+      finally
+        erroJson.Free;
+      end;
+      Exit;
+    end;
+
+    CAD_CD_C_PAR := TClientDataSet.Create(nil);
+    CAD_CD_C_PAR.SetProvider(CAD_DP_C_PAR);
+
+    CAD_SQ_C_PAR.Close;
+    CAD_SQ_C_PAR.CommandText := 'SELECT * FROM CAD_TB_C_PAR';
+    CAD_CD_C_PAR.Open;
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das empresas iniciada!');
+
+    jsObj := TJsonObject.Create;
+    Lista := TJsonArray.Create;
+    jsObj.AddPair('empresas', Lista);
+
+    while not CAD_CD_C_PAR.Eof do
+    begin
+      jso := TJsonObject.Create;
+      jso.AddPair('id_empresa', CAD_CD_C_PAR.FieldByName('id_empresa').AsString);
+      jso.AddPair('razao_social', CAD_CD_C_PAR.FieldByName('emp_razao').AsString);
+      jso.AddPair('fantasia', CAD_CD_C_PAR.FieldByName('emp_fantasia').AsString);
+      jso.AddPair('emp_endereco', CAD_CD_C_PAR.FieldByName('emp_endereco').AsString);
+      jso.AddPair('emp_numero', CAD_CD_C_PAR.FieldByName('emp_numero').AsString);
+      jso.AddPair('emp_complemento', CAD_CD_C_PAR.FieldByName('emp_complemento').AsString);
+      jso.AddPair('emp_bairro', CAD_CD_C_PAR.FieldByName('emp_bairro').AsString);
+      jso.AddPair('id_cidade', CAD_CD_C_PAR.FieldByName('id_cidade').AsString);
+      jso.AddPair('emp_cep', CAD_CD_C_PAR.FieldByName('emp_cep').AsString);
+      jso.AddPair('emp_telefone', CAD_CD_C_PAR.FieldByName('emp_telefone').AsString);
+      jso.AddPair('emp_fax', CAD_CD_C_PAR.FieldByName('emp_fax').AsString);
+      jso.AddPair('emp_email', CAD_CD_C_PAR.FieldByName('emp_email').AsString);
+      jso.AddPair('emp_site', CAD_CD_C_PAR.FieldByName('emp_site').AsString);
+      jso.AddPair('emp_ie', CAD_CD_C_PAR.FieldByName('emp_ie').AsString);
+      jso.AddPair('emp_im', CAD_CD_C_PAR.FieldByName('emp_im').AsString);
+      jso.AddPair('emp_cnpj', CAD_CD_C_PAR.FieldByName('emp_cnpj').AsString);
+      Lista.AddElement(jso);
+
+      CAD_CD_C_PAR.Next;
+    end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+    Result := TStringStream.Create(jsObj.ToJSON, TEncoding.UTF8);
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get das empresas finalizada!');
+  finally
+    CAD_CD_C_PAR.Close;
+    FreeAndNil(CAD_CD_C_PAR);
+    FreeAndNil(jsObj); // libera o objeto raiz (que contém o array)
+  end;
+end;
+
+
+
+
+{
 function TServidorMetodos.BuscarEmpresa: TStream;
 var
   jsobj, jso : TJsonObject;
@@ -523,8 +606,6 @@ begin
 
   //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarEmpresa
 
-  { Get da Tabela: CAD_TB_C_PAR - Parâmetros
-      Criado por: Maxsuel Victor - Data: 23/04/2026 }
   try
     // Verifica se o parâmetro existe
     if GetInvocationMetadata().QueryParams.IndexOfName('id_empresa') = -1 then
@@ -595,7 +676,7 @@ begin
     CAD_CD_C_PAR.close;
     FreeAndNil(CAD_CD_C_PAR);
   end;
-end;
+end;    }
 
 
 
