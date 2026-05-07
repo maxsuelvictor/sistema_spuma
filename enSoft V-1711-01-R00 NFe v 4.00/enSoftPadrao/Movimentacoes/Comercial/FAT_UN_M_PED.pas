@@ -25,7 +25,7 @@ uses
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, RDprint,System.Math, dxSkinMetropolis,
   dxSkinMetropolisDark, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White, Vcl.ComCtrls;
+  dxSkinOffice2013White, Vcl.ComCtrls, dxGDIPlusClasses;
 
 type
   TFAT_FM_M_PED = class(TPAD_FM_X_PAD)
@@ -311,8 +311,8 @@ type
     PCP_CD_M_ROM_PED: TClientDataSet;
     N1: TMenuItem;
     Solicitaralteraonaqtdedoitem1: TMenuItem;
-    shapeStatusWeb: TShape;
     lblStatusWeb: TLabel;
+    imgStatusWeb: TImage;
     procedure txtClienteButtonClick(Sender: TObject);
     procedure txtClienteExit(Sender: TObject);
     procedure btn_Add_ItensClick(Sender: TObject);
@@ -1375,6 +1375,17 @@ begin
 
 
                   PathImg := ExtractFilePath(Application.ExeName)+'emp'+dmGeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').Text+'\LogoEmpresa.jpg';
+
+                  TfrxPictureView(FAT_FR_M_PED_SGQ2.FindObject('imgMobile')).Visible := false;
+                  TfrxMemoView(FAT_FR_M_PED_SGQ2.FindObject('mmMobile')).Visible := false;
+
+                  if dmgeral.FAT_CD_M_PEDid_pedido_mob.AsInteger > 0 then
+                     begin
+                       TfrxPictureView(FAT_FR_M_PED_SGQ2.FindObject('imgMobile')).Visible := true;
+                       TfrxMemoView(FAT_FR_M_PED_SGQ2.FindObject('mmMobile')).Visible := true;
+                       FAT_FR_M_PED_SGQ2.Variables['ft_mobile'] :=  QuotedStr('Ped. Mobile:' + dmgeral.FAT_CD_M_PEDid_pedido_mob.AsString);
+                     end;
+
 
                   if FileExists(PathImg) then
                     begin
@@ -3467,7 +3478,7 @@ begin
 
   lblGeracaoPedido.Caption := '';
 
-  shapeStatusWeb.Visible := false;
+  imgStatusWeb.Visible := false;
   lblStatusWeb.Visible   := false;
 
   if not dmgeral.FAT_CD_M_PED.IsEmpty then
@@ -3499,7 +3510,7 @@ begin
 
       if dmgeral.FAT_CD_M_PEDid_pedido_mob.AsInteger > 0 then
          begin
-           shapeStatusWeb.Visible := true;
+           imgStatusWeb.Visible := true;
            lblStatusWeb.Visible := true;
          end;
     end;

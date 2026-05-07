@@ -3389,8 +3389,16 @@ begin
             // Maxsuel Victor, 13/12/2025 - Reforma Tributária->  NT_2025.002_v1.34_RTC_NF-e_IBS_CBS_IS
             if dmGeral.CAD_CD_C_PAR_CTR.FieldByName('usa_reforma_tributaria').AsBoolean then
                begin
-                 dmGeral.BUS_CD_M_NFE_CXA.FieldByName('dta_prev_entrega').AsDateTime :=
-                     dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_EMISSAO').AsDateTime + 3;
+                 // 05/05/2026 - Maxsuel Victor, foi adicionado esses dois itens no if abaixo
+                    // 1 – Contratação do Frete por conta do Destinatário (FOB);
+                    // 4 – Transporte Próprio por conta do Destinatário;
+                    // 9 - Sem Frete (Repassa no campo FRE_VALOR=0, e FRE_CUSTO)
+                 if (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 1) and
+                    (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 4) and
+                    (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 9) then
+
+                     dmGeral.BUS_CD_M_NFE_CXA.FieldByName('dta_prev_entrega').AsDateTime :=
+                          dmGeral.BUS_CD_M_NFE_CXA.FieldByName('DTA_EMISSAO').AsDateTime + 3;
 
                  dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_debito').Asinteger := 0; //Nenhum;
                  dmGeral.BUS_CD_M_NFE_CXA.FieldByName('tp_nf_credito').Asinteger := 0; //Nenhum;
@@ -5646,7 +5654,13 @@ begin
 
           // 12/02/2026 - Maxsuel Victor
              // 9 - Sem Frete (Repassa no campo FRE_VALOR=0, e FRE_CUSTO)
-          if dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 9 then
+                    // 05/05/2026 - Maxsuel Victor, foi adicionado esses dois itens no if abaixo
+                    // 1 – Contratação do Frete por conta do Destinatário (FOB);
+                    // 4 – Transporte Próprio por conta do Destinatário;
+
+          if (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 1) and
+             (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 4) and
+             (dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger <> 9) then
              Ide.dPrevEntrega := dmGeral.BUS_CD_M_NFE_CXA.FieldByName('dta_prev_entrega').AsDateTime;
 
           //Ide.cMunFGIBS := StrToInt(edtEmitCodCidade.Text);
