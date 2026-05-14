@@ -1,0 +1,12 @@
+/***** 13/05/2026 ******/
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_icf"
+ADD CONSTRAINT "unique_cod_barra_rom_icf" UNIQUE ("cod_barra");
+
+
+ALTER TABLE "public"."pcp_tb_m_rom_ped_icf"
+ADD CONSTRAINT "unique_cod_barra_ped_icf" UNIQUE ("cod_barra");
+
+
+
