@@ -936,20 +936,22 @@ begin
                    //dmGeral.FAT_CD_M_PED_ITEvlr_unitario.AsCurrency   := roundTo(vlrLiquidoComDesconto /
                    //                                                     cdsItensPedidosUni.FieldByName('qtde').AsFloat,-2);
 
-                   dmGeral.FAT_CD_M_PED_ITEvlr_unitario.AsCurrency   := vlrLiquidoComDesconto /
-                                                                        cdsItensPedidosUni.FieldByName('qtde').AsCurrency;
+                   // Maxsuel Victor, 18/05/2026, coloquei o roundTo
+                   dmGeral.FAT_CD_M_PED_ITEvlr_unitario.AsCurrency   := SimpleRoundTo(vlrLiquidoComDesconto /
+                                                                        cdsItensPedidosUni.FieldByName('qtde').AsCurrency,-4);
 
 
                    //dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency      := vlrLiquidoComDesconto;
                    dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency      :=
-                            dmGeral.FAT_CD_M_PED_ITEqtde.AsFloat * dmGeral.FAT_CD_M_PED_ITEvlr_unitario.AsCurrency;
+                                              SimpleRoundTo(dmGeral.FAT_CD_M_PED_ITEqtde.AsCurrency *
+                                                               dmGeral.FAT_CD_M_PED_ITEvlr_unitario.AsCurrency,-2);
 
 
                    dmGeral.FAT_CD_M_PED_ITEper_desconto.AsCurrency   := 0;
                    dmGeral.FAT_CD_M_PED_ITEvlr_desconto.AsCurrency   := 0;
 
                    //t := roundTo(dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency,-4);
-                   dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency    := roundTo(dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency,-4);
+                   dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency    := dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency;
                    //dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency    := t;
                    total_temp := total_temp + dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency;
 
@@ -970,9 +972,12 @@ begin
              dmGeral.FAT_CD_M_PED_ITE.Edit;
 
              dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency  := dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency - vlrDiferença;
-             dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency    :=  dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency;
-             dmGeral.FAT_CD_M_PED_ITEvlr_unitario.AsCurrency := dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency /
-                                                                        cdsItensPedidosUni.FieldByName('qtde').AsCurrency;
+             dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency    := dmGeral.FAT_CD_M_PED_ITEvlr_liquido.AsCurrency;
+
+             dmGeral.FAT_CD_M_PED_ITEvlr_unitario.AsCurrency :=
+                SimpleRoundTo( dmGeral.FAT_CD_M_PED_ITEvlr_bruto.AsCurrency / dmGeral.FAT_CD_M_PED_ITEqtde.AsCurrency,
+                  -4);
+
              dmGeral.FAT_CD_M_PED_ITE.post;
            end;
 
