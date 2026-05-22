@@ -1645,8 +1645,12 @@ var
   i, j: Integer;
 
   CAD_CD_C_SEQ: TClientDataSet;
+  CAD_CD_C_ITE: TClientDataSet;
   Vtran: TDBXTransaction;
   Val: TJSONValue;
+
+  cubagem_ped: currency;
+  cubagem_unitaria_person: Currency;
 begin
 
 
@@ -1804,15 +1808,30 @@ begin
           RetornoObj.AddPair('id_pedido_servidor', FAT_CD_M_PED.FieldByName('id_pedido').AsString);
           //RetornoArray.AddElement(RetornoObj);
 
+
+          cubagem_ped := 0;
+
           FAT_CD_M_PED.Post;
 
           // Itens
+          CAD_CD_C_ITE := TClientDataSet.Create(nil);
+          CAD_CD_C_ITE.SetProvider(CAD_DP_C_ITE);
+
+
           ItensArray := PedidoObj.GetValue<TJSONArray>('itens');
           for j := 0 to ItensArray.Count - 1 do
           begin
             ItemObj := ItensArray.Items[j] as TJSONObject;
             FAT_CD_M_PED_ITE.Append;
             FAT_CD_M_PED_ITE.FieldByName('id_item').AsInteger := ItemObj.GetValue<Integer>('id_item');
+
+            // Busca a cubagem do item
+            CAD_SQ_C_ITE.Close;
+            CAD_SQ_C_ITE.CommandText := 'select cubagem from cad_tb_c_ite ite ' +
+                 ' where ite.id_item = ' + FAT_CD_M_PED_ITE.FieldByName('id_item').Text;
+            CAD_CD_C_ITE.Open;
+            // -------------------------
+
             FAT_CD_M_PED_ITE.FieldByName('id_busca_item').AsString := FAT_CD_M_PED_ITE.FieldByName('id_item').AsString;
             FAT_CD_M_PED_ITE.FieldByName('id_pedido').AsInteger := FAT_CD_M_PED.FieldByName('id_pedido').AsInteger;
 
@@ -1830,6 +1849,22 @@ begin
             FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := ItemObj.GetValue<Double>('vlr_liquido');
             FAT_CD_M_PED_ITE.FieldByName('vlr_bruto').AsCurrency         := ItemObj.GetValue<Double>('vlr_bruto');
             FAT_CD_M_PED_ITE.FieldByName('qtde').AsCurrency              := ItemObj.GetValue<Double>('qtde');
+
+            cubagem_unitaria_person := ItemObj.GetValue<Double>('cubagem_unitaria_person');
+
+            // se for um item personalizado essa variável terá algum valor.
+            if cubagem_unitaria_person > 0 then
+               begin
+                 cubagem_ped := cubagem_ped +
+                     (cubagem_unitaria_person * FAT_CD_M_PED_ITE.FieldByName('QTDE').AsCurrency);
+               end
+            else
+               begin
+                 cubagem_ped := cubagem_ped +
+                     (CAD_SQ_C_ITE.FieldByName('CUBAGEM').AsCurrency *
+                         FAT_CD_M_PED_ITE.FieldByName('QTDE').AsCurrency);
+               end;
+
             FAT_CD_M_PED_ITE.FieldByName('id_cor').AsInteger             := ItemObj.GetValue<Integer>('id_cor');
             FAT_CD_M_PED_ITE.FieldByName('id_tamanho').AsInteger         := 0;
             FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := ItemObj.GetValue<Double>('vlr_liquido');
@@ -1852,6 +1887,13 @@ begin
                end;
             FAT_CD_M_PED_ITE.Post;
           end;
+
+          // Atualizar a cubagem do pedido
+          FAT_CD_M_PED.edit;
+          FAT_CD_M_PED.FieldByName('CUBAGEM').AsCurrency  := cubagem_ped;
+          FAT_CD_M_PED.Post;
+          // ------------------------------
+
 
           // Títulos
           TitulosArray := PedidoObj.GetValue<TJSONArray>('titulos');
@@ -1952,6 +1994,8 @@ begin
   finally
     if CAD_CD_C_SEQ <> nil then
        FreeAndNil(CAD_CD_C_SEQ);
+    CAD_CD_C_ITE.Close;
+    FreeAndNil(CAD_CD_C_ITE);
     RetornoArray.Free;
     //JSONArray.Free;
   end;
