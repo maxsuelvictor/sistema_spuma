@@ -222,6 +222,8 @@ type
 
     function ConexaoOK: string;
 
+    function LimparTextoJson(const Valor: string): string;
+
     function BuscarEmpresa: TStream;
 
     function StatusConexaoServidor: TJSONObject;
@@ -267,6 +269,25 @@ implementation
 
 
 uses System.StrUtils, UnitFormPrincipal;
+
+
+
+
+function TServidorMetodos.LimparTextoJson(const Valor: string): string;
+begin
+  Result := Valor;
+
+  Result := StringReplace(Result, #0, '', [rfReplaceAll]);
+  Result := StringReplace(Result, #9, ' ', [rfReplaceAll]);   // TAB
+  Result := StringReplace(Result, #10, ' ', [rfReplaceAll]);  // LF
+  Result := StringReplace(Result, #13, ' ', [rfReplaceAll]);  // CR
+
+  // Troca barra invertida por barra normal para evitar JSON inválido, ex: S\N vira S/N
+  Result := StringReplace(Result, '\', '/', [rfReplaceAll]);
+
+  // Não tratar aspas duplas aqui.
+  // O TJSONObject.ToString já faz isso corretamente.
+end;
 
 
 function TServidorMetodos.BuscarCidades: TStream;
@@ -393,32 +414,31 @@ begin
     while not CAD_CD_C_CLI.Eof do
     begin
       jso := TJsonObject.Create;
-      jso.AddPair('id_cliente', CAD_CD_C_CLI.FieldByName('id_cliente').AsString);
-      jso.AddPair('nome', CAD_CD_C_CLI.FieldByName('nome').AsString);
-      jso.AddPair('pessoa', CAD_CD_C_CLI.FieldByName('pessoa').AsString);
-      jso.AddPair('apelido', CAD_CD_C_CLI.FieldByName('apelido').AsString);
-      jso.AddPair('id_vendedor', CAD_CD_C_CLI.FieldByName('id_vendedor').AsString);
-      jso.AddPair('doc_cnpj_cpf', CAD_CD_C_CLI.FieldByName('doc_cnpj_cpf').AsString);
-      jso.AddPair('doc_ie_identidade', CAD_CD_C_CLI.FieldByName('doc_ie_identidade').AsString);
-      jso.AddPair('ativo', CAD_CD_C_CLI.FieldByName('ativo').AsString);
-      jso.AddPair('sexo', CAD_CD_C_CLI.FieldByName('sexo').AsString);
-      jso.AddPair('endereco', CAD_CD_C_CLI.FieldByName('endereco').AsString);
-      jso.AddPair('end_complemento', CAD_CD_C_CLI.FieldByName('end_complemento').AsString);
-      jso.AddPair('cep', CAD_CD_C_CLI.FieldByName('cep').AsString);
-      jso.AddPair('numero', CAD_CD_C_CLI.FieldByName('numero').AsString);
-      jso.AddPair('tel_fixo', CAD_CD_C_CLI.FieldByName('tel_fixo').AsString);
-      jso.AddPair('tel_movel', CAD_CD_C_CLI.FieldByName('tel_movel').AsString);
-      jso.AddPair('doc_ip', CAD_CD_C_CLI.FieldByName('doc_ip').AsString);
-      jso.AddPair('doc_im', CAD_CD_C_CLI.FieldByName('doc_im').AsString);
-      jso.AddPair('bairro', CAD_CD_C_CLI.FieldByName('bairro').AsString);
-      jso.AddPair('id_cidade', CAD_CD_C_CLI.FieldByName('id_cidade').AsString);
-      jso.AddPair('dta_cadastro', CAD_CD_C_CLI.FieldByName('dta_cadastro').AsString);
-      jso.AddPair('dta_nascimento', CAD_CD_C_CLI.FieldByName('dta_nascimento').AsString);
-      jso.AddPair('id_regiao', CAD_CD_C_CLI.FieldByName('id_regiao').AsString);
-      jso.AddPair('contribuinte', CAD_CD_C_CLI.FieldByName('contribuinte').AsString);
-      jso.AddPair('tipo_cliente', CAD_CD_C_CLI.FieldByName('tipo_cliente').AsString);
-      jso.AddPair('doc_rg_orgao', CAD_CD_C_CLI.FieldByName('doc_rg_orgao').AsString);
-
+      jso.AddPair('id_cliente', LimparTextoJson(CAD_CD_C_CLI.FieldByName('id_cliente').AsString));
+      jso.AddPair('nome', LimparTextoJson(CAD_CD_C_CLI.FieldByName('nome').AsString));
+      jso.AddPair('pessoa', LimparTextoJson(CAD_CD_C_CLI.FieldByName('pessoa').AsString));
+      jso.AddPair('apelido', LimparTextoJson(CAD_CD_C_CLI.FieldByName('apelido').AsString));
+      jso.AddPair('id_vendedor', LimparTextoJson(CAD_CD_C_CLI.FieldByName('id_vendedor').AsString));
+      jso.AddPair('doc_cnpj_cpf', LimparTextoJson(CAD_CD_C_CLI.FieldByName('doc_cnpj_cpf').AsString));
+      jso.AddPair('doc_ie_identidade', LimparTextoJson(CAD_CD_C_CLI.FieldByName('doc_ie_identidade').AsString));
+      jso.AddPair('ativo', LimparTextoJson(CAD_CD_C_CLI.FieldByName('ativo').AsString));
+      jso.AddPair('sexo', LimparTextoJson(CAD_CD_C_CLI.FieldByName('sexo').AsString));
+      jso.AddPair('endereco', LimparTextoJson(CAD_CD_C_CLI.FieldByName('endereco').AsString));
+      jso.AddPair('end_complemento', LimparTextoJson(CAD_CD_C_CLI.FieldByName('end_complemento').AsString));
+      jso.AddPair('cep', LimparTextoJson(CAD_CD_C_CLI.FieldByName('cep').AsString));
+      jso.AddPair('numero', LimparTextoJson(CAD_CD_C_CLI.FieldByName('numero').AsString));
+      jso.AddPair('tel_fixo', LimparTextoJson(CAD_CD_C_CLI.FieldByName('tel_fixo').AsString));
+      jso.AddPair('tel_movel', LimparTextoJson(CAD_CD_C_CLI.FieldByName('tel_movel').AsString));
+      jso.AddPair('doc_ip', LimparTextoJson(CAD_CD_C_CLI.FieldByName('doc_ip').AsString));
+      jso.AddPair('doc_im', LimparTextoJson(CAD_CD_C_CLI.FieldByName('doc_im').AsString));
+      jso.AddPair('bairro', LimparTextoJson(CAD_CD_C_CLI.FieldByName('bairro').AsString));
+      jso.AddPair('id_cidade', LimparTextoJson(CAD_CD_C_CLI.FieldByName('id_cidade').AsString));
+      jso.AddPair('dta_cadastro', LimparTextoJson(CAD_CD_C_CLI.FieldByName('dta_cadastro').AsString));
+      jso.AddPair('dta_nascimento', LimparTextoJson(CAD_CD_C_CLI.FieldByName('dta_nascimento').AsString));
+      jso.AddPair('id_regiao', LimparTextoJson(CAD_CD_C_CLI.FieldByName('id_regiao').AsString));
+      jso.AddPair('contribuinte', LimparTextoJson(CAD_CD_C_CLI.FieldByName('contribuinte').AsString));
+      jso.AddPair('tipo_cliente', LimparTextoJson(CAD_CD_C_CLI.FieldByName('tipo_cliente').AsString));
+      jso.AddPair('doc_rg_orgao', LimparTextoJson(CAD_CD_C_CLI.FieldByName('doc_rg_orgao').AsString));
       Lista.AddElement(jso);
       CAD_CD_C_CLI.Next;
     end;
@@ -437,6 +457,7 @@ begin
       erroJson := TJSONObject.Create;
       try
         erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
+        unitformPrincipal.Form1.mmTexto.Lines.Add('Get das clientes com erro : ' + E.Message);
         Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
       finally
         erroJson.Free;
@@ -444,6 +465,7 @@ begin
     end;
   end;
 
+  unitformPrincipal.Form1.mmTexto.Lines.Add('Get das clientes liberação de memória!');
   // Liberação de recursos
   FreeAndNil(Lista);
   if Assigned(CAD_CD_C_CLI) then
@@ -912,7 +934,7 @@ begin
     CAD_SQ_C_ITE.CommandText := 'select ' +
            ' ite.id_item ,  ite.descricao , ite.fantasia,  ite.id_grupo ,  ite.ativo ,  ' +
            ' ite.preco_avista ,  ite.preco_aprazo ,  ite.id_ncm ,  ite.sgq_personalizado ,  ite.tipo_produto , ' +
-           ' ite.id_und_venda, gru.tipo_item as int_tipoitem  ' +
+           ' ite.id_und_venda, gru.tipo_item as int_tipoitem, coalesce(ite.cubagem,0) as cubagem  ' +
            ' from cad_tb_c_ite ite ' +
            '    left outer join cad_tb_c_gru gru on gru.id_grupo = ite.id_grupo ' +
            ' where ite.ativo = true ';
@@ -938,6 +960,7 @@ begin
       jso.AddPair('tipo_produto', CAD_CD_C_ITE.FieldByName('tipo_produto').AsString);
       jso.AddPair('id_und_venda', CAD_CD_C_ITE.FieldByName('id_und_venda').AsString);
       jso.AddPair('int_tipoitem', CAD_CD_C_ITE.FieldByName('int_tipoitem').AsString);
+      jso.AddPair('cubagem', TJSONNumber.Create(CAD_CD_C_ITE.FieldByName('cubagem').AsCurrency));
 
       Lista.AddElement(jso);
       CAD_CD_C_ITE.Next;
@@ -1768,7 +1791,7 @@ begin
           FAT_CD_M_PED.FieldByName('vlr_desc_basico').AsString     := PedidoObj.GetValue<string>('vlr_desc_basico');
           }
           // Deve calcular a cubagem
-          FAT_CD_M_PED.FieldByName('cubagem').AsString := '0';
+          FAT_CD_M_PED.FieldByName('cubagem').AsCurrency := PedidoObj.GetValue<Double>('cubagem');
 
           // verificar no enSoftSpuma como é alimentado esse campo id_almoxarifado
           FAT_CD_M_PED.FieldByName('id_almoxarifado').AsString := '1';
@@ -1826,6 +1849,8 @@ begin
             FAT_CD_M_PED_ITE.FieldByName('id_item').AsInteger := ItemObj.GetValue<Integer>('id_item');
 
             // Busca a cubagem do item
+            CAD_CD_C_ITE.Close;
+            CAD_CD_C_ITE.SetProvider(CAD_DP_C_ITE);
             CAD_SQ_C_ITE.Close;
             CAD_SQ_C_ITE.CommandText := 'select cubagem from cad_tb_c_ite ite ' +
                  ' where ite.id_item = ' + FAT_CD_M_PED_ITE.FieldByName('id_item').Text;
@@ -1850,9 +1875,15 @@ begin
             FAT_CD_M_PED_ITE.FieldByName('vlr_bruto').AsCurrency         := ItemObj.GetValue<Double>('vlr_bruto');
             FAT_CD_M_PED_ITE.FieldByName('qtde').AsCurrency              := ItemObj.GetValue<Double>('qtde');
 
+
+
+            // Maxsuel Victor, 27/05/2026 - Foi comentado o código abaixo, pois na parte
+               // do appVendas já está vindo pronto a cubagem.
+            // se for um item personalizado essa variável terá algum valor.
+
+            {
             cubagem_unitaria_person := ItemObj.GetValue<Double>('cubagem_unitaria_person');
 
-            // se for um item personalizado essa variável terá algum valor.
             if cubagem_unitaria_person > 0 then
                begin
                  cubagem_ped := cubagem_ped +
@@ -1860,11 +1891,14 @@ begin
                end
             else
                begin
-                 cubagem_ped := cubagem_ped +
-                     (CAD_SQ_C_ITE.FieldByName('CUBAGEM').AsCurrency *
-                         FAT_CD_M_PED_ITE.FieldByName('QTDE').AsCurrency);
+                 if CAD_CD_C_ITE.FieldByName('CUBAGEM').AsCurrency > 0 then
+                    begin
+                      cubagem_ped := cubagem_ped +
+                         (CAD_CD_C_ITE.FieldByName('CUBAGEM').AsCurrency *
+                             FAT_CD_M_PED_ITE.FieldByName('QTDE').AsCurrency);
+                    end;
                end;
-
+            }
             FAT_CD_M_PED_ITE.FieldByName('id_cor').AsInteger             := ItemObj.GetValue<Integer>('id_cor');
             FAT_CD_M_PED_ITE.FieldByName('id_tamanho').AsInteger         := 0;
             FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := ItemObj.GetValue<Double>('vlr_liquido');

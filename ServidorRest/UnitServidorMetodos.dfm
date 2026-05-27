@@ -32,7 +32,7 @@ object ServidorMetodos: TServidorMetodos
       'Password=ssq#0609'
       'EnableBCD=True')
     Left = 31
-    Top = 7
+    Top = 15
   end
   object CAD_SQ_C_COR: TSQLDataSet
     CommandText = 'SELECT * FROM CAD_TB_C_COR'#13#10'WHERE  1 =2'
