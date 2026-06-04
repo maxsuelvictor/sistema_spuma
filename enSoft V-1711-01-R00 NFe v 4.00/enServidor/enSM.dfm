@@ -2,7 +2,7 @@
   OldCreateOrder = False
   OnCreate = DSServerModuleCreate
   OnDestroy = DSServerModuleDestroy
-  Height = 4900
+  Height = 5064
   Width = 4133
   object CAD_DP_C_CNE: TDataSetProvider
     DataSet = CAD_SQ_C_CNE
@@ -157,7 +157,7 @@
     OnUpdateData = CAD_DP_C_FUNUpdateData
     OnGetDataSetProperties = CAD_DP_C_FUNGetDataSetProperties
     Left = 152
-    Top = 1870
+    Top = 1950
   end
   object CAD_DP_C_CLI: TDataSetProvider
     DataSet = CAD_SQ_C_CLI
@@ -167,7 +167,7 @@
     OnUpdateData = CAD_DP_C_CLIUpdateData
     OnGetDataSetProperties = CAD_DP_C_CLIGetDataSetProperties
     Left = 160
-    Top = 2025
+    Top = 2097
   end
   object CAD_DP_C_ITE: TDataSetProvider
     DataSet = CAD_SQ_C_ITE
@@ -176,7 +176,7 @@
     OnUpdateData = CAD_DP_C_ITEUpdateData
     OnGetDataSetProperties = CAD_DP_C_ITEGetDataSetProperties
     Left = 168
-    Top = 2375
+    Top = 2447
   end
   object CMP_DS_M_SOL: TDataSource
     DataSet = CMP_SQ_M_SOL
@@ -198,17 +198,17 @@
   object CAD_DS_C_CLI: TDataSource
     DataSet = CAD_SQ_C_CLI
     Left = 160
-    Top = 2073
+    Top = 2145
   end
   object CAD_DS_C_ITE: TDataSource
     DataSet = CAD_SQ_C_ITE
     Left = 168
-    Top = 2423
+    Top = 2495
   end
   object CAD_DS_C_PAR: TDataSource
     DataSet = CAD_SQ_C_PAR
-    Left = 168
-    Top = 2758
+    Left = 160
+    Top = 2838
   end
   object CAD_DS_C_TRI: TDataSource
     DataSet = CAD_SQ_C_TRI
@@ -273,8 +273,8 @@
   object CAD_DP_C_ALM: TDataSetProvider
     DataSet = CAD_SQ_C_ALM
     OnDataRequest = CAD_DP_C_ALMDataRequest
-    Left = 192
-    Top = 3052
+    Left = 184
+    Top = 3132
   end
   object PCP_DP_C_MTA: TDataSetProvider
     DataSet = PCP_SQ_C_MTA
@@ -395,8 +395,8 @@
     OnDataRequest = CAD_DP_C_PARDataRequest
     OnUpdateData = CAD_DP_C_PARUpdateData
     OnGetDataSetProperties = CAD_DP_C_PARGetDataSetProperties
-    Left = 168
-    Top = 2710
+    Left = 160
+    Top = 2790
   end
   object CAD_DP_C_COR: TDataSetProvider
     DataSet = CAD_SQ_C_COR
@@ -2906,7 +2906,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 40
-    Top = 1870
+    Top = 1950
     object CAD_SQ_C_FUNid_funcionario: TIntegerField
       FieldName = 'id_funcionario'
     end
@@ -3157,7 +3157,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 48
-    Top = 2025
+    Top = 2097
     object CAD_SQ_C_CLIid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3530,7 +3530,7 @@
       end>
     SQLConnection = Conexao
     Left = 48
-    Top = 2073
+    Top = 2145
     object CAD_SQ_C_CLI_CTOid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3576,7 +3576,7 @@
       end>
     SQLConnection = Conexao
     Left = 48
-    Top = 2120
+    Top = 2192
     object CAD_SQ_C_CLI_INFid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3644,7 +3644,7 @@
       end>
     SQLConnection = Conexao
     Left = 160
-    Top = 2120
+    Top = 2192
     object CAD_SQ_C_CLI_RECid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3714,7 +3714,7 @@
     Params = <>
     SQLConnection = Conexao
     Left = 56
-    Top = 2375
+    Top = 2447
     object CAD_SQ_C_ITEid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -4342,7 +4342,7 @@
       end>
     SQLConnection = Conexao
     Left = 56
-    Top = 2471
+    Top = 2543
     object CAD_SQ_C_ITE_COMid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -4379,7 +4379,7 @@
       end>
     SQLConnection = Conexao
     Left = 56
-    Top = 2423
+    Top = 2495
     object CAD_SQ_C_ITE_ESPid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -4477,8 +4477,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 2710
+    Left = 48
+    Top = 2790
     object CAD_SQ_C_PARid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -4731,8 +4731,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 2758
+    Left = 48
+    Top = 2838
     object CAD_SQ_C_PAR_CTRid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -5740,8 +5740,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 2806
+    Left = 48
+    Top = 2886
     object CAD_SQ_C_PAR_MODid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -5819,8 +5819,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 2862
+    Left = 48
+    Top = 2942
     object CAD_SQ_C_PAR_SERid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -12734,8 +12734,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3052
+    Left = 48
+    Top = 3132
     object CAD_SQ_C_ALMid_almoxarifado: TIntegerField
       FieldName = 'id_almoxarifado'
     end
@@ -15786,8 +15786,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3011
+    Left = 48
+    Top = 3091
     object CAD_SQ_C_TAMid_tamanho: TIntegerField
       FieldName = 'id_tamanho'
     end
@@ -15806,8 +15806,8 @@
   object CAD_DP_C_TAM: TDataSetProvider
     DataSet = CAD_SQ_C_TAM
     OnDataRequest = CAD_DP_C_TAMDataRequest
-    Left = 192
-    Top = 3011
+    Left = 184
+    Top = 3091
   end
   object EST_SQ_M_CTE: TSQLDataSet
     CommandText = 
@@ -18508,8 +18508,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 2910
+    Left = 48
+    Top = 2990
     object CAD_SQ_C_PAR_NFEid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -19400,7 +19400,7 @@
       end>
     SQLConnection = Conexao
     Left = 48
-    Top = 2168
+    Top = 2240
     object CAD_SQ_C_CLI_BCOid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -20991,7 +20991,7 @@
       end>
     SQLConnection = Conexao
     Left = 48
-    Top = 1921
+    Top = 2001
     object CAD_SQ_C_FUN_CRGid_funcionario: TIntegerField
       FieldName = 'id_funcionario'
     end
@@ -21016,7 +21016,7 @@
   object CAD_DS_C_FUN: TDataSource
     DataSet = CAD_SQ_C_FUN
     Left = 160
-    Top = 1921
+    Top = 2001
   end
   object BUS_SQ_M_CME_MEQ: TSQLDataSet
     CommandText = 
@@ -21099,8 +21099,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3096
+    Left = 48
+    Top = 3176
     object CAD_SQ_C_PRGid_prg: TIntegerField
       FieldName = 'id_prg'
     end
@@ -21141,8 +21141,8 @@
   object CAD_DP_C_PRG: TDataSetProvider
     DataSet = CAD_SQ_C_PRG
     OnDataRequest = CAD_DP_C_PRGDataRequest
-    Left = 192
-    Top = 3096
+    Left = 184
+    Top = 3176
   end
   object BUS_DP_C_LME_DOC_DPG: TDataSetProvider
     DataSet = BUS_SQ_C_LME_DOC_DPG
@@ -23172,7 +23172,7 @@
       end>
     SQLConnection = Conexao
     Left = 56
-    Top = 2520
+    Top = 2592
     object CAD_SQ_C_ITE_TPRid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -23199,8 +23199,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3139
+    Left = 48
+    Top = 3219
     object CAD_SQ_C_FAMid_familia: TIntegerField
       FieldName = 'id_familia'
     end
@@ -23216,8 +23216,8 @@
     DataSet = CAD_SQ_C_FAM
     OnDataRequest = CAD_DP_C_FAMDataRequest
     BeforeUpdateRecord = CAD_DP_C_FAMBeforeUpdateRecord
-    Left = 192
-    Top = 3139
+    Left = 184
+    Top = 3219
   end
   object ctc_sq_c_epi: TSQLDataSet
     CommandText = 
@@ -23732,7 +23732,7 @@
       end>
     SQLConnection = Conexao
     Left = 56
-    Top = 2568
+    Top = 2640
     object CAD_SQ_C_ITE_APLid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -25101,8 +25101,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 2664
+    Left = 48
+    Top = 2744
     object CAD_SQ_C_ITE_XMLid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -25142,8 +25142,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 168
-    Top = 2806
+    Left = 160
+    Top = 2886
     object CAD_SQ_C_PAR_CPGid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -26964,8 +26964,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3272
+    Left = 48
+    Top = 3352
     object SQ_BR_PREVENDAnumprevenda: TIntegerField
       FieldName = 'numprevenda'
     end
@@ -27133,23 +27133,23 @@
     Options = [poCascadeDeletes, poCascadeUpdates, poUseQuoteChar]
     OnDataRequest = DP_BR_PREVENDADataRequest
     BeforeUpdateRecord = CAD_DP_C_FAMBeforeUpdateRecord
-    Left = 192
-    Top = 3272
+    Left = 184
+    Top = 3352
   end
   object SQ_BR_SEQ_ID: TSQLDataSet
     CommandText = 'select * from BR_SEQ_ID'#13#10'where 1  = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3417
+    Left = 48
+    Top = 3497
   end
   object DP_BR_SEQ_ID: TDataSetProvider
     DataSet = SQ_BR_SEQ_ID
     OnDataRequest = DP_BR_SEQ_IDDataRequest
     BeforeUpdateRecord = CAD_DP_C_FAMBeforeUpdateRecord
-    Left = 192
-    Top = 3417
+    Left = 184
+    Top = 3497
   end
   object SQ_BR_PREVENDA_DETALHE: TSQLDataSet
     CommandText = 
@@ -27164,8 +27164,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 192
-    Top = 3364
+    Left = 184
+    Top = 3444
     object SQ_BR_PREVENDA_DETALHEnumprevenda: TIntegerField
       FieldName = 'numprevenda'
     end
@@ -27335,8 +27335,8 @@
   end
   object DS_BR_PREVENDA: TDataSource
     DataSet = SQ_BR_PREVENDA
-    Left = 192
-    Top = 3315
+    Left = 184
+    Top = 3395
   end
   object BUS_SQ_M_POS_ITE: TSQLDataSet
     CommandText = 
@@ -30861,7 +30861,7 @@
       'BlobSize=-1'
       'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftGloboP170226'
+      'Database=enSoftGloboP100526'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
@@ -35377,8 +35377,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3233
+    Left = 48
+    Top = 3313
     object CAD_SQ_C_MCTid_maquineta: TIntegerField
       FieldName = 'id_maquineta'
     end
@@ -35398,8 +35398,8 @@
     DataSet = CAD_SQ_C_MCT
     OnDataRequest = CAD_DP_C_MCTDataRequest
     BeforeUpdateRecord = CAD_DP_C_FAMBeforeUpdateRecord
-    Left = 192
-    Top = 3233
+    Left = 184
+    Top = 3313
   end
   object BUS_SQ_M_ORV_TIT_SER_INT: TSQLDataSet
     CommandText = 
@@ -37935,8 +37935,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3469
+    Left = 48
+    Top = 3549
     object CAD_SQ_C_CCRid_ccr: TIntegerField
       FieldName = 'id_ccr'
     end
@@ -37956,8 +37956,8 @@
   object CAD_DP_C_CCR: TDataSetProvider
     DataSet = CAD_SQ_C_CCR
     OnDataRequest = CAD_DP_C_CCRDataRequest
-    Left = 192
-    Top = 3469
+    Left = 184
+    Top = 3549
   end
   object BUS_SQ_M_NFE_TIT_MAQ: TSQLDataSet
     CommandText = 
@@ -39274,16 +39274,16 @@
   object DP_BR_CUPOM_MESTRE: TDataSetProvider
     DataSet = SQ_BR_CUPOM_MESTRE
     OnDataRequest = DP_BR_CUPOM_MESTREDataRequest
-    Left = 189
-    Top = 3656
+    Left = 181
+    Top = 3736
   end
   object SQ_BR_CUPOM_MESTRE: TSQLDataSet
     CommandText = 'select * from br_cupom_mestre'#13#10'where 1 = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 53
-    Top = 3656
+    Left = 45
+    Top = 3736
     object SQ_BR_CUPOM_MESTREn_cupom: TIntegerField
       FieldName = 'n_cupom'
     end
@@ -39490,8 +39490,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 53
-    Top = 3701
+    Left = 45
+    Top = 3781
     object SQ_BR_CUPOM_DETALHEn_cupom: TIntegerField
       FieldName = 'n_cupom'
     end
@@ -39726,8 +39726,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 53
-    Top = 3747
+    Left = 45
+    Top = 3827
     object SQ_BR_CUPOM_PAGAMENTOn_cupom: TIntegerField
       FieldName = 'n_cupom'
     end
@@ -39871,8 +39871,8 @@
   end
   object SQ_DS_CUPOM_MESTRE: TDataSource
     DataSet = SQ_BR_CUPOM_MESTRE
-    Left = 189
-    Top = 3701
+    Left = 181
+    Top = 3781
   end
   object BUS_DP_M_COB: TDataSetProvider
     DataSet = BUS_SQ_M_COB
@@ -41158,8 +41158,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 168
-    Top = 2862
+    Left = 160
+    Top = 2942
     object CAD_SQ_C_PAR_BXPid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -46912,16 +46912,16 @@
   end
   object AUD_DP_M_AUD: TDataSetProvider
     DataSet = AUD_SQ_M_AUD
-    Left = 189
-    Top = 3793
+    Left = 181
+    Top = 3873
   end
   object AUD_SQ_M_AUD: TSQLDataSet
     CommandText = 'select * from aud_tb_m_aud'#13#10'where 1 =2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 53
-    Top = 3793
+    Left = 45
+    Top = 3873
     object AUD_SQ_M_AUDdta_servidor: TDateField
       FieldName = 'dta_servidor'
     end
@@ -46950,8 +46950,8 @@
     Aggregates = <>
     Params = <>
     ProviderName = 'AUD_DP_M_AUD'
-    Left = 53
-    Top = 3839
+    Left = 45
+    Top = 3919
     object AUD_CD_M_AUDdta_servidor: TDateField
       FieldName = 'dta_servidor'
     end
@@ -47151,7 +47151,7 @@
       end>
     SQLConnection = Conexao
     Left = 56
-    Top = 2620
+    Top = 2692
     object CAD_SQ_C_ITE_PRCid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -47229,16 +47229,16 @@
   object CAD_DP_C_PAI: TDataSetProvider
     DataSet = CAD_SQ_C_PAI
     OnDataRequest = CAD_DP_C_PAIDataRequest
-    Left = 192
-    Top = 3519
+    Left = 184
+    Top = 3599
   end
   object CAD_SQ_C_PAI: TSQLDataSet
     CommandText = 'select pai.* from cad_tb_c_pai pai'#13#10'where 1=2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3519
+    Left = 48
+    Top = 3599
     object CAD_SQ_C_PAIid_pais: TWideStringField
       FieldName = 'id_pais'
       Size = 5
@@ -48666,8 +48666,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3567
+    Left = 48
+    Top = 3647
     object CAD_SQ_C_EQPid_equipamento: TIntegerField
       FieldName = 'id_equipamento'
     end
@@ -48690,8 +48690,8 @@
   object CAD_DP_C_EQP: TDataSetProvider
     DataSet = CAD_SQ_C_EQP
     OnDataRequest = CAD_DP_C_EQPDataRequest
-    Left = 192
-    Top = 3567
+    Left = 184
+    Top = 3647
   end
   object BUS_DP_M_PED: TDataSetProvider
     DataSet = BUS_SQ_M_PED
@@ -49495,8 +49495,8 @@
   object CAD_DP_C_HFG: TDataSetProvider
     DataSet = CAD_SQ_C_HFG
     OnDataRequest = CAD_DP_C_HFGDataRequest
-    Left = 192
-    Top = 3614
+    Left = 184
+    Top = 3694
   end
   object CAD_SQ_C_HFG: TSQLDataSet
     CommandText = 
@@ -49506,8 +49506,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3614
+    Left = 48
+    Top = 3694
     object CAD_SQ_C_HFGid_controle: TIntegerField
       FieldName = 'id_controle'
     end
@@ -49568,7 +49568,7 @@
       end>
     SQLConnection = Conexao
     Left = 48
-    Top = 2218
+    Top = 2290
     object CAD_SQ_C_CLI_PRDid_cliente: TIntegerField
       FieldName = 'id_cliente'
     end
@@ -49854,8 +49854,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 53
-    Top = 3887
+    Left = 45
+    Top = 3967
     object CAD_SQ_C_MARid_mar: TIntegerField
       FieldName = 'id_mar'
     end
@@ -49874,8 +49874,8 @@
   object CAD_DP_C_MAR: TDataSetProvider
     DataSet = CAD_SQ_C_MAR
     OnDataRequest = CAD_DP_C_MARDataRequest
-    Left = 189
-    Top = 3887
+    Left = 181
+    Top = 3967
   end
   object FIS_SQ_R_LRE: TSQLDataSet
     CommandText = 
@@ -50369,7 +50369,7 @@
       end>
     SQLConnection = Conexao
     Left = 168
-    Top = 2474
+    Top = 2546
     object CAD_SQ_C_ITE_CATid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -51824,16 +51824,16 @@
   object CAD_DP_C_CUL: TDataSetProvider
     DataSet = CAD_SQ_C_CUL
     OnDataRequest = CAD_DP_C_CULDataRequest
-    Left = 184
-    Top = 3935
+    Left = 176
+    Top = 4015
   end
   object CAD_SQ_C_CUL: TSQLDataSet
     CommandText = 'SELECT CUL.* FROM CAD_TB_C_CUL CUL '#13#10'WHERE 1=2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3935
+    Left = 48
+    Top = 4015
     object CAD_SQ_C_CULid_cultura: TIntegerField
       FieldName = 'id_cultura'
     end
@@ -51857,7 +51857,7 @@
       end>
     SQLConnection = Conexao
     Left = 168
-    Top = 2520
+    Top = 2592
     object CAD_SQ_C_ITE_CULid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -51908,7 +51908,7 @@
       end>
     SQLConnection = Conexao
     Left = 160
-    Top = 2170
+    Top = 2242
     object CAD_SQ_C_CLI_PROid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -52040,7 +52040,7 @@
       end>
     SQLConnection = Conexao
     Left = 168
-    Top = 2568
+    Top = 2640
     object CAD_SQ_C_ITE_COJid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -52386,8 +52386,8 @@
   object CAD_DP_C_MTV: TDataSetProvider
     DataSet = CAD_SQ_C_MTV
     OnDataRequest = CAD_DP_C_MTVDataRequest
-    Left = 176
-    Top = 3986
+    Left = 168
+    Top = 4066
   end
   object CAD_SQ_C_MTV: TSQLDataSet
     CommandText = 
@@ -52399,8 +52399,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3986
+    Left = 48
+    Top = 4066
     object CAD_SQ_C_MTVid_vendedor: TIntegerField
       FieldName = 'id_vendedor'
     end
@@ -52426,8 +52426,8 @@
   end
   object CAD_DS_C_MTV: TDataSource
     DataSet = CAD_SQ_C_MTV
-    Left = 176
-    Top = 4034
+    Left = 168
+    Top = 4114
   end
   object CAD_SQ_C_MTV_MES: TSQLDataSet
     CommandText = 'select * from cad_tb_c_mtv_mes'#13#10'where id_mtv=:id_mtv'
@@ -52440,8 +52440,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4034
+    Left = 48
+    Top = 4114
     object CAD_SQ_C_MTV_MESid_mtv: TIntegerField
       FieldName = 'id_mtv'
     end
@@ -52555,28 +52555,28 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4130
+    Left = 48
+    Top = 4210
   end
   object CAD_DP_C_SEQ: TDataSetProvider
     DataSet = CAD_SQ_C_SEQ
     OnDataRequest = CAD_DP_C_SEQDataRequest
-    Left = 176
-    Top = 4130
+    Left = 168
+    Top = 4210
   end
   object CAD_DP_C_GRP: TDataSetProvider
     DataSet = CAD_SQ_C_GRP
     OnDataRequest = CAD_DP_C_GRPDataRequest
-    Left = 176
-    Top = 4082
+    Left = 168
+    Top = 4162
   end
   object CAD_SQ_C_GRP: TSQLDataSet
     CommandText = 'select grp.* from cad_tb_c_grp grp'#13#10'where 1=2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4082
+    Left = 48
+    Top = 4162
     object CAD_SQ_C_GRPid_codigo: TIntegerField
       FieldName = 'id_codigo'
     end
@@ -54846,8 +54846,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 2960
+    Left = 48
+    Top = 3040
     object CAD_SQ_C_PAR_RSTid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -55822,8 +55822,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4184
+    Left = 48
+    Top = 4264
     object CAD_SQ_C_VITid_visita: TIntegerField
       FieldName = 'id_visita'
     end
@@ -55876,13 +55876,13 @@
   object CAD_DP_C_VIT: TDataSetProvider
     DataSet = CAD_SQ_C_VIT
     OnDataRequest = CAD_DP_C_VITDataRequest
-    Left = 176
-    Top = 4184
+    Left = 168
+    Top = 4264
   end
   object CAD_DS_C_VIT: TDataSource
     DataSet = CAD_SQ_C_VIT
-    Left = 176
-    Top = 4240
+    Left = 168
+    Top = 4320
   end
   object CAD_SQ_C_VIT_FOT: TSQLDataSet
     CommandText = 'select * from cad_tb_c_vit_fot'#13#10'where id_visita=:id_visita'
@@ -55895,8 +55895,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4240
+    Left = 48
+    Top = 4320
     object CAD_SQ_C_VIT_FOTid_visita: TIntegerField
       FieldName = 'id_visita'
     end
@@ -55922,8 +55922,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4296
+    Left = 48
+    Top = 4376
     object CAD_SQ_C_VIT_KMTid_visita: TIntegerField
       FieldName = 'id_visita'
     end
@@ -55959,8 +55959,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4352
+    Left = 48
+    Top = 4432
     object CAD_SQ_C_VISid_vis: TIntegerField
       FieldName = 'id_vis'
     end
@@ -55992,13 +55992,13 @@
     DataSet = CAD_SQ_C_VIS
     Options = [poCascadeDeletes, poUseQuoteChar]
     OnDataRequest = CAD_DP_C_VISDataRequest
-    Left = 176
-    Top = 4352
+    Left = 168
+    Top = 4432
   end
   object CAD_DS_C_VIS: TDataSource
     DataSet = CAD_SQ_C_VIS
-    Left = 176
-    Top = 4408
+    Left = 168
+    Top = 4488
   end
   object CAD_SQ_C_VIS_CLI: TSQLDataSet
     CommandText = 
@@ -56014,8 +56014,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4408
+    Left = 48
+    Top = 4488
     object CAD_SQ_C_VIS_CLIid_vis: TIntegerField
       FieldName = 'id_vis'
     end
@@ -56167,8 +56167,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 168
-    Top = 2912
+    Left = 160
+    Top = 2992
     object CAD_SQ_C_PAR_BXRid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -56395,7 +56395,7 @@
       end>
     SQLConnection = Conexao
     Left = 168
-    Top = 2218
+    Top = 2290
     object CAD_SQ_C_CLI_RVDid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -56413,16 +56413,16 @@
   object CAD_DP_C_RVD: TDataSetProvider
     DataSet = CAD_SQ_C_RVD
     OnDataRequest = CAD_DP_C_RVDDataRequest
-    Left = 176
-    Top = 4464
+    Left = 168
+    Top = 4544
   end
   object CAD_SQ_C_RVD: TSQLDataSet
     CommandText = 'select * from  cad_tb_c_rvd'#13#10'where 1 = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4464
+    Left = 48
+    Top = 4544
     object CAD_SQ_C_RVDid_rvd: TIntegerField
       FieldName = 'id_rvd'
     end
@@ -57175,8 +57175,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4584
+    Left = 48
+    Top = 4664
     object CAD_SQ_C_AUSid_aus: TIntegerField
       FieldName = 'id_aus'
     end
@@ -57207,13 +57207,13 @@
     OnDataRequest = CAD_DP_C_AUSDataRequest
     OnUpdateData = CAD_DP_C_AUSUpdateData
     OnGetDataSetProperties = CAD_DP_C_AUSGetDataSetProperties
-    Left = 176
-    Top = 4584
+    Left = 168
+    Top = 4664
   end
   object CAD_DS_C_AUS: TDataSource
     DataSet = CAD_SQ_C_AUS
-    Left = 176
-    Top = 4640
+    Left = 168
+    Top = 4720
   end
   object CAD_SQ_C_AUS_PRG: TSQLDataSet
     CommandText = 
@@ -57230,8 +57230,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4640
+    Left = 48
+    Top = 4720
     object CAD_SQ_C_AUS_PRGid_aus: TIntegerField
       FieldName = 'id_aus'
     end
@@ -57627,8 +57627,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4704
+    Left = 48
+    Top = 4784
     object BUS_SQ_C_PES_MODid_perfil_seg: TIntegerField
       FieldName = 'id_perfil_seg'
     end
@@ -57668,8 +57668,8 @@
   object BUS_DP_C_PES_MOD: TDataSetProvider
     DataSet = BUS_SQ_C_PES_MOD
     OnDataRequest = BUS_DP_C_PES_MODDataRequest
-    Left = 176
-    Top = 4704
+    Left = 168
+    Top = 4784
   end
   object FIN_SQ_R_EXT_CLI_RPC: TSQLDataSet
     CommandText = 
@@ -58684,8 +58684,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4760
+    Left = 48
+    Top = 4840
     object BUS_SQ_M_PROformulario: TWideStringField
       FieldName = 'formulario'
       Size = 12
@@ -58706,8 +58706,8 @@
   object BUS_DP_M_PRO: TDataSetProvider
     DataSet = BUS_SQ_M_PRO
     OnDataRequest = BUS_DP_M_PRODataRequest
-    Left = 176
-    Top = 4760
+    Left = 168
+    Top = 4840
   end
   object FAT_DP_R_COV_FAT_PED: TDataSetProvider
     DataSet = FAT_SQ_R_COV_FAT_PED
@@ -58963,7 +58963,7 @@
       end>
     SQLConnection = Conexao
     Left = 56
-    Top = 2328
+    Top = 2400
     object CAD_SQ_C_CLI_VEIid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -59026,7 +59026,7 @@
       end>
     SQLConnection = Conexao
     Left = 168
-    Top = 2616
+    Top = 2688
     object CAD_SQ_C_ITE_LOCid_item: TIntegerField
       FieldName = 'id_item'
     end
@@ -59248,7 +59248,7 @@
       end>
     SQLConnection = Conexao
     Left = 176
-    Top = 2328
+    Top = 2400
     object CAD_SQ_C_CLI_EMLid_cliente: TIntegerField
       FieldName = 'id_cliente'
     end
@@ -59523,8 +59523,8 @@
   end
   object CAD_DS_C_FAM: TDataSource
     DataSet = CAD_SQ_C_FAM
-    Left = 192
-    Top = 3184
+    Left = 184
+    Top = 3264
   end
   object CAD_SQ_C_FAM_EMP: TSQLDataSet
     CommandText = 
@@ -59539,8 +59539,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 56
-    Top = 3184
+    Left = 48
+    Top = 3264
     object CAD_SQ_C_FAM_EMPid_familia: TIntegerField
       FieldName = 'id_familia'
     end
@@ -60610,7 +60610,7 @@
       end>
     SQLConnection = Conexao
     Left = 48
-    Top = 2274
+    Top = 2346
     object CAD_SQ_C_CLI_CRDid_cliente: TIntegerField
       FieldName = 'id_cliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -61035,8 +61035,8 @@
         ParamType = ptInput
       end>
     SQLConnection = Conexao
-    Left = 168
-    Top = 2960
+    Left = 160
+    Top = 3040
     object CAD_SQ_C_PAR_EMLid_empresa: TIntegerField
       FieldName = 'id_empresa'
     end
@@ -61133,16 +61133,16 @@
   object CAD_DP_C_PCC: TDataSetProvider
     DataSet = CAD_SQ_C_PCC
     OnDataRequest = CAD_DP_C_PCCDataRequest
-    Left = 176
-    Top = 4528
+    Left = 168
+    Top = 4608
   end
   object CAD_SQ_C_PCC: TSQLDataSet
     CommandText = 'SELECT * FROM CAD_TB_C_PCC'#13#10'WHERE 1=2;'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4528
+    Left = 48
+    Top = 4608
     object CAD_SQ_C_PCCcod_nat_cc: TWideStringField
       FieldName = 'cod_nat_cc'
       Size = 2
@@ -61248,16 +61248,16 @@
   object CAD_DP_C_NTR: TDataSetProvider
     DataSet = CAD_SQ_C_NTR
     OnDataRequest = CAD_DP_C_NTRDataRequest
-    Left = 176
-    Top = 4824
+    Left = 168
+    Top = 4904
   end
   object CAD_SQ_C_NTR: TSQLDataSet
     CommandText = 'select ntr.*'#13#10'   from cad_tb_c_ntr ntr '#13#10'where 1 = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 56
-    Top = 4824
+    Left = 48
+    Top = 4904
     object CAD_SQ_C_NTRcodigo: TWideStringField
       FieldName = 'codigo'
       Size = 3
@@ -64171,7 +64171,7 @@
       end>
     SQLConnection = Conexao
     Left = 47
-    Top = 1972
+    Top = 2052
     object CAD_SQ_C_FUN_CPNid_funcionario: TIntegerField
       FieldName = 'id_funcionario'
     end
@@ -64503,16 +64503,16 @@
   object CAD_DP_C_IBC: TDataSetProvider
     DataSet = CAD_SQ_C_IBC
     OnDataRequest = CAD_DP_C_IBCDataRequest
-    Left = 400
-    Top = 4704
+    Left = 392
+    Top = 4784
   end
   object CAD_SQ_C_IBC: TSQLDataSet
     CommandText = 'select * from cad_tb_c_ibc'#13#10'where 1 = 2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 304
-    Top = 4704
+    Left = 296
+    Top = 4784
   end
   object CAD_SQ_C_CTR: TSQLDataSet
     CommandText = 
@@ -64522,8 +64522,8 @@
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Conexao
-    Left = 304
-    Top = 4760
+    Left = 296
+    Top = 4840
     object CAD_SQ_C_CTRid_ctr: TIntegerField
       FieldName = 'id_ctr'
     end
@@ -64682,8 +64682,8 @@
   object CAD_DP_C_CTR: TDataSetProvider
     DataSet = CAD_SQ_C_CTR
     OnDataRequest = CAD_DP_C_CTRDataRequest
-    Left = 400
-    Top = 4760
+    Left = 392
+    Top = 4840
   end
   object PCP_SQ_R_EPP_FUN_RNK: TSQLDataSet
     CommandText = 
@@ -64847,5 +64847,99 @@
     OnDataRequest = BUS_DP_M_TQADataRequest
     Left = 1016
     Top = 3456
+  end
+  object CAD_SQ_C_FOR_QUE: TSQLDataSet
+    CommandText = 
+      'SELECT QUE.*'#13#10'FROM CAD_TB_C_FOR_QUE QUE'#13#10'WHERE ID_FORNECEDOR=:ID' +
+      '_FORNECEDOR'
+    DataSource = CAD_DS_C_FOR
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_FORNECEDOR'
+        ParamType = ptInput
+      end>
+    SQLConnection = Conexao
+    Left = 40
+    Top = 1872
+    object CAD_SQ_C_FOR_QUEid_fornecedor: TIntegerField
+      FieldName = 'id_fornecedor'
+    end
+    object CAD_SQ_C_FOR_QUEid_for_que: TIntegerField
+      FieldName = 'id_for_que'
+    end
+    object CAD_SQ_C_FOR_QUEcarimbo_data_hora: TSQLTimeStampField
+      FieldName = 'carimbo_data_hora'
+    end
+    object CAD_SQ_C_FOR_QUEcnpj: TWideStringField
+      FieldName = 'cnpj'
+      Size = 14
+    end
+    object CAD_SQ_C_FOR_QUEfornecedor: TWideStringField
+      FieldName = 'fornecedor'
+      Size = 150
+    end
+    object CAD_SQ_C_FOR_QUEpreenchido_em: TDateField
+      FieldName = 'preenchido_em'
+    end
+    object CAD_SQ_C_FOR_QUEresponsavel: TWideStringField
+      FieldName = 'responsavel'
+      Size = 100
+    end
+    object CAD_SQ_C_FOR_QUEcargo_responsavel: TWideStringField
+      FieldName = 'cargo_responsavel'
+      Size = 100
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_01: TWideStringField
+      FieldName = 'pergunta_01'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_02: TWideStringField
+      FieldName = 'pergunta_02'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_03: TWideStringField
+      FieldName = 'pergunta_03'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_04: TWideStringField
+      FieldName = 'pergunta_04'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_05: TWideStringField
+      FieldName = 'pergunta_05'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_06: TWideStringField
+      FieldName = 'pergunta_06'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_07: TWideStringField
+      FieldName = 'pergunta_07'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_08: TWideStringField
+      FieldName = 'pergunta_08'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_09: TWideStringField
+      FieldName = 'pergunta_09'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEpergunta_10: TWideStringField
+      FieldName = 'pergunta_10'
+      Size = 3
+    end
+    object CAD_SQ_C_FOR_QUEcodigo: TIntegerField
+      FieldName = 'codigo'
+    end
+    object CAD_SQ_C_FOR_QUEresultado: TWideStringField
+      FieldName = 'resultado'
+      Size = 50
+    end
+    object CAD_SQ_C_FOR_QUEano: TIntegerField
+      FieldName = 'ano'
+    end
   end
 end

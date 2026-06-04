@@ -1,7 +1,5 @@
 ﻿inherited CAD_FM_C_FOR: TCAD_FM_C_FOR
   Caption = 'Cadastro'
-  ExplicitLeft = -76
-  ExplicitTop = -88
   ExplicitWidth = 1156
   ExplicitHeight = 539
   PixelsPerInch = 96
@@ -82,7 +80,7 @@
         Top = 55
         Width = 309
         Height = 43
-        Caption = 'Imprimir Question'#225'rio'
+        Caption = 'Enviar question'#225'rio'
         Layout = blGlyphTop
         TabOrder = 8
         OnClick = btnImprimirFichaClick
@@ -367,12 +365,11 @@
         Top = 215
         Width = 673
         Height = 242
-        ActivePage = ts_CriterioSQG
+        ActivePage = tbQuestionario
         TabOrder = 28
         OnChange = pg_FornecedorChange
         object ts_CriterioSQG: TTabSheet
           Caption = 'SGQ - Crit'#233'rios de qualifica'#231#227'o'
-          ExplicitHeight = 207
           object scbCriteriosQualificacaoSGQ: TScrollBox
             Left = 0
             Top = 0
@@ -386,7 +383,6 @@
             Color = clWhite
             ParentColor = False
             TabOrder = 0
-            ExplicitHeight = 207
             object gbCertificado: TGroupBox
               Left = 7
               Top = -1
@@ -594,7 +590,6 @@
         object ts_Criterio: TTabSheet
           Caption = 'Crit'#233'rio de qualifica'#231#227'o'
           ImageIndex = 3
-          ExplicitHeight = 207
           object scbCriteriosQualificacao: TScrollBox
             Left = 0
             Top = 0
@@ -609,7 +604,6 @@
             Color = clWhite
             ParentColor = False
             TabOrder = 0
-            ExplicitHeight = 207
             object GroupBox1: TGroupBox
               Left = 9
               Top = -13
@@ -851,7 +845,6 @@
         object tabRepresentantes: TTabSheet
           Caption = 'Representantes'
           ImageIndex = 1
-          ExplicitHeight = 207
           object lblNome: TLabel
             Left = 264
             Top = 54
@@ -1182,7 +1175,6 @@
         object TabSheet1: TTabSheet
           Caption = 'Informa'#231#245'es Financeiras'
           ImageIndex = 2
-          ExplicitHeight = 207
           object Label3: TLabel
             Left = 15
             Top = 60
@@ -1340,6 +1332,372 @@
             TabOrder = 5
             OnButtonClick = txtPlanoContasButtonClick
             OnExit = txtPlanoContasExit
+          end
+        end
+        object tbQuestionario: TTabSheet
+          Caption = 'Question'#225'rio'
+          ImageIndex = 4
+          object ScrollBox1: TScrollBox
+            Left = 0
+            Top = 0
+            Width = 665
+            Height = 214
+            Align = alClient
+            BorderStyle = bsNone
+            TabOrder = 0
+            object Label18: TLabel
+              Left = 16
+              Top = 16
+              Width = 24
+              Height = 13
+              Caption = 'Ano:'
+            end
+            object Label19: TLabel
+              Left = 239
+              Top = 15
+              Width = 206
+              Height = 13
+              Caption = '* Busca os dados no google formul'#225'rios'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Label20: TLabel
+              Left = 16
+              Top = 48
+              Width = 70
+              Height = 13
+              Caption = 'Question'#225'rio:'
+            end
+            object Label22: TLabel
+              Left = 16
+              Top = 115
+              Width = 273
+              Height = 39
+              Caption = 
+                '1 - Os documentos de compras cont'#233'm os dados que descrevem clara' +
+                'mente os produtos ou servi'#231'os adquiridos?'
+              WordWrap = True
+            end
+            object Label24: TLabel
+              Left = 16
+              Top = 68
+              Width = 84
+              Height = 13
+              Caption = 'Respondido em:'
+            end
+            object Label25: TLabel
+              Left = 143
+              Top = 68
+              Width = 64
+              Height = 13
+              Caption = 'Respons'#225'vel'
+            end
+            object Label26: TLabel
+              Left = 292
+              Top = 68
+              Width = 95
+              Height = 13
+              Caption = 'Cargo respons'#225'vel'
+            end
+            object Label29: TLabel
+              Left = 16
+              Top = 198
+              Width = 260
+              Height = 26
+              Caption = '3. Os equipamentos de medi'#231#227'o e monitoramento s'#227'o calibrados?'
+              WordWrap = True
+            end
+            object Label21: TLabel
+              Left = 16
+              Top = 160
+              Width = 226
+              Height = 26
+              Caption = '2. O produto adquirido '#233'  inspecionado no recebimento?'
+              WordWrap = True
+            end
+            object Label23: TLabel
+              Left = 16
+              Top = 243
+              Width = 246
+              Height = 26
+              Caption = 
+                '4. H'#225' regras para  manuseio,  armazenamento e preserva'#231#227'o dos pr' +
+                'odutos?'
+              WordWrap = True
+            end
+            object Label27: TLabel
+              Left = 16
+              Top = 278
+              Width = 273
+              Height = 26
+              Caption = '5. O produto '#233' identificado em todos os est'#225'gios do processo.'
+              WordWrap = True
+            end
+            object Label28: TLabel
+              Left = 343
+              Top = 115
+              Width = 241
+              Height = 26
+              Caption = 
+                '6. A Rastreabilidade '#233' mantida e registrada em todas as etapas d' +
+                'o processo?'
+              WordWrap = True
+            end
+            object Label31: TLabel
+              Left = 343
+              Top = 155
+              Width = 255
+              Height = 26
+              Caption = 
+                '7. Tem condi'#231#245'es de atender os prazos acordados no aceite do ped' +
+                'ido com a Colch'#245'es Globo?'
+              WordWrap = True
+            end
+            object Label32: TLabel
+              Left = 343
+              Top = 198
+              Width = 253
+              Height = 39
+              Caption = 
+                '8. Os processos de produ'#231#227'o s'#227'o planejados e controlados de form' +
+                'a a garantir a pontualidade / qualidade de entrega dos produtos?'
+              WordWrap = True
+            end
+            object Label36: TLabel
+              Left = 343
+              Top = 278
+              Width = 252
+              Height = 26
+              Caption = '10. Os produtos n'#227'o conforme s'#227'o identificados e segregados?'
+              WordWrap = True
+            end
+            object Label37: TLabel
+              Left = 343
+              Top = 243
+              Width = 252
+              Height = 26
+              Caption = 
+                '9. Existe sistem'#225'tica formal para atendimento das reclama'#231#245'es de' +
+                ' clientes?'
+              WordWrap = True
+            end
+            object Label30: TLabel
+              Left = 463
+              Top = 68
+              Width = 52
+              Height = 13
+              Caption = 'Resultado'
+            end
+            object txtAnoQuestionario: TEdit
+              Left = 46
+              Top = 12
+              Width = 51
+              Height = 21
+              TabOrder = 0
+            end
+            object Button1: TButton
+              Left = 103
+              Top = 9
+              Width = 123
+              Height = 25
+              Caption = 'Buscar question'#225'rio'
+              TabOrder = 5
+              OnClick = Button1Click
+            end
+            object DBNavigator1: TDBNavigator
+              Left = 464
+              Top = 9
+              Width = 104
+              Height = 25
+              VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+              TabOrder = 6
+            end
+            object wwDBEdit1: TwwDBEdit
+              Left = 16
+              Top = 84
+              Width = 105
+              Height = 21
+              DataField = 'preenchido_em'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 1
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit2: TwwDBEdit
+              Left = 143
+              Top = 84
+              Width = 106
+              Height = 21
+              DataField = 'responsavel'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 2
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit3: TwwDBEdit
+              Left = 292
+              Top = 84
+              Width = 165
+              Height = 21
+              DataField = 'cargo_responsavel'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 3
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit4: TwwDBEdit
+              Left = 292
+              Top = 115
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_01'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 7
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit5: TwwDBEdit
+              Left = 292
+              Top = 161
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_02'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 8
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit6: TwwDBEdit
+              Left = 292
+              Top = 198
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_03'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 9
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit7: TwwDBEdit
+              Left = 292
+              Top = 243
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_04'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 10
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit8: TwwDBEdit
+              Left = 292
+              Top = 281
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_05'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 11
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit9: TwwDBEdit
+              Left = 608
+              Top = 115
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_06'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 12
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit11: TwwDBEdit
+              Left = 608
+              Top = 155
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_07'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 13
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit12: TwwDBEdit
+              Left = 608
+              Top = 198
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_08'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 14
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit13: TwwDBEdit
+              Left = 610
+              Top = 243
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_09'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 15
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit14: TwwDBEdit
+              Left = 610
+              Top = 281
+              Width = 35
+              Height = 21
+              DataField = 'pergunta_10'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 16
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
+            object wwDBEdit10: TwwDBEdit
+              Left = 463
+              Top = 84
+              Width = 182
+              Height = 21
+              DataField = 'resultado'
+              DataSource = CAD_DS_C_FOR_QUE
+              ReadOnly = True
+              TabOrder = 4
+              UnboundDataType = wwDefault
+              WantReturns = False
+              WordWrap = False
+            end
           end
         end
       end
@@ -1772,7 +2130,7 @@
     Left = 1099
     Top = 251
     Bitmap = {
-      494C010108002401B00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108002401BC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2674,7 +3032,7 @@
     Left = 1099
     Top = 395
     Bitmap = {
-      494C010108007801040218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108007801100218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3574,7 +3932,7 @@
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C01011200740100020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101120074010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -4092,7 +4450,7 @@
     Left = 1099
     Top = 299
     Bitmap = {
-      494C010108001C01A80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108001C01B40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4992,7 +5350,7 @@
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C010106006C01F8010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106006C0104020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -5206,7 +5564,7 @@
     Left = 1099
     Top = 347
     Bitmap = {
-      494C010108002C01B80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108002C01C40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6106,7 +6464,7 @@
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C010106007C0108020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106007C0114020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -6318,7 +6676,7 @@
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC008C0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00980118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7218,7 +7576,7 @@
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C010106000001C4010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106000001D0010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -8665,5 +9023,10 @@
         end
       end
     end
+  end
+  object CAD_DS_C_FOR_QUE: TDataSource
+    DataSet = dmGeral.CAD_CD_C_FOR_QUE
+    Left = 88
+    Top = 314
   end
 end

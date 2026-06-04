@@ -12136,6 +12136,29 @@ type
     BUS_CD_C_ITEint_pcp_epp_informa_costureiro: TBooleanField;
     BUS_CD_C_ITEint_pcp_epp_informa_montador: TBooleanField;
     BUS_CD_C_ITEint_pcp_epp_informa_colador: TBooleanField;
+    CAD_CD_C_FOR_QUE: TClientDataSet;
+    CAD_CD_C_FORCAD_SQ_C_FOR_QUE: TDataSetField;
+    CAD_CD_C_FOR_QUEid_fornecedor: TIntegerField;
+    CAD_CD_C_FOR_QUEid_for_que: TIntegerField;
+    CAD_CD_C_FOR_QUEcarimbo_data_hora: TSQLTimeStampField;
+    CAD_CD_C_FOR_QUEcnpj: TWideStringField;
+    CAD_CD_C_FOR_QUEfornecedor: TWideStringField;
+    CAD_CD_C_FOR_QUEpreenchido_em: TDateField;
+    CAD_CD_C_FOR_QUEresponsavel: TWideStringField;
+    CAD_CD_C_FOR_QUEcargo_responsavel: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_01: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_02: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_03: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_04: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_05: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_06: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_07: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_08: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_09: TWideStringField;
+    CAD_CD_C_FOR_QUEpergunta_10: TWideStringField;
+    CAD_CD_C_FOR_QUEcodigo: TIntegerField;
+    CAD_CD_C_FOR_QUEresultado: TWideStringField;
+    CAD_CD_C_FOR_QUEano: TIntegerField;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);
@@ -13524,7 +13547,7 @@ type
     procedure RedimensionarImagem(Imagen:TBitmap; Ancho, Alto: Integer);
     function  VerificarLicenca:Integer;
     function  BuscarLicensa:Integer;
-    procedure EnviarEmail(Assunto, corpo: String; msgOk:boolean);
+    procedure EnviarEmail(Assunto, corpo, email_destinatario: String; msgOk:boolean);
   end;
 
 var
@@ -25975,7 +25998,7 @@ begin
           end;
 end;
 
-procedure TdmGeral.EnviarEmail(Assunto, corpo: String; msgOk:boolean);
+procedure TdmGeral.EnviarEmail(Assunto, corpo, email_destinatario: String; msgOk:boolean);
 var
   SMTP: TIdSMTP;
   SSL: TIdSSLIOHandlerSocketOpenSSL;
@@ -26030,7 +26053,7 @@ begin
     // Monta mensagem de teste
     //Msg.From.Address := 'admin@cgloboapp.com.br';   // remetente
     Msg.From.Address := 'qualidade@colchoesglobo.com.br';   // remetente
-    Msg.Recipients.EMailAddresses := 'maxsuelvictor@hotmail.com'; // destinatário de teste
+    Msg.Recipients.EMailAddresses := email_destinatario; // destinatário de teste
 
     Msg.Subject   := Assunto;
     Msg.Body.Text := Corpo;

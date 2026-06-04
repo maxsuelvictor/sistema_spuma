@@ -21,7 +21,8 @@ uses
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, vcl.Wwdbedit, vcl.Wwdotdot, vcl.Wwdbcomb, frxExportXLS,
-  frxClass, frxExportPDF, frxDBSet, Datasnap.DBClient;
+  frxClass, frxExportPDF, frxDBSet, Datasnap.DBClient,IdURI, cxControls,
+  cxContainer, cxEdit, cxTextEdit, cxDBEdit, Winapi.ActiveX, System.Win.ComObj;
 
 type
   TCAD_FM_C_FOR = class(TPAD_FM_X_PAD)
@@ -168,6 +169,43 @@ type
     txtPctDescPadrao: TDBText;
     JvDBDateEdit1: TJvDBDateEdit;
     Label17: TLabel;
+    tbQuestionario: TTabSheet;
+    CAD_DS_C_FOR_QUE: TDataSource;
+    ScrollBox1: TScrollBox;
+    Label18: TLabel;
+    txtAnoQuestionario: TEdit;
+    Button1: TButton;
+    Label19: TLabel;
+    DBNavigator1: TDBNavigator;
+    Label20: TLabel;
+    Label22: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label29: TLabel;
+    wwDBEdit1: TwwDBEdit;
+    wwDBEdit2: TwwDBEdit;
+    wwDBEdit3: TwwDBEdit;
+    wwDBEdit4: TwwDBEdit;
+    Label21: TLabel;
+    wwDBEdit5: TwwDBEdit;
+    wwDBEdit6: TwwDBEdit;
+    Label23: TLabel;
+    wwDBEdit7: TwwDBEdit;
+    Label27: TLabel;
+    wwDBEdit8: TwwDBEdit;
+    Label28: TLabel;
+    wwDBEdit9: TwwDBEdit;
+    Label31: TLabel;
+    wwDBEdit11: TwwDBEdit;
+    Label32: TLabel;
+    wwDBEdit12: TwwDBEdit;
+    Label36: TLabel;
+    wwDBEdit13: TwwDBEdit;
+    Label37: TLabel;
+    wwDBEdit14: TwwDBEdit;
+    Label30: TLabel;
+    wwDBEdit10: TwwDBEdit;
     procedure acAdicionaExecute(Sender: TObject);
     procedure acAlterarExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
@@ -201,9 +239,13 @@ type
     procedure btnImprimirFichaClick(Sender: TObject);
     procedure txtPlanoContasButtonClick(Sender: TObject);
     procedure txtPlanoContasExit(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     procedure AvaliacaoFor;
+    function TratarTextoParaURL(const ATexto: string): string;
+    function SomenteNumeros(const Texto: string): string;
+    procedure BuscarDadosPlanilha(pAno: Integer; pCNPJ: string);
   public
     { Public declarations }
   end;
@@ -215,7 +257,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmGeral, PSQ_UN_X_CID, uProxy, PSQ_UN_X_PAI, enConstantes, PSQ_UN_X_PCT;
+uses uDmGeral, enFunc, PSQ_UN_X_CID, uProxy, PSQ_UN_X_PAI, enConstantes, PSQ_UN_X_PCT;
 
 procedure TCAD_FM_C_FOR.acAdicionaExecute(Sender: TObject);
 begin
@@ -349,13 +391,104 @@ begin
   end;
 end;
 
+function TCAD_FM_C_FOR.TratarTextoParaURL(const ATexto: string): string;
+var
+  TextoLimpo: string;
+begin
+  // 1. Remove espaços em branco nas pontas
+  TextoLimpo := Trim(ATexto);
+
+  // 2. Remove quebras de linha usando a função compatível com XE7
+  TextoLimpo := StringReplace(TextoLimpo, #13, '', [rfReplaceAll]);
+  TextoLimpo := StringReplace(TextoLimpo, #10, '', [rfReplaceAll]);
+
+  // SOLUÇÃO DO ERRO: Usar ParamsEncode em vez de URLEncode
+  // Isso diz ao Delphi que o texto é apenas um dado, e não um endereço web completo
+  Result := TIdURI.ParamsEncode(TextoLimpo);
+end;
+
+
 procedure TCAD_FM_C_FOR.btnImprimirFichaClick(Sender: TObject);
 var
   codigo, PathImg: string;
   LogoEmpresa: TfrxPictureView;
+  ValorDigitado: string;
+  assunto, corpo, email: String;
+  resposta: integer;
 begin
   inherited;
+
+
+  if dmGeral.CAD_CD_C_FOR.IsEmpty then
+     begin
+       Showmessage('Nenhum fornecedor foi selecionado!');
+       exit;
+     end;
+
+  if trim(dmGeral.CAD_CD_C_FOR.FieldByName('email').Text) = '' then
+     begin
+       Showmessage('O campo e-mail está vazio!');
+       exit;
+     end;
+
+  if not IsEmailValido(dmGeral.CAD_CD_C_FOR.FieldByName('email').Text) then
+     begin
+       ShowMessage('E-mail do fornecedor inválido!');
+       exit;
+     end;
+
+  email := dmGeral.CAD_CD_C_FOR.FieldByName('email').Text;
+
+  Resposta := MessageDlg('Deseja realmente enviar o questionário de avaliação deste fornecedor para o e-mail: ' +
+                         dmGeral.CAD_CD_C_FOR.FieldByName('email').Text + '?',
+                         mtConfirmation,
+                         [mbYes, mbNo],
+                         0,
+                         mbYes); // <-- Aqui você define o foco padrão no SIM
+
+  // Trata a resposta do usuário
+  if Resposta = mrNo then
+     begin
+       abort;
+     end;
+
   if not dmGeral.CAD_CD_C_FOR.IsEmpty then
+     begin
+        ValorDigitado :=
+        'https://docs.google.com/forms/d/e/1FAIpQLSdRqDWBLzLOKSoeqyOt29bd4M51MCDMMnLzpUW8gUylHjauKw/viewform?usp=pp_url'+
+        '&entry.84681567='+TratarTextoParaURL(dmGeral.CAD_CD_C_FOR.FieldByName('id_fornecedor').Text)+
+        '&entry.1086280916='+TratarTextoParaURL(dmGeral.CAD_CD_C_FOR.FieldByName('doc_cnpj').Text)+
+        '&entry.1208293552='+TratarTextoParaURL(dmGeral.CAD_CD_C_FOR.FieldByName('descricao').Text);
+
+
+        {'https://docs.google.com/forms/d/e/1FAIpQLSdRqDWBLzLOKSoeqyOt29bd4M51MCDMMnLzpUW8gUylHjauKw/viewform?usp=pp_url'+
+        '&entry.145198171='+TratarTextoParaURL(dmGeral.CAD_CD_C_FOR.FieldByName('id_fornecedor').Text)+
+        '&entry.1341635190='+TratarTextoParaURL(dmGeral.CAD_CD_C_FOR.FieldByName('doc_cnpj').Text)+
+        '&entry.613016077='+TratarTextoParaURL(dmGeral.CAD_CD_C_FOR.FieldByName('descricao').Text);}
+
+        {if InputQuery('Link gerado', 'Copie este link para enviar por e-mail:', ValorDigitado) then
+           begin
+             ShowMessage('link' + ValorDigitado);
+           end
+        else
+           begin
+             //ShowMessage('Operação cancelada.');
+           end;}
+     end;
+
+     assunto:=  'Questionário de avaliação';
+     corpo  :=  'Por gentilize, pedimos que respondam nosso questionário de avaliação, no link abaixo:'+#13+#13+
+                ValorDigitado + #13 +#13 +
+                'Att,' + #13 + #13 + 'Maxsuel Victor' + #13 + 'Coordenador da qualidade';
+     dmGeral.EnviarEmail(Assunto, corpo, email,  false);
+     assunto := '';
+     corpo := '';
+
+     ShowMessage('E-mail enviado!');
+
+  // Comentado por Maxsuel Victor, em 02/06/2026
+
+  {if not dmGeral.CAD_CD_C_FOR.IsEmpty then
       begin
         PathImg := ExtractFilePath(Application.ExeName)+'emp'+dmGeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').Text+'\LogoEmpresa.jpg';
         if FileExists(PathImg) then
@@ -373,7 +506,215 @@ begin
       begin
         ShowMessage('Nenhum registro encontrado!');
         exit;
+      end;}
+end;
+
+procedure TCAD_FM_C_FOR.BuscarDadosPlanilha(pAno: Integer; pCNPJ: string);
+var
+  URL: string;
+  WinHTTP: OleVariant;
+  ConteudoCSV: string;
+  Linhas, Cabecalhos, Colunas: TStringList;
+  i, j: Integer;
+  ExibirRegistro: Boolean;
+  CnpjPlanilha, DataHoraPlanilha, AnoPlanilha: string;
+
+  preenchido_em, responsavel, cargo_responsavel: string;
+  RespPerg01,RespPerg02,RespPerg03,RespPerg04,RespPerg05,
+  RespPerg06,RespPerg07,RespPerg08,RespPerg09, RespPerg10: string;
+  resultado_quest: String;
+begin
+  // Validação inicial de segurança: o ano sempre deve ser informado
+  if pAno <= 0 then
+  begin
+    ShowMessage('O ano de busca é obrigatório!');
+    Exit;
+  end;
+
+  // URL obtida ao "Publicar na Web" como CSV no Google Planilhas
+  //URL := Edit1.text;
+  URL := 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSkeKtCVrQXS_6J9KDsioBz_xfit0zVOPF1zXePAgWF3isG8H7U6tZRkA5V5iF3pTY1m4YaxZNi_oOl/pub?output=csv';
+
+
+  Linhas := TStringList.Create;
+  Cabecalhos := TStringList.Create;
+  Colunas := TStringList.Create;
+
+  //Memo1.Lines.Clear;
+  //Memo1.Lines.Add(Format('Buscando dados da planilha para o ano: %d...', [pAno]));
+  //Memo1.Lines.Add('=========================================');
+
+  try
+    // Conexão nativa via Windows (compatível com XE7 e sem necessidade de OpenSSL)
+    WinHTTP := CreateOleObject('MSXML2.ServerXMLHTTP.6.0');
+    try
+      WinHTTP.open('GET', URL, False);
+      WinHTTP.send;
+      ConteudoCSV := WinHTTP.responseText;
+    except
+      on E: Exception do
+      begin
+        Showmessage('Erro ao conectar à planilha: ' + E.Message);
+        Exit;
       end;
+    end;
+
+    Linhas.Text := ConteudoCSV;
+
+    if Linhas.Count > 0 then
+    begin
+      Cabecalhos.Delimiter := ',';
+      Cabecalhos.StrictDelimiter := True;
+      Cabecalhos.DelimitedText := Linhas[0];
+    end;
+
+    responsavel := '';
+
+    // Varre as respostas (da linha 1 em diante)
+    for i := 1 to Linhas.Count - 1 do
+    begin
+      if Linhas[i] <> '' then
+      begin
+        Colunas.Clear;
+        Colunas.Delimiter := ',';
+        Colunas.StrictDelimiter := True;
+        Colunas.DelimitedText := Linhas[i];
+
+        if (Colunas.Count > 0) and (Colunas.Count <= Cabecalhos.Count) then
+        begin
+          // Inicia verdadeiro e passa pelos filtros obrigatórios
+          ExibirRegistro := True;
+
+          // 1. FILTRO OBRIGATÓRIO: Validação do Ano (Baseado no Carimbo de Data/Hora - Índice 0)
+          if (Colunas.Count > 0) then
+          begin
+            DataHoraPlanilha := Colunas[0]; // Ex: "03/06/2026 10:57:17"
+            if Length(DataHoraPlanilha) >= 10 then
+            begin
+              // Extrai os 4 caracteres do ano (posições 7, 8, 9 e 10 da data no formato DD/MM/AAAA)
+              AnoPlanilha := Copy(DataHoraPlanilha, 7, 4);
+              if AnoPlanilha <> IntToStr(pAno) then
+                ExibirRegistro := False;
+            end
+            else
+              ExibirRegistro := False; // Descarta se o formato da data estiver corrompido
+          end
+          else
+            ExibirRegistro := False;
+
+          // 2. FILTRO OPCIONAL: Validação do CNPJ (Índice 1 no CSV) - Só filtra se for preenchido
+          if ExibirRegistro and (pCNPJ <> '') and (Colunas.Count > 1) then
+          begin
+            CnpjPlanilha := SomenteNumeros(Colunas[1]);
+            if CnpjPlanilha <> pCNPJ then
+              ExibirRegistro := False;
+          end;
+
+          // Se passou pelas validações, joga no Memo
+          if ExibirRegistro then
+          begin
+            //Memo1.Lines.Add(Format('--- REGISTRO LOCALIZADO (Linha %d) ---', [i]));
+
+            // Dados de cabeçalho destacados
+            if Colunas.Count > 15 then
+            begin
+              preenchido_em := Colunas[13]; // Preenchido em:
+              responsavel   := Colunas[14]; // Responsável pelas informações:
+              cargo_responsavel := Colunas[15]; // Cargo do responsável:
+            end;
+
+            //Memo1.Lines.Add('-----------------------------------------');
+
+            // Varre o restante das colunas mostrando "Nome da Coluna: Resposta"
+            for j := 0 to Colunas.Count - 1 do
+                begin
+                  if not (j in [13, 14, 15]) then
+                    begin
+                      //Memo1.Lines.Add(Cabecalhos[j] + ': ' + Colunas[j]);
+                      if j = 3 then
+                         RespPerg01 := Colunas[j];
+                      if j = 4 then
+                         RespPerg02 := Colunas[j];
+                      if j = 5 then
+                         RespPerg03 := Colunas[j];
+                      if j = 6 then
+                         RespPerg04 := Colunas[j];
+                      if j = 7 then
+                         RespPerg05 := Colunas[j];
+                      if j = 8 then
+                         RespPerg06 := Colunas[j];
+                      if j = 9 then
+                         RespPerg07 := Colunas[j];
+                      if j = 10 then
+                         RespPerg08 := Colunas[j];
+                      if j = 11 then
+                         RespPerg09 := Colunas[j];
+                      if j = 12 then
+                         RespPerg10 := Colunas[j];
+
+                      if j = 17 then
+                         resultado_quest := Colunas[j];
+                    end;
+                end;
+            //Memo1.Lines.Add('=========================================');
+            //Memo1.Lines.Add('');
+          end;
+        end;
+      end;
+    end;
+
+    Showmessage('Busca finalizada.' + #13 +
+                'Os dados serão gravados!' );
+
+  if trim(responsavel) <> '' then
+     begin
+       dmGeral.CAD_CD_C_FOR_QUE.Cancel;
+       if not dmGeral.CAD_CD_C_FOR_QUE.locate('ano',txtAnoQuestionario.text,[]) then
+          begin
+            dmGeral.CAD_CD_C_FOR_QUE.Insert;
+
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('carimbo_data_hora').AsString := DataHoraPlanilha;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('preenchido_em').AsString := preenchido_em;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('responsavel').AsString := responsavel;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('cargo_responsavel').AsString := cargo_responsavel;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_01').AsString := RespPerg01;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_02').AsString := RespPerg02;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_03').AsString := RespPerg03;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_04').AsString := RespPerg04;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_05').AsString := RespPerg05;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_06').AsString := RespPerg06;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_07').AsString := RespPerg07;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_08').AsString := RespPerg08;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_09').AsString := RespPerg09;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('pergunta_10').AsString := RespPerg10;
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('resultado').AsString := Resultado_quest;
+
+            dmGeral.CAD_CD_C_FOR_QUE.Post;
+
+            Showmessage('Os dados do questionário foram gravados com sucesso!' );
+          end;
+     end;
+
+  finally
+    Linhas.Free;
+    Cabecalhos.Free;
+    Colunas.Free;
+    WinHTTP := Unassigned;
+  end;
+end;
+
+
+procedure TCAD_FM_C_FOR.Button1Click(Sender: TObject);
+begin
+  inherited;
+
+  if trim(txtAnoQuestionario.text) = '' then
+     begin
+       Showmessage('O ano deve ser preenchido!');
+       exit;
+     end;
+
+  BuscarDadosPlanilha( strtoint(txtAnoQuestionario.text),dmGeral.CAD_CD_C_FOR.FieldByName('doc_cnpj').Text);
 end;
 
 procedure TCAD_FM_C_FOR.cbbPesquisaChange(Sender: TObject);
@@ -496,6 +837,18 @@ procedure TCAD_FM_C_FOR.rgIdoneidadeExit(Sender: TObject);
 begin
   inherited;
   avaliacaofor;
+end;
+
+function TCAD_FM_C_FOR.SomenteNumeros(const Texto: string): string;
+var
+  i: Integer;
+begin
+  Result := '';
+  for i := 1 to Length(Texto) do
+  begin
+    if Texto[i] in ['0'..'9'] then
+      Result := Result + Texto[i];
+  end;
 end;
 
 procedure TCAD_FM_C_FOR.txtCEPKeyPress(Sender: TObject; var Key: Char);

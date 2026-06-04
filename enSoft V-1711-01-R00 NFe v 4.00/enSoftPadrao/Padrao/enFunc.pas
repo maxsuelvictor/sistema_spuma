@@ -3,7 +3,8 @@
 interface
    Uses Data.DB, SysUtils,StrUtils,Printers,WinSpool,forms,stdctrls,Classes,
         System.Variants,Vcl.Dialogs,DateUtils, System.UITypes, Vcl.Controls,
-        IdSMTP, IdMessage,   IdSSLOpenSSL, windows, IdIOHandler,System.Math;
+        IdSMTP, IdMessage,   IdSSLOpenSSL, windows, IdIOHandler,System.Math,
+        System.RegularExpressions;
 
 Type
    TEnorth = class
@@ -32,6 +33,7 @@ Function RetornaMes(Data:TdateTime) : Word;
 Function RetornaDia(Data:TdateTime) : Word;
 Function RemoveChars(const Chrs : array of Char; const aText : string) : string;
 function IsValidEmail(const Email: string) : Boolean;
+function IsEmailValido(const AEmail: string): Boolean;
 function Rtrim(Text : string) : string;
 Function Extenso(Valor: double):string;
 Function DiaDaSemana(i: word; tipo: integer): string;
@@ -734,6 +736,17 @@ begin
 
   // Se não encontrou problemas, retorna verdadeiro
   Result := True;
+end;
+
+// Inserido em 02/06/2026 - por Maxsuel Victor
+function IsEmailValido(const AEmail: string): Boolean;
+const
+  // Expressão regular padrão internacional para validação de e-mails
+  RE_EMAIL = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+begin
+  // Remove espaços em branco que o usuário possa ter digitado sem querer nas pontas
+  // e valida contra a expressão regular
+  Result := TRegEx.IsMatch(Trim(AEmail), RE_EMAIL);
 end;
 
 
