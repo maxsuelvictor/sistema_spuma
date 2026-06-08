@@ -206,6 +206,8 @@ type
     wwDBEdit14: TwwDBEdit;
     Label30: TLabel;
     wwDBEdit10: TwwDBEdit;
+    Label33: TLabel;
+    txtEmailQuestionario: TDBEdit;
     procedure acAdicionaExecute(Sender: TObject);
     procedure acAlterarExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
@@ -266,6 +268,9 @@ begin
   dmgeral.CAD_CD_C_FORaval_ctc_perg_02.AsInteger := 2;
   dmgeral.CAD_CD_C_FORaval_ctc_perg_03.AsInteger := 2;
   dmgeral.CAD_CD_C_FORaval_ctc_perg_04.AsInteger := 2;
+
+  btnImprimirFicha.Enabled := false;
+
   dpkTransportadora.Enabled := true;
   txtCodPais.Enabled := false;
   txtTipoForn.SetFocus;
@@ -282,6 +287,7 @@ begin
          begin
             txtCodPais.Enabled := true;
          end;
+        btnImprimirFicha.Enabled := false;
         txtTipoForn.SetFocus;
       end;
 end;
@@ -290,6 +296,7 @@ procedure TCAD_FM_C_FOR.acCancelarExecute(Sender: TObject);
 begin
    if Botoes(dso.DataSet, TAction(Sender).Tag,dmGeral.CAD_CD_C_FOR) then
       begin
+        btnImprimirFicha.Enabled := true;
         inherited;
         dbGrid.SetFocus;
       end
@@ -311,6 +318,7 @@ var
 begin
   codigo := dmGeral.CAD_CD_C_FOR.FieldByName('ID_FORNECEDOR').AsString;
   DmGeral.Grava(dmGeral.CAD_CD_C_FOR);
+  btnImprimirFicha.Enabled := true;
   inherited;
 
   dmGeral.CAD_CD_C_FOR.Close;
@@ -425,22 +433,22 @@ begin
        exit;
      end;
 
-  if trim(dmGeral.CAD_CD_C_FOR.FieldByName('email').Text) = '' then
+  if trim(dmGeral.CAD_CD_C_FOR.FieldByName('email_questionario_forn').Text) = '' then
      begin
        Showmessage('O campo e-mail está vazio!');
        exit;
      end;
 
-  if not IsEmailValido(dmGeral.CAD_CD_C_FOR.FieldByName('email').Text) then
+  if not IsEmailValido(dmGeral.CAD_CD_C_FOR.FieldByName('email_questionario_forn').Text) then
      begin
        ShowMessage('E-mail do fornecedor inválido!');
        exit;
      end;
 
-  email := dmGeral.CAD_CD_C_FOR.FieldByName('email').Text;
+  email := dmGeral.CAD_CD_C_FOR.FieldByName('email_questionario_forn').Text;
 
   Resposta := MessageDlg('Deseja realmente enviar o questionário de avaliação deste fornecedor para o e-mail: ' +
-                         dmGeral.CAD_CD_C_FOR.FieldByName('email').Text + '?',
+                         dmGeral.CAD_CD_C_FOR.FieldByName('email_questionario_forn').Text + '?',
                          mtConfirmation,
                          [mbYes, mbNo],
                          0,
@@ -477,9 +485,19 @@ begin
      end;
 
      assunto:=  'Questionário de avaliação';
-     corpo  :=  'Por gentilize, pedimos que respondam nosso questionário de avaliação, no link abaixo:'+#13+#13+
+     corpo  :=
+                'Prezado Parceiro,' +#13+#13+
+                'Com o objetivo de mantermos a excelência em nossos processos e fortalecer nossa parceria comercial,'+
+                'solicitamos a sua colaboração no preenchimento do nosso Questionário de Autoavaliação de Fornecedor.'+#13+#13+
+
+                'Para sua comodidade, os dados de identificação da sua empresa já foram pré-preenchidos pelo nosso sistema.'+
+                ' Pedimos a gentileza de responder às demais questões acessando o link abaixo: ' + #13 +
                 ValorDigitado + #13 +#13 +
-                'Att,' + #13 + #13 + 'Maxsuel Victor' + #13 + 'Coordenador da qualidade';
+                'Contamos com sua resposta para dar andamento ao nosso processo interno de qualificação.'+ #13 +#13 +
+                'Atenciosamente,'+ #13 +#13 +
+                'Maxsuel Victor'+#13 +
+                'Coordenador da Qualidade' +#13 +
+                'Colchões Globo';
      dmGeral.EnviarEmail(Assunto, corpo, email,  false);
      assunto := '';
      corpo := '';
@@ -523,7 +541,19 @@ var
   RespPerg01,RespPerg02,RespPerg03,RespPerg04,RespPerg05,
   RespPerg06,RespPerg07,RespPerg08,RespPerg09, RespPerg10: string;
   resultado_quest: String;
+  id_for_que: integer;
 begin
+
+   {
+    FÓRMULA PARA O CAMPO RESULTADOS NA PLANILHA DO GOOGLE FORMULÁRIOS:
+    =ARRAYFORMULA(SE(D2:D=""; ""; SE((D2:D="Sim") + (E2:E="Sim") + (F2:F="Sim") + (G2:G="Sim") +
+                  (H2:H="Sim") + (I2:I="Sim") + (J2:J="Sim") + (K2:K="Sim") + (L2:L="Sim") +
+                   (M2:M="Sim") > 7; "Qualificado"; SE((D2:D="Sim") + (E2:E="Sim") +
+                   (F2:F="Sim") + (G2:G="Sim") + (H2:H="Sim") + (I2:I="Sim") + (J2:J="Sim") +
+                    (K2:K="Sim") + (L2:L="Sim") +
+                     (M2:M="Sim") >= 4; "Aprovado (Requer Plano de Ação)"; "Desqualificado"))))
+   }
+
   // Validação inicial de segurança: o ano sempre deve ser informado
   if pAno <= 0 then
   begin
@@ -605,7 +635,7 @@ begin
           // 2. FILTRO OPCIONAL: Validação do CNPJ (Índice 1 no CSV) - Só filtra se for preenchido
           if ExibirRegistro and (pCNPJ <> '') and (Colunas.Count > 1) then
           begin
-            CnpjPlanilha := SomenteNumeros(Colunas[1]);
+            CnpjPlanilha := SomenteNumeros(Colunas[17]); // coluna CNPJ na planilha
             if CnpjPlanilha <> pCNPJ then
               ExibirRegistro := False;
           end;
@@ -652,7 +682,7 @@ begin
                       if j = 12 then
                          RespPerg10 := Colunas[j];
 
-                      if j = 17 then
+                      if j = 19 then
                          resultado_quest := Colunas[j];
                     end;
                 end;
@@ -663,15 +693,24 @@ begin
       end;
     end;
 
-    Showmessage('Busca finalizada.' + #13 +
-                'Os dados serão gravados!' );
-
-  if trim(responsavel) <> '' then
+  if trim(responsavel) = '' then
      begin
+       Showmessage('Nenhum questionário foi encontrado para este fornecedor neste ano.');
+       exit;
+     end
+  else
+     begin
+       Showmessage('Busca finalizada.' + #13 +
+                   'Os dados serão gravados!' );
+
        dmGeral.CAD_CD_C_FOR_QUE.Cancel;
        if not dmGeral.CAD_CD_C_FOR_QUE.locate('ano',txtAnoQuestionario.text,[]) then
           begin
+            id_for_que := dmGeral.CAD_CD_C_FOR_QUE.RecordCount + 1;
+
             dmGeral.CAD_CD_C_FOR_QUE.Insert;
+
+            dmGeral.CAD_CD_C_FOR_QUE.FieldByName('id_for_que').AsInteger := id_for_que;
 
             dmGeral.CAD_CD_C_FOR_QUE.FieldByName('carimbo_data_hora').AsString := DataHoraPlanilha;
             dmGeral.CAD_CD_C_FOR_QUE.FieldByName('preenchido_em').AsString := preenchido_em;
@@ -694,7 +733,6 @@ begin
             Showmessage('Os dados do questionário foram gravados com sucesso!' );
           end;
      end;
-
   finally
     Linhas.Free;
     Cabecalhos.Free;
@@ -802,6 +840,8 @@ begin
     pnlBotoes.Height := 54
   else
     pnlBotoes.Height := 100;
+
+  pg_Fornecedor.ActivePage := ts_CriterioSQG;
 end;
 
 procedure TCAD_FM_C_FOR.pg_FornecedorChange(Sender: TObject);

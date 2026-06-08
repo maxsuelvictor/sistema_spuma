@@ -32,3 +32,13 @@ WITH (OIDS=FALSE)
 ALTER TABLE "public"."cad_tb_c_for_que" OWNER TO "postgres";
 
 COMMENT ON TABLE "public"."cad_tb_c_for_que" IS 'Tabela de questionário de fornecedor';
+
+
+
+/******* 08/06/2026 *******/
+
+ALTER TABLE "public"."cad_tb_c_for"
+ADD COLUMN "email_questionario_forn" varchar(60);
+
+COMMENT ON COLUMN "public"."cad_tb_c_for"."email_questionario_forn" IS 'Email utitlizado para envio do link do questionário (google forms) para o fornecedor';
+

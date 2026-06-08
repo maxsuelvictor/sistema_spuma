@@ -18,12 +18,14 @@
       'Filters={}'
       'DSAuthenticationUser=admin'
       'HostName=localhost')
+    Connected = True
     Left = 49
     Top = 8
     UniqueId = '{9DB98CFE-7809-45C4-AD3A-DA87030605AD}'
   end
   object pcConecao: TDSProviderConnection
     ServerClassName = 'TSM'
+    Connected = True
     SQLConnection = Conexao
     Left = 167
     Top = 8
@@ -2627,6 +2629,10 @@
     end
     object CAD_CD_C_FORCAD_SQ_C_FOR_QUE: TDataSetField
       FieldName = 'CAD_SQ_C_FOR_QUE'
+    end
+    object CAD_CD_C_FORemail_questionario_forn: TWideStringField
+      FieldName = 'email_questionario_forn'
+      Size = 60
     end
   end
   object CAD_CD_C_GRU: TClientDataSet
@@ -16519,6 +16525,10 @@
     end
     object BUS_CD_C_FORmetodo3_dta_auto_avaliacao: TDateField
       FieldName = 'metodo3_dta_auto_avaliacao'
+    end
+    object BUS_CD_C_FORemail_questionario_forn: TWideStringField
+      FieldName = 'email_questionario_forn'
+      Size = 60
     end
   end
   object BUS_CD_C_PAR_CTR: TClientDataSet

@@ -80,7 +80,7 @@
         Top = 55
         Width = 309
         Height = 43
-        Caption = 'Enviar question'#225'rio'
+        Caption = 'Enviar question'#225'rio de avalia'#231#227'o'
         Layout = blGlyphTop
         TabOrder = 8
         OnClick = btnImprimirFichaClick
@@ -365,7 +365,7 @@
         Top = 215
         Width = 673
         Height = 242
-        ActivePage = tbQuestionario
+        ActivePage = ts_CriterioSQG
         TabOrder = 28
         OnChange = pg_FornecedorChange
         object ts_CriterioSQG: TTabSheet
@@ -596,7 +596,6 @@
             Width = 665
             Height = 214
             HorzScrollBar.Visible = False
-            VertScrollBar.Position = 16
             Align = alClient
             BevelInner = bvNone
             BevelOuter = bvNone
@@ -606,7 +605,7 @@
             TabOrder = 0
             object GroupBox1: TGroupBox
               Left = 9
-              Top = -13
+              Top = 3
               Width = 655
               Height = 81
               Caption = 
@@ -647,7 +646,7 @@
             end
             object GroupBox2: TGroupBox
               Left = 9
-              Top = 74
+              Top = 90
               Width = 655
               Height = 201
               Caption = '2'#170' Metodologia - Question'#225'rio auto avalia'#231#227'o'
@@ -815,7 +814,7 @@
             end
             object GroupBox3: TGroupBox
               Left = 9
-              Top = 281
+              Top = 297
               Width = 655
               Height = 87
               Caption = '3'#170' Metodologia - Outra metodologia'
@@ -1335,7 +1334,7 @@
           end
         end
         object tbQuestionario: TTabSheet
-          Caption = 'Question'#225'rio'
+          Caption = 'Question'#225'rio de avalia'#231#227'o'
           ImageIndex = 4
           object ScrollBox1: TScrollBox
             Left = 0
@@ -1346,15 +1345,15 @@
             BorderStyle = bsNone
             TabOrder = 0
             object Label18: TLabel
-              Left = 16
-              Top = 16
+              Left = 245
+              Top = 3
               Width = 24
               Height = 13
               Caption = 'Ano:'
             end
             object Label19: TLabel
-              Left = 239
-              Top = 15
+              Left = 438
+              Top = 20
               Width = 206
               Height = 13
               Caption = '* Busca os dados no google formul'#225'rios'
@@ -1492,29 +1491,37 @@
               Height = 13
               Caption = 'Resultado'
             end
+            object Label33: TLabel
+              Left = 16
+              Top = 3
+              Width = 136
+              Height = 13
+              Caption = 'E-mail para o question'#225'rio'
+            end
             object txtAnoQuestionario: TEdit
-              Left = 46
-              Top = 12
+              Left = 245
+              Top = 17
               Width = 51
               Height = 21
-              TabOrder = 0
+              TabOrder = 1
             end
             object Button1: TButton
-              Left = 103
-              Top = 9
+              Left = 302
+              Top = 14
               Width = 123
               Height = 25
               Caption = 'Buscar question'#225'rio'
-              TabOrder = 5
+              TabOrder = 6
               OnClick = Button1Click
             end
             object DBNavigator1: TDBNavigator
-              Left = 464
-              Top = 9
+              Left = 541
+              Top = 36
               Width = 104
               Height = 25
+              DataSource = CAD_DS_C_FOR_QUE
               VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
-              TabOrder = 6
+              TabOrder = 7
             end
             object wwDBEdit1: TwwDBEdit
               Left = 16
@@ -1524,7 +1531,7 @@
               DataField = 'preenchido_em'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 1
+              TabOrder = 2
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1537,7 +1544,7 @@
               DataField = 'responsavel'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 2
+              TabOrder = 3
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1550,7 +1557,7 @@
               DataField = 'cargo_responsavel'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 3
+              TabOrder = 4
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1563,7 +1570,7 @@
               DataField = 'pergunta_01'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 7
+              TabOrder = 8
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1576,7 +1583,7 @@
               DataField = 'pergunta_02'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 8
+              TabOrder = 9
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1589,7 +1596,7 @@
               DataField = 'pergunta_03'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 9
+              TabOrder = 10
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1602,7 +1609,7 @@
               DataField = 'pergunta_04'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 10
+              TabOrder = 11
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1615,7 +1622,7 @@
               DataField = 'pergunta_05'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 11
+              TabOrder = 12
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1628,7 +1635,7 @@
               DataField = 'pergunta_06'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 12
+              TabOrder = 13
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1641,7 +1648,7 @@
               DataField = 'pergunta_07'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 13
+              TabOrder = 14
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1654,7 +1661,7 @@
               DataField = 'pergunta_08'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 14
+              TabOrder = 15
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1667,7 +1674,7 @@
               DataField = 'pergunta_09'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 15
+              TabOrder = 16
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1680,7 +1687,7 @@
               DataField = 'pergunta_10'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 16
+              TabOrder = 17
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
@@ -1693,10 +1700,20 @@
               DataField = 'resultado'
               DataSource = CAD_DS_C_FOR_QUE
               ReadOnly = True
-              TabOrder = 4
+              TabOrder = 5
               UnboundDataType = wwDefault
               WantReturns = False
               WordWrap = False
+            end
+            object txtEmailQuestionario: TDBEdit
+              Left = 16
+              Top = 17
+              Width = 201
+              Height = 21
+              Color = clWhite
+              DataField = 'email_questionario_forn'
+              DataSource = dso
+              TabOrder = 0
             end
           end
         end
@@ -2130,7 +2147,7 @@
     Left = 1099
     Top = 251
     Bitmap = {
-      494C010108002401BC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108002401C40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3032,7 +3049,7 @@
     Left = 1099
     Top = 395
     Bitmap = {
-      494C010108007801100218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108007801180218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3932,7 +3949,7 @@
   end
   inherited ImgPequena: TImageList
     Bitmap = {
-      494C0101120074010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200740114020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -4450,7 +4467,7 @@
     Left = 1099
     Top = 299
     Bitmap = {
-      494C010108001C01B40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108001C01BC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5350,7 +5367,7 @@
   end
   inherited ImgPequenaAz: TImageList
     Bitmap = {
-      494C010106006C0104020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106006C010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -5564,7 +5581,7 @@
     Left = 1099
     Top = 347
     Bitmap = {
-      494C010108002C01C40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108002C01CC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6464,7 +6481,7 @@
   end
   inherited ImgPequenaVe: TImageList
     Bitmap = {
-      494C010106007C0114020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106007C011C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -6676,7 +6693,7 @@
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00980118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00A00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7576,7 +7593,7 @@
   end
   inherited ImgPequenaLa: TImageList
     Bitmap = {
-      494C010106000001D0010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106000001D8010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF

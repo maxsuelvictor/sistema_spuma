@@ -12159,6 +12159,8 @@ type
     CAD_CD_C_FOR_QUEcodigo: TIntegerField;
     CAD_CD_C_FOR_QUEresultado: TWideStringField;
     CAD_CD_C_FOR_QUEano: TIntegerField;
+    CAD_CD_C_FORemail_questionario_forn: TWideStringField;
+    BUS_CD_C_FORemail_questionario_forn: TWideStringField;
     procedure CMP_CD_M_PED_ITEAfterPost(DataSet: TDataSet);
     procedure CMP_CD_M_PED_ITEQTDEChange(Sender: TField);
     procedure CMP_CD_M_PED_ITEVLR_DESCONTOChange(Sender: TField);

@@ -11823,6 +11823,7 @@ type
     CAD_SQ_C_FOR_QUEcodigo: TIntegerField;
     CAD_SQ_C_FOR_QUEresultado: TWideStringField;
     CAD_SQ_C_FOR_QUEano: TIntegerField;
+    CAD_SQ_C_FORemail_questionario_forn: TWideStringField;
     function CAD_DP_C_CNEDataRequest(Sender: TObject;
       Input: OleVariant): OleVariant;
     function CMP_DP_M_SOLDataRequest(Sender: TObject;

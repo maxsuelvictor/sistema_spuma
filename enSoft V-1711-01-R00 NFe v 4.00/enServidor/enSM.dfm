@@ -2823,6 +2823,10 @@
     object CAD_SQ_C_FORmetodo3_dta_auto_avaliacao: TDateField
       FieldName = 'metodo3_dta_auto_avaliacao'
     end
+    object CAD_SQ_C_FORemail_questionario_forn: TWideStringField
+      FieldName = 'email_questionario_forn'
+      Size = 60
+    end
   end
   object CAD_SQ_C_FOR_REP: TSQLDataSet
     SchemaName = 'dbo'
