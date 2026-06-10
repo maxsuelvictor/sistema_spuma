@@ -1454,7 +1454,7 @@ begin
                         end;
                     end;
 
-                 if tipo = '2' then
+                 if (tipo = '2') or  (tipo = '3') then
                     begin
                       FAT_FR_M_PED_SGQ2.Variables['ft_impresso_por'] :=
                             QuotedStr('Salvo em PDF por: ' + dmGeral.BUS_CD_C_FU3.FieldByName('nome').AsString);
@@ -1558,7 +1558,39 @@ begin
                      FAT_FR_M_PED_SGQ2.ShowReport();
 
                   if tipo = '2' then
-                     FAT_FR_M_PED_SGQ2.Export(frxPDFExport);
+                     begin
+                        if not DirectoryExists('C:\Pedidos Globo') then
+                          ForceDirectories('C:\Pedidos Globo');
+
+                        frxPDFExport.ShowDialog := True;
+                        frxPDFExport.OverwritePrompt := True;
+
+                        frxPDFExport.DefaultPath := 'C:\Pedidos Globo';
+                        frxPDFExport.FileName := 'Pedido_'+dmGeral.FAT_CD_M_PEDid_pedido.AsString +
+                          '.pdf';
+
+                        FAT_FR_M_PED_SGQ2.Export(frxPDFExport);
+                     end;
+
+                  if tipo = '3' then
+                     begin
+                        if not DirectoryExists('C:\Pedidos Globo') then
+                          ForceDirectories('C:\Pedidos Globo');
+
+                        frxPDFExport.ShowDialog := False;
+                        frxPDFExport.OverwritePrompt := False;
+                        frxPDFExport.FileName :=
+                          'C:\Pedidos Globo\Pedido_' +
+                          dmGeral.FAT_CD_M_PEDid_pedido.AsString +
+                          '.pdf';
+
+                        FAT_FR_M_PED_SGQ2.Export(frxPDFExport);
+
+                        ShowMessage(
+                          'PDF gerado com sucesso em:' + sLineBreak +
+                          frxPDFExport.FileName
+                        );
+                     end;
 
                   if dmGeral.BUS_CD_C_CPG.FieldByName('tipo_pagamento').AsInteger = 2 then // Sem pagamentos
                      begin
@@ -1998,9 +2030,28 @@ begin
 end;
 
 procedure TFAT_FM_M_PED.btnGerarPDFClick(Sender: TObject);
+var
+  Opcao: Integer;
 begin
   inherited;
-  ImprimirPedido('2');
+
+  Opcao := MessageDlg(
+    'Como deseja gerar o PDF do pedido?' + sLineBreak + sLineBreak +
+    'SIM = Salvar em C:\Pedidos Globo' + sLineBreak +
+    'NÃO = Escolher a pasta manualmente',
+    mtConfirmation,
+    [mbYes, mbNo, mbCancel],
+    0
+  );
+
+  case Opcao of
+    mrYes:
+      ImprimirPedido('3'); // salva direto em C:\Pedidos Globo
+
+    mrNo:
+      ImprimirPedido('2'); // comportamento atual: usuário escolhe a pasta
+  end;
+  //ImprimirPedido('2');
 end;
 
 procedure TFAT_FM_M_PED.btn_Add_FpgClick(Sender: TObject);

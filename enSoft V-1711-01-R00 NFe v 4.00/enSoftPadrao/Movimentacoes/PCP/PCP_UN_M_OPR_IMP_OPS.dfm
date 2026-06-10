@@ -24,7 +24,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 432
     object Label1: TLabel
       Left = 1
       Top = 1
@@ -53,7 +52,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 432
     object pnlDados: TPanel
       Left = 1
       Top = 16

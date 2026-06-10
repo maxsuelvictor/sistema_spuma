@@ -183,6 +183,27 @@ begin
          end;
       dmGeral.BUS_CD_M_PED.Close;
 
+      if opcao_rel = '1' then
+         begin
+           dmGeral.PCP_CD_M_OPR_OPP.Filtered := true;
+
+           case rgSetor.ItemIndex of
+              0:
+                 dmGeral.PCP_CD_M_OPR_OPP.Filter := ' int_exibe_na_impressao_op = true and int_rastrea_bordadeira = true and (qtde_a_produzir) > 0 ';
+              1:
+                 dmGeral.PCP_CD_M_OPR_OPP.Filter := ' int_exibe_na_impressao_op = true and int_rastrea_colagem_tampo_alfin = true and (qtde_a_produzir) > 0 ';
+              2:
+                 dmGeral.PCP_CD_M_OPR_OPP.Filter := ' int_exibe_na_impressao_op = true and int_rastrea_colagem_molas  = true and (qtde_a_produzir) > 0 ';
+              3:
+                 dmGeral.PCP_CD_M_OPR_OPP.Filter := ' int_exibe_na_impressao_op = true and int_rastrea_corte_costura  = true and (qtde_a_produzir) > 0 ';
+              4:
+                 dmGeral.PCP_CD_M_OPR_OPP.Filter := ' int_exibe_na_impressao_op = true and int_rastrea_montagem_caixa_box   = true and (qtde_a_produzir) > 0 ';
+           else
+              dmGeral.PCP_CD_M_OPR_OPP.Filter := ' (qtde_a_produzir) > 0 ';
+           end;
+
+         end;
+
       if opcao_rel = '2' then
          begin
            dmGeral.PCP_CD_M_OPR_OPP.Filtered := true;

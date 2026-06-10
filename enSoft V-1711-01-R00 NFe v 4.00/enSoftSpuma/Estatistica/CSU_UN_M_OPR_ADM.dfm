@@ -6,7 +6,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
   WindowState = wsMaximized
   OnResize = FormResize
   ExplicitWidth = 1100
-  ExplicitHeight = 620
+  ExplicitHeight = 621
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlDireita: TPanel
@@ -102,10 +102,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
         object tbFiltro: TTabSheet
           Caption = '                          Filtro'
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel2: TPanel
             Left = 0
             Top = 0
@@ -210,10 +206,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
           ImageIndex = 8
           ParentFont = False
           OnShow = tsOpShow
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel1: TPanel
             Left = 0
             Top = 0
@@ -282,10 +274,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
               TabOrder = 0
               object tsItensProducao: TTabSheet
                 Caption = 'Itens da Ordem de Produ'#231#227'o'
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object lblLegendaItePro: TLabel
                   Left = 29
                   Top = 249
@@ -390,10 +378,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
               object tsTotalItem: TTabSheet
                 Caption = 'Qtde total por Item'
                 ImageIndex = 1
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object wwDBGrid1: TwwDBGrid
                   Left = 0
                   Top = 0
@@ -428,10 +412,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
               object tsTotalItePed: TTabSheet
                 Caption = 'Qtde total de itens por Pedido'
                 ImageIndex = 2
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object wwDBGrid2: TwwDBGrid
                   Left = 0
                   Top = 0
@@ -651,10 +631,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
           ImageIndex = 3
           ParentFont = False
           OnEnter = TabSheet1Enter
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label6: TLabel
             Left = 1
             Top = 8
@@ -812,10 +788,11 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
             Height = 265
             Selected.Strings = (
               'id_pedido'#9'7'#9'Pedido'#9#9
-              'int_num_lote_opr'#9'6'#9'Nro O.P'#9'F'
+              'int_num_lote_opr'#9'6'#9'Nro O.P'#9'F'#9
               'dta_pedido'#9'10'#9'Data'#9#9
-              'id_cliente'#9'8'#9'C'#243'd.'#9#9
-              'int_nomecli'#9'31'#9'Cliente'#9'F'
+              'int_nomecpg'#9'10'#9'Cond. pagto'#9'F'
+              'id_cliente'#9'7'#9'C'#243'd.'#9'F'
+              'int_nomecli'#9'20'#9'Cliente'#9'F'#9
               'vlr_liquido'#9'9'#9'Vlr L'#237'quido'#9#9
               'cubagem'#9'8'#9'Cubagem'#9#9)
             IniAttributes.Delimiter = ';;'
@@ -1002,10 +979,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
           Caption = '  Estoque Pendente'
           ImageIndex = 3
           OnEnter = TabSheet2Enter
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel7: TPanel
             Left = 0
             Top = 0
@@ -1219,7 +1192,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1043
     Top = 171
     Bitmap = {
-      494C01010800A800B00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800A800B40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2121,7 +2094,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1043
     Top = 315
     Bitmap = {
-      494C010108003001040218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108003001080218001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3023,7 +2996,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1139
     Top = 315
     Bitmap = {
-      494C01011200000100020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01011200000104020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000038000000460000000100200000000000403D
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -3541,7 +3514,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1043
     Top = 219
     Bitmap = {
-      494C01010800DC00A80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00AC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4443,7 +4416,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1139
     Top = 363
     Bitmap = {
-      494C010106000001F8010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106000001FC010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000704003C603805DA301C039A0E08
       0054020100250000000000000000000000000000000000000000000000000000
@@ -4657,7 +4630,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1043
     Top = 267
     Bitmap = {
-      494C01010800DC00B80118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00BC0118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5559,7 +5532,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1139
     Top = 411
     Bitmap = {
-      494C01010600000108020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101060000010C020E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       0000000000000000000000000000000000000005003C004803DA0024019A000A
       0054000200250000000000000000000000000000000000000000000000000000
@@ -5771,7 +5744,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
   end
   inherited imgBotoesAtivoLa: TImageList
     Bitmap = {
-      494C01010800DC00C00118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800DC00C40118001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6673,7 +6646,7 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
     Left = 1083
     Top = 216
     Bitmap = {
-      494C010106000001F8010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106000001FC010E000E00FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000380000001C00000001002000000000008018
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFF9F9F9FF267EFFFFA2A2A2FFE4E4E4FFFFFFFFFFFFFFFFFFFFFF
@@ -6944,14 +6917,21 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
       DisplayWidth = 10
       FieldName = 'dta_pedido'
     end
+    object BUS_CD_M_PED_PENint_nomecpg: TWideStringField
+      DisplayLabel = 'Cond. pagto'
+      DisplayWidth = 10
+      FieldName = 'int_nomecpg'
+      ProviderFlags = []
+      Size = 30
+    end
     object BUS_CD_M_PED_PENid_cliente: TIntegerField
       DisplayLabel = 'C'#243'd.'
-      DisplayWidth = 8
+      DisplayWidth = 7
       FieldName = 'id_cliente'
     end
     object BUS_CD_M_PED_PENint_nomecli: TWideStringField
       DisplayLabel = 'Cliente'
-      DisplayWidth = 31
+      DisplayWidth = 20
       FieldName = 'int_nomecli'
       ProviderFlags = []
       Size = 50
@@ -7183,13 +7163,6 @@ inherited CSU_FM_M_OPR_ADM: TCSU_FM_M_OPR_ADM
       ProviderFlags = []
       Visible = False
       Size = 50
-    end
-    object BUS_CD_M_PED_PENint_nomecpg: TWideStringField
-      DisplayWidth = 30
-      FieldName = 'int_nomecpg'
-      ProviderFlags = []
-      Visible = False
-      Size = 30
     end
     object BUS_CD_M_PED_PENint_nomeate: TWideStringField
       DisplayWidth = 50
