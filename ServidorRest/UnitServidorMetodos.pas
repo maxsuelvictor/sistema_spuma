@@ -199,6 +199,8 @@ type
     CAD_CD_C_CLI: TClientDataSet;
     CAD_SQ_C_PAR: TSQLDataSet;
     CAD_DP_C_PAR: TDataSetProvider;
+    FAT_CD_R_PEDid_empresa: TIntegerField;
+    FAT_CD_R_PEDid_cliente: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -243,6 +245,8 @@ type
     function BuscarItens: TStream;
 
     function BuscarPedidosRelatorio: TStream;
+
+    function BuscarConsultarPedidos: TStream;
 
     // Posts
     function updateEnviarCores(const Dados: TJSONArray): TJSONObject;
@@ -475,6 +479,460 @@ begin
   end;
 end;
 
+
+function TServidorMetodos.BuscarConsultarPedidos: TStream;
+var
+  jso, jsoItens, jsoTit: TJsonObject;
+  jsa, jsaItens, jsaTit: TJsonArray;
+  jsp: TJsonPair;
+  id_empresa, dta_inicio, dta_final, texto, id_vendedor, id_cliente,
+  nome_cliente, nome_cidade, uf: String;
+  FAT_CD_M_PED, FAT_CD_M_PED_ITE, FAT_CD_M_PED_TIT: TClientDataSet;
+  ListaPedidos, ListaPedItens, ListaPedTitulos: TJsonArray;
+  erroJson: TJSONObject;
+begin
+  {    ped.id_empresa,
+       PED.id_pedido,
+       ped.dta_pedido,
+       ped.vlr_bruto,
+       ped.vlr_desconto,
+       ped.vlr_liquido,
+       ped.id_cliente,
+       INT_NOMECLI,
+       INT_NOMETME,
+       INT_NOMEFUN,
+       int_desc_cond_pag,
+       INT_NOMEATE,
+       INT_NOMERES,
+       INT_NOMECID,
+       INT_NOMEEST,
+       INT_CPFCNPJ,
+       int_pessoacli,
+       INT_ID_PERFIL,
+       int_sitaprov,
+       int_sitped,
+       int_sitped2,
+       int_ie_rg_cli,
+       INT_EMPFANTASIA,
+       DTA_EMISSAO_NFE,
+       ORDEM_FAT }
+
+   //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarConsultarPedidos?dta_inicio=
+
+   { Get da Tabela: FAT_TB_M_PED - FAT_TB_M_PED_ITE - FAT_TB_M_PED_TIT -
+    Criado por: Maxsuel Victor
+    Data: 12/06/2026
+   }
+
+
+     try
+
+    // Verifica se o parâmetro existe
+    if GetInvocationMetadata().QueryParams.IndexOfName('dta_inicio') = -1 then
+      dta_inicio :=   datetostr(date - 180)
+    else
+      dta_inicio := Trim(GetInvocationMetadata().QueryParams.Values['dta_inicio']);
+
+    // Validação do parâmetro
+    if  dta_inicio = '' then
+        begin
+          GetInvocationMetadata().ResponseCode := 400;
+          GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+          erroJson := TJSONObject.Create;
+          try
+            erroJson.AddPair('erro', 'Parâmetro data de inicio está vazio ou não informado');
+            Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+          finally
+            erroJson.Free;
+          end;
+
+          exit;
+        end;
+
+
+    // Verifica se o parâmetro existe
+    if GetInvocationMetadata().QueryParams.IndexOfName('dta_final') = -1 then
+       dta_final :=   datetostr(date)
+    else
+       dta_final := Trim(GetInvocationMetadata().QueryParams.Values['dta_final']);
+
+    // Validação do parâmetro
+    if  dta_final = '' then
+        begin
+          GetInvocationMetadata().ResponseCode := 400;
+          GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+          erroJson := TJSONObject.Create;
+          try
+            erroJson.AddPair('erro', 'Parâmetro data final está vazio ou não informado');
+            Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+          finally
+            erroJson.Free;
+          end;
+          exit;
+        end;
+
+
+   // Verifica se o parâmetro existe
+   if GetInvocationMetadata().QueryParams.IndexOfName('id_empresa') = 0 then
+      id_empresa := ''
+    else
+      id_empresa := Trim(GetInvocationMetadata().QueryParams.Values['id_empresa']);
+
+    // Validação do parâmetro
+    if id_empresa = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro id_empresa está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
+
+
+    // Verifica se o parâmetro existe
+   if GetInvocationMetadata().QueryParams.IndexOfName('id_vendedor') = 0 then
+      id_vendedor := ''
+    else
+      id_vendedor := Trim(GetInvocationMetadata().QueryParams.Values['id_vendedor']);
+
+    // Validação do parâmetro
+    if id_vendedor = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro id_vendedor está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
+
+   // Verifica se o parâmetro existe
+   if GetInvocationMetadata().QueryParams.IndexOfName('id_cliente') = 0 then
+      id_cliente := ''
+    else
+      id_cliente := Trim(GetInvocationMetadata().QueryParams.Values['id_cliente']);
+
+   // Validação do parâmetro
+    if id_cliente = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro id_cliente está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
+
+    // Verifica se o parâmetro existe
+   if GetInvocationMetadata().QueryParams.IndexOfName('nome_cliente') = -1 then
+      nome_cliente := ''
+    else
+      nome_cliente := Trim(GetInvocationMetadata().QueryParams.Values['nome_cliente']);
+
+   // Validação do parâmetro
+    if nome_cliente = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro nome_cliente está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
+
+     // Verifica se o parâmetro existe
+   if GetInvocationMetadata().QueryParams.IndexOfName('nome_cidade') = -1 then
+      nome_cidade := ''
+    else
+      nome_cidade := Trim(GetInvocationMetadata().QueryParams.Values['nome_cidade']);
+
+   // Validação do parâmetro
+    if nome_cidade = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro cidade está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
+   // Verifica se o parâmetro existe
+   if GetInvocationMetadata().QueryParams.IndexOfName('uf') = -1 then
+      uf := ''
+    else
+      uf := Trim(GetInvocationMetadata().QueryParams.Values['uf']);
+
+   // Validação do parâmetro
+    if uf = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro uf está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
+
+
+
+    // Inicializa componentes
+    //FAT_CD_M_PED := TClientDataSet.Create(nil);
+    //FAT_CD_M_PED.SetProvider(FAT_DP_M_PED);
+
+    FAT_SQ_R_PED.Close;
+    FAT_SQ_R_PED.CommandText :=
+
+        ' SELECT ' +
+        '   ped.id_empresa,ped.id_pedido, ped.id_cliente, ped.dta_pedido, ped.vlr_bruto, ped.vlr_desconto, ped.vlr_liquido, ' +
+        '   ped.id_cliente as int_codcli, cli.nome as int_nomecli, tme.descricao as int_nometme, ' +
+        '   fun.nome as int_nomefun, ' +
+        '   case ' +
+        '     when sgq_texto_cond_pgto <> '''' then sgq_texto_cond_pgto ' +
+        '   else  CPG.DESCRICAO end as int_desc_cond_pag, ' +
+        '   ate.nome as int_nomeate, res.nome as int_nomeres, cid.nome as int_nomecid, '+
+        ' ' +
+        '   cid.uf as int_nomeest, cli.doc_cnpj_cpf as int_cpfcnpj, ' +
+        '   cli.pessoa as int_pessoacli, cli.id_perfil_cli as int_id_perfil, '+
+        '   cast( case situacao_aprovacao ' +
+        '   when 0 then ''Em espera'' '+
+        '   when 1 then ''Aprovado'' ' +
+        '   when 2 then ''Reprovado'' ' +
+        ' end as varchar(20) ) as int_sitaprov, ' +
+        ' cast( case ped.situacao     ' +
+        '   when 0 then ''Em aberto'' ' +
+        '   when 1 then ''Reprovado'' ' +
+        '   when 2 then ''Em produção'' ' +
+        '   when 3 then ''Faturado''  ' +
+        '   when 4 then ''Cancelado'' ' +
+        ' end as varchar(20) ) as int_sitped, '+
+        ' cast( case      ' + #13#10 +
+        '           when (ped.situacao = 0) and (ped.situacao_aprovacao = 0) then ''Digitado''' + #13#10 +
+        '           when (ped.situacao = 0) and (ped.situacao_aprovacao = 1) then ''Aprovado''' + #13#10 +
+        '           when (ped.situacao = 1) then ''Reprovado''' + #13#10 +
+        '           when (ped.situacao = 2) then ''Em produção''' + #13#10 +
+        '           when (ped.situacao = 3) then ''Faturado''' + #13#10 +
+        '           when (ped.situacao = 4) then ''Cancelado''' + #13#10 +
+        '         end as varchar(20) ) as int_sit_pedido_detalhado, ' +
+        ' cli.doc_ie_identidade as int_ie_rg_cli, ' +
+        ' par.emp_fantasia as int_empfantasia, nfe.dta_emissao as dta_emissao_nfe, ors.id_ors as ordem_fat '+
+        ' ' +
+        ' from fat_tb_m_ped ped '+
+       '    left outer join cad_tb_c_cli cli on cli.id_cliente = ped.id_cliente '+
+        '    left outer join cad_tb_c_tme tme on tme.id_tipo_mov_estoque = ped.id_tipo_mov_estoque '+
+        '    left outer join cad_tb_c_fun fun on fun.id_funcionario=ped.id_vendedor '+
+        '    left outer join cad_tb_c_cpg cpg on cpg.id_condicao_pag=ped.id_condicao_pag '+
+        '    left outer join cad_tb_c_fun ate on ate.id_funcionario=ped.id_atendente '+
+        '    left outer join cad_tb_c_fun res on res.id_funcionario=ped.id_responsavel '+
+        '    left outer join cad_tb_c_cid cid on cid.id_cidade=cli.id_cidade '+
+        '    left outer join cad_tb_c_par par on par.id_empresa=ped.id_empresa ' +
+        '    left outer join pcp_tb_m_ors ors on ors.id_pedido=ped.id_pedido ' +
+        '    left outer join fat_tb_m_nfe nfe on nfe.id_ors=ors.id_ors ' +
+        ' where ped.dta_pedido>='''+FormatDateTime('dd/mm/yyyy', StrToDate(dta_inicio))+''' '+
+        '   and ped.dta_pedido<='''+FormatDateTime('dd/mm/yyyy', StrToDate(dta_final))+''' ';
+
+    if id_empresa <> '0' then
+       begin
+         FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' and ped.id_empresa = ''' +
+                                                                    id_empresa + ''' ';
+       end;
+
+    if id_vendedor <> '0' then
+       begin
+         FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' and ped.id_vendedor = ''' +
+                                                                    id_vendedor + ''' ';
+       end;
+
+    if id_cliente <> '0' then
+       begin
+         FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' and ped.id_cliente = ''' +
+                                                                    id_cliente + ''' ';
+       end;
+
+    if nome_cliente <> '-1' then
+       begin
+         FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText +
+                                               ' and upper(unaccent(cli.nome)) LIKE '''+ uppercase(nome_cliente)+'%'+''' ';
+
+       end;
+
+    if nome_cidade <> '-1' then
+       begin
+         FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText +
+                                     ' and upper(unaccent(cid.nome)) LIKE '''+ uppercase(nome_cidade)+'%'+''' ';
+       end;
+
+    if uf <> '-1' then
+       begin
+         FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' and upper(cid.uf) = upper(''' + uf +''') ';
+
+
+       end;
+
+    FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' order by ped.dta_pedido desc ';
+
+    FAT_CD_R_PED.Open;
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get do relatório de pedido de venda iniciada!');
+
+    //jsObj := TJsonObject.Create();
+    ListaPedidos := TJsonArray.Create;
+
+    while not FAT_CD_R_PED.Eof do
+        begin
+
+           jso := TJsonObject.Create;
+
+           jso.AddPair('id_empresa',        FAT_CD_R_PED.FieldByName('id_empresa').AsString);
+           jso.AddPair('id_cliente',        FAT_CD_R_PED.FieldByName('id_cliente').AsString);
+           jso.AddPair('id_pedido',         FAT_CD_R_PED.FieldByName('id_pedido').AsString);
+           jso.AddPair('int_codcli',        FAT_CD_R_PED.FieldByName('int_codcli').AsString);
+           jso.AddPair('dta_pedido',        FAT_CD_R_PED.FieldByName('dta_pedido').AsString);
+           jso.AddPair('vlr_bruto',         FAT_CD_R_PED.FieldByName('vlr_bruto').AsString);
+           jso.AddPair('vlr_desconto',      FAT_CD_R_PED.FieldByName('vlr_desconto').AsString);
+           jso.AddPair('vlr_liquido',       FAT_CD_R_PED.FieldByName('vlr_liquido').AsString);
+           jso.AddPair('int_nomecli',       FAT_CD_R_PED.FieldByName('int_nomecli').AsString);
+           jso.AddPair('int_nometme',       FAT_CD_R_PED.FieldByName('int_nometme').AsString);
+           jso.AddPair('int_nomefun',       FAT_CD_R_PED.FieldByName('int_nomefun').AsString);
+           jso.AddPair('int_desc_cond_pag', FAT_CD_R_PED.FieldByName('int_desc_cond_pag').AsString);
+           jso.AddPair('int_nomeate',       FAT_CD_R_PED.FieldByName('int_nomeate').AsString);
+           jso.AddPair('int_nomeres',       FAT_CD_R_PED.FieldByName('int_nomeres').AsString);
+           jso.AddPair('int_nomecid',       FAT_CD_R_PED.FieldByName('int_nomecid').AsString);
+           jso.AddPair('int_nomeest',       FAT_CD_R_PED.FieldByName('int_nomeest').AsString);
+           jso.AddPair('int_cpfcnpj',       FAT_CD_R_PED.FieldByName('int_cpfcnpj').AsString);
+           jso.AddPair('int_pessoacli',     FAT_CD_R_PED.FieldByName('int_pessoacli').AsString);
+           jso.AddPair('int_id_perfil',     FAT_CD_R_PED.FieldByName('int_id_perfil').AsString);
+           jso.AddPair('int_sitaprov',      FAT_CD_R_PED.FieldByName('int_sitaprov').AsString);
+           jso.AddPair('int_sitped',        FAT_CD_R_PED.FieldByName('int_sitped').AsString);
+           jso.AddPair('int_sit_pedido_detalhado',       FAT_CD_R_PED.FieldByName('int_sit_pedido_detalhado').AsString);
+           jso.AddPair('int_ie_rg_cli',     FAT_CD_R_PED.FieldByName('int_ie_rg_cli').AsString);
+           jso.AddPair('int_empfantasia',   FAT_CD_R_PED.FieldByName('int_empfantasia').AsString);
+           jso.AddPair('dta_emissao_nfe',   FAT_CD_R_PED.FieldByName('dta_emissao_nfe').AsString);
+           jso.AddPair('ordem_fat',         FAT_CD_R_PED.FieldByName('ordem_fat').AsString);
+
+
+           ListaPedItens := TJsonArray.Create;
+           FAT_CD_R_PED_ITE.First;
+           while not FAT_CD_R_PED_ITE.Eof do
+              begin
+                 jsoItens := TJsonObject.Create;
+
+                 jsoItens.AddPair('id_pedido',         FAT_CD_R_PED_ITE.FieldByName('id_pedido').AsString);
+                 jsoItens.AddPair('id_item',           FAT_CD_R_PED_ITE.FieldByName('id_item').AsString);
+                 jsoItens.AddPair('id_cor',            FAT_CD_R_PED_ITE.FieldByName('id_cor').AsString);
+                 jsoItens.AddPair('id_tamanho',        FAT_CD_R_PED_ITE.FieldByName('id_tamanho').AsString);
+                 jsoItens.AddPair('qtde',              FAT_CD_R_PED_ITE.FieldByName('qtde').AsString);
+                 jsoItens.AddPair('vlr_unitario',      FAT_CD_R_PED_ITE.FieldByName('vlr_unitario').AsString);
+                 jsoItens.AddPair('vlr_desconto',      FAT_CD_R_PED_ITE.FieldByName('vlr_desconto').AsString);
+                 jsoItens.AddPair('vlr_liquido',       FAT_CD_R_PED_ITE.FieldByName('vlr_liquido').AsString);
+                 jsoItens.AddPair('int_nomeite',       FAT_CD_R_PED_ITE.FieldByName('int_nomeite').AsString);
+                 jsoItens.AddPair('int_nomecor',       FAT_CD_R_PED_ITE.FieldByName('int_nomecor').AsString);
+                 jsoItens.AddPair('int_id_und_venda',  FAT_CD_R_PED_ITE.FieldByName('int_id_und_venda').AsString);
+                 jsoItens.AddPair('int_tipo_item',     FAT_CD_R_PED_ITE.FieldByName('int_tipo_item').AsString);
+                 jsoItens.AddPair('int_nometam',       FAT_CD_R_PED_ITE.FieldByName('int_nometam').AsString);
+
+                 ListaPedItens.AddElement(jsoItens);
+
+                 FAT_CD_R_PED_ITE.Next;
+              end;
+           jso.AddPair('itens', ListaPedItens);
+
+
+           ListaPedTitulos := TJsonArray.Create;
+           FAT_CD_R_PED_TIT.First;
+           while not FAT_CD_R_PED_TIT.Eof do
+              begin
+                 jsoTit := TJsonObject.Create;
+
+                 jsoTit.AddPair('id_pedido',         FAT_CD_R_PED_TIT.FieldByName('id_pedido').AsString);
+                 jsoTit.AddPair('dta_vencimento',    FAT_CD_R_PED_TIT.FieldByName('dta_vencimento').AsString);
+                 jsoTit.AddPair('che_agencia',       FAT_CD_R_PED_TIT.FieldByName('che_agencia').AsString);
+                 jsoTit.AddPair('che_banco',         FAT_CD_R_PED_TIT.FieldByName('che_banco').AsString);
+                 jsoTit.AddPair('che_conta',         FAT_CD_R_PED_TIT.FieldByName('che_conta').AsString);
+                 jsoTit.AddPair('che_numero',        FAT_CD_R_PED_TIT.FieldByName('che_numero').AsString);
+                 jsoTit.AddPair('che_emitente',      FAT_CD_R_PED_TIT.FieldByName('che_emitente').AsString);
+                 jsoTit.AddPair('int_nomefpg',       FAT_CD_R_PED_TIT.FieldByName('int_nomefpg').AsString);
+                 jsoTit.AddPair('vlr_titulo',        FAT_CD_R_PED_TIT.FieldByName('vlr_titulo').AsString);
+
+                 ListaPedTitulos.AddElement(jsoTit);
+                 FAT_CD_R_PED_TIT.Next;
+              end;
+           jso.AddPair('titulos', ListaPedTitulos);
+
+           ListaPedidos.AddElement(jso);
+           FAT_CD_R_PED.Next;
+        end;
+
+    GetInvocationMetadata().ResponseCode := 200;
+    GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+    Result := TStringStream.Create(UTF8Encode(ListaPedidos.ToString));
+
+    unitformPrincipal.Form1.mmTexto.Lines.Add('Get dos pedidos para o relatório!');
+  except
+    on E: Exception do
+    begin
+      GetInvocationMetadata().ResponseCode := 500;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Erro interno: ' + E.Message);
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+    end;
+  end;
+
+
+  FreeAndNil(ListaPedTitulos);
+  FreeAndNil(ListaPedItens);
+  FAT_CD_R_PED.Close;
+end;
 
 function TServidorMetodos.BuscarCores: TStream;
 var
@@ -1911,14 +2369,20 @@ begin
             FAT_CD_M_PED_ITE.FieldByName('per_desc_especial').AsCurrency   := ItemObj.GetValue<Double>('per_desc_especial');
             FAT_CD_M_PED_ITE.FieldByName('pcp_obs_item').AsString          := ItemObj.GetValue<string>('desc_personalizado');
 
-            // Maxsuel Victor , 04/11/2025
-            // Esse if é devido o app de vendas, deixar o vlr liquido do pedido sem a soma do vlr_desc_especial,
-               // pois no pedido do enSoftSpuma isso já é somado.
-            if FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency > 0 then
-               begin
-                 FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency +
-                                                                                 FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency;
-               end;
+            // Maxsuel Victor, 12/06/2026
+               // O IF abaixo foi comentado devido o pedido no AppVendas ser ajustado para ter a mesma funcionalidade
+               // do ensoftSpuma.
+
+                  // Maxsuel Victor , 04/11/2025
+                  // Esse if é devido o app de vendas, deixar o vlr liquido do pedido sem a soma do vlr_desc_especial,
+                     // pois no pedido do enSoftSpuma isso já é somado.
+                  //if FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency > 0 then
+                  //   begin
+                  //     FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency +
+                  //                                                                     FAT_CD_M_PED_ITE.FieldByName('vlr_desc_especial').AsCurrency;
+                  //   end;
+            FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency       := FAT_CD_M_PED_ITE.FieldByName('vlr_liquido').AsCurrency;
+
             FAT_CD_M_PED_ITE.Post;
           end;
 
