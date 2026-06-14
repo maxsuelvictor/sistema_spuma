@@ -1,6 +1,6 @@
 ﻿// 
 // Created by the DataSnap proxy generator.
-// 20/08/2025 19:53:53
+// 18/04/2026 18:35:57
 // 
 
 function DSAdmin(connectionInfo)
@@ -672,25 +672,54 @@ function TServidorMetodos(connectionInfo)
   };
 
   /*
-   * @param Dados [in] - Type on server: TJSONArray
-   * @return result - Type on server: TJSONObject
+   * @return result - Type on server: string
    */
-  this.updateEnviarCores = function(Dados) {
-    var returnObject = this.executor.executeMethod('EnviarCores', "POST", [Dados], arguments[1], true, arguments[2], arguments[3]);
-    if (arguments[1] == null) {
+  this.GetInfoConexao = function() {
+    var returnObject = this.executor.executeMethod('GetInfoConexao', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
       if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
         var resultArray = returnObject.result;
         var resultObject = new Object();
-        resultObject.Dados = Dados;
         resultObject.result = resultArray[0];
-        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
-          resultObject._cacheId = returnObject.cacheId;
-          resultObject._cmdIndex = returnObject.cmdIndex;
-        }
         return resultObject;
       }
       return returnObject;
     }
+  };
+
+  this.GetInfoConexao_URL = function() {
+    return this.executor.getMethodURL("GetInfoConexao", "GET", [], arguments[0])[0];
+  };
+
+  /*
+   * @param texto [in] - Type on server: string
+   */
+  this.GerarSqlTxt = function(texto) {
+    this.executor.executeMethod('GerarSqlTxt', "GET", [texto], arguments[1], false, arguments[2], arguments[3]);
+  };
+
+  this.GerarSqlTxt_URL = function(texto) {
+    return this.executor.getMethodURL("GerarSqlTxt", "GET", [texto], arguments[1])[0];
+  };
+
+  /*
+   * @return result - Type on server: string
+   */
+  this.ConexaoOK = function() {
+    var returnObject = this.executor.executeMethod('ConexaoOK', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.result = resultArray[0];
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  this.ConexaoOK_URL = function() {
+    return this.executor.getMethodURL("ConexaoOK", "GET", [], arguments[0])[0];
   };
 
   /*
@@ -718,28 +747,6 @@ function TServidorMetodos(connectionInfo)
   };
 
   /*
-   * @param Dados [in] - Type on server: TJSONArray
-   * @return result - Type on server: TJSONObject
-   */
-  this.updateEnviarRegioes = function(Dados) {
-    var returnObject = this.executor.executeMethod('EnviarRegioes', "POST", [Dados], arguments[1], true, arguments[2], arguments[3]);
-    if (arguments[1] == null) {
-      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
-        var resultArray = returnObject.result;
-        var resultObject = new Object();
-        resultObject.Dados = Dados;
-        resultObject.result = resultArray[0];
-        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
-          resultObject._cacheId = returnObject.cacheId;
-          resultObject._cmdIndex = returnObject.cmdIndex;
-        }
-        return resultObject;
-      }
-      return returnObject;
-    }
-  };
-
-  /*
    * @return result - Type on server: TStream
    */
   this.BuscarRegioes = function() {
@@ -762,10 +769,234 @@ function TServidorMetodos(connectionInfo)
   this.BuscarRegioes_URL = function() {
     return this.executor.getMethodURL("BuscarRegioes", "GET", [], arguments[0])[0];
   };
+
+  /*
+   * @return result - Type on server: TStream
+   */
+  this.BuscarGrupoEstoque = function() {
+    var returnObject = this.executor.executeMethod('BuscarGrupoEstoque', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  this.BuscarGrupoEstoque_URL = function() {
+    return this.executor.getMethodURL("BuscarGrupoEstoque", "GET", [], arguments[0])[0];
+  };
+
+  /*
+   * @return result - Type on server: TStream
+   */
+  this.BuscarGrupoEstoqueCor = function() {
+    var returnObject = this.executor.executeMethod('BuscarGrupoEstoqueCor', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  this.BuscarGrupoEstoqueCor_URL = function() {
+    return this.executor.getMethodURL("BuscarGrupoEstoqueCor", "GET", [], arguments[0])[0];
+  };
+
+  /*
+   * @return result - Type on server: TStream
+   */
+  this.BuscarCidades = function() {
+    var returnObject = this.executor.executeMethod('BuscarCidades', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  this.BuscarCidades_URL = function() {
+    return this.executor.getMethodURL("BuscarCidades", "GET", [], arguments[0])[0];
+  };
+
+  /*
+   * @return result - Type on server: TStream
+   */
+  this.BuscarClientesPorVendedor = function() {
+    var returnObject = this.executor.executeMethod('BuscarClientesPorVendedor', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  this.BuscarClientesPorVendedor_URL = function() {
+    return this.executor.getMethodURL("BuscarClientesPorVendedor", "GET", [], arguments[0])[0];
+  };
+
+  /*
+   * @return result - Type on server: TStream
+   */
+  this.BuscarItens = function() {
+    var returnObject = this.executor.executeMethod('BuscarItens', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  this.BuscarItens_URL = function() {
+    return this.executor.getMethodURL("BuscarItens", "GET", [], arguments[0])[0];
+  };
+
+  /*
+   * @return result - Type on server: TStream
+   */
+  this.BuscarPedidosRelatorio = function() {
+    var returnObject = this.executor.executeMethod('BuscarPedidosRelatorio', "GET", [], arguments[0], true, arguments[1], arguments[2]);
+    if (arguments[0] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  this.BuscarPedidosRelatorio_URL = function() {
+    return this.executor.getMethodURL("BuscarPedidosRelatorio", "GET", [], arguments[0])[0];
+  };
+
+  /*
+   * @param Dados [in] - Type on server: TJSONArray
+   * @return result - Type on server: TJSONObject
+   */
+  this.updateEnviarCores = function(Dados) {
+    var returnObject = this.executor.executeMethod('EnviarCores', "POST", [Dados], arguments[1], true, arguments[2], arguments[3]);
+    if (arguments[1] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.Dados = Dados;
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  /*
+   * @param Dados [in] - Type on server: TJSONArray
+   * @return result - Type on server: TJSONObject
+   */
+  this.updateEnviarRegioes = function(Dados) {
+    var returnObject = this.executor.executeMethod('EnviarRegioes', "POST", [Dados], arguments[1], true, arguments[2], arguments[3]);
+    if (arguments[1] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.Dados = Dados;
+        resultObject.result = resultArray[0];
+        if (returnObject.cacheId != null && returnObject.cmdIndex != null) {
+          resultObject._cacheId = returnObject.cacheId;
+          resultObject._cmdIndex = returnObject.cmdIndex;
+        }
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  /*
+   * @param AJSON [in] - Type on server: TJSONValue
+   * @return result - Type on server: string
+   */
+  this.updateReceberClientesPorVendedor = function(AJSON) {
+    var returnObject = this.executor.executeMethod('ReceberClientesPorVendedor', "POST", [AJSON], arguments[1], true, arguments[2], arguments[3]);
+    if (arguments[1] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.AJSON = AJSON;
+        resultObject.result = resultArray[0];
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
+
+  /*
+   * @param AJSON [in] - Type on server: TJSONValue
+   * @return result - Type on server: string
+   */
+  this.updateReceberPedidos = function(AJSON) {
+    var returnObject = this.executor.executeMethod('ReceberPedidos', "POST", [AJSON], arguments[1], true, arguments[2], arguments[3]);
+    if (arguments[1] == null) {
+      if (returnObject != null && returnObject.result != null && isArray(returnObject.result)) {
+        var resultArray = returnObject.result;
+        var resultObject = new Object();
+        resultObject.AJSON = AJSON;
+        resultObject.result = resultArray[0];
+        return resultObject;
+      }
+      return returnObject;
+    }
+  };
 }
 
 var JSProxyClassList = {
   "DSAdmin": ["GetPlatformName","ClearResources","FindPackages","FindClasses","FindMethods","CreateServerClasses","DropServerClasses","CreateServerMethods","DropServerMethods","GetServerClasses","ListClasses","DescribeClass","ListMethods","DescribeMethod","GetServerMethods","GetServerMethodParameters","GetDatabaseConnectionProperties","GetDSServerName","ConsumeClientChannel","ConsumeClientChannelTimeout","CloseClientChannel","RegisterClientCallbackServer","UnregisterClientCallback","BroadcastToChannel","BroadcastObjectToChannel","NotifyCallback","NotifyObject"],
-  "TServidorMetodos": ["DataModuleCreate","EchoString","ReverseString","updateEnviarCores","BuscarCores","updateEnviarRegioes","BuscarRegioes"]
+  "TServidorMetodos": ["DataModuleCreate","EchoString","ReverseString","GetInfoConexao","GerarSqlTxt","ConexaoOK","BuscarCores","BuscarRegioes","BuscarGrupoEstoque","BuscarGrupoEstoqueCor","BuscarCidades","BuscarClientesPorVendedor","BuscarItens","BuscarPedidosRelatorio","updateEnviarCores","updateEnviarRegioes","updateReceberClientesPorVendedor","updateReceberPedidos"]
 };
 

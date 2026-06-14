@@ -201,6 +201,16 @@ type
     CAD_DP_C_PAR: TDataSetProvider;
     FAT_CD_R_PEDid_empresa: TIntegerField;
     FAT_CD_R_PEDid_cliente: TIntegerField;
+    FAT_CD_R_PED_ITEper_desc_basico: TFloatField;
+    FAT_CD_R_PED_ITEvlr_desc_basico: TFMTBCDField;
+    FAT_CD_R_PED_ITEper_desc_especial: TFloatField;
+    FAT_CD_R_PED_ITEvlr_desc_especial: TFMTBCDField;
+    FAT_CD_R_PEDper_desc_basico: TFloatField;
+    FAT_CD_R_PEDvlr_desc_basico: TFMTBCDField;
+    FAT_CD_R_PEDper_desc_especial: TFloatField;
+    FAT_CD_R_PEDvlr_desc_especial: TFMTBCDField;
+    FAT_CD_R_PEDcubagem: TFloatField;
+    FAT_CD_R_PED_TITdias: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -258,7 +268,7 @@ type
     function updateReceberPedidos(const AJSON: TJSONValue): string;
 
     // casa
-    //http://177.71.92.68:214/datasnap/rest/TServidorMetodos/BuscarRegioes
+    //http://177.71.92.67:214/datasnap/rest/TServidorMetodos/BuscarRegioes
 
     // Fábrica
     //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarRegioes
@@ -486,7 +496,7 @@ var
   jsa, jsaItens, jsaTit: TJsonArray;
   jsp: TJsonPair;
   id_empresa, dta_inicio, dta_final, texto, id_vendedor, id_cliente,
-  nome_cliente, nome_cidade, uf: String;
+  nome_cliente, nome_cidade, uf,cpfcnpj: String;
   FAT_CD_M_PED, FAT_CD_M_PED_ITE, FAT_CD_M_PED_TIT: TClientDataSet;
   ListaPedidos, ListaPedItens, ListaPedTitulos: TJsonArray;
   erroJson: TJSONObject;
@@ -515,9 +525,11 @@ begin
        int_ie_rg_cli,
        INT_EMPFANTASIA,
        DTA_EMISSAO_NFE,
+       CUBAGEM,
        ORDEM_FAT }
 
-   //http://170.78.21.225:214/datasnap/rest/TServidorMetodos/BuscarConsultarPedidos?dta_inicio=
+   // Preenchendo os parâmetros
+   //http://localhost:214/datasnap/rest/TServidorMetodos/BuscarConsultarPedidos?dta_inicio=12/12/2025&dta_final=12/06/2026&id_empresa=1&id_vendedor=129&id_cliente=0&nome_cliente=-1&nome_cidade=-1&uf=-1&cpfcnpj=-1
 
    { Get da Tabela: FAT_TB_M_PED - FAT_TB_M_PED_ITE - FAT_TB_M_PED_TIT -
     Criado por: Maxsuel Victor
@@ -717,6 +729,29 @@ begin
       Exit;
     end;
 
+     // Verifica se o parâmetro existe
+   if GetInvocationMetadata().QueryParams.IndexOfName('cpfcnpj') = -1 then
+      cpfcnpj := ''
+    else
+      cpfcnpj := Trim(GetInvocationMetadata().QueryParams.Values['cpfcnpj']);
+
+   // Validação do parâmetro
+    if cpfcnpj = '' then
+    begin
+      GetInvocationMetadata().ResponseCode := 400;
+      GetInvocationMetadata().ResponseContentType := 'application/json; charset=utf-8';
+
+      erroJson := TJSONObject.Create;
+      try
+        erroJson.AddPair('erro', 'Parâmetro cpfcnpj está vazio ou não informado');
+        Result := TStringStream.Create(UTF8Encode(erroJson.ToString));
+      finally
+        erroJson.Free;
+      end;
+
+      Exit;
+    end;
+
 
 
 
@@ -759,8 +794,8 @@ begin
         '           when (ped.situacao = 4) then ''Cancelado''' + #13#10 +
         '         end as varchar(20) ) as int_sit_pedido_detalhado, ' +
         ' cli.doc_ie_identidade as int_ie_rg_cli, ' +
-        ' par.emp_fantasia as int_empfantasia, nfe.dta_emissao as dta_emissao_nfe, ors.id_ors as ordem_fat '+
-        ' ' +
+        ' par.emp_fantasia as int_empfantasia, nfe.dta_emissao as dta_emissao_nfe, ors.id_ors as ordem_fat, '+
+        ' ped.per_desc_basico, ped.vlr_desc_basico, ped.per_desc_especial, ped.vlr_desc_especial, ped.cubagem ' +
         ' from fat_tb_m_ped ped '+
        '    left outer join cad_tb_c_cli cli on cli.id_cliente = ped.id_cliente '+
         '    left outer join cad_tb_c_tme tme on tme.id_tipo_mov_estoque = ped.id_tipo_mov_estoque '+
@@ -781,13 +816,13 @@ begin
                                                                     id_empresa + ''' ';
        end;
 
-    if id_vendedor <> '0' then
+    if id_vendedor <> '-1' then
        begin
          FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' and ped.id_vendedor = ''' +
                                                                     id_vendedor + ''' ';
        end;
 
-    if id_cliente <> '0' then
+    if id_cliente <> '-1' then
        begin
          FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' and ped.id_cliente = ''' +
                                                                     id_cliente + ''' ';
@@ -812,6 +847,12 @@ begin
 
 
        end;
+    if cpfcnpj <> '-1' then
+      begin
+        FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText +
+          ' and CLI.doc_cnpj_cpf = '''  + cpfcnpj + ''' ';
+      end;
+
 
     FAT_SQ_R_PED.CommandText :=  FAT_SQ_R_PED.CommandText + ' order by ped.dta_pedido desc ';
 
@@ -835,6 +876,13 @@ begin
            jso.AddPair('vlr_bruto',         FAT_CD_R_PED.FieldByName('vlr_bruto').AsString);
            jso.AddPair('vlr_desconto',      FAT_CD_R_PED.FieldByName('vlr_desconto').AsString);
            jso.AddPair('vlr_liquido',       FAT_CD_R_PED.FieldByName('vlr_liquido').AsString);
+
+           jso.AddPair('per_desc_basico',   FAT_CD_R_PED.FieldByName('per_desc_basico').AsString);
+           jso.AddPair('vlr_desc_basico',   FAT_CD_R_PED.FieldByName('vlr_desc_basico').AsString);
+
+           jso.AddPair('per_desc_especial', FAT_CD_R_PED.FieldByName('per_desc_especial').AsString);
+           jso.AddPair('vlr_desc_especial', FAT_CD_R_PED.FieldByName('vlr_desc_especial').AsString);
+
            jso.AddPair('int_nomecli',       FAT_CD_R_PED.FieldByName('int_nomecli').AsString);
            jso.AddPair('int_nometme',       FAT_CD_R_PED.FieldByName('int_nometme').AsString);
            jso.AddPair('int_nomefun',       FAT_CD_R_PED.FieldByName('int_nomefun').AsString);
@@ -853,6 +901,7 @@ begin
            jso.AddPair('int_empfantasia',   FAT_CD_R_PED.FieldByName('int_empfantasia').AsString);
            jso.AddPair('dta_emissao_nfe',   FAT_CD_R_PED.FieldByName('dta_emissao_nfe').AsString);
            jso.AddPair('ordem_fat',         FAT_CD_R_PED.FieldByName('ordem_fat').AsString);
+           jso.AddPair('cubagem',           FAT_CD_R_PED.FieldByName('cubagem').AsString);
 
 
            ListaPedItens := TJsonArray.Create;
@@ -869,6 +918,13 @@ begin
                  jsoItens.AddPair('vlr_unitario',      FAT_CD_R_PED_ITE.FieldByName('vlr_unitario').AsString);
                  jsoItens.AddPair('vlr_desconto',      FAT_CD_R_PED_ITE.FieldByName('vlr_desconto').AsString);
                  jsoItens.AddPair('vlr_liquido',       FAT_CD_R_PED_ITE.FieldByName('vlr_liquido').AsString);
+
+                 jsoItens.AddPair('per_desc_basico',   FAT_CD_R_PED_ITE.FieldByName('per_desc_basico').AsString);
+                 jsoItens.AddPair('vlr_desc_basico',   FAT_CD_R_PED_ITE.FieldByName('vlr_desc_basico').AsString);
+
+                 jsoItens.AddPair('per_desc_especial', FAT_CD_R_PED_ITE.FieldByName('per_desc_especial').AsString);
+                 jsoItens.AddPair('vlr_desc_especial', FAT_CD_R_PED_ITE.FieldByName('vlr_desc_especial').AsString);
+
                  jsoItens.AddPair('int_nomeite',       FAT_CD_R_PED_ITE.FieldByName('int_nomeite').AsString);
                  jsoItens.AddPair('int_nomecor',       FAT_CD_R_PED_ITE.FieldByName('int_nomecor').AsString);
                  jsoItens.AddPair('int_id_und_venda',  FAT_CD_R_PED_ITE.FieldByName('int_id_und_venda').AsString);
@@ -890,6 +946,7 @@ begin
 
                  jsoTit.AddPair('id_pedido',         FAT_CD_R_PED_TIT.FieldByName('id_pedido').AsString);
                  jsoTit.AddPair('dta_vencimento',    FAT_CD_R_PED_TIT.FieldByName('dta_vencimento').AsString);
+                 jsoTit.AddPair('dias',              FAT_CD_R_PED_TIT.FieldByName('dias').AsString);
                  jsoTit.AddPair('che_agencia',       FAT_CD_R_PED_TIT.FieldByName('che_agencia').AsString);
                  jsoTit.AddPair('che_banco',         FAT_CD_R_PED_TIT.FieldByName('che_banco').AsString);
                  jsoTit.AddPair('che_conta',         FAT_CD_R_PED_TIT.FieldByName('che_conta').AsString);

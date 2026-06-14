@@ -27,7 +27,7 @@ object ServidorMetodos: TServidorMetodos
       'BlobSize=-1'
       'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftGloboP170226'
+      'Database=enSoftGloboP090426'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
@@ -604,20 +604,22 @@ object ServidorMetodos: TServidorMetodos
       '         end as varchar(20) ) as int_sit_pedido_detalhado,    '#13#10 +
       '         cli.doc_ie_identidade as int_ie_rg_cli,'#13#10'         PAR.E' +
       'MP_FANTASIA AS INT_EMPFANTASIA,'#13#10'         NFE.DTA_EMISSAO AS DTA' +
-      '_EMISSAO_NFE, '#13#10'         ORS.ID_ORS AS ORDEM_FAT'#13#10'         FROM ' +
-      'FAT_TB_M_PED PED'#13#10'         LEFT OUTER JOIN CAD_TB_C_CLI CLI ON C' +
-      'LI.ID_CLIENTE = PED.ID_CLIENTE'#13#10'         LEFT OUTER JOIN CAD_TB_' +
-      'C_TME TME ON TME.ID_TIPO_MOV_ESTOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10 +
-      '         LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=' +
-      'PED.ID_VENDEDOR'#13#10'         LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CP' +
-      'G.ID_CONDICAO_PAG=PED.ID_CONDICAO_PAG'#13#10'         LEFT OUTER JOIN ' +
-      'CAD_TB_C_FUN ATE ON ATE.ID_FUNCIONARIO=PED.ID_ATENDENTE'#13#10'       ' +
-      '  LEFT OUTER JOIN CAD_TB_C_FUN RES ON RES.ID_FUNCIONARIO=PED.ID_' +
-      'RESPONSAVEL'#13#10'         LEFT OUTER JOIN CAD_TB_C_CID CID ON CID.ID' +
-      '_CIDADE=CLI.ID_CIDADE'#13#10'         LEFT OUTER JOIN CAD_TB_C_PAR PAR' +
-      ' ON PAR.ID_EMPRESA=PED.ID_EMPRESA'#13#10'         LEFT OUTER JOIN PCP_' +
-      'TB_M_ORS ORS ON ORS.ID_PEDIDO=PED.ID_PEDIDO '#13#10'         LEFT OUTE' +
-      'R JOIN FAT_TB_M_NFE NFE ON NFE.ID_ORS=ORS.ID_ORS '#13#10#13#10'WHERE 1=2'
+      '_EMISSAO_NFE, '#13#10'         ORS.ID_ORS AS ORDEM_FAT,'#13#10'         ped.' +
+      'per_desc_basico, ped.vlr_desc_basico, '#13#10'         ped.per_desc_es' +
+      'pecial, ped.vlr_desc_especial, ped.cubagem'#13#10'         FROM FAT_TB' +
+      '_M_PED PED'#13#10'         LEFT OUTER JOIN CAD_TB_C_CLI CLI ON CLI.ID_' +
+      'CLIENTE = PED.ID_CLIENTE'#13#10'         LEFT OUTER JOIN CAD_TB_C_TME ' +
+      'TME ON TME.ID_TIPO_MOV_ESTOQUE = PED.ID_TIPO_MOV_ESTOQUE'#13#10'      ' +
+      '   LEFT OUTER JOIN CAD_TB_C_FUN FUN ON FUN.ID_FUNCIONARIO=PED.ID' +
+      '_VENDEDOR'#13#10'         LEFT OUTER JOIN CAD_TB_C_CPG CPG ON CPG.ID_C' +
+      'ONDICAO_PAG=PED.ID_CONDICAO_PAG'#13#10'         LEFT OUTER JOIN CAD_TB' +
+      '_C_FUN ATE ON ATE.ID_FUNCIONARIO=PED.ID_ATENDENTE'#13#10'         LEFT' +
+      ' OUTER JOIN CAD_TB_C_FUN RES ON RES.ID_FUNCIONARIO=PED.ID_RESPON' +
+      'SAVEL'#13#10'         LEFT OUTER JOIN CAD_TB_C_CID CID ON CID.ID_CIDAD' +
+      'E=CLI.ID_CIDADE'#13#10'         LEFT OUTER JOIN CAD_TB_C_PAR PAR ON PA' +
+      'R.ID_EMPRESA=PED.ID_EMPRESA'#13#10'         LEFT OUTER JOIN PCP_TB_M_O' +
+      'RS ORS ON ORS.ID_PEDIDO=PED.ID_PEDIDO '#13#10'         LEFT OUTER JOIN' +
+      ' FAT_TB_M_NFE NFE ON NFE.ID_ORS=ORS.ID_ORS '#13#10#13#10'WHERE 1=2'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = ConexaoNW
@@ -735,6 +737,25 @@ object ServidorMetodos: TServidorMetodos
     object FAT_CD_R_PEDid_cliente: TIntegerField
       FieldName = 'id_cliente'
     end
+    object FAT_CD_R_PEDper_desc_basico: TFloatField
+      FieldName = 'per_desc_basico'
+    end
+    object FAT_CD_R_PEDvlr_desc_basico: TFMTBCDField
+      FieldName = 'vlr_desc_basico'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PEDper_desc_especial: TFloatField
+      FieldName = 'per_desc_especial'
+    end
+    object FAT_CD_R_PEDvlr_desc_especial: TFMTBCDField
+      FieldName = 'vlr_desc_especial'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PEDcubagem: TFloatField
+      FieldName = 'cubagem'
+    end
   end
   object FAT_SQ_R_PED_ITE: TSQLDataSet
     CommandText = 
@@ -743,12 +764,13 @@ object ServidorMetodos: TServidorMetodos
       'iquido,'#13#10'       ite.descricao as int_nomeite, cor.descricao as i' +
       'nt_nomecor,'#13#10'       ite.id_und_venda int_id_und_venda ,'#13#10'       ' +
       'gru.tipo_item  as  int_tipo_item ,'#13#10'       tam.descricao as int_' +
-      'nometam'#13#10'from fat_tb_m_ped_ite pte'#13#10'left outer join cad_tb_c_ite' +
-      ' ite on ite.id_item = pte.id_item'#13#10'left outer join cad_tb_c_gru ' +
-      'gru on gru.id_grupo = ite.id_grupo'#13#10'left outer join cad_tb_c_cor' +
-      ' cor on cor.id_cor = pte.id_cor'#13#10'left outer join cad_tb_c_tam ta' +
-      'm on tam.id_tamanho = pte.id_tamanho'#13#10'where pte.id_pedido=:id_pe' +
-      'dido'
+      'nometam,'#13#10'       pte.per_desc_basico, pte.vlr_desc_basico, '#13#10'   ' +
+      '    pte.per_desc_especial, pte.vlr_desc_especial '#13#10'from fat_tb_m' +
+      '_ped_ite pte'#13#10'left outer join cad_tb_c_ite ite on ite.id_item = ' +
+      'pte.id_item'#13#10'left outer join cad_tb_c_gru gru on gru.id_grupo = ' +
+      'ite.id_grupo'#13#10'left outer join cad_tb_c_cor cor on cor.id_cor = p' +
+      'te.id_cor'#13#10'left outer join cad_tb_c_tam tam on tam.id_tamanho = ' +
+      'pte.id_tamanho'#13#10'where pte.id_pedido=:id_pedido'
     DataSource = FAT_DS_R_PED
     MaxBlobSize = -1
     Params = <
@@ -768,12 +790,12 @@ object ServidorMetodos: TServidorMetodos
   end
   object FAT_SQ_R_PED_TIT: TSQLDataSet
     CommandText = 
-      'select pti.id_pedido,pti.id_titulo, pti.dta_vencimento, pti.che_' +
-      'agencia, pti.che_banco,'#13#10'       pti.che_conta, pti.che_numero, p' +
-      'ti.che_emitente, pti.vlr_titulo,'#13#10'       fpg.descricao as int_no' +
-      'mefpg'#13#10'from fat_tb_m_ped_tit pti '#13#10'left outer join cad_tb_c_fpg ' +
-      'fpg on fpg.id_forma_pag=pti.id_forma_pag'#13#10'where pti.id_pedido=:i' +
-      'd_pedido'#13#10'order by pti.dta_vencimento'
+      'select pti.id_pedido,pti.id_titulo, pti.dta_vencimento,pti.dias,' +
+      ' pti.che_agencia, pti.che_banco,'#13#10'       pti.che_conta, pti.che_' +
+      'numero, pti.che_emitente, pti.vlr_titulo,'#13#10'       fpg.descricao ' +
+      'as int_nomefpg'#13#10'from fat_tb_m_ped_tit pti '#13#10'left outer join cad_' +
+      'tb_c_fpg fpg on fpg.id_forma_pag=pti.id_forma_pag'#13#10'where pti.id_' +
+      'pedido=:id_pedido'#13#10'order by pti.dta_vencimento'
     DataSource = FAT_DS_R_PED
     MaxBlobSize = -1
     Params = <
@@ -842,6 +864,22 @@ object ServidorMetodos: TServidorMetodos
       FieldName = 'int_nometam'
       Size = 40
     end
+    object FAT_CD_R_PED_ITEper_desc_basico: TFloatField
+      FieldName = 'per_desc_basico'
+    end
+    object FAT_CD_R_PED_ITEvlr_desc_basico: TFMTBCDField
+      FieldName = 'vlr_desc_basico'
+      Precision = 18
+      Size = 4
+    end
+    object FAT_CD_R_PED_ITEper_desc_especial: TFloatField
+      FieldName = 'per_desc_especial'
+    end
+    object FAT_CD_R_PED_ITEvlr_desc_especial: TFMTBCDField
+      FieldName = 'vlr_desc_especial'
+      Precision = 18
+      Size = 4
+    end
   end
   object FAT_CD_R_PED_TIT: TClientDataSet
     Aggregates = <>
@@ -884,6 +922,9 @@ object ServidorMetodos: TServidorMetodos
     end
     object FAT_CD_R_PED_TITid_pedido: TIntegerField
       FieldName = 'id_pedido'
+    end
+    object FAT_CD_R_PED_TITdias: TIntegerField
+      FieldName = 'dias'
     end
   end
   object CAD_CD_C_CLI: TClientDataSet

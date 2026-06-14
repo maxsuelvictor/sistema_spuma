@@ -4,7 +4,7 @@
 -- CST-IBS/CBS: 000 - Tributação integral
 -- ============================================================
 
-INSERT INTO cad_tb_c_ctr (cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib, lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc, ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred, d_inivig, d_fimvig, dataatualizacao, indnfeabi, indnfe, indnfce, indcte, indcteos, indbpe, indbpeta, indbpetm, indnf3e, indnfse, indnfse_via, indnfcom, indnfag, indnfgas, inddere, anexo, link) VALUES
+INSERT INTO cad_tb_c_ctr (id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib, lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc, ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred, d_inivig, d_fimvig, dataatualizacao, indnfeabi, indnfe, indnfce, indcte, indcteos, indbpe, indbpeta, indbpetm, indnf3e, indnfse, indnfse_via, indnfcom, indnfag, indnfgas, inddere, anexo, link) VALUES
 ('000', 'Tributação integral', '000001', 'Situações tributadas integralmente pelo IBS e CBS.', 'Situações tributadas integralmente pelo IBS e CBS.', '', '', 'Padrão', 0, 0, 'N/A', 0, 0, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-11-19', 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art4'),
 ('000', 'Tributação integral', '000002', 'Exploração de via', 'Exploração de via, observado o art. 11 da Lei Complementar nº 214, de 2025.', 'Art. 11. Considera-se local da operação com: VIII - serviço de exploração de via, mediante cobrança de valor a qualquer título, incluindo tarifas, pedágios e quaisquer outras formas de cobrança, o território de cada Município e Estado, ou do Distrito Federal, proporcionalmente à correspondente extensão da via explorada', 'Art. 11, VIII', 'Padrão', 0, 0, 'N/A', 0, 0, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-11-19', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art11'),
 ('000', 'Tributação integral', '000003', 'Regime automotivo - projetos incentivados (art. 311)', 'Regime automotivo - projetos incentivados, observado o art. 311 da Lei Complementar nº 214, de 2025.', 'Art. 311. Em relação aos projetos habilitados à fruição dos benefícios estabelecidos pelo art. 11-C da Lei nº 9.440, de 14 de março de 1997, o crédito presumido de que trata o art. 309 desta Lei Complementar será calculado mediante a aplicação dos seguintes percentuais sobre o valor das vendas no mercado interno, em cada mês, dos produtos constantes nos projetos de que trata o art. 309, fabricados ou montados nos estabelecimentos incentivados:', 'Art. 311', 'Padrão', 0, 0, 'N/A', 0, 1, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-05-19', 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art311'),
@@ -15,7 +15,7 @@ INSERT INTO cad_tb_c_ctr (cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_c
 -- CST-IBS/CBS: 010 - Tributação com alíquotas uniformes
 -- ============================================================
 
-INSERT INTO cad_tb_c_ctr (cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib, lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc, ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred, d_inivig, d_fimvig, dataatualizacao, indnfeabi, indnfe, indnfce, indcte, indcteos, indbpe, indbpeta, indbpetm, indnf3e, indnfse, indnfse_via, indnfcom, indnfag, indnfgas, inddere, anexo, link) VALUES
+INSERT INTO cad_tb_c_ctr (id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib, lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc, ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred, d_inivig, d_fimvig, dataatualizacao, indnfeabi, indnfe, indnfce, indcte, indcteos, indbpe, indbpeta, indbpetm, indnf3e, indnfse, indnfse_via, indnfcom, indnfag, indnfgas, inddere, anexo, link) VALUES
 ('010', 'Tributação com alíquotas uniformes - operações do FGTS', '010001', 'Operações do FGTS não realizadas pela Caixa Econômica Federal', 'Operações do FGTS não realizadas pela Caixa Econômica Federal, observado o art. 212 da Lei Complementar nº 214, de 2025.', 'Art. 212. As operações relacionadas ao Fundo de Garantia do Tempo de Serviço (FGTS) ficam sujeitas à incidência do IBS e da CBS, por alíquota nacionalmente uniforme, a ser fixada de modo a manter a carga tributária incidente sobre essas operações. § 3º Ficam sujeitas: II - às alíquotas necessárias para manter a carga tributária, as operações previstas nos incisos II e III do § 2º deste artigo.', 'Art. 212', 'Uniforme setorial', 0, 0, 'N/A', 0, 0, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-05-19', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art212'),
 ('010', 'Tributação com alíquotas uniformes - operações setor financeiro', '010002', 'Operações do serviço financeiro', 'Operações do serviço financeiro', 'Art. 233. De 2027 a 2033, as alíquotas do IBS e da CBS incidentes sobre os serviços financeiros de que trata o art. 189 desta Lei Complementar serão fixadas de modo a manter a carga tributária incidente sobre as operações de crédito das instituições financeiras bancárias.', 'Art. 233', 'Uniforme setorial', 0, 0, 'N/A', 0, 0, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-11-19', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art233');
 
@@ -24,7 +24,7 @@ INSERT INTO cad_tb_c_ctr (cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_c
 -- CST-IBS/CBS: 011 - Tributação com alíquotas uniformes reduzidas
 -- ============================================================
 
-INSERT INTO cad_tb_c_ctr (cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib, lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc, ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred, d_inivig, d_fimvig, dataatualizacao, indnfeabi, indnfe, indnfce, indcte, indcteos, indbpe, indbpeta, indbpetm, indnf3e, indnfse, indnfse_via, indnfcom, indnfag, indnfgas, inddere, anexo, link) VALUES
+INSERT INTO cad_tb_c_ctr (id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib, lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc, ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred, d_inivig, d_fimvig, dataatualizacao, indnfeabi, indnfe, indnfce, indcte, indcteos, indbpe, indbpeta, indbpetm, indnf3e, indnfse, indnfse_via, indnfcom, indnfag, indnfgas, inddere, anexo, link) VALUES
 ('011', 'Tributação com alíquotas uniformes reduzidas em 60%', '011001', 'Planos de assistência funerária.', 'Planos de assistência funerária, observado o art. 236 da Lei Complementar nº 214, de 2025.', 'Art. 236. Os planos de assistência funerária ficam sujeitos ao disposto nos arts. 234 a 242 desta Lei Complementar.', 'Art. 236', 'Uniforme nacional (referência)', 60, 60, 'N/A', 0, 0, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-05-19', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art236'),
 ('011', 'Tributação com alíquotas uniformes reduzidas em 60%', '011002', 'Planos de assistência à saúde', 'Planos de assistência à saúde, observado o art. 237 da Lei Complementar nº 214, de 2025.', 'Art. 237. As alíquotas de IBS e de CBS no regime específico de planos de assistência à saúde são nacionalmente uniformes e correspondem às alíquotas de referência de cada esfera federativa, reduzidas em 60% (sessenta por cento).', 'Art. 237', 'Uniforme nacional (referência)', 60, 60, 'N/A', 0, 0, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-05-19', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art237'),
 ('011', 'Tributação com alíquotas uniformes reduzidas em 60%', '011003', 'Intermediação de planos de assistência à saúde', 'Intermediação de planos de assistência à saúde, observado o art. 240 da Lei Complementar nº 214, de 2025.', 'Art. 240. Os serviços de intermediação de planos de assistência à saúde ficam sujeitos à incidência do IBS e da CBS sobre o valor da operação pela mesma alíquota aplicável ao plano de assistência à saúde.', 'Art. 240', 'Uniforme nacional (referência)', 60, 60, 'N/A', 0, 0, 0, 0, 0, 0, 0, '2026-01-01', NULL, '2025-05-19', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, NULL, 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art240'),
@@ -38,7 +38,7 @@ INSERT INTO cad_tb_c_ctr (cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_c
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -72,7 +72,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -113,7 +113,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -141,7 +141,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -169,7 +169,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -202,7 +202,7 @@ INSERT INTO cad_tb_c_ctr (
  II - a alíquota é a mesma aplicável aos serviços de hotelaria, parques de diversão e parques temáticos;','Art. 289, II','Padrão',40,40,'N/A',0,0,0,0,0,0,0,'2026-01-01',NULL,'2025-05-19',0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,NULL,'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art289');
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -236,7 +236,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -258,7 +258,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -275,7 +275,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -291,7 +291,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -308,7 +308,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -355,7 +355,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -394,7 +394,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -460,7 +460,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -480,7 +480,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -501,7 +501,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -527,7 +527,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -556,7 +556,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -582,7 +582,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -600,7 +600,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -616,7 +616,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -637,7 +637,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
@@ -664,7 +664,7 @@ INSERT INTO cad_tb_c_ctr (
 -- ============================================================
 
 INSERT INTO cad_tb_c_ctr (
-  cst_ibs_cbs, descricao_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
+  id_cst_ibs_cbs, descricao_id_cst_ibs_cbs, cclasstrib, nome_cclasstrib, descricao_cclasstrib,
   lc_redacao, lc_214_25, tipo_aliquota, predibs, predbcbs, ind_reductorbc,
   ind_gtribregular, ind_gcredpresoper, ind_gmonopadrao, ind_gmonoreten, ind_gmonoret, ind_gmonodif, ind_gestornocred,
   d_inivig, d_fimvig, dataatualizacao,
