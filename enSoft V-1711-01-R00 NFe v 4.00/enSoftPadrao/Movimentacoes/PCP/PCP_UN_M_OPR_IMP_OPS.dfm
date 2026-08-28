@@ -2,8 +2,8 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
-  ClientHeight = 205
-  ClientWidth = 447
+  ClientHeight = 204
+  ClientWidth = 446
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,16 +18,17 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 447
+    Width = 446
     Height = 30
     Align = alTop
     Color = 3355443
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 447
     object Label1: TLabel
       Left = 1
       Top = 1
-      Width = 445
+      Width = 444
       Height = 28
       Align = alClient
       Alignment = taCenter
@@ -47,11 +48,13 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
   object pnlPrincipal: TPanel
     Left = 0
     Top = 30
-    Width = 447
-    Height = 175
+    Width = 446
+    Height = 174
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 447
+    ExplicitHeight = 175
     object pnlDados: TPanel
       Left = 1
       Top = 16
@@ -263,6 +266,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       '     '
       'procedure Page1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      ''
       '  {if (<xCor> = '#39'False'#39') and (<xTamanho> = '#39'False'#39') then'
       '     begin'
       '       MemoC.visible := false;'
@@ -311,6 +315,13 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      '   if <opcao_rel> = 1 then'
+      '      begin'
+      
+        '        MasterQP.Text := <PCP_DB_M_OPR_OPP."qtde_a_produzir">;  ' +
+        '                                                                ' +
+        '                                              '
+      '      end;  '
       '//  mmPcpObs.Visible := false;    '
       
         '//  if trim(<PCP_DB_M_OPR_OPP."obs_producao">) = '#39#39' then        ' +
@@ -384,6 +395,17 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       ''
       'end;'
       ''
+      'procedure MasterData2OnBeforePrint(Sender: TfrxComponent);'
+      'begin'
+      '  if <opcao_rel> = 1 then'
+      '      begin'
+      
+        '        memo_qtd_col_espumas.Text := <PCP_DB_M_OPR_OPP."qtde_a_p' +
+        'roduzir">;                                                      ' +
+        '                                                          '
+      '      end;  '
+      'end;'
+      ''
       'begin'
       ''
       'end.')
@@ -426,6 +448,10 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       item
         Name = 'ft_Ano_Colagem'
         Value = Null
+      end
+      item
+        Name = 'opcao_rel'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -445,7 +471,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 19.677180000000000000
-        Top = 653.858690000000000000
+        Top = 521.575140000000000000
         Width = 1084.725110000000000000
         object Memo25: TfrxMemoView
           Left = 457.323130000000000000
@@ -510,7 +536,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 131.966843070000000000
-        Top = 18.897650000000000000
         Width = 1084.725110000000000000
         OnBeforePrint = 'PageHeader1OnBeforePrint'
         Stretched = True
@@ -783,7 +808,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 85.385900000000000000
-        Top = 211.653680000000000000
+        Top = 173.858380000000000000
         Width = 1084.725110000000000000
         ReprintOnNewPage = True
         object Shape31: TfrxShapeView
@@ -1299,7 +1324,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 42.708673620000000000
-        Top = 347.716760000000000000
+        Top = 272.126160000000000000
         Width = 1084.725110000000000000
         OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = PCP_DB_M_OPR_OPP
@@ -1520,7 +1545,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 2.478925390000000000
-        Top = 321.260050000000000000
+        Top = 264.567100000000000000
         Width = 1084.725110000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_M_OPR_OPP."int_id_grupo"'
@@ -1529,7 +1554,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 3.779527560000000000
-        Top = 411.968770000000000000
+        Top = 317.480520000000000000
         Width = 1084.725110000000000000
         OnBeforePrint = 'GroupFooter1OnBeforePrint'
         object Line2: TfrxLineView
@@ -1543,7 +1568,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object ReportSummary2: TfrxReportSummary
         FillType = ftBrush
         Height = 154.960730000000000000
-        Top = 476.220780000000000000
+        Top = 362.834880000000000000
         Width = 1084.725110000000000000
         object Shape34: TfrxShapeView
           Left = 399.102660000000000000
@@ -2081,7 +2106,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageFooter3: TfrxPageFooter
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 597.165740000000000000
+        Top = 464.882190000000000000
         Width = 1084.725110000000000000
         object Memo44: TfrxMemoView
           Left = 449.764070000000000000
@@ -2146,7 +2171,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageHeader3: TfrxPageHeader
         FillType = ftBrush
         Height = 120.771157690000000000
-        Top = 18.897650000000000000
         Width = 1084.725110000000000000
         OnBeforePrint = 'PageHeader1OnBeforePrint'
         Stretched = True
@@ -2419,7 +2443,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object ReportSummary3: TfrxReportSummary
         FillType = ftBrush
         Height = 117.165430000000000000
-        Top = 457.323130000000000000
+        Top = 343.937230000000000000
         Width = 1084.725110000000000000
         object Shape5: TfrxShapeView
           Left = 2.267718970000000000
@@ -2603,7 +2627,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object Header2: TfrxHeader
         FillType = ftBrush
         Height = 74.811070000000000000
-        Top = 200.315090000000000000
+        Top = 162.519790000000000000
         Width = 1084.725110000000000000
         ReprintOnNewPage = True
         object Memo43: TfrxMemoView
@@ -2947,9 +2971,9 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object MasterData2: TfrxMasterData
         FillType = ftBrush
         Height = 42.708673620000000000
-        Top = 328.819110000000000000
+        Top = 253.228510000000000000
         Width = 1084.725110000000000000
-        OnBeforePrint = 'MasterData1OnBeforePrint'
+        OnBeforePrint = 'MasterData2OnBeforePrint'
         DataSet = PCP_DB_M_OPR_OPP
         DataSetName = 'PCP_DB_M_OPR_OPP'
         RowCount = 0
@@ -3000,7 +3024,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
             '[PCP_DB_M_OPR_OPP."id_item"]')
           ParentFont = False
         end
-        object Memo63: TfrxMemoView
+        object memo_qtd_col_espumas: TfrxMemoView
           Left = 460.968770000000000000
           Top = 7.779530000000000000
           Width = 32.241068460000000000
@@ -3144,7 +3168,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupHeader1: TfrxGroupHeader
         FillType = ftBrush
         Height = 6.258455390000000000
-        Top = 298.582870000000000000
+        Top = 241.889920000000000000
         Width = 1084.725110000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_M_OPR_OPP."int_id_grupo"'
@@ -3153,7 +3177,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupFooter2: TfrxGroupFooter
         FillType = ftBrush
         Height = 3.779527560000000000
-        Top = 393.071120000000000000
+        Top = 298.582870000000000000
         Width = 1084.725110000000000000
         OnBeforePrint = 'GroupFooter1OnBeforePrint'
         object Line4: TfrxLineView
@@ -3325,6 +3349,16 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      ''
+      '   if <opcao_rel> = 1 then'
+      '      begin'
+      
+        '        MasterQP.Text := <PCP_DB_M_OPR_OPP."qtde_a_produzir">;  ' +
+        '                                                                ' +
+        '                                              '
+      '      end;  '
+      ''
+      '    '
       '//  mmPcpObs.Visible := false;    '
       
         '//  if trim(<PCP_DB_M_OPR_OPP."obs_producao">) = '#39#39' then        ' +
@@ -3365,6 +3399,11 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       
         'procedure MasterCOnMouseMove(Sender: TfrxComponent; Shift: Integ' +
         'er; X, Y: Integer);'
+      'begin'
+      ''
+      'end;'
+      ''
+      'procedure MasterQPOnBeforePrint(Sender: TfrxComponent);'
       'begin'
       ''
       'end;'
@@ -3411,6 +3450,10 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       item
         Name = 'ft_AnoCorteCostura'
         Value = ''
+      end
+      item
+        Name = 'opcao_rel'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -3429,7 +3472,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 574.488560000000000000
+        Top = 442.205010000000000000
         Width = 718.110700000000000000
         object Memo25: TfrxMemoView
           Left = 302.362400000000000000
@@ -3494,7 +3537,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 139.525903070000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'PageHeader1OnBeforePrint'
         Stretched = True
@@ -3770,7 +3812,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 75.385900000000000000
-        Top = 219.212740000000000000
+        Top = 181.417440000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
         object Memo22: TfrxMemoView
@@ -3948,7 +3990,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 25.322834650000000000
-        Top = 343.937230000000000000
+        Top = 268.346630000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = PCP_DB_M_OPR_OPP
@@ -4033,6 +4075,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
           Top = 1.779530000000000000
           Width = 62.477308460000000000
           Height = 15.118120000000000000
+          OnBeforePrint = 'MasterQPOnBeforePrint'
           DataSet = PCP_DB_M_OPR_OPP
           DataSetName = 'PCP_DB_M_OPR_OPP'
           Font.Charset = DEFAULT_CHARSET
@@ -4109,7 +4152,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 2.478925390000000000
-        Top = 317.480520000000000000
+        Top = 260.787570000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_M_OPR_OPP."int_id_grupo"'
@@ -4117,7 +4160,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 5.754103080000000000
-        Top = 393.071120000000000000
+        Top = 298.582870000000000000
         Width = 718.110700000000000000
         object Line2: TfrxLineView
           Left = 2.307692310000000000
@@ -4130,7 +4173,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object ReportSummary1: TfrxReportSummary
         FillType = ftBrush
         Height = 90.708720000000000000
-        Top = 461.102660000000000000
+        Top = 347.716760000000000000
         Width = 718.110700000000000000
         object Line4: TfrxLineView
           Left = 2.307692310000000000
@@ -4221,6 +4264,15 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      ''
+      '   if <opcao_rel> = 1 then'
+      '      begin'
+      
+        '        MasterQP.Text := <PCP_DB_M_OPR_OPP."qtde_a_produzir">;  ' +
+        '                                                                ' +
+        '                                              '
+      '      end;'
+      '        '
       '//  mmPcpObs.Visible := false;    '
       
         '//  if trim(<PCP_DB_M_OPR_OPP."obs_producao">) = '#39#39' then        ' +
@@ -4310,6 +4362,10 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       item
         Name = 'CubPed'
         Value = Null
+      end
+      item
+        Name = 'opcao_rel'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -4328,7 +4384,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 411.968770000000000000
+        Top = 298.582870000000000000
         Width = 718.110700000000000000
         object Memo25: TfrxMemoView
           Left = 302.362400000000000000
@@ -4393,7 +4449,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 116.848723070000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'PageHeader1OnBeforePrint'
         Stretched = True
@@ -4661,7 +4716,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 55.149660000000000000
-        Top = 196.535560000000000000
+        Top = 158.740260000000000000
         Width = 718.110700000000000000
         ReprintOnNewPage = True
         object Memo22: TfrxMemoView
@@ -4787,7 +4842,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 17.763774650000000000
-        Top = 302.362400000000000000
+        Top = 226.771800000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = PCP_DB_M_OPR_OPP
@@ -4908,7 +4963,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 2.478925390000000000
-        Top = 275.905690000000000000
+        Top = 219.212740000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_M_OPR_OPP."int_id_grupo"'
@@ -4916,7 +4971,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 5.754103080000000000
-        Top = 343.937230000000000000
+        Top = 249.448980000000000000
         Width = 718.110700000000000000
         object Line2: TfrxLineView
           Left = 2.307692310000000000
@@ -4993,6 +5048,13 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      '   if <opcao_rel> = 1 then'
+      '      begin'
+      
+        '        MasterQP.Text := <PCP_DB_M_OPR_OPP."qtde_a_produzir">;  ' +
+        '                                                                ' +
+        '                                              '
+      '      end;  '
       '//  mmPcpObs.Visible := false;    '
       
         '//  if trim(<PCP_DB_M_OPR_OPP."obs_producao">) = '#39#39' then        ' +
@@ -5079,6 +5141,10 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       item
         Name = 'ft_Ano_Bordadeira'
         Value = ''
+      end
+      item
+        Name = 'opcao_rel'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -5098,7 +5164,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 642.520100000000000000
+        Top = 510.236550000000000000
         Width = 1046.929810000000000000
         object Memo25: TfrxMemoView
           Left = 468.661720000000000000
@@ -5163,7 +5229,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 128.187313070000000000
-        Top = 18.897650000000000000
         Width = 1046.929810000000000000
         OnBeforePrint = 'PageHeader1OnBeforePrint'
         Stretched = True
@@ -5440,7 +5505,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 66.488250000000000000
-        Top = 207.874150000000000000
+        Top = 170.078850000000000000
         Width = 1046.929810000000000000
         ReprintOnNewPage = True
         object Memo22: TfrxMemoView
@@ -5774,7 +5839,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 25.322834650000000000
-        Top = 325.039580000000000000
+        Top = 249.448980000000000000
         Width = 1046.929810000000000000
         OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = PCP_DB_M_OPR_OPP
@@ -5961,7 +6026,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 2.478925390000000000
-        Top = 298.582870000000000000
+        Top = 241.889920000000000000
         Width = 1046.929810000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_M_OPR_OPP."int_id_grupo"'
@@ -5969,7 +6034,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 5.754103080000000000
-        Top = 374.173470000000000000
+        Top = 279.685220000000000000
         Width = 1046.929810000000000000
         object Line2: TfrxLineView
           Left = 2.307692310000000000
@@ -5982,7 +6047,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object ReportSummary1: TfrxReportSummary
         FillType = ftBrush
         Height = 177.637910000000000000
-        Top = 442.205010000000000000
+        Top = 328.819110000000000000
         Width = 1046.929810000000000000
         object Shape7: TfrxShapeView
           Top = 25.236240000000000000
@@ -6263,6 +6328,14 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      '  if <opcao_rel> = 1 then'
+      '      begin'
+      
+        '        MasterQP.Text := <PCP_DB_M_OPR_OPP."qtde_a_produzir">;  ' +
+        '                                                                ' +
+        '                                              '
+      '      end;  '
+      '              '
       '//  mmPcpObs.Visible := false;    '
       
         '//  if trim(<PCP_DB_M_OPR_OPP."obs_producao">) = '#39#39' then        ' +
@@ -6338,6 +6411,10 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       item
         Name = 'CubPed'
         Value = ''
+      end
+      item
+        Name = 'opcao_rel'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -6356,7 +6433,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 442.205010000000000000
+        Top = 328.819110000000000000
         Width = 718.110700000000000000
         object Memo25: TfrxMemoView
           Left = 302.362400000000000000
@@ -6421,7 +6498,6 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 139.525903070000000000
-        Top = 18.897650000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'PageHeader1OnBeforePrint'
         Stretched = True
@@ -6712,7 +6788,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object Header1: TfrxHeader
         FillType = ftBrush
         Height = 55.149660000000000000
-        Top = 219.212740000000000000
+        Top = 181.417440000000000000
         Width = 718.110700000000000000
         object Memo22: TfrxMemoView
           Top = 22.692950000000000000
@@ -6835,8 +6911,8 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 25.322834645669290000
-        Top = 325.039580000000000000
+        Height = 25.322834650000000000
+        Top = 249.448980000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = PCP_DB_M_OPR_OPP
@@ -6973,7 +7049,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupHeader2: TfrxGroupHeader
         FillType = ftBrush
         Height = 2.478925390000000000
-        Top = 298.582870000000000000
+        Top = 241.889920000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupHeader2OnBeforePrint'
         Condition = 'PCP_DB_M_OPR_OPP."int_id_grupo"'
@@ -6981,7 +7057,7 @@ object PCP_FM_M_OPR_IMP_OPS: TPCP_FM_M_OPR_IMP_OPS
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 5.754103080000000000
-        Top = 374.173470000000000000
+        Top = 279.685220000000000000
         Width = 718.110700000000000000
         object Line2: TfrxLineView
           Left = 2.307692310000000000

@@ -27,7 +27,7 @@ object ServidorMetodos: TServidorMetodos
       'BlobSize=-1'
       'HostName=localhost'
       'SchemaName=public'
-      'Database=enSoftGloboP090426'
+      'Database=enSoftGloboP100526'
       'User_Name=postgres'
       'Password=ssq#0609'
       'EnableBCD=True')
@@ -760,17 +760,17 @@ object ServidorMetodos: TServidorMetodos
   object FAT_SQ_R_PED_ITE: TSQLDataSet
     CommandText = 
       'select pte.id_pedido, pte.id_item,  pte.id_cor, pte.id_tamanho,'#13 +
-      #10'       pte.qtde,  pte.vlr_unitario, pte.vlr_desconto, pte.vlr_l' +
-      'iquido,'#13#10'       ite.descricao as int_nomeite, cor.descricao as i' +
-      'nt_nomecor,'#13#10'       ite.id_und_venda int_id_und_venda ,'#13#10'       ' +
-      'gru.tipo_item  as  int_tipo_item ,'#13#10'       tam.descricao as int_' +
-      'nometam,'#13#10'       pte.per_desc_basico, pte.vlr_desc_basico, '#13#10'   ' +
-      '    pte.per_desc_especial, pte.vlr_desc_especial '#13#10'from fat_tb_m' +
-      '_ped_ite pte'#13#10'left outer join cad_tb_c_ite ite on ite.id_item = ' +
-      'pte.id_item'#13#10'left outer join cad_tb_c_gru gru on gru.id_grupo = ' +
-      'ite.id_grupo'#13#10'left outer join cad_tb_c_cor cor on cor.id_cor = p' +
-      'te.id_cor'#13#10'left outer join cad_tb_c_tam tam on tam.id_tamanho = ' +
-      'pte.id_tamanho'#13#10'where pte.id_pedido=:id_pedido'
+      #10'       pte.qtde,  pte.vlr_unitario, pte.per_desconto, pte.vlr_d' +
+      'esconto, pte.vlr_liquido,'#13#10'       ite.descricao as int_nomeite, ' +
+      'cor.descricao as int_nomecor,'#13#10'       ite.id_und_venda int_id_un' +
+      'd_venda ,'#13#10'       gru.tipo_item  as  int_tipo_item ,'#13#10'       tam' +
+      '.descricao as int_nometam,'#13#10'       pte.per_desc_basico, pte.vlr_' +
+      'desc_basico, '#13#10'       pte.per_desc_especial, pte.vlr_desc_especi' +
+      'al '#13#10'from fat_tb_m_ped_ite pte'#13#10'left outer join cad_tb_c_ite ite' +
+      ' on ite.id_item = pte.id_item'#13#10'left outer join cad_tb_c_gru gru ' +
+      'on gru.id_grupo = ite.id_grupo'#13#10'left outer join cad_tb_c_cor cor' +
+      ' on cor.id_cor = pte.id_cor'#13#10'left outer join cad_tb_c_tam tam on' +
+      ' tam.id_tamanho = pte.id_tamanho'#13#10'where pte.id_pedido=:id_pedido'
     DataSource = FAT_DS_R_PED
     MaxBlobSize = -1
     Params = <
@@ -879,6 +879,9 @@ object ServidorMetodos: TServidorMetodos
       FieldName = 'vlr_desc_especial'
       Precision = 18
       Size = 4
+    end
+    object FAT_CD_R_PED_ITEper_desconto: TFloatField
+      FieldName = 'per_desconto'
     end
   end
   object FAT_CD_R_PED_TIT: TClientDataSet

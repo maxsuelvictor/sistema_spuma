@@ -211,6 +211,7 @@ type
     FAT_CD_R_PEDvlr_desc_especial: TFMTBCDField;
     FAT_CD_R_PEDcubagem: TFloatField;
     FAT_CD_R_PED_TITdias: TIntegerField;
+    FAT_CD_R_PED_ITEper_desconto: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
   private
     function updateEnviarFrutas(const Dados: TJSONArray): TJSONObject;
@@ -916,6 +917,7 @@ begin
                  jsoItens.AddPair('id_tamanho',        FAT_CD_R_PED_ITE.FieldByName('id_tamanho').AsString);
                  jsoItens.AddPair('qtde',              FAT_CD_R_PED_ITE.FieldByName('qtde').AsString);
                  jsoItens.AddPair('vlr_unitario',      FAT_CD_R_PED_ITE.FieldByName('vlr_unitario').AsString);
+                 jsoItens.AddPair('per_desconto',      FAT_CD_R_PED_ITE.FieldByName('per_desconto').AsString);
                  jsoItens.AddPair('vlr_desconto',      FAT_CD_R_PED_ITE.FieldByName('vlr_desconto').AsString);
                  jsoItens.AddPair('vlr_liquido',       FAT_CD_R_PED_ITE.FieldByName('vlr_liquido').AsString);
 
@@ -1633,7 +1635,7 @@ begin
     FAT_SQ_R_PED.CommandText :=
 
         ' SELECT ' +
-        '   ped.id_pedido, ped.dta_pedido, ped.vlr_bruto, ped.vlr_desconto, ped.vlr_liquido, ' +
+        '   ped.id_empresa,ped.id_pedido, ped.id_cliente, ped.dta_pedido, ped.vlr_bruto, ped.vlr_desconto, ped.vlr_liquido, ' +
         '   ped.id_cliente as int_codcli, cli.nome as int_nomecli, tme.descricao as int_nometme, ' +
         '   fun.nome as int_nomefun, ' +
         '   case ' +
@@ -1664,8 +1666,8 @@ begin
         '           when (ped.situacao = 4) then ''Cancelado''' + #13#10 +
         '         end as varchar(20) ) as int_sit_pedido_detalhado, ' +
         ' cli.doc_ie_identidade as int_ie_rg_cli, ' +
-        ' par.emp_fantasia as int_empfantasia, nfe.dta_emissao as dta_emissao_nfe, ors.id_ors as ordem_fat '+
-        ' ' +
+        ' par.emp_fantasia as int_empfantasia, nfe.dta_emissao as dta_emissao_nfe, ors.id_ors as ordem_fat, '+
+        ' ped.per_desc_basico, ped.vlr_desc_basico, ped.per_desc_especial, ped.vlr_desc_especial, ped.cubagem ' +
         ' from fat_tb_m_ped ped '+
        '    left outer join cad_tb_c_cli cli on cli.id_cliente = ped.id_cliente '+
         '    left outer join cad_tb_c_tme tme on tme.id_tipo_mov_estoque = ped.id_tipo_mov_estoque '+
@@ -1737,7 +1739,15 @@ begin
                  jsoItens.AddPair('id_tamanho',        FAT_CD_R_PED_ITE.FieldByName('id_tamanho').AsString);
                  jsoItens.AddPair('qtde',              FAT_CD_R_PED_ITE.FieldByName('qtde').AsString);
                  jsoItens.AddPair('vlr_unitario',      FAT_CD_R_PED_ITE.FieldByName('vlr_unitario').AsString);
+                 jsoItens.AddPair('per_desconto',      FAT_CD_R_PED_ITE.FieldByName('vlr_desconto').AsString);
                  jsoItens.AddPair('vlr_desconto',      FAT_CD_R_PED_ITE.FieldByName('vlr_desconto').AsString);
+
+                 jsoItens.AddPair('per_desc_basico',   FAT_CD_R_PED_ITE.FieldByName('per_desc_basico').AsString);
+                 jsoItens.AddPair('vlr_desc_basico',   FAT_CD_R_PED_ITE.FieldByName('vlr_desc_basico').AsString);
+
+                 jsoItens.AddPair('per_desc_especial', FAT_CD_R_PED_ITE.FieldByName('per_desc_especial').AsString);
+                 jsoItens.AddPair('vlr_desc_especial', FAT_CD_R_PED_ITE.FieldByName('vlr_desc_especial').AsString);
+
                  jsoItens.AddPair('vlr_liquido',       FAT_CD_R_PED_ITE.FieldByName('vlr_liquido').AsString);
                  jsoItens.AddPair('int_nomeite',       FAT_CD_R_PED_ITE.FieldByName('int_nomeite').AsString);
                  jsoItens.AddPair('int_nomecor',       FAT_CD_R_PED_ITE.FieldByName('int_nomecor').AsString);

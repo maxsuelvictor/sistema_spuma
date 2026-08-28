@@ -246,6 +246,7 @@ begin
             PCP_FR_M_OPR_ITE_BOR.Variables['CubPed'] := QuotedStr(CurrToStr(Cubagem));
             PCP_FR_M_OPR_ITE_BOR.Variables['Assin_enorth'] := QuotedStr(CAssin_Enorth);
             PCP_FR_M_OPR_ITE_BOR.Variables['ft_Ano_Bordadeira'] := QuotedStr(IntToStr(ano));
+            PCP_FR_M_OPR_ITE_BOR.Variables['opcao_rel'] := QuotedStr(opcao_rel);
             PCP_FR_M_OPR_ITE_BOR.PrepareReport();
             PCP_FR_M_OPR_ITE_BOR.ShowReport();
          end;
@@ -270,6 +271,7 @@ begin
             PCP_FR_M_OPR_ITE_COL.Variables['CubPed'] := QuotedStr(CurrToStr(Cubagem));
             PCP_FR_M_OPR_ITE_COL.Variables['Assin_enorth'] := QuotedStr(CAssin_Enorth);
             PCP_FR_M_OPR_ITE_COL.Variables['ft_Ano_Colagem'] := QuotedStr(IntToStr(ano));
+            PCP_FR_M_OPR_ITE_COL.Variables['opcao_rel'] := QuotedStr(opcao_rel);
             PCP_FR_M_OPR_ITE_COL.PrepareReport();
             PCP_FR_M_OPR_ITE_COL.ShowReport();
          end;
@@ -294,6 +296,7 @@ begin
             PCP_FR_M_OPR_ITE_CCT.Variables['CubPed'] := QuotedStr(CurrToStr(Cubagem));
             PCP_FR_M_OPR_ITE_CCT.Variables['Assin_enorth'] := QuotedStr(CAssin_Enorth);
             PCP_FR_M_OPR_ITE_CCT.Variables['ft_AnoCorteCostura'] := QuotedStr(IntToStr(ano));
+            PCP_FR_M_OPR_ITE_CCT.Variables['opcao_rel'] := QuotedStr(opcao_rel);
             PCP_FR_M_OPR_ITE_CCT.PrepareReport();
             PCP_FR_M_OPR_ITE_CCT.ShowReport();
          end;
@@ -305,6 +308,7 @@ begin
             PCP_FR_M_OPR_ITE_MTB.Variables['VlrLiqPed'] := QuotedStr(FormatCurr('R$ ###,###,###,##0.00', TotLiq));
             PCP_FR_M_OPR_ITE_MTB.Variables['CubPed'] := QuotedStr(CurrToStr(Cubagem));
             PCP_FR_M_OPR_ITE_MTB.Variables['Assin_enorth'] := QuotedStr(CAssin_Enorth);
+            PCP_FR_M_OPR_ITE_MTB.Variables['opcao_rel'] := QuotedStr(opcao_rel);
             PCP_FR_M_OPR_ITE_MTB.PrepareReport();
             PCP_FR_M_OPR_ITE_MTB.ShowReport();
          end;
@@ -316,6 +320,7 @@ begin
             PCP_FR_M_OPR_ITE.Variables['VlrLiqPed'] := QuotedStr(FormatCurr('R$ ###,###,###,##0.00', TotLiq));
             PCP_FR_M_OPR_ITE.Variables['CubPed'] := QuotedStr(CurrToStr(Cubagem));
             PCP_FR_M_OPR_ITE.Variables['Assin_enorth'] := QuotedStr(CAssin_Enorth);
+            PCP_FR_M_OPR_ITE.Variables['opcao_rel'] := QuotedStr(opcao_rel);
             PCP_FR_M_OPR_ITE.PrepareReport();
             PCP_FR_M_OPR_ITE.ShowReport();
          end;

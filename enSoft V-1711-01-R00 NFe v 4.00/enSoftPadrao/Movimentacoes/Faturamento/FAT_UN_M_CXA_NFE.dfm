@@ -486,10 +486,6 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
       TabPosition = tpBottom
       object tsItens: TTabSheet
         Caption = 'Itens'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dgItens: TwwDBGrid
           AlignWithMargins = True
           Left = 2
@@ -608,10 +604,6 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
         Caption = 'Informa'#231#227'o fiscal'
         ImageIndex = 2
         OnExit = tsInfFiscalExit
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object txtNfeObs: TDBMemo
           Left = 0
           Top = 0
@@ -699,10 +691,6 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
         Caption = 'Pedidos da produ'#231#227'o'
         ImageIndex = 3
         OnShow = tsPedidosProdShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label14: TLabel
           Left = 8
           Top = 8
@@ -1570,6 +1558,15 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
         Caption = 'Usa Reforma tribut'#225'ria'
         Enabled = False
         TabOrder = 23
+      end
+      object btnDispSefaz: TButton
+        Left = 239
+        Top = 118
+        Width = 130
+        Height = 22
+        Caption = 'Disponibilidade Sefaz'
+        TabOrder = 24
+        OnClick = btnDispSefazClick
       end
     end
     object Button1: TButton
@@ -3308,7 +3305,7 @@ object FAT_FM_M_CXA_NFE: TFAT_FM_M_CXA_NFE
     Left = 548
     Top = 112
     Bitmap = {
-      494C010101000800B00410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101000800C00410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       000000000000000000000000000000000000EAD999FFEAD999FFEAD999FFEAD9
       99FFEAD999FFEAD999FFEAD999FFEAD999FFEAD999FFEAD999FFEAD999FFEAD9

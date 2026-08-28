@@ -8,7 +8,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
   vcl.wwdatsrc, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, Vcl.Mask, Vcl.DBCtrls,
-  ACBrNFe,pcnConversao,pnfsConversao, pcnConversaoNFe, ACBrNFeDANFEClass, ACBrUtil,
+  ACBrNFe,pcnConversao,pnfsConversao, ACBrNFeDANFEClass, ACBrUtil,
   ACBRNFe.XmlWriter,
   //pcnNFeW,
   pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil, Math,
@@ -19,7 +19,7 @@ uses
   ACBrNFeDANFeESCPOS, ACBrBase, ACBrDFe, ACBrMail, ACBrNFSe, RDprint,
   ACBrDFeReport, ACBrDFeDANFeReport, Data.DBXDataSnap, IPPeerClient, System.IniFiles,
   Data.DBXCommon, Data.SqlExpr, Datasnap.DBClient, vcl.Wwdbedit,
-  Datasnap.DSConnect;
+  Datasnap.DSConnect, ShellAPI;
 
 
 type
@@ -386,6 +386,7 @@ type
     cbTimeServices: TComboBox;
     Label24: TLabel;
     chkReformaTributaria: TCheckBox;
+    btnDispSefaz: TButton;
     procedure btnImprimeNFEClick(Sender: TObject);
     procedure btnNotaFiscalClick(Sender: TObject);
     procedure btnVerificaServicoClick(Sender: TObject);
@@ -450,6 +451,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure miFaturaSemPedidoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure btnDispSefazClick(Sender: TObject);
   private
     { Private declarations }
     procedure LoadXML(RetWS: String; MyWebBrowser: TWebBrowser);
@@ -488,7 +490,7 @@ uses FileCtrl, ufrmStatus, ACBrNFeNotasFiscais, DateUtils,uDmGeral,enFunc,
   FIN_RN_M_BOL, CAD_UN_C_CTC, PSQ_UN_X_CTC, CAD_UN_R_E01, FAT_UN_M_CXA_NFE_FPG,
   FAT_RN_M_NFE, FAT_UN_M_CXA_NFE_MAQ, Unit1,ACBrDFeSSL, FAT_UN_M_CXA_NFE_NCF,
   FAT_UN_M_LIB, FAT_UN_M_CXA_NFE_IMP, FAT_UN_M_CXA_NFE_CAN,
-  FAT_UN_M_CXA_NFE_CRT, uNfse, ACBrNFe.Classes,   ACBrDFe.Conversao;
+  FAT_UN_M_CXA_NFE_CRT, uNfse, ACBrNFe.Classes, ACBrDFe.Conversao, pcnConversaoNFe;
   //pcnNFe
 
 const
@@ -1259,6 +1261,21 @@ end;
 procedure TFAT_FM_M_CXA_NFE.btnDesfazerPreVendaClick(Sender: TObject);
 begin
   FAT_RN_M_CXA.FatDesfazerPreVendaCxa;
+end;
+
+procedure TFAT_FM_M_CXA_NFE.btnDispSefazClick(Sender: TObject);
+const
+  URL_DISPONIBILIDADE_NFE =
+    'https://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx';
+begin
+  ShellExecute(
+    Handle,
+    'open',
+    PChar(URL_DISPONIBILIDADE_NFE),
+    nil,
+    nil,
+    SW_SHOWNORMAL
+  );
 end;
 
 procedure TFAT_FM_M_CXA_NFE.btnEnviarEmailClick(Sender: TObject);
@@ -3791,7 +3808,102 @@ end;
 
 
 procedure TFAT_FM_M_CXA_NFE.btnVerificaServicoClick(Sender: TObject);
+var
+  Status: Integer;
+  Motivo: string;
 begin
+  Screen.Cursor := crHourGlass;
+
+  try
+    MemoDados.Clear;
+    MemoResp.Clear;
+    MemoRespWS.Clear;
+
+    NFe.Configuracoes.Arquivos.PathSalvar :=
+      ExtractFilePath(Application.ExeName) +
+      dmGeral.CAD_CD_C_PAR_NFE
+        .FieldByName('PATH_STATUS').AsString;
+
+    NFe.WebServices.StatusServico.Executar;
+
+    Status := NFe.WebServices.StatusServico.cStat;
+    Motivo := NFe.WebServices.StatusServico.xMotivo;
+
+    MemoResp.Lines.Text :=
+      NFe.WebServices.StatusServico.RetWS;
+
+    MemoRespWS.Lines.Text :=
+      NFe.WebServices.StatusServico.RetornoWS;
+
+    LoadXML(
+      NFe.WebServices.StatusServico.RetornoWS,
+      WBResposta
+    );
+
+    MemoDados.Lines.Add('STATUS DO SERVIÇO DA NF-e');
+    MemoDados.Lines.Add(
+      'UF: ' + NFe.Configuracoes.WebServices.UF
+    );
+    MemoDados.Lines.Add(
+      'Ambiente: ' +
+      TpAmbToStr(NFe.WebServices.StatusServico.tpAmb)
+    );
+    MemoDados.Lines.Add(
+      'Código: ' + IntToStr(Status)
+    );
+    MemoDados.Lines.Add(
+      'Motivo: ' + Motivo
+    );
+    MemoDados.Lines.Add(
+      'Versão: ' +
+      NFe.WebServices.StatusServico.verAplic
+    );
+    MemoDados.Lines.Add(
+      'Tempo médio: ' +
+      IntToStr(NFe.WebServices.StatusServico.TMed) +
+      ' segundo(s)'
+    );
+
+    if Status = 107 then
+      MessageDlg(
+        'SEFAZ-' + NFe.Configuracoes.WebServices.UF +
+        ' está em operação.' + sLineBreak +
+        'Código 107: ' + Motivo,
+        mtInformation,
+        [mbOK],
+        0
+      )
+    else
+      MessageDlg(
+        'A SEFAZ retornou uma situação diferente de operacional.' +
+        sLineBreak +
+        'Código: ' + IntToStr(Status) + sLineBreak +
+        'Motivo: ' + Motivo,
+        mtWarning,
+        [mbOK],
+        0
+      );
+
+  except
+    on E: Exception do
+      MessageDlg(
+        'Não foi possível consultar o serviço da NF-e.' +
+        sLineBreak + sLineBreak +
+        'UF configurada: ' +
+        NFe.Configuracoes.WebServices.UF +
+        sLineBreak +
+        'Erro: ' + E.Message,
+        mtError,
+        [mbOK],
+        0
+      );
+  end;
+
+  Screen.Cursor := crDefault;
+
+
+ {
+
  //v antigo
  //NFe.Configuracoes.Geral.PathSalvar := ExtractFilePath(Application.ExeName) +
  //  dmGeral.CAD_CD_C_PAR_NFE.FieldByName('PATH_STATUS').AsString;
@@ -3807,14 +3919,14 @@ begin
  // LoadXML(MemoResp, WBResposta);
  LoadXML(NFe.WebServices.StatusServico.RetornoWS, WBResposta);
  // v antigo
- {MemoDados.Lines.Clear;
- MemoDados.Lines.Add('Status Serviço');
- MemoDados.Lines.Add('  Ambiente: ' +TpAmbToStr(NFe.WebServices.StatusServico.tpAmb));
- MemoDados.Lines.Add('    Versão: ' +NFe.WebServices.StatusServico.verAplic);
- MemoDados.Lines.Add('    Status: ' +IntToStr(NFe.WebServices.StatusServico.cStat));
- MemoDados.Lines.Add('    Motivo: ' +NFe.WebServices.StatusServico.xMotivo);
- MemoDados.Lines.Add('        UF: ' +IntToStr(NFe.WebServices.StatusServico.cUF));
- MemoDados.Lines.Add('Observação: ' +NFe.WebServices.StatusServico.xObs);  }
+    // MemoDados.Lines.Clear;
+    // MemoDados.Lines.Add('Status Serviço');
+    // MemoDados.Lines.Add('  Ambiente: ' +TpAmbToStr(NFe.WebServices.StatusServico.tpAmb));
+    // MemoDados.Lines.Add('    Versão: ' +NFe.WebServices.StatusServico.verAplic);
+    // MemoDados.Lines.Add('    Status: ' +IntToStr(NFe.WebServices.StatusServico.cStat));
+    // MemoDados.Lines.Add('    Motivo: ' +NFe.WebServices.StatusServico.xMotivo);
+    // MemoDados.Lines.Add('        UF: ' +IntToStr(NFe.WebServices.StatusServico.cUF));
+    // MemoDados.Lines.Add('Observação: ' +NFe.WebServices.StatusServico.xObs);
 
  MemoDados.Lines.Add('Status Serviço');
  MemoDados.Lines.Add('tpAmb: '    +TpAmbToStr(NFe.WebServices.StatusServico.tpAmb));
@@ -3827,7 +3939,7 @@ begin
  MemoDados.Lines.Add('dhRetorno: '+DateTimeToStr(NFe.WebServices.StatusServico.dhRetorno));
  MemoDados.Lines.Add('xObs: '     +NFe.WebServices.StatusServico.xObs);
 
-
+ }
 
 end;
 
@@ -5546,6 +5658,7 @@ Var iSeq: Integer;
     NumParcela: Integer;
 
     vTotalAvistaVenctos: Currency;
+    VlrNFTot, Vlr_vItem: Currency;
 begin
 
   with NFe.NotasFiscais.Add.NFe do
@@ -6003,6 +6116,9 @@ begin
 
 
       iSeq := 0;
+
+      VlrNFTot  := 0;
+
       dmGeral.BUS_CD_M_NFE_ITE_CXA.First;
       while not dmGeral.BUS_CD_M_NFE_ITE_CXA.eof do
         begin
@@ -6068,6 +6184,7 @@ begin
              Prod.vSeg      := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('vlr_seguro').AsCurrency;
              Prod.vOutro    := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('vlr_outras_desp').AsCurrency;
              Prod.vDesc     := dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('vlr_desconto').AsCurrency;
+
 
              // Nota técnica: NT_2016_002_v1.42
              if dmGeral.CAD_CD_C_PAR_NFE.FieldByName('nfe_versao').AsInteger = 3 then  //  3 - Versão 4.00;    2- Versão 3.10
@@ -6657,6 +6774,25 @@ begin
                         IBSCBS.gCredPresIBSZFM.vCredPresIBSZFM := 100;   }
                     end;
               end;
+
+             // por Maxsuel Victor, em 29/07/2026, foi colocado devido a NT 2025.002-RTC — Portal Nacional da NF-e.
+
+             Vlr_vItem := SimpleRoundTo(
+                     dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('VLR_MERCADORIA').AsCurrency
+                         - dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('VLR_ICM_DESC').AsCurrency
+                         - dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('VLR_DESCONTO').AsCurrency    +
+                     dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('ICM_S_VALOR').AsCurrency    +
+                     dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('FRE_VALOR').AsCurrency       +
+                     dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('VLR_SEGURO').AsCurrency      +
+                     //dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('VLR_OUTRAS').AsCurrency +
+                     dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('VLR_OUTRAS_DESP').AsCurrency +
+                     dmGeral.BUS_CD_M_NFE_ITE_CXA.FieldByName('IPI_VALOR').AsCurrency, -2);
+
+             // tag
+             vItem := Vlr_vItem;
+             // ------
+
+             VlrNFTot  := VlrNFTot + Vlr_vItem;
            end ;
            dmGeral.BUS_CD_M_NFE_ITE_CXA.Next;
         end;
@@ -6747,7 +6883,8 @@ begin
             Total.IBSCBSTot.gEstornoCred.vCBSEstCred := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_estorncred_cbsestcred').asCurrency;
 
             // Valor total da NF-e com IBS / CBS / IS
-            Total.vNFTot := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_tot_ibs_cbs_is').asCurrency;
+            // 30/07/2026 - Assim estava incorreto ->  Total.vNFTot := dmGeral.BUS_CD_M_NFE_CXA.fieldByName('vlr_v_tot_ibs_cbs_is').asCurrency;
+            Total.vNFTot := VlrNFTot
           end;
 
       Transp.modFrete :=StrTomodFrete(iRet, inttoStr(dmGeral.BUS_CD_M_NFE_CXA.FieldByName('ind_frete').AsInteger));
