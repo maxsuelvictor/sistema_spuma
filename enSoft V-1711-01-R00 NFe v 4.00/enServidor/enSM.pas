@@ -70960,6 +70960,9 @@ begin
 
    else if Input[0] = 22 then
       begin
+         // Esse código não está sendo mais usado pela rotina PCP_FM_M_ROM_ICF, foi
+         //   aprimorado para o código de input[24]
+
          PCP_SQ_M_ETQ.CommandText :=  enSqlOprEtq +
               ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
               ' and    etq.cod_barra  = '''+VarToStr(Input[6])+''' ';
@@ -71028,7 +71031,30 @@ begin
                ' order by etq.dta_criacao desc, etq.cod_barra ' ;
       end;
 
+   else if Input[0] = 24 then
+      begin
+         // 25/09/2026, Maxsuel Victor
+         // Esse código foi aprimorado para ser usado pela rotina PCP_FM_M_ROM_ICF
 
+         PCP_SQ_M_ETQ.CommandText :=  enSqlOprEtq +
+              ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+              ' and    etq.cod_barra  = '''+VarToStr(Input[6])+''' ';
+
+         PCP_SQ_M_ETQ.CommandText :=  PCP_SQ_M_ETQ.CommandText +
+               ' union all ' +
+              sqlUnion +
+               ' WHERE  etq.id_empresa = '''+VarToStr(Input[1])+''' '+
+               ' and    etq.id_item  = '''+VarToStr(Input[2])+''' ' +
+               ' and    etq.id_cor   = '''+VarToStr(Input[3])+''' ' +
+               ' and    etq.id_tamanho  = '''+VarToStr(Input[4])+''' ' +
+               ' and    coalesce(etq.pcp_obs_item,'''') = '''+VarToStr(Input[5])+''' ' +
+               ' and CAST(etq.cod_barra AS BIGINT) > ' +
+                     VarToStr(Input[6]) +
+               ' and CAST(etq.cod_barra AS BIGINT) <= ' +
+                     VarToStr(Input[8]) +
+               ' and    coalesce(etq.id_ors_saida,0) = 0 and etq.id_epp > 0 ' +
+               ' limit '''+VarToStr(Input[7])+''' ';
+      end;
 
    if (Input[0] = 14) or (Input[0] = 15) or (Input[0] = 16) then
       begin

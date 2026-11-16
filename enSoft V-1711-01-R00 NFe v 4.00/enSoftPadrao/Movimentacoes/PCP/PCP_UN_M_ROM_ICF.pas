@@ -1111,6 +1111,7 @@ var
   qtdeInserir, contador: Currency;
 
   pedido: string;
+  codBarraSeq_ultima: string;
 begin
 
     if txtPedido.Focused then
@@ -1372,10 +1373,13 @@ begin
                              end
                           else
                              begin
+                               //25/09/2026, Maxsuel Victor
+                                 // Foi adicionado o index 24 e o novo parâmetro CodBarraSeq_ultima;
+                               codBarraSeq_ultima := CurrToStr((strtocurr(codBarra) + qtdeInserir) -1);
                                dmGeral.BUS_CD_M_ROM_ETQ.Close;
                                 dmGeral.BUS_CD_M_ROM_ETQ.Data :=
-                                  dmGeral.BUS_CD_M_ROM_ETQ.DataRequest(VarArrayOf([22,dmgeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').AsString,
-                                  codigo,cor,tamanho,pcp_obs_item,codBarra,currtostr(qtdeInserir)]));
+                                  dmGeral.BUS_CD_M_ROM_ETQ.DataRequest(VarArrayOf([24,dmgeral.CAD_CD_C_PAR.FieldByName('ID_EMPRESA').AsString,
+                                  codigo,cor,tamanho,pcp_obs_item,codBarra,currtostr(qtdeInserir),codBarraSeq_ultima]));
                              end;
                           dmGeral.BUS_CD_M_ROM_ETQ.First;
                         end;

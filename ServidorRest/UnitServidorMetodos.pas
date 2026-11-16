@@ -2315,7 +2315,8 @@ begin
           FAT_CD_M_PED.FieldByName('per_desconto').AsString        := PedidoObj.GetValue<string>('per_desconto');
           FAT_CD_M_PED.FieldByName('vlr_desc_basico').AsString     := PedidoObj.GetValue<string>('vlr_desc_basico');
           }
-          // Deve calcular a cubagem
+
+          // Recebe a cubagem pronta do pedido do AppVendas
           FAT_CD_M_PED.FieldByName('cubagem').AsCurrency := PedidoObj.GetValue<Double>('cubagem');
 
           // verificar no enSoftSpuma como é alimentado esse campo id_almoxarifado
@@ -2356,8 +2357,8 @@ begin
           RetornoObj.AddPair('id_pedido_servidor', FAT_CD_M_PED.FieldByName('id_pedido').AsString);
           //RetornoArray.AddElement(RetornoObj);
 
-
-          cubagem_ped := 0;
+               // Maxsuel Victor, em 13/11/2026 a cubagem já vem pronta do AppVendas
+               //cubagem_ped := 0;
 
           FAT_CD_M_PED.Post;
 
@@ -2453,11 +2454,12 @@ begin
             FAT_CD_M_PED_ITE.Post;
           end;
 
-          // Atualizar a cubagem do pedido
-          FAT_CD_M_PED.edit;
-          FAT_CD_M_PED.FieldByName('CUBAGEM').AsCurrency  := cubagem_ped;
-          FAT_CD_M_PED.Post;
-          // ------------------------------
+          // Maxsuel Victor, em 13/11/2026 a cubagem já vem pronta do AppVendas
+              // Atualizar a cubagem do pedido
+                // FAT_CD_M_PED.edit;
+                // FAT_CD_M_PED.FieldByName('CUBAGEM').AsCurrency  := cubagem_ped;
+                // FAT_CD_M_PED.Post;
+              // ------------------------------
 
 
           // Títulos

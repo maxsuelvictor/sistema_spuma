@@ -247,6 +247,14 @@ begin
 
   xHistorico :=Length(Trim(dmGeral.FIN_CD_M_PAG.FieldByName('Historico').AsString));
 
+  if dmGeral.CAD_CD_C_PAR_MOD.FieldByName('SGQ').AsBoolean then
+     begin
+      if (xHistorico<3) then
+         begin
+           xMensErro:= xMensErro + 'Histórico deve ter no minimo 3 caracteres.'+ #13;
+         end;
+     end;
+
   if (xHistorico<10) then
      begin
        xMensErro:= xMensErro + 'Histórico deve ter no minimo 10 caracteres.'+ #13;
